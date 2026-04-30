@@ -1,0 +1,2765 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "date": "2026-04-28",
+    "source_file": "/app/working/projects/watsons-retail-intel/data/raw/2026-04-28/raw_articles_merged.json",
+    "created_at": "2026-04-28T22:55:38.098794",
+    "total_raw": 124,
+    "total_rejected": 77,
+    "reject_reason_distribution": {
+      "reject": 77,
+      "reference": 13,
+      "main": 34
+    }
+  },
+  "articles": [
+    {
+      "article_id": "9d4ea5f3d6b7efc1",
+      "title": "谁还在逛屈臣氏？",
+      "url": "https://www.huxiu.com/article/4847066.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Tue, 31 Mar 2026 23:59:15 GMT",
+      "collected_at": "2026-04-29T06:51:35.234971+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/01/15816-prod-db-general-1-1775001517874.png\" /></figure>本文来自微信公众号： 斑马消费 ，作者：张闻溪你多久没逛屈臣氏，它就有多暗淡。近日，长江和记实业披露2025年全年业绩，零售分部（核心为屈臣氏）虽整体增长，但中国与欧洲保健及美容产品业务的经营已出现较",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/01/15816-prod-db-general-1-1775001517874.png\" /></figure>本文来自微信公众号： 斑马消费 ，作者：张闻溪你多久没逛屈臣氏，它就有多暗淡。近日，长江和记实业披露2025年全年业绩，零售分部（核心为屈臣氏）虽整体增长，但中国与欧洲保健及美容产品业务的经营已出现较",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4847066"
+      },
+      "filter": {
+        "rule_score": 4,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "e01cc2d4f0c6285b",
+      "title": "摇摆的屈臣氏",
+      "url": "https://www.huxiu.com/article/4827868.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Mon, 19 Jan 2026 12:48:10 GMT",
+      "collected_at": "2026-04-29T06:51:35.236318+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202601/19/6026-prod-kl-general-1-1768826856100.png\" /></figure>本文来自微信公众号： 灵兽 ，作者：晴山永远不要远离你的消费者，尤其是当他们已经改变，或者长大的时候。1被诟病的会员卡“充值99元就可以办个屈臣氏的年卡，然后每个月都会返25元，算下来真的很划算。”一",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202601/19/6026-prod-kl-general-1-1768826856100.png\" /></figure>本文来自微信公众号： 灵兽 ，作者：晴山永远不要远离你的消费者，尤其是当他们已经改变，或者长大的时候。1被诟病的会员卡“充值99元就可以办个屈臣氏的年卡，然后每个月都会返25元，算下来真的很划算。”一",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4827868"
+      },
+      "filter": {
+        "rule_score": 5,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 命中经营变量: 会员",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "55e9ecbf0e415f2d",
+      "title": "【视频】屈臣氏IPO：一场传统零售的“求生之战”",
+      "url": "https://www.huxiu.com/article/4820641.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Fri, 26 Dec 2025 07:00:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.236846+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202512/25/120906676089.jpg\" /></figure>一边是中国市场营收下滑、模式老化，一边是欧洲贡献超六成收入且增速显著。屈臣氏的IPO，本质是一场以空间换时间的传统零售转型豪赌。",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202512/25/120906676089.jpg\" /></figure>一边是中国市场营收下滑、模式老化，一边是欧洲贡献超六成收入且增速显著。屈臣氏的IPO，本质是一场以空间换时间的传统零售转型豪赌。",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4820641"
+      },
+      "filter": {
+        "rule_score": 1,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 source_tier=2",
+          "-3 泛领域: IPO",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "c7a2c26d5e18ac81",
+      "title": "半年减少145家店，屈臣氏艰难收缩",
+      "url": "https://www.huxiu.com/article/4707431.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Mon, 18 Aug 2025 08:48:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.237802+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/article_default_picpath_v1.png\" /></figure>本文来自微信公众号：亿邦动力 （ID：iebrun），作者：张从容，原文标题：《半年减少145家店，李嘉诚旗下屈臣氏在中国艰难收缩》8月14日，屈臣氏母公司长江和记实业发布2025半年报。其中，由屈臣",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/article_default_picpath_v1.png\" /></figure>本文来自微信公众号：亿邦动力 （ID：iebrun），作者：张从容，原文标题：《半年减少145家店，李嘉诚旗下屈臣氏在中国艰难收缩》8月14日，屈臣氏母公司长江和记实业发布2025半年报。其中，由屈臣",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4707431"
+      },
+      "filter": {
+        "rule_score": 4,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "7203499893f7e357",
+      "title": "中年屈臣氏，原地彷徨",
+      "url": "https://www.huxiu.com/article/3582952.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 16 Oct 2024 03:24:53 GMT",
+      "collected_at": "2026-04-29T06:51:35.238854+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-article-cover/202410/16/3582952-2-mjv2-4.png\" /></figure>本文来自微信公众号：雪豹财经社，作者：刘纾含，题图来自：AI生成从里到外弥漫着一股中年味儿的屈臣氏，正在成为“社恐”年轻人避之不及的地方。以中年女性为主的BA（beauty advicer，美容顾问）",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-article-cover/202410/16/3582952-2-mjv2-4.png\" /></figure>本文来自微信公众号：雪豹财经社，作者：刘纾含，题图来自：AI生成从里到外弥漫着一股中年味儿的屈臣氏，正在成为“社恐”年轻人避之不及的地方。以中年女性为主的BA（beauty advicer，美容顾问）",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-3582952"
+      },
+      "filter": {
+        "rule_score": 4,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "b4a749cc719a30f9",
+      "title": "屈臣氏还能赢得这届年轻人吗？",
+      "url": "https://www.huxiu.com/article/3322624.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Mon, 05 Aug 2024 01:20:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.239379+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202408/05/090700090117.jpg\" /></figure>本文来自微信公众号：读数一帜，作者：王颖，编辑：杨秀红，头图来自：视觉中国百年零售巨头屈臣氏，正在筹划重启上市？前不久，新加坡主权财富基金淡马锡副首席执行长谢松辉对外透露：屈臣氏集团（下称“屈臣氏”）",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202408/05/090700090117.jpg\" /></figure>本文来自微信公众号：读数一帜，作者：王颖，编辑：杨秀红，头图来自：视觉中国百年零售巨头屈臣氏，正在筹划重启上市？前不久，新加坡主权财富基金淡马锡副首席执行长谢松辉对外透露：屈臣氏集团（下称“屈臣氏”）",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-3322624"
+      },
+      "filter": {
+        "rule_score": 4,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "faacbfee6de3b5ad",
+      "title": "屈臣氏拖累了屈臣氏",
+      "url": "https://www.huxiu.com/article/1090033.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Fri, 07 Apr 2023 13:14:47 GMT",
+      "collected_at": "2026-04-29T06:51:35.240261+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202304/07/203340740552.jpg\" /></figure>本文来自微信公众号：每经影视 （ID：meijingyingshi），作者：丁舟洋、杜蔚，编辑：张海妮，头图来自：视觉中国从李嘉诚到其长子李泽钜，长和（长江和记实业有限公司，HK00001，股价49.",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202304/07/203340740552.jpg\" /></figure>本文来自微信公众号：每经影视 （ID：meijingyingshi），作者：丁舟洋、杜蔚，编辑：张海妮，头图来自：视觉中国从李嘉诚到其长子李泽钜，长和（长江和记实业有限公司，HK00001，股价49.",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-1090033"
+      },
+      "filter": {
+        "rule_score": 4,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "71236c8f81f1793e",
+      "title": "屈臣氏被私域“绑架”",
+      "url": "https://www.huxiu.com/article/732999.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Mon, 05 Dec 2022 01:38:19 GMT",
+      "collected_at": "2026-04-29T06:51:35.240699+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202212/05/084635965297.jpg\" /></figure>本文来自微信公众号：中国企业家杂志 （ID：iceo-com-cn），作者：胡楠楠，编辑：姚赟，头图来自：视觉中国多久没想起屈臣氏了？周末，位于北京东三环的屈臣氏，店内工作人员远超顾客数。一个女孩在店",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202212/05/084635965297.jpg\" /></figure>本文来自微信公众号：中国企业家杂志 （ID：iceo-com-cn），作者：胡楠楠，编辑：姚赟，头图来自：视觉中国多久没想起屈臣氏了？周末，位于北京东三环的屈臣氏，店内工作人员远超顾客数。一个女孩在店",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-732999"
+      },
+      "filter": {
+        "rule_score": 5,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 命中经营变量: 私域",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "052ef39b6ec879f1",
+      "title": "利润持续下滑， “新试界”换不来屈臣氏的新世界？",
+      "url": "https://www.huxiu.com/article/523255.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 06 Apr 2022 11:38:11 GMT",
+      "collected_at": "2026-04-29T06:51:35.241691+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202204/06/181453066334.jpg\" /></figure>本文来自微信公众号：锌刻度（ID：znkedu），作者：黎炫岐，编辑：文婕，题图来自：视觉中国3月中旬，屈臣氏母公司长江和记实业有限公司公布了截止2021年12 月31日的年度财报。在过去的一年里，屈",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202204/06/181453066334.jpg\" /></figure>本文来自微信公众号：锌刻度（ID：znkedu），作者：黎炫岐，编辑：文婕，题图来自：视觉中国3月中旬，屈臣氏母公司长江和记实业有限公司公布了截止2021年12 月31日的年度财报。在过去的一年里，屈",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-523255"
+      },
+      "filter": {
+        "rule_score": 4,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "d56ae69d6845e2e4",
+      "title": "大批药店要变成“屈臣氏”，零售药店分级改革来了",
+      "url": "https://www.huxiu.com/article/498834.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 16 Feb 2022 13:04:09 GMT",
+      "collected_at": "2026-04-29T06:51:35.242135+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202202/16/201245265904.jpg\" /></figure>本文来自微信公众号：健识局（ID：jianshiju01），作者：雷公，头图来自：视觉中国2月11日，广东省药监局发布通知，开展经营乙类非处方药综合改革试点工作。广东省内的便利店将可以设置乙类非处方药",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202202/16/201245265904.jpg\" /></figure>本文来自微信公众号：健识局（ID：jianshiju01），作者：雷公，头图来自：视觉中国2月11日，广东省药监局发布通知，开展经营乙类非处方药综合改革试点工作。广东省内的便利店将可以设置乙类非处方药",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-498834"
+      },
+      "filter": {
+        "rule_score": 4,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "f85a70c6e23105c2",
+      "title": "屈臣氏去往低线市场，能找到出路吗？",
+      "url": "https://www.huxiu.com/article/414032.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 10 Mar 2021 02:52:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.243036+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202103/10/101057556616.jpg\" /></figure>本文来自微信公众号：极海品牌监控（ID：gh_37c72c5cf901），作者：极海，原文标题：《浮浮沉沉屈臣氏，去往低线市场寻出路》，头图来自：视觉中国2月28日，屈臣氏中国官宣了明星蔡徐坤成为品牌",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202103/10/101057556616.jpg\" /></figure>本文来自微信公众号：极海品牌监控（ID：gh_37c72c5cf901），作者：极海，原文标题：《浮浮沉沉屈臣氏，去往低线市场寻出路》，头图来自：视觉中国2月28日，屈臣氏中国官宣了明星蔡徐坤成为品牌",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-414032"
+      },
+      "filter": {
+        "rule_score": 4,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "a48528f69352896f",
+      "title": "屈臣氏的碎嘴导购，终于把顾客都赶走了",
+      "url": "https://www.huxiu.com/article/374035.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Fri, 07 Aug 2020 01:23:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.243968+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202008/07/091954871370.jpg\" /></figure>你想买什么根本不重要，重要的是屈臣氏的导购们想卖给你什么。本文来自微信公众号：新周刊（ID：new-weekly），作者：笺语，题图来自：视觉中国2020年开局难中间也难，就连实体零售行业的巨头们都不",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202008/07/091954871370.jpg\" /></figure>你想买什么根本不重要，重要的是屈臣氏的导购们想卖给你什么。本文来自微信公众号：新周刊（ID：new-weekly），作者：笺语，题图来自：视觉中国2020年开局难中间也难，就连实体零售行业的巨头们都不",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-374035"
+      },
+      "filter": {
+        "rule_score": 4,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "1da8114805f3937c",
+      "title": "不足8小时，机器人被“劫持”，家庭生活恐被“直播”",
+      "url": "https://www.huxiu.com/article/4854151.html",
+      "source_name": "rsshub_huxiu_search_douyin_hour",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Mon, 27 Apr 2026 10:09:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.724684+08:00",
+      "time_status": "in_window",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/27/18814-prod-db-general-1-1777284501211.png\" /></figure>本文来自微信公众号： IT时报 ，作者：潘少颖“能跑起来”不等于“能卖出去”作者／IT时报潘少颖编辑／孙妍当发令枪响，百余台人形机器人与上万名跑者同步出发，有的机器人步伐稳健、一马当先，有的小巧敦实、",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/27/18814-prod-db-general-1-1777284501211.png\" /></figure>本文来自微信公众号： IT时报 ，作者：潘少颖“能跑起来”不等于“能卖出去”作者／IT时报潘少颖编辑／孙妍当发令枪响，百余台人形机器人与上万名跑者同步出发，有的机器人步伐稳健、一马当先，有的小巧敦实、",
+      "matched_keywords": [
+        "直播"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/抖音小时达?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/抖音小时达?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4854151"
+      },
+      "filter": {
+        "rule_score": 3,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+1 source_tier=2",
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule=review, score=3<5, 无LLM结果→reject",
+        "reject_reason": "rule=review, score=3<5, 无LLM结果→reject"
+      }
+    },
+    {
+      "article_id": "695965b332be669d",
+      "title": "Noah Kagan：如果你48小时内无法开启一门小生意，给你4800小时也一样",
+      "url": "https://www.huxiu.com/article/4853930.html",
+      "source_name": "rsshub_huxiu_search_douyin_hour",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Sun, 26 Apr 2026 14:27:05 GMT",
+      "collected_at": "2026-04-29T06:51:35.725283+08:00",
+      "time_status": "near_window",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/26/18716-prod-jm-general-1-1777213584868.png\" /></figure>本文来自微信公众号： BusinessCreator ，作者：爱思考的瑞如果你无法在48小时内，开启一门小生意，那么给你4800小时，你也无法做到。你有没有想做些事，但准备很久了，从来没开始？可能是想",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/26/18716-prod-jm-general-1-1777213584868.png\" /></figure>本文来自微信公众号： BusinessCreator ，作者：爱思考的瑞如果你无法在48小时内，开启一门小生意，那么给你4800小时，你也无法做到。你有没有想做些事，但准备很久了，从来没开始？可能是想",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/抖音小时达?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/抖音小时达?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4853930"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+1 source_tier=2",
+          "+1 time_status=near_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "2ce790a47ead9e3e",
+      "title": "为了永生，硅谷富豪想要养“无脑人”？",
+      "url": "https://www.36kr.com/p/3784276861148168",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 27 Apr 2026 00:16:37 GMT",
+      "collected_at": "2026-04-29T06:52:14.264272+08:00",
+      "time_status": "in_window",
+      "summary": "你想长生不老吗？大多数人当段子听，但硅谷那帮富豪真的开始行动了。",
+      "content": "你想长生不老吗？大多数人当段子听，但硅谷那帮富豪真的开始行动了。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3784276861148168"
+      },
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=0<3",
+        "reject_reason": "rule_score=0<3"
+      }
+    },
+    {
+      "article_id": "3195f6c6f122afcc",
+      "title": "300亿蒸发，山西民工首富“破产”",
+      "url": "https://www.36kr.com/p/3764694611001862",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 13 Apr 2026 03:43:10 GMT",
+      "collected_at": "2026-04-29T06:52:14.264950+08:00",
+      "time_status": "old",
+      "summary": "信用破产的杨建新，能否重回巅峰？",
+      "content": "信用破产的杨建新，能否重回巅峰？",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3764694611001862"
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "4a10b4ed2efba88f",
+      "title": "北冰洋最不该做的就是拿信任换利润",
+      "url": "https://www.36kr.com/p/3759425801912832",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 09 Apr 2026 10:29:22 GMT",
+      "collected_at": "2026-04-29T06:52:14.265446+08:00",
+      "time_status": "old",
+      "summary": "当北冰洋也开始沉迷于包装上的文字游戏，它消耗的就不只是某一款产品的口碑，而是整个品牌最为宝贵的信誉资产。",
+      "content": "当北冰洋也开始沉迷于包装上的文字游戏，它消耗的就不只是某一款产品的口碑，而是整个品牌最为宝贵的信誉资产。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3759425801912832"
+      },
+      "filter": {
+        "rule_score": -5,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-3 无关主题: 游戏",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "c63816246139954f",
+      "title": "635家首店涌入福建，谁是最大赢家？",
+      "url": "https://www.36kr.com/p/3757572944577287",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 08 Apr 2026 02:42:42 GMT",
+      "collected_at": "2026-04-29T06:52:14.265946+08:00",
+      "time_status": "old",
+      "summary": "下沉市场火力全开！",
+      "content": "下沉市场火力全开！",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3757572944577287"
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "53fdcc2932466699",
+      "title": "近300万家餐厅消失了",
+      "url": "https://www.36kr.com/p/3756142399422984",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 07 Apr 2026 02:33:28 GMT",
+      "collected_at": "2026-04-29T06:52:14.266369+08:00",
+      "time_status": "old",
+      "summary": "把招商放到“资产全生命周期”里看，而不是孤立“填铺”",
+      "content": "把招商放到“资产全生命周期”里看，而不是孤立“填铺”",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3756142399422984"
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "c5a1a98377b86a1e",
+      "title": "罗技的“雷”，该“炸”醒所有男性品牌了",
+      "url": "https://www.36kr.com/p/3742463052841223",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 30 Mar 2026 01:35:21 GMT",
+      "collected_at": "2026-04-29T06:52:14.266811+08:00",
+      "time_status": "old",
+      "summary": "所有男性品牌都应该“感谢”罗技！！！",
+      "content": "所有男性品牌都应该“感谢”罗技！！！",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3742463052841223"
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "36535f35b3a6c5e1",
+      "title": "假如外卖大战不打了",
+      "url": "https://www.36kr.com/p/3739620715020294",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 26 Mar 2026 12:57:50 GMT",
+      "collected_at": "2026-04-29T06:52:14.267233+08:00",
+      "time_status": "old",
+      "summary": "能否从多输到共赢",
+      "content": "能否从多输到共赢",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3739620715020294",
+        "duplicate_sources": [
+          "rsshub_36kr_search_jd_instant"
+        ]
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "bce52fda306ddb7c",
+      "title": "云南15个新商场来了，这个项目最抢眼！",
+      "url": "https://www.36kr.com/p/3737738740432905",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 25 Mar 2026 02:28:45 GMT",
+      "collected_at": "2026-04-29T06:52:14.267753+08:00",
+      "time_status": "old",
+      "summary": "龙湖昆明时代天街、3座壹然广场…今年将开业",
+      "content": "龙湖昆明时代天街、3座壹然广场…今年将开业",
+      "matched_keywords": [
+        "开业"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3737738740432905"
+      },
+      "filter": {
+        "rule_score": -2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "0766467910444ee6",
+      "title": "半年下滑5个亿，可复美难撑巨子生物的增长神话",
+      "url": "https://www.36kr.com/p/3736527438623233",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 24 Mar 2026 07:54:39 GMT",
+      "collected_at": "2026-04-29T06:52:14.268198+08:00",
+      "time_status": "old",
+      "summary": "械字号与线下能否突围？",
+      "content": "械字号与线下能否突围？",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3736527438623233"
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "77182b52271cd5bd",
+      "title": "挨骂含泪赚3000万，谁在制造二次元IP香水的“暴利神话”？",
+      "url": "https://www.36kr.com/p/3733995733725700",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 23 Mar 2026 03:49:25 GMT",
+      "collected_at": "2026-04-29T06:52:14.268636+08:00",
+      "time_status": "old",
+      "summary": "二次元可以交IP税，但不能交不走心的IP税。",
+      "content": "二次元可以交IP税，但不能交不走心的IP税。",
+      "matched_keywords": [
+        "香水"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3733995733725700"
+      },
+      "filter": {
+        "rule_score": -2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "566e8c0c4fe8618c",
+      "title": "斐萃屈臣氏华南四店联动狂欢，传递 “科学内养” 新主张",
+      "url": "https://www.36kr.com/p/3725449765337475",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 16 Mar 2026 10:04:31 GMT",
+      "collected_at": "2026-04-29T06:52:14.269062+08:00",
+      "time_status": "old",
+      "summary": "斐萃与屈臣氏华南联动，科学内养精准触达女性健康消费市场。",
+      "content": "斐萃与屈臣氏华南联动，科学内养精准触达女性健康消费市场。",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3725449765337475"
+      },
+      "filter": {
+        "rule_score": 3,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "cf13d8d154374694",
+      "title": "太难了！180+品牌一年关店超15000家",
+      "url": "https://www.36kr.com/p/3724992064076163",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 16 Mar 2026 02:20:26 GMT",
+      "collected_at": "2026-04-29T06:52:14.269571+08:00",
+      "time_status": "old",
+      "summary": "昔日的“排队王”，又倒下一批",
+      "content": "昔日的“排队王”，又倒下一批",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3724992064076163"
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "f00c94b784d2caf2",
+      "title": "龙湖、华润、新城、世纪金源...西南今年49个商业“炸场”！",
+      "url": "https://www.36kr.com/p/3717937495651968",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 11 Mar 2026 02:46:24 GMT",
+      "collected_at": "2026-04-29T06:52:14.270056+08:00",
+      "time_status": "old",
+      "summary": "数量最多的不是川渝！",
+      "content": "数量最多的不是川渝！",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3717937495651968"
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "b89f7166aba8f957",
+      "title": "2026年：传统美妆零售败了？",
+      "url": "https://www.36kr.com/p/3714186707349891",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 09 Mar 2026 05:00:57 GMT",
+      "collected_at": "2026-04-29T06:52:14.270497+08:00",
+      "time_status": "old",
+      "summary": "多重考验下，传统美妆零售商何去何从？",
+      "content": "多重考验下，传统美妆零售商何去何从？",
+      "matched_keywords": [
+        "美妆"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3714186707349891"
+      },
+      "filter": {
+        "rule_score": 1,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "d90d38d36e38920d",
+      "title": "一年吸金224亿，被全球女生追着买，这个海外巨头卖疯了",
+      "url": "https://www.36kr.com/p/3708640900264070",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Mar 2026 03:29:56 GMT",
+      "collected_at": "2026-04-29T06:52:14.270956+08:00",
+      "time_status": "old",
+      "summary": "韩国美妆零售之王是怎样炼成的？",
+      "content": "韩国美妆零售之王是怎样炼成的？",
+      "matched_keywords": [
+        "美妆"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3708640900264070"
+      },
+      "filter": {
+        "rule_score": 1,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "2996c3f961f88d88",
+      "title": "日本平价彩妆销冠王闭店",
+      "url": "https://www.36kr.com/p/3709236654780801",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Mar 2026 02:49:22 GMT",
+      "collected_at": "2026-04-29T06:52:14.271399+08:00",
+      "time_status": "old",
+      "summary": "靠经典三色眉粉立足大中华区的TA，17年后突然宣布闭店。",
+      "content": "靠经典三色眉粉立足大中华区的TA，17年后突然宣布闭店。",
+      "matched_keywords": [
+        "彩妆",
+        "闭店"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3709236654780801"
+      },
+      "filter": {
+        "rule_score": 1,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 彩妆",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "d5adb73a34a464c4",
+      "title": "“塌房”的椰子水，失守的if",
+      "url": "https://www.36kr.com/p/3709402330821124",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Mar 2026 02:26:01 GMT",
+      "collected_at": "2026-04-29T06:52:14.271880+08:00",
+      "time_status": "old",
+      "summary": "当“中产饮料”的光环淡去。",
+      "content": "当“中产饮料”的光环淡去。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3709402330821124"
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "eea36d81b074f07a",
+      "title": "老广最爱的饮料，曾是国货顶流，现在又火了",
+      "url": "https://www.36kr.com/p/3669792022897285",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Feb 2026 02:52:38 GMT",
+      "collected_at": "2026-04-29T06:52:14.272305+08:00",
+      "time_status": "old",
+      "summary": "中式饮品的鼻祖，老广喝了几十年。",
+      "content": "中式饮品的鼻祖，老广喝了几十年。",
+      "matched_keywords": [
+        "国货"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3669792022897285"
+      },
+      "filter": {
+        "rule_score": -2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "76c141dc59bd3349",
+      "title": "巴黎水和圣培露，在华有了新“操盘手”：捷成饮料成为大陆地区总代理经销商，雀巢年收入超280亿饮用水业务在中国市场想“换档提速”",
+      "url": "https://www.36kr.com/p/3667684256801673",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 04 Feb 2026 02:25:13 GMT",
+      "collected_at": "2026-04-29T06:52:14.272779+08:00",
+      "time_status": "old",
+      "summary": "雀巢高端水在华转由捷成代理，轻资产运营迈出关键一步。",
+      "content": "雀巢高端水在华转由捷成代理，轻资产运营迈出关键一步。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3667684256801673"
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-2 time_status=old",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "d5b24d1855363c28",
+      "title": "2100亿，一个超级IPO要来了",
+      "url": "https://www.36kr.com/p/3655383042056320",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Sun, 25 Jan 2026 23:44:44 GMT",
+      "collected_at": "2026-04-29T06:52:14.273242+08:00",
+      "time_status": "old",
+      "summary": "对于投资者而言，现在或许是10年以来最好的退出时机。",
+      "content": "对于投资者而言，现在或许是10年以来最好的退出时机。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3655383042056320"
+      },
+      "filter": {
+        "rule_score": -7,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-3 泛领域: IPO",
+          "-2 time_status=old",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old",
+        "reject_reason": "time_status=old"
+      }
+    },
+    {
+      "article_id": "244eaf3bfe5185e1",
+      "title": "商汤科技正式发布并开源日日新SenseNova U1系列模型",
+      "url": "https://www.36kr.com/newsflashes/3786492691782919",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:59:33 GMT",
+      "collected_at": "2026-04-29T06:52:38.073639+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，今天，商汤科技正式发布并开源日日新SenseNova U1系列原生理解生成统一模型。它基于商汤于今年三月自主研发的NEO-unify架构，在单一模型架构上统一了多模态理解、推理与生成。据了解，SenseNova U1系列模型能够将语言与视觉信息作为统一的复合体直接建模，实现语言和视觉信息的高效协同，让理解与生成能力同步增强，在保留语义丰富度的同时，维持像素级的视觉保真度。",
+      "content": "36氪获悉，今天，商汤科技正式发布并开源日日新SenseNova U1系列原生理解生成统一模型。它基于商汤于今年三月自主研发的NEO-unify架构，在单一模型架构上统一了多模态理解、推理与生成。据了解，SenseNova U1系列模型能够将语言与视觉信息作为统一的复合体直接建模，实现语言和视觉信息的高效协同，让理解与生成能力同步增强，在保留语义丰富度的同时，维持像素级的视觉保真度。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786492691782919"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "508a166caee04bcd",
+      "title": "热门中概股美股盘前多数下跌，理想汽车跌超4%",
+      "url": "https://www.36kr.com/newsflashes/3786484642372615",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:51:21 GMT",
+      "collected_at": "2026-04-29T06:52:38.074290+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，热门中概股美股盘前多数下跌，截至发稿，理想汽车跌超4%，小鹏集团跌超3%，腾讯音乐、阿里巴巴、B站跌超2%，百度、京东、网易、蔚来跌超1%；啊七一涨近1%。",
+      "content": "36氪获悉，热门中概股美股盘前多数下跌，截至发稿，理想汽车跌超4%，小鹏集团跌超3%，腾讯音乐、阿里巴巴、B站跌超2%，百度、京东、网易、蔚来跌超1%；啊七一涨近1%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786484642372615"
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-3 泛领域: 美股",
+          "-3 无关主题: 汽车"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=-4<3",
+        "reject_reason": "rule_score=-4<3"
+      }
+    },
+    {
+      "article_id": "64278f2d6717dfc3",
+      "title": "美股大型科技股盘前跌多涨少，Arm跌超7%",
+      "url": "https://www.36kr.com/newsflashes/3786480947404041",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:47:36 GMT",
+      "collected_at": "2026-04-29T06:52:38.074756+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，美股大型科技股盘前跌多涨少，截至发稿，Arm跌超7%，英伟达跌超3%，特斯拉、微软、亚马逊、Meta跌超1%，谷歌跌近1%；苹果涨0.77%，奈飞涨0.76%。",
+      "content": "36氪获悉，美股大型科技股盘前跌多涨少，截至发稿，Arm跌超7%，英伟达跌超3%，特斯拉、微软、亚马逊、Meta跌超1%，谷歌跌近1%；苹果涨0.77%，奈飞涨0.76%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786480947404041"
+      },
+      "filter": {
+        "rule_score": -1,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-3 泛领域: 美股"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=-1<3",
+        "reject_reason": "rule_score=-1<3"
+      }
+    },
+    {
+      "article_id": "cb2a7c020d6f4013",
+      "title": "清越科技：实施其他风险警示，股票停牌",
+      "url": "https://www.36kr.com/newsflashes/3786468315733251",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:34:45 GMT",
+      "collected_at": "2026-04-29T06:52:38.075176+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，清越科技公告，公司因2025年度内部控制被出具否定意见审计报告，触及《科创板股票上市规则》相关规定，股票自2026年4月29日开市起停牌1天，将于4月30日复牌并实施其他风险警示，股票简称变更为“ST清越”。实施期间，公司股票不进入风险警示板交易，涨跌幅仍为20%，投资者当日累计买入数量不得超过50万股。公司正积极配合证监会调查，并采取措施提升内控水平，争取撤销风险警示。",
+      "content": "36氪获悉，清越科技公告，公司因2025年度内部控制被出具否定意见审计报告，触及《科创板股票上市规则》相关规定，股票自2026年4月29日开市起停牌1天，将于4月30日复牌并实施其他风险警示，股票简称变更为“ST清越”。实施期间，公司股票不进入风险警示板交易，涨跌幅仍为20%，投资者当日累计买入数量不得超过50万股。公司正积极配合证监会调查，并采取措施提升内控水平，争取撤销风险警示。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786468315733251"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "0d1f8e8b10bbef6b",
+      "title": "ADP：截至4月11日四周美国私营部门就业人数平均每周增加3.925万",
+      "url": "https://www.36kr.com/newsflashes/3786453125324033",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:19:18 GMT",
+      "collected_at": "2026-04-29T06:52:38.075623+08:00",
+      "time_status": "in_window",
+      "summary": "4月28日，根据ADP Research和斯坦福数字经济实验室的初步估计，截至4月11日的四周，美国私营部门就业人数平均每周增加3.925万人。（界面）",
+      "content": "4月28日，根据ADP Research和斯坦福数字经济实验室的初步估计，截至4月11日的四周，美国私营部门就业人数平均每周增加3.925万人。（界面）",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786453125324033"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "bbba2ae7b71abc2b",
+      "title": "长芯博创：拟1.96亿元收购高速有源光缆公司长芯盛2.20%股份",
+      "url": "https://www.36kr.com/newsflashes/3786452077763584",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:18:14 GMT",
+      "collected_at": "2026-04-29T06:52:38.076058+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，长芯博创公告，公司拟以现金1.96亿元收购控股子公司长芯盛2.20%股份，交易完成后持股比例将升至62.65%。长芯盛是光通信解决方案提供商，主要产品应用于数据通信、消费及工业互联领域，产品包括用于数据中心内部互联的各类高速线缆、无源预端接跳线等，用于消费、工业以及医疗等行业互联的高速有源光缆（AOC）以及广泛应用于不同场景的各类处理器接口的高速模拟芯片、高速光电模组组件等。本公司控股股东、实际控制人长飞光纤光缆股份有限公司持有目标公司37.35%的股份。",
+      "content": "36氪获悉，长芯博创公告，公司拟以现金1.96亿元收购控股子公司长芯盛2.20%股份，交易完成后持股比例将升至62.65%。长芯盛是光通信解决方案提供商，主要产品应用于数据通信、消费及工业互联领域，产品包括用于数据中心内部互联的各类高速线缆、无源预端接跳线等，用于消费、工业以及医疗等行业互联的高速有源光缆（AOC）以及广泛应用于不同场景的各类处理器接口的高速模拟芯片、高速光电模组组件等。本公司控股股东、实际控制人长飞光纤光缆股份有限公司持有目标公司37.35%的股份。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786452077763584"
+      },
+      "filter": {
+        "rule_score": -1,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-3 无关主题: 芯片"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=-1<3",
+        "reject_reason": "rule_score=-1<3"
+      }
+    },
+    {
+      "article_id": "4ca7aff0ecaf9c81",
+      "title": "古井贡酒：第一季度净利润16.07亿元，同比下降31.03%",
+      "url": "https://www.36kr.com/newsflashes/3786443969305607",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:09:59 GMT",
+      "collected_at": "2026-04-29T06:52:38.076484+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，古井贡酒发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入74.46亿元，同比下降18.59%；归属于上市公司股东的净利润为16.07亿元，同比下降31.03%。",
+      "content": "36氪获悉，古井贡酒发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入74.46亿元，同比下降18.59%；归属于上市公司股东的净利润为16.07亿元，同比下降31.03%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786443969305607"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "0af8a754e8ad8807",
+      "title": "华曙高科：拟募资不超39.1亿元，用于先进增材制造设备产能提升项目等",
+      "url": "https://www.36kr.com/newsflashes/3786438056582403",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:03:58 GMT",
+      "collected_at": "2026-04-29T06:52:38.076903+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，华曙高科公告，拟定增募资不超过39.1亿元，用于先进增材制造设备产能提升项目、增材制造综合服务平台建设项目、全球运营中心建设项目。",
+      "content": "36氪获悉，华曙高科公告，拟定增募资不超过39.1亿元，用于先进增材制造设备产能提升项目、增材制造综合服务平台建设项目、全球运营中心建设项目。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786438056582403"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "533879bf394c8bd8",
+      "title": "久立特材：回购170万股，使用资金总额4934.31万元",
+      "url": "https://www.36kr.com/newsflashes/3786431608872199",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:57:24 GMT",
+      "collected_at": "2026-04-29T06:52:38.077311+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，久立特材公告，公司首次通过回购专用证券账户以集中竞价交易方式回购公司股份1,700,000股，占公司总股本的0.17%，最高成交价为29.18元/股，最低成交价为28.79元/股，成交总金额为49,343,073元（不含交易费用）。本次回购股份资金来源为公司自有资金，回购价格未超过回购方案中拟定的价格上限。本次回购符合相关法律法规的要求，符合既定的回购股份方案。",
+      "content": "36氪获悉，久立特材公告，公司首次通过回购专用证券账户以集中竞价交易方式回购公司股份1,700,000股，占公司总股本的0.17%，最高成交价为29.18元/股，最低成交价为28.79元/股，成交总金额为49,343,073元（不含交易费用）。本次回购股份资金来源为公司自有资金，回购价格未超过回购方案中拟定的价格上限。本次回购符合相关法律法规的要求，符合既定的回购股份方案。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786431608872199"
+      },
+      "filter": {
+        "rule_score": 3,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+1 命中经营变量: 价格",
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule=review, score=3<5, 无LLM结果→reject",
+        "reject_reason": "rule=review, score=3<5, 无LLM结果→reject"
+      }
+    },
+    {
+      "article_id": "fc0c17fa8a55f837",
+      "title": "寒武纪：2025年度权益分派拟每10股派15元转增4.9股，股权登记日为2026年5月7日",
+      "url": "https://www.36kr.com/newsflashes/3786420670881032",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:46:17 GMT",
+      "collected_at": "2026-04-29T06:52:38.077739+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，寒武纪公告，公司2025年年度权益分派方案为，以实施权益分派股权登记日登记的总股本扣除回购专用账户股份为基数，向全体股东每10股派发现金红利15元(含税)，同时以资本公积金每10股转增4.9股。股权登记日为2026年5月7日，除权除息日为2026年5月8日。",
+      "content": "36氪获悉，寒武纪公告，公司2025年年度权益分派方案为，以实施权益分派股权登记日登记的总股本扣除回购专用账户股份为基数，向全体股东每10股派发现金红利15元(含税)，同时以资本公积金每10股转增4.9股。股权登记日为2026年5月7日，除权除息日为2026年5月8日。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786420670881032"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "69b9b87f04177dd0",
+      "title": "天娱数科：一季度归母净利润3024.12万元，同比增加476.94%",
+      "url": "https://www.36kr.com/newsflashes/3786414097112067",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:39:36 GMT",
+      "collected_at": "2026-04-29T06:52:38.078270+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，天娱数科发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入5.47亿元，同比增长12.81%；归属于上市公司股东的净利润3024.12万元，上年同期归属于上市公司股东的净利润524.17万元，同比增长476.94%；基本每股收益0.0183元。",
+      "content": "36氪获悉，天娱数科发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入5.47亿元，同比增长12.81%；归属于上市公司股东的净利润3024.12万元，上年同期归属于上市公司股东的净利润524.17万元，同比增长476.94%；基本每股收益0.0183元。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786414097112067"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "c00ad971bc6634b1",
+      "title": "可口可乐第一季度净营收124.72亿美元",
+      "url": "https://www.36kr.com/newsflashes/3786403225164809",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:28:32 GMT",
+      "collected_at": "2026-04-29T06:52:38.078746+08:00",
+      "time_status": "in_window",
+      "summary": "可口可乐4月28日公布第一季度业绩显示，净营收124.72亿美元，可比每股收益0.86美元。（界面）",
+      "content": "可口可乐4月28日公布第一季度业绩显示，净营收124.72亿美元，可比每股收益0.86美元。（界面）",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786403225164809"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "31549f42da1dae07",
+      "title": "昆仑万维：第一季度营收同比增长45.69%，短剧业务单月流水超4800万美元",
+      "url": "https://www.36kr.com/newsflashes/3786398647377157",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:23:53 GMT",
+      "collected_at": "2026-04-29T06:52:38.079197+08:00",
+      "time_status": "in_window",
+      "summary": "4月28日，昆仑万维发布2026年第一季度报告。报告期内，公司营收25.7亿元，同比增长45.69%，其中海外业务收入24.87亿元，同比增长49.29%。伴随AI技术商业化落地加速推进，天工AI业务收入较2025年第四季度延续高速增长态势。公司经营活动产生的现金流量净额同比显著改善，内生造血能力明显增强。公司短剧和AI短剧平台业务单月流水超4800万美元，年度经常性收入（ARR）突破5.7亿美元。",
+      "content": "4月28日，昆仑万维发布2026年第一季度报告。报告期内，公司营收25.7亿元，同比增长45.69%，其中海外业务收入24.87亿元，同比增长49.29%。伴随AI技术商业化落地加速推进，天工AI业务收入较2025年第四季度延续高速增长态势。公司经营活动产生的现金流量净额同比显著改善，内生造血能力明显增强。公司短剧和AI短剧平台业务单月流水超4800万美元，年度经常性收入（ARR）突破5.7亿美元。",
+      "matched_keywords": [
+        "流量"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786398647377157"
+      },
+      "filter": {
+        "rule_score": 3,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+1 命中经营变量: 流量, 活动",
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule=review, score=3<5, 无LLM结果→reject",
+        "reject_reason": "rule=review, score=3<5, 无LLM结果→reject"
+      }
+    },
+    {
+      "article_id": "383003e4beca1810",
+      "title": "现货黄金失守4600美元关口",
+      "url": "https://www.36kr.com/newsflashes/3786388151524615",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:13:12 GMT",
+      "collected_at": "2026-04-29T06:52:38.079622+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，现货黄金失守4600美元/盎司，日内跌幅1.75%。",
+      "content": "36氪获悉，现货黄金失守4600美元/盎司，日内跌幅1.75%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786388151524615"
+      },
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=0<3",
+        "reject_reason": "rule_score=0<3"
+      }
+    },
+    {
+      "article_id": "c32afd6e716267ea",
+      "title": "科大讯飞：2025年公司实现营收271.05亿元，同比增长16.12%",
+      "url": "https://www.36kr.com/newsflashes/3786382504778755",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:07:27 GMT",
+      "collected_at": "2026-04-29T06:52:38.080043+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，科大讯飞发布2025年业绩报告。报告显示，2025年，公司实现营收271.05亿元，同比增长16.12%；归母净利润8.39亿元，同比增长49.85%；扣非净利润2.64亿元，同比增长40.47%。此外，公司去年销售回款总额超过274亿元，同比增长超过45亿元，报告期末经营活动产生的现金流量净额32.08亿元，均创历史新高。",
+      "content": "36氪获悉，科大讯飞发布2025年业绩报告。报告显示，2025年，公司实现营收271.05亿元，同比增长16.12%；归母净利润8.39亿元，同比增长49.85%；扣非净利润2.64亿元，同比增长40.47%。此外，公司去年销售回款总额超过274亿元，同比增长超过45亿元，报告期末经营活动产生的现金流量净额32.08亿元，均创历史新高。",
+      "matched_keywords": [
+        "流量"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786382504778755"
+      },
+      "filter": {
+        "rule_score": 3,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+1 命中经营变量: 流量, 活动",
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule=review, score=3<5, 无LLM结果→reject",
+        "reject_reason": "rule=review, score=3<5, 无LLM结果→reject"
+      }
+    },
+    {
+      "article_id": "6444b1d3cd13222d",
+      "title": "中国石化：第一季度净利润170.06亿元，同比增长28.2%",
+      "url": "https://www.36kr.com/newsflashes/3786373135490306",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:57:55 GMT",
+      "collected_at": "2026-04-29T06:52:38.080452+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，中国石化发布2026年一季度业绩报告。报告显示，2026年第一季度营收为7066.95亿元，同比下降3.9%；净利润为170.06亿元，同比增长28.2%。",
+      "content": "36氪获悉，中国石化发布2026年一季度业绩报告。报告显示，2026年第一季度营收为7066.95亿元，同比下降3.9%；净利润为170.06亿元，同比增长28.2%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786373135490306"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "6d4003898d412896",
+      "title": "影石创新：第一季度净利润8462.02万元，同比下降52.02%",
+      "url": "https://www.36kr.com/newsflashes/3786369707170816",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:54:26 GMT",
+      "collected_at": "2026-04-29T06:52:38.080880+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，影石创新发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入24.81亿元，同比增长83.11%；归属于上市公司股东的净利润为8462.02万元，同比下降52.02%。业绩变动主要系公司主动加大战略研发投入及市场开拓，相关费用有所增加，同时，存储元器件涨价、影像行业市场竞争加剧，公司毛利率有所下降所致。",
+      "content": "36氪获悉，影石创新发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入24.81亿元，同比增长83.11%；归属于上市公司股东的净利润为8462.02万元，同比下降52.02%。业绩变动主要系公司主动加大战略研发投入及市场开拓，相关费用有所增加，同时，存储元器件涨价、影像行业市场竞争加剧，公司毛利率有所下降所致。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786369707170816"
+      },
+      "filter": {
+        "rule_score": 3,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+1 命中经营变量: 毛利",
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule=review, score=3<5, 无LLM结果→reject",
+        "reject_reason": "rule=review, score=3<5, 无LLM结果→reject"
+      }
+    },
+    {
+      "article_id": "47700ac4a1d0f0cf",
+      "title": "顺丰控股：第一季度净利润25.26亿元，同比增长13.05%",
+      "url": "https://www.36kr.com/newsflashes/3786368036428805",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:52:44 GMT",
+      "collected_at": "2026-04-29T06:52:38.081285+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，顺丰控股发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入741.42亿元，同比增长6.14%；归属于上市公司股东的净利润为25.26亿元，同比增长13.05%。",
+      "content": "36氪获悉，顺丰控股发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入741.42亿元，同比增长6.14%；归属于上市公司股东的净利润为25.26亿元，同比增长13.05%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786368036428805"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "c36174d5ce717c6e",
+      "title": "文峰股份：4月30日起实施其他风险警示，股票简称变更为ST文峰",
+      "url": "https://www.36kr.com/newsflashes/3786364682247425",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:49:20 GMT",
+      "collected_at": "2026-04-29T06:52:38.081705+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，文峰股份公告，因大信会计师事务所出具否定意见的内部控制审计报告，公司股票自2026年4月29日停牌1天，4月30日起实施其他风险警示，股票简称变更为ST文峰，日涨跌幅限制为5%。公司已制定整改措施，包括强化会计信息质量、优化采购和投资管理流程。",
+      "content": "36氪获悉，文峰股份公告，因大信会计师事务所出具否定意见的内部控制审计报告，公司股票自2026年4月29日停牌1天，4月30日起实施其他风险警示，股票简称变更为ST文峰，日涨跌幅限制为5%。公司已制定整改措施，包括强化会计信息质量、优化采购和投资管理流程。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786364682247425"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "e48f6089f0264441",
+      "title": "比亚迪：一季度净利润40.8亿元，同比下降55.38%",
+      "url": "https://www.36kr.com/newsflashes/3786355448798213",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:39:56 GMT",
+      "collected_at": "2026-04-29T06:52:38.082113+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，比亚迪发布2026年一季度业绩报告。报告显示，一季度营业收入1502.25亿元，同比下降11.82%；归属于上市公司股东的净利润40.85亿元，同比大降55.38%；扣非净利润41.48亿元，同比下滑49.24%。第一季度基本每股收益0.4480元/股，同比下降56.89%；加权平均净资产收益率1.65%，同比下降2.72个百分点。",
+      "content": "36氪获悉，比亚迪发布2026年一季度业绩报告。报告显示，一季度营业收入1502.25亿元，同比下降11.82%；归属于上市公司股东的净利润40.85亿元，同比大降55.38%；扣非净利润41.48亿元，同比下滑49.24%。第一季度基本每股收益0.4480元/股，同比下降56.89%；加权平均净资产收益率1.65%，同比下降2.72个百分点。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786355448798213"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "78e43888dacd976e",
+      "title": "4.4亿AI 用户驱动下，GEO行业如何从狂热走向合规重建？",
+      "url": "https://www.36kr.com/p/3786268268475137",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:53:09 GMT",
+      "collected_at": "2026-04-29T06:52:38.859645+08:00",
+      "time_status": "in_window",
+      "summary": "正确的GEO应该长什么样？",
+      "content": "正确的GEO应该长什么样？",
+      "matched_keywords": [
+        "合规"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3786268268475137"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "1abc9505dd5ee68e",
+      "title": "2026年的零售业：谁在崛起，谁在崩塌",
+      "url": "https://www.36kr.com/p/3785706391165953",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 02:54:56 GMT",
+      "collected_at": "2026-04-29T06:52:38.860244+08:00",
+      "time_status": "in_window",
+      "summary": "喊了十年的零售变革，有了新信号。",
+      "content": "喊了十年的零售变革，有了新信号。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3785706391165953",
+        "duplicate_sources": [
+          "rsshub_36kr_search_instant_retail"
+        ]
+      },
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=0<3",
+        "reject_reason": "rule_score=0<3"
+      }
+    },
+    {
+      "article_id": "701d48d7acb8138e",
+      "title": "QuestMobile2026 中国移动互联网春季大报告：结构性大变局来临，用户跨行业、跨终端迁移，部分行业黏性飙涨，如何适应新常态？",
+      "url": "https://www.36kr.com/p/3785860816395529",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 02:43:27 GMT",
+      "collected_at": "2026-04-29T06:52:38.860703+08:00",
+      "time_status": "in_window",
+      "summary": "全网用户月人均使用时长达192.2小时，同比增长9.3%，增长动能持续增强。",
+      "content": "全网用户月人均使用时长达192.2小时，同比增长9.3%，增长动能持续增强。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3785860816395529",
+        "duplicate_sources": [
+          "rsshub_36kr_search_instant_retail",
+          "rsshub_36kr_search_beauty"
+        ]
+      },
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=0<3",
+        "reject_reason": "rule_score=0<3"
+      }
+    },
+    {
+      "article_id": "b984f744f6f2e9ff",
+      "title": "团购“无限战争”：美团、抖音、京东的流量分配权暗战",
+      "url": "https://www.36kr.com/p/3784949011985158",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 27 Apr 2026 12:28:27 GMT",
+      "collected_at": "2026-04-29T06:52:38.861130+08:00",
+      "time_status": "in_window",
+      "summary": "2026年了，这帮互联网老炮儿突然发现，外卖罚单吃到饱，还是骗你下楼吃火锅最赚钱。",
+      "content": "2026年了，这帮互联网老炮儿突然发现，外卖罚单吃到饱，还是骗你下楼吃火锅最赚钱。",
+      "matched_keywords": [
+        "流量"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3784949011985158",
+        "duplicate_sources": [
+          "rsshub_36kr_search_jd_instant",
+          "rsshub_36kr_search_instant_retail"
+        ]
+      },
+      "filter": {
+        "rule_score": 3,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+1 命中经营变量: 流量",
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule=review, score=3<5, 无LLM结果→reject",
+        "reject_reason": "rule=review, score=3<5, 无LLM结果→reject"
+      }
+    },
+    {
+      "article_id": "02fff81c70f1728f",
+      "title": "主播接连出走，但东方甄选更能赚钱了？",
+      "url": "https://www.36kr.com/p/3786338199745284",
+      "source_name": "rsshub_36kr_search_instant_retail",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:55:10 GMT",
+      "collected_at": "2026-04-29T06:52:40.722996+08:00",
+      "time_status": "in_window",
+      "summary": "卖货的公司不谈理想主义",
+      "content": "卖货的公司不谈理想主义",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/即时零售?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/即时零售?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3786338199745284",
+        "duplicate_sources": [
+          "rsshub_36kr_search_beauty"
+        ]
+      },
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=0<3",
+        "reject_reason": "rule_score=0<3"
+      }
+    },
+    {
+      "article_id": "92e32aafea6b637c",
+      "title": "“鼻祖”接连闭店，北京容不下城市奥莱？",
+      "url": "https://www.36kr.com/p/3785894709566729",
+      "source_name": "rsshub_36kr_search_instant_retail",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 03:08:37 GMT",
+      "collected_at": "2026-04-29T06:52:40.723427+08:00",
+      "time_status": "in_window",
+      "summary": "荟品仓、BIGOFFS、好特卖超级折扣厮杀五环外。",
+      "content": "荟品仓、BIGOFFS、好特卖超级折扣厮杀五环外。",
+      "matched_keywords": [
+        "折扣",
+        "闭店"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/即时零售?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/即时零售?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3785894709566729",
+        "duplicate_sources": [
+          "rsshub_36kr_search_beauty"
+        ]
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=2<3",
+        "reject_reason": "rule_score=2<3"
+      }
+    },
+    {
+      "article_id": "0c090af2eeb52e06",
+      "title": "老牌日化上市以来首次年度亏损",
+      "url": "https://www.36kr.com/p/3786322983116040",
+      "source_name": "rsshub_36kr_search_beauty",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:37:00 GMT",
+      "collected_at": "2026-04-29T06:52:44.322234+08:00",
+      "time_status": "in_window",
+      "summary": "研发砍23%，营销砸3亿。",
+      "content": "研发砍23%，营销砸3亿。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/美妆?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/美妆?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3786322983116040"
+      },
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=0<3",
+        "reject_reason": "rule_score=0<3"
+      }
+    },
+    {
+      "article_id": "b5006b7b6b7d91d2",
+      "title": "打破AI焦虑 审美才是顶级竞争力丨亿邦新竞争力品牌大会实录",
+      "url": "https://www.36kr.com/p/3786399282666756",
+      "source_name": "rsshub_36kr_search_beauty",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:35:45 GMT",
+      "collected_at": "2026-04-29T06:52:44.322725+08:00",
+      "time_status": "in_window",
+      "summary": "中国零售反思：科技与美学成破局关键。",
+      "content": "中国零售反思：科技与美学成破局关键。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/美妆?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/美妆?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3786399282666756"
+      },
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=0<3",
+        "reject_reason": "rule_score=0<3"
+      }
+    },
+    {
+      "article_id": "905e33f88a8309b8",
+      "title": "大牌美妆 1 元秒！京东美妆蝴蝶节超级秒杀日 3 月 2 日晚 8 点火热开启 - IT之家",
+      "url": "https://www.ithome.com/0/926/220.htm",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:26.727213+08:00",
+      "time_status": "unknown_time",
+      "summary": "设置\n\n 日夜间\n\n  随系统\n\n  浅色\n\n  深色\n 主题色\n\n  黑色\n\n投稿\n\n订阅\n\n RSS订阅\n 收藏IT之家\n\n软媒应用\n\n App客户端\n 要知App\n 软媒魔方\n\n业界 手机 电脑 测评 视频 AI 苹果 iPhone 鸿蒙 软件\n\n智车 数码 学院 游戏 直播 5G 微软 Win10 Win11 专题\n\n首页 > IT资讯>业界\n\n# 大牌美妆 1 元秒！京东美妆蝴蝶节超级秒杀日 3 月 2 日晚 8 点火热开启\n\n2026/3/5 16:06:32 来源：之家网站 作者：- 责编：-\n\n评论：0\n\n早春换季，正是开启新一季护肤美妆计划的好时机。换季时节肌肤状态波动，无论是密集修护、深层清洁还是日常保湿，都需要一套值得信赖的护肤装备。3 月 2 日晚 8 点，京东美妆蝴蝶节超级秒杀日开启，京东秒杀推出兰蔻、欧莱雅、SK-II、海蓝之谜、赫莲娜等国际一线大牌产品秒杀活动，带来长达 76 小时的限时购物狂欢。大牌万件好物限时 1 元秒杀、采销推荐全网低价 500 款、明星周边权益集卡抽奖、下单赠足金黄金蝴蝶等多重福利齐发，助力消费者以超值价格抢购心仪的商品。\n\n本次超级秒杀日汇聚了多款修护单品。其中，娇兰复原蜜 50ml 限时送正装，会员到手 90ml，一瓶搞定换季干燥、泛红等多重肌肤困扰；YSL 夜皇后精华买 1 赠 1，熬夜加班后用它做夜间密集修护，帮助肌肤焕发光采；赫莲娜黑绷带 50PX 面霜到手 80ml 面霜量，高效紧致抗老，为初春肌肤筑起坚实屏障；娇韵诗黄金双萃精华 50ml 送同款正装 30ml，植萃双效精华早晚一泵，轻松应对季节交替带来的肌肤敏感与暗沉。 [...] 在本次超级秒杀日活动中，多款护肤好物重磅上线，满足全场景护肤需求：雅诗兰黛美白胶原水乳下单即享超 3 件正装量，欧莱雅小蜜罐水乳礼盒一次到手 9 件，覆盖晨间至夜间完整护肤流程，性价比拉满；SK-II 氨基酸洗面奶双支装，限时会员专享加赠，温和洁净不紧绷，成为每日洁面安心之选；海蓝之谜精萃水 100ml 享受三重好礼，为高端护肤爱好者带来超值入手体验。\n\n深层清洁与密集焕肤是换季护肤不可缺少的一环。在本次超级秒杀日活动中，科颜氏第二代白泥面膜买 125ml 到手 225ml，一周两次深度清洁毛孔，帮助后续精华更好吸收；理肤泉 B5 面膜 PRO 20 片买 20 片到手 55 片，密集补水修护一步到位，敏感肌也能放心囤货。还有兰蔻菁纯眼霜 20ml 买赠享买 1 赠 1、欧舒丹护手霜礼盒 4 支装买赠超正装量礼等优惠。\n\n值得一提的是，活动期间消费者还可参与明星周边权益集卡抽奖活动，更有机会获赠 999 足金蝴蝶手机贴，为春日购物增添惊喜仪式感。\n\n3 月 2 日晚 8 点至 3 月 5 日，打开京东 APP 进入秒杀频道，参与京东美妆蝴蝶节超级秒杀日，1 元秒大牌爆品、尽享全网低价，用超值好物开启春日焕美新篇章！\n\n广告声明：文内含有的对外跳转链接（包括不限于超链接、二维码、口令等形式），用于传递更多信息，节省甄选时间，结果仅供参考，IT之家所有文章均包含本声明。\n\n下载IT之家APP，签到赚金币兑豪礼\n\n## 相关文章\n\n关键词：业界动态 [...] 下载IT之家APP，签到赚金币兑豪礼\n\n## 相关文章\n\n关键词：业界动态\n\n 打造多元化内容矩阵创新玩法推动商业化加速\n 创新业务规模持续增长斗鱼第二增长曲线渐成\n 斗鱼转型“提质增效”：创新业务八季连增背后的多元化发展道路\n 黑竞宗轴 + FSA 球帽：机械师 K600 三模机械键盘 149.5 元半价发车\n 搭建仅需 3 分钟，和好朋友一起联机玩《幻兽帕鲁》\n 阿里云大促，云服务器产品低至 61 元 / 年\n\n软媒旗下网站： IT之家 最会买 - 返利返现优惠券 iPhone之家 Win7之家 Win10之家 Win11之家\n\n软媒旗下软件： 软媒手机APP应用 魔方 最会买 要知",
+      "content": "设置\n\n 日夜间\n\n  随系统\n\n  浅色\n\n  深色\n 主题色\n\n  黑色\n\n投稿\n\n订阅\n\n RSS订阅\n 收藏IT之家\n\n软媒应用\n\n App客户端\n 要知App\n 软媒魔方\n\n业界 手机 电脑 测评 视频 AI 苹果 iPhone 鸿蒙 软件\n\n智车 数码 学院 游戏 直播 5G 微软 Win10 Win11 专题\n\n首页 > IT资讯>业界\n\n# 大牌美妆 1 元秒！京东美妆蝴蝶节超级秒杀日 3 月 2 日晚 8 点火热开启\n\n2026/3/5 16:06:32 来源：之家网站 作者：- 责编：-\n\n评论：0\n\n早春换季，正是开启新一季护肤美妆计划的好时机。换季时节肌肤状态波动，无论是密集修护、深层清洁还是日常保湿，都需要一套值得信赖的护肤装备。3 月 2 日晚 8 点，京东美妆蝴蝶节超级秒杀日开启，京东秒杀推出兰蔻、欧莱雅、SK-II、海蓝之谜、赫莲娜等国际一线大牌产品秒杀活动，带来长达 76 小时的限时购物狂欢。大牌万件好物限时 1 元秒杀、采销推荐全网低价 500 款、明星周边权益集卡抽奖、下单赠足金黄金蝴蝶等多重福利齐发，助力消费者以超值价格抢购心仪的商品。\n\n本次超级秒杀日汇聚了多款修护单品。其中，娇兰复原蜜 50ml 限时送正装，会员到手 90ml，一瓶搞定换季干燥、泛红等多重肌肤困扰；YSL 夜皇后精华买 1 赠 1，熬夜加班后用它做夜间密集修护，帮助肌肤焕发光采；赫莲娜黑绷带 50PX 面霜到手 80ml 面霜量，高效紧致抗老，为初春肌肤筑起坚实屏障；娇韵诗黄金双萃精华 50ml 送同款正装 30ml，植萃双效精华早晚一泵，轻松应对季节交替带来的肌肤敏感与暗沉。 [...] 在本次超级秒杀日活动中，多款护肤好物重磅上线，满足全场景护肤需求：雅诗兰黛美白胶原水乳下单即享超 3 件正装量，欧莱雅小蜜罐水乳礼盒一次到手 9 件，覆盖晨间至夜间完整护肤流程，性价比拉满；SK-II 氨基酸洗面奶双支装，限时会员专享加赠，温和洁净不紧绷，成为每日洁面安心之选；海蓝之谜精萃水 100ml 享受三重好礼，为高端护肤爱好者带来超值入手体验。\n\n深层清洁与密集焕肤是换季护肤不可缺少的一环。在本次超级秒杀日活动中，科颜氏第二代白泥面膜买 125ml 到手 225ml，一周两次深度清洁毛孔，帮助后续精华更好吸收；理肤泉 B5 面膜 PRO 20 片买 20 片到手 55 片，密集补水修护一步到位，敏感肌也能放心囤货。还有兰蔻菁纯眼霜 20ml 买赠享买 1 赠 1、欧舒丹护手霜礼盒 4 支装买赠超正装量礼等优惠。\n\n值得一提的是，活动期间消费者还可参与明星周边权益集卡抽奖活动，更有机会获赠 999 足金蝴蝶手机贴，为春日购物增添惊喜仪式感。\n\n3 月 2 日晚 8 点至 3 月 5 日，打开京东 APP 进入秒杀频道，参与京东美妆蝴蝶节超级秒杀日，1 元秒大牌爆品、尽享全网低价，用超值好物开启春日焕美新篇章！\n\n广告声明：文内含有的对外跳转链接（包括不限于超链接、二维码、口令等形式），用于传递更多信息，节省甄选时间，结果仅供参考，IT之家所有文章均包含本声明。\n\n下载IT之家APP，签到赚金币兑豪礼\n\n## 相关文章\n\n关键词：业界动态 [...] 下载IT之家APP，签到赚金币兑豪礼\n\n## 相关文章\n\n关键词：业界动态\n\n 打造多元化内容矩阵创新玩法推动商业化加速\n 创新业务规模持续增长斗鱼第二增长曲线渐成\n 斗鱼转型“提质增效”：创新业务八季连增背后的多元化发展道路\n 黑竞宗轴 + FSA 球帽：机械师 K600 三模机械键盘 149.5 元半价发车\n 搭建仅需 3 分钟，和好朋友一起联机玩《幻兽帕鲁》\n 阿里云大促，云服务器产品低至 61 元 / 年\n\n软媒旗下网站： IT之家 最会买 - 返利返现优惠券 iPhone之家 Win7之家 Win10之家 Win11之家\n\n软媒旗下软件： 软媒手机APP应用 魔方 最会买 要知",
+      "matched_keywords": [
+        "美妆",
+        "敏感肌",
+        "大促",
+        "精华",
+        "面膜",
+        "直播",
+        "换季",
+        "护肤"
+      ],
+      "raw": {
+        "query": "京东秒送 美妆 个护 最新",
+        "score": 0.6155738,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 1,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆, 护肤, 面膜",
+          "+1 命中经营变量: 价格, 会员, 活动",
+          "-3 无关主题: 游戏"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=1<3",
+        "reject_reason": "rule_score=1<3"
+      }
+    },
+    {
+      "article_id": "a5ce4eb6dcede64b",
+      "title": "大牌美妆1元秒！京东美妆蝴蝶节超级秒杀日3月2日晚8点火热开启",
+      "url": "http://www.clii.com.cn/ppsj/202603/t20260306_3961076.html",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:26.728992+08:00",
+      "time_status": "unknown_time",
+      "summary": "中轻网首页\n 收藏本站\n\n 中国轻工业联合会\n |\n 中华全国手工业合作社\n |\n 中国轻工业信息中心\n\n 中国轻工行业进出口报告\n 中国轻工行业产业安全报告\n 中国轻工业竞争力报告\n 《轻工业统计资料》\n 《轻工标准与质量》杂志\n 消费日报\n\n2025年信息化大会\n\n 品牌设计\n 产业升级\n 质量标准\n 两化融合\n 经济运行\n 产业安全\n 区域发展\n 信用轻工\n 消费精品\n 会展交流\n 热点聚焦\n 公告通知\n 协会动态\n 专题新闻\n\n中国轻工业网>品牌设计\n\n### 大牌美妆1元秒！京东美妆蝴蝶节超级秒杀日3月2日晚8点火热开启\n\n0\n\n2026-03-06 来源：京东\n\n(javascript:void(0);)字号 [大;) 中;)小;)]\n\n早春换季，正是开启新一季护肤美妆计划的好时机。换季时节肌肤状态波动，无论是密集修护、深层清洁还是日常保湿，都需要一套值得信赖的护肤装备。3月2日晚8点，京东美妆蝴蝶节超级秒杀日开启，京东秒杀推出兰蔻、欧莱雅、SK-II、海蓝之谜、赫莲娜等国际一线大牌产品秒杀活动，带来长达76小时的限时购物狂欢。大牌万件好物限时1元秒杀、采销推荐全网低价500款、明星周边权益集卡抽奖、下单赠足金黄金蝴蝶等多重福利齐发，助力消费者以超值价格抢购心仪的商品。\n\n本次超级秒杀日汇聚了多款修护单品。其中，娇兰复原蜜50ml限时送正装，会员到手90ml，一瓶搞定换季干燥、泛红等多重肌肤困扰；YSL夜皇后精华买1赠1，熬夜加班后用它做夜间密集修护，帮助肌肤焕发光采；赫莲娜黑绷带50PX面霜到手80ml面霜量，高效紧致抗老，为初春肌肤筑起坚实屏障；娇韵诗黄金双萃精华50ml送同款正装30ml，植萃双效精华早晚一泵，轻松应对季节交替带来的肌肤敏感与暗沉。 [...] 在本次超级秒杀日活动中，多款护肤好物重磅上线，满足全场景护肤需求：雅诗兰黛美白胶原水乳下单即享超3件正装量，欧莱雅小蜜罐水乳礼盒一次到手9件，覆盖晨间至夜间完整护肤流程，性价比拉满；SK-II 氨基酸洗面奶双支装，限时会员专享加赠，温和洁净不紧绷，成为每日洁面安心之选；海蓝之谜精萃水100ml享受三重好礼，为高端护肤爱好者带来超值入手体验。\n\n深层清洁与密集焕肤是换季护肤不可缺少的一环。在本次超级秒杀日活动中，科颜氏第二代白泥面膜买125ml到手225ml，一周两次深度清洁毛孔，帮助后续精华更好吸收；理肤泉B5面膜PRO 20片买20片到手55片，密集补水修护一步到位，敏感肌也能放心囤货。还有兰蔻菁纯眼霜20ml买赠享买1赠1、欧舒丹护手霜礼盒4支装买赠超正装量礼等优惠。\n\n值得一提的是，活动期间消费者还可参与明星周边权益集卡抽奖活动，更有机会获赠999足金蝴蝶手机贴，为春日购物增添惊喜仪式感。\n\n3月2日晚8点至3月5日，打开京东APP进入秒杀频道，参与京东美妆蝴蝶节超级秒杀日，1元秒大牌爆品、尽享全网低价，用超值好物开启春日焕美新篇章！\n\n### 相关新闻\n\n### 版权声明\n\n1、凡本网注明“来源：中国轻工业网” 的作品，版权均属于中国轻工业网，未经本网授权，任何单位及个人不得转载、摘编或以其它方式使用。已经本网授权使用作品的，应在授权范围内使用，并注明“来源：中国轻工业网”。违反上述声明者，本网将追究其相关法律责任。  \n 2、凡本网注明 “来源：XXX（非中国轻工业网）” 的作品，均转载自其它媒体，转载目的在于信息之传播，并不代表本网赞同其观点和对其真实性负责。  \n 3、如因作品内容、版权和其它问题需要同本网联系的，请于转载之日起30日内进行。  \n4、免责声明：本站信息及数据均为非营利用途，转载文章版权归信息来源网站或原作者所有。\n\n大国工匠 [...] 大国工匠\n\n# 微博互动\n\n# 图片新闻\n\n [](  2025年全国行\n [](  科学谋划“十五五\n [](  中国轻工业联合会\n [](  中国轻工联党委纪\n\n# 专题新闻\n\n 2025年轻工百强高峰论坛\n 2024年全国轻工行业职业技能\n 2023年轻工百强高峰论坛\n 中国轻工业百强企业榜单（202\n\n友情链接 |\n\n国资委 国家新闻出版署 国家市场监督管理总局 生态环境部 国家统计局 海关总署 科技部 商务部 工信部 民政部 发改委\n\n中国轻工业信息中心行业研究报告\n\n关于中轻网|法律声明|常用电话|联系我们|广告服务|行业协会|地方轻工\n\n主办单位：中国轻工业联合会 运行管理：中国轻工业信息中心 技术支持：北京银河漫游科技有限公司  \n Copyright© 中国轻工业网；未经书面授权，请勿转载，违者依法必究；京ICP备05052150号-1 ； 公安备案号11010202009559",
+      "content": "中轻网首页\n 收藏本站\n\n 中国轻工业联合会\n |\n 中华全国手工业合作社\n |\n 中国轻工业信息中心\n\n 中国轻工行业进出口报告\n 中国轻工行业产业安全报告\n 中国轻工业竞争力报告\n 《轻工业统计资料》\n 《轻工标准与质量》杂志\n 消费日报\n\n2025年信息化大会\n\n 品牌设计\n 产业升级\n 质量标准\n 两化融合\n 经济运行\n 产业安全\n 区域发展\n 信用轻工\n 消费精品\n 会展交流\n 热点聚焦\n 公告通知\n 协会动态\n 专题新闻\n\n中国轻工业网>品牌设计\n\n### 大牌美妆1元秒！京东美妆蝴蝶节超级秒杀日3月2日晚8点火热开启\n\n0\n\n2026-03-06 来源：京东\n\n(javascript:void(0);)字号 [大;) 中;)小;)]\n\n早春换季，正是开启新一季护肤美妆计划的好时机。换季时节肌肤状态波动，无论是密集修护、深层清洁还是日常保湿，都需要一套值得信赖的护肤装备。3月2日晚8点，京东美妆蝴蝶节超级秒杀日开启，京东秒杀推出兰蔻、欧莱雅、SK-II、海蓝之谜、赫莲娜等国际一线大牌产品秒杀活动，带来长达76小时的限时购物狂欢。大牌万件好物限时1元秒杀、采销推荐全网低价500款、明星周边权益集卡抽奖、下单赠足金黄金蝴蝶等多重福利齐发，助力消费者以超值价格抢购心仪的商品。\n\n本次超级秒杀日汇聚了多款修护单品。其中，娇兰复原蜜50ml限时送正装，会员到手90ml，一瓶搞定换季干燥、泛红等多重肌肤困扰；YSL夜皇后精华买1赠1，熬夜加班后用它做夜间密集修护，帮助肌肤焕发光采；赫莲娜黑绷带50PX面霜到手80ml面霜量，高效紧致抗老，为初春肌肤筑起坚实屏障；娇韵诗黄金双萃精华50ml送同款正装30ml，植萃双效精华早晚一泵，轻松应对季节交替带来的肌肤敏感与暗沉。 [...] 在本次超级秒杀日活动中，多款护肤好物重磅上线，满足全场景护肤需求：雅诗兰黛美白胶原水乳下单即享超3件正装量，欧莱雅小蜜罐水乳礼盒一次到手9件，覆盖晨间至夜间完整护肤流程，性价比拉满；SK-II 氨基酸洗面奶双支装，限时会员专享加赠，温和洁净不紧绷，成为每日洁面安心之选；海蓝之谜精萃水100ml享受三重好礼，为高端护肤爱好者带来超值入手体验。\n\n深层清洁与密集焕肤是换季护肤不可缺少的一环。在本次超级秒杀日活动中，科颜氏第二代白泥面膜买125ml到手225ml，一周两次深度清洁毛孔，帮助后续精华更好吸收；理肤泉B5面膜PRO 20片买20片到手55片，密集补水修护一步到位，敏感肌也能放心囤货。还有兰蔻菁纯眼霜20ml买赠享买1赠1、欧舒丹护手霜礼盒4支装买赠超正装量礼等优惠。\n\n值得一提的是，活动期间消费者还可参与明星周边权益集卡抽奖活动，更有机会获赠999足金蝴蝶手机贴，为春日购物增添惊喜仪式感。\n\n3月2日晚8点至3月5日，打开京东APP进入秒杀频道，参与京东美妆蝴蝶节超级秒杀日，1元秒大牌爆品、尽享全网低价，用超值好物开启春日焕美新篇章！\n\n### 相关新闻\n\n### 版权声明\n\n1、凡本网注明“来源：中国轻工业网” 的作品，版权均属于中国轻工业网，未经本网授权，任何单位及个人不得转载、摘编或以其它方式使用。已经本网授权使用作品的，应在授权范围内使用，并注明“来源：中国轻工业网”。违反上述声明者，本网将追究其相关法律责任。  \n 2、凡本网注明 “来源：XXX（非中国轻工业网）” 的作品，均转载自其它媒体，转载目的在于信息之传播，并不代表本网赞同其观点和对其真实性负责。  \n 3、如因作品内容、版权和其它问题需要同本网联系的，请于转载之日起30日内进行。  \n4、免责声明：本站信息及数据均为非营利用途，转载文章版权归信息来源网站或原作者所有。\n\n大国工匠 [...] 大国工匠\n\n# 微博互动\n\n# 图片新闻\n\n [](  2025年全国行\n [](  科学谋划“十五五\n [](  中国轻工业联合会\n [](  中国轻工联党委纪\n\n# 专题新闻\n\n 2025年轻工百强高峰论坛\n 2024年全国轻工行业职业技能\n 2023年轻工百强高峰论坛\n 中国轻工业百强企业榜单（202\n\n友情链接 |\n\n国资委 国家新闻出版署 国家市场监督管理总局 生态环境部 国家统计局 海关总署 科技部 商务部 工信部 民政部 发改委\n\n中国轻工业信息中心行业研究报告\n\n关于中轻网|法律声明|常用电话|联系我们|广告服务|行业协会|地方轻工\n\n主办单位：中国轻工业联合会 运行管理：中国轻工业信息中心 技术支持：北京银河漫游科技有限公司  \n Copyright© 中国轻工业网；未经书面授权，请勿转载，违者依法必究；京ICP备05052150号-1 ； 公安备案号11010202009559",
+      "matched_keywords": [
+        "备案",
+        "美妆",
+        "敏感肌",
+        "精华",
+        "面膜",
+        "换季",
+        "护肤"
+      ],
+      "raw": {
+        "query": "京东秒送 美妆 个护 最新",
+        "score": 0.5962692,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": -1,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆, 护肤, 面膜",
+          "+1 命中经营变量: 价格, 会员, 活动",
+          "-5 垃圾内容: 免责声明"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "垃圾内容: 免责声明",
+        "reject_reason": "垃圾内容: 免责声明"
+      }
+    },
+    {
+      "article_id": "934669fc40b4606a",
+      "title": "京东秒杀",
+      "url": "https://pro.m.jd.com/mall/active/3tuyrzceYdNbDk58hVat3fPRosRa/index.html?babelChannel=ttt452&mTabId=Md9FMi1pJXg2q7qc8CmE9FNYDS4&father=ms&useFoldTab=1&innerLink=%5B%7B%22groupId%22%3A%222RJ7ot8kUkU5iciABi62Ds7TZ1Ks%22%2C%22matType%22%3A%2226%22%7D%5D",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:26.730984+08:00",
+      "time_status": "unknown_time",
+      "summary": "超级品类日\n\n超级品牌日\n\n临期清仓\n\n​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n\n￥59\n\nimage\n\n热销中\n\n相宜本草（INOHERB）【张凌赫同款】龙胆专研舒安修护冻干面膜\\5片舒缓修护男女士护肤\n\nimageimage\n\n推荐\n\nAI帮你选\n\n好礼抽奖\n\n送女友\n\n送男友\n\n送爸爸\n\n送妈妈\n\n送恩师\n\n送孩子\n\n送同事\n\n送闺蜜\n\n送兄弟\n\n礼品卡\n\n生日礼\n\n图片\n\n图片\n\n图片\n\n 学生优惠)\n 超萌摆件)\n 纸巾1元起)\n 黄金贴纸)\n\n图片\n\nimage\n\n小米12.1英寸平板\n\n￥1499\n\nimage\n\nimage\n\n机械革命游戏本\n\n￥6999\n\nimage\n\nimage\n\n雕塑家屏显示器\n\n￥748\n\nimage\n\n点击查看更多\n\nimage\n\nimage\n\nVCC行李箱18寸小型登机箱前开盖箱出差箱男轻便旅行箱密码拉杆箱女 白色 18英寸 【顺丰速发】\n\n已售2万+\n\n大容量深仓设计\n\n3期免息\n\n￥167.5\n\nimage\n\nimage\n\n羽博（Yoobao）手持小风扇usb迷你风扇随身便携充电风扇桌面小型风扇学生办公宿舍户外风扇 森系绿【低噪大风可立吹】 4000mAh\n\n￥43 [...] ￥43\n\nimage\n\nimage\n\nVENIDER【国家3C安全认证】【可上飞机高铁】磁吸充电宝20000mAh超级快充自带线移动电源适用苹果小米 顶配版【2万毫安时+磁吸+AC插头+自带线】米橙色\n\n￥222\n\nimage",
+      "content": "超级品类日\n\n超级品牌日\n\n临期清仓\n\n​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n\n￥59\n\nimage\n\n热销中\n\n相宜本草（INOHERB）【张凌赫同款】龙胆专研舒安修护冻干面膜\\5片舒缓修护男女士护肤\n\nimageimage\n\n推荐\n\nAI帮你选\n\n好礼抽奖\n\n送女友\n\n送男友\n\n送爸爸\n\n送妈妈\n\n送恩师\n\n送孩子\n\n送同事\n\n送闺蜜\n\n送兄弟\n\n礼品卡\n\n生日礼\n\n图片\n\n图片\n\n图片\n\n 学生优惠)\n 超萌摆件)\n 纸巾1元起)\n 黄金贴纸)\n\n图片\n\nimage\n\n小米12.1英寸平板\n\n￥1499\n\nimage\n\nimage\n\n机械革命游戏本\n\n￥6999\n\nimage\n\nimage\n\n雕塑家屏显示器\n\n￥748\n\nimage\n\n点击查看更多\n\nimage\n\nimage\n\nVCC行李箱18寸小型登机箱前开盖箱出差箱男轻便旅行箱密码拉杆箱女 白色 18英寸 【顺丰速发】\n\n已售2万+\n\n大容量深仓设计\n\n3期免息\n\n￥167.5\n\nimage\n\nimage\n\n羽博（Yoobao）手持小风扇usb迷你风扇随身便携充电风扇桌面小型风扇学生办公宿舍户外风扇 森系绿【低噪大风可立吹】 4000mAh\n\n￥43 [...] ￥43\n\nimage\n\nimage\n\nVENIDER【国家3C安全认证】【可上飞机高铁】磁吸充电宝20000mAh超级快充自带线移动电源适用苹果小米 顶配版【2万毫安时+磁吸+AC插头+自带线】米橙色\n\n￥222\n\nimage",
+      "matched_keywords": [
+        "面膜",
+        "护肤"
+      ],
+      "raw": {
+        "query": "京东秒送 美妆 个护 最新",
+        "score": 0.43727133,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 护肤, 面膜",
+          "-3 无关主题: 游戏"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=0<3",
+        "reject_reason": "rule_score=0<3"
+      }
+    },
+    {
+      "article_id": "debae6d122460186",
+      "title": "[PDF] 推荐",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202501121641896034_1.pdf",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:26.734003+08:00",
+      "time_status": "unknown_time",
+      "summary": "用途。 3.2 医美美妆：欧莱雅在CES 展中推出最新美容科技产品 L’Oréal Cell BioPrin，瑞士美妆品牌LA PRAIRIE 新品 重力精华3.0 在京东美妆独家首发 3.2.1 行业资讯 1．【化妆品】据外媒报道称，欧莱雅集团正面临六起集体诉讼，这些诉讼主要针 对的是CeraVe（适乐肤）品牌以及欧莱雅集团。有原告指控，在适乐肤及其 它含有过氧化苯甲酰的护理产品中， 苯的含量超过了联邦安全标准所规定的限 值。（2025.01.09 联商网） 2．【化妆品】 近日，瑞士高奢美妆品牌LA PRAIRIE 新品重力精华3.0 在京东美 妆独家首发，京东重磅新品日也于1 月10 日同步开启，当日下单即享超值优 惠， 可获赠明星产品、 定制周边等至高15 重礼。 （2025.01.10 中国质量新闻 网） 3.【化妆品】2024 年12 月，抖音美妆护肤大盘销售数据出炉。期内，美妆护肤品 类在平台的总销量达2.5 亿~5 亿单，总销售额在100 亿~250 亿元之间，销 售额环比下降6.47%， 同比增长40.87%。 具体到细分类目， 仅有彩妆/香水品 类销售额环比实现6.62%的正增长，其余护肤和美容工具/美容仪器销售额环 比均录得负增长，降幅分别为-10.97%、-3.02%。（2025.01.07 搜狐网） 4. 【医疗美容】欧莱雅集团（下称“欧莱雅”）在美妆科技领域又有新动作。1 月 6 日，欧莱雅在2025 CES 国际消费类电子产品展览会上推出了最新美容科技 产品L’Oréal Cell BioPrin（一款生物细胞皮肤分析仪器）。该皮肤分析仪器 利用蛋白质组学技术， 能在五分钟内提供个性化的皮肤分析。 （2025.01.08 经 济观察报） 5. 【医疗美容】1 月9 日，郑州市整形美容协会“豫美同行”医美高质量发展大 会暨中整协医美机构5A [...] 分钟回复 无 - 巨子生物 可复美 4.79 1 年308 天 5 1.5 96.00% 平均9 小时发货，大 于3 分钟回复 有 49.9/99.9/1 09.9/199 可丽金 4.80 1 年59 天 3.3 2.1 96.70% 平均11 小时发货， 大于3 分钟回复 有 188/329/37 9 丸美生物 丸美 4.78 2 年49 天 18.3 14.7 97.50% 平均11 小时发货，3 分钟内回复 有 58/218/248 /338/388/3 99/458/449 /519 恋火 4.64 1 年193 天 0.0977 0.0524 100% 平均11 小时发货， 大于3 分钟回复 无 - 上美股份 韩束 4.72 ﹣ 0.007 ﹣ ﹣ - 有 99/399 一叶子 ﹣ 219 天 0 0 ﹣ ﹣ 无 - 红色小象 4.84 160 天 0.0947 0.054 91.70% 平均24 小时后发 货，大于3 分钟回复 无 - 一页 4.73 ﹣ 0.0741 ﹣ ﹣ ﹣ 无 - 润本股份 润本 4.85 1 年265 天 9.6 8.5 94.50% 平均8 小时发货，大 于3 分钟回复 无 - 毛戈平 毛戈平 4.64 243 天 1.9 1.1 95.90% 平均9 小时发货，3 分钟内回复 无 - 水羊股份 伊菲丹 4.82 1 年225 天 0.1194 0.0577 100% 平均11 小时发货， 大于3 分钟回复 有 299/2580/9 900 御泥坊 4.67 2 年75 天 0.1882 0.1265 93.30% 平均12 小时发货， 大于3 分钟回复 无 - 福瑞达 瑷尔博士 4.85 1 年342 天 1.7 1.2 100% 平均13 小时发货，3 分钟内回复 有 61/168/208 颐莲 4.86 1 年207 天 [...] 1.2 100% 平均13 小时发货，3 分钟内回复 有 61/168/208 颐莲 4.86 1 年207 天 1.8 1.3 100% 平均8 小时发货，3 分钟内回复 有 85/158/299 华熙生物 润百颜 4.83 1 年261 天 5.1 4 95.90% 平均9 小时发货，3 分钟内回复 无 - 夸迪 4.81 2 年23 天 13.4 9.9 94.10% 平均13 小时发货，3 分钟内回复 无 - 肌活 ﹣ 1 年117 天 0.0003 ﹣ ﹣ 平均大于3 分钟回复 无 - 米蓓尔 ﹣ 1 年165 天 0.0109 ﹣ ﹣ ﹣ 无 - 行业定期报告/商贸零售 本公司具备证券投资咨询业务资格，请务必阅读最后一页免责声明 证券研究报告 5 雅诗兰黛 雅诗兰黛 4.66 1 年176 天 1.9 1.3 94.90% 平均13 小时发货 无 - 海蓝之谜 ",
+      "content": "用途。 3.2 医美美妆：欧莱雅在CES 展中推出最新美容科技产品 L’Oréal Cell BioPrin，瑞士美妆品牌LA PRAIRIE 新品 重力精华3.0 在京东美妆独家首发 3.2.1 行业资讯 1．【化妆品】据外媒报道称，欧莱雅集团正面临六起集体诉讼，这些诉讼主要针 对的是CeraVe（适乐肤）品牌以及欧莱雅集团。有原告指控，在适乐肤及其 它含有过氧化苯甲酰的护理产品中， 苯的含量超过了联邦安全标准所规定的限 值。（2025.01.09 联商网） 2．【化妆品】 近日，瑞士高奢美妆品牌LA PRAIRIE 新品重力精华3.0 在京东美 妆独家首发，京东重磅新品日也于1 月10 日同步开启，当日下单即享超值优 惠， 可获赠明星产品、 定制周边等至高15 重礼。 （2025.01.10 中国质量新闻 网） 3.【化妆品】2024 年12 月，抖音美妆护肤大盘销售数据出炉。期内，美妆护肤品 类在平台的总销量达2.5 亿~5 亿单，总销售额在100 亿~250 亿元之间，销 售额环比下降6.47%， 同比增长40.87%。 具体到细分类目， 仅有彩妆/香水品 类销售额环比实现6.62%的正增长，其余护肤和美容工具/美容仪器销售额环 比均录得负增长，降幅分别为-10.97%、-3.02%。（2025.01.07 搜狐网） 4. 【医疗美容】欧莱雅集团（下称“欧莱雅”）在美妆科技领域又有新动作。1 月 6 日，欧莱雅在2025 CES 国际消费类电子产品展览会上推出了最新美容科技 产品L’Oréal Cell BioPrin（一款生物细胞皮肤分析仪器）。该皮肤分析仪器 利用蛋白质组学技术， 能在五分钟内提供个性化的皮肤分析。 （2025.01.08 经 济观察报） 5. 【医疗美容】1 月9 日，郑州市整形美容协会“豫美同行”医美高质量发展大 会暨中整协医美机构5A [...] 分钟回复 无 - 巨子生物 可复美 4.79 1 年308 天 5 1.5 96.00% 平均9 小时发货，大 于3 分钟回复 有 49.9/99.9/1 09.9/199 可丽金 4.80 1 年59 天 3.3 2.1 96.70% 平均11 小时发货， 大于3 分钟回复 有 188/329/37 9 丸美生物 丸美 4.78 2 年49 天 18.3 14.7 97.50% 平均11 小时发货，3 分钟内回复 有 58/218/248 /338/388/3 99/458/449 /519 恋火 4.64 1 年193 天 0.0977 0.0524 100% 平均11 小时发货， 大于3 分钟回复 无 - 上美股份 韩束 4.72 ﹣ 0.007 ﹣ ﹣ - 有 99/399 一叶子 ﹣ 219 天 0 0 ﹣ ﹣ 无 - 红色小象 4.84 160 天 0.0947 0.054 91.70% 平均24 小时后发 货，大于3 分钟回复 无 - 一页 4.73 ﹣ 0.0741 ﹣ ﹣ ﹣ 无 - 润本股份 润本 4.85 1 年265 天 9.6 8.5 94.50% 平均8 小时发货，大 于3 分钟回复 无 - 毛戈平 毛戈平 4.64 243 天 1.9 1.1 95.90% 平均9 小时发货，3 分钟内回复 无 - 水羊股份 伊菲丹 4.82 1 年225 天 0.1194 0.0577 100% 平均11 小时发货， 大于3 分钟回复 有 299/2580/9 900 御泥坊 4.67 2 年75 天 0.1882 0.1265 93.30% 平均12 小时发货， 大于3 分钟回复 无 - 福瑞达 瑷尔博士 4.85 1 年342 天 1.7 1.2 100% 平均13 小时发货，3 分钟内回复 有 61/168/208 颐莲 4.86 1 年207 天 [...] 1.2 100% 平均13 小时发货，3 分钟内回复 有 61/168/208 颐莲 4.86 1 年207 天 1.8 1.3 100% 平均8 小时发货，3 分钟内回复 有 85/158/299 华熙生物 润百颜 4.83 1 年261 天 5.1 4 95.90% 平均9 小时发货，3 分钟内回复 无 - 夸迪 4.81 2 年23 天 13.4 9.9 94.10% 平均13 小时发货，3 分钟内回复 无 - 肌活 ﹣ 1 年117 天 0.0003 ﹣ ﹣ 平均大于3 分钟回复 无 - 米蓓尔 ﹣ 1 年165 天 0.0109 ﹣ ﹣ ﹣ 无 - 行业定期报告/商贸零售 本公司具备证券投资咨询业务资格，请务必阅读最后一页免责声明 证券研究报告 5 雅诗兰黛 雅诗兰黛 4.66 1 年176 天 1.9 1.3 94.90% 平均13 小时发货 无 - 海蓝之谜 4.52 225 天 0.1554 0.0838 88.90% 平均14 小时发货 有 3310/3790/ 4860/5420/ 7210 欧莱雅 欧莱雅 4.74 1 年216 天 3.3 2.5 95.20% 平均15 小时发货，3 分钟内回复 无 - 兰蔻 ﹣ ﹣ 0 ﹣ ﹣ ﹣ 无 - 修丽可 ﹣ ﹣ 0.0001 ﹣ ﹣ ﹣ 无 - 赫莲娜 ﹣ 271 天 0.0001 ﹣ ﹣ ﹣ 无 - 资生堂 资生堂 4.65 149 天 0.6271 0.3868 100% 平均17 小时发货， 大于3 分钟回复 无 - 资料来源：微信小店，民生证券研究院 1.1.3 淘宝上线“送礼物”功能 事件：近期，淘宝平台部分食品、服饰、家居等产品上线“送礼物”功能，且 部分订单支持微信支付。 淘宝“送礼物”功能的使用方式：用户在选择好商品后，点击“去送礼物”，",
+      "matched_keywords": [
+        "彩妆",
+        "独家首发",
+        "美妆",
+        "香水",
+        "抖音美妆",
+        "精华",
+        "护肤"
+      ],
+      "raw": {
+        "query": "京东秒送 美妆 个护 最新",
+        "score": 0.29322278,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": -5,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆, 护肤, 彩妆",
+          "-3 泛领域: 美股",
+          "-5 垃圾内容: 免责声明"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "垃圾内容: 免责声明",
+        "reject_reason": "垃圾内容: 免责声明"
+      }
+    },
+    {
+      "article_id": "a32a4da0fc547d97",
+      "title": "美妆个护 - Top 100件美妆个护 - 2026年4月更新 - Taobao",
+      "url": "https://www.taobao.com/list/product/%E7%BE%8E%E5%A6%86%E4%B8%AA%E6%8A%A4.htm",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:24.365412+08:00",
+      "time_status": "unknown_time",
+      "summary": "Image 7: 护肤个护全新护肤美妆化妆品上新合集全新正品特价正装正品促销 Image 8收藏宝贝 护肤个护全新护肤美妆化妆品上新合集全新正品特价正装正品促销 ￥ 58.9 Image 9Image 10Image 11Image 12Image 13 4.8Image 14: 护肤个护全新旅行装护肤美妆化妆品上新合集全新正品特价促销 Image 15收藏宝贝 护肤个护全新旅行装护肤美妆化妆品上新合集全新正品特价促销 ￥ 45.8 Image 16Image 17Image 18Image 19Image 20 4.8Image 21: 护肤个护全新护肤美妆粉底化妆品上新合集全新正品特价正装正品 Image 22收藏宝贝 全新正品美妆个护美妆化妆品上新合集全新正品特价正装正品促销 ￥ 41.78 Image 23Image 24Image 25Image 26Image 27 4.8Image 28: 个护美妆化妆品上新合集全新正品特价正装正品促销 Image 29收藏宝贝 个护美妆化妆品上新合集全新正品特价正装正品促销 ￥ 69 Image 30Image 31Image 32Image 33Image 34 4.8Image 35: 护肤个护全新旅行装护肤美妆化妆品上新合集全新正品特价促销 Image 36收藏宝贝 护肤个护全新旅行装护肤美妆化妆品上新合集全新正品特价促销 ￥ 57.8 Image 37Image 38Image 39Image 40Image 41 4.8Image 42: 护肤个护全新护肤美妆化妆品上新合集全新正品特价正装正品促销1 Image 43收藏宝贝 护肤个护全新护肤美妆化妆品上新合集全新正品特价正装正品促销1 ￥ 32.6 Image 44Image 45Image 46Image 47Image 48 4.8Image 49: [...] # 美妆个护 - Top 100件美妆个护 - 2026年4月更新 - Taobao\n\n   全球 \n\n       全球\n       中国大陆\n       中国香港\n       中国台湾\n       中国澳门\n       韩国\n       马来西亚\n       澳大利亚\n       新加坡\n       新西兰\n       加拿大\n       日本\n       越南\n       泰国\n       菲律宾\n       柬埔寨\n\n   亲，请登录免费注册    \n   手机逛淘宝 \n\n   我的淘宝 已买到的宝贝我的足迹  \n   购物车   \n   收藏夹 收藏的宝贝收藏的店铺  \n   跨境物流管理 \n   海外消费者帮助 \n\nImage 1\n\nImage 2\n\nImage 3 全球\n\n搜索\n\n全部分类\n\nImage 4\n\n服饰\n\n家具家居\n\n3C数码\n\n母婴\n\n美妆洗护\n\n食品\n\n大小家电\n\n汽车\n\n医药健康\n\n虚拟\n\n行业其他\n\n针织衫男秋装男款秋装外套外套钱包男手提包保暖内衣男加厚棒球服女耐克男鞋\n\n更多...\n\nImage 5\n\nHi! 你好，请登录\n\n登录\n\n注册运费立减\n\n首页>汽车内外饰用品>汽车香水香薰>车用香水>美妆个护（共找到 100 件 商品）\n\n美妆个护 相关推荐\n\n美妆工具分类\n\n[- [x] 脸部美容化妆用具]( [x] 化妆粉扑]( [x] 分装用空瓶](\n\n功能\n\n[- [x] 定妆]( [x] 修饰肤色]( [x] 妆前打底]( [x] 防水]( [x] 控油](\n\n更多\n\nImage 6: 展開收起\n\n重置\n\n销量排序\n\n综合排序\n\n信用排序\n\n价格排序\n\n确定\n\n[]( [...] 119: 电商美妆个护化妆品护肤品大促首页618双十一活动设计素材PSD模板 Image 120收藏宝贝 电商美妆个护数码电器鞋保健品高点击主图直通车图模板PS设计素材 ￥ 2.8 Image 121Image 122Image 123Image 124Image 125 5.0Image 126: 电商美妆个护化妆品护肤品大促首页618双十一活动设计素材PSD模板 Image 127收藏宝贝 金达日美不锈钢修眉刀个护卫生锋利刮眉刀剃眉刀 竹节形美妆工具 ￥ 7.9 Image 128Image 129Image 130Image 131Image 132 4.8Image 133: 电商美妆个护化妆品护肤品大促首页618双十一活动设计素材PSD模板 Image 134收藏宝贝 PEACH JO+美妆个护小蓝管唇部美容液唇油保湿滋润补水男女去死皮 热销款 ￥ 5.29 Image 135Image 136Image 137Image 138Image 139 4.9Image 140: 电商美妆个",
+      "content": "Image 7: 护肤个护全新护肤美妆化妆品上新合集全新正品特价正装正品促销 Image 8收藏宝贝 护肤个护全新护肤美妆化妆品上新合集全新正品特价正装正品促销 ￥ 58.9 Image 9Image 10Image 11Image 12Image 13 4.8Image 14: 护肤个护全新旅行装护肤美妆化妆品上新合集全新正品特价促销 Image 15收藏宝贝 护肤个护全新旅行装护肤美妆化妆品上新合集全新正品特价促销 ￥ 45.8 Image 16Image 17Image 18Image 19Image 20 4.8Image 21: 护肤个护全新护肤美妆粉底化妆品上新合集全新正品特价正装正品 Image 22收藏宝贝 全新正品美妆个护美妆化妆品上新合集全新正品特价正装正品促销 ￥ 41.78 Image 23Image 24Image 25Image 26Image 27 4.8Image 28: 个护美妆化妆品上新合集全新正品特价正装正品促销 Image 29收藏宝贝 个护美妆化妆品上新合集全新正品特价正装正品促销 ￥ 69 Image 30Image 31Image 32Image 33Image 34 4.8Image 35: 护肤个护全新旅行装护肤美妆化妆品上新合集全新正品特价促销 Image 36收藏宝贝 护肤个护全新旅行装护肤美妆化妆品上新合集全新正品特价促销 ￥ 57.8 Image 37Image 38Image 39Image 40Image 41 4.8Image 42: 护肤个护全新护肤美妆化妆品上新合集全新正品特价正装正品促销1 Image 43收藏宝贝 护肤个护全新护肤美妆化妆品上新合集全新正品特价正装正品促销1 ￥ 32.6 Image 44Image 45Image 46Image 47Image 48 4.8Image 49: [...] # 美妆个护 - Top 100件美妆个护 - 2026年4月更新 - Taobao\n\n   全球 \n\n       全球\n       中国大陆\n       中国香港\n       中国台湾\n       中国澳门\n       韩国\n       马来西亚\n       澳大利亚\n       新加坡\n       新西兰\n       加拿大\n       日本\n       越南\n       泰国\n       菲律宾\n       柬埔寨\n\n   亲，请登录免费注册    \n   手机逛淘宝 \n\n   我的淘宝 已买到的宝贝我的足迹  \n   购物车   \n   收藏夹 收藏的宝贝收藏的店铺  \n   跨境物流管理 \n   海外消费者帮助 \n\nImage 1\n\nImage 2\n\nImage 3 全球\n\n搜索\n\n全部分类\n\nImage 4\n\n服饰\n\n家具家居\n\n3C数码\n\n母婴\n\n美妆洗护\n\n食品\n\n大小家电\n\n汽车\n\n医药健康\n\n虚拟\n\n行业其他\n\n针织衫男秋装男款秋装外套外套钱包男手提包保暖内衣男加厚棒球服女耐克男鞋\n\n更多...\n\nImage 5\n\nHi! 你好，请登录\n\n登录\n\n注册运费立减\n\n首页>汽车内外饰用品>汽车香水香薰>车用香水>美妆个护（共找到 100 件 商品）\n\n美妆个护 相关推荐\n\n美妆工具分类\n\n[- [x] 脸部美容化妆用具]( [x] 化妆粉扑]( [x] 分装用空瓶](\n\n功能\n\n[- [x] 定妆]( [x] 修饰肤色]( [x] 妆前打底]( [x] 防水]( [x] 控油](\n\n更多\n\nImage 6: 展開收起\n\n重置\n\n销量排序\n\n综合排序\n\n信用排序\n\n价格排序\n\n确定\n\n[]( [...] 119: 电商美妆个护化妆品护肤品大促首页618双十一活动设计素材PSD模板 Image 120收藏宝贝 电商美妆个护数码电器鞋保健品高点击主图直通车图模板PS设计素材 ￥ 2.8 Image 121Image 122Image 123Image 124Image 125 5.0Image 126: 电商美妆个护化妆品护肤品大促首页618双十一活动设计素材PSD模板 Image 127收藏宝贝 金达日美不锈钢修眉刀个护卫生锋利刮眉刀剃眉刀 竹节形美妆工具 ￥ 7.9 Image 128Image 129Image 130Image 131Image 132 4.8Image 133: 电商美妆个护化妆品护肤品大促首页618双十一活动设计素材PSD模板 Image 134收藏宝贝 PEACH JO+美妆个护小蓝管唇部美容液唇油保湿滋润补水男女去死皮 热销款 ￥ 5.29 Image 135Image 136Image 137Image 138Image 139 4.9Image 140: 电商美妆个护化妆品护肤品大促首页618双十一活动设计素材PSD模板 Image 141收藏宝贝 电商美妆个护化妆品护肤品大促首页618双十一活动设计素材PSD模板 热卖促销 ￥ 2.8 Image 142Image 143Image 144Image 145Image 146 5.0",
+      "matched_keywords": [
+        "美妆",
+        "香水",
+        "个护",
+        "618",
+        "洗护",
+        "大促",
+        "促销",
+        "护肤"
+      ],
+      "raw": {
+        "query": "淘宝闪购 美妆 个护 最新",
+        "score": 0.6884899,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 1,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆, 个护, 护肤",
+          "+1 命中经营变量: 价格, 活动",
+          "-3 无关主题: 汽车"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=1<3",
+        "reject_reason": "rule_score=1<3"
+      }
+    },
+    {
+      "article_id": "93f39fa0606e5649",
+      "title": "美妆个护知识与美妆个护信息资讯-淘宝美妆网",
+      "url": "https://beaut.taobao.com/topic/zhuanti/%E7%BE%8E%E5%A6%86%E4%B8%AA%E6%8A%A4/list-1",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:24.371944+08:00",
+      "time_status": "unknown_time",
+      "summary": "这个套盒真的“抗皱”吗？我们用数据说话！\n\n### 这个套盒真的“抗皱”吗？我们用数据说话！\n\n在美妆圈里，“抗皱”这个词已经被炒得够热了，但真正能打的不多。今天我们要聊的这款\\贞美抗皱焕颜日夜修护套盒\\，到底是不是真·抗皱神器？咱们不靠广告吹，只看成分和功效，来一场硬核拆解！\n\n啊啊啊！这个睡眠面膜是神仙吗？本美少女尖叫了！\n\n### 啊啊啊！这个睡眠面膜是神仙吗？本美少女尖叫了！\n\n这个【自营】SULWHASOO雪花秀与润免洗睡眠面膜真的太会玩了！120ml的量，超级适合熬夜党、换季脸垮的姐妹！它不是普通的面膜，而是护肤界的“睡美人”神器！我用了之后第二天醒来脸亮到反光，像开了柔光灯一样！不...\n\n啊啊啊！痘痘肌姐妹快看这个“液体黄金”——喜美恩净颜平衡乳！\n\n### 啊啊啊！痘痘肌姐妹快看这个“液体黄金”——喜美恩净颜平衡乳！\n\n今天要给你们安利一个我最近疯狂回购的宝藏护肤单品，它就是喜美恩净颜平衡乳！这瓶乳液简直是痘痘肌的救星，控油、祛痘、修护一步到位，质地轻盈不粘腻，用过的宝宝都直呼上头！快来一起尖叫吧！...\n\n啊啊啊！这个护发素也太会玩了吧！\n\n### 啊啊啊！这个护发素也太会玩了吧！\n\n姐妹们听我说！这瓶韩国UNOVE发膜简直就是头发界的“神仙水”！修护+柔顺+防断发，一罐搞定所有问题，关键是还能闻到香香的味道！我当场就下单了，真的香到停不下来！(ﾉ&gt;ω&lt;)ﾉ\n\n这个白茶沐浴露和护发套装，让我家香香的像个茶叶铺子\n\n### 这个白茶沐浴露和护发套装，让我家香香的像个茶叶铺子\n\n最近家里人都爱上了一套\\白茶沐浴露香水型持久留香控油除螨洗发水修护滋养护发素850ml\\，它的香气温柔又清新，洗澡后头发柔顺、皮肤滑嫩，简直是居家生活的小确幸。\n\n这个喷雾让我家人都爱上了“补水仪式感”\n\n### 这个喷雾让我家人都爱上了“补水仪式感” [...] 淘宝网页通过提供多样化的男装女装女鞋包包等商品服务，为消费者提供各类newbalance、converse、adidas、nike等运动鞋与篮球鞋购物体验。其中oppo、vivo、iphone17、电脑、音响、ai智能眼镜等热门商品更是赢得了用户口碑和良好的评价。在满足了广大消费者的不同需求同时也为淘宝卖家和淘宝店铺提供了一个广阔的商品销售渠道。\n\n手机淘宝不定期推出服装、美妆、数码、游戏等行业促销商品推荐。提供担保交易(先收货后付款)，并由商家提供退货承诺、破损补寄等消费者保障服务，也可以通过淘宝客户端安心购物的同时还能畅享逛一逛淘宝带来的购物乐趣。\n\n除了购物以外，淘宝网贴心的为您提供了产品翻译/阅读等生活娱乐工具，让你购物娱乐两不误！淘宝网不仅是您的购物平台，更是您的生活好伙伴！ [...] # tbhome\n\n浴出高光时刻！这款沐浴油让肌肤在泡沫中重生！\n\n### 浴出高光时刻！这款沐浴油让肌肤在泡沫中重生！\n\n今天不是普通的护肤分享，是带你一起解锁\\乐颜美妆个护拍1发4沐浴油\\的魔力时刻！这可不是一瓶普通的沐浴露，它集清洁、滋养、保\u0000湿和留香于一身，像是一场皮肤SPA。姐妹们，敢不敢跟我一起跳进这场泡沫盛宴？(๑•̀...\n\n分装瓶界的颜值天花板！玻璃瓶白茶瓶凭啥成美妆达人新宠？\n\n### 分装瓶界的颜值天花板！玻璃瓶白茶瓶凭啥成美妆达人新宠？\n\n在美妆界，一款好用又好看的分装瓶能救命。今天直接把市面上最火的玻璃瓶白茶瓶拉出来，从实用性和外观两个维度做透彻分析，告诉你它为何是当前最具性价比的个护瓶选择。\n\n这个唇釉让老公抢着涂，全家都爱的水光果冻唇蜜\n\n### 这个唇釉让老公抢着涂，全家都爱的水光果冻唇蜜\n\n最近家里人都爱上了一款\\CT果冻唇蜜\\，尤其是这款流心樱桃色，水光镜面质地像果冻一样柔软，滋润又提气色，连老公都被吸引。今天来跟大家分享这款让我幸福感爆棚的新宠。\n\n这个口红让我每天出门都自信满满，家里人都爱它！\n\n### 这个口红让我每天出门都自信满满，家里人都爱它！\n\n这款\\形象美魅色溢彩丝润口红\\是我最近的真爱，它不仅质地细腻，而且保湿效果超棒，关键是不沾杯！老公说我涂上它后整个人都温柔了不少，连宝宝都问我是不是换了新护肤品。今天就来和大家分享一下它的魅力。\n\n玫瑰豆沙色的低语：一场与唇间野性灵魂的私密对话\n\n### 玫瑰豆沙色的低语：一场与唇间野性灵魂的私密对话\n\n在这瓶\\形象美魅色溢彩丝润口红\\里，我仿佛听到了大地深处的呢喃。它是温柔与自由的结合体，像是清晨阳光亲吻花瓣后的微醺。不沾杯、不掉色，是它给予现代女性最实在的承诺。\n\n这个套盒真的“抗皱”吗？我们用数据说话！\n\n### 这个套盒真的“抗皱”吗？我们用数据说话！",
+      "content": "这个套盒真的“抗皱”吗？我们用数据说话！\n\n### 这个套盒真的“抗皱”吗？我们用数据说话！\n\n在美妆圈里，“抗皱”这个词已经被炒得够热了，但真正能打的不多。今天我们要聊的这款\\贞美抗皱焕颜日夜修护套盒\\，到底是不是真·抗皱神器？咱们不靠广告吹，只看成分和功效，来一场硬核拆解！\n\n啊啊啊！这个睡眠面膜是神仙吗？本美少女尖叫了！\n\n### 啊啊啊！这个睡眠面膜是神仙吗？本美少女尖叫了！\n\n这个【自营】SULWHASOO雪花秀与润免洗睡眠面膜真的太会玩了！120ml的量，超级适合熬夜党、换季脸垮的姐妹！它不是普通的面膜，而是护肤界的“睡美人”神器！我用了之后第二天醒来脸亮到反光，像开了柔光灯一样！不...\n\n啊啊啊！痘痘肌姐妹快看这个“液体黄金”——喜美恩净颜平衡乳！\n\n### 啊啊啊！痘痘肌姐妹快看这个“液体黄金”——喜美恩净颜平衡乳！\n\n今天要给你们安利一个我最近疯狂回购的宝藏护肤单品，它就是喜美恩净颜平衡乳！这瓶乳液简直是痘痘肌的救星，控油、祛痘、修护一步到位，质地轻盈不粘腻，用过的宝宝都直呼上头！快来一起尖叫吧！...\n\n啊啊啊！这个护发素也太会玩了吧！\n\n### 啊啊啊！这个护发素也太会玩了吧！\n\n姐妹们听我说！这瓶韩国UNOVE发膜简直就是头发界的“神仙水”！修护+柔顺+防断发，一罐搞定所有问题，关键是还能闻到香香的味道！我当场就下单了，真的香到停不下来！(ﾉ&gt;ω&lt;)ﾉ\n\n这个白茶沐浴露和护发套装，让我家香香的像个茶叶铺子\n\n### 这个白茶沐浴露和护发套装，让我家香香的像个茶叶铺子\n\n最近家里人都爱上了一套\\白茶沐浴露香水型持久留香控油除螨洗发水修护滋养护发素850ml\\，它的香气温柔又清新，洗澡后头发柔顺、皮肤滑嫩，简直是居家生活的小确幸。\n\n这个喷雾让我家人都爱上了“补水仪式感”\n\n### 这个喷雾让我家人都爱上了“补水仪式感” [...] 淘宝网页通过提供多样化的男装女装女鞋包包等商品服务，为消费者提供各类newbalance、converse、adidas、nike等运动鞋与篮球鞋购物体验。其中oppo、vivo、iphone17、电脑、音响、ai智能眼镜等热门商品更是赢得了用户口碑和良好的评价。在满足了广大消费者的不同需求同时也为淘宝卖家和淘宝店铺提供了一个广阔的商品销售渠道。\n\n手机淘宝不定期推出服装、美妆、数码、游戏等行业促销商品推荐。提供担保交易(先收货后付款)，并由商家提供退货承诺、破损补寄等消费者保障服务，也可以通过淘宝客户端安心购物的同时还能畅享逛一逛淘宝带来的购物乐趣。\n\n除了购物以外，淘宝网贴心的为您提供了产品翻译/阅读等生活娱乐工具，让你购物娱乐两不误！淘宝网不仅是您的购物平台，更是您的生活好伙伴！ [...] # tbhome\n\n浴出高光时刻！这款沐浴油让肌肤在泡沫中重生！\n\n### 浴出高光时刻！这款沐浴油让肌肤在泡沫中重生！\n\n今天不是普通的护肤分享，是带你一起解锁\\乐颜美妆个护拍1发4沐浴油\\的魔力时刻！这可不是一瓶普通的沐浴露，它集清洁、滋养、保\u0000湿和留香于一身，像是一场皮肤SPA。姐妹们，敢不敢跟我一起跳进这场泡沫盛宴？(๑•̀...\n\n分装瓶界的颜值天花板！玻璃瓶白茶瓶凭啥成美妆达人新宠？\n\n### 分装瓶界的颜值天花板！玻璃瓶白茶瓶凭啥成美妆达人新宠？\n\n在美妆界，一款好用又好看的分装瓶能救命。今天直接把市面上最火的玻璃瓶白茶瓶拉出来，从实用性和外观两个维度做透彻分析，告诉你它为何是当前最具性价比的个护瓶选择。\n\n这个唇釉让老公抢着涂，全家都爱的水光果冻唇蜜\n\n### 这个唇釉让老公抢着涂，全家都爱的水光果冻唇蜜\n\n最近家里人都爱上了一款\\CT果冻唇蜜\\，尤其是这款流心樱桃色，水光镜面质地像果冻一样柔软，滋润又提气色，连老公都被吸引。今天来跟大家分享这款让我幸福感爆棚的新宠。\n\n这个口红让我每天出门都自信满满，家里人都爱它！\n\n### 这个口红让我每天出门都自信满满，家里人都爱它！\n\n这款\\形象美魅色溢彩丝润口红\\是我最近的真爱，它不仅质地细腻，而且保湿效果超棒，关键是不沾杯！老公说我涂上它后整个人都温柔了不少，连宝宝都问我是不是换了新护肤品。今天就来和大家分享一下它的魅力。\n\n玫瑰豆沙色的低语：一场与唇间野性灵魂的私密对话\n\n### 玫瑰豆沙色的低语：一场与唇间野性灵魂的私密对话\n\n在这瓶\\形象美魅色溢彩丝润口红\\里，我仿佛听到了大地深处的呢喃。它是温柔与自由的结合体，像是清晨阳光亲吻花瓣后的微醺。不沾杯、不掉色，是它给予现代女性最实在的承诺。\n\n这个套盒真的“抗皱”吗？我们用数据说话！\n\n### 这个套盒真的“抗皱”吗？我们用数据说话！",
+      "matched_keywords": [
+        "成分",
+        "洗发",
+        "美妆",
+        "香水",
+        "个护",
+        "促销",
+        "沐浴",
+        "面膜",
+        "换季",
+        "护肤"
+      ],
+      "raw": {
+        "query": "淘宝闪购 美妆 个护 最新",
+        "score": 0.56431514,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆, 个护, 护肤",
+          "-3 无关主题: 游戏"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=0<3",
+        "reject_reason": "rule_score=0<3"
+      }
+    },
+    {
+      "article_id": "b55a1a85ad486778",
+      "title": "抖音入局“小时达”巨头激战即时零售 - 证券时报",
+      "url": "https://www.stcn.com/article/detail/1026894.html",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:29.408019+08:00",
+      "time_status": "unknown_time",
+      "summary": "京东2023年一季度财报显示，京东小时购GMV（商品交易总额）同比增长60%，已与超过30万家实体门店展开合作，在超过2000个县市提供小时购业务。\n\n到了今年二季度，京东将即时零售服务统一更名为小时达，包括京东App重要入口之一的城市频道名称改为小时达。根据京东财报，今年第二季度，小时达频道的日活用户同比增长超过100%，成交额同比增长超过300%。\n\n江瀚认为，从抖音小时达的发展情况来看，其背后依托的是抖音这个巨大的流量池。抖音作为一款短视频应用，拥有数亿的用户和很高的日活，这为小时达提供了源源不断的用户基础。在如此庞大的用户基数上，抖音小时达有着很大的发展空间。\n\n艾瑞咨询的数据显示，预计2026年即时配送服务行业订单规模将接近千亿量级，达到957.8亿单，2021—2026年年复合增速为28.0%，行业整体仍处于快速发展阶段。在传统的零售电商逐渐触碰到增量天花板的背景下，即时配送或许能为平台带来新的增长点。\n\n“针对未来的布局，抖音小时达可以首先着眼于拓展商家资源，为消费者提供更多元化的选择。只有商品丰富，才能吸引更多的用户。其次，抖音小时达还需要持续优化其配送服务。配送的效率和准确性是消费者关心的重点，也是小时达服务的核心竞争力所在。通过技术和数据的驱动，提高配送效率，减少配送时间，将有助于提高用户满意度。”江瀚说。\n\n责任编辑： 李志强\n\n机构\n\n抖音\n\n阿里巴巴\n\n声明：证券时报力求信息真实、准确，文章提及内容仅供参考，不构成实质性投资建议，据此操作风险自担\n\n下载\"证券时报\"官方APP，或关注官方微信公众号，即可随时了解股市动态，洞察政策信息，把握财富机会。\n\n用户评论\n\n登录后可以发言\n\n网友评论仅供其表达个人看法，并不表明证券时报立场\n\n发表评论\n\n暂无评论\n\n时报热榜\n\n换一换\n\n  \n\n热点视频\n\n换一换 [...] 首页\n 快讯\n 新闻 \n\n  要闻   金融   评论   产经   创投   滚动\n 视频\n 投资 \n\n  A股   公司   新股   基金   港美股\n 数据\n 信披+\n 专题\n 服务 \n\n  人民鉴真   投关服务   投教服务   其他服务\n\n公众号\n\n  电子报   客户端 \n\n您当前的位置：证券时报 > 创投 > 正文\n\n抖音入局“小时达”巨头激战即时零售\n\n来源：中国经营报2023-11-06 14:06\n\n字号\n\n超大\n\n大\n\n标准\n\n小\n\n抖音小时达内的商户除了可以通过同城推荐卖货，还可以通过直播来卖货。记者在抖音小时达搜索发现，各类商品均显示60分钟送达，不知后期是否会有所提升。\n\n点赞\n\n分享\n\n近日，抖音上线了“小时达”业务，市场普遍认为该业务与美团“闪购”业务、京东“小时达”等即时零售业务平台展开了竞争。用户可以在抖音上搜索小时达，也可以通过抖音商城进入小时达业务。《中国经营报》记者发现，小时达业务已经上线了蔬果、肉蛋水产、米面粮油、服饰鞋包、美妆、手机数码、药品等类目。\n\n盘古智库高级研究员江瀚向本报记者说，“与美团相比，抖音小时达业务有着自己的优势和劣势。优势在于，抖音有着强大的社交属性。用户可以通过抖音短视频了解商品，再通过小时达服务快速购买，形成了从了解到购买的完整闭环。而劣势则在于，抖音小时达作为后来者，在配送网络和商家资源上可能还没有美团那么完善。”\n\n抖音试水\n\n抖音小时达内的商户除了可以通过同城推荐卖货，还可以通过直播来卖货。记者在抖音小时达搜索发现，各类商品均显示60分钟送达，不知后期是否会有所提升。\n\n实际上，早在2022年8月，抖音就曾首次试水小时达服务，并将深圳设为首个试点城市。经过一年多的滚动，小时达服务的势力范围不断扩大，目前已覆盖北上广深、杭州、成都、重庆、合肥、福州、武汉、苏州、天津、西安等城市。 [...] 发表评论\n\n暂无评论\n\n时报热榜\n\n换一换\n\n  \n\n热点视频\n\n换一换\n\n关于我们|服务条例|联系我们|版权声明|网站地图|线索提交\n\n备案号：粤ICP备09109218号-7|增值电信业务经营许可证：粤B2-20080118|互联网新闻信息服务许可证10120170066|粤公网安备44030002008846号\n\n违法和不良信息举报电话：0755-83514034 邮箱：bwb@stcn.com 中央网信办违法和不良信息举报中心|证券时报网举报中心\n\nCopyright © 2008-2026 Shenzhen Securities Times Co., Ltd. All Rights Reserved",
+      "content": "京东2023年一季度财报显示，京东小时购GMV（商品交易总额）同比增长60%，已与超过30万家实体门店展开合作，在超过2000个县市提供小时购业务。\n\n到了今年二季度，京东将即时零售服务统一更名为小时达，包括京东App重要入口之一的城市频道名称改为小时达。根据京东财报，今年第二季度，小时达频道的日活用户同比增长超过100%，成交额同比增长超过300%。\n\n江瀚认为，从抖音小时达的发展情况来看，其背后依托的是抖音这个巨大的流量池。抖音作为一款短视频应用，拥有数亿的用户和很高的日活，这为小时达提供了源源不断的用户基础。在如此庞大的用户基数上，抖音小时达有着很大的发展空间。\n\n艾瑞咨询的数据显示，预计2026年即时配送服务行业订单规模将接近千亿量级，达到957.8亿单，2021—2026年年复合增速为28.0%，行业整体仍处于快速发展阶段。在传统的零售电商逐渐触碰到增量天花板的背景下，即时配送或许能为平台带来新的增长点。\n\n“针对未来的布局，抖音小时达可以首先着眼于拓展商家资源，为消费者提供更多元化的选择。只有商品丰富，才能吸引更多的用户。其次，抖音小时达还需要持续优化其配送服务。配送的效率和准确性是消费者关心的重点，也是小时达服务的核心竞争力所在。通过技术和数据的驱动，提高配送效率，减少配送时间，将有助于提高用户满意度。”江瀚说。\n\n责任编辑： 李志强\n\n机构\n\n抖音\n\n阿里巴巴\n\n声明：证券时报力求信息真实、准确，文章提及内容仅供参考，不构成实质性投资建议，据此操作风险自担\n\n下载\"证券时报\"官方APP，或关注官方微信公众号，即可随时了解股市动态，洞察政策信息，把握财富机会。\n\n用户评论\n\n登录后可以发言\n\n网友评论仅供其表达个人看法，并不表明证券时报立场\n\n发表评论\n\n暂无评论\n\n时报热榜\n\n换一换\n\n  \n\n热点视频\n\n换一换 [...] 首页\n 快讯\n 新闻 \n\n  要闻   金融   评论   产经   创投   滚动\n 视频\n 投资 \n\n  A股   公司   新股   基金   港美股\n 数据\n 信披+\n 专题\n 服务 \n\n  人民鉴真   投关服务   投教服务   其他服务\n\n公众号\n\n  电子报   客户端 \n\n您当前的位置：证券时报 > 创投 > 正文\n\n抖音入局“小时达”巨头激战即时零售\n\n来源：中国经营报2023-11-06 14:06\n\n字号\n\n超大\n\n大\n\n标准\n\n小\n\n抖音小时达内的商户除了可以通过同城推荐卖货，还可以通过直播来卖货。记者在抖音小时达搜索发现，各类商品均显示60分钟送达，不知后期是否会有所提升。\n\n点赞\n\n分享\n\n近日，抖音上线了“小时达”业务，市场普遍认为该业务与美团“闪购”业务、京东“小时达”等即时零售业务平台展开了竞争。用户可以在抖音上搜索小时达，也可以通过抖音商城进入小时达业务。《中国经营报》记者发现，小时达业务已经上线了蔬果、肉蛋水产、米面粮油、服饰鞋包、美妆、手机数码、药品等类目。\n\n盘古智库高级研究员江瀚向本报记者说，“与美团相比，抖音小时达业务有着自己的优势和劣势。优势在于，抖音有着强大的社交属性。用户可以通过抖音短视频了解商品，再通过小时达服务快速购买，形成了从了解到购买的完整闭环。而劣势则在于，抖音小时达作为后来者，在配送网络和商家资源上可能还没有美团那么完善。”\n\n抖音试水\n\n抖音小时达内的商户除了可以通过同城推荐卖货，还可以通过直播来卖货。记者在抖音小时达搜索发现，各类商品均显示60分钟送达，不知后期是否会有所提升。\n\n实际上，早在2022年8月，抖音就曾首次试水小时达服务，并将深圳设为首个试点城市。经过一年多的滚动，小时达服务的势力范围不断扩大，目前已覆盖北上广深、杭州、成都、重庆、合肥、福州、武汉、苏州、天津、西安等城市。 [...] 发表评论\n\n暂无评论\n\n时报热榜\n\n换一换\n\n  \n\n热点视频\n\n换一换\n\n关于我们|服务条例|联系我们|版权声明|网站地图|线索提交\n\n备案号：粤ICP备09109218号-7|增值电信业务经营许可证：粤B2-20080118|互联网新闻信息服务许可证10120170066|粤公网安备44030002008846号\n\n违法和不良信息举报电话：0755-83514034 邮箱：bwb@stcn.com 中央网信办违法和不良信息举报中心|证券时报网举报中心\n\nCopyright © 2008-2026 Shenzhen Securities Times Co., Ltd. All Rights Reserved",
+      "matched_keywords": [
+        "闪购",
+        "流量",
+        "备案",
+        "美妆",
+        "即时零售",
+        "政策",
+        "直播",
+        "即时配送"
+      ],
+      "raw": {
+        "query": "抖音小时达 美妆 日百 最新",
+        "score": 0.9763105,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+4 命中即时零售: 抖音小时达",
+          "+3 命中美妆个护: 美妆",
+          "+1 命中经营变量: 流量",
+          "-3 泛领域: A股",
+          "-5 垃圾内容: 网站地图"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "垃圾内容: 网站地图",
+        "reject_reason": "垃圾内容: 网站地图"
+      }
+    },
+    {
+      "article_id": "567f6dd2b1eb97b3",
+      "title": "抖音美妆达人版图：批量孵化的「李佳琦」们赚到钱了吗？ | 人人都是产品经理",
+      "url": "https://www.woshipm.com/marketing/2593853.html",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:29.409815+08:00",
+      "time_status": "unknown_time",
+      "summary": "结合相关数据和行业访谈，我对抖音上的美妆达人进行了一场非典型观察。\n\n## 01 美妆达人版图\n\n从内容上来说，抖音上的美妆达人内容主要分以下几类：\n\n### 1. 成分分析类\n\n这类内容以成分作为主要研究对象。\n\n“大嘴博士”以行业专家的身份切入了美妆主题内容制作，大嘴博士在化妆品研发中心工作多年，对美妆产品成分配方功效十分了解。这类行业KOL的人设背书也很具有可信度，“老爸评测”还会动用专业仪器分析防晒霜、面膜等化妆品的成分和效果。\n\n### 2. 种草拔草测评类\n\n“李佳琦”是种草类的翘楚，他从口红细分领域切入，建立影响力和收获庞大受众后，将带货力延展到其他产品。\n\n“Alin闪闪发光”自称“温柔又精分的美妆避雷针”会分享一些美妆知识和好用小物，比如卷发技巧、拯救卡粉方式。让用户有获得感的同时，也种了草。\n\n### 3. 妆容知识技能类：仿妆、化妆教程、护肤知识、变妆对比\n\n“宇芽YUYAMIKA”将自己化妆成蒙娜丽莎，惟妙惟肖的程度让人惊讶。\n\n### 4. 复合类：剧情、生活植入\n\n这类内容中，美妆并不作为重点元素，而是深深植入达人的生活方式、剧情之中。“柚子cici酱”的抖音内容和美妆主题无关，但始终以精致妆容示人。\n\n有的美妆达人会选择某一类精进发展，也有达人内容比较复合会同时涵盖以上几类内容。\n\n## 02 泛娱乐元素成为抖音美妆达人涨粉突破点\n\n在美妆这条红海赛道下，内容更新迭代很快，除了达人人格化识别度和美妆干货，泛娱乐元素成为了粉丝增长的关键点。 [...] 盘点了广告接单数TOP50，接单多的达人们有这样特点：\n\n1. 美妆测评、攻略类最受欢迎，其次是美妆+（搞笑）剧情、美妆+情感；\n2. 90%的上榜美妆达人都签约了MCN；\n3. 美妆达人接单数量TOP30中有一半的达人粉丝介于一百多万和三百万之间，这个区间的达人更好卖；\n4. 专业人设背书。化妆师繁子将身份作为昵称，陈采尼在微博就已经是服装类KOL，在抖音跨领域美妆发展；\n5. 多平台发展。在快手、微博、抖音或小红书等平台有不同程度的运营。\n\n从数据上看，即使成不了头部，当一个中腰部的百万美妆达人，依然可以稳稳赚得盆满钵满。（这里有一份名单，可以围观美妆达人的广告变现能力，关注“短视频参谋”回复“美妆”获取方法）\n\n## 05 美妆达人养成法\n\n### 1. 五月美妆\n\n“五月美妆”的品牌总监小乌龟经历了达人招募和短视频团队组建全过程，他们坚持自营孵化达人，并要求达人具有内容原创能力。孵化周期一般为两个月，需要达人在任一短视频平台涨粉30万。\n\n达人收入由底薪加提成两部分构成，当达人粉丝达到50万、80万、100万节点时，公司会给予相应奖励。\n\n“五月美妆”的日常管理采用编导责任制，一个编导带两三个达人组，每个达人和一个剪辑师组成一个组。此外小红书、微博图文内容有一个部门整体负责。\n\n他们对于美妆达人挑选标准有四点：\n\n1. 颜值；\n2. 内容生产能力。达人需要自己撰写脚本；\n3. 一定要热爱美妆行业；\n4. 性格比较重要，这决定了达人是否能长久地跟团队走下去。\n\n### 2. 鹰眼传媒\n\n“黑马小明”所在的MCN鹰眼传媒 CEO周健力曾经有电商创业背景，他将抖音渠道定义为流量池。\n\n“从有销售带货能力的团长中挑选网红，进行内容包装输出，根据不同粉丝量级，组成矩阵。” [...] 在美妆这条红海赛道下，内容更新迭代很快，除了达人人格化识别度和美妆干货，泛娱乐元素成为了粉丝增长的关键点。\n\n在六月份涨粉排行榜上，粉丝上涨超过八十万的美妆达人一共有九位：“李佳琦、柚子cici酱、豆豆\\_Babe、化妆师小晗、逆袭小宇、泡椒一米六，关小微、仿妆大魔王Kk”，其中四位达人“柚子cici酱、化妆师小晗、逆袭小宇、仿妆大魔王”的内容都融入了故事情节和一些反转元素。除了他们，走剧情类的“郝凡”和“乃提guli”表现也很抢眼。\n\n▲化妆师小晗路遇一位妈妈对女儿古风装扮不满，小晗为妈妈变妆为古风造型，妈妈喜不胜收，改变了观念。\n\n、\n\n▲逆袭类博主前后反差是看点\n\n反转是抖音上最受欢迎的内容底层逻辑，短时间内带来前后形象和情绪对比反差，让观众极具舒适感。“黑马小明”从一个毫无气质的男生变妆成一个风度翩翩少年，随着剧情反转推进，抵达人生高光时刻。\n\n最近三个月粉丝上涨七百多万新晋红人“叶公子”，如女版的“黑马小明”，变妆前后判若两人，从形象到气场上战无不胜，路遇到以貌取人的对象，会毫不客气“怼”过去；“逆袭小宇”也走了这一路线；“仿妆大魔王Kk”和“化妆师小晗”则以专家人设出现，遇见不平，拿着化妆包出手相助。路人形象前后反差，也带来了戏剧性的故事结尾。\n\n通过这些快速上涨的美妆达人中，看到了这样的共性：\n\n1. 不管是美妆达人是男生还是女生，形象都趋于中性化。霸气大女",
+      "content": "结合相关数据和行业访谈，我对抖音上的美妆达人进行了一场非典型观察。\n\n## 01 美妆达人版图\n\n从内容上来说，抖音上的美妆达人内容主要分以下几类：\n\n### 1. 成分分析类\n\n这类内容以成分作为主要研究对象。\n\n“大嘴博士”以行业专家的身份切入了美妆主题内容制作，大嘴博士在化妆品研发中心工作多年，对美妆产品成分配方功效十分了解。这类行业KOL的人设背书也很具有可信度，“老爸评测”还会动用专业仪器分析防晒霜、面膜等化妆品的成分和效果。\n\n### 2. 种草拔草测评类\n\n“李佳琦”是种草类的翘楚，他从口红细分领域切入，建立影响力和收获庞大受众后，将带货力延展到其他产品。\n\n“Alin闪闪发光”自称“温柔又精分的美妆避雷针”会分享一些美妆知识和好用小物，比如卷发技巧、拯救卡粉方式。让用户有获得感的同时，也种了草。\n\n### 3. 妆容知识技能类：仿妆、化妆教程、护肤知识、变妆对比\n\n“宇芽YUYAMIKA”将自己化妆成蒙娜丽莎，惟妙惟肖的程度让人惊讶。\n\n### 4. 复合类：剧情、生活植入\n\n这类内容中，美妆并不作为重点元素，而是深深植入达人的生活方式、剧情之中。“柚子cici酱”的抖音内容和美妆主题无关，但始终以精致妆容示人。\n\n有的美妆达人会选择某一类精进发展，也有达人内容比较复合会同时涵盖以上几类内容。\n\n## 02 泛娱乐元素成为抖音美妆达人涨粉突破点\n\n在美妆这条红海赛道下，内容更新迭代很快，除了达人人格化识别度和美妆干货，泛娱乐元素成为了粉丝增长的关键点。 [...] 盘点了广告接单数TOP50，接单多的达人们有这样特点：\n\n1. 美妆测评、攻略类最受欢迎，其次是美妆+（搞笑）剧情、美妆+情感；\n2. 90%的上榜美妆达人都签约了MCN；\n3. 美妆达人接单数量TOP30中有一半的达人粉丝介于一百多万和三百万之间，这个区间的达人更好卖；\n4. 专业人设背书。化妆师繁子将身份作为昵称，陈采尼在微博就已经是服装类KOL，在抖音跨领域美妆发展；\n5. 多平台发展。在快手、微博、抖音或小红书等平台有不同程度的运营。\n\n从数据上看，即使成不了头部，当一个中腰部的百万美妆达人，依然可以稳稳赚得盆满钵满。（这里有一份名单，可以围观美妆达人的广告变现能力，关注“短视频参谋”回复“美妆”获取方法）\n\n## 05 美妆达人养成法\n\n### 1. 五月美妆\n\n“五月美妆”的品牌总监小乌龟经历了达人招募和短视频团队组建全过程，他们坚持自营孵化达人，并要求达人具有内容原创能力。孵化周期一般为两个月，需要达人在任一短视频平台涨粉30万。\n\n达人收入由底薪加提成两部分构成，当达人粉丝达到50万、80万、100万节点时，公司会给予相应奖励。\n\n“五月美妆”的日常管理采用编导责任制，一个编导带两三个达人组，每个达人和一个剪辑师组成一个组。此外小红书、微博图文内容有一个部门整体负责。\n\n他们对于美妆达人挑选标准有四点：\n\n1. 颜值；\n2. 内容生产能力。达人需要自己撰写脚本；\n3. 一定要热爱美妆行业；\n4. 性格比较重要，这决定了达人是否能长久地跟团队走下去。\n\n### 2. 鹰眼传媒\n\n“黑马小明”所在的MCN鹰眼传媒 CEO周健力曾经有电商创业背景，他将抖音渠道定义为流量池。\n\n“从有销售带货能力的团长中挑选网红，进行内容包装输出，根据不同粉丝量级，组成矩阵。” [...] 在美妆这条红海赛道下，内容更新迭代很快，除了达人人格化识别度和美妆干货，泛娱乐元素成为了粉丝增长的关键点。\n\n在六月份涨粉排行榜上，粉丝上涨超过八十万的美妆达人一共有九位：“李佳琦、柚子cici酱、豆豆\\_Babe、化妆师小晗、逆袭小宇、泡椒一米六，关小微、仿妆大魔王Kk”，其中四位达人“柚子cici酱、化妆师小晗、逆袭小宇、仿妆大魔王”的内容都融入了故事情节和一些反转元素。除了他们，走剧情类的“郝凡”和“乃提guli”表现也很抢眼。\n\n▲化妆师小晗路遇一位妈妈对女儿古风装扮不满，小晗为妈妈变妆为古风造型，妈妈喜不胜收，改变了观念。\n\n、\n\n▲逆袭类博主前后反差是看点\n\n反转是抖音上最受欢迎的内容底层逻辑，短时间内带来前后形象和情绪对比反差，让观众极具舒适感。“黑马小明”从一个毫无气质的男生变妆成一个风度翩翩少年，随着剧情反转推进，抵达人生高光时刻。\n\n最近三个月粉丝上涨七百多万新晋红人“叶公子”，如女版的“黑马小明”，变妆前后判若两人，从形象到气场上战无不胜，路遇到以貌取人的对象，会毫不客气“怼”过去；“逆袭小宇”也走了这一路线；“仿妆大魔王Kk”和“化妆师小晗”则以专家人设出现，遇见不平，拿着化妆包出手相助。路人形象前后反差，也带来了戏剧性的故事结尾。\n\n通过这些快速上涨的美妆达人中，看到了这样的共性：\n\n1. 不管是美妆达人是男生还是女生，形象都趋于中性化。霸气大女主、仗义执言等形象受欢迎；\n2. 纯美妆干货爆款不易，还需叠加其他元素。比如通过场景、故事展示痛点，用霸气女主形象加强人设记忆点增强好感度，用沙雕等夸张元素强化产品功能点、用语气、重复、音乐带动情绪节奏；\n3. 场景化+反转逻辑看似简单粗暴，但在抖音快节奏内容场景下，同样意味着高识别度，聚焦用户注意力，不需要过多思考。营造冲突、反转，制造情绪，快速让用户沉浸视频营造的气氛情绪之中。",
+      "matched_keywords": [
+        "成分",
+        "防晒",
+        "流量",
+        "美妆",
+        "抖音美妆",
+        "面膜",
+        "护肤"
+      ],
+      "raw": {
+        "query": "抖音小时达 美妆 日百 最新",
+        "score": 0.93195957,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 4,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆, 护肤, 防晒",
+          "+1 命中经营变量: 流量"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule=review, score=4<5, 无LLM结果→reject",
+        "reject_reason": "rule=review, score=4<5, 无LLM结果→reject"
+      }
+    },
+    {
+      "article_id": "6965aa629af2e160",
+      "title": "电商晚报:2026年Q1 TikTok美妆品牌播放榜:付费内容引领增长潮流__财经头条__新浪财经",
+      "url": "https://cj.sina.cn/articles/view/7880068200/1d5b04c6801901h2wu?froms=ggmp&vt=4",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:29.411931+08:00",
+      "time_status": "unknown_time",
+      "summary": "新浪财经APP\n\n 宏观经济\n A股\n 港股\n 美股\n 基金\n 理财\n 黄金\n 期货\n 能源\n 互联网金融\n 房地产\n 更多\n\n  外汇 管理 消费 科技 互联网 手机\n\n  保险 数码 科普 创业 银行 新三板 其他\n\n# 电商晚报:2026年Q1 TikTok美妆品牌播放榜:付费内容引领增长潮流\n\n电商晚报:2026年Q1 TikTok美妆品牌播放榜:付费内容引领增长潮流\n\n2026年04月18日 21:17 看点资讯\n\n语音播报 缩小字体 放大字体 微博 微信 分享 0 \n\n腾讯QQ QQ空间\n\n4月16日消息，数据分析公司Spate发布的2026年第一季度TikTok美妆品牌播放量排行榜显示，目前美妆品牌在TikTok上的增长高度依赖付费内容。在前十名品牌中，大部分品牌的播放量超过90%来源于赞助或付费推广，其中潘婷（Pantene）付费内容占比93.6%，巴黎欧莱雅（L‘Oréal Paris）占比96.3%，Dr. Melaxin更是高达98.3%。榜单中唯一以自然流量为主的品牌是创立于2022年的新锐品牌Based Bodyworks，其付费内容占比仅为11.4%，但总播放量达到2.249亿次，成为增长最快的品牌。值得注意的是，统计中将TikTok Shop相关内容也归为付费内容，这进一步凸显TikTok电商已成为美妆品牌获取曝光的核心付费渠道。报告分析指出，尽管自然内容仍有潜力创造高增长，但付费内容，尤其是与TikTok Shop结合的推广，已成为品牌获取流量和提升曝光的主要手段。 [...] 今日推荐 优秀作者 看点月榜\n\n排行 看点昵称 看点指数\n\n## 热文排行榜\n\n日榜 周榜 月榜\n\n 01 任志强：房地产不管怎么调也不能让它掉下去，因为…\n 02 台胞感叹两岸差距：大陆吃饭掏手机，台湾却掏信用卡\n 03 王健林的妻子，背景才是真的深……\n 04 年产6亿头猪为何一头也进不了香港？互害社会怪谁？\n 05 刚刚，美国两房又崩盘了，中国投资了数千亿美元啊！\n 06 你们这样说杨振宁，问过邓稼先吗？\n 07 深扒隐形富豪：马云王健林算什么？他才是真首富！\n 08 香港前特首的七大罪状，看到第六条我笑了\n 09 蒙古不知羞耻又来讨钱，但这次中国的手段妙到毫巅！\n 10 欧洲大变局！这个比肩特朗普的女人或让欧盟走向末日\n\n 01 背负高房贷，中年失业，一个深圳男子的财务悲剧\n 02 45万亿来了！中国经济和房市、股市将迎来大变化？\n 03 高铁票价涨70%！终于找到真实原因\n 04 在美国，我感受到“越南制造”在取代“中国制造”\n 05 能拿下万科，为何完败格力？姚振华的吃相与吃向！\n 06 三星“宫心计”：儿子检举父亲，父母逼死女儿\n 07 新加坡贼心不死，对中国又出一毒计，北京不忍了！\n 08 2017年、45万亿，这是让货币毁灭的节奏么？\n 09 杀死金正男的究竟是何方神圣？揭秘惊人美女特工组织\n 10 楼市重磅：日本式泡沫即将袭击中国内地房地产市场？ [...] 4月16日消息，抖音发布关于持续治理涉未成年人不良内容的公告。近一个月，针对涉未成年人的违规场景，平台共清理相关违规内容20.4万条，对8145个账号处以清理违规增长粉丝、限制商业变现功能、禁言、封禁等不同梯度的处罚。\n\n4月16日消息，亚马逊全球智能枢纽仓（GWD）深圳首仓面向卖家正式开放，能够赋能卖家以更低成本、更高效率拓展全球布局，存储成本最高可减少45%，跨境配送到FBA仓库的履约时间最多可缩短7天。未来GWD计划拓展至长三角地区，并将支持向更多亚马逊站点的运营中心发货。\n\n4月16日消息，阿里旗下跨境电商平台速卖通在深圳举办Top品牌出海闭门会。速卖通总裁惊石在会上表示：要打造中国品牌出海全新主场，让速卖通成为中国品牌海外数字化转型的主阵地。这意味着速卖通不再仅是“卖货”的销售渠道，而是向“品牌成长基础设施”跃迁。速卖通还宣布了其Brand+超级品牌出海最新计划：去年品牌GMV高速增长超40%，2026年要帮助2000个中国品牌实现出海规模翻倍。\n\n相关新闻\n\n加载中\n\n点击加载更多\n\n## 头条号入驻\n\n ## What?二十多年的指甲竟然都剪错啦~你有Get到正确剪指甲的方法嘛?\n ## 别只呵护脸了,看看你的脚出问题了吗?\n ## 干燥皲裂? 医生教你如何护足\n\n## 财经自媒体联盟更多自媒体作者\n\n今日推荐 优秀作者 看点月榜\n\n排行 看点昵称 看点指数\n\n## 热文排行榜\n\n日榜 周榜 月榜",
+      "content": "新浪财经APP\n\n 宏观经济\n A股\n 港股\n 美股\n 基金\n 理财\n 黄金\n 期货\n 能源\n 互联网金融\n 房地产\n 更多\n\n  外汇 管理 消费 科技 互联网 手机\n\n  保险 数码 科普 创业 银行 新三板 其他\n\n# 电商晚报:2026年Q1 TikTok美妆品牌播放榜:付费内容引领增长潮流\n\n电商晚报:2026年Q1 TikTok美妆品牌播放榜:付费内容引领增长潮流\n\n2026年04月18日 21:17 看点资讯\n\n语音播报 缩小字体 放大字体 微博 微信 分享 0 \n\n腾讯QQ QQ空间\n\n4月16日消息，数据分析公司Spate发布的2026年第一季度TikTok美妆品牌播放量排行榜显示，目前美妆品牌在TikTok上的增长高度依赖付费内容。在前十名品牌中，大部分品牌的播放量超过90%来源于赞助或付费推广，其中潘婷（Pantene）付费内容占比93.6%，巴黎欧莱雅（L‘Oréal Paris）占比96.3%，Dr. Melaxin更是高达98.3%。榜单中唯一以自然流量为主的品牌是创立于2022年的新锐品牌Based Bodyworks，其付费内容占比仅为11.4%，但总播放量达到2.249亿次，成为增长最快的品牌。值得注意的是，统计中将TikTok Shop相关内容也归为付费内容，这进一步凸显TikTok电商已成为美妆品牌获取曝光的核心付费渠道。报告分析指出，尽管自然内容仍有潜力创造高增长，但付费内容，尤其是与TikTok Shop结合的推广，已成为品牌获取流量和提升曝光的主要手段。 [...] 今日推荐 优秀作者 看点月榜\n\n排行 看点昵称 看点指数\n\n## 热文排行榜\n\n日榜 周榜 月榜\n\n 01 任志强：房地产不管怎么调也不能让它掉下去，因为…\n 02 台胞感叹两岸差距：大陆吃饭掏手机，台湾却掏信用卡\n 03 王健林的妻子，背景才是真的深……\n 04 年产6亿头猪为何一头也进不了香港？互害社会怪谁？\n 05 刚刚，美国两房又崩盘了，中国投资了数千亿美元啊！\n 06 你们这样说杨振宁，问过邓稼先吗？\n 07 深扒隐形富豪：马云王健林算什么？他才是真首富！\n 08 香港前特首的七大罪状，看到第六条我笑了\n 09 蒙古不知羞耻又来讨钱，但这次中国的手段妙到毫巅！\n 10 欧洲大变局！这个比肩特朗普的女人或让欧盟走向末日\n\n 01 背负高房贷，中年失业，一个深圳男子的财务悲剧\n 02 45万亿来了！中国经济和房市、股市将迎来大变化？\n 03 高铁票价涨70%！终于找到真实原因\n 04 在美国，我感受到“越南制造”在取代“中国制造”\n 05 能拿下万科，为何完败格力？姚振华的吃相与吃向！\n 06 三星“宫心计”：儿子检举父亲，父母逼死女儿\n 07 新加坡贼心不死，对中国又出一毒计，北京不忍了！\n 08 2017年、45万亿，这是让货币毁灭的节奏么？\n 09 杀死金正男的究竟是何方神圣？揭秘惊人美女特工组织\n 10 楼市重磅：日本式泡沫即将袭击中国内地房地产市场？ [...] 4月16日消息，抖音发布关于持续治理涉未成年人不良内容的公告。近一个月，针对涉未成年人的违规场景，平台共清理相关违规内容20.4万条，对8145个账号处以清理违规增长粉丝、限制商业变现功能、禁言、封禁等不同梯度的处罚。\n\n4月16日消息，亚马逊全球智能枢纽仓（GWD）深圳首仓面向卖家正式开放，能够赋能卖家以更低成本、更高效率拓展全球布局，存储成本最高可减少45%，跨境配送到FBA仓库的履约时间最多可缩短7天。未来GWD计划拓展至长三角地区，并将支持向更多亚马逊站点的运营中心发货。\n\n4月16日消息，阿里旗下跨境电商平台速卖通在深圳举办Top品牌出海闭门会。速卖通总裁惊石在会上表示：要打造中国品牌出海全新主场，让速卖通成为中国品牌海外数字化转型的主阵地。这意味着速卖通不再仅是“卖货”的销售渠道，而是向“品牌成长基础设施”跃迁。速卖通还宣布了其Brand+超级品牌出海最新计划：去年品牌GMV高速增长超40%，2026年要帮助2000个中国品牌实现出海规模翻倍。\n\n相关新闻\n\n加载中\n\n点击加载更多\n\n## 头条号入驻\n\n ## What?二十多年的指甲竟然都剪错啦~你有Get到正确剪指甲的方法嘛?\n ## 别只呵护脸了,看看你的脚出问题了吗?\n ## 干燥皲裂? 医生教你如何护足\n\n## 财经自媒体联盟更多自媒体作者\n\n今日推荐 优秀作者 看点月榜\n\n排行 看点昵称 看点指数\n\n## 热文排行榜\n\n日榜 周榜 月榜",
+      "matched_keywords": [
+        "流量",
+        "美妆",
+        "数字化",
+        "曝光"
+      ],
+      "raw": {
+        "query": "抖音小时达 美妆 日百 最新",
+        "score": 0.86431044,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": -2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆",
+          "+1 命中经营变量: 流量, 履约",
+          "-3 泛领域: 宏观经济",
+          "-3 无关主题: 楼市"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=-2<3",
+        "reject_reason": "rule_score=-2<3"
+      }
+    },
+    {
+      "article_id": "a6fb9914fd96ba93",
+      "title": "调色师与饿了么 美团 京东到家达成协作 网经社 电子商务研究中心 电商门户 互联网+智库",
+      "url": "https://www.100ec.cn/detail--6611482.html",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:30.226320+08:00",
+      "time_status": "unknown_time",
+      "summary": "公司数据 全球数据 行业数据 评级数据 融资数据 财报数据 股价数据 上市数据库\n\n    新三板数据 独角兽数据 AppStore数据 小程序指数 网约车数据库 电商产业园 App月活 违规App数据\n  + 研究中心 政府智库 创投智库 跨境智库 商学院 培训智库 媒体智库 售后顾问\n 会议中心\n  + 会议中心\n  + 公司会议\n  + 我要游学\n  + 共享会议室\n  + 入驻网盛大厦\n 直播中心\n  + 大讲堂 直播门户 直播短视频 直播企业 直播游学 直播投诉\n  + 直播选品 网盛特卖 直播供应链金融 数字人直播 网盛大厦周六选品会 共享直播间\n 我要融资\n  + 投融中心 成为会员 投融数据 投融参谋 投资方库 上传计划书 融资事件 投融榜单\n  + 融资中心 网盛供应链金融 消费品供应链金融\n\n    国企供应链金融\n\n    网盛杭钢 网盛巨化 网盛农发\n\n    直播供应链金融\n 系统资源\n  + 用户库 专家库 投资库\n  + 资料库 企业库 APP通报 报告库 专题库\n  + 系统应用\n\n    网经搜 风险评级 战疫通\n\n    全站导航 网课导航 网购导航\n\n\n\n\n\n当前位置：100EC>数字生活>调色师与饿了么 美团 京东到家达成协作\n\n调色师与饿了么 美团 京东到家达成协作\n\n网经社发布时间：2022年05月13日 11:24:14\n\n(网经社讯)5月13日消息，日前，KK集团旗下美妆集合店品牌THE COLORIST调色师联合饿了么、美团、京东到家三大本地生活服务平台，举办“IP联萌”活动。\n\n据了解，此次参与调色师“IP联萌”活动的品牌商有数十余家，包括滋色、COLORKEY、Spes、KIKO等彩妆品牌，除线下门店外，还在“美团”、“京东到家”、“饿了么”三大本地生活服务平台的调色师线上店发售。 [...] 据悉，调色师门店覆盖了400+全球美妆品牌，超5000款单品。此外，调色师与欧莱雅、资生堂、KISS ME等全球30多个彩妆品牌达成合作，保证了商品的日常供应。\n\n浙江网经社信息科技公司拥有18年历史，作为中国领先的数字经济新媒体、服务商，提供“媒体+智库”、“会员+孵化”服务；（1）面向电商平台、头部服务商等PR条线提供媒体传播服务；（2）面向各类企事业单位、政府部门、培训机构、电商平台等提供智库服务；（3）面向各类电商渠道方、品牌方、商家、供应链公司等提供“千电万商”生态圈服务；（4）面向各类初创公司提供创业孵化器服务。\n\n\n\n【投诉曝光】 更多>\n\n行业方案 更多>\n:   《数字零售一站式解决方案》\n:   《私域电商一站式解决方案》\n:   《跨境电商一站式解决方案》\n:   《直播电商一站式解决方案》\n:   《服装电商产业链赋能解决方案》\n:   《移动出行影响力和产品体系》\n:   《数字教育影响力和产品体系》\n:   《物流科技影响力和产品体系》\n:   《互联网监管方面影响力》\n:   《数商兴农影响力和产品体系》\n:   《数字健康影响力和产品体系》\n:   《产业电商影响力和产品体系》\n:   《数智产教影响力和产品体系》 [...] 【原创报告】 更多>\n:   《2025年度中国数字生活市场数据报告》\n:   《2025年度中国物流科技市场数据报告》\n:   《2025年度中国移动出行市场数据报告》\n:   《2026年Q1电商平台商家投诉数据报告》\n:   《2025年度中国数字健康市场数据报告》\n:   《2026年Q1电子商务用户体验与投诉数据报告》\n:   《2025年度中国电子商务行业投融资数据报告》\n:   《2025年中国电子商务“死亡”数据报告》\n:   《2025年度中国电子商务用户体验与投诉监测报告》\n:   《2025年度中国数字生活投诉数据与典型案例报告》\n\n【版权声明】秉承互联网开放、包容的精神，网经社欢迎各方(自)媒体、机构转载、引用我们原创内容，但要严格注明来源网经社；同时，我们倡导尊重与保护知识产权，如发现本站文章存在版权问题，烦请将版权疑问、授权证明、版权证明、联系方式等，发邮件至NEWS@netsun.com，我们将第一时间核实、处理。\n\n 往期回顾\n\n《电商 月刊》\n\n热点专题更多\n\n\n\n\n\n\n\n\n\n\n\n投诉榜 热搜榜 评级榜 更多\n\n平台名称\n\n平台回复率\n\n回复时效性\n\n用户满意度\n\n年度报告 更多>>\n\n\n\n\n\n\n\n\n\n\n\n我要投诉更多\n\n 融资9亿AI公司沦为“造黄”工具：央视起底“哩布哩布”\n 【电诉宝】“瓜子二手车”被指虚假促销 霸王条款 退款难问题突出\n 【电诉宝】“智联招聘”被指违规封号 审核失职 霸王条款问题突出\n 【法律案例】电商从业者需注意！税务部门曝光8起偷逃贵重首饰及珠宝玉石 白酒 成品油等消",
+      "content": "公司数据 全球数据 行业数据 评级数据 融资数据 财报数据 股价数据 上市数据库\n\n    新三板数据 独角兽数据 AppStore数据 小程序指数 网约车数据库 电商产业园 App月活 违规App数据\n  + 研究中心 政府智库 创投智库 跨境智库 商学院 培训智库 媒体智库 售后顾问\n 会议中心\n  + 会议中心\n  + 公司会议\n  + 我要游学\n  + 共享会议室\n  + 入驻网盛大厦\n 直播中心\n  + 大讲堂 直播门户 直播短视频 直播企业 直播游学 直播投诉\n  + 直播选品 网盛特卖 直播供应链金融 数字人直播 网盛大厦周六选品会 共享直播间\n 我要融资\n  + 投融中心 成为会员 投融数据 投融参谋 投资方库 上传计划书 融资事件 投融榜单\n  + 融资中心 网盛供应链金融 消费品供应链金融\n\n    国企供应链金融\n\n    网盛杭钢 网盛巨化 网盛农发\n\n    直播供应链金融\n 系统资源\n  + 用户库 专家库 投资库\n  + 资料库 企业库 APP通报 报告库 专题库\n  + 系统应用\n\n    网经搜 风险评级 战疫通\n\n    全站导航 网课导航 网购导航\n\n\n\n\n\n当前位置：100EC>数字生活>调色师与饿了么 美团 京东到家达成协作\n\n调色师与饿了么 美团 京东到家达成协作\n\n网经社发布时间：2022年05月13日 11:24:14\n\n(网经社讯)5月13日消息，日前，KK集团旗下美妆集合店品牌THE COLORIST调色师联合饿了么、美团、京东到家三大本地生活服务平台，举办“IP联萌”活动。\n\n据了解，此次参与调色师“IP联萌”活动的品牌商有数十余家，包括滋色、COLORKEY、Spes、KIKO等彩妆品牌，除线下门店外，还在“美团”、“京东到家”、“饿了么”三大本地生活服务平台的调色师线上店发售。 [...] 据悉，调色师门店覆盖了400+全球美妆品牌，超5000款单品。此外，调色师与欧莱雅、资生堂、KISS ME等全球30多个彩妆品牌达成合作，保证了商品的日常供应。\n\n浙江网经社信息科技公司拥有18年历史，作为中国领先的数字经济新媒体、服务商，提供“媒体+智库”、“会员+孵化”服务；（1）面向电商平台、头部服务商等PR条线提供媒体传播服务；（2）面向各类企事业单位、政府部门、培训机构、电商平台等提供智库服务；（3）面向各类电商渠道方、品牌方、商家、供应链公司等提供“千电万商”生态圈服务；（4）面向各类初创公司提供创业孵化器服务。\n\n\n\n【投诉曝光】 更多>\n\n行业方案 更多>\n:   《数字零售一站式解决方案》\n:   《私域电商一站式解决方案》\n:   《跨境电商一站式解决方案》\n:   《直播电商一站式解决方案》\n:   《服装电商产业链赋能解决方案》\n:   《移动出行影响力和产品体系》\n:   《数字教育影响力和产品体系》\n:   《物流科技影响力和产品体系》\n:   《互联网监管方面影响力》\n:   《数商兴农影响力和产品体系》\n:   《数字健康影响力和产品体系》\n:   《产业电商影响力和产品体系》\n:   《数智产教影响力和产品体系》 [...] 【原创报告】 更多>\n:   《2025年度中国数字生活市场数据报告》\n:   《2025年度中国物流科技市场数据报告》\n:   《2025年度中国移动出行市场数据报告》\n:   《2026年Q1电商平台商家投诉数据报告》\n:   《2025年度中国数字健康市场数据报告》\n:   《2026年Q1电子商务用户体验与投诉数据报告》\n:   《2025年度中国电子商务行业投融资数据报告》\n:   《2025年中国电子商务“死亡”数据报告》\n:   《2025年度中国电子商务用户体验与投诉监测报告》\n:   《2025年度中国数字生活投诉数据与典型案例报告》\n\n【版权声明】秉承互联网开放、包容的精神，网经社欢迎各方(自)媒体、机构转载、引用我们原创内容，但要严格注明来源网经社；同时，我们倡导尊重与保护知识产权，如发现本站文章存在版权问题，烦请将版权疑问、授权证明、版权证明、联系方式等，发邮件至NEWS@netsun.com，我们将第一时间核实、处理。\n\n 往期回顾\n\n《电商 月刊》\n\n热点专题更多\n\n\n\n\n\n\n\n\n\n\n\n投诉榜 热搜榜 评级榜 更多\n\n平台名称\n\n平台回复率\n\n回复时效性\n\n用户满意度\n\n年度报告 更多>>\n\n\n\n\n\n\n\n\n\n\n\n我要投诉更多\n\n 融资9亿AI公司沦为“造黄”工具：央视起底“哩布哩布”\n 【电诉宝】“瓜子二手车”被指虚假促销 霸王条款 退款难问题突出\n 【电诉宝】“智联招聘”被指违规封号 审核失职 霸王条款问题突出\n 【法律案例】电商从业者需注意！税务部门曝光8起偷逃贵重首饰及珠宝玉石 白酒 成品油等消费税案件\n 【法律案例】浙江两起数据不正当竞争典型案例：小红书 淘宝 天猫等被摘录\n\n电数宝我要数据\n\n\n\n评论家 快评 更多\n\n董毅智律师：大搜车金融板块存多重合规雷区 坏账率真实性待验证",
+      "matched_keywords": [
+        "彩妆",
+        "京东到家",
+        "美妆",
+        "供应链",
+        "饿了么",
+        "曝光",
+        "促销",
+        "直播",
+        "合规",
+        "选品",
+        "调色师"
+      ],
+      "raw": {
+        "query": "调色师 美团闪购 最新投入",
+        "score": 0.5195463,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 3,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+4 命中即时零售: 京东到家",
+          "+3 命中美妆个护: 美妆, 彩妆",
+          "+3 命中竞对: 调色师",
+          "+1 命中经营变量: 会员, 私域, 活动",
+          "-3 泛领域: 独角兽",
+          "-5 垃圾内容: 招聘"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule=review, score=3<5, 无LLM结果→reject",
+        "reject_reason": "rule=review, score=3<5, 无LLM结果→reject"
+      }
+    },
+    {
+      "article_id": "e3afe3103fbf719b",
+      "title": "[PDF] 即时零售系列报告（一）：竞争格局、 平台博弈与巨头利润影响",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202507221713451853_1.pdf?1753182144000.pdf",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:30.229330+08:00",
+      "time_status": "unknown_time",
+      "summary": "个，单店月盈利超1万，年GMV达8000万。数码闪电仓龙头也 涌现出斑马、六米、绿阶等。 • 2）行业集中度提升：随着玩家的快速增加，行业进入“一 商多仓”连锁时代，商家经营模式逐渐由“松散加盟”转变 为具有长期竞争优势的“紧密连锁”模式。 24 日均单量（单） 500 月单量（单） 17000 客单价 （元） 33 单位：万元 占收入比例 月销售额 56.1 商品成本 30.9 55% 租金 3.0 人员成本（4人） 2.4 水电费 0.6 佣金 3.4 6% 代运营（松鼠） 2.5 4.5% 代运营（其他） 3% 配送成本 10.1 18% 净利润 3.3 5.8% 单位：万元 单店投入 75 商品成本 35 装修货架 18 保证金 1 加盟费 5 设备费用 1 备用金 15 回本周期 2年 图：深圳某闪电仓经营模型 资料来源：美团闪购，国信证券经济研究所整理测算 请务必阅读正文之后的免责声明及其项下所有内容 供给：闪电仓解决“多”的需求，美团覆盖数量领先 • 美团当前闪电仓数量优势显著，但差距将逐渐缩小。目前美团拥有大约1.5万综合闪电仓，以及2万垂类仓，而淘宝闪 购则目前上线了总计约2万+闪电仓，美团在覆盖商家数量上的优势较为显著。过往美团有大量深度合作仓，商家仅在 美团独家经营，不入驻其它平台，美团对深度合作商家进行补贴和扶持，如房租补贴、冷库补贴、流量扶持、数据分 析赋能等。但随着淘宝闪购单量增加，美团的补贴和扶持收益不足以弥补淘宝带来的增量（部分多平台上线的店近 期已能达到美团和淘宝闪购单量1:1），越来越多的闪电仓品牌选择开始尝试淘宝闪购，供给门店数量的差距将逐渐 缩小。 • 美团自有品牌松鼠便利满足用户“好”的需求，产品组合上更有优势。美团自有品牌松鼠便利采取加盟模式，我们预 [...] 缩短，未来将主要体现在购买频次较低的长尾商品。 时间 即时零售平台 即时零售自营 远场电商平台 商家 数 美团合作 5600家大型 连锁零售商、 41万本地小商 户及570家品 牌商 -淘宝一年新增 500万+商家 天猫拥有30万 品牌商家 SKU 数量 几十万 5000~10000+ 千万级别 图：美团闪电仓数量 资料来源：美团闪购商家中心、国信证券经济研究 所整理 图：拼多多百亿补贴部分热门商品在美团闪购货源情况 资料来源：美团闪购、拼多多、国信证券经济研究所整理 0 5000 10000 15000 20000 25000 30000 35000 2021年 2022年 2023年 2024年 品类 商品 美团闪购 母婴 皇家美素佳儿3段 母婴用品连锁店、商超、 母婴闪电仓 母婴 babycare仅山茶花纸尿裤 母婴闪电仓 数码3C 小米15pro 直营店 数码3C Apple AirPods Pro第二代授权专营店 数码3C 小米空调1.5匹 直营店、数码闪电仓 数码3C 苏泊尔电饭煲5L 直营店、便利店 数码3C 华硕随身WIFI上网充电二 合一 -数码3C 任天堂全新Switch2 数码门店、数码闪电仓 数码3C 奥睿科 超级快充type-C数 据线 -美妆个护 CPB肌肤之玥长管隔离 美妆闪电仓 美妆个护 娇韵诗第九代黄金双萃精 华 美妆闪电仓、线下美妆集 合店 日用百货 清风原木金装大包抽纸 商超便利 日用百货 E路驰车用微分子润滑剂 -日用百货 双鱼手力握力器 闪电仓、商超便利 日用百货 得力透明胶带大卷 商超便利 服饰 蝶安芬袜子 -酒水饮料 五粮液第八代52度 酒水经销门店、平台自营 歪马送酒 酒水饮料 可口可乐怡泉原味苏打水 商超便利 书籍 乌合之众大众心理学研究 闪电仓、书城 日用百货 萌趣多 合金仿真摩托车模 型 -9 [...] • GTV和单量：假设美团 闪购日均单量持续增 长，2024-2030年复合 增速为24%；假设28年 后伴随补贴力度减弱、 3C/服饰等品类的增加、 品牌商品的占比提升 客单价稳步增长， 2030年GTV将达到接近 1.1万亿元； • 收入侧：假设佣金货 币化率和配送及其他 收入保持稳定，广告 货币化率从2%小幅提 升至2.3%； • 成本侧：单均配送成 本假设保持稳定，补 贴则在25年大战之后 逐渐下降至约2.3元。 最终测算得2030年美 团闪购利润有望达到 186亿元。 34 美团 2023 2024 2025E 2026E 2027E 2028E 2029E 2030E 具体假设 GTV 2042 2772 3849 5470 6838 8355 9731 10785 yoy 44% 36% 39% 42% 25% 22% 16% 11% 收入 185.9 36% 37% 39% 40% 41% 42% 43% yoy 262.2 467.0 638.6 80",
+      "content": "个，单店月盈利超1万，年GMV达8000万。数码闪电仓龙头也 涌现出斑马、六米、绿阶等。 • 2）行业集中度提升：随着玩家的快速增加，行业进入“一 商多仓”连锁时代，商家经营模式逐渐由“松散加盟”转变 为具有长期竞争优势的“紧密连锁”模式。 24 日均单量（单） 500 月单量（单） 17000 客单价 （元） 33 单位：万元 占收入比例 月销售额 56.1 商品成本 30.9 55% 租金 3.0 人员成本（4人） 2.4 水电费 0.6 佣金 3.4 6% 代运营（松鼠） 2.5 4.5% 代运营（其他） 3% 配送成本 10.1 18% 净利润 3.3 5.8% 单位：万元 单店投入 75 商品成本 35 装修货架 18 保证金 1 加盟费 5 设备费用 1 备用金 15 回本周期 2年 图：深圳某闪电仓经营模型 资料来源：美团闪购，国信证券经济研究所整理测算 请务必阅读正文之后的免责声明及其项下所有内容 供给：闪电仓解决“多”的需求，美团覆盖数量领先 • 美团当前闪电仓数量优势显著，但差距将逐渐缩小。目前美团拥有大约1.5万综合闪电仓，以及2万垂类仓，而淘宝闪 购则目前上线了总计约2万+闪电仓，美团在覆盖商家数量上的优势较为显著。过往美团有大量深度合作仓，商家仅在 美团独家经营，不入驻其它平台，美团对深度合作商家进行补贴和扶持，如房租补贴、冷库补贴、流量扶持、数据分 析赋能等。但随着淘宝闪购单量增加，美团的补贴和扶持收益不足以弥补淘宝带来的增量（部分多平台上线的店近 期已能达到美团和淘宝闪购单量1:1），越来越多的闪电仓品牌选择开始尝试淘宝闪购，供给门店数量的差距将逐渐 缩小。 • 美团自有品牌松鼠便利满足用户“好”的需求，产品组合上更有优势。美团自有品牌松鼠便利采取加盟模式，我们预 [...] 缩短，未来将主要体现在购买频次较低的长尾商品。 时间 即时零售平台 即时零售自营 远场电商平台 商家 数 美团合作 5600家大型 连锁零售商、 41万本地小商 户及570家品 牌商 -淘宝一年新增 500万+商家 天猫拥有30万 品牌商家 SKU 数量 几十万 5000~10000+ 千万级别 图：美团闪电仓数量 资料来源：美团闪购商家中心、国信证券经济研究 所整理 图：拼多多百亿补贴部分热门商品在美团闪购货源情况 资料来源：美团闪购、拼多多、国信证券经济研究所整理 0 5000 10000 15000 20000 25000 30000 35000 2021年 2022年 2023年 2024年 品类 商品 美团闪购 母婴 皇家美素佳儿3段 母婴用品连锁店、商超、 母婴闪电仓 母婴 babycare仅山茶花纸尿裤 母婴闪电仓 数码3C 小米15pro 直营店 数码3C Apple AirPods Pro第二代授权专营店 数码3C 小米空调1.5匹 直营店、数码闪电仓 数码3C 苏泊尔电饭煲5L 直营店、便利店 数码3C 华硕随身WIFI上网充电二 合一 -数码3C 任天堂全新Switch2 数码门店、数码闪电仓 数码3C 奥睿科 超级快充type-C数 据线 -美妆个护 CPB肌肤之玥长管隔离 美妆闪电仓 美妆个护 娇韵诗第九代黄金双萃精 华 美妆闪电仓、线下美妆集 合店 日用百货 清风原木金装大包抽纸 商超便利 日用百货 E路驰车用微分子润滑剂 -日用百货 双鱼手力握力器 闪电仓、商超便利 日用百货 得力透明胶带大卷 商超便利 服饰 蝶安芬袜子 -酒水饮料 五粮液第八代52度 酒水经销门店、平台自营 歪马送酒 酒水饮料 可口可乐怡泉原味苏打水 商超便利 书籍 乌合之众大众心理学研究 闪电仓、书城 日用百货 萌趣多 合金仿真摩托车模 型 -9 [...] • GTV和单量：假设美团 闪购日均单量持续增 长，2024-2030年复合 增速为24%；假设28年 后伴随补贴力度减弱、 3C/服饰等品类的增加、 品牌商品的占比提升 客单价稳步增长， 2030年GTV将达到接近 1.1万亿元； • 收入侧：假设佣金货 币化率和配送及其他 收入保持稳定，广告 货币化率从2%小幅提 升至2.3%； • 成本侧：单均配送成 本假设保持稳定，补 贴则在25年大战之后 逐渐下降至约2.3元。 最终测算得2030年美 团闪购利润有望达到 186亿元。 34 美团 2023 2024 2025E 2026E 2027E 2028E 2029E 2030E 具体假设 GTV 2042 2772 3849 5470 6838 8355 9731 10785 yoy 44% 36% 39% 42% 25% 22% 16% 11% 收入 185.9 36% 37% 39% 40% 41% 42% 43% yoy 262.2 467.0 638.6 801.7 956.1 1089.9 1184.9 货币化率 9.1% 41% 78% 37% 26% 19% 14% 9% 9.5% 12.1% 11.7% 11.7% 11.4% 11.2% 11.0% 总利润 4.8 GTV利润率 0.2% 9.1 1.0 23.2 41.0 81.3 138.4 185.9 客单价（元） 80 80 76 80 80 85 90 95 1）25年因为补贴导致客单价下降，26年起伴随补贴力度减弱、 3C/服饰等品类的增加、品牌商品的占比提升，客单价持续增长。 2）远期客单价预测：2030年3400万单，我们认为27年即时性需 求渗透见顶，因此约2600万单为即时性场景的低客单价（假设 80元），800万单为替代电商场景的高客单价（假设150元）， 平均客单价为95元",
+      "matched_keywords": [
+        "闪购",
+        "流量",
+        "美妆",
+        "补贴",
+        "即时零售",
+        "个护",
+        "美团闪购",
+        "自有品牌"
+      ],
+      "raw": {
+        "query": "调色师 美团闪购 最新投入",
+        "score": 0.39971843,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 3,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+4 命中即时零售: 美团闪购",
+          "+3 命中美妆个护: 美妆, 个护",
+          "+1 命中经营变量: 流量, 客单价, 补贴",
+          "-5 垃圾内容: 免责声明"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule=review, score=3<5, 无LLM结果→reject",
+        "reject_reason": "rule=review, score=3<5, 无LLM结果→reject"
+      }
+    },
+    {
+      "article_id": "78bc2c3968b56532",
+      "title": "名創優品與美團達成合作　年內上線逾800家「24H超級店」",
+      "url": "https://www.hk01.com/%E8%B2%A1%E7%B6%93%E5%BF%AB%E8%A8%8A/1066102/%E5%90%8D%E5%89%B5%E5%84%AA%E5%93%81%E8%88%87%E7%BE%8E%E5%9C%98%E9%81%94%E6%88%90%E5%90%88%E4%BD%9C-%E5%B9%B4%E5%85%A7%E4%B8%8A%E7%B7%9A%E9%80%BE800%E5%AE%B6-24h%E8%B6%85%E7%B4%9A%E5%BA%97",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:34.826328+08:00",
+      "time_status": "unknown_time",
+      "summary": "# 名創優品與美團達成合作　年內上線逾800家「24H超級店」\n\n撰文：\n溫多娜\n\n出版：\n更新：\n\n讚好\n\n2\n\n讚好\n\n2\n\n我鍾意\n\n0\n\n我喊喇\n\n0\n\n笑死我\n\n0\n\n我嬲啊\n\n0\n\n名創優品與美團達成合作　年內上線逾800家「24H超級店」\n\n內媒報道，名創優品（9896）與美團（3690）今日（14日）宣佈，簽訂深度戰略合作協議，雙方以即時零售業務為合作重點，名創優品年內將在美團上線超過800家「閃電倉」形態的「24H超級店」，服務消費者線上下單，最快30分鐘送達的即時需求。\n\n據介紹，名創優品「24H超級店專門針對即時零售用戶的線上消費需求，今年1月試營運至今，已開設約500家24H超級店，累計生意額錄得過億人民幣。\n\n名創優品中期多賺16%　息6.86美仙　12個月內最多回購20億元股份\n名創優品｜荷里活廣場再添全港最大旗艦店　年內續開分店逆市擴張\n\nMINISO名創優品\n\n搶先表達\n\n讚好\n\n2\n\n我鍾意\n\n0\n\n我喊喇\n\n0\n\n笑死我\n\n0\n\n我嬲啊\n\n0\n\n熱門文章\n\n查看更多\n\n10:39\n\n攬500億淨現金　變3年半投7地　信和晒冷啟示\n\n彭博︰滙豐擬取消新入職員工子女學費資助　目前每年上限30萬元\n\n華爾街瘋搶「電力霸權」！　AI戰爭已從「拼晶片」轉「拼電力」\n\nFacebook母企Meta遭內地禁止收購Manus　發改委︰要求撤銷交易\n\n曦智科技明掛牌　暗盤飆逾3倍　每手賬面曾賺1.05萬元｜新股IPO\n\n「迪王」「寧王」之爭　花落誰家？｜伍禮賢\n\n曾安業辭任佐丹奴主席　 純官長女鄭志雯接任\n\n曦智科技超購5783倍　抽2000手方穩獲一手　暗盤飆逾3倍｜新股IPO\n\n# 名創優品料去年利潤減半　收入則升26%\n\n撰文：\n黃捷\n\n出版：\n更新：\n\n讚好\n\n讚好\n\n我鍾意\n\n我喊喇\n\n笑死我\n\n我嬲啊",
+      "content": "# 名創優品與美團達成合作　年內上線逾800家「24H超級店」\n\n撰文：\n溫多娜\n\n出版：\n更新：\n\n讚好\n\n2\n\n讚好\n\n2\n\n我鍾意\n\n0\n\n我喊喇\n\n0\n\n笑死我\n\n0\n\n我嬲啊\n\n0\n\n名創優品與美團達成合作　年內上線逾800家「24H超級店」\n\n內媒報道，名創優品（9896）與美團（3690）今日（14日）宣佈，簽訂深度戰略合作協議，雙方以即時零售業務為合作重點，名創優品年內將在美團上線超過800家「閃電倉」形態的「24H超級店」，服務消費者線上下單，最快30分鐘送達的即時需求。\n\n據介紹，名創優品「24H超級店專門針對即時零售用戶的線上消費需求，今年1月試營運至今，已開設約500家24H超級店，累計生意額錄得過億人民幣。\n\n名創優品中期多賺16%　息6.86美仙　12個月內最多回購20億元股份\n名創優品｜荷里活廣場再添全港最大旗艦店　年內續開分店逆市擴張\n\nMINISO名創優品\n\n搶先表達\n\n讚好\n\n2\n\n我鍾意\n\n0\n\n我喊喇\n\n0\n\n笑死我\n\n0\n\n我嬲啊\n\n0\n\n熱門文章\n\n查看更多\n\n10:39\n\n攬500億淨現金　變3年半投7地　信和晒冷啟示\n\n彭博︰滙豐擬取消新入職員工子女學費資助　目前每年上限30萬元\n\n華爾街瘋搶「電力霸權」！　AI戰爭已從「拼晶片」轉「拼電力」\n\nFacebook母企Meta遭內地禁止收購Manus　發改委︰要求撤銷交易\n\n曦智科技明掛牌　暗盤飆逾3倍　每手賬面曾賺1.05萬元｜新股IPO\n\n「迪王」「寧王」之爭　花落誰家？｜伍禮賢\n\n曾安業辭任佐丹奴主席　 純官長女鄭志雯接任\n\n曦智科技超購5783倍　抽2000手方穩獲一手　暗盤飆逾3倍｜新股IPO\n\n# 名創優品料去年利潤減半　收入則升26%\n\n撰文：\n黃捷\n\n出版：\n更新：\n\n讚好\n\n讚好\n\n我鍾意\n\n我喊喇\n\n笑死我\n\n我嬲啊",
+      "matched_keywords": [],
+      "raw": {
+        "query": "名创优品 美妆 即时零售",
+        "score": 0.994089,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": -3,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-3 泛领域: IPO"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=-3<3",
+        "reject_reason": "rule_score=-3<3"
+      }
+    },
+    {
+      "article_id": "36ad057701582bcc",
+      "title": "美团闪购：个人洗护品类即时零售白皮书 - 新浪财经",
+      "url": "https://finance.sina.com.cn/tech/roll/2023-04-11/doc-imypxshy7712554.shtml",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:37.860886+08:00",
+      "time_status": "unknown_time",
+      "summary": "# 美团闪购：个人洗护品类即时零售白皮书\n\n预计到2027年，即时零售个人洗护市场规模复合增长率将达到47%，市场规模将超过1700亿左右。相较于其他渠道，即时零售渠道增速将超过25倍。\n\n《白皮书》提到，在即时零售赛道，平台模式凭借履约高效、物美价优等优势，渗透率高达92%。看重“配送速度快”、“能送货上门”、“产品质量好”的年轻消费者，越来越高频选择在即时零售平台购买个护产品。其中，以美团闪购为代表的外卖类即时零售平台，覆盖的个护商家和地域更广，能够提供全天候履约服务，成为个护品牌合作的首选。\n\n个护市场越来越细分化，《白皮书》给出了即时零售个护品类的六大趋势洞察，帮助品牌精准把脉年轻消费者的需求所在。\n\n首先，通过专业选品和服务提升消费者即时零售渠道体验，数据显示，55%的即时零售消费者尤其关注专业的成分、工艺等。\n\n其次，满足生活“小确幸”的中高端产品受追捧，数据显示，55%的即时零售消费者尤其关注专业的成分、工艺等。\n\n第三，多步骤护理，拉升即时零售精细护理品类需求。76%的女性消费者护理步骤增多，护理需求更加细分，面部护理、身体护理、口腔护理、洗发护发等细分品类备受追捧。\n\n第四，情感价值、智能体验，在即时零售蔚然成风。\n\n第五，个性化产品及营销助力品牌转化，数据显示，43%的即时零售年轻消费者偏好个性化定制、渠道限量产品。第六，丰富场景跨“界”联动，刺激消费需求因“景”而异。数据显示，44%的即时零售个护消费者会选择跨生态购物。\n\n新浪众测\n新浪众测\n新浪科技公众号\n\n“掌”握科技鲜闻 （微信搜索techsina或扫描左侧二维码关注）\n\n### 创事记\n\n### 阅读排行榜\n\n### 评论排行榜\n\n### 科学探索\n\n### 科学大家\n\n### 苹果汇\n\n### 众测\n\n### 来电聊\n\n### 专题\n\n### 官方微博 [...] ### 科学大家\n\n### 苹果汇\n\n### 众测\n\n### 来电聊\n\n### 专题\n\n### 官方微博\n\n新浪科技\n新浪数码\n新浪手机\n科学探索\n苹果汇\n新浪众测\n\n### 公众号\n\n新浪科技\n\n新浪科技为你带来最新鲜的科技资讯\n\n苹果汇\n\n苹果汇为你带来最新鲜的苹果产品新闻\n\n新浪众测\n\n新酷产品第一时间免费试玩\n\n新浪探索\n\n提供最新的科学家新闻，精彩的震撼图片\n\n新浪科技意见反馈留言板\n\n新浪简介|广告服务|About Sina\n  \n联系我们|招聘信息|通行证注册\n  \n产品答疑|网站律师|SINA English\n\nCopyright © 1996-2023 SINA Corporation\n\nAll Rights Reserved 新浪公司 版权所有",
+      "content": "# 美团闪购：个人洗护品类即时零售白皮书\n\n预计到2027年，即时零售个人洗护市场规模复合增长率将达到47%，市场规模将超过1700亿左右。相较于其他渠道，即时零售渠道增速将超过25倍。\n\n《白皮书》提到，在即时零售赛道，平台模式凭借履约高效、物美价优等优势，渗透率高达92%。看重“配送速度快”、“能送货上门”、“产品质量好”的年轻消费者，越来越高频选择在即时零售平台购买个护产品。其中，以美团闪购为代表的外卖类即时零售平台，覆盖的个护商家和地域更广，能够提供全天候履约服务，成为个护品牌合作的首选。\n\n个护市场越来越细分化，《白皮书》给出了即时零售个护品类的六大趋势洞察，帮助品牌精准把脉年轻消费者的需求所在。\n\n首先，通过专业选品和服务提升消费者即时零售渠道体验，数据显示，55%的即时零售消费者尤其关注专业的成分、工艺等。\n\n其次，满足生活“小确幸”的中高端产品受追捧，数据显示，55%的即时零售消费者尤其关注专业的成分、工艺等。\n\n第三，多步骤护理，拉升即时零售精细护理品类需求。76%的女性消费者护理步骤增多，护理需求更加细分，面部护理、身体护理、口腔护理、洗发护发等细分品类备受追捧。\n\n第四，情感价值、智能体验，在即时零售蔚然成风。\n\n第五，个性化产品及营销助力品牌转化，数据显示，43%的即时零售年轻消费者偏好个性化定制、渠道限量产品。第六，丰富场景跨“界”联动，刺激消费需求因“景”而异。数据显示，44%的即时零售个护消费者会选择跨生态购物。\n\n新浪众测\n新浪众测\n新浪科技公众号\n\n“掌”握科技鲜闻 （微信搜索techsina或扫描左侧二维码关注）\n\n### 创事记\n\n### 阅读排行榜\n\n### 评论排行榜\n\n### 科学探索\n\n### 科学大家\n\n### 苹果汇\n\n### 众测\n\n### 来电聊\n\n### 专题\n\n### 官方微博 [...] ### 科学大家\n\n### 苹果汇\n\n### 众测\n\n### 来电聊\n\n### 专题\n\n### 官方微博\n\n新浪科技\n新浪数码\n新浪手机\n科学探索\n苹果汇\n新浪众测\n\n### 公众号\n\n新浪科技\n\n新浪科技为你带来最新鲜的科技资讯\n\n苹果汇\n\n苹果汇为你带来最新鲜的苹果产品新闻\n\n新浪众测\n\n新酷产品第一时间免费试玩\n\n新浪探索\n\n提供最新的科学家新闻，精彩的震撼图片\n\n新浪科技意见反馈留言板\n\n新浪简介|广告服务|About Sina\n  \n联系我们|招聘信息|通行证注册\n  \n产品答疑|网站律师|SINA English\n\nCopyright © 1996-2023 SINA Corporation\n\nAll Rights Reserved 新浪公司 版权所有",
+      "matched_keywords": [
+        "成分",
+        "口腔护理",
+        "闪购",
+        "洗发",
+        "即时零售",
+        "个护",
+        "美团闪购",
+        "洗护",
+        "选品"
+      ],
+      "raw": {
+        "query": "洗护 即时零售 最新",
+        "score": 0.99856746,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 3,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+4 命中即时零售: 美团闪购",
+          "+3 命中美妆个护: 个护, 洗护, 身体护理",
+          "+1 命中经营变量: 履约",
+          "-5 垃圾内容: 招聘"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule=review, score=3<5, 无LLM结果→reject",
+        "reject_reason": "rule=review, score=3<5, 无LLM结果→reject"
+      }
+    },
+    {
+      "article_id": "84100c24051e75a3",
+      "title": "2026年4月 女性护理优惠券、折扣信息 | 北美省钱快报，北美折扣指南大全",
+      "url": "https://www.dealmoon.com/cn/health/feminine-care",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:36.032967+08:00",
+      "time_status": "unknown_time",
+      "summary": "运动/户外服饰   运动休闲服饰     爆款限量\n\n  运动电子     运动营养     健身/瑜伽     滑雪     装备及器材\n ~~美食~~\n ~~旅游~~\n ~~男士专区~~\n ~~个人护理~~ \n\n  个护健康   口腔护理     眼睛护理     女性护理     男士护理     个护健康\n\n  营养保健品   维生素/保健品     减肥纤体     花旗参&传统滋补\n 信用卡/金融\n ~~影视/演出/体育~~\n ~~资讯~~\n ~~汽车~~\n 其他\n ~~更多~~\n\n  最新   美妆护肤   服饰手袋   电子电脑   家居厨卫   母婴儿童   运动户外   美食   旅游   男士专区   个护保健   信用卡/金融   影视/演出/体育   资讯   汽车   其他\n\n  更多折扣 热门折扣 最新折扣 繁体版;)  美妆护肤   服饰手袋   电子电脑   家居厨卫   母婴儿童   运动户外   美食   旅游   男士专区   个护保健   信用卡/金融   影视/演出/体育   资讯   汽车   其他\n\n  热门频道  DealMoon活动   DealMoon招聘\n\n亲爱的用户，你好：为了提升您的访问速度，我们根据您的IP地址，为您推荐直接浏览Dealmoon中文站。\n\n请选择：  \n 继续浏览中文站 浏览英文站\n\n首页 个护保健 女性护理\n\n \n\nDr. Brown's 恐龙造型儿童牙刷 2支装 $3.99 $7.99\n\n新人首盒免费+满$35免运 \n\n视客 美瞳7折+限时6折秒杀 留言抽礼卡 新人首盒免费+满$35免运\n\n菁纯买1送1💛 多款低库存 \n\n即将截止：Lancôme“热销王”菁纯精华$280 菁纯买1送1💛 多款低库存\n\n保健品买1送1 舒适达$2.7/支 [...] GuruNanda 蜡质牙线 肉桂味 3件 $2.79 $4.05\n\n \n\nNew-Skin 液体创可喷雾 1盎司 $4.72 $7.99\n\n \n\nSensodyne Pronamel 儿童牙膏4盎司 仅限部分用户 $4.38 $7.97\n\n \n\nNature Made 鱼油胶囊 1400mg 60粒 $7.42 $20.19\n\n \n\n1 2 3 4 5 6\n\n全部热门\n\n# 个护保健\n\n关爱女性，从了解女性护理知识，选择合适的护理产品开始。卫生巾，私处护理液，除毛用品等都是每个仙女们必不可少的。有健康才能有自信，快来这里找到适合你的护理好物，学习正确的女性私密... 展开全部\n\n全部 口腔护理 眼睛护理 女性护理 男士护理 个护健康 维生素/保健品 减肥纤体 花旗参&传统滋补 成人用品\n\n液体卫生巾$23/108片U by Kotex、Always 液体卫生巾热卖   去购买  热门\n\n## U by Kotex、Always 液体卫生巾热卖 Amazon 现有 Always 液体卫生巾立减，U by Kotex卫生巾额外7.5折，需通过订阅结账。 每个用户显示折扣可能不同。 小编推荐：用了舒适透气的液体卫生巾...\n\nalways日用液体卫生巾 普通流量 3包 共108片\n\n$23.22 $26.82\n\nalways  日用液体卫生巾 普通流量 3包 共108片\n\nalways液体卫生巾  蓝色款日常量多 84片\n\n$25.56 $26.91\n\nalways  液体卫生巾 蓝色款日常量多 84片\n\nalways液体卫生巾 2号 带护翼 共96片\n\n$22.74 $26.97\n\nalways  液体卫生巾 2号 带护翼 共96片\n\n49        117       219\n\n收起\n\nRENPHO 红光加热按摩腰带 热敷+振动+理疗3合一   去购买 [...] 旅行必备折扣全攻略\n\nDealmoon 北美省钱快报\n\nDealmoon User \n\n 我的收藏\n 我的长文章\n 我的爆料\n 我的评论\n 账号设置\n 退出登录\n\n  \n\n🇺🇸美国\n\n🇺🇸 美国   🇨🇦 加拿大   🇬🇧 英国   🇩🇪 德国   🇫🇷 法国   🇮🇹 意大利   🇦🇺 澳洲   🇳🇿 新西兰\n\n English\n 首页\n 热门\n 最新\n ~~美妆护肤~~\n ~~服饰手袋~~ \n\n  女士   女装     女鞋     手袋钱包     女表配饰\n\n  男士   男装     男鞋     男表     男士配件\n ~~电子电脑~~ \n\n  电脑   笔记本/台式电脑     电脑外设及配件     网络设备     宽带服务\n\n  游戏动漫   电子游戏     动漫周边\n\n  移动   手机计划     手机及平板     Apps及移动配件     耳机/便携音箱\n\n  家用   电视及音响     摄影器材 ",
+      "content": "运动/户外服饰   运动休闲服饰     爆款限量\n\n  运动电子     运动营养     健身/瑜伽     滑雪     装备及器材\n ~~美食~~\n ~~旅游~~\n ~~男士专区~~\n ~~个人护理~~ \n\n  个护健康   口腔护理     眼睛护理     女性护理     男士护理     个护健康\n\n  营养保健品   维生素/保健品     减肥纤体     花旗参&传统滋补\n 信用卡/金融\n ~~影视/演出/体育~~\n ~~资讯~~\n ~~汽车~~\n 其他\n ~~更多~~\n\n  最新   美妆护肤   服饰手袋   电子电脑   家居厨卫   母婴儿童   运动户外   美食   旅游   男士专区   个护保健   信用卡/金融   影视/演出/体育   资讯   汽车   其他\n\n  更多折扣 热门折扣 最新折扣 繁体版;)  美妆护肤   服饰手袋   电子电脑   家居厨卫   母婴儿童   运动户外   美食   旅游   男士专区   个护保健   信用卡/金融   影视/演出/体育   资讯   汽车   其他\n\n  热门频道  DealMoon活动   DealMoon招聘\n\n亲爱的用户，你好：为了提升您的访问速度，我们根据您的IP地址，为您推荐直接浏览Dealmoon中文站。\n\n请选择：  \n 继续浏览中文站 浏览英文站\n\n首页 个护保健 女性护理\n\n \n\nDr. Brown's 恐龙造型儿童牙刷 2支装 $3.99 $7.99\n\n新人首盒免费+满$35免运 \n\n视客 美瞳7折+限时6折秒杀 留言抽礼卡 新人首盒免费+满$35免运\n\n菁纯买1送1💛 多款低库存 \n\n即将截止：Lancôme“热销王”菁纯精华$280 菁纯买1送1💛 多款低库存\n\n保健品买1送1 舒适达$2.7/支 [...] GuruNanda 蜡质牙线 肉桂味 3件 $2.79 $4.05\n\n \n\nNew-Skin 液体创可喷雾 1盎司 $4.72 $7.99\n\n \n\nSensodyne Pronamel 儿童牙膏4盎司 仅限部分用户 $4.38 $7.97\n\n \n\nNature Made 鱼油胶囊 1400mg 60粒 $7.42 $20.19\n\n \n\n1 2 3 4 5 6\n\n全部热门\n\n# 个护保健\n\n关爱女性，从了解女性护理知识，选择合适的护理产品开始。卫生巾，私处护理液，除毛用品等都是每个仙女们必不可少的。有健康才能有自信，快来这里找到适合你的护理好物，学习正确的女性私密... 展开全部\n\n全部 口腔护理 眼睛护理 女性护理 男士护理 个护健康 维生素/保健品 减肥纤体 花旗参&传统滋补 成人用品\n\n液体卫生巾$23/108片U by Kotex、Always 液体卫生巾热卖   去购买  热门\n\n## U by Kotex、Always 液体卫生巾热卖 Amazon 现有 Always 液体卫生巾立减，U by Kotex卫生巾额外7.5折，需通过订阅结账。 每个用户显示折扣可能不同。 小编推荐：用了舒适透气的液体卫生巾...\n\nalways日用液体卫生巾 普通流量 3包 共108片\n\n$23.22 $26.82\n\nalways  日用液体卫生巾 普通流量 3包 共108片\n\nalways液体卫生巾  蓝色款日常量多 84片\n\n$25.56 $26.91\n\nalways  液体卫生巾 蓝色款日常量多 84片\n\nalways液体卫生巾 2号 带护翼 共96片\n\n$22.74 $26.97\n\nalways  液体卫生巾 2号 带护翼 共96片\n\n49        117       219\n\n收起\n\nRENPHO 红光加热按摩腰带 热敷+振动+理疗3合一   去购买 [...] 旅行必备折扣全攻略\n\nDealmoon 北美省钱快报\n\nDealmoon User \n\n 我的收藏\n 我的长文章\n 我的爆料\n 我的评论\n 账号设置\n 退出登录\n\n  \n\n🇺🇸美国\n\n🇺🇸 美国   🇨🇦 加拿大   🇬🇧 英国   🇩🇪 德国   🇫🇷 法国   🇮🇹 意大利   🇦🇺 澳洲   🇳🇿 新西兰\n\n English\n 首页\n 热门\n 最新\n ~~美妆护肤~~\n ~~服饰手袋~~ \n\n  女士   女装     女鞋     手袋钱包     女表配饰\n\n  男士   男装     男鞋     男表     男士配件\n ~~电子电脑~~ \n\n  电脑   笔记本/台式电脑     电脑外设及配件     网络设备     宽带服务\n\n  游戏动漫   电子游戏     动漫周边\n\n  移动   手机计划     手机及平板     Apps及移动配件     耳机/便携音箱\n\n  家用   电视及音响     摄影器材     智能设备     智能穿戴     日用电子\n ~~家居厨卫~~ \n\n  家居厨卫   行李箱包     吸尘/清洁     厨房用品     床品家纺     家饰家具     生活家电     庭院草坪     五金家装\n\n  办公学习用品     宠物用品     乐器\n ~~母婴儿童~~ \n\n  儿童   童装童鞋     玩具     童书     儿童日用/家居     儿童教育\n\n  婴儿   奶粉/喂养     宝宝玩乐     尿布/湿巾     婴儿服饰/学步鞋     安全座椅/推车     洗护健康     婴儿家居/床品\n ~~运动户外~~ \n\n  运动/户外服饰   运动休闲服饰     爆款限量",
+      "matched_keywords": [
+        "口腔护理",
+        "流量",
+        "美妆",
+        "折扣",
+        "个护",
+        "洗护",
+        "男士护理",
+        "精华",
+        "护肤"
+      ],
+      "raw": {
+        "query": "女性护理 即时零售 最新",
+        "score": 0.44594026,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆, 个护, 护肤",
+          "+1 命中经营变量: 流量, 活动",
+          "-3 无关主题: 汽车",
+          "-5 垃圾内容: 招聘"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "垃圾内容: 招聘",
+        "reject_reason": "垃圾内容: 招聘"
+      }
+    },
+    {
+      "article_id": "0d58fcc679f8249f",
+      "title": "女性私密护理产品市场——按产品类型、价格范围、分销渠道划分，增长预测（2026-2035年）",
+      "url": "https://www.gminsights.com/zh/industry-analysis/women-intimate-care-products-market",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-29T06:55:36.035082+08:00",
+      "time_status": "unknown_time",
+      "summary": "此类专业产品的优势非常明显，例如通过增强皮肤屏障健康来降低激素变化或生活压力导致的炎症或感染风险。因此，市场受到人们对预防性健康管理长期益处认识的提高的影响，从而导致对强效但温和配方的更广泛接受。此外，包装和交付方式的持续变化，如泵式分发器和可生物降解的湿巾，预计不仅能提高用户安全性，还能使过程更加方便。因此，医疗级标准和高效便利性的需求，这两者是相互支持的，对市场的强劲财务表现起到了重要作用。\n\n推动市场长期增长的主要因素之一是配方技术的进步，它将基础护理产品转化为高度专业化的产品。行业正朝着益生菌友好型活性成分和纳米包覆系统发展，这些系统能稳定维生素E或透明质酸等成分。制造商通过提供不同生命阶段（从经期到更年期）的模块化护理步骤来增强消费者体验，从而为不同肤质和敏感度提供更好的适应性。\n\n这种有效性对需要专业术后护理的专业健康诊所和需要稳定及时产品交付的零售/电商企业都非常具有吸引力。\n\n此外，技术正日益成为决定性因素，数字平台提供个性化咨询以实现更精准的护理体验。这些相互关联的趋势表明市场充满活力，并能满足亲密健康需求。因此，近几年内阴清洁剂和精华液细分市场成为总收入的主要贡献者。这些细分市场的主导地位主要归功于产品的长效性能和高度多功能性，它们为现代女性提供了即时舒适感与专业健康护理的完美结合。\n\n女性私密护理产品市场 报告属性 [...] 2025年7月，Seventh Generation的“Free & Clean”系列推出了Lucent Intimate LED面罩，这是一款自动驱动的护肤单元，配备高效光引擎和专有的Smart Adapt皮肤感应系统。该系统可根据检测到的皮肤敏感度自动调整LED波长和强度，最大化针对性抗炎护理的治疗效率。Lucent面罩还采用窄型人体工学框架，便于整合到紧凑型存储工具包中，使专业光疗对频繁出行者更加便捷。\n\n   2025年，Lil-Lets继续为Lil-Lets Smart Fit系列提供专业高性能模块化附件。该系列专注于高机动性和低运营成本，满足年轻消费者通过可互换头部和紧凑型人体工学手柄快速重组护理工具的需求。通过将NAD+技术整合到其配套的“Intimate Bloom”精华液中，Lil-Lets创建了一个协同生态系统，其中硬件和局部产品协同工作以加速细胞修复。\n\n   2024年1月，L. Organic推出了一款突破性的亲密护理产品，采用生物发酵技术。该系统包括专门设计的精华液弹匣，内含高纯度有机棉提取物、维生素C和绿茶酶，能够治疗和滋养皮肤，同时保护其免受环境污染。该技术保留了通常因城市压力而流失的水分，使皮肤呈现滋润、健康的状态。此次发布标志着向“生物护肤”的转变，其中传统草药成分通过先进的微生物加工进行优化。\n\n   2024年9月，Lola推出了重新设计的全球健康中心，专为专业网红和高频健康爱好者量身定制。该新版本通过AI驱动的“Skin-Link”算法在产品发现和皮肤类型分类方面表现出色。依托高效云驱动，它配备了个性化推荐引擎、热门独立品牌的积极库存输入以及各种用户体验增强功能。该平台采用无缝结账流程，满足了全球消费者扩大亲密护理常规容量的需求。 [...] 宝洁旗下的Always品牌推出了多款“皮肤安全”数字互动平台和产品改进，涵盖高端Always Discreet系列和有机产品线，以满足年轻消费者和老年群体的需求。新增功能包括多功能“经期追踪与健康同步”系统，该数字工具可根据激素变化实时推荐特定产品吸收度和pH平衡洗涤方案。该技术还包含智能取样计划，以提升对消费者屏障健康的洞察，并优化库存管理以适应快速交付环境。一位高级品牌经理强调，公司致力于通过提供全面的数字工具来增强用户日常护理的预测性维护。\n\n## 女性私密护理产品市场企业\n\n在女性私密护理产品行业运营的主要企业包括：\n\n   科拉\n   柔棉\n   强生\n   金佰利公司\n   L. Organic\n   Lil-Lets\n   洛拉\n   天然护理\n   Organyc\n   普莱特\n   宝洁公司\n   联合利华\n   诚信公司\n   宇部制药\n   维达\n\nLil-Lets集团有限公司通过推出可重复使用的棉签申请器，扩大了其可持续护理平台的范围。该设备是一种连接式、环保的多用途装置，旨在消除一次性塑料垃圾。该医疗级系统在生产力和精准舒适度方面优于旧式手动纸板或塑料设计。作为2025年可持续发展路线图的一部分，其模块化设计和易清洁表面为各种流量类型提供了更好的控制。该设计的优势在于提供更好的流量控制，并消除了对传统塑料产品的频繁重复购买需求。\n\n## 女性私密护理产品市场动态\n\n   2025年11月，Unicharm公司推出了两款新型高产能美容护理设备：Sofy AGE-R Ultra ",
+      "content": "此类专业产品的优势非常明显，例如通过增强皮肤屏障健康来降低激素变化或生活压力导致的炎症或感染风险。因此，市场受到人们对预防性健康管理长期益处认识的提高的影响，从而导致对强效但温和配方的更广泛接受。此外，包装和交付方式的持续变化，如泵式分发器和可生物降解的湿巾，预计不仅能提高用户安全性，还能使过程更加方便。因此，医疗级标准和高效便利性的需求，这两者是相互支持的，对市场的强劲财务表现起到了重要作用。\n\n推动市场长期增长的主要因素之一是配方技术的进步，它将基础护理产品转化为高度专业化的产品。行业正朝着益生菌友好型活性成分和纳米包覆系统发展，这些系统能稳定维生素E或透明质酸等成分。制造商通过提供不同生命阶段（从经期到更年期）的模块化护理步骤来增强消费者体验，从而为不同肤质和敏感度提供更好的适应性。\n\n这种有效性对需要专业术后护理的专业健康诊所和需要稳定及时产品交付的零售/电商企业都非常具有吸引力。\n\n此外，技术正日益成为决定性因素，数字平台提供个性化咨询以实现更精准的护理体验。这些相互关联的趋势表明市场充满活力，并能满足亲密健康需求。因此，近几年内阴清洁剂和精华液细分市场成为总收入的主要贡献者。这些细分市场的主导地位主要归功于产品的长效性能和高度多功能性，它们为现代女性提供了即时舒适感与专业健康护理的完美结合。\n\n女性私密护理产品市场 报告属性 [...] 2025年7月，Seventh Generation的“Free & Clean”系列推出了Lucent Intimate LED面罩，这是一款自动驱动的护肤单元，配备高效光引擎和专有的Smart Adapt皮肤感应系统。该系统可根据检测到的皮肤敏感度自动调整LED波长和强度，最大化针对性抗炎护理的治疗效率。Lucent面罩还采用窄型人体工学框架，便于整合到紧凑型存储工具包中，使专业光疗对频繁出行者更加便捷。\n\n   2025年，Lil-Lets继续为Lil-Lets Smart Fit系列提供专业高性能模块化附件。该系列专注于高机动性和低运营成本，满足年轻消费者通过可互换头部和紧凑型人体工学手柄快速重组护理工具的需求。通过将NAD+技术整合到其配套的“Intimate Bloom”精华液中，Lil-Lets创建了一个协同生态系统，其中硬件和局部产品协同工作以加速细胞修复。\n\n   2024年1月，L. Organic推出了一款突破性的亲密护理产品，采用生物发酵技术。该系统包括专门设计的精华液弹匣，内含高纯度有机棉提取物、维生素C和绿茶酶，能够治疗和滋养皮肤，同时保护其免受环境污染。该技术保留了通常因城市压力而流失的水分，使皮肤呈现滋润、健康的状态。此次发布标志着向“生物护肤”的转变，其中传统草药成分通过先进的微生物加工进行优化。\n\n   2024年9月，Lola推出了重新设计的全球健康中心，专为专业网红和高频健康爱好者量身定制。该新版本通过AI驱动的“Skin-Link”算法在产品发现和皮肤类型分类方面表现出色。依托高效云驱动，它配备了个性化推荐引擎、热门独立品牌的积极库存输入以及各种用户体验增强功能。该平台采用无缝结账流程，满足了全球消费者扩大亲密护理常规容量的需求。 [...] 宝洁旗下的Always品牌推出了多款“皮肤安全”数字互动平台和产品改进，涵盖高端Always Discreet系列和有机产品线，以满足年轻消费者和老年群体的需求。新增功能包括多功能“经期追踪与健康同步”系统，该数字工具可根据激素变化实时推荐特定产品吸收度和pH平衡洗涤方案。该技术还包含智能取样计划，以提升对消费者屏障健康的洞察，并优化库存管理以适应快速交付环境。一位高级品牌经理强调，公司致力于通过提供全面的数字工具来增强用户日常护理的预测性维护。\n\n## 女性私密护理产品市场企业\n\n在女性私密护理产品行业运营的主要企业包括：\n\n   科拉\n   柔棉\n   强生\n   金佰利公司\n   L. Organic\n   Lil-Lets\n   洛拉\n   天然护理\n   Organyc\n   普莱特\n   宝洁公司\n   联合利华\n   诚信公司\n   宇部制药\n   维达\n\nLil-Lets集团有限公司通过推出可重复使用的棉签申请器，扩大了其可持续护理平台的范围。该设备是一种连接式、环保的多用途装置，旨在消除一次性塑料垃圾。该医疗级系统在生产力和精准舒适度方面优于旧式手动纸板或塑料设计。作为2025年可持续发展路线图的一部分，其模块化设计和易清洁表面为各种流量类型提供了更好的控制。该设计的优势在于提供更好的流量控制，并消除了对传统塑料产品的频繁重复购买需求。\n\n## 女性私密护理产品市场动态\n\n   2025年11月，Unicharm公司推出了两款新型高产能美容护理设备：Sofy AGE-R Ultra Tune（一款用于盆底健康的高频治疗单元）和Mini Sofy Pro（配备重新设计的无线感应充电系统）。Ultra Tune专为高容量护理工作设计，利用40.68MHz频率消除导电凝胶的需求，而Mini Pro则引入侧装感应电机系统，简化其紧凑型便携平台的维护工作。",
+      "matched_keywords": [
+        "成分",
+        "流量",
+        "复购",
+        "精华",
+        "护肤"
+      ],
+      "raw": {
+        "query": "女性护理 即时零售 最新",
+        "score": 0.39424816,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 4,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+3 命中美妆个护: 护肤",
+          "+1 命中经营变量: 流量, 复购, 价格"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule=review, score=4<5, 无LLM结果→reject",
+        "reject_reason": "rule=review, score=4<5, 无LLM结果→reject"
+      }
+    }
+  ]
+}

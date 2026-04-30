@@ -1,0 +1,115 @@
+2026-04-28 12:28:34,139 [INFO] ============================================================
+2026-04-28 12:28:34,140 [INFO] 开始 Tavily Gap Search: date=2026-04-28
+2026-04-28 12:28:34,140 [INFO]   project_root: /app/working/projects/watsons-retail-intel
+2026-04-28 12:28:34,140 [INFO]   skip_merge: False
+2026-04-28 12:28:34,140 [INFO] ============================================================
+2026-04-28 12:28:34,195 [INFO] 当前数据: raw=54, cleaned=0, reference=8
+2026-04-28 12:28:34,195 [INFO] 触发 Tavily gap search，原因: ['cleaned_count=0 < 5', '核心平台缺失: 美团闪购', '核心平台缺失: 京东到家/京东秒送', '核心平台缺失: 淘宝闪购/饿了么', '核心平台缺失: 抖音小时达']
+2026-04-28 12:28:34,198 [INFO] Tavily Key: 3 个可用
+2026-04-28 12:28:34,199 [INFO] 计划执行 18 个搜索 query
+2026-04-28 12:28:34,214 [INFO] 加载 98 个关键词
+2026-04-28 12:28:34,214 [INFO] [Tavily Gap] 搜索: '美团闪购 美妆 个护 最新活动' (Key: tvly-dev-O...)
+2026-04-28 12:28:36,790 [INFO] [Tavily Gap] '美团闪购 美妆 个护 最新活动': 返回 5 条结果
+2026-04-28 12:28:36,791 [INFO] [Tavily Gap] 搜索: '美团闪购 屈臣氏 入驻 最新' (Key: tvly-dev-3...)
+2026-04-28 12:28:39,894 [INFO] [Tavily Gap] '美团闪购 屈臣氏 入驻 最新': 返回 5 条结果
+2026-04-28 12:28:39,894 [INFO] [Tavily Gap] 搜索: '京东到家 屈臣氏 最新合作 动态' (Key: tvly-dev-4...)
+2026-04-28 12:28:40,677 [ERROR] [Tavily Gap] 搜索 '京东到家 屈臣氏 最新合作 动态' 失败: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 12:28:40,678 [INFO] [Tavily Gap] 搜索: '京东秒送 美妆 个护 最新' (Key: tvly-dev-O...)
+2026-04-28 12:28:44,139 [INFO] [Tavily Gap] '京东秒送 美妆 个护 最新': 返回 5 条结果
+2026-04-28 12:28:44,139 [INFO] [Tavily Gap] 搜索: '淘宝闪购 美妆 个护 最新' (Key: tvly-dev-3...)
+2026-04-28 12:28:47,485 [INFO] [Tavily Gap] '淘宝闪购 美妆 个护 最新': 返回 5 条结果
+2026-04-28 12:28:47,485 [INFO] [Tavily Gap] 搜索: '淘宝闪购 天猫 官旗 最新' (Key: tvly-dev-4...)
+2026-04-28 12:28:48,443 [ERROR] [Tavily Gap] 搜索 '淘宝闪购 天猫 官旗 最新' 失败: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 12:28:48,444 [INFO] [Tavily Gap] 搜索: '抖音小时达 美妆 日百 最新' (Key: tvly-dev-O...)
+2026-04-28 12:28:51,186 [INFO] [Tavily Gap] '抖音小时达 美妆 日百 最新': 返回 5 条结果
+2026-04-28 12:28:51,186 [INFO] [Tavily Gap] 搜索: '抖音小时达 个护 即时零售 最新' (Key: tvly-dev-3...)
+2026-04-28 12:28:54,378 [INFO] [Tavily Gap] '抖音小时达 个护 即时零售 最新': 返回 5 条结果
+2026-04-28 12:28:54,378 [INFO] [Tavily Gap] 搜索: '丝芙兰 即时零售 最新动态' (Key: tvly-dev-4...)
+2026-04-28 12:28:55,178 [ERROR] [Tavily Gap] 搜索 '丝芙兰 即时零售 最新动态' 失败: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 12:28:55,179 [INFO] [Tavily Gap] 搜索: '万宁 即时零售 最新布局' (Key: tvly-dev-O...)
+2026-04-28 12:28:59,607 [INFO] [Tavily Gap] '万宁 即时零售 最新布局': 返回 5 条结果
+2026-04-28 12:28:59,608 [INFO] [Tavily Gap] 搜索: '调色师 美团闪购 最新投入' (Key: tvly-dev-3...)
+2026-04-28 12:29:02,616 [INFO] [Tavily Gap] '调色师 美团闪购 最新投入': 返回 5 条结果
+2026-04-28 12:29:02,616 [INFO] [Tavily Gap] 搜索: 'WOW COLOUR 即时零售' (Key: tvly-dev-4...)
+2026-04-28 12:29:03,482 [ERROR] [Tavily Gap] 搜索 'WOW COLOUR 即时零售' 失败: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 12:29:03,483 [INFO] [Tavily Gap] 搜索: '名创优品 美妆 即时零售' (Key: tvly-dev-O...)
+2026-04-28 12:29:06,516 [INFO] [Tavily Gap] '名创优品 美妆 即时零售': 返回 5 条结果
+2026-04-28 12:29:06,516 [INFO] [Tavily Gap] 搜索: '美妆 个护 即时零售 最新动态' (Key: tvly-dev-3...)
+2026-04-28 12:29:09,994 [INFO] [Tavily Gap] '美妆 个护 即时零售 最新动态': 返回 5 条结果
+2026-04-28 12:29:09,995 [INFO] [Tavily Gap] 搜索: '防晒 即时零售 销量 趋势' (Key: tvly-dev-4...)
+2026-04-28 12:29:10,925 [ERROR] [Tavily Gap] 搜索 '防晒 即时零售 销量 趋势' 失败: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 12:29:10,927 [INFO] [Tavily Gap] 搜索: '洗护 即时零售 最新' (Key: tvly-dev-O...)
+2026-04-28 12:29:15,935 [INFO] [Tavily Gap] '洗护 即时零售 最新': 返回 5 条结果
+2026-04-28 12:29:15,936 [INFO] [Tavily Gap] 搜索: '女性护理 即时零售 最新' (Key: tvly-dev-3...)
+2026-04-28 12:29:19,145 [INFO] [Tavily Gap] '女性护理 即时零售 最新': 返回 5 条结果
+2026-04-28 12:29:19,145 [INFO] [Tavily Gap] 搜索: '卸妆 小时达 即时零售' (Key: tvly-dev-4...)
+2026-04-28 12:29:21,392 [ERROR] [Tavily Gap] 搜索 '卸妆 小时达 即时零售' 失败: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 12:29:21,396 [INFO] Tavily 返回 60 条结果
+2026-04-28 12:29:21,397 [INFO] 去重后保留 55 条新文章 (与 54 条已有文章比对)
+2026-04-28 12:29:21,398 [INFO] 新文章时间分布: {'unknown_time': 55}
+2026-04-28 12:29:21,409 [INFO] Gap 文章已保存: /app/working/projects/watsons-retail-intel/data/raw/2026-04-28/tavily_gap_articles.json
+2026-04-28 12:29:21,435 [INFO] 合并文件已保存: /app/working/projects/watsons-retail-intel/data/raw/2026-04-28/raw_articles_merged.json (原始 54 + 补搜 55 = 109)
+2026-04-28 12:29:21,436 [INFO] 开始重新运行 filter_relevant_articles ...
+2026-04-28 12:29:21,559 [INFO] 重过滤完成: cleaned=34, reference=15, rejected=60
+2026-04-28 12:29:21,560 [INFO] ============================================================
+2026-04-28 12:29:21,560 [INFO] Tavily Gap Search 完成
+2026-04-28 12:29:21,560 [INFO]   触发原因: ['cleaned_count=0 < 5', '核心平台缺失: 美团闪购', '核心平台缺失: 京东到家/京东秒送', '核心平台缺失: 淘宝闪购/饿了么', '核心平台缺失: 抖音小时达']
+2026-04-28 12:29:21,560 [INFO]   补搜 query 数: 18
+2026-04-28 12:29:21,560 [INFO]   补搜结果数: 60
+2026-04-28 12:29:21,560 [INFO]   去重后新文章: 55
+2026-04-28 12:29:21,560 [INFO]   raw_count: 54 → 109
+2026-04-28 12:29:21,560 [INFO]   cleaned_count: 0 → 34
+2026-04-28 12:29:21,561 [INFO] ============================================================
+2026-04-28 13:08:46,986 [INFO] ============================================================
+2026-04-28 13:08:46,986 [INFO] 开始 Tavily Gap Search: date=2026-04-28
+2026-04-28 13:08:46,987 [INFO]   project_root: /app/working/projects/watsons-retail-intel
+2026-04-28 13:08:46,987 [INFO]   skip_merge: False
+2026-04-28 13:08:46,987 [INFO] ============================================================
+2026-04-28 13:08:47,048 [INFO] 当前数据: raw=54, cleaned=34, reference=15
+2026-04-28 13:08:47,049 [INFO] 未触发 Tavily gap search，数据充足
+2026-04-28 22:55:19,233 [INFO] ============================================================
+2026-04-28 22:55:19,233 [INFO] 开始 Tavily Gap Search: date=2026-04-28
+2026-04-28 22:55:19,233 [INFO]   project_root: /app/working/projects/watsons-retail-intel
+2026-04-28 22:55:19,234 [INFO]   skip_merge: False
+2026-04-28 22:55:19,234 [INFO] ============================================================
+2026-04-28 22:55:19,250 [INFO] 当前数据: raw=71, cleaned=1, reference=10
+2026-04-28 22:55:19,250 [INFO] 触发 Tavily gap search，原因: ['cleaned_count=1 < 5', '核心平台缺失: 美团闪购', '核心平台缺失: 京东到家/京东秒送', '核心平台缺失: 淘宝闪购/饿了么', '核心平台缺失: 抖音小时达']
+2026-04-28 22:55:19,251 [INFO] Tavily Key: 3 个可用
+2026-04-28 22:55:19,251 [INFO] 计划执行 18 个搜索 query
+2026-04-28 22:55:19,266 [INFO] 加载 98 个关键词
+2026-04-28 22:55:19,280 [INFO] [Tavily Gap] 并行搜索 18 个查询, max_workers=3, per_key_limit=1, keys=3
+2026-04-28 22:55:20,096 [ERROR] [Tavily Gap] 搜索 '京东到家 屈臣氏 最新合作 动态' 失败: HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 22:55:24,556 [ERROR] [Tavily Gap] 搜索 '淘宝闪购 天猫 官旗 最新' 失败: HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 22:55:27,586 [ERROR] [Tavily Gap] 搜索 '丝芙兰 即时零售 最新动态' 失败: HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 22:55:30,218 [ERROR] [Tavily Gap] 搜索 'WOW COLOUR 即时零售' 失败: HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 22:55:33,190 [ERROR] [Tavily Gap] 搜索 '防晒 即时零售 销量 趋势' 失败: HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 22:55:35,627 [ERROR] [Tavily Gap] 搜索 '卸妆 小时达 即时零售' 失败: HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-28 22:55:37,864 [INFO] [Tavily Gap] '美团闪购 美妆 个护 最新活动': 返回 5 条结果
+2026-04-28 22:55:37,865 [INFO] [Tavily Gap] '美团闪购 屈臣氏 入驻 最新': 返回 5 条结果
+2026-04-28 22:55:37,865 [INFO] [Tavily Gap] '京东秒送 美妆 个护 最新': 返回 5 条结果
+2026-04-28 22:55:37,865 [INFO] [Tavily Gap] '淘宝闪购 美妆 个护 最新': 返回 5 条结果
+2026-04-28 22:55:37,865 [INFO] [Tavily Gap] '抖音小时达 美妆 日百 最新': 返回 5 条结果
+2026-04-28 22:55:37,866 [INFO] [Tavily Gap] '抖音小时达 个护 即时零售 最新': 返回 5 条结果
+2026-04-28 22:55:37,866 [INFO] [Tavily Gap] '万宁 即时零售 最新布局': 返回 5 条结果
+2026-04-28 22:55:37,866 [INFO] [Tavily Gap] '调色师 美团闪购 最新投入': 返回 5 条结果
+2026-04-28 22:55:37,866 [INFO] [Tavily Gap] '名创优品 美妆 即时零售': 返回 5 条结果
+2026-04-28 22:55:37,866 [INFO] [Tavily Gap] '美妆 个护 即时零售 最新动态': 返回 5 条结果
+2026-04-28 22:55:37,866 [INFO] [Tavily Gap] '洗护 即时零售 最新': 返回 5 条结果
+2026-04-28 22:55:37,866 [INFO] [Tavily Gap] '女性护理 即时零售 最新': 返回 5 条结果
+2026-04-28 22:55:37,867 [INFO] [Tavily Gap] 搜索完成: 60 条结果, 6 错误, 耗时 18.58s
+2026-04-28 22:55:37,867 [INFO] Tavily 返回 60 条结果
+2026-04-28 22:55:37,867 [INFO] 去重后保留 53 条新文章 (与 71 条已有文章比对)
+2026-04-28 22:55:37,867 [INFO] 新文章时间分布: {'unknown_time': 53}
+2026-04-28 22:55:37,899 [INFO] Gap 文章已保存: /app/working/projects/watsons-retail-intel/data/raw/2026-04-28/tavily_gap_articles.json
+2026-04-28 22:55:37,918 [INFO] 合并文件已保存: /app/working/projects/watsons-retail-intel/data/raw/2026-04-28/raw_articles_merged.json (原始 71 + 补搜 53 = 124)
+2026-04-28 22:55:37,918 [INFO] 开始重新运行 filter_relevant_articles ...
+2026-04-28 22:55:38,017 [INFO] 重过滤完成: cleaned=34, reference=13, rejected=77
+2026-04-28 22:55:38,017 [INFO] ============================================================
+2026-04-28 22:55:38,017 [INFO] Tavily Gap Search 完成
+2026-04-28 22:55:38,018 [INFO]   触发原因: ['cleaned_count=1 < 5', '核心平台缺失: 美团闪购', '核心平台缺失: 京东到家/京东秒送', '核心平台缺失: 淘宝闪购/饿了么', '核心平台缺失: 抖音小时达']
+2026-04-28 22:55:38,018 [INFO]   补搜 query 数: 18
+2026-04-28 22:55:38,018 [INFO]   补搜结果数: 60
+2026-04-28 22:55:38,018 [INFO]   去重后新文章: 53
+2026-04-28 22:55:38,018 [INFO]   raw_count: 71 → 124
+2026-04-28 22:55:38,018 [INFO]   cleaned_count: 1 → 34
+2026-04-28 22:55:38,019 [INFO] ============================================================

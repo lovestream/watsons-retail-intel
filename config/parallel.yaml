@@ -1,0 +1,141 @@
+# parallel.yaml — 并行处理配置
+# 控制各 skill 的并行策略、并发数、超时、容错
+
+# ── 全局默认 ──
+defaults:
+  enabled: true                # 是否启用并行（false 则退回串行）
+  max_workers: 6               # 全局默认最大线程数
+  single_timeout: 120          # 单个任务超时秒
+  retry: 0                     # 失败重试次数
+
+# ── collect_daily_articles ──
+collect_daily_articles:
+  # 源级别并行
+  source_parallel:
+    enabled: true
+    # 不同采集方式的并发上限
+    rsshub_workers: 6          # RSSHub 源并发（HTTP 请求为主，可高并发）
+    rss_workers: 4             # RSS 源并发
+    web_workers: 2             # Web 源低并发（防反爬）
+    tavily_workers: 6          # Tavily 源 query 并发（受 key 数限制）
+    # 混合源总并发上限（0 = 不限制，各方式独立计算）
+    total_workers_cap: 0
+    # 单源超时
+    source_timeout: 120
+    # 单源失败不影响整体
+    continue_on_source_error: true
+  # Tavily query 级并行（在 collect_tavily 内部）
+  tavily_query_parallel:
+    enabled: true
+    max_workers: 6
+    # 每个 key 同时最多几个请求（1 = 串行使用同一 key，避免 rate limit）
+    max_concurrent_per_key: 1
+
+# ── tavily_gap_search ──
+tavily_gap_search:
+  query_parallel:
+    enabled: true
+    # 总并发（同时跑多少个 query）
+    max_workers: 3
+    # 每个 key 同时最多 1 个请求
+    max_concurrent_per_key: 1
+    # 单 query 超时
+    query_timeout: 30
+    # daily_budget 保留（在 search_policy.yaml 控制）
+    respect_daily_budget: true
+    # 失败是否中断
+    continue_on_query_error: true
+
+# ── extract_events ──
+extract_events:
+  article_parallel:
+    enabled: true
+    # 最大并发线程（默认 4，可配置到 6）
+    max_workers: 4
+    # 单篇文章超时秒
+    article_timeout: 180
+    # 单篇失败不影响整体
+    continue_on_error: true
+    # 检查点文件（在 events_dir 下）
+    checkpoint_file: extract_events_checkpoint.jsonl
+    # 模型策略
+    model_strategy:
+      # 默认模型（批量 JSON 抽取）
+      default: LongCat-Flash-Lite
+      # 失败重试模型
+      fallback: LongCat-Flash-Chat
+      # 不使用 Thinking 模型做 JSON 抽取
+      skip_thinking: true
+    # 失败重试
+    retry_on_failure: true
+    retry_model: LongCat-Flash-Chat
+    retry_timeout: 120
+
+# ── filter_relevant_articles ──
+filter_relevant_articles:
+  llm_review_parallel:
+    enabled: true
+    # Phase2 LLM 复核上限（0 = 不限制）
+    max_llm_articles: 100
+    # 每批并发数（建议 ≤ 可用 key 数，默认 5）
+    batch_size: 5
+    # 单篇 LLM 复核超时
+    single_timeout: 90
+    # 模型策略：只用 Lite/Chat，不用 Thinking（审核分类不需要深度推理）
+    model_strategy:
+      default: LongCat-Flash-Lite
+      fallback: LongCat-Flash-Chat
+      skip_thinking: true
+
+# ── generate_daily_report ──
+generate_daily_report:
+  # 三稿可并行生成（normal / no-signal / parallel）
+  draft_parallel:
+    enabled: true
+    # 三稿同时生成
+    max_workers: 3
+    # 单稿生成超时
+    draft_timeout: 180
+
+# ── editor_review ──  
+editor_review:
+  # 逐 section / 维度并行审核
+  section_parallel:
+    enabled: true
+    max_workers: 4
+    section_timeout: 60
+
+# ── analyze_business_impact ──
+analyze_business_impact:
+  event_parallel:
+    enabled: true
+    # 各优先级的并发策略
+    priority_batches:
+      # ARCHIVE: 跳过 LLM，纯规则，无需并行
+      ARCHIVE:
+        use_llm: false
+        max_workers: 0
+      # P2: 使用 Lite 快速批量
+      P2:
+        use_llm: true
+        model: LongCat-Flash-Lite
+        max_workers: 6
+        timeout: 60
+      # P1: 使用 Chat 稳定
+      P1:
+        use_llm: true
+        model: LongCat-Flash-Chat
+        max_workers: 4
+        timeout: 120
+      # P0: 低并发，使用 Chat 稳妥处理
+      P0:
+        use_llm: true
+        model: LongCat-Flash-Chat
+        max_workers: 2
+        timeout: 150
+    # 总超时
+    total_timeout: 600
+    # 检查点文件（在 events_dir 下）
+    checkpoint_file: analyze_business_checkpoint.jsonl
+    # 失败后回退到规则分析
+    fallback_to_rule: true

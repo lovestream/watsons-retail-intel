@@ -1,0 +1,28 @@
+{
+  "generate_podcast": {
+    "status": "warning",
+    "duration_seconds": 18.745743989944458,
+    "stats": {
+      "script_length": 1106,
+      "audio_exists": true,
+      "audio_size_bytes": 1632672,
+      "is_no_signal": false,
+      "llm_used": true,
+      "tts_success": true,
+      "voice": "zh-CN-XiaoxiaoNeural"
+    }
+  },
+  "send_daily_report_email": {
+    "status": "success",
+    "duration_seconds": 3.7915921211242676,
+    "stats": {
+      "sendable": true,
+      "sent": true,
+      "dry_run": false,
+      "html_length": 10115,
+      "markdown_attachment": true,
+      "podcast_attachment": true,
+      "script_attachment": false
+    }
+  }
+}

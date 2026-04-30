@@ -1,0 +1,1130 @@
+2026-04-29 14:22:31,192 [INFO] ============================================================
+2026-04-29 14:22:31,193 [INFO] 开始采集 (V2): date=2026-04-29
+2026-04-29 14:22:31,193 [INFO] 时间窗口: 2026-04-28 07:00:00+08:00 ~ 2026-04-29 22:22:31.191432+08:00
+2026-04-29 14:22:31,193 [INFO] 项目根目录: /app/working/projects/watsons-retail-intel
+2026-04-29 14:22:31,193 [INFO] ============================================================
+2026-04-29 14:22:31,383 [INFO] 加载 98 个关键词
+2026-04-29 14:22:31,383 [INFO] RSSHub 基础地址: http://192.168.2.100:1200
+2026-04-29 14:22:31,383 [INFO] Tavily: 3 个 Key 已加载，轮换策略: round_robin
+2026-04-29 14:22:31,384 [INFO] 启用源数量: 55 (rsshub: 43, other: 16, legacy: 0)
+2026-04-29 14:22:31,384 [INFO] RSSHub filterout_days 全局默认: 90 天
+2026-04-29 14:22:37,629 [INFO] ============================================================
+2026-04-29 14:22:37,629 [INFO] 开始采集 (V2): date=2026-04-29
+2026-04-29 14:22:37,630 [INFO] 时间窗口: 2026-04-28 07:00:00+08:00 ~ 2026-04-29 22:22:37.628421+08:00
+2026-04-29 14:22:37,630 [INFO] 项目根目录: /app/working/projects/watsons-retail-intel
+2026-04-29 14:22:37,630 [INFO] ============================================================
+2026-04-29 14:22:37,821 [INFO] 加载 98 个关键词
+2026-04-29 14:22:37,822 [INFO] RSSHub 基础地址: http://192.168.2.100:1200
+2026-04-29 14:22:37,822 [INFO] Tavily: 3 个 Key 已加载，轮换策略: round_robin
+2026-04-29 14:22:37,822 [INFO] 启用源数量: 55 (rsshub: 43, other: 16, legacy: 0)
+2026-04-29 14:22:37,822 [INFO] RSSHub filterout_days 全局默认: 90 天
+2026-04-29 14:22:37,845 [INFO] 源级并行采集已启用, workers: {'rsshub': 6, 'rss': 4, 'web': 2, 'tavily': 6}
+2026-04-29 14:22:37,845 [INFO] 并行采集 [rsshub] 组: 41 个源, max_workers=6
+2026-04-29 14:22:37,846 [INFO] [RSSHub] rsshub_huxiu_search_meituan_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:37,846 [INFO] [RSSHub] rsshub_huxiu_search_meituan_flash: 请求 http://192.168.2.100:1200/huxiu/search/美团闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:22:37,847 [INFO] [RSSHub] rsshub_huxiu_search_jd_instant: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:37,848 [INFO] [RSSHub] rsshub_huxiu_search_jd_instant: 请求 http://192.168.2.100:1200/huxiu/search/京东秒送?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:22:37,850 [INFO] [RSSHub] rsshub_huxiu_search_taobao_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:37,850 [INFO] [RSSHub] rsshub_huxiu_search_taobao_flash: 请求 http://192.168.2.100:1200/huxiu/search/淘宝闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:22:37,852 [INFO] [RSSHub] rsshub_huxiu_search_douyin_hour: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:37,852 [INFO] [RSSHub] rsshub_huxiu_search_douyin_hour: 请求 http://192.168.2.100:1200/huxiu/search/抖音小时达?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:22:37,853 [INFO] [RSSHub] rsshub_huxiu_search_watsons: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:37,853 [INFO] [RSSHub] rsshub_huxiu_search_watsons: 请求 http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:22:37,858 [INFO] [RSSHub] rsshub_huxiu_search_instant_retail: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:37,862 [INFO] [RSSHub] rsshub_huxiu_search_instant_retail: 请求 http://192.168.2.100:1200/huxiu/search/即时零售?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:22:55,645 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_taobao_flash — 成功 20, 失败 0, 耗时 17.79s
+2026-04-29 14:22:55,645 [INFO] [RSSHub] rsshub_huxiu_search_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:55,646 [INFO] [RSSHub] rsshub_huxiu_search_flash: 请求 http://192.168.2.100:1200/huxiu/search/闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:22:55,680 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_meituan_flash — 成功 12, 失败 0, 耗时 17.83s
+2026-04-29 14:22:55,681 [INFO] [RSSHub] rsshub_huxiu_search_personal_care: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:55,681 [INFO] [RSSHub] rsshub_huxiu_search_personal_care: 请求 http://192.168.2.100:1200/huxiu/search/个护?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:22:56,261 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_jd_instant — 成功 7, 失败 0, 耗时 18.41s
+2026-04-29 14:22:56,261 [INFO] [RSSHub] rsshub_latepost: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:56,261 [INFO] [RSSHub] rsshub_latepost: 请求 http://192.168.2.100:1200/latepost?limit=10&sorted=true&filterout_time=7776000
+2026-04-29 14:22:56,313 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_watsons — 成功 20, 失败 0, 耗时 18.46s
+2026-04-29 14:22:56,314 [INFO] [RSSHub] rsshub_huxiu_search_front_warehouse: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:56,345 [INFO] [RSSHub] rsshub_huxiu_search_front_warehouse: 请求 http://192.168.2.100:1200/huxiu/search/前置仓?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:22:56,396 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_douyin_hour — 成功 20, 失败 0, 耗时 18.54s
+2026-04-29 14:22:56,396 [INFO] [RSSHub] rsshub_huxiu_search_beauty: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:56,397 [INFO] [RSSHub] rsshub_huxiu_search_beauty: 请求 http://192.168.2.100:1200/huxiu/search/美妆?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:22:56,474 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_instant_retail — 成功 20, 失败 0, 耗时 18.62s
+2026-04-29 14:22:56,474 [INFO] [RSSHub] rsshub_huxiu_search_sephora: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:22:56,475 [INFO] [RSSHub] rsshub_huxiu_search_sephora: 请求 http://192.168.2.100:1200/huxiu/search/丝芙兰?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:10,617 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_flash — 成功 20, 失败 0, 耗时 14.97s
+2026-04-29 14:23:10,617 [INFO] [RSSHub] rsshub_cls_telegraph: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-29 14:23:10,618 [INFO] [RSSHub] rsshub_cls_telegraph: 请求 http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800
+2026-04-29 14:23:12,526 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_personal_care — 成功 20, 失败 0, 耗时 16.85s
+2026-04-29 14:23:12,526 [INFO] [RSSHub] rsshub_huxiu_search_tmall: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:12,527 [INFO] [RSSHub] rsshub_huxiu_search_tmall: 请求 http://192.168.2.100:1200/huxiu/search/天猫?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:13,346 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_sephora — 成功 12, 失败 0, 耗时 16.87s
+2026-04-29 14:23:13,346 [INFO] [RSSHub] rsshub_huxiu_search_jd: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:13,352 [INFO] [RSSHub] rsshub_huxiu_search_jd: 请求 http://192.168.2.100:1200/huxiu/search/京东?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:13,386 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_front_warehouse — 成功 20, 失败 0, 耗时 17.07s
+2026-04-29 14:23:13,387 [INFO] [RSSHub] rsshub_huxiu_search_douyin_ecom: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:13,388 [INFO] [RSSHub] rsshub_huxiu_search_douyin_ecom: 请求 http://192.168.2.100:1200/huxiu/search/抖音电商?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:13,437 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_beauty — 成功 20, 失败 0, 耗时 17.04s
+2026-04-29 14:23:13,437 [INFO] [RSSHub] rsshub_huxiu_search_miniso: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:13,438 [INFO] [RSSHub] rsshub_huxiu_search_miniso: 请求 http://192.168.2.100:1200/huxiu/search/名创优品?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:13,750 [INFO] 完成采集: [rsshub] rsshub_cls_telegraph — 成功 20, 失败 0, 耗时 3.13s
+2026-04-29 14:23:13,751 [INFO] [RSSHub] rsshub_huxiu_retail_channel: filterout_time=2592000s (排除 >30天的旧文章)
+2026-04-29 14:23:13,751 [INFO] [RSSHub] rsshub_huxiu_retail_channel: 请求 http://192.168.2.100:1200/huxiu/channel/115?limit=30&sorted=true&filterout_time=2592000
+2026-04-29 14:23:16,292 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/latepost?limit=10&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:16,293 [INFO] 完成采集: [rsshub] rsshub_latepost — 成功 0, 失败 1, 耗时 20.03s
+2026-04-29 14:23:16,293 [INFO] [RSSHub] rsshub_cls_depth: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-29 14:23:16,293 [INFO] [RSSHub] rsshub_cls_depth: 请求 http://192.168.2.100:1200/cls/depth?limit=30&filterout_time=604800
+2026-04-29 14:23:32,542 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/天猫?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:32,542 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_tmall — 成功 0, 失败 1, 耗时 20.02s
+2026-04-29 14:23:32,543 [INFO] [RSSHub] rsshub_huxiu_article: filterout_time=5184000s (排除 >60天的旧文章)
+2026-04-29 14:23:32,543 [INFO] [RSSHub] rsshub_huxiu_article: 请求 http://192.168.2.100:1200/huxiu/article?limit=30&sorted=true&filterout_time=5184000
+2026-04-29 14:23:33,395 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/京东?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:33,396 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_jd — 成功 0, 失败 1, 耗时 20.05s
+2026-04-29 14:23:33,396 [INFO] [RSSHub] rsshub_huxiu_search_skincare: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:33,397 [INFO] [RSSHub] rsshub_huxiu_search_skincare: 请求 http://192.168.2.100:1200/huxiu/search/护肤品?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:33,440 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/抖音电商?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:33,440 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_douyin_ecom — 成功 0, 失败 1, 耗时 20.05s
+2026-04-29 14:23:33,440 [INFO] [RSSHub] rsshub_huxiu_search_loreal: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:33,441 [INFO] [RSSHub] rsshub_huxiu_search_loreal: 请求 http://192.168.2.100:1200/huxiu/search/欧莱雅?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:33,459 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/名创优品?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:33,460 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_miniso — 成功 0, 失败 1, 耗时 20.02s
+2026-04-29 14:23:33,460 [INFO] [RSSHub] rsshub_36kr_search_watsons: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:33,460 [INFO] [RSSHub] rsshub_36kr_search_watsons: 请求 http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:33,772 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/channel/115?limit=30&sorted=true&filterout_time=2592000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:33,772 [INFO] 完成采集: [rsshub] rsshub_huxiu_retail_channel — 成功 0, 失败 1, 耗时 20.02s
+2026-04-29 14:23:33,772 [INFO] [RSSHub] rsshub_huxiu_consumer_channel: filterout_time=2592000s (排除 >30天的旧文章)
+2026-04-29 14:23:33,773 [INFO] [RSSHub] rsshub_huxiu_consumer_channel: 请求 http://192.168.2.100:1200/huxiu/channel/107?limit=30&sorted=true&filterout_time=2592000
+2026-04-29 14:23:36,308 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/cls/depth?limit=30&filterout_time=604800 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:36,308 [INFO] 完成采集: [rsshub] rsshub_cls_depth — 成功 0, 失败 1, 耗时 20.02s
+2026-04-29 14:23:36,309 [INFO] [RSSHub] rsshub_huxiu_search_sunscreen: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:36,309 [INFO] [RSSHub] rsshub_huxiu_search_sunscreen: 请求 http://192.168.2.100:1200/huxiu/search/防晒?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:44,020 [INFO] 完成采集: [rsshub] rsshub_36kr_search_watsons — 成功 20, 失败 0, 耗时 10.56s
+2026-04-29 14:23:44,021 [INFO] [RSSHub] rsshub_huxiu_search_proya: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:44,024 [INFO] [RSSHub] rsshub_huxiu_search_proya: 请求 http://192.168.2.100:1200/huxiu/search/珀莱雅?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:52,566 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/article?limit=30&sorted=true&filterout_time=5184000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:52,566 [INFO] 完成采集: [rsshub] rsshub_huxiu_article — 成功 0, 失败 1, 耗时 20.02s
+2026-04-29 14:23:52,567 [INFO] [RSSHub] rsshub_huxiu_search_winona: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:52,567 [INFO] [RSSHub] rsshub_huxiu_search_winona: 请求 http://192.168.2.100:1200/huxiu/search/薇诺娜?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:53,415 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/护肤品?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:53,416 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_skincare — 成功 0, 失败 1, 耗时 20.02s
+2026-04-29 14:23:53,416 [INFO] [RSSHub] rsshub_36kr_newsflashes: filterout_time=5184000s (排除 >60天的旧文章)
+2026-04-29 14:23:53,416 [INFO] [RSSHub] rsshub_36kr_newsflashes: 请求 http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000
+2026-04-29 14:23:53,459 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/欧莱雅?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:53,459 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_loreal — 成功 0, 失败 1, 耗时 20.02s
+2026-04-29 14:23:53,460 [INFO] [RSSHub] rsshub_huxiu_search_wow_colour: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:53,460 [INFO] [RSSHub] rsshub_huxiu_search_wow_colour: 请求 http://192.168.2.100:1200/huxiu/search/WOW%20COLOUR?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:53,785 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/channel/107?limit=30&sorted=true&filterout_time=2592000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:53,786 [INFO] 完成采集: [rsshub] rsshub_huxiu_consumer_channel — 成功 0, 失败 1, 耗时 20.01s
+2026-04-29 14:23:53,786 [INFO] [RSSHub] rsshub_36kr_search_meituan_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:53,787 [INFO] [RSSHub] rsshub_36kr_search_meituan_flash: 请求 http://192.168.2.100:1200/36kr/search/articles/美团闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:23:56,332 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/防晒?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:23:56,332 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_sunscreen — 成功 0, 失败 1, 耗时 20.02s
+2026-04-29 14:23:56,332 [INFO] [RSSHub] rsshub_36kr_search_taobao_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:23:56,335 [INFO] [RSSHub] rsshub_36kr_search_taobao_flash: 请求 http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:24:04,047 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/珀莱雅?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:24:04,047 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_proya — 成功 0, 失败 1, 耗时 20.03s
+2026-04-29 14:24:04,047 [INFO] [RSSHub] rsshub_36kr_search_jd_instant: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:24:04,048 [INFO] [RSSHub] rsshub_36kr_search_jd_instant: 请求 http://192.168.2.100:1200/36kr/search/articles/京东秒送?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:24:05,601 [INFO] 完成采集: [rsshub] rsshub_36kr_newsflashes — 成功 20, 失败 0, 耗时 12.19s
+2026-04-29 14:24:05,605 [INFO] [RSSHub] rsshub_36kr_search_douyin_hour: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:24:05,606 [INFO] [RSSHub] rsshub_36kr_search_douyin_hour: 请求 http://192.168.2.100:1200/36kr/search/articles/抖音小时达?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:24:06,004 [INFO] 完成采集: [rsshub] rsshub_36kr_search_meituan_flash — 成功 20, 失败 0, 耗时 12.22s
+2026-04-29 14:24:06,005 [INFO] [RSSHub] rsshub_wallstreetcn: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-29 14:24:06,006 [INFO] [RSSHub] rsshub_wallstreetcn: 请求 http://192.168.2.100:1200/wallstreetcn/news?limit=30&filterout_time=604800
+2026-04-29 14:24:06,207 [INFO] 完成采集: [rsshub] rsshub_36kr_search_taobao_flash — 成功 20, 失败 0, 耗时 9.88s
+2026-04-29 14:24:06,208 [INFO] [RSSHub] rsshub_yicai: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-29 14:24:06,208 [INFO] [RSSHub] rsshub_yicai: 请求 http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800
+2026-04-29 14:24:09,708 [INFO] 完成采集: [rsshub] rsshub_36kr_search_jd_instant — 成功 20, 失败 0, 耗时 5.66s
+2026-04-29 14:24:09,708 [INFO] [RSSHub] rsshub_caixin: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-29 14:24:09,708 [INFO] [RSSHub] rsshub_caixin: 请求 http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800
+2026-04-29 14:24:12,584 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/薇诺娜?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:24:12,584 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_winona — 成功 0, 失败 1, 耗时 20.02s
+2026-04-29 14:24:12,584 [INFO] [RSSHub] rsshub_huxiu_search_xiaohongshu: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:24:12,585 [INFO] [RSSHub] rsshub_huxiu_search_xiaohongshu: 请求 http://192.168.2.100:1200/huxiu/search/小红书?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:24:13,478 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/WOW%20COLOUR?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:24:13,479 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_wow_colour — 成功 0, 失败 1, 耗时 20.02s
+2026-04-29 14:24:13,479 [INFO] [RSSHub] rsshub_36kr_search_instant_retail: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:24:13,480 [INFO] [RSSHub] rsshub_36kr_search_instant_retail: 请求 http://192.168.2.100:1200/36kr/search/articles/即时零售?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:24:14,225 [INFO] 完成采集: [rsshub] rsshub_36kr_search_douyin_hour — 成功 20, 失败 0, 耗时 8.62s
+2026-04-29 14:24:14,225 [INFO] [RSSHub] rsshub_36kr_search_beauty: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-29 14:24:14,226 [INFO] [RSSHub] rsshub_36kr_search_beauty: 请求 http://192.168.2.100:1200/36kr/search/articles/美妆?limit=20&sorted=true&filterout_time=7776000
+2026-04-29 14:24:14,307 [INFO] 完成采集: [rsshub] rsshub_yicai — 成功 30, 失败 0, 耗时 8.1s
+2026-04-29 14:24:14,307 [INFO] [RSSHub] rsshub_ifeng: filterout_time=259200s (排除 >3天的旧文章)
+2026-04-29 14:24:14,308 [INFO] [RSSHub] rsshub_ifeng: 请求 http://192.168.2.100:1200/ifeng?limit=30&filterout_time=259200
+2026-04-29 14:24:14,324 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/ifeng?limit=30&filterout_time=259200 — 503 Server Error: Service Unavailable for url: http://192.168.2.100:1200/ifeng?limit=30&filterout_time=259200
+2026-04-29 14:24:14,325 [INFO] 完成采集: [rsshub] rsshub_ifeng — 成功 0, 失败 1, 耗时 0.02s
+2026-04-29 14:24:14,325 [INFO] [RSSHub] rsshub_guancha: filterout_time=259200s (排除 >3天的旧文章)
+2026-04-29 14:24:14,326 [INFO] [RSSHub] rsshub_guancha: 请求 http://192.168.2.100:1200/guancha/headline?limit=20&filterout_time=259200
+2026-04-29 14:24:15,387 [INFO] 完成采集: [rsshub] rsshub_36kr_search_instant_retail — 成功 20, 失败 0, 耗时 1.91s
+2026-04-29 14:24:21,844 [INFO] 完成采集: [rsshub] rsshub_wallstreetcn — 成功 30, 失败 0, 耗时 15.84s
+2026-04-29 14:24:22,067 [INFO] 完成采集: [rsshub] rsshub_36kr_search_beauty — 成功 20, 失败 0, 耗时 7.84s
+2026-04-29 14:24:25,725 [INFO] 完成采集: [rsshub] rsshub_caixin — 成功 19, 失败 0, 耗时 16.02s
+2026-04-29 14:24:32,606 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/小红书?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-29 14:24:32,607 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_xiaohongshu — 成功 0, 失败 1, 耗时 20.02s
+2026-04-29 14:24:33,586 [INFO] 完成采集: [rsshub] rsshub_guancha — 成功 20, 失败 0, 耗时 19.26s
+2026-04-29 14:24:33,587 [INFO] 开始采集: [rss] rss_cbndata_beauty
+2026-04-29 14:24:33,588 [INFO] [RSS] rss_cbndata_beauty: 请求 https://www.cbndata.com/rss/beauty
+2026-04-29 14:24:33,857 [INFO] 完成采集: [rss] rss_cbndata_beauty — 成功 0, 失败 0, 耗时 0.27s
+2026-04-29 14:24:33,857 [INFO] 并行采集 [web] 组: 6 个源, max_workers=2
+2026-04-29 14:24:33,858 [INFO] [Web] web_baidu_news_meituan_flash: 抓取首页 https://www.baidu.com/s?rtt=4&rn=20&ie=utf-8&tn=news&word=%E7%BE%8E%E5%9B%A2%E9%97%AA%E8%B4%AD+%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE
+2026-04-29 14:24:33,861 [INFO] [Web] web_nmpa_cosmetic: 抓取首页 https://www.nmpa.gov.cn/WS04/CL2044/
+2026-04-29 14:24:34,010 [INFO] [Web] web_baidu_news_meituan_flash: 提取到 0 个候选链接
+2026-04-29 14:24:34,012 [INFO] 完成采集: [web] web_baidu_news_meituan_flash — 成功 0, 失败 0, 耗时 0.15s
+2026-04-29 14:24:34,013 [INFO] [Web] web_eleoda_rules: 抓取首页 https://www.ele.me/rulecenter
+2026-04-29 14:24:34,181 [WARNING] HTTP GET 失败: https://www.nmpa.gov.cn/WS04/CL2044/ — 412 Client Error: Precondition Failed for url: https://www.nmpa.gov.cn/WS04/CL2044/
+2026-04-29 14:24:34,183 [INFO] 完成采集: [web] web_nmpa_cosmetic — 成功 0, 失败 0, 耗时 0.32s
+2026-04-29 14:24:34,184 [INFO] [Web] web_jd_daojia: 抓取首页 https://daoja.jd.com/notice
+2026-04-29 14:24:34,382 [INFO] [Web] web_eleoda_rules: 提取到 0 个候选链接
+2026-04-29 14:24:34,385 [INFO] 完成采集: [web] web_eleoda_rules — 成功 0, 失败 0, 耗时 0.37s
+2026-04-29 14:24:34,386 [INFO] [Web] web_watsons_cn: 抓取首页 https://www.watsons.com.cn/about/news
+2026-04-29 14:24:35,039 [WARNING] HTTP GET 失败: https://www.watsons.com.cn/about/news — 404 Client Error: Not Found for url: https://www.watsons.com.cn/about/news
+2026-04-29 14:24:35,041 [INFO] 完成采集: [web] web_watsons_cn — 成功 0, 失败 0, 耗时 0.66s
+2026-04-29 14:24:35,042 [INFO] [Web] web_sephora_cn: 抓取首页 https://www.sephora.cn/news
+2026-04-29 14:24:35,305 [WARNING] HTTP GET 失败: https://www.sephora.cn/news — 404 Client Error: Not Found for url: https://www.sephora.cn/news
+2026-04-29 14:24:35,308 [INFO] 完成采集: [web] web_sephora_cn — 成功 0, 失败 0, 耗时 0.27s
+2026-04-29 14:24:36,127 [INFO] [Web] web_jd_daojia: 提取到 0 个候选链接
+2026-04-29 14:24:36,132 [INFO] 完成采集: [web] web_jd_daojia — 成功 0, 失败 0, 耗时 1.95s
+2026-04-29 14:24:36,133 [INFO] 并行采集 [tavily] 组: 7 个源, max_workers=6
+2026-04-29 14:24:36,134 [INFO] [Tavily] tavily_instant_retail_beauty: 并行搜索 8 查询, keys=3, per_key_limit=1
+2026-04-29 14:24:36,134 [INFO] [Tavily tavily_instant_retail_beauty] 并行处理 8 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-29 14:24:36,134 [INFO] [Tavily] tavily_platform_regulation: 并行搜索 6 查询, keys=3, per_key_limit=1
+2026-04-29 14:24:36,135 [INFO] [Tavily tavily_platform_regulation] 并行处理 6 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-29 14:24:36,135 [INFO] [Tavily] tavily_competitor_moves: 并行搜索 6 查询, keys=3, per_key_limit=1
+2026-04-29 14:24:36,136 [INFO] [Tavily tavily_competitor_moves] 并行处理 6 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-29 14:24:36,136 [INFO] [Tavily] tavily_industry_data: 并行搜索 7 查询, keys=3, per_key_limit=1
+2026-04-29 14:24:36,137 [INFO] [Tavily] tavily_category_trends: 并行搜索 6 查询, keys=3, per_key_limit=1
+2026-04-29 14:24:36,137 [INFO] [Tavily tavily_industry_data] 并行处理 7 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-29 14:24:36,138 [INFO] [Tavily] tavily_today_instant_retail: 并行搜索 7 查询, keys=3, per_key_limit=1
+2026-04-29 14:24:36,139 [INFO] [Tavily tavily_category_trends] 并行处理 6 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-29 14:24:36,146 [INFO] [Tavily tavily_today_instant_retail] 并行处理 7 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-29 14:24:49,231 [INFO] [Tavily tavily_category_trends] 完成: 6/6 成功, 0 失败, 耗时 13.1s
+2026-04-29 14:24:49,231 [INFO] [Tavily] tavily_category_trends: query 0 返回 10 条结果
+2026-04-29 14:24:49,231 [INFO] [Tavily] tavily_category_trends: query 1 返回 10 条结果
+2026-04-29 14:24:49,232 [WARNING] [Tavily] tavily_category_trends: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:49,232 [INFO] [Tavily] tavily_category_trends: query 3 返回 10 条结果
+2026-04-29 14:24:49,232 [INFO] [Tavily] tavily_category_trends: query 4 返回 10 条结果
+2026-04-29 14:24:49,232 [WARNING] [Tavily] tavily_category_trends: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:49,232 [INFO] [Tavily] tavily_category_trends: 总计 40 条, 成功 40, 失败 2
+2026-04-29 14:24:49,232 [INFO] 完成采集: [tavily] tavily_category_trends — 成功 40, 失败 2, 耗时 13.1s
+2026-04-29 14:24:49,232 [INFO] [Tavily] tavily_today_beauty_retail: 并行搜索 7 查询, keys=3, per_key_limit=1
+2026-04-29 14:24:49,234 [INFO] [Tavily tavily_today_beauty_retail] 并行处理 7 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-29 14:24:49,369 [INFO] [Tavily tavily_platform_regulation] 完成: 6/6 成功, 0 失败, 耗时 13.2s
+2026-04-29 14:24:49,369 [INFO] [Tavily] tavily_platform_regulation: query 0 返回 10 条结果
+2026-04-29 14:24:49,370 [INFO] [Tavily] tavily_platform_regulation: query 1 返回 10 条结果
+2026-04-29 14:24:49,370 [WARNING] [Tavily] tavily_platform_regulation: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:49,370 [INFO] [Tavily] tavily_platform_regulation: query 3 返回 10 条结果
+2026-04-29 14:24:49,370 [INFO] [Tavily] tavily_platform_regulation: query 4 返回 10 条结果
+2026-04-29 14:24:49,370 [WARNING] [Tavily] tavily_platform_regulation: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:49,370 [INFO] [Tavily] tavily_platform_regulation: 总计 40 条, 成功 40, 失败 2
+2026-04-29 14:24:49,371 [INFO] 完成采集: [tavily] tavily_platform_regulation — 成功 40, 失败 2, 耗时 13.24s
+2026-04-29 14:24:51,993 [INFO] [Tavily tavily_competitor_moves] 完成: 6/6 成功, 0 失败, 耗时 15.9s
+2026-04-29 14:24:51,993 [INFO] [Tavily] tavily_competitor_moves: query 0 返回 10 条结果
+2026-04-29 14:24:51,993 [INFO] [Tavily] tavily_competitor_moves: query 1 返回 10 条结果
+2026-04-29 14:24:51,993 [WARNING] [Tavily] tavily_competitor_moves: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:51,994 [INFO] [Tavily] tavily_competitor_moves: query 3 返回 10 条结果
+2026-04-29 14:24:51,994 [INFO] [Tavily] tavily_competitor_moves: query 4 返回 10 条结果
+2026-04-29 14:24:51,994 [WARNING] [Tavily] tavily_competitor_moves: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:51,994 [INFO] [Tavily] tavily_competitor_moves: 总计 40 条, 成功 40, 失败 2
+2026-04-29 14:24:51,994 [INFO] 完成采集: [tavily] tavily_competitor_moves — 成功 40, 失败 2, 耗时 15.86s
+2026-04-29 14:24:55,931 [INFO] [Tavily tavily_instant_retail_beauty] 完成: 8/8 成功, 0 失败, 耗时 19.8s
+2026-04-29 14:24:55,931 [INFO] [Tavily] tavily_instant_retail_beauty: query 0 返回 10 条结果
+2026-04-29 14:24:55,931 [INFO] [Tavily] tavily_instant_retail_beauty: query 1 返回 10 条结果
+2026-04-29 14:24:55,932 [WARNING] [Tavily] tavily_instant_retail_beauty: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:55,932 [INFO] [Tavily] tavily_instant_retail_beauty: query 3 返回 10 条结果
+2026-04-29 14:24:55,932 [INFO] [Tavily] tavily_instant_retail_beauty: query 4 返回 10 条结果
+2026-04-29 14:24:55,932 [WARNING] [Tavily] tavily_instant_retail_beauty: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:55,932 [INFO] [Tavily] tavily_instant_retail_beauty: query 6 返回 10 条结果
+2026-04-29 14:24:55,932 [INFO] [Tavily] tavily_instant_retail_beauty: query 7 返回 10 条结果
+2026-04-29 14:24:55,932 [INFO] [Tavily] tavily_instant_retail_beauty: 总计 60 条, 成功 60, 失败 2
+2026-04-29 14:24:55,933 [INFO] 完成采集: [tavily] tavily_instant_retail_beauty — 成功 60, 失败 2, 耗时 19.8s
+2026-04-29 14:24:56,897 [INFO] [Tavily tavily_industry_data] 完成: 7/7 成功, 0 失败, 耗时 20.8s
+2026-04-29 14:24:56,897 [INFO] [Tavily] tavily_industry_data: query 0 返回 10 条结果
+2026-04-29 14:24:56,897 [INFO] [Tavily] tavily_industry_data: query 1 返回 10 条结果
+2026-04-29 14:24:56,897 [WARNING] [Tavily] tavily_industry_data: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:56,897 [INFO] [Tavily] tavily_industry_data: query 3 返回 10 条结果
+2026-04-29 14:24:56,897 [INFO] [Tavily] tavily_industry_data: query 4 返回 10 条结果
+2026-04-29 14:24:56,898 [WARNING] [Tavily] tavily_industry_data: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:56,898 [INFO] [Tavily] tavily_industry_data: query 6 返回 10 条结果
+2026-04-29 14:24:56,898 [INFO] [Tavily] tavily_industry_data: 总计 50 条, 成功 50, 失败 2
+2026-04-29 14:24:56,898 [INFO] 完成采集: [tavily] tavily_industry_data — 成功 50, 失败 2, 耗时 20.76s
+2026-04-29 14:24:59,867 [INFO] [Tavily tavily_today_instant_retail] 完成: 7/7 成功, 0 失败, 耗时 23.7s
+2026-04-29 14:24:59,867 [INFO] [Tavily] tavily_today_instant_retail: query 0 返回 10 条结果
+2026-04-29 14:24:59,868 [INFO] [Tavily] tavily_today_instant_retail: query 1 返回 10 条结果
+2026-04-29 14:24:59,868 [WARNING] [Tavily] tavily_today_instant_retail: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:59,868 [INFO] [Tavily] tavily_today_instant_retail: query 3 返回 10 条结果
+2026-04-29 14:24:59,868 [INFO] [Tavily] tavily_today_instant_retail: query 4 返回 10 条结果
+2026-04-29 14:24:59,868 [WARNING] [Tavily] tavily_today_instant_retail: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:24:59,868 [INFO] [Tavily] tavily_today_instant_retail: query 6 返回 10 条结果
+2026-04-29 14:24:59,869 [INFO] [Tavily] tavily_today_instant_retail: 总计 50 条, 成功 50, 失败 2
+2026-04-29 14:24:59,869 [INFO] 完成采集: [tavily] tavily_today_instant_retail — 成功 50, 失败 2, 耗时 23.73s
+2026-04-29 14:25:09,210 [INFO] [Tavily tavily_today_beauty_retail] 完成: 7/7 成功, 0 失败, 耗时 20.0s
+2026-04-29 14:25:09,211 [INFO] [Tavily] tavily_today_beauty_retail: query 0 返回 10 条结果
+2026-04-29 14:25:09,211 [INFO] [Tavily] tavily_today_beauty_retail: query 1 返回 10 条结果
+2026-04-29 14:25:09,211 [WARNING] [Tavily] tavily_today_beauty_retail: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:25:09,211 [INFO] [Tavily] tavily_today_beauty_retail: query 3 返回 10 条结果
+2026-04-29 14:25:09,212 [INFO] [Tavily] tavily_today_beauty_retail: query 4 返回 10 条结果
+2026-04-29 14:25:09,212 [WARNING] [Tavily] tavily_today_beauty_retail: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-29 14:25:09,212 [INFO] [Tavily] tavily_today_beauty_retail: query 6 返回 10 条结果
+2026-04-29 14:25:09,212 [INFO] [Tavily] tavily_today_beauty_retail: 总计 50 条, 成功 50, 失败 2
+2026-04-29 14:25:09,212 [INFO] 完成采集: [tavily] tavily_today_beauty_retail — 成功 50, 失败 2, 耗时 19.98s
+2026-04-29 14:25:09,213 [INFO] 总采集数: 800
+2026-04-29 14:25:09,240 [WARNING] 去重后 721 条，截断到 600
+2026-04-29 14:25:09,241 [INFO] 去重后数量: 600
+2026-04-29 14:25:09,241 [INFO] allow_old 过滤: 丢弃 10 条 old 文章 (allow_old=false 的源不允许 old)
+2026-04-29 14:25:09,242 [INFO] allow_old 过滤后数量: 590 (过滤前 600, 丢弃 10)
+2026-04-29 14:25:09,242 [INFO] 时间窗口内: 144, 近窗口: 5, 早于窗口: 272, 无法识别: 169
+2026-04-29 14:25:09,398 [INFO] 输出文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json
+2026-04-29 14:25:09,399 [INFO] ============================================================
+2026-04-29 14:25:09,399 [INFO] 采集完成汇总:
+2026-04-29 14:25:09,399 [INFO]   总采集数: 800
+2026-04-29 14:25:09,399 [INFO]   去重后数量: 590
+2026-04-29 14:25:09,399 [INFO]   in_window: 144
+2026-04-29 14:25:09,399 [INFO]   near_window: 5
+2026-04-29 14:25:09,400 [INFO]   old: 272
+2026-04-29 14:25:09,400 [INFO]   unknown_time: 169
+2026-04-29 14:25:09,400 [INFO]   rsshub: 470
+2026-04-29 14:25:09,400 [INFO]   rss: 0
+2026-04-29 14:25:09,400 [INFO]   web: 0
+2026-04-29 14:25:09,400 [INFO]   tavily: 330
+2026-04-29 14:25:09,400 [INFO]   Tavily Key 状态:
+2026-04-29 14:25:09,401 [INFO]     key_0_tavily_key: calls=18, remaining=982, exhausted=False
+2026-04-29 14:25:09,401 [INFO]     key_1_tavily_key1: calls=15, remaining=985, exhausted=False
+2026-04-29 14:25:09,401 [INFO]     key_2_tavily_key2: calls=0, remaining=1000, exhausted=False
+2026-04-29 14:25:09,401 [INFO]   源 [rsshub_huxiu_search_taobao_flash]: 成功 20, 失败 0, 耗时 17.79s, 错误: None
+2026-04-29 14:25:09,401 [INFO]   源 [rsshub_huxiu_search_meituan_flash]: 成功 12, 失败 0, 耗时 17.83s, 错误: None
+2026-04-29 14:25:09,401 [INFO]   源 [rsshub_huxiu_search_jd_instant]: 成功 7, 失败 0, 耗时 18.41s, 错误: None
+2026-04-29 14:25:09,402 [INFO]   源 [rsshub_huxiu_search_watsons]: 成功 20, 失败 0, 耗时 18.46s, 错误: None
+2026-04-29 14:25:09,402 [INFO]   源 [rsshub_huxiu_search_douyin_hour]: 成功 20, 失败 0, 耗时 18.54s, 错误: None
+2026-04-29 14:25:09,402 [INFO]   源 [rsshub_huxiu_search_instant_retail]: 成功 20, 失败 0, 耗时 18.62s, 错误: None
+2026-04-29 14:25:09,402 [INFO]   源 [rsshub_huxiu_search_flash]: 成功 20, 失败 0, 耗时 14.97s, 错误: None
+2026-04-29 14:25:09,402 [INFO]   源 [rsshub_huxiu_search_personal_care]: 成功 20, 失败 0, 耗时 16.85s, 错误: None
+2026-04-29 14:25:09,402 [INFO]   源 [rsshub_huxiu_search_sephora]: 成功 12, 失败 0, 耗时 16.87s, 错误: None
+2026-04-29 14:25:09,403 [INFO]   源 [rsshub_huxiu_search_front_warehouse]: 成功 20, 失败 0, 耗时 17.07s, 错误: None
+2026-04-29 14:25:09,403 [INFO]   源 [rsshub_huxiu_search_beauty]: 成功 20, 失败 0, 耗时 17.04s, 错误: None
+2026-04-29 14:25:09,403 [INFO]   源 [rsshub_cls_telegraph]: 成功 20, 失败 0, 耗时 3.13s, 错误: None
+2026-04-29 14:25:09,403 [INFO]   源 [rsshub_latepost]: 成功 0, 失败 1, 耗时 20.03s, 错误: None
+2026-04-29 14:25:09,403 [INFO]   源 [rsshub_huxiu_search_tmall]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-29 14:25:09,403 [INFO]   源 [rsshub_huxiu_search_jd]: 成功 0, 失败 1, 耗时 20.05s, 错误: None
+2026-04-29 14:25:09,404 [INFO]   源 [rsshub_huxiu_search_douyin_ecom]: 成功 0, 失败 1, 耗时 20.05s, 错误: None
+2026-04-29 14:25:09,404 [INFO]   源 [rsshub_huxiu_search_miniso]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-29 14:25:09,404 [INFO]   源 [rsshub_huxiu_retail_channel]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-29 14:25:09,404 [INFO]   源 [rsshub_cls_depth]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-29 14:25:09,404 [INFO]   源 [rsshub_36kr_search_watsons]: 成功 20, 失败 0, 耗时 10.56s, 错误: None
+2026-04-29 14:25:09,404 [INFO]   源 [rsshub_huxiu_article]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-29 14:25:09,404 [INFO]   源 [rsshub_huxiu_search_skincare]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-29 14:25:09,405 [INFO]   源 [rsshub_huxiu_search_loreal]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-29 14:25:09,405 [INFO]   源 [rsshub_huxiu_consumer_channel]: 成功 0, 失败 1, 耗时 20.01s, 错误: None
+2026-04-29 14:25:09,405 [INFO]   源 [rsshub_huxiu_search_sunscreen]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-29 14:25:09,405 [INFO]   源 [rsshub_huxiu_search_proya]: 成功 0, 失败 1, 耗时 20.03s, 错误: None
+2026-04-29 14:25:09,405 [INFO]   源 [rsshub_36kr_newsflashes]: 成功 20, 失败 0, 耗时 12.19s, 错误: None
+2026-04-29 14:25:09,405 [INFO]   源 [rsshub_36kr_search_meituan_flash]: 成功 20, 失败 0, 耗时 12.22s, 错误: None
+2026-04-29 14:25:09,405 [INFO]   源 [rsshub_36kr_search_taobao_flash]: 成功 20, 失败 0, 耗时 9.88s, 错误: None
+2026-04-29 14:25:09,406 [INFO]   源 [rsshub_36kr_search_jd_instant]: 成功 20, 失败 0, 耗时 5.66s, 错误: None
+2026-04-29 14:25:09,406 [INFO]   源 [rsshub_huxiu_search_winona]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-29 14:25:09,406 [INFO]   源 [rsshub_huxiu_search_wow_colour]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-29 14:25:09,406 [INFO]   源 [rsshub_36kr_search_douyin_hour]: 成功 20, 失败 0, 耗时 8.62s, 错误: None
+2026-04-29 14:25:09,406 [INFO]   源 [rsshub_yicai]: 成功 30, 失败 0, 耗时 8.1s, 错误: None
+2026-04-29 14:25:09,406 [INFO]   源 [rsshub_ifeng]: 成功 0, 失败 1, 耗时 0.02s, 错误: None
+2026-04-29 14:25:09,406 [INFO]   源 [rsshub_36kr_search_instant_retail]: 成功 20, 失败 0, 耗时 1.91s, 错误: None
+2026-04-29 14:25:09,406 [INFO]   源 [rsshub_wallstreetcn]: 成功 30, 失败 0, 耗时 15.84s, 错误: None
+2026-04-29 14:25:09,407 [INFO]   源 [rsshub_36kr_search_beauty]: 成功 20, 失败 0, 耗时 7.84s, 错误: None
+2026-04-29 14:25:09,407 [INFO]   源 [rsshub_caixin]: 成功 19, 失败 0, 耗时 16.02s, 错误: None
+2026-04-29 14:25:09,407 [INFO]   源 [rsshub_huxiu_search_xiaohongshu]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-29 14:25:09,407 [INFO]   源 [rsshub_guancha]: 成功 20, 失败 0, 耗时 19.26s, 错误: None
+2026-04-29 14:25:09,407 [INFO]   源 [rss_cbndata_beauty]: 成功 0, 失败 0, 耗时 0.27s, 错误: None
+2026-04-29 14:25:09,407 [INFO]   源 [web_baidu_news_meituan_flash]: 成功 0, 失败 0, 耗时 0.15s, 错误: None
+2026-04-29 14:25:09,407 [INFO]   源 [web_nmpa_cosmetic]: 成功 0, 失败 0, 耗时 0.32s, 错误: Failed to fetch index: https://www.nmpa.gov.cn/WS04/CL2044/
+2026-04-29 14:25:09,408 [INFO]   源 [web_eleoda_rules]: 成功 0, 失败 0, 耗时 0.37s, 错误: None
+2026-04-29 14:25:09,408 [INFO]   源 [web_watsons_cn]: 成功 0, 失败 0, 耗时 0.66s, 错误: Failed to fetch index: https://www.watsons.com.cn/about/news
+2026-04-29 14:25:09,408 [INFO]   源 [web_sephora_cn]: 成功 0, 失败 0, 耗时 0.27s, 错误: Failed to fetch index: https://www.sephora.cn/news
+2026-04-29 14:25:09,408 [INFO]   源 [web_jd_daojia]: 成功 0, 失败 0, 耗时 1.95s, 错误: None
+2026-04-29 14:25:09,408 [INFO]   源 [tavily_category_trends]: 成功 40, 失败 2, 耗时 13.1s, 错误: None
+2026-04-29 14:25:09,408 [INFO]   源 [tavily_platform_regulation]: 成功 40, 失败 2, 耗时 13.24s, 错误: None
+2026-04-29 14:25:09,408 [INFO]   源 [tavily_competitor_moves]: 成功 40, 失败 2, 耗时 15.86s, 错误: None
+2026-04-29 14:25:09,408 [INFO]   源 [tavily_instant_retail_beauty]: 成功 60, 失败 2, 耗时 19.8s, 错误: None
+2026-04-29 14:25:09,409 [INFO]   源 [tavily_industry_data]: 成功 50, 失败 2, 耗时 20.76s, 错误: None
+2026-04-29 14:25:09,409 [INFO]   源 [tavily_today_instant_retail]: 成功 50, 失败 2, 耗时 23.73s, 错误: None
+2026-04-29 14:25:09,409 [INFO]   源 [tavily_today_beauty_retail]: 成功 50, 失败 2, 耗时 19.98s, 错误: None
+2026-04-29 14:25:09,409 [INFO] ============================================================
+2026-04-30 09:52:00,822 [INFO] ============================================================
+2026-04-30 09:52:00,822 [INFO] 开始采集 (V2): date=2026-04-29
+2026-04-30 09:52:00,822 [INFO] 时间窗口: 2026-04-28 07:00:00+08:00 ~ 2026-04-30 17:52:00.820761+08:00
+2026-04-30 09:52:00,822 [INFO] 项目根目录: /app/working/projects/watsons-retail-intel
+2026-04-30 09:52:00,823 [INFO] ============================================================
+2026-04-30 09:52:01,020 [INFO] 加载 98 个关键词
+2026-04-30 09:52:01,020 [INFO] RSSHub 基础地址: http://192.168.2.100:1200
+2026-04-30 09:52:01,021 [INFO] Tavily: 3 个 Key 已加载，轮换策略: round_robin
+2026-04-30 09:52:01,021 [INFO] XCrawl: 3 个 Key 已加载
+2026-04-30 09:52:01,021 [INFO] 启用源数量: 59 (rsshub: 43, other: 20, legacy: 0)
+2026-04-30 09:52:01,021 [INFO] RSSHub filterout_days 全局默认: 90 天
+2026-04-30 09:52:01,069 [INFO] 源级并行采集已启用, workers: {'rsshub': 6, 'rss': 4, 'web': 2, 'tavily': 6}
+2026-04-30 09:52:01,069 [INFO] 并行采集 [rsshub] 组: 41 个源, max_workers=6
+2026-04-30 09:52:01,070 [INFO] [RSSHub] rsshub_huxiu_search_meituan_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:01,071 [INFO] [RSSHub] rsshub_huxiu_search_meituan_flash: 请求 http://192.168.2.100:1200/huxiu/search/美团闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:01,076 [INFO] [RSSHub] rsshub_huxiu_search_jd_instant: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:01,077 [INFO] [RSSHub] rsshub_huxiu_search_jd_instant: 请求 http://192.168.2.100:1200/huxiu/search/京东秒送?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:01,080 [INFO] [RSSHub] rsshub_huxiu_search_taobao_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:01,081 [INFO] [RSSHub] rsshub_huxiu_search_douyin_hour: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:01,083 [INFO] [RSSHub] rsshub_huxiu_search_watsons: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:01,083 [INFO] [RSSHub] rsshub_huxiu_search_taobao_flash: 请求 http://192.168.2.100:1200/huxiu/search/淘宝闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:01,084 [INFO] [RSSHub] rsshub_huxiu_search_douyin_hour: 请求 http://192.168.2.100:1200/huxiu/search/抖音小时达?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:01,085 [INFO] [RSSHub] rsshub_huxiu_search_watsons: 请求 http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:01,085 [INFO] [RSSHub] rsshub_huxiu_search_instant_retail: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:01,092 [INFO] [RSSHub] rsshub_huxiu_search_instant_retail: 请求 http://192.168.2.100:1200/huxiu/search/即时零售?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:18,759 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_meituan_flash — 成功 12, 失败 0, 耗时 17.69s
+2026-04-30 09:52:18,760 [INFO] [RSSHub] rsshub_huxiu_search_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:18,761 [INFO] [RSSHub] rsshub_huxiu_search_flash: 请求 http://192.168.2.100:1200/huxiu/search/闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:18,848 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_watsons — 成功 20, 失败 0, 耗时 17.77s
+2026-04-30 09:52:18,849 [INFO] [RSSHub] rsshub_huxiu_search_personal_care: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:18,849 [INFO] [RSSHub] rsshub_huxiu_search_personal_care: 请求 http://192.168.2.100:1200/huxiu/search/个护?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:19,764 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_jd_instant — 成功 7, 失败 0, 耗时 18.69s
+2026-04-30 09:52:19,764 [INFO] [RSSHub] rsshub_latepost: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:19,775 [INFO] [RSSHub] rsshub_latepost: 请求 http://192.168.2.100:1200/latepost?limit=10&sorted=true&filterout_time=7776000
+2026-04-30 09:52:19,790 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_instant_retail — 成功 20, 失败 0, 耗时 18.7s
+2026-04-30 09:52:19,790 [INFO] [RSSHub] rsshub_huxiu_search_front_warehouse: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:19,791 [INFO] [RSSHub] rsshub_huxiu_search_front_warehouse: 请求 http://192.168.2.100:1200/huxiu/search/前置仓?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:19,856 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_douyin_hour — 成功 20, 失败 0, 耗时 18.78s
+2026-04-30 09:52:19,857 [INFO] [RSSHub] rsshub_huxiu_search_beauty: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:19,857 [INFO] [RSSHub] rsshub_huxiu_search_beauty: 请求 http://192.168.2.100:1200/huxiu/search/美妆?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:19,953 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_taobao_flash — 成功 20, 失败 0, 耗时 18.87s
+2026-04-30 09:52:19,953 [INFO] [RSSHub] rsshub_huxiu_search_sephora: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:19,954 [INFO] [RSSHub] rsshub_huxiu_search_sephora: 请求 http://192.168.2.100:1200/huxiu/search/丝芙兰?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:33,984 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_flash — 成功 20, 失败 0, 耗时 15.22s
+2026-04-30 09:52:33,984 [INFO] [RSSHub] rsshub_cls_telegraph: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-30 09:52:33,985 [INFO] [RSSHub] rsshub_cls_telegraph: 请求 http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800
+2026-04-30 09:52:34,087 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_personal_care — 成功 20, 失败 0, 耗时 15.24s
+2026-04-30 09:52:34,088 [INFO] [RSSHub] rsshub_huxiu_search_tmall: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:34,088 [INFO] [RSSHub] rsshub_huxiu_search_tmall: 请求 http://192.168.2.100:1200/huxiu/search/天猫?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:36,584 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_beauty — 成功 20, 失败 0, 耗时 16.73s
+2026-04-30 09:52:36,584 [INFO] [RSSHub] rsshub_huxiu_search_jd: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:36,585 [INFO] [RSSHub] rsshub_huxiu_search_jd: 请求 http://192.168.2.100:1200/huxiu/search/京东?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:36,737 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_front_warehouse — 成功 20, 失败 0, 耗时 16.95s
+2026-04-30 09:52:36,737 [INFO] [RSSHub] rsshub_huxiu_search_douyin_ecom: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:36,741 [INFO] [RSSHub] rsshub_huxiu_search_douyin_ecom: 请求 http://192.168.2.100:1200/huxiu/search/抖音电商?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:36,818 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_sephora — 成功 12, 失败 0, 耗时 16.86s
+2026-04-30 09:52:36,818 [INFO] [RSSHub] rsshub_huxiu_search_miniso: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:36,819 [INFO] [RSSHub] rsshub_huxiu_search_miniso: 请求 http://192.168.2.100:1200/huxiu/search/名创优品?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:37,448 [INFO] 完成采集: [rsshub] rsshub_cls_telegraph — 成功 20, 失败 0, 耗时 3.46s
+2026-04-30 09:52:37,449 [INFO] [RSSHub] rsshub_huxiu_retail_channel: filterout_time=2592000s (排除 >30天的旧文章)
+2026-04-30 09:52:37,449 [INFO] [RSSHub] rsshub_huxiu_retail_channel: 请求 http://192.168.2.100:1200/huxiu/channel/115?limit=30&sorted=true&filterout_time=2592000
+2026-04-30 09:52:39,806 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/latepost?limit=10&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:52:39,806 [INFO] 完成采集: [rsshub] rsshub_latepost — 成功 0, 失败 1, 耗时 20.04s
+2026-04-30 09:52:39,806 [INFO] [RSSHub] rsshub_cls_depth: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-30 09:52:39,807 [INFO] [RSSHub] rsshub_cls_depth: 请求 http://192.168.2.100:1200/cls/depth?limit=30&filterout_time=604800
+2026-04-30 09:52:54,102 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/天猫?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:52:54,103 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_tmall — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:52:54,103 [INFO] [RSSHub] rsshub_huxiu_article: filterout_time=5184000s (排除 >60天的旧文章)
+2026-04-30 09:52:54,104 [INFO] [RSSHub] rsshub_huxiu_article: 请求 http://192.168.2.100:1200/huxiu/article?limit=30&sorted=true&filterout_time=5184000
+2026-04-30 09:52:56,605 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/京东?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:52:56,606 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_jd — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:52:56,606 [INFO] [RSSHub] rsshub_huxiu_search_skincare: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:56,607 [INFO] [RSSHub] rsshub_huxiu_search_skincare: 请求 http://192.168.2.100:1200/huxiu/search/护肤品?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:56,767 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/抖音电商?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:52:56,767 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_douyin_ecom — 成功 0, 失败 1, 耗时 20.03s
+2026-04-30 09:52:56,767 [INFO] [RSSHub] rsshub_huxiu_search_loreal: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:56,768 [INFO] [RSSHub] rsshub_huxiu_search_loreal: 请求 http://192.168.2.100:1200/huxiu/search/欧莱雅?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:56,829 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/名创优品?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:52:56,830 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_miniso — 成功 0, 失败 1, 耗时 20.01s
+2026-04-30 09:52:56,830 [INFO] [RSSHub] rsshub_36kr_search_watsons: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:56,830 [INFO] [RSSHub] rsshub_36kr_search_watsons: 请求 http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:52:57,464 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/channel/115?limit=30&sorted=true&filterout_time=2592000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:52:57,464 [INFO] 完成采集: [rsshub] rsshub_huxiu_retail_channel — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:52:57,464 [INFO] [RSSHub] rsshub_huxiu_consumer_channel: filterout_time=2592000s (排除 >30天的旧文章)
+2026-04-30 09:52:57,465 [INFO] [RSSHub] rsshub_huxiu_consumer_channel: 请求 http://192.168.2.100:1200/huxiu/channel/107?limit=30&sorted=true&filterout_time=2592000
+2026-04-30 09:52:59,825 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/cls/depth?limit=30&filterout_time=604800 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:52:59,825 [INFO] 完成采集: [rsshub] rsshub_cls_depth — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:52:59,825 [INFO] [RSSHub] rsshub_huxiu_search_sunscreen: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:52:59,826 [INFO] [RSSHub] rsshub_huxiu_search_sunscreen: 请求 http://192.168.2.100:1200/huxiu/search/防晒?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:53:07,836 [INFO] 完成采集: [rsshub] rsshub_36kr_search_watsons — 成功 20, 失败 0, 耗时 11.01s
+2026-04-30 09:53:07,837 [INFO] [RSSHub] rsshub_huxiu_search_proya: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:53:07,837 [INFO] [RSSHub] rsshub_huxiu_search_proya: 请求 http://192.168.2.100:1200/huxiu/search/珀莱雅?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:53:14,126 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/article?limit=30&sorted=true&filterout_time=5184000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:53:14,127 [INFO] 完成采集: [rsshub] rsshub_huxiu_article — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:53:14,127 [INFO] [RSSHub] rsshub_huxiu_search_winona: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:53:14,127 [INFO] [RSSHub] rsshub_huxiu_search_winona: 请求 http://192.168.2.100:1200/huxiu/search/薇诺娜?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:53:16,630 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/护肤品?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:53:16,630 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_skincare — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:53:16,630 [INFO] [RSSHub] rsshub_36kr_newsflashes: filterout_time=5184000s (排除 >60天的旧文章)
+2026-04-30 09:53:16,631 [INFO] [RSSHub] rsshub_36kr_newsflashes: 请求 http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000
+2026-04-30 09:53:16,790 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/欧莱雅?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:53:16,791 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_loreal — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:53:16,791 [INFO] [RSSHub] rsshub_huxiu_search_wow_colour: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:53:16,792 [INFO] [RSSHub] rsshub_huxiu_search_wow_colour: 请求 http://192.168.2.100:1200/huxiu/search/WOW%20COLOUR?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:53:17,485 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/channel/107?limit=30&sorted=true&filterout_time=2592000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:53:17,486 [INFO] 完成采集: [rsshub] rsshub_huxiu_consumer_channel — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:53:17,486 [INFO] [RSSHub] rsshub_36kr_search_meituan_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:53:17,487 [INFO] [RSSHub] rsshub_36kr_search_meituan_flash: 请求 http://192.168.2.100:1200/36kr/search/articles/美团闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:53:19,843 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/防晒?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:53:19,843 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_sunscreen — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:53:19,843 [INFO] [RSSHub] rsshub_36kr_search_taobao_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:53:19,845 [INFO] [RSSHub] rsshub_36kr_search_taobao_flash: 请求 http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:53:27,856 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/珀莱雅?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:53:27,856 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_proya — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:53:27,857 [INFO] [RSSHub] rsshub_36kr_search_jd_instant: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:53:27,857 [INFO] [RSSHub] rsshub_36kr_search_jd_instant: 请求 http://192.168.2.100:1200/36kr/search/articles/京东秒送?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:53:29,212 [INFO] 完成采集: [rsshub] rsshub_36kr_search_meituan_flash — 成功 20, 失败 0, 耗时 11.73s
+2026-04-30 09:53:29,213 [INFO] [RSSHub] rsshub_36kr_search_douyin_hour: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:53:29,213 [INFO] [RSSHub] rsshub_36kr_search_douyin_hour: 请求 http://192.168.2.100:1200/36kr/search/articles/抖音小时达?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:53:29,264 [INFO] 完成采集: [rsshub] rsshub_36kr_newsflashes — 成功 20, 失败 0, 耗时 12.63s
+2026-04-30 09:53:29,265 [INFO] [RSSHub] rsshub_wallstreetcn: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-30 09:53:29,265 [INFO] [RSSHub] rsshub_wallstreetcn: 请求 http://192.168.2.100:1200/wallstreetcn/news?limit=30&filterout_time=604800
+2026-04-30 09:53:33,003 [INFO] 完成采集: [rsshub] rsshub_36kr_search_taobao_flash — 成功 20, 失败 0, 耗时 13.16s
+2026-04-30 09:53:33,003 [INFO] [RSSHub] rsshub_yicai: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-30 09:53:33,004 [INFO] [RSSHub] rsshub_yicai: 请求 http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800
+2026-04-30 09:53:33,208 [INFO] 完成采集: [rsshub] rsshub_36kr_search_jd_instant — 成功 20, 失败 0, 耗时 5.35s
+2026-04-30 09:53:33,208 [INFO] [RSSHub] rsshub_caixin: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-30 09:53:33,209 [INFO] [RSSHub] rsshub_caixin: 请求 http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800
+2026-04-30 09:53:34,150 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/薇诺娜?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:53:34,151 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_winona — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:53:34,151 [INFO] [RSSHub] rsshub_huxiu_search_xiaohongshu: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:53:34,152 [INFO] [RSSHub] rsshub_huxiu_search_xiaohongshu: 请求 http://192.168.2.100:1200/huxiu/search/小红书?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:53:36,796 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/WOW%20COLOUR?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:53:36,796 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_wow_colour — 成功 0, 失败 1, 耗时 20.0s
+2026-04-30 09:53:36,796 [INFO] [RSSHub] rsshub_36kr_search_instant_retail: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:53:36,797 [INFO] [RSSHub] rsshub_36kr_search_instant_retail: 请求 http://192.168.2.100:1200/36kr/search/articles/即时零售?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:53:37,866 [INFO] 完成采集: [rsshub] rsshub_36kr_search_douyin_hour — 成功 20, 失败 0, 耗时 8.65s
+2026-04-30 09:53:37,867 [INFO] [RSSHub] rsshub_36kr_search_beauty: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:53:37,867 [INFO] [RSSHub] rsshub_36kr_search_beauty: 请求 http://192.168.2.100:1200/36kr/search/articles/美妆?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:53:38,145 [INFO] 完成采集: [rsshub] rsshub_yicai — 成功 30, 失败 0, 耗时 5.14s
+2026-04-30 09:53:38,145 [INFO] [RSSHub] rsshub_ifeng: filterout_time=259200s (排除 >3天的旧文章)
+2026-04-30 09:53:38,146 [INFO] [RSSHub] rsshub_ifeng: 请求 http://192.168.2.100:1200/ifeng?limit=30&filterout_time=259200
+2026-04-30 09:53:38,165 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/ifeng?limit=30&filterout_time=259200 — 503 Server Error: Service Unavailable for url: http://192.168.2.100:1200/ifeng?limit=30&filterout_time=259200
+2026-04-30 09:53:38,166 [INFO] 完成采集: [rsshub] rsshub_ifeng — 成功 0, 失败 1, 耗时 0.02s
+2026-04-30 09:53:38,166 [INFO] [RSSHub] rsshub_guancha: filterout_time=259200s (排除 >3天的旧文章)
+2026-04-30 09:53:38,167 [INFO] [RSSHub] rsshub_guancha: 请求 http://192.168.2.100:1200/guancha/headline?limit=20&filterout_time=259200
+2026-04-30 09:53:39,218 [INFO] 完成采集: [rsshub] rsshub_36kr_search_instant_retail — 成功 20, 失败 0, 耗时 2.42s
+2026-04-30 09:53:46,674 [INFO] 完成采集: [rsshub] rsshub_wallstreetcn — 成功 30, 失败 0, 耗时 17.41s
+2026-04-30 09:53:46,776 [INFO] 完成采集: [rsshub] rsshub_36kr_search_beauty — 成功 20, 失败 0, 耗时 8.91s
+2026-04-30 09:53:50,559 [INFO] 完成采集: [rsshub] rsshub_caixin — 成功 18, 失败 0, 耗时 17.35s
+2026-04-30 09:53:54,173 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/小红书?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:53:54,173 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_xiaohongshu — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:53:57,774 [INFO] 完成采集: [rsshub] rsshub_guancha — 成功 20, 失败 0, 耗时 19.61s
+2026-04-30 09:53:57,775 [INFO] 开始采集: [rss] rss_cbndata_beauty
+2026-04-30 09:53:57,776 [INFO] [RSS] rss_cbndata_beauty: 请求 https://www.cbndata.com/rss/beauty
+2026-04-30 09:53:58,073 [INFO] 完成采集: [rss] rss_cbndata_beauty — 成功 0, 失败 0, 耗时 0.3s
+2026-04-30 09:53:58,073 [INFO] 并行采集 [web] 组: 6 个源, max_workers=2
+2026-04-30 09:53:58,074 [INFO] [Web] web_baidu_news_meituan_flash: 抓取首页 https://www.baidu.com/s?rtt=4&rn=20&ie=utf-8&tn=news&word=%E7%BE%8E%E5%9B%A2%E9%97%AA%E8%B4%AD+%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE
+2026-04-30 09:53:58,076 [INFO] [Web] web_nmpa_cosmetic: 抓取首页 https://www.nmpa.gov.cn/WS04/CL2044/
+2026-04-30 09:53:58,217 [INFO] [Web] web_baidu_news_meituan_flash: 提取到 0 个候选链接
+2026-04-30 09:53:58,219 [INFO] 完成采集: [web] web_baidu_news_meituan_flash — 成功 0, 失败 0, 耗时 0.14s
+2026-04-30 09:53:58,220 [INFO] [Web] web_eleoda_rules: 抓取首页 https://www.ele.me/rulecenter
+2026-04-30 09:53:58,423 [WARNING] HTTP GET 失败: https://www.nmpa.gov.cn/WS04/CL2044/ — 412 Client Error: Precondition Failed for url: https://www.nmpa.gov.cn/WS04/CL2044/
+2026-04-30 09:53:58,425 [INFO] 完成采集: [web] web_nmpa_cosmetic — 成功 0, 失败 0, 耗时 0.35s
+2026-04-30 09:53:58,426 [INFO] [Web] web_jd_daojia: 抓取首页 https://daoja.jd.com/notice
+2026-04-30 09:53:58,671 [INFO] [Web] web_eleoda_rules: 提取到 0 个候选链接
+2026-04-30 09:53:58,673 [INFO] 完成采集: [web] web_eleoda_rules — 成功 0, 失败 0, 耗时 0.45s
+2026-04-30 09:53:58,674 [INFO] [Web] web_watsons_cn: 抓取首页 https://www.watsons.com.cn/about/news
+2026-04-30 09:53:58,856 [WARNING] HTTP GET 失败: https://www.watsons.com.cn/about/news — 567 Server Error: Unknown Status for url: https://www.watsons.com.cn/about/news
+2026-04-30 09:53:58,858 [INFO] 完成采集: [web] web_watsons_cn — 成功 0, 失败 0, 耗时 0.18s
+2026-04-30 09:53:58,859 [INFO] [Web] web_sephora_cn: 抓取首页 https://www.sephora.cn/news
+2026-04-30 09:53:58,920 [INFO] [Web] web_jd_daojia: 提取到 0 个候选链接
+2026-04-30 09:53:58,924 [INFO] 完成采集: [web] web_jd_daojia — 成功 0, 失败 0, 耗时 0.5s
+2026-04-30 09:53:59,180 [WARNING] HTTP GET 失败: https://www.sephora.cn/news — 404 Client Error: Not Found for url: https://www.sephora.cn/news
+2026-04-30 09:53:59,183 [INFO] 完成采集: [web] web_sephora_cn — 成功 0, 失败 0, 耗时 0.32s
+2026-04-30 09:53:59,184 [INFO] 并行采集 [xcrawl] 组: 4 个源, max_workers=4
+2026-04-30 09:53:59,230 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '美妆 个护 即时零售 今日 2026年4月30日'
+2026-04-30 09:53:59,232 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '即时零售 美妆 个护 最新新闻 2026年4月30日'
+2026-04-30 09:53:59,238 [INFO] [XCrawl] xcrawl_regulation_today: 搜索 '即时零售 监管 合规 最新 2026 2026年4月30日'
+2026-04-30 09:53:59,253 [INFO] [XCrawl] xcrawl_competitor_today: 搜索 '屈臣氏 即时零售 门店 会员 最新 2026年4月30日'
+2026-04-30 09:54:02,725 [INFO] [XCrawl] xcrawl_beauty_retail_today: '美妆 个护 即时零售 今日 2026年4月30日' → 10 篇
+2026-04-30 09:54:02,725 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '屈臣氏 丝芙兰 即时零售 最新 2026年4月30日'
+2026-04-30 09:54:03,330 [INFO] [XCrawl] xcrawl_instant_retail_today: '即时零售 美妆 个护 最新新闻 2026年4月30日' → 10 篇
+2026-04-30 09:54:03,331 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '美团闪购 即时零售 品牌入驻 2026年4月30日'
+2026-04-30 09:54:03,536 [INFO] [XCrawl] xcrawl_regulation_today: '即时零售 监管 合规 最新 2026 2026年4月30日' → 10 篇
+2026-04-30 09:54:03,536 [INFO] [XCrawl] xcrawl_regulation_today: 搜索 '淘宝闪购 美团 京东 自查整改 2026年4月30日'
+2026-04-30 09:54:05,312 [INFO] [XCrawl] xcrawl_competitor_today: '屈臣氏 即时零售 门店 会员 最新 2026年4月30日' → 10 篇
+2026-04-30 09:54:05,312 [INFO] [XCrawl] xcrawl_competitor_today: 搜索 '丝芙兰 线上 线下 即时零售 2026 2026年4月30日'
+2026-04-30 09:54:07,037 [INFO] [XCrawl] xcrawl_instant_retail_today: '美团闪购 即时零售 品牌入驻 2026年4月30日' → 10 篇
+2026-04-30 09:54:07,037 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '闪电仓 前置仓 即时配送 2026年4月30日'
+2026-04-30 09:54:07,452 [INFO] [XCrawl] xcrawl_regulation_today: '淘宝闪购 美团 京东 自查整改 2026年4月30日' → 10 篇
+2026-04-30 09:54:07,453 [INFO] [XCrawl] xcrawl_regulation_today: 搜索 '化妆品 备案 新规 监管 处罚 2026年4月30日'
+2026-04-30 09:54:07,844 [INFO] [XCrawl] xcrawl_beauty_retail_today: '屈臣氏 丝芙兰 即时零售 最新 2026年4月30日' → 9 篇
+2026-04-30 09:54:07,844 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '参半 WOW COLOUR 线上 线下 2026年4月30日'
+2026-04-30 09:54:08,291 [INFO] [XCrawl] xcrawl_competitor_today: '丝芙兰 线上 线下 即时零售 2026 2026年4月30日' → 10 篇
+2026-04-30 09:54:08,291 [INFO] [XCrawl] xcrawl_competitor_today: 搜索 '名创优品 闪购 到家 经营 最新 2026年4月30日'
+2026-04-30 09:54:09,700 [INFO] [XCrawl] xcrawl_instant_retail_today: '闪电仓 前置仓 即时配送 2026年4月30日' → 10 篇
+2026-04-30 09:54:09,700 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '小米家电 美团闪购 即时零售 2026年4月30日'
+2026-04-30 09:54:11,011 [INFO] [XCrawl] xcrawl_regulation_today: '化妆品 备案 新规 监管 处罚 2026年4月30日' → 10 篇
+2026-04-30 09:54:11,011 [INFO] [XCrawl] xcrawl_regulation_today: 搜索 '外卖 平台 入网 资质 审核 2026年4月30日'
+2026-04-30 09:54:12,029 [INFO] [XCrawl] xcrawl_beauty_retail_today: '参半 WOW COLOUR 线上 线下 2026年4月30日' → 10 篇
+2026-04-30 09:54:12,029 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '贝泰妮 珀莱雅 即时零售 OMO 2026年4月30日'
+2026-04-30 09:54:12,809 [INFO] [XCrawl] xcrawl_competitor_today: '名创优品 闪购 到家 经营 最新 2026年4月30日' → 10 篇
+2026-04-30 09:54:12,810 [INFO] [XCrawl] xcrawl_competitor_today: 搜索 '花西子 完美日记 抖音电商 最新 2026年4月30日'
+2026-04-30 09:54:13,393 [INFO] [XCrawl] xcrawl_instant_retail_today: '小米家电 美团闪购 即时零售 2026年4月30日' → 8 篇
+2026-04-30 09:54:13,394 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '即时零售 万亿 增长 最新 2026年4月30日'
+2026-04-30 09:54:14,283 [INFO] [XCrawl] xcrawl_regulation_today: '外卖 平台 入网 资质 审核 2026年4月30日' → 10 篇
+2026-04-30 09:54:14,283 [INFO] [XCrawl] xcrawl_regulation_today: 共采集 40 篇文章 (40 成功, 0 失败)
+2026-04-30 09:54:14,283 [INFO] 完成采集: [xcrawl] xcrawl_regulation_today — 成功 40, 失败 0, 耗时 15.09s
+2026-04-30 09:54:16,061 [INFO] [XCrawl] xcrawl_competitor_today: '花西子 完美日记 抖音电商 最新 2026年4月30日' → 10 篇
+2026-04-30 09:54:16,061 [INFO] [XCrawl] xcrawl_competitor_today: 共采集 40 篇文章 (40 成功, 0 失败)
+2026-04-30 09:54:16,062 [INFO] 完成采集: [xcrawl] xcrawl_competitor_today — 成功 40, 失败 0, 耗时 16.86s
+2026-04-30 09:54:16,101 [INFO] [XCrawl] xcrawl_beauty_retail_today: '贝泰妮 珀莱雅 即时零售 OMO 2026年4月30日' → 10 篇
+2026-04-30 09:54:16,102 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '稳健医疗 即时零售 医美 修复 2026年4月30日'
+2026-04-30 09:54:16,148 [INFO] [XCrawl] xcrawl_instant_retail_today: '即时零售 万亿 增长 最新 2026年4月30日' → 10 篇
+2026-04-30 09:54:16,148 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '叮当健康 即时零售 闪电仓 2026年4月30日'
+2026-04-30 09:54:20,262 [INFO] [XCrawl] xcrawl_beauty_retail_today: '稳健医疗 即时零售 医美 修复 2026年4月30日' → 10 篇
+2026-04-30 09:54:20,262 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '美妆品牌 入驻 闪购 最新动态 2026年4月30日'
+2026-04-30 09:54:21,022 [INFO] [XCrawl] xcrawl_instant_retail_today: '叮当健康 即时零售 闪电仓 2026年4月30日' → 9 篇
+2026-04-30 09:54:21,022 [INFO] [XCrawl] xcrawl_instant_retail_today: 共采集 57 篇文章 (57 成功, 0 失败)
+2026-04-30 09:54:21,022 [INFO] 完成采集: [xcrawl] xcrawl_instant_retail_today — 成功 57, 失败 0, 耗时 21.84s
+2026-04-30 09:54:24,122 [INFO] [XCrawl] xcrawl_beauty_retail_today: '美妆品牌 入驻 闪购 最新动态 2026年4月30日' → 10 篇
+2026-04-30 09:54:24,122 [INFO] [XCrawl] xcrawl_beauty_retail_today: 共采集 59 篇文章 (59 成功, 0 失败)
+2026-04-30 09:54:24,122 [INFO] 完成采集: [xcrawl] xcrawl_beauty_retail_today — 成功 59, 失败 0, 耗时 24.94s
+2026-04-30 09:54:24,123 [INFO] 并行采集 [tavily] 组: 7 个源, max_workers=6
+2026-04-30 09:54:24,124 [INFO] [Tavily] tavily_instant_retail_beauty: 并行搜索 8 查询, keys=3, per_key_limit=1
+2026-04-30 09:54:24,124 [INFO] [Tavily] tavily_platform_regulation: 并行搜索 6 查询, keys=3, per_key_limit=1
+2026-04-30 09:54:24,125 [INFO] [Tavily tavily_instant_retail_beauty] 并行处理 8 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:54:24,125 [INFO] [Tavily] tavily_competitor_moves: 并行搜索 6 查询, keys=3, per_key_limit=1
+2026-04-30 09:54:24,125 [INFO] [Tavily tavily_platform_regulation] 并行处理 6 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:54:24,152 [INFO] [Tavily tavily_competitor_moves] 并行处理 6 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:54:24,152 [INFO] [Tavily] tavily_industry_data: 并行搜索 7 查询, keys=3, per_key_limit=1
+2026-04-30 09:54:24,153 [INFO] [Tavily] tavily_category_trends: 并行搜索 6 查询, keys=3, per_key_limit=1
+2026-04-30 09:54:24,154 [INFO] [Tavily] tavily_today_instant_retail: 并行搜索 7 查询, keys=3, per_key_limit=1
+2026-04-30 09:54:24,164 [INFO] [Tavily tavily_today_instant_retail] 并行处理 7 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:54:24,157 [INFO] [Tavily tavily_category_trends] 并行处理 6 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:54:24,157 [INFO] [Tavily tavily_industry_data] 并行处理 7 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:54:32,623 [INFO] [Tavily tavily_competitor_moves] 完成: 6/6 成功, 0 失败, 耗时 8.5s
+2026-04-30 09:54:32,623 [INFO] [Tavily] tavily_competitor_moves: query 0 返回 10 条结果
+2026-04-30 09:54:32,624 [INFO] [Tavily] tavily_competitor_moves: query 1 返回 10 条结果
+2026-04-30 09:54:32,624 [WARNING] [Tavily] tavily_competitor_moves: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:32,624 [INFO] [Tavily] tavily_competitor_moves: query 3 返回 10 条结果
+2026-04-30 09:54:32,624 [INFO] [Tavily] tavily_competitor_moves: query 4 返回 10 条结果
+2026-04-30 09:54:32,624 [WARNING] [Tavily] tavily_competitor_moves: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:32,624 [INFO] [Tavily] tavily_competitor_moves: 总计 40 条, 成功 40, 失败 2
+2026-04-30 09:54:32,625 [INFO] 完成采集: [tavily] tavily_competitor_moves — 成功 40, 失败 2, 耗时 8.5s
+2026-04-30 09:54:32,625 [INFO] [Tavily] tavily_today_beauty_retail: 并行搜索 7 查询, keys=3, per_key_limit=1
+2026-04-30 09:54:32,626 [INFO] [Tavily tavily_today_beauty_retail] 并行处理 7 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:54:35,315 [INFO] [Tavily tavily_platform_regulation] 完成: 6/6 成功, 0 失败, 耗时 11.2s
+2026-04-30 09:54:35,315 [INFO] [Tavily] tavily_platform_regulation: query 0 返回 10 条结果
+2026-04-30 09:54:35,316 [INFO] [Tavily] tavily_platform_regulation: query 1 返回 10 条结果
+2026-04-30 09:54:35,316 [WARNING] [Tavily] tavily_platform_regulation: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:35,316 [INFO] [Tavily] tavily_platform_regulation: query 3 返回 10 条结果
+2026-04-30 09:54:35,316 [INFO] [Tavily] tavily_platform_regulation: query 4 返回 10 条结果
+2026-04-30 09:54:35,316 [WARNING] [Tavily] tavily_platform_regulation: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:35,316 [INFO] [Tavily] tavily_platform_regulation: 总计 40 条, 成功 40, 失败 2
+2026-04-30 09:54:35,316 [INFO] 完成采集: [tavily] tavily_platform_regulation — 成功 40, 失败 2, 耗时 11.19s
+2026-04-30 09:54:35,929 [INFO] [Tavily tavily_today_instant_retail] 完成: 7/7 成功, 0 失败, 耗时 11.8s
+2026-04-30 09:54:35,930 [INFO] [Tavily] tavily_today_instant_retail: query 0 返回 10 条结果
+2026-04-30 09:54:35,930 [INFO] [Tavily] tavily_today_instant_retail: query 1 返回 10 条结果
+2026-04-30 09:54:35,930 [WARNING] [Tavily] tavily_today_instant_retail: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:35,930 [INFO] [Tavily] tavily_today_instant_retail: query 3 返回 10 条结果
+2026-04-30 09:54:35,931 [INFO] [Tavily] tavily_today_instant_retail: query 4 返回 10 条结果
+2026-04-30 09:54:35,931 [WARNING] [Tavily] tavily_today_instant_retail: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:35,931 [INFO] [Tavily] tavily_today_instant_retail: query 6 返回 10 条结果
+2026-04-30 09:54:35,931 [INFO] [Tavily] tavily_today_instant_retail: 总计 50 条, 成功 50, 失败 2
+2026-04-30 09:54:35,931 [INFO] 完成采集: [tavily] tavily_today_instant_retail — 成功 50, 失败 2, 耗时 11.78s
+2026-04-30 09:54:36,984 [INFO] [Tavily tavily_instant_retail_beauty] 完成: 8/8 成功, 0 失败, 耗时 12.9s
+2026-04-30 09:54:36,985 [INFO] [Tavily] tavily_instant_retail_beauty: query 0 返回 10 条结果
+2026-04-30 09:54:36,985 [INFO] [Tavily] tavily_instant_retail_beauty: query 1 返回 10 条结果
+2026-04-30 09:54:36,985 [WARNING] [Tavily] tavily_instant_retail_beauty: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:36,985 [INFO] [Tavily] tavily_instant_retail_beauty: query 3 返回 10 条结果
+2026-04-30 09:54:36,985 [INFO] [Tavily] tavily_instant_retail_beauty: query 4 返回 10 条结果
+2026-04-30 09:54:36,985 [WARNING] [Tavily] tavily_instant_retail_beauty: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:36,986 [INFO] [Tavily] tavily_instant_retail_beauty: query 6 返回 10 条结果
+2026-04-30 09:54:36,986 [INFO] [Tavily] tavily_instant_retail_beauty: query 7 返回 10 条结果
+2026-04-30 09:54:36,986 [INFO] [Tavily] tavily_instant_retail_beauty: 总计 60 条, 成功 60, 失败 2
+2026-04-30 09:54:36,986 [INFO] 完成采集: [tavily] tavily_instant_retail_beauty — 成功 60, 失败 2, 耗时 12.86s
+2026-04-30 09:54:37,238 [INFO] [Tavily tavily_category_trends] 完成: 6/6 成功, 0 失败, 耗时 13.1s
+2026-04-30 09:54:37,238 [INFO] [Tavily] tavily_category_trends: query 0 返回 10 条结果
+2026-04-30 09:54:37,238 [INFO] [Tavily] tavily_category_trends: query 1 返回 10 条结果
+2026-04-30 09:54:37,239 [WARNING] [Tavily] tavily_category_trends: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:37,239 [INFO] [Tavily] tavily_category_trends: query 3 返回 10 条结果
+2026-04-30 09:54:37,239 [INFO] [Tavily] tavily_category_trends: query 4 返回 10 条结果
+2026-04-30 09:54:37,239 [WARNING] [Tavily] tavily_category_trends: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:37,239 [INFO] [Tavily] tavily_category_trends: 总计 40 条, 成功 40, 失败 2
+2026-04-30 09:54:37,239 [INFO] 完成采集: [tavily] tavily_category_trends — 成功 40, 失败 2, 耗时 13.09s
+2026-04-30 09:54:37,454 [INFO] [Tavily tavily_industry_data] 完成: 7/7 成功, 0 失败, 耗时 13.3s
+2026-04-30 09:54:37,455 [INFO] [Tavily] tavily_industry_data: query 0 返回 10 条结果
+2026-04-30 09:54:37,455 [INFO] [Tavily] tavily_industry_data: query 1 返回 10 条结果
+2026-04-30 09:54:37,455 [WARNING] [Tavily] tavily_industry_data: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:37,455 [INFO] [Tavily] tavily_industry_data: query 3 返回 10 条结果
+2026-04-30 09:54:37,455 [INFO] [Tavily] tavily_industry_data: query 4 返回 10 条结果
+2026-04-30 09:54:37,455 [WARNING] [Tavily] tavily_industry_data: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:37,456 [INFO] [Tavily] tavily_industry_data: query 6 返回 10 条结果
+2026-04-30 09:54:37,456 [INFO] [Tavily] tavily_industry_data: 总计 50 条, 成功 50, 失败 2
+2026-04-30 09:54:37,456 [INFO] 完成采集: [tavily] tavily_industry_data — 成功 50, 失败 2, 耗时 13.3s
+2026-04-30 09:54:45,007 [INFO] [Tavily tavily_today_beauty_retail] 完成: 7/7 成功, 0 失败, 耗时 12.4s
+2026-04-30 09:54:45,007 [INFO] [Tavily] tavily_today_beauty_retail: query 0 返回 10 条结果
+2026-04-30 09:54:45,007 [INFO] [Tavily] tavily_today_beauty_retail: query 1 返回 10 条结果
+2026-04-30 09:54:45,008 [WARNING] [Tavily] tavily_today_beauty_retail: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:45,008 [INFO] [Tavily] tavily_today_beauty_retail: query 3 返回 10 条结果
+2026-04-30 09:54:45,008 [INFO] [Tavily] tavily_today_beauty_retail: query 4 返回 10 条结果
+2026-04-30 09:54:45,008 [WARNING] [Tavily] tavily_today_beauty_retail: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:54:45,008 [INFO] [Tavily] tavily_today_beauty_retail: query 6 返回 10 条结果
+2026-04-30 09:54:45,008 [INFO] [Tavily] tavily_today_beauty_retail: 总计 50 条, 成功 50, 失败 2
+2026-04-30 09:54:45,008 [INFO] 完成采集: [tavily] tavily_today_beauty_retail — 成功 50, 失败 2, 耗时 12.38s
+2026-04-30 09:54:45,009 [INFO] 总采集数: 995
+2026-04-30 09:54:45,044 [WARNING] 去重后 889 条，截断到 600
+2026-04-30 09:54:45,045 [INFO] 去重后数量: 600
+2026-04-30 09:54:45,045 [INFO] allow_old 过滤: 丢弃 6 条 old 文章 (allow_old=false 的源不允许 old)
+2026-04-30 09:54:45,046 [INFO] allow_old 过滤后数量: 594 (过滤前 600, 丢弃 6)
+2026-04-30 09:54:45,046 [INFO] 时间窗口内: 146, 近窗口: 6, 早于窗口: 268, 无法识别: 174
+2026-04-30 09:54:45,165 [INFO] 输出文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json
+2026-04-30 09:54:45,165 [INFO] ============================================================
+2026-04-30 09:54:45,165 [INFO] 采集完成汇总:
+2026-04-30 09:54:45,165 [INFO]   总采集数: 995
+2026-04-30 09:54:45,166 [INFO]   去重后数量: 594
+2026-04-30 09:54:45,166 [INFO]   in_window: 146
+2026-04-30 09:54:45,166 [INFO]   near_window: 6
+2026-04-30 09:54:45,166 [INFO]   old: 268
+2026-04-30 09:54:45,166 [INFO]   unknown_time: 174
+2026-04-30 09:54:45,166 [INFO]   rsshub: 469
+2026-04-30 09:54:45,166 [INFO]   rss: 0
+2026-04-30 09:54:45,167 [INFO]   web: 0
+2026-04-30 09:54:45,167 [INFO]   xcrawl: 196
+2026-04-30 09:54:45,167 [INFO]   tavily: 330
+2026-04-30 09:54:45,167 [INFO]   Tavily Key 状态:
+2026-04-30 09:54:45,167 [INFO]     key_0_tavily_key: calls=18, remaining=982, exhausted=False
+2026-04-30 09:54:45,167 [INFO]     key_1_tavily_key1: calls=15, remaining=985, exhausted=False
+2026-04-30 09:54:45,167 [INFO]     key_2_tavily_key2: calls=0, remaining=1000, exhausted=False
+2026-04-30 09:54:45,167 [INFO]   源 [rsshub_huxiu_search_meituan_flash]: 成功 12, 失败 0, 耗时 17.69s, 错误: None
+2026-04-30 09:54:45,168 [INFO]   源 [rsshub_huxiu_search_watsons]: 成功 20, 失败 0, 耗时 17.77s, 错误: None
+2026-04-30 09:54:45,168 [INFO]   源 [rsshub_huxiu_search_jd_instant]: 成功 7, 失败 0, 耗时 18.69s, 错误: None
+2026-04-30 09:54:45,168 [INFO]   源 [rsshub_huxiu_search_instant_retail]: 成功 20, 失败 0, 耗时 18.7s, 错误: None
+2026-04-30 09:54:45,168 [INFO]   源 [rsshub_huxiu_search_douyin_hour]: 成功 20, 失败 0, 耗时 18.78s, 错误: None
+2026-04-30 09:54:45,168 [INFO]   源 [rsshub_huxiu_search_taobao_flash]: 成功 20, 失败 0, 耗时 18.87s, 错误: None
+2026-04-30 09:54:45,168 [INFO]   源 [rsshub_huxiu_search_flash]: 成功 20, 失败 0, 耗时 15.22s, 错误: None
+2026-04-30 09:54:45,168 [INFO]   源 [rsshub_huxiu_search_personal_care]: 成功 20, 失败 0, 耗时 15.24s, 错误: None
+2026-04-30 09:54:45,169 [INFO]   源 [rsshub_huxiu_search_beauty]: 成功 20, 失败 0, 耗时 16.73s, 错误: None
+2026-04-30 09:54:45,169 [INFO]   源 [rsshub_huxiu_search_front_warehouse]: 成功 20, 失败 0, 耗时 16.95s, 错误: None
+2026-04-30 09:54:45,169 [INFO]   源 [rsshub_huxiu_search_sephora]: 成功 12, 失败 0, 耗时 16.86s, 错误: None
+2026-04-30 09:54:45,169 [INFO]   源 [rsshub_cls_telegraph]: 成功 20, 失败 0, 耗时 3.46s, 错误: None
+2026-04-30 09:54:45,169 [INFO]   源 [rsshub_latepost]: 成功 0, 失败 1, 耗时 20.04s, 错误: None
+2026-04-30 09:54:45,169 [INFO]   源 [rsshub_huxiu_search_tmall]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,169 [INFO]   源 [rsshub_huxiu_search_jd]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,170 [INFO]   源 [rsshub_huxiu_search_douyin_ecom]: 成功 0, 失败 1, 耗时 20.03s, 错误: None
+2026-04-30 09:54:45,170 [INFO]   源 [rsshub_huxiu_search_miniso]: 成功 0, 失败 1, 耗时 20.01s, 错误: None
+2026-04-30 09:54:45,170 [INFO]   源 [rsshub_huxiu_retail_channel]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,170 [INFO]   源 [rsshub_cls_depth]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,170 [INFO]   源 [rsshub_36kr_search_watsons]: 成功 20, 失败 0, 耗时 11.01s, 错误: None
+2026-04-30 09:54:45,170 [INFO]   源 [rsshub_huxiu_article]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,170 [INFO]   源 [rsshub_huxiu_search_skincare]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,171 [INFO]   源 [rsshub_huxiu_search_loreal]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,171 [INFO]   源 [rsshub_huxiu_consumer_channel]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,171 [INFO]   源 [rsshub_huxiu_search_sunscreen]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,171 [INFO]   源 [rsshub_huxiu_search_proya]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,171 [INFO]   源 [rsshub_36kr_search_meituan_flash]: 成功 20, 失败 0, 耗时 11.73s, 错误: None
+2026-04-30 09:54:45,171 [INFO]   源 [rsshub_36kr_newsflashes]: 成功 20, 失败 0, 耗时 12.63s, 错误: None
+2026-04-30 09:54:45,171 [INFO]   源 [rsshub_36kr_search_taobao_flash]: 成功 20, 失败 0, 耗时 13.16s, 错误: None
+2026-04-30 09:54:45,172 [INFO]   源 [rsshub_36kr_search_jd_instant]: 成功 20, 失败 0, 耗时 5.35s, 错误: None
+2026-04-30 09:54:45,172 [INFO]   源 [rsshub_huxiu_search_winona]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,172 [INFO]   源 [rsshub_huxiu_search_wow_colour]: 成功 0, 失败 1, 耗时 20.0s, 错误: None
+2026-04-30 09:54:45,172 [INFO]   源 [rsshub_36kr_search_douyin_hour]: 成功 20, 失败 0, 耗时 8.65s, 错误: None
+2026-04-30 09:54:45,172 [INFO]   源 [rsshub_yicai]: 成功 30, 失败 0, 耗时 5.14s, 错误: None
+2026-04-30 09:54:45,172 [INFO]   源 [rsshub_ifeng]: 成功 0, 失败 1, 耗时 0.02s, 错误: None
+2026-04-30 09:54:45,172 [INFO]   源 [rsshub_36kr_search_instant_retail]: 成功 20, 失败 0, 耗时 2.42s, 错误: None
+2026-04-30 09:54:45,173 [INFO]   源 [rsshub_wallstreetcn]: 成功 30, 失败 0, 耗时 17.41s, 错误: None
+2026-04-30 09:54:45,173 [INFO]   源 [rsshub_36kr_search_beauty]: 成功 20, 失败 0, 耗时 8.91s, 错误: None
+2026-04-30 09:54:45,173 [INFO]   源 [rsshub_caixin]: 成功 18, 失败 0, 耗时 17.35s, 错误: None
+2026-04-30 09:54:45,173 [INFO]   源 [rsshub_huxiu_search_xiaohongshu]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:54:45,173 [INFO]   源 [rsshub_guancha]: 成功 20, 失败 0, 耗时 19.61s, 错误: None
+2026-04-30 09:54:45,173 [INFO]   源 [rss_cbndata_beauty]: 成功 0, 失败 0, 耗时 0.3s, 错误: None
+2026-04-30 09:54:45,173 [INFO]   源 [web_baidu_news_meituan_flash]: 成功 0, 失败 0, 耗时 0.14s, 错误: None
+2026-04-30 09:54:45,174 [INFO]   源 [web_nmpa_cosmetic]: 成功 0, 失败 0, 耗时 0.35s, 错误: Failed to fetch index: https://www.nmpa.gov.cn/WS04/CL2044/
+2026-04-30 09:54:45,174 [INFO]   源 [web_eleoda_rules]: 成功 0, 失败 0, 耗时 0.45s, 错误: None
+2026-04-30 09:54:45,174 [INFO]   源 [web_watsons_cn]: 成功 0, 失败 0, 耗时 0.18s, 错误: Failed to fetch index: https://www.watsons.com.cn/about/news
+2026-04-30 09:54:45,174 [INFO]   源 [web_jd_daojia]: 成功 0, 失败 0, 耗时 0.5s, 错误: None
+2026-04-30 09:54:45,174 [INFO]   源 [web_sephora_cn]: 成功 0, 失败 0, 耗时 0.32s, 错误: Failed to fetch index: https://www.sephora.cn/news
+2026-04-30 09:54:45,174 [INFO]   源 [xcrawl_regulation_today]: 成功 40, 失败 0, 耗时 15.09s, 错误: None
+2026-04-30 09:54:45,174 [INFO]   源 [xcrawl_competitor_today]: 成功 40, 失败 0, 耗时 16.86s, 错误: None
+2026-04-30 09:54:45,175 [INFO]   源 [xcrawl_instant_retail_today]: 成功 57, 失败 0, 耗时 21.84s, 错误: None
+2026-04-30 09:54:45,175 [INFO]   源 [xcrawl_beauty_retail_today]: 成功 59, 失败 0, 耗时 24.94s, 错误: None
+2026-04-30 09:54:45,175 [INFO]   源 [tavily_competitor_moves]: 成功 40, 失败 2, 耗时 8.5s, 错误: None
+2026-04-30 09:54:45,175 [INFO]   源 [tavily_platform_regulation]: 成功 40, 失败 2, 耗时 11.19s, 错误: None
+2026-04-30 09:54:45,175 [INFO]   源 [tavily_today_instant_retail]: 成功 50, 失败 2, 耗时 11.78s, 错误: None
+2026-04-30 09:54:45,175 [INFO]   源 [tavily_instant_retail_beauty]: 成功 60, 失败 2, 耗时 12.86s, 错误: None
+2026-04-30 09:54:45,175 [INFO]   源 [tavily_category_trends]: 成功 40, 失败 2, 耗时 13.09s, 错误: None
+2026-04-30 09:54:45,176 [INFO]   源 [tavily_industry_data]: 成功 50, 失败 2, 耗时 13.3s, 错误: None
+2026-04-30 09:54:45,176 [INFO]   源 [tavily_today_beauty_retail]: 成功 50, 失败 2, 耗时 12.38s, 错误: None
+2026-04-30 09:54:45,176 [INFO] ============================================================
+2026-04-30 09:56:34,724 [INFO] ============================================================
+2026-04-30 09:56:34,725 [INFO] 开始采集 (V2): date=2026-04-29
+2026-04-30 09:56:34,725 [INFO] 时间窗口: 2026-04-28 07:00:00+08:00 ~ 2026-04-30 17:56:34.723436+08:00
+2026-04-30 09:56:34,725 [INFO] 项目根目录: /app/working/projects/watsons-retail-intel
+2026-04-30 09:56:34,725 [INFO] ============================================================
+2026-04-30 09:56:34,923 [INFO] 加载 98 个关键词
+2026-04-30 09:56:34,923 [INFO] RSSHub 基础地址: http://192.168.2.100:1200
+2026-04-30 09:56:34,924 [INFO] Tavily: 3 个 Key 已加载，轮换策略: round_robin
+2026-04-30 09:56:34,924 [INFO] XCrawl: 3 个 Key 已加载
+2026-04-30 09:56:34,924 [INFO] 启用源数量: 59 (rsshub: 43, other: 20, legacy: 0)
+2026-04-30 09:56:34,924 [INFO] RSSHub filterout_days 全局默认: 90 天
+2026-04-30 09:56:34,945 [INFO] 源级并行采集已启用, workers: {'rsshub': 6, 'rss': 4, 'web': 2, 'tavily': 6}
+2026-04-30 09:56:34,946 [INFO] 并行采集 [rsshub] 组: 41 个源, max_workers=6
+2026-04-30 09:56:34,947 [INFO] [RSSHub] rsshub_huxiu_search_meituan_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:34,947 [INFO] [RSSHub] rsshub_huxiu_search_meituan_flash: 请求 http://192.168.2.100:1200/huxiu/search/美团闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:56:34,948 [INFO] [RSSHub] rsshub_huxiu_search_jd_instant: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:34,948 [INFO] [RSSHub] rsshub_huxiu_search_jd_instant: 请求 http://192.168.2.100:1200/huxiu/search/京东秒送?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:56:34,949 [INFO] [RSSHub] rsshub_huxiu_search_taobao_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:34,950 [INFO] [RSSHub] rsshub_huxiu_search_taobao_flash: 请求 http://192.168.2.100:1200/huxiu/search/淘宝闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:56:34,951 [INFO] [RSSHub] rsshub_huxiu_search_douyin_hour: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:34,951 [INFO] [RSSHub] rsshub_huxiu_search_douyin_hour: 请求 http://192.168.2.100:1200/huxiu/search/抖音小时达?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:56:34,953 [INFO] [RSSHub] rsshub_huxiu_search_watsons: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:34,953 [INFO] [RSSHub] rsshub_huxiu_search_instant_retail: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:34,955 [INFO] [RSSHub] rsshub_huxiu_search_watsons: 请求 http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:56:34,956 [INFO] [RSSHub] rsshub_huxiu_search_instant_retail: 请求 http://192.168.2.100:1200/huxiu/search/即时零售?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:56:53,003 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_meituan_flash — 成功 12, 失败 0, 耗时 18.06s
+2026-04-30 09:56:53,003 [INFO] [RSSHub] rsshub_huxiu_search_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:53,004 [INFO] [RSSHub] rsshub_huxiu_search_flash: 请求 http://192.168.2.100:1200/huxiu/search/闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:56:53,107 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_watsons — 成功 20, 失败 0, 耗时 18.15s
+2026-04-30 09:56:53,107 [INFO] [RSSHub] rsshub_huxiu_search_personal_care: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:53,108 [INFO] [RSSHub] rsshub_huxiu_search_personal_care: 请求 http://192.168.2.100:1200/huxiu/search/个护?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:56:53,160 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_jd_instant — 成功 7, 失败 0, 耗时 18.21s
+2026-04-30 09:56:53,160 [INFO] [RSSHub] rsshub_latepost: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:53,161 [INFO] [RSSHub] rsshub_latepost: 请求 http://192.168.2.100:1200/latepost?limit=10&sorted=true&filterout_time=7776000
+2026-04-30 09:56:53,277 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_douyin_hour — 成功 20, 失败 0, 耗时 18.33s
+2026-04-30 09:56:53,278 [INFO] [RSSHub] rsshub_huxiu_search_front_warehouse: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:53,278 [INFO] [RSSHub] rsshub_huxiu_search_front_warehouse: 请求 http://192.168.2.100:1200/huxiu/search/前置仓?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:56:53,380 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_taobao_flash — 成功 20, 失败 0, 耗时 18.43s
+2026-04-30 09:56:53,381 [INFO] [RSSHub] rsshub_huxiu_search_beauty: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:53,381 [INFO] [RSSHub] rsshub_huxiu_search_beauty: 请求 http://192.168.2.100:1200/huxiu/search/美妆?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:56:54,180 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_instant_retail — 成功 20, 失败 0, 耗时 19.23s
+2026-04-30 09:56:54,180 [INFO] [RSSHub] rsshub_huxiu_search_sephora: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:56:54,181 [INFO] [RSSHub] rsshub_huxiu_search_sephora: 请求 http://192.168.2.100:1200/huxiu/search/丝芙兰?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:08,135 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_flash — 成功 20, 失败 0, 耗时 15.13s
+2026-04-30 09:57:08,135 [INFO] [RSSHub] rsshub_cls_telegraph: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-30 09:57:08,136 [INFO] [RSSHub] rsshub_cls_telegraph: 请求 http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800
+2026-04-30 09:57:09,943 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_personal_care — 成功 20, 失败 0, 耗时 16.84s
+2026-04-30 09:57:09,944 [INFO] [RSSHub] rsshub_huxiu_search_tmall: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:09,944 [INFO] [RSSHub] rsshub_huxiu_search_tmall: 请求 http://192.168.2.100:1200/huxiu/search/天猫?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:10,698 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_front_warehouse — 成功 20, 失败 0, 耗时 17.42s
+2026-04-30 09:57:10,710 [INFO] [RSSHub] rsshub_huxiu_search_jd: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:10,711 [INFO] [RSSHub] rsshub_huxiu_search_jd: 请求 http://192.168.2.100:1200/huxiu/search/京东?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:10,725 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_beauty — 成功 20, 失败 0, 耗时 17.34s
+2026-04-30 09:57:10,746 [INFO] [RSSHub] rsshub_huxiu_search_douyin_ecom: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:10,755 [INFO] [RSSHub] rsshub_huxiu_search_douyin_ecom: 请求 http://192.168.2.100:1200/huxiu/search/抖音电商?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:10,756 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_sephora — 成功 12, 失败 0, 耗时 16.58s
+2026-04-30 09:57:10,759 [INFO] [RSSHub] rsshub_huxiu_search_miniso: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:10,760 [INFO] [RSSHub] rsshub_huxiu_search_miniso: 请求 http://192.168.2.100:1200/huxiu/search/名创优品?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:11,052 [INFO] 完成采集: [rsshub] rsshub_cls_telegraph — 成功 20, 失败 0, 耗时 2.92s
+2026-04-30 09:57:11,053 [INFO] [RSSHub] rsshub_huxiu_retail_channel: filterout_time=2592000s (排除 >30天的旧文章)
+2026-04-30 09:57:11,054 [INFO] [RSSHub] rsshub_huxiu_retail_channel: 请求 http://192.168.2.100:1200/huxiu/channel/115?limit=30&sorted=true&filterout_time=2592000
+2026-04-30 09:57:13,184 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/latepost?limit=10&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:13,184 [INFO] 完成采集: [rsshub] rsshub_latepost — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:57:13,185 [INFO] [RSSHub] rsshub_cls_depth: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-30 09:57:13,185 [INFO] [RSSHub] rsshub_cls_depth: 请求 http://192.168.2.100:1200/cls/depth?limit=30&filterout_time=604800
+2026-04-30 09:57:29,956 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/天猫?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:29,957 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_tmall — 成功 0, 失败 1, 耗时 20.01s
+2026-04-30 09:57:29,957 [INFO] [RSSHub] rsshub_huxiu_article: filterout_time=5184000s (排除 >60天的旧文章)
+2026-04-30 09:57:29,957 [INFO] [RSSHub] rsshub_huxiu_article: 请求 http://192.168.2.100:1200/huxiu/article?limit=30&sorted=true&filterout_time=5184000
+2026-04-30 09:57:30,738 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/京东?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:30,739 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_jd — 成功 0, 失败 1, 耗时 20.03s
+2026-04-30 09:57:30,739 [INFO] [RSSHub] rsshub_huxiu_search_skincare: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:30,739 [INFO] [RSSHub] rsshub_huxiu_search_skincare: 请求 http://192.168.2.100:1200/huxiu/search/护肤品?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:30,768 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/抖音电商?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:30,768 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_douyin_ecom — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:57:30,769 [INFO] [RSSHub] rsshub_huxiu_search_loreal: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:30,769 [INFO] [RSSHub] rsshub_huxiu_search_loreal: 请求 http://192.168.2.100:1200/huxiu/search/欧莱雅?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:30,783 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/名创优品?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:30,784 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_miniso — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:57:30,784 [INFO] [RSSHub] rsshub_36kr_search_watsons: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:30,784 [INFO] [RSSHub] rsshub_36kr_search_watsons: 请求 http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:31,062 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/channel/115?limit=30&sorted=true&filterout_time=2592000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:31,062 [INFO] 完成采集: [rsshub] rsshub_huxiu_retail_channel — 成功 0, 失败 1, 耗时 20.01s
+2026-04-30 09:57:31,063 [INFO] [RSSHub] rsshub_huxiu_consumer_channel: filterout_time=2592000s (排除 >30天的旧文章)
+2026-04-30 09:57:31,063 [INFO] [RSSHub] rsshub_huxiu_consumer_channel: 请求 http://192.168.2.100:1200/huxiu/channel/107?limit=30&sorted=true&filterout_time=2592000
+2026-04-30 09:57:33,208 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/cls/depth?limit=30&filterout_time=604800 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:33,208 [INFO] 完成采集: [rsshub] rsshub_cls_depth — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:57:33,208 [INFO] [RSSHub] rsshub_huxiu_search_sunscreen: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:33,209 [INFO] [RSSHub] rsshub_huxiu_search_sunscreen: 请求 http://192.168.2.100:1200/huxiu/search/防晒?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:41,174 [INFO] 完成采集: [rsshub] rsshub_36kr_search_watsons — 成功 20, 失败 0, 耗时 10.39s
+2026-04-30 09:57:41,174 [INFO] [RSSHub] rsshub_huxiu_search_proya: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:41,178 [INFO] [RSSHub] rsshub_huxiu_search_proya: 请求 http://192.168.2.100:1200/huxiu/search/珀莱雅?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:49,978 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/article?limit=30&sorted=true&filterout_time=5184000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:49,978 [INFO] 完成采集: [rsshub] rsshub_huxiu_article — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:57:49,979 [INFO] [RSSHub] rsshub_huxiu_search_winona: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:49,979 [INFO] [RSSHub] rsshub_huxiu_search_winona: 请求 http://192.168.2.100:1200/huxiu/search/薇诺娜?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:50,748 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/护肤品?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:50,749 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_skincare — 成功 0, 失败 1, 耗时 20.01s
+2026-04-30 09:57:50,749 [INFO] [RSSHub] rsshub_36kr_newsflashes: filterout_time=5184000s (排除 >60天的旧文章)
+2026-04-30 09:57:50,750 [INFO] [RSSHub] rsshub_36kr_newsflashes: 请求 http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000
+2026-04-30 09:57:50,787 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/欧莱雅?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:50,787 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_loreal — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:57:50,787 [INFO] [RSSHub] rsshub_huxiu_search_wow_colour: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:50,788 [INFO] [RSSHub] rsshub_huxiu_search_wow_colour: 请求 http://192.168.2.100:1200/huxiu/search/WOW%20COLOUR?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:51,086 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/channel/107?limit=30&sorted=true&filterout_time=2592000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:51,086 [INFO] 完成采集: [rsshub] rsshub_huxiu_consumer_channel — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:57:51,086 [INFO] [RSSHub] rsshub_36kr_search_meituan_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:51,087 [INFO] [RSSHub] rsshub_36kr_search_meituan_flash: 请求 http://192.168.2.100:1200/36kr/search/articles/美团闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:57:53,223 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/防晒?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:57:53,223 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_sunscreen — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:57:53,223 [INFO] [RSSHub] rsshub_36kr_search_taobao_flash: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:57:53,225 [INFO] [RSSHub] rsshub_36kr_search_taobao_flash: 请求 http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:58:01,197 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/珀莱雅?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:58:01,197 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_proya — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:58:01,198 [INFO] [RSSHub] rsshub_36kr_search_jd_instant: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:58:01,198 [INFO] [RSSHub] rsshub_36kr_search_jd_instant: 请求 http://192.168.2.100:1200/36kr/search/articles/京东秒送?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:58:01,424 [INFO] 完成采集: [rsshub] rsshub_36kr_newsflashes — 成功 20, 失败 0, 耗时 10.67s
+2026-04-30 09:58:01,424 [INFO] [RSSHub] rsshub_36kr_search_douyin_hour: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:58:01,425 [INFO] [RSSHub] rsshub_36kr_search_douyin_hour: 请求 http://192.168.2.100:1200/36kr/search/articles/抖音小时达?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:58:02,160 [INFO] 完成采集: [rsshub] rsshub_36kr_search_meituan_flash — 成功 20, 失败 0, 耗时 11.07s
+2026-04-30 09:58:02,160 [INFO] [RSSHub] rsshub_wallstreetcn: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-30 09:58:02,161 [INFO] [RSSHub] rsshub_wallstreetcn: 请求 http://192.168.2.100:1200/wallstreetcn/news?limit=30&filterout_time=604800
+2026-04-30 09:58:02,271 [INFO] 完成采集: [rsshub] rsshub_36kr_search_taobao_flash — 成功 20, 失败 0, 耗时 9.05s
+2026-04-30 09:58:02,271 [INFO] [RSSHub] rsshub_yicai: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-30 09:58:02,272 [INFO] [RSSHub] rsshub_yicai: 请求 http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800
+2026-04-30 09:58:06,972 [INFO] 完成采集: [rsshub] rsshub_36kr_search_jd_instant — 成功 20, 失败 0, 耗时 5.77s
+2026-04-30 09:58:06,973 [INFO] [RSSHub] rsshub_caixin: filterout_time=604800s (排除 >7天的旧文章)
+2026-04-30 09:58:06,973 [INFO] [RSSHub] rsshub_caixin: 请求 http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800
+2026-04-30 09:58:07,084 [INFO] 完成采集: [rsshub] rsshub_36kr_search_douyin_hour — 成功 20, 失败 0, 耗时 5.66s
+2026-04-30 09:58:07,085 [INFO] [RSSHub] rsshub_huxiu_search_xiaohongshu: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:58:07,085 [INFO] [RSSHub] rsshub_huxiu_search_xiaohongshu: 请求 http://192.168.2.100:1200/huxiu/search/小红书?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:58:10,000 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/薇诺娜?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:58:10,001 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_winona — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:58:10,001 [INFO] [RSSHub] rsshub_36kr_search_instant_retail: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:58:10,002 [INFO] [RSSHub] rsshub_36kr_search_instant_retail: 请求 http://192.168.2.100:1200/36kr/search/articles/即时零售?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:58:10,821 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/WOW%20COLOUR?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:58:10,821 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_wow_colour — 成功 0, 失败 1, 耗时 20.03s
+2026-04-30 09:58:10,827 [INFO] [RSSHub] rsshub_36kr_search_beauty: filterout_time=7776000s (排除 >90天的旧文章)
+2026-04-30 09:58:10,827 [INFO] [RSSHub] rsshub_36kr_search_beauty: 请求 http://192.168.2.100:1200/36kr/search/articles/美妆?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:58:10,870 [INFO] 完成采集: [rsshub] rsshub_yicai — 成功 30, 失败 0, 耗时 8.6s
+2026-04-30 09:58:10,870 [INFO] [RSSHub] rsshub_ifeng: filterout_time=259200s (排除 >3天的旧文章)
+2026-04-30 09:58:10,870 [INFO] [RSSHub] rsshub_ifeng: 请求 http://192.168.2.100:1200/ifeng?limit=30&filterout_time=259200
+2026-04-30 09:58:10,883 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/ifeng?limit=30&filterout_time=259200 — 503 Server Error: Service Unavailable for url: http://192.168.2.100:1200/ifeng?limit=30&filterout_time=259200
+2026-04-30 09:58:10,883 [INFO] 完成采集: [rsshub] rsshub_ifeng — 成功 0, 失败 1, 耗时 0.01s
+2026-04-30 09:58:10,884 [INFO] [RSSHub] rsshub_guancha: filterout_time=259200s (排除 >3天的旧文章)
+2026-04-30 09:58:10,884 [INFO] [RSSHub] rsshub_guancha: 请求 http://192.168.2.100:1200/guancha/headline?limit=20&filterout_time=259200
+2026-04-30 09:58:18,733 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/36kr/search/articles/即时零售?limit=20&sorted=true&filterout_time=7776000 — 503 Server Error: Service Unavailable for url: http://192.168.2.100:1200/36kr/search/articles/%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:58:18,738 [INFO] 完成采集: [rsshub] rsshub_36kr_search_instant_retail — 成功 0, 失败 1, 耗时 8.74s
+2026-04-30 09:58:18,869 [INFO] 完成采集: [rsshub] rsshub_wallstreetcn — 成功 30, 失败 0, 耗时 16.71s
+2026-04-30 09:58:19,215 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/36kr/search/articles/美妆?limit=20&sorted=true&filterout_time=7776000 — 503 Server Error: Service Unavailable for url: http://192.168.2.100:1200/36kr/search/articles/%E7%BE%8E%E5%A6%86?limit=20&sorted=true&filterout_time=7776000
+2026-04-30 09:58:19,216 [INFO] 完成采集: [rsshub] rsshub_36kr_search_beauty — 成功 0, 失败 1, 耗时 8.39s
+2026-04-30 09:58:22,767 [INFO] 完成采集: [rsshub] rsshub_caixin — 成功 18, 失败 0, 耗时 15.79s
+2026-04-30 09:58:27,106 [WARNING] HTTP GET 失败: http://192.168.2.100:1200/huxiu/search/小红书?limit=20&sorted=true&filterout_time=7776000 — HTTPConnectionPool(host='192.168.2.100', port=1200): Read timed out. (read timeout=20)
+2026-04-30 09:58:27,107 [INFO] 完成采集: [rsshub] rsshub_huxiu_search_xiaohongshu — 成功 0, 失败 1, 耗时 20.02s
+2026-04-30 09:58:29,057 [INFO] 完成采集: [rsshub] rsshub_guancha — 成功 20, 失败 0, 耗时 18.17s
+2026-04-30 09:58:29,059 [INFO] 开始采集: [rss] rss_cbndata_beauty
+2026-04-30 09:58:29,059 [INFO] [RSS] rss_cbndata_beauty: 请求 https://www.cbndata.com/rss/beauty
+2026-04-30 09:58:29,310 [INFO] 完成采集: [rss] rss_cbndata_beauty — 成功 0, 失败 0, 耗时 0.25s
+2026-04-30 09:58:29,311 [INFO] 并行采集 [web] 组: 6 个源, max_workers=2
+2026-04-30 09:58:29,312 [INFO] [Web] web_baidu_news_meituan_flash: 抓取首页 https://www.baidu.com/s?rtt=4&rn=20&ie=utf-8&tn=news&word=%E7%BE%8E%E5%9B%A2%E9%97%AA%E8%B4%AD+%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE
+2026-04-30 09:58:29,314 [INFO] [Web] web_nmpa_cosmetic: 抓取首页 https://www.nmpa.gov.cn/WS04/CL2044/
+2026-04-30 09:58:29,472 [INFO] [Web] web_baidu_news_meituan_flash: 提取到 0 个候选链接
+2026-04-30 09:58:29,474 [INFO] 完成采集: [web] web_baidu_news_meituan_flash — 成功 0, 失败 0, 耗时 0.16s
+2026-04-30 09:58:29,475 [INFO] [Web] web_eleoda_rules: 抓取首页 https://www.ele.me/rulecenter
+2026-04-30 09:58:29,667 [WARNING] HTTP GET 失败: https://www.nmpa.gov.cn/WS04/CL2044/ — 412 Client Error: Precondition Failed for url: https://www.nmpa.gov.cn/WS04/CL2044/
+2026-04-30 09:58:29,669 [INFO] 完成采集: [web] web_nmpa_cosmetic — 成功 0, 失败 0, 耗时 0.35s
+2026-04-30 09:58:29,670 [INFO] [Web] web_jd_daojia: 抓取首页 https://daoja.jd.com/notice
+2026-04-30 09:58:29,713 [INFO] [Web] web_eleoda_rules: 提取到 0 个候选链接
+2026-04-30 09:58:29,716 [INFO] 完成采集: [web] web_eleoda_rules — 成功 0, 失败 0, 耗时 0.24s
+2026-04-30 09:58:29,717 [INFO] [Web] web_watsons_cn: 抓取首页 https://www.watsons.com.cn/about/news
+2026-04-30 09:58:30,121 [INFO] [Web] web_jd_daojia: 提取到 0 个候选链接
+2026-04-30 09:58:30,126 [INFO] 完成采集: [web] web_jd_daojia — 成功 0, 失败 0, 耗时 0.46s
+2026-04-30 09:58:30,127 [INFO] [Web] web_sephora_cn: 抓取首页 https://www.sephora.cn/news
+2026-04-30 09:58:30,215 [WARNING] HTTP GET 失败: https://www.watsons.com.cn/about/news — 404 Client Error: Not Found for url: https://www.watsons.com.cn/about/news
+2026-04-30 09:58:30,218 [INFO] 完成采集: [web] web_watsons_cn — 成功 0, 失败 0, 耗时 0.5s
+2026-04-30 09:58:30,419 [WARNING] HTTP GET 失败: https://www.sephora.cn/news — 404 Client Error: Not Found for url: https://www.sephora.cn/news
+2026-04-30 09:58:30,422 [INFO] 完成采集: [web] web_sephora_cn — 成功 0, 失败 0, 耗时 0.3s
+2026-04-30 09:58:30,423 [INFO] 并行采集 [xcrawl] 组: 4 个源, max_workers=4
+2026-04-30 09:58:30,472 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '美妆 个护 即时零售 今日 2026年4月30日'
+2026-04-30 09:58:30,477 [INFO] [XCrawl] xcrawl_competitor_today: 搜索 '屈臣氏 即时零售 门店 会员 最新 2026年4月30日'
+2026-04-30 09:58:30,482 [INFO] [XCrawl] xcrawl_regulation_today: 搜索 '即时零售 监管 合规 最新 2026 2026年4月30日'
+2026-04-30 09:58:30,490 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '即时零售 美妆 个护 最新新闻 2026年4月30日'
+2026-04-30 09:58:33,354 [INFO] [XCrawl] xcrawl_instant_retail_today: '即时零售 美妆 个护 最新新闻 2026年4月30日' → 10 篇
+2026-04-30 09:58:33,354 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '美团闪购 即时零售 品牌入驻 2026年4月30日'
+2026-04-30 09:58:33,537 [INFO] [XCrawl] xcrawl_regulation_today: '即时零售 监管 合规 最新 2026 2026年4月30日' → 10 篇
+2026-04-30 09:58:33,539 [INFO] [XCrawl] xcrawl_regulation_today: 搜索 '淘宝闪购 美团 京东 自查整改 2026年4月30日'
+2026-04-30 09:58:33,578 [INFO] [XCrawl] xcrawl_competitor_today: '屈臣氏 即时零售 门店 会员 最新 2026年4月30日' → 10 篇
+2026-04-30 09:58:33,579 [INFO] [XCrawl] xcrawl_competitor_today: 搜索 '丝芙兰 线上 线下 即时零售 2026 2026年4月30日'
+2026-04-30 09:58:33,898 [INFO] [XCrawl] xcrawl_beauty_retail_today: '美妆 个护 即时零售 今日 2026年4月30日' → 10 篇
+2026-04-30 09:58:33,898 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '屈臣氏 丝芙兰 即时零售 最新 2026年4月30日'
+2026-04-30 09:58:36,293 [INFO] [XCrawl] xcrawl_instant_retail_today: '美团闪购 即时零售 品牌入驻 2026年4月30日' → 10 篇
+2026-04-30 09:58:36,293 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '闪电仓 前置仓 即时配送 2026年4月30日'
+2026-04-30 09:58:36,871 [INFO] [XCrawl] xcrawl_competitor_today: '丝芙兰 线上 线下 即时零售 2026 2026年4月30日' → 10 篇
+2026-04-30 09:58:36,871 [INFO] [XCrawl] xcrawl_competitor_today: 搜索 '名创优品 闪购 到家 经营 最新 2026年4月30日'
+2026-04-30 09:58:38,692 [INFO] [XCrawl] xcrawl_regulation_today: '淘宝闪购 美团 京东 自查整改 2026年4月30日' → 10 篇
+2026-04-30 09:58:38,692 [INFO] [XCrawl] xcrawl_regulation_today: 搜索 '化妆品 备案 新规 监管 处罚 2026年4月30日'
+2026-04-30 09:58:39,524 [INFO] [XCrawl] xcrawl_beauty_retail_today: '屈臣氏 丝芙兰 即时零售 最新 2026年4月30日' → 10 篇
+2026-04-30 09:58:39,525 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '参半 WOW COLOUR 线上 线下 2026年4月30日'
+2026-04-30 09:58:39,623 [INFO] [XCrawl] xcrawl_instant_retail_today: '闪电仓 前置仓 即时配送 2026年4月30日' → 8 篇
+2026-04-30 09:58:39,623 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '小米家电 美团闪购 即时零售 2026年4月30日'
+2026-04-30 09:58:42,323 [INFO] [XCrawl] xcrawl_instant_retail_today: '小米家电 美团闪购 即时零售 2026年4月30日' → 8 篇
+2026-04-30 09:58:42,324 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '即时零售 万亿 增长 最新 2026年4月30日'
+2026-04-30 09:58:42,395 [INFO] [XCrawl] xcrawl_regulation_today: '化妆品 备案 新规 监管 处罚 2026年4月30日' → 10 篇
+2026-04-30 09:58:42,395 [INFO] [XCrawl] xcrawl_regulation_today: 搜索 '外卖 平台 入网 资质 审核 2026年4月30日'
+2026-04-30 09:58:43,151 [INFO] [XCrawl] xcrawl_competitor_today: '名创优品 闪购 到家 经营 最新 2026年4月30日' → 10 篇
+2026-04-30 09:58:43,152 [INFO] [XCrawl] xcrawl_competitor_today: 搜索 '花西子 完美日记 抖音电商 最新 2026年4月30日'
+2026-04-30 09:58:44,745 [INFO] [XCrawl] xcrawl_beauty_retail_today: '参半 WOW COLOUR 线上 线下 2026年4月30日' → 10 篇
+2026-04-30 09:58:44,745 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '贝泰妮 珀莱雅 即时零售 OMO 2026年4月30日'
+2026-04-30 09:58:45,499 [INFO] [XCrawl] xcrawl_instant_retail_today: '即时零售 万亿 增长 最新 2026年4月30日' → 10 篇
+2026-04-30 09:58:45,499 [INFO] [XCrawl] xcrawl_instant_retail_today: 搜索 '叮当健康 即时零售 闪电仓 2026年4月30日'
+2026-04-30 09:58:45,666 [INFO] [XCrawl] xcrawl_regulation_today: '外卖 平台 入网 资质 审核 2026年4月30日' → 10 篇
+2026-04-30 09:58:45,666 [INFO] [XCrawl] xcrawl_regulation_today: 共采集 40 篇文章 (40 成功, 0 失败)
+2026-04-30 09:58:45,666 [INFO] 完成采集: [xcrawl] xcrawl_regulation_today — 成功 40, 失败 0, 耗时 15.24s
+2026-04-30 09:58:46,752 [INFO] [XCrawl] xcrawl_competitor_today: '花西子 完美日记 抖音电商 最新 2026年4月30日' → 10 篇
+2026-04-30 09:58:46,752 [INFO] [XCrawl] xcrawl_competitor_today: 共采集 40 篇文章 (40 成功, 0 失败)
+2026-04-30 09:58:46,752 [INFO] 完成采集: [xcrawl] xcrawl_competitor_today — 成功 40, 失败 0, 耗时 16.33s
+2026-04-30 09:58:47,841 [INFO] [XCrawl] xcrawl_beauty_retail_today: '贝泰妮 珀莱雅 即时零售 OMO 2026年4月30日' → 10 篇
+2026-04-30 09:58:47,841 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '稳健医疗 即时零售 医美 修复 2026年4月30日'
+2026-04-30 09:58:50,646 [INFO] [XCrawl] xcrawl_instant_retail_today: '叮当健康 即时零售 闪电仓 2026年4月30日' → 10 篇
+2026-04-30 09:58:50,647 [INFO] [XCrawl] xcrawl_instant_retail_today: 共采集 56 篇文章 (56 成功, 0 失败)
+2026-04-30 09:58:50,647 [INFO] 完成采集: [xcrawl] xcrawl_instant_retail_today — 成功 56, 失败 0, 耗时 20.22s
+2026-04-30 09:58:51,246 [INFO] [XCrawl] xcrawl_beauty_retail_today: '稳健医疗 即时零售 医美 修复 2026年4月30日' → 10 篇
+2026-04-30 09:58:51,246 [INFO] [XCrawl] xcrawl_beauty_retail_today: 搜索 '美妆品牌 入驻 闪购 最新动态 2026年4月30日'
+2026-04-30 09:58:53,955 [INFO] [XCrawl] xcrawl_beauty_retail_today: '美妆品牌 入驻 闪购 最新动态 2026年4月30日' → 10 篇
+2026-04-30 09:58:53,956 [INFO] [XCrawl] xcrawl_beauty_retail_today: 共采集 60 篇文章 (60 成功, 0 失败)
+2026-04-30 09:58:53,956 [INFO] 完成采集: [xcrawl] xcrawl_beauty_retail_today — 成功 60, 失败 0, 耗时 23.53s
+2026-04-30 09:58:53,957 [INFO] 并行采集 [tavily] 组: 7 个源, max_workers=6
+2026-04-30 09:58:53,957 [INFO] [Tavily] tavily_instant_retail_beauty: 并行搜索 8 查询, keys=3, per_key_limit=1
+2026-04-30 09:58:53,958 [INFO] [Tavily tavily_instant_retail_beauty] 并行处理 8 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:58:53,958 [INFO] [Tavily] tavily_platform_regulation: 并行搜索 6 查询, keys=3, per_key_limit=1
+2026-04-30 09:58:53,959 [INFO] [Tavily] tavily_competitor_moves: 并行搜索 6 查询, keys=3, per_key_limit=1
+2026-04-30 09:58:53,959 [INFO] [Tavily tavily_platform_regulation] 并行处理 6 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:58:53,960 [INFO] [Tavily] tavily_industry_data: 并行搜索 7 查询, keys=3, per_key_limit=1
+2026-04-30 09:58:53,960 [INFO] [Tavily tavily_competitor_moves] 并行处理 6 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:58:53,960 [INFO] [Tavily] tavily_category_trends: 并行搜索 6 查询, keys=3, per_key_limit=1
+2026-04-30 09:58:53,961 [INFO] [Tavily tavily_industry_data] 并行处理 7 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:58:53,962 [INFO] [Tavily tavily_category_trends] 并行处理 6 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:58:53,963 [INFO] [Tavily] tavily_today_instant_retail: 并行搜索 7 查询, keys=3, per_key_limit=1
+2026-04-30 09:58:53,963 [INFO] [Tavily tavily_today_instant_retail] 并行处理 7 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:58:57,063 [INFO] [Tavily tavily_category_trends] 完成: 6/6 成功, 0 失败, 耗时 3.1s
+2026-04-30 09:58:57,064 [INFO] [Tavily] tavily_category_trends: query 0 返回 10 条结果
+2026-04-30 09:58:57,064 [INFO] [Tavily] tavily_category_trends: query 1 返回 10 条结果
+2026-04-30 09:58:57,064 [WARNING] [Tavily] tavily_category_trends: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:57,065 [INFO] [Tavily] tavily_category_trends: query 3 返回 10 条结果
+2026-04-30 09:58:57,065 [INFO] [Tavily] tavily_category_trends: query 4 返回 10 条结果
+2026-04-30 09:58:57,065 [WARNING] [Tavily] tavily_category_trends: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:57,065 [INFO] [Tavily] tavily_category_trends: 总计 40 条, 成功 40, 失败 2
+2026-04-30 09:58:57,065 [INFO] 完成采集: [tavily] tavily_category_trends — 成功 40, 失败 2, 耗时 3.1s
+2026-04-30 09:58:57,066 [INFO] [Tavily] tavily_today_beauty_retail: 并行搜索 7 查询, keys=3, per_key_limit=1
+2026-04-30 09:58:57,066 [INFO] [Tavily tavily_today_beauty_retail] 并行处理 7 项, max_workers=6, per_key_limit=1, keys=3
+2026-04-30 09:58:57,344 [INFO] [Tavily tavily_platform_regulation] 完成: 6/6 成功, 0 失败, 耗时 3.4s
+2026-04-30 09:58:57,345 [INFO] [Tavily] tavily_platform_regulation: query 0 返回 10 条结果
+2026-04-30 09:58:57,345 [INFO] [Tavily] tavily_platform_regulation: query 1 返回 10 条结果
+2026-04-30 09:58:57,345 [WARNING] [Tavily] tavily_platform_regulation: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:57,345 [INFO] [Tavily] tavily_platform_regulation: query 3 返回 10 条结果
+2026-04-30 09:58:57,345 [INFO] [Tavily] tavily_platform_regulation: query 4 返回 10 条结果
+2026-04-30 09:58:57,345 [WARNING] [Tavily] tavily_platform_regulation: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:57,345 [INFO] [Tavily] tavily_platform_regulation: 总计 40 条, 成功 40, 失败 2
+2026-04-30 09:58:57,346 [INFO] 完成采集: [tavily] tavily_platform_regulation — 成功 40, 失败 2, 耗时 3.39s
+2026-04-30 09:58:57,358 [INFO] [Tavily tavily_competitor_moves] 完成: 6/6 成功, 0 失败, 耗时 3.4s
+2026-04-30 09:58:57,360 [INFO] [Tavily] tavily_competitor_moves: query 0 返回 10 条结果
+2026-04-30 09:58:57,361 [INFO] [Tavily] tavily_competitor_moves: query 1 返回 10 条结果
+2026-04-30 09:58:57,361 [WARNING] [Tavily] tavily_competitor_moves: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:57,363 [INFO] [Tavily] tavily_competitor_moves: query 3 返回 10 条结果
+2026-04-30 09:58:57,363 [INFO] [Tavily] tavily_competitor_moves: query 4 返回 10 条结果
+2026-04-30 09:58:57,364 [WARNING] [Tavily] tavily_competitor_moves: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:57,364 [INFO] [Tavily] tavily_competitor_moves: 总计 40 条, 成功 40, 失败 2
+2026-04-30 09:58:57,364 [INFO] 完成采集: [tavily] tavily_competitor_moves — 成功 40, 失败 2, 耗时 3.41s
+2026-04-30 09:58:58,104 [INFO] [Tavily tavily_today_instant_retail] 完成: 7/7 成功, 0 失败, 耗时 4.1s
+2026-04-30 09:58:58,105 [INFO] [Tavily] tavily_today_instant_retail: query 0 返回 10 条结果
+2026-04-30 09:58:58,105 [INFO] [Tavily] tavily_today_instant_retail: query 1 返回 10 条结果
+2026-04-30 09:58:58,105 [WARNING] [Tavily] tavily_today_instant_retail: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:58,105 [INFO] [Tavily] tavily_today_instant_retail: query 3 返回 10 条结果
+2026-04-30 09:58:58,106 [INFO] [Tavily] tavily_today_instant_retail: query 4 返回 10 条结果
+2026-04-30 09:58:58,106 [WARNING] [Tavily] tavily_today_instant_retail: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:58,106 [INFO] [Tavily] tavily_today_instant_retail: query 6 返回 10 条结果
+2026-04-30 09:58:58,106 [INFO] [Tavily] tavily_today_instant_retail: 总计 50 条, 成功 50, 失败 2
+2026-04-30 09:58:58,106 [INFO] 完成采集: [tavily] tavily_today_instant_retail — 成功 50, 失败 2, 耗时 4.14s
+2026-04-30 09:58:58,509 [INFO] [Tavily tavily_instant_retail_beauty] 完成: 8/8 成功, 0 失败, 耗时 4.6s
+2026-04-30 09:58:58,509 [INFO] [Tavily] tavily_instant_retail_beauty: query 0 返回 10 条结果
+2026-04-30 09:58:58,509 [INFO] [Tavily] tavily_instant_retail_beauty: query 1 返回 10 条结果
+2026-04-30 09:58:58,510 [WARNING] [Tavily] tavily_instant_retail_beauty: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:58,510 [INFO] [Tavily] tavily_instant_retail_beauty: query 3 返回 10 条结果
+2026-04-30 09:58:58,510 [INFO] [Tavily] tavily_instant_retail_beauty: query 4 返回 10 条结果
+2026-04-30 09:58:58,510 [WARNING] [Tavily] tavily_instant_retail_beauty: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:58,510 [INFO] [Tavily] tavily_instant_retail_beauty: query 6 返回 10 条结果
+2026-04-30 09:58:58,510 [INFO] [Tavily] tavily_instant_retail_beauty: query 7 返回 10 条结果
+2026-04-30 09:58:58,510 [INFO] [Tavily] tavily_instant_retail_beauty: 总计 60 条, 成功 60, 失败 2
+2026-04-30 09:58:58,511 [INFO] 完成采集: [tavily] tavily_instant_retail_beauty — 成功 60, 失败 2, 耗时 4.55s
+2026-04-30 09:58:58,762 [INFO] [Tavily tavily_industry_data] 完成: 7/7 成功, 0 失败, 耗时 4.8s
+2026-04-30 09:58:58,763 [INFO] [Tavily] tavily_industry_data: query 0 返回 10 条结果
+2026-04-30 09:58:58,763 [INFO] [Tavily] tavily_industry_data: query 1 返回 10 条结果
+2026-04-30 09:58:58,763 [WARNING] [Tavily] tavily_industry_data: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:58,763 [INFO] [Tavily] tavily_industry_data: query 3 返回 10 条结果
+2026-04-30 09:58:58,764 [INFO] [Tavily] tavily_industry_data: query 4 返回 10 条结果
+2026-04-30 09:58:58,764 [WARNING] [Tavily] tavily_industry_data: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:58:58,764 [INFO] [Tavily] tavily_industry_data: query 6 返回 10 条结果
+2026-04-30 09:58:58,764 [INFO] [Tavily] tavily_industry_data: 总计 50 条, 成功 50, 失败 2
+2026-04-30 09:58:58,764 [INFO] 完成采集: [tavily] tavily_industry_data — 成功 50, 失败 2, 耗时 4.8s
+2026-04-30 09:59:01,185 [INFO] [Tavily tavily_today_beauty_retail] 完成: 7/7 成功, 0 失败, 耗时 4.1s
+2026-04-30 09:59:01,186 [INFO] [Tavily] tavily_today_beauty_retail: query 0 返回 10 条结果
+2026-04-30 09:59:01,186 [INFO] [Tavily] tavily_today_beauty_retail: query 1 返回 10 条结果
+2026-04-30 09:59:01,186 [WARNING] [Tavily] tavily_today_beauty_retail: query 2 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:59:01,186 [INFO] [Tavily] tavily_today_beauty_retail: query 3 返回 10 条结果
+2026-04-30 09:59:01,186 [INFO] [Tavily] tavily_today_beauty_retail: query 4 返回 10 条结果
+2026-04-30 09:59:01,186 [WARNING] [Tavily] tavily_today_beauty_retail: query 5 失败 — HTTP N/A: 432 Client Error:  for url: https://api.tavily.com/search
+2026-04-30 09:59:01,187 [INFO] [Tavily] tavily_today_beauty_retail: query 6 返回 10 条结果
+2026-04-30 09:59:01,187 [INFO] [Tavily] tavily_today_beauty_retail: 总计 50 条, 成功 50, 失败 2
+2026-04-30 09:59:01,187 [INFO] 完成采集: [tavily] tavily_today_beauty_retail — 成功 50, 失败 2, 耗时 4.12s
+2026-04-30 09:59:01,188 [INFO] 总采集数: 955
+2026-04-30 09:59:01,221 [WARNING] 去重后 863 条，截断到 600
+2026-04-30 09:59:01,221 [INFO] 去重后数量: 600
+2026-04-30 09:59:01,222 [INFO] allow_old 过滤: 丢弃 43 条 old 文章 (allow_old=false 的源不允许 old)
+2026-04-30 09:59:01,222 [INFO] allow_old 过滤后数量: 557 (过滤前 600, 丢弃 43)
+2026-04-30 09:59:01,222 [INFO] 时间窗口内: 159, 近窗口: 2, 早于窗口: 255, 无法识别: 141
+2026-04-30 09:59:01,342 [INFO] 输出文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json
+2026-04-30 09:59:01,342 [INFO] ============================================================
+2026-04-30 09:59:01,342 [INFO] 采集完成汇总:
+2026-04-30 09:59:01,342 [INFO]   总采集数: 955
+2026-04-30 09:59:01,343 [INFO]   去重后数量: 557
+2026-04-30 09:59:01,343 [INFO]   in_window: 159
+2026-04-30 09:59:01,343 [INFO]   near_window: 2
+2026-04-30 09:59:01,343 [INFO]   old: 255
+2026-04-30 09:59:01,343 [INFO]   unknown_time: 141
+2026-04-30 09:59:01,343 [INFO]   rsshub: 429
+2026-04-30 09:59:01,343 [INFO]   rss: 0
+2026-04-30 09:59:01,344 [INFO]   web: 0
+2026-04-30 09:59:01,344 [INFO]   xcrawl: 196
+2026-04-30 09:59:01,344 [INFO]   tavily: 330
+2026-04-30 09:59:01,344 [INFO]   Tavily Key 状态:
+2026-04-30 09:59:01,344 [INFO]     key_0_tavily_key: calls=18, remaining=982, exhausted=False
+2026-04-30 09:59:01,344 [INFO]     key_1_tavily_key1: calls=15, remaining=985, exhausted=False
+2026-04-30 09:59:01,345 [INFO]     key_2_tavily_key2: calls=0, remaining=1000, exhausted=False
+2026-04-30 09:59:01,345 [INFO]   源 [rsshub_huxiu_search_meituan_flash]: 成功 12, 失败 0, 耗时 18.06s, 错误: None
+2026-04-30 09:59:01,345 [INFO]   源 [rsshub_huxiu_search_watsons]: 成功 20, 失败 0, 耗时 18.15s, 错误: None
+2026-04-30 09:59:01,345 [INFO]   源 [rsshub_huxiu_search_jd_instant]: 成功 7, 失败 0, 耗时 18.21s, 错误: None
+2026-04-30 09:59:01,345 [INFO]   源 [rsshub_huxiu_search_douyin_hour]: 成功 20, 失败 0, 耗时 18.33s, 错误: None
+2026-04-30 09:59:01,345 [INFO]   源 [rsshub_huxiu_search_taobao_flash]: 成功 20, 失败 0, 耗时 18.43s, 错误: None
+2026-04-30 09:59:01,346 [INFO]   源 [rsshub_huxiu_search_instant_retail]: 成功 20, 失败 0, 耗时 19.23s, 错误: None
+2026-04-30 09:59:01,346 [INFO]   源 [rsshub_huxiu_search_flash]: 成功 20, 失败 0, 耗时 15.13s, 错误: None
+2026-04-30 09:59:01,346 [INFO]   源 [rsshub_huxiu_search_personal_care]: 成功 20, 失败 0, 耗时 16.84s, 错误: None
+2026-04-30 09:59:01,346 [INFO]   源 [rsshub_huxiu_search_front_warehouse]: 成功 20, 失败 0, 耗时 17.42s, 错误: None
+2026-04-30 09:59:01,346 [INFO]   源 [rsshub_huxiu_search_beauty]: 成功 20, 失败 0, 耗时 17.34s, 错误: None
+2026-04-30 09:59:01,346 [INFO]   源 [rsshub_huxiu_search_sephora]: 成功 12, 失败 0, 耗时 16.58s, 错误: None
+2026-04-30 09:59:01,346 [INFO]   源 [rsshub_cls_telegraph]: 成功 20, 失败 0, 耗时 2.92s, 错误: None
+2026-04-30 09:59:01,347 [INFO]   源 [rsshub_latepost]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:59:01,347 [INFO]   源 [rsshub_huxiu_search_tmall]: 成功 0, 失败 1, 耗时 20.01s, 错误: None
+2026-04-30 09:59:01,347 [INFO]   源 [rsshub_huxiu_search_jd]: 成功 0, 失败 1, 耗时 20.03s, 错误: None
+2026-04-30 09:59:01,347 [INFO]   源 [rsshub_huxiu_search_douyin_ecom]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:59:01,347 [INFO]   源 [rsshub_huxiu_search_miniso]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:59:01,347 [INFO]   源 [rsshub_huxiu_retail_channel]: 成功 0, 失败 1, 耗时 20.01s, 错误: None
+2026-04-30 09:59:01,347 [INFO]   源 [rsshub_cls_depth]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:59:01,348 [INFO]   源 [rsshub_36kr_search_watsons]: 成功 20, 失败 0, 耗时 10.39s, 错误: None
+2026-04-30 09:59:01,348 [INFO]   源 [rsshub_huxiu_article]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:59:01,348 [INFO]   源 [rsshub_huxiu_search_skincare]: 成功 0, 失败 1, 耗时 20.01s, 错误: None
+2026-04-30 09:59:01,348 [INFO]   源 [rsshub_huxiu_search_loreal]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:59:01,348 [INFO]   源 [rsshub_huxiu_consumer_channel]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:59:01,348 [INFO]   源 [rsshub_huxiu_search_sunscreen]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:59:01,348 [INFO]   源 [rsshub_huxiu_search_proya]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:59:01,349 [INFO]   源 [rsshub_36kr_newsflashes]: 成功 20, 失败 0, 耗时 10.67s, 错误: None
+2026-04-30 09:59:01,349 [INFO]   源 [rsshub_36kr_search_meituan_flash]: 成功 20, 失败 0, 耗时 11.07s, 错误: None
+2026-04-30 09:59:01,349 [INFO]   源 [rsshub_36kr_search_taobao_flash]: 成功 20, 失败 0, 耗时 9.05s, 错误: None
+2026-04-30 09:59:01,349 [INFO]   源 [rsshub_36kr_search_jd_instant]: 成功 20, 失败 0, 耗时 5.77s, 错误: None
+2026-04-30 09:59:01,349 [INFO]   源 [rsshub_36kr_search_douyin_hour]: 成功 20, 失败 0, 耗时 5.66s, 错误: None
+2026-04-30 09:59:01,349 [INFO]   源 [rsshub_huxiu_search_winona]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:59:01,349 [INFO]   源 [rsshub_huxiu_search_wow_colour]: 成功 0, 失败 1, 耗时 20.03s, 错误: None
+2026-04-30 09:59:01,350 [INFO]   源 [rsshub_yicai]: 成功 30, 失败 0, 耗时 8.6s, 错误: None
+2026-04-30 09:59:01,350 [INFO]   源 [rsshub_ifeng]: 成功 0, 失败 1, 耗时 0.01s, 错误: None
+2026-04-30 09:59:01,350 [INFO]   源 [rsshub_36kr_search_instant_retail]: 成功 0, 失败 1, 耗时 8.74s, 错误: None
+2026-04-30 09:59:01,350 [INFO]   源 [rsshub_wallstreetcn]: 成功 30, 失败 0, 耗时 16.71s, 错误: None
+2026-04-30 09:59:01,350 [INFO]   源 [rsshub_36kr_search_beauty]: 成功 0, 失败 1, 耗时 8.39s, 错误: None
+2026-04-30 09:59:01,350 [INFO]   源 [rsshub_caixin]: 成功 18, 失败 0, 耗时 15.79s, 错误: None
+2026-04-30 09:59:01,350 [INFO]   源 [rsshub_huxiu_search_xiaohongshu]: 成功 0, 失败 1, 耗时 20.02s, 错误: None
+2026-04-30 09:59:01,350 [INFO]   源 [rsshub_guancha]: 成功 20, 失败 0, 耗时 18.17s, 错误: None
+2026-04-30 09:59:01,351 [INFO]   源 [rss_cbndata_beauty]: 成功 0, 失败 0, 耗时 0.25s, 错误: None
+2026-04-30 09:59:01,351 [INFO]   源 [web_baidu_news_meituan_flash]: 成功 0, 失败 0, 耗时 0.16s, 错误: None
+2026-04-30 09:59:01,351 [INFO]   源 [web_nmpa_cosmetic]: 成功 0, 失败 0, 耗时 0.35s, 错误: Failed to fetch index: https://www.nmpa.gov.cn/WS04/CL2044/
+2026-04-30 09:59:01,351 [INFO]   源 [web_eleoda_rules]: 成功 0, 失败 0, 耗时 0.24s, 错误: None
+2026-04-30 09:59:01,351 [INFO]   源 [web_jd_daojia]: 成功 0, 失败 0, 耗时 0.46s, 错误: None
+2026-04-30 09:59:01,351 [INFO]   源 [web_watsons_cn]: 成功 0, 失败 0, 耗时 0.5s, 错误: Failed to fetch index: https://www.watsons.com.cn/about/news
+2026-04-30 09:59:01,351 [INFO]   源 [web_sephora_cn]: 成功 0, 失败 0, 耗时 0.3s, 错误: Failed to fetch index: https://www.sephora.cn/news
+2026-04-30 09:59:01,352 [INFO]   源 [xcrawl_regulation_today]: 成功 40, 失败 0, 耗时 15.24s, 错误: None
+2026-04-30 09:59:01,352 [INFO]   源 [xcrawl_competitor_today]: 成功 40, 失败 0, 耗时 16.33s, 错误: None
+2026-04-30 09:59:01,352 [INFO]   源 [xcrawl_instant_retail_today]: 成功 56, 失败 0, 耗时 20.22s, 错误: None
+2026-04-30 09:59:01,352 [INFO]   源 [xcrawl_beauty_retail_today]: 成功 60, 失败 0, 耗时 23.53s, 错误: None
+2026-04-30 09:59:01,352 [INFO]   源 [tavily_category_trends]: 成功 40, 失败 2, 耗时 3.1s, 错误: None
+2026-04-30 09:59:01,352 [INFO]   源 [tavily_platform_regulation]: 成功 40, 失败 2, 耗时 3.39s, 错误: None
+2026-04-30 09:59:01,352 [INFO]   源 [tavily_competitor_moves]: 成功 40, 失败 2, 耗时 3.41s, 错误: None
+2026-04-30 09:59:01,353 [INFO]   源 [tavily_today_instant_retail]: 成功 50, 失败 2, 耗时 4.14s, 错误: None
+2026-04-30 09:59:01,353 [INFO]   源 [tavily_instant_retail_beauty]: 成功 60, 失败 2, 耗时 4.55s, 错误: None
+2026-04-30 09:59:01,353 [INFO]   源 [tavily_industry_data]: 成功 50, 失败 2, 耗时 4.8s, 错误: None
+2026-04-30 09:59:01,353 [INFO]   源 [tavily_today_beauty_retail]: 成功 50, 失败 2, 耗时 4.12s, 错误: None
+2026-04-30 09:59:01,353 [INFO] ============================================================

@@ -1,0 +1,146 @@
+# 评分配置 — 即时零售 × 个护美妆经营情报系统
+# score_events 技能专用
+
+weights:
+  # 八维度权重，合计 1.0
+  strategic_importance: 0.18   # 战略重要性
+  watsons_relevance:    0.24   # 屈臣氏相关度
+  impact_scope:         0.12   # 影响范围
+  source_credibility:   0.12   # 来源可信度
+  data_richness:        0.10   # 数据丰富度
+  actionability:        0.14   # 可执行性
+  time_sensitivity:     0.06   # 时效性
+  novelty:              0.04   # 新颖度
+
+thresholds:
+  # ── 分级阈值（加权总分 0-5 映射）──
+  P0:        4.3   # >= 4.3 → 立即推送
+  P1:        3.6   # >= 3.6 → 纳入日报
+  P2:        2.8   # >= 2.8 → 归档备查
+  ARCHIVE:   0.0   # <  2.8 → 丢弃或存入
+
+  # ── 硬降级规则 ──
+  # 以下条件触发时，事件最高只能到指定级别
+  hard_downgrade:
+    confidence_low_max:         P2    # confidence=low → 最高 P2
+    rule_fallback_max:          P2    # extraction_method=rule_fallback → 最高 P2
+    source_credibility_low_max: P2    # source_credibility < 2 → 最高 P2
+    watsons_relevance_low_max:  P2    # watsons_relevance < 3 → 最高 P2
+    event_type_background_max:  P2    # event_type=background_only → 最高 P2
+    event_type_unclear_max:     P2    # event_type=unclear → 最高 P2
+    source_url_missing:         ARCHIVE  # source_url 缺失 → 直接 ARCHIVE
+    fact_empty:                 ARCHIVE  # fact 为空 → 直接 ARCHIVE
+    evidence_text_empty_max:    P2    # evidence_text 为空 → 最高 P2
+
+  # ── 每日推送上限 ──
+  push_limits:
+    daily_P0_max: 5
+    daily_P1_max: 20
+
+# ── 来源可信度映射 ──
+# source_name → source_credibility (0-5)
+source_tier_map:
+  # Tier 5: 平台官方 / 公司公告 / 财报 / 监管机构
+  "meituan_official":       5
+  "jd_daojia_official":     5
+  "eleoda_official":        5
+  "watsons_official":       5
+  "nmpa":                   5
+  "sec_filing":             5
+  "company_earnings":       5
+  "company_announcement":   5
+
+  # Tier 4: 头部权威媒体 / 商业深度媒体
+  "latepost":               4
+  "36kr":                   4
+  "36kr_newsflashes":       4
+  "caixin":                 4
+  "wallstreetcn":           4
+  "jiemian":                4
+  "huxiu":                  4
+
+  # Tier 3: 行业媒体 / 垂类媒体
+  "cbndata":                3
+  "cosmetic_observation":   3
+  "beauty_evolution":       3
+  "retail_observation":     3
+  "instant_retail_watch":   3
+
+  # Tier 2: 搜索聚合 / 转载 / 普通自媒体
+  "sohu":                   2
+  "sina":                   2
+  "toutiao":                2
+  "baijiahao":              2
+  "wechat_article":         2
+
+  # Tier 1: 未知来源
+  "_unknown":               1
+
+# ── event_type 重要性映射 ──
+# event_type → strategic_importance 基线分
+event_type_importance:
+  platform_rule:     5   # 平台政策/规则变更 → 直接影响经营
+  platform_move:     4   # 平台大动作
+  competitor_move:   4   # 竞对大动作
+  data_signal:       4   # 数据信号
+  category_trend:    3   # 品类趋势
+  policy_change:     5   # 政策/合规变更
+  consumer_trend:    3   # 消费趋势
+  new_product:       3   # 新品动态
+  supply_chain:      3   # 供应链
+  marketing:         2   # 营销活动
+  background_only:   1   # 仅背景信息
+  unclear:           1   # 不明确
+
+# ── business_variables 可执行性映射 ──
+# business_variable → actionability 加分
+actionable_variables:
+  "促销":       5
+  "折扣":       5
+  "满减":       5
+  "补贴":       5
+  "平台资源位":  5
+  "货盘":       4
+  "SKU":        4
+  "选品":       4
+  "客单价":     4
+  "复购":       4
+  "转化率":     4
+  "流量":       3
+  "投流":       3
+  "门店覆盖":   3
+  "履约":       3
+  "私域":       3
+  "会员":       3
+  "竞争格局":   2
+  "品类机会":   2
+  "拉新":       3
+  "留存":       3
+  "供应链":     3
+  "仓储":       3
+  "合规":       3
+  "备案":       3
+  "成分":       3
+
+# ── 数据关键词（用于 data_richness 评分）──
+data_keywords:
+  - "GMV"
+  - "增长率"
+  - "订单量"
+  - "门店数"
+  - "用户数"
+  - "市场份额"
+  - "突破"
+  - "增长"
+  - "提升"
+  - "下降"
+  - "同比"
+  - "环比"
+  - "亿"
+  - "万"
+  - "%"
+  - "SKU"
+  - "渗透率"
+  - "市占率"
+  - "营收"
+  - "利润"

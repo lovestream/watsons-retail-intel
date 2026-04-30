@@ -1,0 +1,900 @@
+2026-04-30 15:08:49,143 [INFO]   ============================================================
+2026-04-30 15:08:49,144 [INFO]   开始经营分析: date=2026-04-29
+2026-04-30 15:08:49,144 [INFO]     events_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_scored.json
+2026-04-30 15:08:49,144 [INFO]     output_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json
+2026-04-30 15:08:49,144 [INFO]     use_llm: True
+2026-04-30 15:08:49,165 [INFO]   加载 430 条事件
+2026-04-30 15:08:49,165 [INFO]   LLM 可用: keys=6, model=LongCat-Flash-Thinking
+2026-04-30 15:08:49,166 [INFO]   模型路由: analyze priority=P0 → LongCat-Flash-Thinking, fallback=['LongCat-Flash-Thinking']
+2026-04-30 15:08:49,166 [INFO]   模型路由: analyze priority=P1 → LongCat-Flash-Chat, fallback=['LongCat-Flash-Thinking']
+2026-04-30 15:08:49,166 [INFO]   模型路由: analyze priority=P2 → LongCat-Flash-Lite, fallback=['LongCat-Flash-Thinking']
+2026-04-30 15:08:49,181 [INFO]   事件分流: ARCHIVE=266, P0=0, P1=4, P2=160, other(rule)=0
+2026-04-30 15:08:49,181 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,182 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,182 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,182 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,182 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,182 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,183 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,183 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,183 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,183 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,184 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,184 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,184 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,184 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,184 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,185 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,185 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,185 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,185 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,185 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,186 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,186 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,186 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,186 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,186 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,186 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,187 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,187 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,187 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,187 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,188 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,188 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,188 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,188 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,188 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,189 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,189 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,189 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,189 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,189 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,189 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,190 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,190 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,190 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,190 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,190 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,191 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,191 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,191 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,191 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,191 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,192 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,192 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,192 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,192 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,192 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,193 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,195 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,196 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,196 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,196 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,196 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,196 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,197 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,197 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,197 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,197 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,197 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,198 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,198 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,198 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,198 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,198 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,199 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,199 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,199 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,199 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,199 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,199 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,200 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,200 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,200 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,200 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,200 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,201 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,201 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,201 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,201 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,202 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,202 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,202 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,202 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,202 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,203 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,203 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,203 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,203 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,203 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,203 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,204 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,204 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,204 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,204 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,204 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,205 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,205 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,205 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,205 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,205 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,205 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,206 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,206 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,206 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,206 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,206 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,207 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,207 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,207 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,207 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,207 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,208 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,208 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,208 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,209 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,209 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,209 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,209 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,210 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,210 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,210 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,211 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,211 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,211 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:08:49,212 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,212 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,212 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,212 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,213 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,213 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,213 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,213 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,213 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,214 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,214 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,214 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,214 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,214 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,215 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,215 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,215 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,215 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,215 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,215 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,216 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,216 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,216 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,216 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,217 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,217 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,217 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,217 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,217 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,218 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,218 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,218 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,218 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,218 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,219 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,219 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:08:49,219 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,219 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,219 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,219 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,220 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,220 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,220 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,220 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,220 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,221 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,221 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,221 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,221 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,221 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,222 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,222 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,222 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,222 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:08:49,222 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,223 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,223 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,223 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,223 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,223 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,224 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,224 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,224 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,224 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,224 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,225 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,225 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,225 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,225 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,225 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,225 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,226 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,226 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,226 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,226 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,226 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,227 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,227 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,227 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,227 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,227 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,228 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,228 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,228 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,228 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,228 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,229 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,229 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,229 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,229 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,229 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,230 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,230 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,230 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,230 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,230 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,231 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,231 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,231 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,231 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,231 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,232 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,232 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,232 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,232 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,232 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,233 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,233 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,233 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,233 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,233 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,233 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,234 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,234 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,234 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,234 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,234 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,235 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,235 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,235 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,235 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,235 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,236 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,236 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,236 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,236 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,237 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,237 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,237 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,237 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,237 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,238 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,238 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:08:49,238 [INFO]   并行 LLM 分析: P2=160, P1=4, P0=0, models={'P2': 'LongCat-Flash-Lite', 'P1': 'LongCat-Flash-Chat', 'P0': 'LongCat-Flash-Chat'}
+2026-04-30 15:08:50,731 [INFO]   事件 E20260429_0295 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:08:50,792 [INFO]   事件 E20260429_0054 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:08:50,919 [INFO]   事件 E20260429_0305 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:08:52,214 [INFO]   事件 E20260429_0056 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:08:52,221 [INFO]   事件 E20260429_0007 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:08:52,229 [INFO]   事件 E20260429_0150 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:08:53,590 [INFO]   事件 E20260429_0041 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:26:54,999 [INFO]   ============================================================
+2026-04-30 15:26:54,999 [INFO]   开始经营分析: date=2026-04-29
+2026-04-30 15:26:54,999 [INFO]     events_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_scored.json
+2026-04-30 15:26:55,000 [INFO]     output_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json
+2026-04-30 15:26:55,000 [INFO]     use_llm: True
+2026-04-30 15:26:55,025 [INFO]   加载 430 条事件
+2026-04-30 15:26:55,026 [INFO]   LLM 可用: keys=6, model=LongCat-Flash-Thinking
+2026-04-30 15:26:55,042 [INFO]   模型路由: analyze priority=P0 → LongCat-Flash-Thinking, fallback=['LongCat-Flash-Thinking']
+2026-04-30 15:26:55,042 [INFO]   模型路由: analyze priority=P1 → LongCat-Flash-Chat, fallback=['LongCat-Flash-Thinking']
+2026-04-30 15:26:55,043 [INFO]   模型路由: analyze priority=P2 → LongCat-Flash-Lite, fallback=['LongCat-Flash-Thinking']
+2026-04-30 15:26:55,062 [INFO]   事件分流: ARCHIVE=266, P0=0, P1=4, P2=160, other(rule)=0
+2026-04-30 15:26:55,063 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,063 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,063 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,063 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,064 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,064 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,064 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,064 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,065 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,065 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,065 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,065 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,066 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,066 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,066 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,066 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,066 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,067 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,067 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,067 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,067 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,068 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,068 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,068 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,068 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,068 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,069 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,069 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,069 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,069 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,070 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,070 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,070 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,070 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,071 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,071 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,071 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,071 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,071 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,072 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,072 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,072 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,072 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,073 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,073 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,073 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,073 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,074 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,074 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,074 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,074 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,074 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,075 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,075 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,075 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,075 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,075 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,076 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,076 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,076 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,077 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,077 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,077 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,077 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,077 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,078 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,078 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,078 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,078 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,078 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,079 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,079 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,079 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,079 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,080 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,080 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,080 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,080 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,080 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,081 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,081 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,081 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,081 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,081 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,082 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,082 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,082 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,082 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,083 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,083 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,083 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,083 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,083 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,084 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,084 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,084 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,084 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,084 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,085 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,085 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,085 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,085 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,085 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,086 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,086 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,086 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,086 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,086 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,087 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,087 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,087 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,087 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,087 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,088 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,088 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,088 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,088 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,088 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,089 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,089 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,089 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,089 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,090 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,090 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,090 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,090 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,090 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,091 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,091 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,091 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,091 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,092 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,092 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-30 15:26:55,092 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,092 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,092 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,093 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,093 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,093 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,093 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,093 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,094 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,094 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,094 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,094 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,094 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,095 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,095 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,095 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,095 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,096 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,096 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,096 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,096 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,096 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,097 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,097 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,097 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,097 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,097 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,098 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,098 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,098 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,098 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,099 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,099 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,099 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,099 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,099 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-30 15:26:55,100 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,100 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,100 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,100 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,100 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,101 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,101 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,101 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,101 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,101 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,102 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,102 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,102 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,102 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,102 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,103 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,103 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,103 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-30 15:26:55,103 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,103 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,104 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,104 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,104 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,104 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,104 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,105 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,105 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,105 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,105 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,105 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,106 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,106 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,106 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,106 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,106 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,107 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,107 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,107 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,107 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,107 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,108 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,108 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,108 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,108 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,108 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,109 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,109 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,109 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,109 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,110 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,110 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,110 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,110 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,110 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,111 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,111 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,111 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,111 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,111 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,112 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,112 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,112 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,112 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,113 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,113 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,113 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,113 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,113 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,114 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,114 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,114 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,114 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,114 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,115 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,115 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,115 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,115 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,115 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,115 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,116 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,116 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,116 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,116 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,116 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,117 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,117 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,117 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,117 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,118 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,118 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,118 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,118 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,118 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,119 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,119 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,119 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,119 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-30 15:26:55,119 [INFO]   并行 LLM 分析: P2=160, P1=4, P0=0, models={'P2': 'LongCat-Flash-Lite', 'P1': 'LongCat-Flash-Chat', 'P0': 'LongCat-Flash-Chat'}
+2026-04-30 15:26:56,621 [INFO]   事件 E20260429_0295 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:26:56,787 [INFO]   事件 E20260429_0305 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:26:58,029 [INFO]   事件 E20260429_0030 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:26:58,072 [INFO]   事件 E20260429_0150 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:00,153 [INFO]   事件 E20260429_0007 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:00,216 [INFO]   事件 E20260429_0050 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:00,289 [INFO]   事件 E20260429_0041 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:01,954 [INFO]   事件 E20260429_0309 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:03,775 [INFO]   事件 E20260429_0149 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:11,420 [INFO]   事件 E20260429_0152 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:23,938 [INFO]   事件 E20260429_0018 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:25,959 [INFO]   事件 E20260429_0231 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:26,345 [INFO]   事件 E20260429_0159 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:26,358 [INFO]   事件 E20260429_0054 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:28,060 [INFO]   事件 E20260429_0053 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:28,066 [INFO]   事件 E20260429_0035 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:29,516 [INFO]   事件 E20260429_0004 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:31,321 [INFO]   事件 E20260429_0070 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:33,251 [INFO]   事件 E20260429_0308 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:33,334 [INFO]   事件 E20260429_0056 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:33,412 [INFO]   事件 E20260429_0312 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:33,586 [INFO]   事件 E20260429_0037 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:35,013 [INFO]   事件 E20260429_0313 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:35,197 [INFO]   事件 E20260429_0038 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:36,821 [INFO]   事件 E20260429_0191 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:37,112 [INFO]   事件 E20260429_0163 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:38,377 [INFO]   事件 E20260429_0005 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:39,839 [INFO]   事件 E20260429_0039 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:40,058 [INFO]   事件 E20260429_0162 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:41,759 [INFO]   事件 E20260429_0066 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:43,009 [INFO]   事件 E20260429_0067 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:43,391 [INFO]   事件 E20260429_0057 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:44,354 [INFO]   事件 E20260429_0310 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:44,770 [INFO]   事件 E20260429_0311 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:48,875 [INFO]   事件 E20260429_0126 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:48,882 [INFO]   事件 E20260429_0069 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:50,222 [INFO]   事件 E20260429_0003 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:50,253 [INFO]   事件 E20260429_0194 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:51,450 [INFO]   事件 E20260429_0131 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:51,579 [INFO]   事件 E20260429_0128 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:52,774 [INFO]   事件 E20260429_0154 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:54,238 [INFO]   事件 E20260429_0040 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:27:59,852 [INFO]   事件 E20260429_0010 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:01,131 [INFO]   事件 E20260429_0246 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:02,656 [INFO]   事件 E20260429_0051 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:02,889 [INFO]   事件 E20260429_0297 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:03,205 [INFO]   事件 E20260429_0155 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:05,722 [INFO]   事件 E20260429_0211 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:07,926 [INFO]   事件 E20260429_0006 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:09,321 [INFO]   事件 E20260429_0193 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:10,037 [INFO]   事件 E20260429_0151 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:11,604 [INFO]   事件 E20260429_0243 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:12,588 [INFO]   事件 E20260429_0158 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:12,667 [INFO]   事件 E20260429_0130 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:13,581 [INFO]   事件 E20260429_0047 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:14,435 [INFO]   事件 E20260429_0314 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:14,477 [INFO]   事件 E20260429_0294 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:15,700 [INFO]   事件 E20260429_0114 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:19,982 [INFO]   事件 E20260429_0227 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:22,471 [INFO]   事件 E20260429_0230 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:22,584 [INFO]   事件 E20260429_0197 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:24,315 [INFO]   事件 E20260429_0052 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:25,082 [INFO]   事件 E20260429_0042 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:26,709 [INFO]   事件 E20260429_0013 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:28,534 [INFO]   事件 E20260429_0049 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:30,005 [INFO]   事件 E20260429_0189 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:30,288 [INFO]   事件 E20260429_0153 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:31,363 [INFO]   事件 E20260429_0291 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:31,785 [INFO]   事件 E20260429_0166 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:32,462 [INFO]   事件 E20260429_0187 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:32,684 [INFO]   事件 E20260429_0148 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:33,113 [INFO]   事件 E20260429_0190 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:33,892 [INFO]   事件 E20260429_0127 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:34,128 [INFO]   事件 E20260429_0008 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:34,384 [INFO]   事件 E20260429_0011 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:35,504 [INFO]   事件 E20260429_0032 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:35,684 [INFO]   事件 E20260429_0065 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:35,689 [INFO]   事件 E20260429_0033 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:37,144 [INFO]   事件 E20260429_0296 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:37,747 [INFO]   事件 E20260429_0048 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:38,895 [INFO]   事件 E20260429_0001 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:39,730 [INFO]   事件 E20260429_0019 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:41,166 [INFO]   事件 E20260429_0238 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:43,545 [INFO]   事件 E20260429_0303 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:44,769 [INFO]   事件 E20260429_0028 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:45,222 [INFO]   事件 E20260429_0043 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:46,577 [INFO]   事件 E20260429_0102 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:46,752 [INFO]   事件 E20260429_0182 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:47,998 [INFO]   事件 E20260429_0215 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:48,473 [INFO]   事件 E20260429_0160 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:48,742 [INFO]   事件 E20260429_0036 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:49,751 [INFO]   事件 E20260429_0015 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:50,067 [INFO]   事件 E20260429_0046 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:50,102 [INFO]   事件 E20260429_0016 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:51,409 [INFO]   事件 E20260429_0200 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:51,425 [INFO]   事件 E20260429_0129 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:51,481 [INFO]   事件 E20260429_0097 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:51,695 [INFO]   事件 E20260429_0228 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:52,592 [INFO]   事件 E20260429_0216 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:52,880 [INFO]   事件 E20260429_0306 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:53,319 [INFO]   事件 E20260429_0248 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:53,887 [INFO]   事件 E20260429_0031 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:54,678 [INFO]   事件 E20260429_0262 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:55,111 [INFO]   事件 E20260429_0292 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:56,205 [INFO]   事件 E20260429_0412 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:57,572 [INFO]   事件 E20260429_0218 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:58,968 [INFO]   事件 E20260429_0115 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:28:59,564 [INFO]   事件 E20260429_0044 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:00,874 [INFO]   事件 E20260429_0117 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:01,466 [INFO]   事件 E20260429_0085 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:02,879 [INFO]   事件 E20260429_0121 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:04,684 [INFO]   事件 E20260429_0124 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:05,894 [INFO]   事件 E20260429_0140 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:06,035 [INFO]   事件 E20260429_0009 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:07,163 [INFO]   事件 E20260429_0183 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:09,953 [INFO]   事件 E20260429_0116 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:09,993 [INFO]   事件 E20260429_0119 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:10,547 [INFO]   事件 E20260429_0414 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:11,247 [INFO]   事件 E20260429_0122 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:11,324 [INFO]   事件 E20260429_0269 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:11,677 [INFO]   事件 E20260429_0014 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:12,538 [INFO]   事件 E20260429_0242 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:12,863 [INFO]   事件 E20260429_0241 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:13,520 [INFO]   事件 E20260429_0354 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:14,596 [INFO]   事件 E20260429_0095 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:14,806 [INFO]   事件 E20260429_0026 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:15,683 [INFO]   事件 E20260429_0029 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:15,811 [INFO]   事件 E20260429_0409 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:16,019 [INFO]   事件 E20260429_0045 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:18,179 [INFO]   事件 E20260429_0017 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:18,246 [INFO]   事件 E20260429_0263 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:18,669 [INFO]   事件 E20260429_0423 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:18,703 [INFO]   事件 E20260429_0222 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:19,038 [INFO]   事件 E20260429_0273 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:19,941 [INFO]   事件 E20260429_0181 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:20,148 [INFO]   事件 E20260429_0144 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:28,487 [INFO]   事件 E20260429_0118 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:30,820 [INFO]   事件 E20260429_0110 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:32,450 [INFO]   事件 E20260429_0175 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:33,811 [INFO]   事件 E20260429_0120 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:35,092 [INFO]   事件 E20260429_0180 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:40,657 [INFO]   事件 E20260429_0192 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:40,744 [INFO]   事件 E20260429_0419 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:42,022 [INFO]   事件 E20260429_0023 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:42,196 [INFO]   事件 E20260429_0061 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:43,672 [INFO]   事件 E20260429_0025 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:43,806 [INFO]   事件 E20260429_0027 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:43,923 [INFO]   事件 E20260429_0301 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:44,056 [INFO]   事件 E20260429_0198 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:45,229 [INFO]   事件 E20260429_0077 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:45,412 [INFO]   事件 E20260429_0394 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:45,625 [INFO]   事件 E20260429_0209 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:46,471 [INFO]   事件 E20260429_0233 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:46,953 [INFO]   事件 E20260429_0188 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:47,471 [INFO]   事件 E20260429_0236 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:48,354 [INFO]   事件 E20260429_0125 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:49,834 [INFO]   事件 E20260429_0413 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:56,085 [INFO]   事件 E20260429_0161 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:56,259 [INFO]   事件 E20260429_0022 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:29:58,622 [INFO]   事件 E20260429_0109 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-30 15:30:02,682 [INFO]   事件 E20260429_0064 LLM分析使用模型: LongCat-Flash-Chat
+2026-04-30 15:30:03,021 [INFO]   事件 E20260429_0307 LLM分析使用模型: LongCat-Flash-Chat
+2026-04-30 15:30:03,095 [INFO]   事件 E20260429_0058 LLM分析使用模型: LongCat-Flash-Chat
+2026-04-30 15:30:04,606 [INFO]   事件 E20260429_0055 LLM分析使用模型: LongCat-Flash-Chat
+2026-04-30 15:30:04,609 [INFO]   并行分析统计: {'total': 164, 'success': 164, 'failed': 0, 'elapsed_seconds': 189.49, 'by_batch': {'P2': {'total': 160, 'success': 160, 'failed': 0}, 'P1': {'total': 4, 'success': 4, 'failed': 0}}}
+2026-04-30 15:30:04,609 [INFO]     ⬇️ 硬降级: confidence=low → action_level不可为immediate
+2026-04-30 15:30:04,610 [INFO]     ⬇️ 硬降级: confidence=low → action_level不可为immediate
+2026-04-30 15:30:04,610 [INFO]     ⬇️ 硬降级: confidence=low → action_level不可为immediate
+2026-04-30 15:30:04,611 [INFO]     ⬇️ 硬降级: confidence=low → action_level不可为immediate
+2026-04-30 15:30:04,612 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,612 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,612 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,612 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,612 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,613 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,613 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,613 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,613 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,613 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,613 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,614 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,614 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,614 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,614 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,614 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,615 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,615 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,615 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,615 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,615 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,615 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,615 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,616 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,616 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,616 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,616 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,616 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,617 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,617 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,617 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,617 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,617 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,617 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,618 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,618 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,618 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,618 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,618 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,618 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,619 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,619 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,619 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,619 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,619 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,619 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,619 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,620 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,620 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,620 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,620 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,620 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,620 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,621 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,621 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,621 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,621 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,621 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,621 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,621 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,622 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,622 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,622 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,622 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,622 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,622 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,622 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,623 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,623 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,623 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,623 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,623 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,623 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,623 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,624 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,624 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,624 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,624 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,624 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,624 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,625 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,625 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,625 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,625 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,625 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,625 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,625 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,626 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,626 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,626 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,626 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,626 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,626 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,626 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,627 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,627 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,627 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,627 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,627 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-30 15:30:04,732 [INFO]   经营分析完成: 430 条事件
+2026-04-30 15:30:04,732 [INFO]     LLM成功=164, LLM失败=0
+2026-04-30 15:30:04,732 [INFO]     immediate=0 test=50 watch=113 archive=267
+2026-04-30 15:30:04,732 [INFO]     by_impact_type: {'watch': 99, 'opportunity': 77, 'risk': 57, 'noise': 197}
+2026-04-30 15:30:04,732 [INFO]     by_action_level: {'watch': 113, 'test': 50, 'archive': 267}
+2026-04-30 15:30:04,732 [INFO]     by_owner_hint: {'京东运营': 2, '天猫运营': 3, '商品/货盘团队': 38, '即时零售运营': 153, '平台BD': 8, '数据分析': 20, '管理层关注': 1, '暂不分派': 204, '会员/私域': 1}
+2026-04-30 15:30:04,733 [INFO]     downgrade_stats: {'硬降级: confidence=low → action_level不可为immediate': 4, '注意: tracking_metrics不明确，已补充follow_up_questions': 99}
+2026-04-30 15:30:04,733 [INFO]     ACTION: [test] 天猫运营 — 分析己悦在淘宝闪购的运营策略（如选品、定价、履约时效），并评估屈臣氏自有美妆品牌在淘宝闪购的适配性，小范围测试高潜力单品。
+2026-04-30 15:30:04,733 [INFO]     ACTION: [test] 商品/货盘团队 — 在天猫、京东等B2C渠道及即时零售平台同步测试涂抹式面膜新品类，重点布局多维养护功效产品，并监控销售反馈。
+2026-04-30 15:30:04,733 [INFO]     ACTION: [test] 即时零售运营 — 评估现有即时零售履约体系对美妆个护、医药健康等高价值品类的覆盖能力，优先在核心城市试点扩大高毛利品类在美团闪购、京东到家等平台的即时配送范围。
+2026-04-30 15:30:04,733 [INFO]     ACTION: [test] 即时零售运营 — 加强与淘宝闪购的联合营销资源对接，争取更多首页推荐位和流量扶持；优化饿了么渠道的商品供给和履约效率，提升订单承接能力。
+2026-04-30 15:30:04,733 [INFO]     ACTION: [test] 即时零售运营 — 立即评估屈臣氏在美团闪购的GMV占比、流量来源及竞品动态，制定差异化商品组合与营销资源倾斜策略，强化与美团平台的BD沟通以争取优质资源位。
+2026-04-30 15:30:04,733 [INFO]     ACTION: [test] 即时零售运营 — 启动与美团、京东等平台自营前置仓的货盘协同试点，优先在核心城市测试高周转品类入仓，提升履约时效与库存周转。
+2026-04-30 15:30:04,734 [INFO]     ACTION: [test] 平台BD — 与抖音平台BD团队沟通，争取小时达频道的优质资源位，优化商品供给与履约时效，提升转化率。
+2026-04-30 15:30:04,734 [INFO]     ACTION: [test] 即时零售运营 — 结合年轻化、场景化趋势，优化即时零售渠道的货盘结构，重点布局高频快消美妆品类，并测试针对即时场景的营销活动（如限时闪购、场景套装）。
+2026-04-30 15:30:04,734 [INFO]     ACTION: [test] 即时零售运营 — 在屈臣氏即时零售渠道试点引入精选鲜花商品，重点布局情人节、母亲节等高需求节点，测试其对高净值用户拉新与留存的影响。
+2026-04-30 15:30:04,734 [INFO]     ACTION: [test] 商品/货盘团队 — 联合平台BD团队调研重点县域城市的用户画像与消费偏好，试点精选商品包并优化本地仓配覆盖，验证低线城市履约可行性。
+2026-04-30 15:30:04,734 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏在抖音小时达渠道的布局现状，若尚未进入则建议快速测试商品接入与履约合作；若已布局则加强内容与即时零售场景联动，提升转化效率。
+2026-04-30 15:30:04,734 [INFO]     ACTION: [test] 即时零售运营 — 立即梳理春节期间各酒类子类在即时零售渠道的销售表现，识别增长品类并调整货盘优先级，优先引入或扩大畅销SKU的库存与曝光。
+2026-04-30 15:30:04,734 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏在美团闪购的当前投放效率，针对性加大高转化商品或品类的投流预算，并监测活动期间GMV与转化率变化。
+2026-04-30 15:30:04,735 [INFO]     ACTION: [test] 即时零售运营 — 立即评估淘宝闪购渠道当前GMV占比及利润率，若占比高则启动限时补贴或联合营销活动对冲竞争；同时监控竞品在淘宝闪购的价格策略变化。
+2026-04-30 15:30:04,735 [INFO]     ACTION: [test] 即时零售运营 — 主动对接美团闪购'闪电帮帮'平台接口，评估接入可行性及预期收益，优先在重点城市试点应用以验证货盘优化与履约提速效果。
+2026-04-30 15:30:04,735 [INFO]     ACTION: [test] 即时零售运营 — 加速在美团闪购、京东秒送等即时零售平台扩大商品覆盖与活动资源投入，重点推广高复购美妆个护产品，并优化履约时效以提升用户体验。
+2026-04-30 15:30:04,735 [INFO]     ACTION: [test] 即时零售运营 — 评估宠物护理产品在即时零售渠道的适配性，包括选品、供应链响应速度和门店覆盖能力，并制定试点计划验证市场需求。
+2026-04-30 15:30:04,735 [INFO]     ACTION: [test] 即时零售运营 — 结合屈臣氏现有门店资源，加速推进‘线上下单、门店发货’或‘附近门店闪送’模式，优化履约效率，抢占即时零售美妆赛道增长红利。
+2026-04-30 15:30:04,735 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏在美团闪购等即时零售平台的当前渗透率与增长潜力，制定针对性入驻或资源倾斜策略，优先覆盖高需求区域门店。
+2026-04-30 15:30:04,735 [INFO]     ACTION: [test] 即时零售运营 — 在美团闪购、京东到家等平台试点三线及以下城市重点区域（如县域）的闪电仓或前置仓布局，优先覆盖高需求日用品SKU，并监测订单密度与履约成本。
+2026-04-30 15:30:04,736 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏现有线下门店是否具备接入淘宝闪购的技术与运营条件，并制定门店入驻计划以获取平台资源位支持。
+2026-04-30 15:30:04,736 [INFO]     ACTION: [test] 即时零售运营 — 立即与美团闪购运营团队沟通，争取首页焦点图、品牌专区等核心资源位的排期，并同步优化屈臣氏商品在闪购频道的搜索排名与活动承接页体验。
+2026-04-30 15:30:04,736 [INFO]     ACTION: [test] 即时零售运营 — 在即时零售平台上线夜间专属促销或满减活动，优化夜间时段商品陈列与库存配置，提升20:00-6:00时段订单转化率。
+2026-04-30 15:30:04,736 [INFO]     ACTION: [test] 即时零售运营 — 加速在美团闪购、京东到家等即时零售平台的美妆品类资源倾斜，优化商品组合与履约效率，并针对高潜力SKU进行重点推广。
+2026-04-30 15:30:04,736 [INFO]     ACTION: [test] 即时零售运营 — 在美团闪购平台针对21点后时段优化商品陈列、推送夜间护肤套装及限时优惠，测试夜间促销策略。
+2026-04-30 15:30:04,736 [INFO]     ACTION: [test] 即时零售运营 — 优先在美团闪购、京东到家等平台加大生鲜、日用百货、医药类商品的库存投入和营销资源倾斜，测试限时达活动以提升转化率和订单密度。
+2026-04-30 15:30:04,736 [INFO]     ACTION: [test] 即时零售运营 — 评估在美团闪购、京东到家等平台上线高毛利美妆个护商品的可行性，优先测试SKU并监测订单转化率与履约成本。
+2026-04-30 15:30:04,736 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏现有酒类商品在即时零售渠道的表现，并联合平台资源测试高需求酒类新品或促销组合，验证市场接受度。
+2026-04-30 15:30:04,737 [INFO]     ACTION: [test] 暂不分派 — 启动年轻化BA形象重塑试点项目，在部分门店试点招聘年轻BA或培训现有BA提升亲和力与沟通方式，同步优化门店视觉陈列与互动体验。
+2026-04-30 15:30:04,737 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏在美团闪购上的GMV占比及履约时效表现，若低于平台标杆，建议优化门店覆盖密度或申请加入‘品牌官旗闪电仓’试点，提升曝光与配送效率。
+2026-04-30 15:30:04,737 [INFO]     ACTION: [test] 即时零售运营 — 优化即时零售渠道的商品组合，重点扩充高频、低决策成本品类（如美妆小样、个人护理快消品），并提升履约时效与库存响应速度。
+2026-04-30 15:30:04,737 [INFO]     ACTION: [test] 商品/货盘团队 — 调研新型美妆集合店的运营模式（如品牌丰富度、试妆体验、无导购服务），评估是否可在屈臣氏现有门店试点引入类似元素或优化购物体验。
+2026-04-30 15:30:04,737 [INFO]     ACTION: [test] 商品/货盘团队 — 评估被撤离品牌（如莎莎、万宁）在屈臣氏现有门店或线上渠道的替代机会，优先引入其核心品类或互补品牌以填补空白。
+2026-04-30 15:30:04,737 [INFO]     ACTION: [test] 会员/私域 — 在天猫、京东及即时零售渠道同步上线该会员年卡活动，并设置3个月试点期，监测新会员注册量、月均消费频次及补贴ROI。
+2026-04-30 15:30:04,737 [INFO]     ACTION: [test] 即时零售运营 — 评估万宁原有门店覆盖区域的市场需求，针对性加强屈臣氏在这些区域的线上商品供给、促销活动及履约能力，抢占市场空间。
+2026-04-30 15:30:04,738 [INFO]     ACTION: [test] 即时零售运营 — 在饿了么平台针对面部与身体护理产品进行夜间时段专项运营测试，如设置夜间专属优惠券或组合套装，验证转化效果。
+2026-04-30 15:30:04,738 [INFO]     ACTION: [test] 暂不分派 — 评估中百集团关店区域的即时零售需求缺口，主动对接平台BD争取优质点位，并测试承接其部分非核心SKU以丰富货盘结构。
+2026-04-30 15:30:04,738 [INFO]     ACTION: [test] 商品/货盘团队 — 评估现有国货美妆商品组合，优先引入高潜力国货品牌，优化搜索与推荐位曝光，并针对即时零售渠道设计专属促销或试用装活动。
+2026-04-30 15:30:04,738 [INFO]     ACTION: [test] 即时零售运营 — 在美团闪购、京东到家等平台试点引入高毛利酒类商品，测试消费者接受度与履约表现。
+2026-04-30 15:30:04,738 [INFO]     ACTION: [test] 商品/货盘团队 — 评估现有美容护肤SKU结构与市场领先品牌的匹配度，优先补强高增长子类目（如功效型护肤、国货新锐品牌），并在即时零售渠道试点限时促销或组合装以提升转化。
+2026-04-30 15:30:04,738 [INFO]     ACTION: [test] 平台BD — 立即评估淘宝闪购上线后对屈臣氏在淘宝生态内曝光度的影响，并联合平台BD团队争取优先展示位或专属活动资源。
+2026-04-30 15:30:04,738 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏门店夜间履约覆盖能力，并在高需求区域试点夜间面膜闪购活动，测试转化率与客单价变化。
+2026-04-30 15:30:04,738 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏在美团闪购等平台的闪电仓或前置仓覆盖密度，优先在高流量区域试点前置仓模式，提升履约时效与用户体验。
+2026-04-30 15:30:04,739 [INFO]     ACTION: [test] 商品/货盘团队 — 在天猫、京东等B2C渠道及美团闪购等即时零售平台测试香水新品类或主推款，观察销售表现与用户反馈。
+2026-04-30 15:30:04,739 [INFO]     ACTION: [test] 天猫运营 — 评估天猫618期间投放资源，重点测试美妆与个护品类的活动坑位曝光与促销组合，争取获取平台流量红利。
+2026-04-30 15:30:04,739 [INFO]     ACTION: [test] 数据分析 — 调研YouTube当前对中国美妆品牌的内容政策与流量分配机制，评估屈臣氏自有品牌或合作品牌在YouTube的潜在内容布局空间，如短视频、直播带货或KOL合作。
+2026-04-30 15:30:04,739 [INFO]     ACTION: [test] 即时零售运营 — 优先在目标城市筛选高潜力点位，试点社区店模式并评估单店GMV与订单密度，同步优化供应链响应速度。
+2026-04-30 15:30:04,739 [INFO]     ACTION: [test] 即时零售运营 — 在即时零售渠道试点小样派发+救急场景产品的组合推广模式，优先选择高复购潜力的美妆个护品类进行验证，并评估免洗洗发巾类创新产品的引入可能性。
+2026-04-30 15:30:04,739 [INFO]     ACTION: [test] 暂不分派 — 在天猫、京东及抖音等平台加大代言人相关内容投放，结合明星同款、话题营销等活动，推动会员注册与复购转化。
+2026-04-30 15:30:04,739 [INFO]     ACTION: [test] 数据分析 — 结合市场增长趋势，在天猫、京东及即时零售平台策划‘春季美妆焕新’主题促销活动，重点推广高毛利护肤与个护产品，提升GMV与客单价。
+2026-04-30 15:30:04,740 [INFO]   {
+  "ok": true,
+  "date": "2026-04-29",
+  "input_file": "/app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_scored.json",
+  "output_file": "/app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json",
+  "log_file": "/app/working/projects/watsons-retail-intel/data/logs/2026-04-29/analyze_business_impact.log",
+  "event_count": 430,
+  "analyzed_count": 430,
+  "llm_success_count": 164,
+  "llm_failed_count": 0,
+  "errors": []
+}

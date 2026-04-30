@@ -1,0 +1,65 @@
+2026-04-28 14:40:33 [INFO] ============================================================
+2026-04-28 14:40:33 [INFO] send_daily_report_email 开始: date=2026-04-28, dry_run=True
+2026-04-28 14:40:33 [WARNING] run_manifest.json 不存在: /app/working/projects/watsons-retail-intel/data/runs/2026-04-28/run_manifest.json
+2026-04-28 14:40:33 [INFO] 读取终稿: /app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md (725 字符)
+2026-04-28 14:40:33 [WARNING] 安全门未通过: run_manifest.json 不存在或为空
+2026-04-28 14:40:33 [WARNING] 安全门未通过: 终稿以【待人工复核】开头，未通过审稿
+2026-04-28 14:40:33 [WARNING] 安全门未通过: 审稿报告中未找到「✅ 可发送」结论
+2026-04-28 14:40:33 [WARNING] 安全门未通过: 终稿未包含任何 event_id 引用
+2026-04-28 14:40:33 [WARNING] 安全门未通过: 邮件收件人为空
+2026-04-28 14:40:33 [WARNING] 安全门未通过，邮件不发送
+2026-04-28 14:40:33 [INFO] 结果 JSON 已保存: /app/working/projects/watsons-retail-intel/data/logs/2026-04-28/send_daily_report_email.json
+2026-04-28 14:42:53 [INFO] ============================================================
+2026-04-28 14:42:53 [INFO] send_daily_report_email 开始: date=2026-04-28, dry_run=True
+2026-04-28 14:42:53 [WARNING] run_manifest.json 不存在: /app/working/projects/watsons-retail-intel/data/runs/2026-04-28/run_manifest.json
+2026-04-28 14:42:53 [INFO] 读取终稿: /app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md (725 字符)
+2026-04-28 14:42:53 [WARNING] 安全门未通过: run_manifest.json 不存在或为空
+2026-04-28 14:42:53 [WARNING] 安全门未通过: 终稿以【待人工复核】开头，未通过审稿
+2026-04-28 14:42:53 [WARNING] 安全门未通过: 审稿报告中未找到「✅ 可发送」结论
+2026-04-28 14:42:53 [WARNING] 安全门未通过: 终稿未包含任何 event_id 引用
+2026-04-28 14:42:53 [WARNING] 安全门未通过: 邮件收件人为空
+2026-04-28 14:42:53 [WARNING] 安全门未通过，邮件不发送
+2026-04-28 14:42:53 [INFO] 结果 JSON 已保存: /app/working/projects/watsons-retail-intel/data/logs/2026-04-28/send_daily_report_email.json
+2026-04-28 14:42:58 [INFO] ============================================================
+2026-04-28 14:42:58 [INFO] send_daily_report_email 开始: date=2026-04-28, dry_run=True
+2026-04-28 14:42:58 [WARNING] run_manifest.json 不存在: /app/working/projects/watsons-retail-intel/data/runs/2026-04-28/run_manifest.json
+2026-04-28 14:42:58 [INFO] 读取终稿: /app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md (725 字符)
+2026-04-28 14:42:58 [WARNING] 安全门未通过: run_manifest.json 不存在或为空
+2026-04-28 14:42:58 [WARNING] 安全门未通过: 终稿以【待人工复核】开头，未通过审稿
+2026-04-28 14:42:58 [WARNING] 安全门未通过: 审稿报告中未找到「✅ 可发送」结论
+2026-04-28 14:42:58 [WARNING] 安全门未通过: 终稿未包含任何 event_id 引用
+2026-04-28 14:42:58 [WARNING] 安全门未通过: 邮件收件人为空
+2026-04-28 14:42:58 [WARNING] 安全门未通过，邮件不发送
+2026-04-28 14:42:58 [INFO] 结果 JSON 已保存: /app/working/projects/watsons-retail-intel/data/logs/2026-04-28/send_daily_report_email.json
+2026-04-28 15:16:52 [INFO] ============================================================
+2026-04-28 15:16:52 [INFO] send_daily_report_email 开始: date=2026-04-28, dry_run=True
+2026-04-28 15:16:52 [INFO] 读取 manifest: sendable=False, no_signal=False
+2026-04-28 15:16:52 [ERROR] 终稿文件不存在: /app/working/projects/watsons-retail-intel/app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md
+2026-04-28 15:16:52 [WARNING] 安全门未通过: run_manifest.sendable=False，不是 true
+2026-04-28 15:16:52 [WARNING] 安全门未通过: 终稿文件不存在: /app/working/projects/watsons-retail-intel/app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md
+2026-04-28 15:16:52 [WARNING] 安全门未通过: 审稿报告中未找到「✅ 可发送」结论
+2026-04-28 15:16:52 [WARNING] 安全门未通过: 邮件收件人为空
+2026-04-28 15:16:52 [WARNING] 安全门未通过，邮件不发送
+2026-04-28 15:16:53 [INFO] 结果 JSON 已保存: /app/working/projects/watsons-retail-intel/data/logs/2026-04-28/send_daily_report_email.json
+2026-04-28 15:17:47 [INFO] ============================================================
+2026-04-28 15:17:47 [INFO] send_daily_report_email 开始: date=2026-04-28, dry_run=True
+2026-04-28 15:17:47 [INFO] 读取 manifest: sendable=False, no_signal=False
+2026-04-28 15:17:47 [INFO] 读取终稿: /app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md (725 字符)
+2026-04-28 15:17:47 [WARNING] 安全门未通过: run_manifest.sendable=False，不是 true
+2026-04-28 15:17:47 [WARNING] 安全门未通过: 终稿以【待人工复核】开头，未通过审稿
+2026-04-28 15:17:47 [WARNING] 安全门未通过: 审稿报告中未找到「✅ 可发送」结论
+2026-04-28 15:17:47 [WARNING] 安全门未通过: 终稿未包含任何 event_id 引用
+2026-04-28 15:17:47 [WARNING] 安全门未通过: 邮件收件人为空
+2026-04-28 15:17:47 [WARNING] 安全门未通过，邮件不发送
+2026-04-28 15:17:47 [INFO] 结果 JSON 已保存: /app/working/projects/watsons-retail-intel/data/logs/2026-04-28/send_daily_report_email.json
+2026-04-28 15:33:49 [INFO] ============================================================
+2026-04-28 15:33:49 [INFO] send_daily_report_email 开始: date=2026-04-28, dry_run=True
+2026-04-28 15:33:49 [INFO] 读取 manifest: sendable=False, no_signal=False
+2026-04-28 15:33:49 [INFO] 读取终稿: /app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md (725 字符)
+2026-04-28 15:33:49 [WARNING] 安全门未通过: run_manifest.sendable=False，不是 true
+2026-04-28 15:33:49 [WARNING] 安全门未通过: 终稿以【待人工复核】开头，未通过审稿
+2026-04-28 15:33:49 [WARNING] 安全门未通过: 审稿报告中未找到「✅ 可发送」结论
+2026-04-28 15:33:49 [WARNING] 安全门未通过: 终稿未包含任何 event_id 引用
+2026-04-28 15:33:49 [WARNING] 安全门未通过: 邮件收件人为空
+2026-04-28 15:33:49 [WARNING] 安全门未通过，邮件不发送
+2026-04-28 15:33:49 [INFO] 结果 JSON 已保存: /app/working/projects/watsons-retail-intel/data/logs/2026-04-28/send_daily_report_email.json

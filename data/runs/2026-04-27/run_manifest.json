@@ -1,0 +1,199 @@
+{
+  "date": "2026-04-27",
+  "started_at": "2026-04-28T20:04:29.664570+08:00",
+  "finished_at": "2026-04-28T20:04:29.731202+08:00",
+  "duration_seconds": 0.066632,
+  "ok": true,
+  "sendable": false,
+  "report_type": "normal",
+  "no_signal": false,
+  "final_report_file": "",
+  "steps": [
+    {
+      "name": "collect",
+      "status": "dry_run",
+      "started_at": "2026-04-28T20:04:29.687102+08:00",
+      "finished_at": "2026-04-28T20:04:29.694602+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "./data/raw/2026-04-27/raw_articles.json"
+      ],
+      "stats": {
+        "raw_count": 53
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "filter",
+      "status": "dry_run",
+      "started_at": "2026-04-28T20:04:29.694983+08:00",
+      "finished_at": "2026-04-28T20:04:29.711850+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "./data/cleaned/2026-04-27/cleaned_articles.json",
+        "./data/cleaned/2026-04-27/reference_articles.json",
+        "./data/rejected/2026-04-27/rejected_articles.json"
+      ],
+      "stats": {
+        "cleaned_count": 33,
+        "reference_count": 12,
+        "rejected_count": 60
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "source_health_report",
+      "status": "dry_run",
+      "started_at": "2026-04-28T20:04:29.712249+08:00",
+      "finished_at": "2026-04-28T20:04:29.712714+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "./data/logs/2026-04-27/source_health_report.json",
+        "./data/logs/2026-04-27/source_health_report.md"
+      ],
+      "stats": {
+        "health_report_sources": 5
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "tavily_gap_search",
+      "status": "dry_run",
+      "started_at": "2026-04-28T20:04:29.712986+08:00",
+      "finished_at": "2026-04-28T20:04:29.713121+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [],
+      "stats": {},
+      "warnings": [
+        "Tavily gap search 未触发（无需补搜或条件不满足）"
+      ],
+      "errors": []
+    },
+    {
+      "name": "filter_merged",
+      "status": "dry_run",
+      "started_at": "2026-04-28T20:04:29.713330+08:00",
+      "finished_at": "2026-04-28T20:04:29.728998+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "./data/cleaned/2026-04-27/cleaned_articles.json",
+        "./data/cleaned/2026-04-27/reference_articles.json",
+        "./data/rejected/2026-04-27/rejected_articles.json"
+      ],
+      "stats": {
+        "cleaned_count": 33,
+        "reference_count": 12,
+        "rejected_count": 60
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "extract",
+      "status": "dry_run",
+      "started_at": "2026-04-28T20:04:29.729410+08:00",
+      "finished_at": "2026-04-28T20:04:29.729579+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [],
+      "stats": {},
+      "warnings": [],
+      "errors": [
+        "事件文件不存在: ./data/events/2026-04-27/events_raw.json"
+      ]
+    },
+    {
+      "name": "score",
+      "status": "dry_run",
+      "started_at": "2026-04-28T20:04:29.729787+08:00",
+      "finished_at": "2026-04-28T20:04:29.729893+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [],
+      "stats": {},
+      "warnings": [],
+      "errors": [
+        "评分文件不存在: ./data/events/2026-04-27/events_scored.json"
+      ]
+    },
+    {
+      "name": "analyze",
+      "status": "dry_run",
+      "started_at": "2026-04-28T20:04:29.730093+08:00",
+      "finished_at": "2026-04-28T20:04:29.730197+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [],
+      "stats": {},
+      "warnings": [],
+      "errors": [
+        "分析文件不存在: ./data/events/2026-04-27/events_analyzed.json"
+      ]
+    },
+    {
+      "name": "generate_report",
+      "status": "dry_run",
+      "started_at": "2026-04-28T20:04:29.730394+08:00",
+      "finished_at": "2026-04-28T20:04:29.730534+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [],
+      "stats": {},
+      "warnings": [],
+      "errors": [
+        "日报文件不存在: ./data/drafts/2026-04-27/daily_report_draft_v1.md",
+        "日报文件不存在: ./data/drafts/2026-04-27/daily_report_draft_v2.md",
+        "日报文件不存在: ./data/drafts/2026-04-27/daily_report_draft.md"
+      ]
+    },
+    {
+      "name": "editor_review",
+      "status": "dry_run",
+      "started_at": "2026-04-28T20:04:29.730740+08:00",
+      "finished_at": "2026-04-28T20:04:29.730847+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [],
+      "stats": {},
+      "warnings": [],
+      "errors": [
+        "审稿报告不存在: ./data/reviews/2026-04-27/editor_review.md"
+      ]
+    },
+    {
+      "name": "generate_podcast",
+      "status": "dry_run",
+      "started_at": "2026-04-28T20:04:29.731035+08:00",
+      "finished_at": "2026-04-28T20:04:29.731186+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [],
+      "stats": {},
+      "warnings": [
+        "口播稿文件不存在",
+        "音频文件不存在（edge-tts 生成失败不影响日报）"
+      ],
+      "errors": []
+    }
+  ],
+  "errors": []
+}

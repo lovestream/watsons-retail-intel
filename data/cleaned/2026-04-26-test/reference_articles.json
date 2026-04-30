@@ -1,0 +1,128 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "date": "2026-04-26-test",
+    "source_file": "/app/working/projects/watsons-retail-intel/data/raw/2026-04-26-test/raw_articles.json",
+    "created_at": "2026-04-26T10:16:47.225330",
+    "total_raw": 9,
+    "total_reference": 3
+  },
+  "articles": [
+    {
+      "title": "屈臣氏2025年即时零售战略复盘：SKU策略与流量打法",
+      "summary": "屈臣氏即时零售年终复盘，SKU优化与流量转化策略分析",
+      "content": "屈臣氏2025年即时零售复盘显示，SKU精简和流量投放策略取得显著成效，客单价提升15%。",
+      "source_name": "huxiu",
+      "source_tier": 2,
+      "time_status": "old",
+      "matched_keywords": [
+        "屈臣氏",
+        "即时零售",
+        "SKU",
+        "流量"
+      ],
+      "url": "https://huxiu.com/article/5",
+      "published_at": "2026-04-20T08:00:00",
+      "filter": {
+        "rule_score": 9,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+4 命中即时零售: 即时零售",
+          "+1 命中经营变量: 流量, 客单价, SKU",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule_score>=6 但 time_status=old"
+      }
+    },
+    {
+      "title": "传统零售数字化转型加速，线下门店如何搭建私域流量池",
+      "summary": "零售企业纷纷加速数字化转型，通过私域运营提升会员复购率，线下门店成为新流量入口",
+      "content": "随着消费者习惯变化，传统零售商正在加速数字化转型。线下门店不再只是销售终端，而是私域流量的重要入口。通过会员体系、社群运营和精准投流，门店可以有效提升复购率和客单价。业内人士指出，头部零售品牌已将30%营销预算投向私域。",
+      "source_name": "latepost",
+      "source_tier": 1,
+      "time_status": "in_window",
+      "matched_keywords": [
+        "私域",
+        "复购",
+        "客单价"
+      ],
+      "url": "https://latepost.com/borderline-test",
+      "filter": {
+        "rule_score": 5,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+1 命中经营变量: 流量, 客单价, 复购",
+          "+2 source_tier=1",
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": true,
+        "llm_result": {
+          "llm_relevance": "low",
+          "business_relevance_type": "background",
+          "related_channels": [],
+          "related_categories": [],
+          "business_variables": [
+            "复购率",
+            "客单价"
+          ],
+          "reason": "文章讨论传统零售数字化转型趋势，虽未直接提及屈臣氏即时零售与个护美妆，但私域运营与复购提升是相关行业背景",
+          "recommended_pool": "reference",
+          "confidence": "high",
+          "llm_reviewed": true
+        },
+        "final_pool": "reference",
+        "final_reason": "LLM推荐reference (confidence=high)"
+      }
+    },
+    {
+      "title": "电商平台价格战再起，补贴策略如何影响品牌毛利",
+      "summary": "多家电商平台重启价格补贴策略，品牌方毛利承压，转化率提升但客单价下降",
+      "content": "618大促前期，天猫、京东等平台纷纷推出价格补贴策略，刺激消费。品牌方在流量提升的同时，毛利空间被压缩。业内人士分析，短期转化率提升但客单价下降，长期可持续性存疑。",
+      "source_name": "36kr_newsflashes",
+      "source_tier": 1,
+      "time_status": "in_window",
+      "matched_keywords": [
+        "价格",
+        "补贴",
+        "毛利",
+        "转化率",
+        "客单价"
+      ],
+      "url": "https://36kr.com/newsflash/price-war",
+      "filter": {
+        "rule_score": 5,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+1 命中经营变量: 流量, 转化率, 客单价",
+          "+2 source_tier=1",
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": true,
+        "llm_result": {
+          "llm_relevance": "medium",
+          "business_relevance_type": "indirect",
+          "related_channels": [],
+          "related_categories": [],
+          "business_variables": [
+            "价格",
+            "补贴",
+            "毛利",
+            "转化率",
+            "客单价"
+          ],
+          "reason": "文章讨论电商平台价格补贴策略，间接影响屈臣氏个护美妆线上销售毛利和转化率。",
+          "recommended_pool": "reference",
+          "confidence": "medium",
+          "llm_reviewed": true
+        },
+        "final_pool": "reference",
+        "final_reason": "LLM推荐reference (confidence=medium)"
+      }
+    }
+  ]
+}

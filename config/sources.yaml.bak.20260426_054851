@@ -1,0 +1,121 @@
+# 信息采集源配置
+# 路径均为相对路径（相对于项目根目录）
+
+# RSSHub 基础地址（最低优先级，可被环境变量 RSSHUB_BASE_URL 或函数参数覆盖）
+rsshub_base: "http://192.168.2.100:1200"
+
+sources:
+  # ── 即时零售平台 (RSSHub) ──
+  - name: meituan_flash
+    method: rsshub
+    routes:
+      - "/meituan/flashbuy"
+    description: "美团闪购 RSS"
+    source_tier: 2
+    enabled: true
+    fetch:
+      interval_minutes: 60
+      timeout_seconds: 30
+
+  # ── 行业媒体 (RSSHub) ──
+  - name: 36kr_new_consumption
+    method: rsshub
+    routes:
+      - "/36kr/motif/2158896348806151"
+    description: "36氪新消费频道 via RSSHub"
+    source_tier: 2
+    enabled: true
+    fetch:
+      interval_minutes: 60
+      timeout_seconds: 30
+
+  # ── 产业洞察 (原生 RSS) ──
+  - name: cbndata_beauty
+    method: rss
+    url: "https://www.cbndata.com/rss/beauty"
+    description: "CBNData 个护美妆行业洞察与数据报告"
+    source_tier: 2
+    enabled: true
+    fetch:
+      interval_minutes: 180
+      timeout_seconds: 30
+
+  # ── 政策合规 (网页抓取) ──
+  - name: nmpa_cosmetic_regulations
+    method: web
+    url: "https://www.nmpa.gov.cn/WS04/CL2044/"
+    description: "国家药监局化妆品监管法规与通告"
+    source_tier: 3
+    enabled: true
+    fetch:
+      interval_minutes: 720
+      timeout_seconds: 30
+
+  # ── 即时零售平台 (网页抓取) ──
+  - name: eleoda_rules
+    method: web
+    url: "https://www.ele.me/rulecenter"
+    description: "饿了么/蜂鸟即配商家规则中心更新"
+    source_tier: 2
+    enabled: true
+    fetch:
+      interval_minutes: 120
+      timeout_seconds: 30
+
+  - name: jd_daojia_notice
+    method: web
+    url: "https://daoja.jd.com/notice"
+    description: "京东到家商家公告与运营活动"
+    source_tier: 2
+    enabled: true
+    fetch:
+      interval_minutes: 120
+      timeout_seconds: 30
+
+  # ── 竞品动态 (网页抓取) ──
+  - name: watsons_cn_news
+    method: web
+    url: "https://www.watsons.com.cn/about/news"
+    description: "屈臣氏中国官方动态与门店活动"
+    source_tier: 3
+    enabled: true
+    fetch:
+      interval_minutes: 360
+      timeout_seconds: 30
+
+  - name: sephora_cn_news
+    method: web
+    url: "https://www.sephora.cn/news"
+    description: "丝芙兰中国新品上线与营销活动"
+    source_tier: 2
+    enabled: true
+    fetch:
+      interval_minutes: 360
+      timeout_seconds: 30
+
+  # ── 即时零售×个护美妆 (Tavily 搜索) ──
+  - name: tavily_instant_retail_beauty
+    method: tavily
+    search_queries:
+      - "即时零售 个护美妆 经营"
+      - "即时零售 美妆 趋势"
+      - "屈臣氏 即时零售 到家"
+    description: "Tavily 搜索：即时零售×个护美妆经营情报"
+    source_tier: 1
+    enabled: true
+    fetch:
+      interval_minutes: 360
+      timeout_seconds: 30
+
+  # ── 个护美妆合规政策 (Tavily 搜索) ──
+  - name: tavily_cosmetic_regulation
+    method: tavily
+    search_queries:
+      - "化妆品 新规 监管 2026"
+      - "个护 合规 政策 变化"
+    description: "Tavily 搜索：个护美妆合规政策动态"
+    source_tier: 1
+    enabled: true
+    fetch:
+      interval_minutes: 720
+      timeout_seconds: 30

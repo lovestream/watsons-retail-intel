@@ -1,0 +1,20 @@
+{
+  "ok": false,
+  "date": "2026-04-28",
+  "sent": false,
+  "dry_run": true,
+  "recipient": "",
+  "subject": "",
+  "html_length": 0,
+  "markdown_attachment": false,
+  "podcast_attachment": false,
+  "script_attachment": false,
+  "sendable": false,
+  "errors": [
+    "run_manifest.sendable=False，不是 true",
+    "终稿以【待人工复核】开头，未通过审稿",
+    "审稿报告中未找到「✅ 可发送」结论",
+    "终稿未包含任何 event_id 引用",
+    "邮件收件人为空"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "date": "2026-04-26-test",
+    "source_file": "/app/working/projects/watsons-retail-intel/data/raw/2026-04-26-test/raw_articles.json",
+    "created_at": "2026-04-26T10:16:47.225338",
+    "total_raw": 9,
+    "total_rejected": 3,
+    "reject_reason_distribution": {
+      "main": 3,
+      "reject": 3,
+      "reference": 3
+    }
+  },
+  "articles": [
+    {
+      "title": "比亚迪Q1交付突破100万辆，新能源车市场持续爆发",
+      "summary": "比亚迪一季度全球交付量突破百万大关，新能源车渗透率持续攀升",
+      "content": "汽车行业继续高歌猛进，比亚迪Q1交付量突破100万辆...",
+      "source_name": "auto_news",
+      "source_tier": 3,
+      "time_status": "near_window",
+      "matched_keywords": [],
+      "url": "https://auto.com/4",
+      "published_at": "2026-04-25T10:00:00",
+      "filter": {
+        "rule_score": -4,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+1 time_status=near_window",
+          "-3 无关主题: 汽车",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "rule_score=-4<3",
+        "reject_reason": "rule_score=-4<3"
+      }
+    },
+    {
+      "title": "美妆行业最新数据报告",
+      "summary": "2026年美妆行业整体趋势分析",
+      "content": "美妆行业趋势分析报告",
+      "source_name": "unknown",
+      "source_tier": 3,
+      "time_status": "near_window",
+      "matched_keywords": [
+        "美妆"
+      ],
+      "url": "",
+      "published_at": "2026-04-26T05:00:00",
+      "filter": {
+        "rule_score": -1,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆",
+          "+1 time_status=near_window",
+          "-5 url为空"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "url为空",
+        "reject_reason": "url为空"
+      }
+    },
+    {
+      "title": "某某公司招聘市场总监，年薪50万",
+      "summary": "招聘市场总监，负责品牌推广和市场开拓",
+      "content": "招聘启事：某某公司诚聘市场总监...",
+      "source_name": "job_board",
+      "source_tier": 3,
+      "time_status": "in_window",
+      "matched_keywords": [],
+      "url": "https://job.com/7",
+      "published_at": "2026-04-26T04:00:00",
+      "filter": {
+        "rule_score": -5,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-5 垃圾内容: 招聘",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "垃圾内容: 招聘",
+        "reject_reason": "垃圾内容: 招聘"
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+# 即时零售 × 个护美妆经营情报系统 — 项目全局配置
+
+project:
+  name: watsons-retail-intel
+  display_name: "即时零售 × 个护美妆经营情报系统"
+  version: "0.1.0"
+  description: "面向即时零售赛道的个护美妆品类经营情报采集、评分、分析与推送系统"
+
+# 项目根目录（所有相对路径的基准）
+# 未指定绝对路径时，默认以此目录为根
+base_dir: "."
+
+# 数据目录（相对 base_dir）
+paths:
+  data_raw: "data/raw"
+  data_cleaned: "data/cleaned"
+  data_rejected: "data/rejected"
+  data_events: "data/events"
+  data_drafts: "data/drafts"
+  data_reviews: "data/reviews"
+  data_logs: "data/logs"
+  reports: "reports"
+  podcasts_scripts: "podcasts/scripts"
+  podcasts_audio: "podcasts/audio"
+
+# 配置文件（相对 base_dir）
+configs:
+  sources: "config/sources.yaml"
+  keywords: "config/keywords.yaml"
+  scoring: "config/scoring.yaml"
+  runtime: "config/runtime.yaml"
+
+# 密钥管理策略
+secrets:
+  strategy: "qwenpaw_env"  # 通过 QwenPaw 环境变量或 Secret 配置管理
+  env_prefix: "WATSONS_"   # 环境变量前缀约定
+  # 禁止在项目文件中存储任何密钥

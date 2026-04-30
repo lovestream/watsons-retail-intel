@@ -1,0 +1,72 @@
+2026-04-28 23:10:36 [Podcast] ============================================================
+2026-04-28 23:10:36 [Podcast] 开始生成播客: date=2026-04-28
+2026-04-28 23:10:36 [Podcast]   project_root: /app/working/projects/watsons-retail-intel
+2026-04-28 23:10:36 [Podcast]   voice: zh-CN-XiaoxiaoNeural
+2026-04-28 23:10:36 [Podcast]   rate: +0%
+2026-04-28 23:10:36 [Podcast]   use_llm: True
+2026-04-28 23:10:36 [Podcast] ============================================================
+2026-04-28 23:10:36 [Podcast] 日报文件: /app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md
+2026-04-28 23:10:36 [Podcast] 日报类型: 无信号日报
+2026-04-28 23:10:36 [Podcast] 尝试 LLM 生成口播稿...
+2026-04-28 23:10:36 [Podcast] LLM 不可用或失败，使用规则模板生成口播稿...
+2026-04-28 23:10:36 [Podcast] 口播稿中文字符数: 206
+2026-04-28 23:10:36 [Podcast] 口播稿已保存: /app/working/projects/watsons-retail-intel/podcasts/scripts/2026-04-28.md (206 中文字符)
+2026-04-28 23:10:36 [Podcast] 开始生成音频: voice=zh-CN-XiaoxiaoNeural, rate=+0%
+2026-04-28 23:10:43 [Podcast] ✅ 音频生成成功: /app/working/projects/watsons-retail-intel/podcasts/audio/2026-04-28.mp3
+2026-04-28 23:10:43 [Podcast] 结果 JSON 已保存: /app/working/projects/watsons-retail-intel/data/logs/2026-04-28/generate_podcast.json
+2026-04-28 23:10:43 [Podcast] ============================================================
+2026-04-28 23:10:43 [Podcast] 播客生成完成
+2026-04-28 23:10:43 [Podcast]   日报类型: 无信号日报
+2026-04-28 23:10:43 [Podcast]   口播稿: 206 中文字符
+2026-04-28 23:10:43 [Podcast]   LLM 生成: 否（规则模板）
+2026-04-28 23:10:43 [Podcast]   音频: ✅ 成功
+2026-04-28 23:10:43 [Podcast]   语音: zh-CN-XiaoxiaoNeural
+2026-04-28 23:10:43 [Podcast] ============================================================
+2026-04-28 23:11:43 [Podcast] ============================================================
+2026-04-28 23:11:43 [Podcast] 开始生成播客: date=2026-04-28
+2026-04-28 23:11:43 [Podcast]   project_root: /app/working/projects/watsons-retail-intel
+2026-04-28 23:11:43 [Podcast]   voice: zh-CN-XiaoxiaoNeural
+2026-04-28 23:11:43 [Podcast]   rate: +0%
+2026-04-28 23:11:43 [Podcast]   use_llm: True
+2026-04-28 23:11:43 [Podcast] ============================================================
+2026-04-28 23:11:43 [Podcast] 日报文件: /app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md
+2026-04-28 23:11:43 [Podcast] 日报类型: 无信号日报
+2026-04-28 23:11:43 [Podcast] 尝试 LLM 生成口播稿...
+2026-04-28 23:11:43 [Podcast] LLM 不可用或失败，使用规则模板生成口播稿...
+2026-04-28 23:11:43 [Podcast] 口播稿中文字符数: 206
+2026-04-28 23:11:43 [Podcast] 口播稿已保存: /app/working/projects/watsons-retail-intel/podcasts/scripts/2026-04-28.md (206 中文字符)
+2026-04-28 23:11:43 [Podcast] 开始生成音频: voice=zh-CN-XiaoxiaoNeural, rate=+0%
+2026-04-28 23:11:47 [Podcast] ✅ 音频生成成功: /app/working/projects/watsons-retail-intel/podcasts/audio/2026-04-28.mp3
+2026-04-28 23:11:47 [Podcast] 结果 JSON 已保存: /app/working/projects/watsons-retail-intel/data/logs/2026-04-28/generate_podcast.json
+2026-04-28 23:11:47 [Podcast] ============================================================
+2026-04-28 23:11:47 [Podcast] 播客生成完成
+2026-04-28 23:11:47 [Podcast]   日报类型: 无信号日报
+2026-04-28 23:11:47 [Podcast]   口播稿: 206 中文字符
+2026-04-28 23:11:47 [Podcast]   LLM 生成: 否（规则模板）
+2026-04-28 23:11:47 [Podcast]   音频: ✅ 成功
+2026-04-28 23:11:47 [Podcast]   语音: zh-CN-XiaoxiaoNeural
+2026-04-28 23:11:47 [Podcast] ============================================================
+2026-04-28 23:33:23 [Podcast] ============================================================
+2026-04-28 23:33:23 [Podcast] 开始生成播客: date=2026-04-28
+2026-04-28 23:33:23 [Podcast]   project_root: /app/working/projects/watsons-retail-intel
+2026-04-28 23:33:23 [Podcast]   voice: zh-CN-XiaoxiaoNeural
+2026-04-28 23:33:23 [Podcast]   rate: +0%
+2026-04-28 23:33:23 [Podcast]   use_llm: True
+2026-04-28 23:33:23 [Podcast] ============================================================
+2026-04-28 23:33:23 [Podcast] 日报文件: /app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md
+2026-04-28 23:33:23 [Podcast] 日报类型: 无信号日报
+2026-04-28 23:33:23 [Podcast] 尝试 LLM 生成口播稿...
+2026-04-28 23:33:23 [Podcast] LLM 不可用或失败，使用规则模板生成口播稿...
+2026-04-28 23:33:23 [Podcast] 口播稿中文字符数: 208
+2026-04-28 23:33:23 [Podcast] 口播稿已保存: /app/working/projects/watsons-retail-intel/podcasts/scripts/2026-04-28.md (208 中文字符)
+2026-04-28 23:33:23 [Podcast] 开始生成音频: voice=zh-CN-XiaoxiaoNeural, rate=+0%
+2026-04-28 23:33:27 [Podcast] ✅ 音频生成成功: /app/working/projects/watsons-retail-intel/podcasts/audio/2026-04-28.mp3
+2026-04-28 23:33:27 [Podcast] 结果 JSON 已保存: /app/working/projects/watsons-retail-intel/data/logs/2026-04-28/generate_podcast.json
+2026-04-28 23:33:27 [Podcast] ============================================================
+2026-04-28 23:33:27 [Podcast] 播客生成完成
+2026-04-28 23:33:27 [Podcast]   日报类型: 无信号日报
+2026-04-28 23:33:27 [Podcast]   口播稿: 208 中文字符
+2026-04-28 23:33:27 [Podcast]   LLM 生成: 否（规则模板）
+2026-04-28 23:33:27 [Podcast]   音频: ✅ 成功
+2026-04-28 23:33:27 [Podcast]   语音: zh-CN-XiaoxiaoNeural
+2026-04-28 23:33:27 [Podcast] ============================================================

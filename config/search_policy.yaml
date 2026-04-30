@@ -1,0 +1,91 @@
+# search_policy.yaml — 搜索策略配置
+# 定义 Tavily 搜索预算、固定 query、缺口补搜、验证搜搜策略
+
+tavily:
+  enabled: true
+  daily_budget: 80        # 每日总搜索次数上限
+  reserve_budget: 20      # 预留给缺口补搜和验证搜搜的次数
+
+  # Tavily Key 从环境变量读取，支持多 Key 轮换
+  keys_env:
+    - TAVILY_API_KEYS      # 逗号分隔的多 Key
+    - TAVILY_API_KEY       # 单 Key
+    - TAVILY_KEY            # 备选单 Key
+
+  # 搜索参数
+  search_depth: "advanced"     # basic | advanced
+  include_raw_content: true
+  max_results_per_query: 5
+  timeout_seconds: 30
+
+# ── 固定搜索 query ──
+# 每日必搜的主题分类
+fixed_queries:
+  platform:
+    - "即时零售 美团闪购 京东到家 最新动态"
+    - "即时零售 淘宝闪购 抖音小时达 最新政策"
+    - "即时零售 屈臣氏 美妆个护 最新合作"
+    - "前置仓 即时零售 美妆 最新消息"
+
+  competitors:
+    - "丝芙兰 即时零售 最新动态"
+    - "万宁 即时零售 最新布局"
+    - "调色师 美团闪购 最新投入"
+    - "话梅 妍丽 即时零售"
+
+  categories:
+    - "美妆个护 即时零售 GMV 增长 数据"
+    - "防晒 即时零售 销量 趋势"
+    - "护肤 即时零售 增长 最新"
+    - "面膜 即时零售 爆款"
+
+  channels:
+    - "屈臣氏 电商 渠道变化 最新"
+    - "美妆个护 前置仓 渠道 最新"
+    - "即时零售 美妆 品牌入驻 新品"
+
+# ── 缺口补搜（gap_search） ──
+# 如果某个平台当天没有有效事件，自动补搜
+gap_search:
+  enabled: true
+  max_queries_per_platform: 3    # 每个缺口的平台最多补搜 3 条 query
+
+  platforms:
+    - name: "美团闪购"
+      keywords: ["美团闪购", "美团到家", "美团即时"]
+      queries:
+        - "美团闪购 美妆个护 最新活动"
+        - "美团闪购 个护 品牌 入驻"
+        - "美团闪购 美妆 营销 资源位"
+
+    - name: "京东秒送 / 京东到家"
+      keywords: ["京东秒送", "京东到家", "达达配送"]
+      queries:
+        - "京东到家 美妆个护 最新动态"
+        - "京东到家 屈臣氏 最新合作"
+        - "京东秒送 美妆 最新"
+
+    - name: "淘宝闪购 / 饿了么"
+      keywords: ["淘宝闪购", "饿了么", "蜂鸟即配"]
+      queries:
+        - "淘宝闪购 美妆 最新"
+        - "饿了么 美妆个护 即时零售"
+        - "淘宝闪购 个护 品牌"
+
+    - name: "抖音小时达"
+      keywords: ["抖音小时达", "抖音即时"]
+      queries:
+        - "抖音小时达 美妆 最新"
+        - "抖音即时零售 个护 最新动态"
+        - "抖音小时达 美妆个护 品牌"
+
+# ── 验证搜搜（verify_search） ──
+# 对高 watsons_relevance 但低/中 confidence 的事件进行反查验证
+verify_search:
+  enabled: true
+  min_watsons_relevance: 4       # watsons_relevance >= 4 才触发验证
+  max_confidence:                # confidence 在以下值时触发验证
+    - "low"
+    - "medium"
+  queries_per_event: 2           # 每个事件最多验证搜索 2 条 query
+  max_verified_per_day: 10        # 每日最多验证搜索次数

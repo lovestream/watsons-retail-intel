@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "date": "2026-04-26-test",
+    "source_file": "/app/working/projects/watsons-retail-intel/data/raw/2026-04-26-test/raw_articles.json",
+    "created_at": "2026-04-26T10:16:47.225240",
+    "total_raw": 9,
+    "total_cleaned": 3,
+    "total_reference": 3,
+    "total_rejected": 3,
+    "llm_reviewed_count": 2,
+    "llm_failed_count": 0,
+    "by_time_status": {
+      "in_window": 6,
+      "near_window": 2,
+      "old": 1
+    },
+    "by_source": {
+      "36kr_newsflashes": 2,
+      "huxiu": 2,
+      "latepost": 2,
+      "auto_news": 1,
+      "unknown": 1,
+      "job_board": 1
+    },
+    "top_matched_keywords": {
+      "即时零售": 3,
+      "屈臣氏": 2,
+      "美妆": 2,
+      "私域": 2,
+      "复购": 2,
+      "客单价": 2,
+      "美团闪购": 1,
+      "丝芙兰": 1,
+      "万宁": 1,
+      "天猫超市": 1,
+      "SKU": 1,
+      "流量": 1,
+      "价格": 1,
+      "补贴": 1,
+      "毛利": 1,
+      "转化率": 1
+    },
+    "reject_reasons": {
+      "main": 3,
+      "reject": 3,
+      "reference": 3
+    }
+  },
+  "articles": [
+    {
+      "title": "屈臣氏美团闪购单日GMV破纪录，即时零售增速超预期",
+      "summary": "屈臣氏在美团闪购平台单日GMV突破5000万，即时零售渠道同比增长超60%",
+      "content": "屈臣氏即时零售业务持续发力，美团闪购和京东到家两大平台均录得亮眼增长。据内部数据，美团闪购单日GMV突破5000万，客单价和复购率双升。",
+      "source_name": "36kr_newsflashes",
+      "source_tier": 1,
+      "time_status": "in_window",
+      "matched_keywords": [
+        "屈臣氏",
+        "即时零售",
+        "美团闪购"
+      ],
+      "url": "https://36kr.com/newsflash/1",
+      "published_at": "2026-04-26T08:00:00",
+      "filter": {
+        "rule_score": 14,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+4 命中即时零售: 美团闪购",
+          "+1 命中经营变量: 客单价, 复购",
+          "+2 source_tier=1",
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "main",
+        "final_reason": "rule_score=14>=6"
+      }
+    },
+    {
+      "title": "丝芙兰退出三四线城市，万宁加速布局即时零售",
+      "summary": "丝芙兰关闭多个低线城市门店，万宁和调色师加速入驻美团闪购",
+      "content": "个护美妆零售格局生变，丝芙兰退出三四线城市，万宁趁机加速即时零售布局，调色师也加大美团闪购投入。",
+      "source_name": "huxiu",
+      "source_tier": 2,
+      "time_status": "in_window",
+      "matched_keywords": [
+        "丝芙兰",
+        "万宁",
+        "即时零售"
+      ],
+      "url": "https://huxiu.com/article/2",
+      "published_at": "2026-04-26T07:30:00",
+      "filter": {
+        "rule_score": 13,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+4 命中即时零售: 美团闪购",
+          "+3 命中美妆个护: 美妆, 个护",
+          "+3 命中竞对: 丝芙兰",
+          "+1 source_tier=2",
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "main",
+        "final_reason": "rule_score=13>=6"
+      }
+    },
+    {
+      "title": "天猫超市美妆品类Q1增长35%，私域运营成关键",
+      "summary": "天猫超市美妆品类一季度表现强劲，私域流量运营成为品牌增长新引擎",
+      "content": "美妆品类在天猫超市的Q1同比增长35%，通过私域和会员运营提升复购率成为关键策略。",
+      "source_name": "latepost",
+      "source_tier": 1,
+      "time_status": "in_window",
+      "matched_keywords": [
+        "美妆",
+        "私域",
+        "复购",
+        "天猫超市"
+      ],
+      "url": "https://latepost.com/article/3",
+      "published_at": "2026-04-26T06:00:00",
+      "filter": {
+        "rule_score": 10,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆",
+          "+2 命中B2C渠道: 天猫超市",
+          "+1 命中经营变量: 流量, 复购, 会员",
+          "+2 source_tier=1",
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "main",
+        "final_reason": "rule_score=10>=6"
+      }
+    }
+  ]
+}

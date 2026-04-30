@@ -1,0 +1,12 @@
+# email.yaml — 邮件配置
+#
+# 发送使用 default agent 的 mailcli.py 工具
+# SMTP 配置由 mailcli.py 自动管理（含环境变量 email_key）
+#
+# 安全策略：
+# - 密码仅通过环境变量传入（email_key）
+# - 本文件不存储任何密码
+
+from: "Watsons Retail Intel <watsons@watsons-retail.com>"  # 发件人显示名
+to: []  # 收件人列表，通过 --recipient 或此处配置
+        # 例如: ["a@example.com", "b@example.com"]

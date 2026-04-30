@@ -1,0 +1,69 @@
+{
+  "collect": {
+    "status": "dry_run",
+    "duration_seconds": 0,
+    "stats": {
+      "raw_count": 53
+    }
+  },
+  "filter": {
+    "status": "dry_run",
+    "duration_seconds": 0,
+    "stats": {
+      "cleaned_count": 33,
+      "reference_count": 12,
+      "rejected_count": 60
+    }
+  },
+  "source_health_report": {
+    "status": "dry_run",
+    "duration_seconds": 0,
+    "stats": {
+      "health_report_sources": 5
+    }
+  },
+  "tavily_gap_search": {
+    "status": "dry_run",
+    "duration_seconds": 0,
+    "stats": {}
+  },
+  "filter_merged": {
+    "status": "dry_run",
+    "duration_seconds": 0,
+    "stats": {
+      "cleaned_count": 33,
+      "reference_count": 12,
+      "rejected_count": 60
+    }
+  },
+  "extract": {
+    "status": "dry_run",
+    "duration_seconds": 0,
+    "stats": {}
+  },
+  "score": {
+    "status": "dry_run",
+    "duration_seconds": 0,
+    "stats": {}
+  },
+  "analyze": {
+    "status": "dry_run",
+    "duration_seconds": 0,
+    "stats": {}
+  },
+  "generate_report": {
+    "status": "dry_run",
+    "duration_seconds": 0,
+    "stats": {}
+  },
+  "editor_review": {
+    "status": "dry_run",
+    "duration_seconds": 0,
+    "stats": {}
+  },
+  "generate_podcast": {
+    "status": "dry_run",
+    "duration_seconds": 0,
+    "stats": {}
+  }
+}

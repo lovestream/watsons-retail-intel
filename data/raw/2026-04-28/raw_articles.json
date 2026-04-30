@@ -1,0 +1,1925 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "date": "2026-04-28",
+    "window_start": "2026-04-27T07:00:00+08:00",
+    "window_end": "2026-04-29T06:51:18.669703+08:00",
+    "timezone": "Asia/Shanghai",
+    "total_collected": 430,
+    "total_saved": 71,
+    "old_discarded_by_allow_old": 229,
+    "time_summary": {
+      "in_window": 31,
+      "near_window": 1,
+      "old": 39,
+      "unknown_time": 0
+    },
+    "by_collector": {
+      "rsshub": 391,
+      "rss": 0,
+      "web": 0,
+      "tavily": 39
+    },
+    "rsshub_base": "http://192.168.2.100:1200",
+    "tavily_key_status": {
+      "key_0_tavily_key": {
+        "masked_key": "tvly-dev...m1jY",
+        "calls_this_month": 2,
+        "remaining": 998,
+        "exhausted": false
+      },
+      "key_1_tavily_key1": {
+        "masked_key": "tvly-dev...ZXjq",
+        "calls_this_month": 2,
+        "remaining": 998,
+        "exhausted": false
+      },
+      "key_2_tavily_key2": {
+        "masked_key": "tvly-dev...R1im",
+        "calls_this_month": 0,
+        "remaining": 1000,
+        "exhausted": false
+      }
+    },
+    "collection_limits": {
+      "max_total_items_before_dedup": 800,
+      "max_items_after_dedup": 300,
+      "max_items_for_fulltext": 80,
+      "max_items_for_filter_skill": 300
+    },
+    "collected_at": "2026-04-29T06:52:51.995502+08:00"
+  },
+  "source_stats": {
+    "rsshub_huxiu_search_watsons": {
+      "source": "rsshub_huxiu_search_watsons",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 16.41
+    },
+    "rsshub_huxiu_search_jd_instant": {
+      "source": "rsshub_huxiu_search_jd_instant",
+      "collector": "rsshub",
+      "success": 7,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 16.46
+    },
+    "rsshub_huxiu_search_taobao_flash": {
+      "source": "rsshub_huxiu_search_taobao_flash",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 16.6
+    },
+    "rsshub_huxiu_search_instant_retail": {
+      "source": "rsshub_huxiu_search_instant_retail",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 16.69
+    },
+    "rsshub_huxiu_search_meituan_flash": {
+      "source": "rsshub_huxiu_search_meituan_flash",
+      "collector": "rsshub",
+      "success": 12,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 16.78
+    },
+    "rsshub_huxiu_search_douyin_hour": {
+      "source": "rsshub_huxiu_search_douyin_hour",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 16.9
+    },
+    "rsshub_huxiu_search_flash": {
+      "source": "rsshub_huxiu_search_flash",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 12.21
+    },
+    "rsshub_huxiu_search_personal_care": {
+      "source": "rsshub_huxiu_search_personal_care",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 13.96
+    },
+    "rsshub_huxiu_search_sephora": {
+      "source": "rsshub_huxiu_search_sephora",
+      "collector": "rsshub",
+      "success": 12,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 13.6
+    },
+    "rsshub_huxiu_search_front_warehouse": {
+      "source": "rsshub_huxiu_search_front_warehouse",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 13.92
+    },
+    "rsshub_huxiu_search_beauty": {
+      "source": "rsshub_huxiu_search_beauty",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 13.94
+    },
+    "rsshub_latepost": {
+      "source": "rsshub_latepost",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.02
+    },
+    "rsshub_huxiu_consumer_channel": {
+      "source": "rsshub_huxiu_consumer_channel",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.02
+    },
+    "rsshub_huxiu_search_tmall": {
+      "source": "rsshub_huxiu_search_tmall",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.02
+    },
+    "rsshub_huxiu_search_jd": {
+      "source": "rsshub_huxiu_search_jd",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.02
+    },
+    "rsshub_huxiu_search_douyin_ecom": {
+      "source": "rsshub_huxiu_search_douyin_ecom",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.02
+    },
+    "rsshub_huxiu_search_miniso": {
+      "source": "rsshub_huxiu_search_miniso",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.02
+    },
+    "rsshub_36kr_search_watsons": {
+      "source": "rsshub_36kr_search_watsons",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 4.92
+    },
+    "rsshub_huxiu_article": {
+      "source": "rsshub_huxiu_article",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.01
+    },
+    "rsshub_huxiu_search_skincare": {
+      "source": "rsshub_huxiu_search_skincare",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.01
+    },
+    "rsshub_huxiu_search_loreal": {
+      "source": "rsshub_huxiu_search_loreal",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.02
+    },
+    "rsshub_huxiu_business_channel": {
+      "source": "rsshub_huxiu_business_channel",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.03
+    },
+    "rsshub_huxiu_search_sunscreen": {
+      "source": "rsshub_huxiu_search_sunscreen",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.02
+    },
+    "rsshub_huxiu_search_proya": {
+      "source": "rsshub_huxiu_search_proya",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.02
+    },
+    "rsshub_huxiu_search_winona": {
+      "source": "rsshub_huxiu_search_winona",
+      "collector": "rsshub",
+      "success": 0,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 20.01
+    },
+    "rsshub_36kr_newsflashes": {
+      "source": "rsshub_36kr_newsflashes",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 10.6
+    },
+    "rsshub_36kr_search_meituan_flash": {
+      "source": "rsshub_36kr_search_meituan_flash",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 9.06
+    },
+    "rsshub_36kr_search_taobao_flash": {
+      "source": "rsshub_36kr_search_taobao_flash",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 9.26
+    },
+    "rsshub_36kr_search_jd_instant": {
+      "source": "rsshub_36kr_search_jd_instant",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 5.6
+    },
+    "rsshub_36kr_search_douyin_hour": {
+      "source": "rsshub_36kr_search_douyin_hour",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 4.55
+    },
+    "rsshub_36kr_search_instant_retail": {
+      "source": "rsshub_36kr_search_instant_retail",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 2.17
+    },
+    "rsshub_36kr_search_beauty": {
+      "source": "rsshub_36kr_search_beauty",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 5.46
+    },
+    "rsshub_huxiu_search_wow_colour": {
+      "source": "rsshub_huxiu_search_wow_colour",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 18.62
+    },
+    "rsshub_huxiu_search_xiaohongshu": {
+      "source": "rsshub_huxiu_search_xiaohongshu",
+      "collector": "rsshub",
+      "success": 20,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 9.92
+    },
+    "rss_cbndata_beauty": {
+      "source": "rss_cbndata_beauty",
+      "collector": "rss",
+      "success": 0,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 0.3
+    },
+    "web_nmpa_cosmetic": {
+      "source": "web_nmpa_cosmetic",
+      "collector": "web",
+      "success": 0,
+      "failed": 0,
+      "error": "Failed to fetch index: https://www.nmpa.gov.cn/WS04/CL2044/",
+      "source_url": "https://www.nmpa.gov.cn/WS04/CL2044/",
+      "elapsed_seconds": 0.38
+    },
+    "web_eleoda_rules": {
+      "source": "web_eleoda_rules",
+      "collector": "web",
+      "success": 0,
+      "failed": 0,
+      "error": null,
+      "source_url": "https://www.ele.me/rulecenter",
+      "elapsed_seconds": 0.45
+    },
+    "web_jd_daojia": {
+      "source": "web_jd_daojia",
+      "collector": "web",
+      "success": 0,
+      "failed": 0,
+      "error": null,
+      "source_url": "https://daoja.jd.com/notice",
+      "elapsed_seconds": 0.52
+    },
+    "web_watsons_cn": {
+      "source": "web_watsons_cn",
+      "collector": "web",
+      "success": 0,
+      "failed": 0,
+      "error": "Failed to fetch index: https://www.watsons.com.cn/about/news",
+      "source_url": "https://www.watsons.com.cn/about/news",
+      "elapsed_seconds": 0.5
+    },
+    "web_sephora_cn": {
+      "source": "web_sephora_cn",
+      "collector": "web",
+      "success": 0,
+      "failed": 0,
+      "error": "Failed to fetch index: https://www.sephora.cn/news",
+      "source_url": "https://www.sephora.cn/news",
+      "elapsed_seconds": 0.3
+    },
+    "tavily_cosmetic_regulation": {
+      "source": "tavily_cosmetic_regulation",
+      "collector": "tavily",
+      "success": 19,
+      "failed": 0,
+      "error": null,
+      "elapsed_seconds": 2.43
+    },
+    "tavily_instant_retail_beauty": {
+      "source": "tavily_instant_retail_beauty",
+      "collector": "tavily",
+      "success": 20,
+      "failed": 1,
+      "error": null,
+      "elapsed_seconds": 2.47
+    }
+  },
+  "articles": [
+    {
+      "article_id": "9d4ea5f3d6b7efc1",
+      "title": "谁还在逛屈臣氏？",
+      "url": "https://www.huxiu.com/article/4847066.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Tue, 31 Mar 2026 23:59:15 GMT",
+      "collected_at": "2026-04-29T06:51:35.234971+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/01/15816-prod-db-general-1-1775001517874.png\" /></figure>本文来自微信公众号： 斑马消费 ，作者：张闻溪你多久没逛屈臣氏，它就有多暗淡。近日，长江和记实业披露2025年全年业绩，零售分部（核心为屈臣氏）虽整体增长，但中国与欧洲保健及美容产品业务的经营已出现较",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/01/15816-prod-db-general-1-1775001517874.png\" /></figure>本文来自微信公众号： 斑马消费 ，作者：张闻溪你多久没逛屈臣氏，它就有多暗淡。近日，长江和记实业披露2025年全年业绩，零售分部（核心为屈臣氏）虽整体增长，但中国与欧洲保健及美容产品业务的经营已出现较",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4847066"
+      }
+    },
+    {
+      "article_id": "675122150abfaa2e",
+      "title": "每3天关一家店，屈臣氏怎么就在中国不行？",
+      "url": "https://www.huxiu.com/article/4845680.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Thu, 26 Mar 2026 10:18:50 GMT",
+      "collected_at": "2026-04-29T06:51:35.235804+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202603/26/15174-prod-db-general-1-1774520289062.png\" /></figure>本文来自微信公众号： 美妆研究所SHOWCASE ，作者：美妆研究所上周，屈臣氏母公司长江和记实业发布了2025年全年财报。乍一看，这份成绩单其实挺亮眼的：营收2092.67亿港元，同比增长10.03",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202603/26/15174-prod-db-general-1-1774520289062.png\" /></figure>本文来自微信公众号： 美妆研究所SHOWCASE ，作者：美妆研究所上周，屈臣氏母公司长江和记实业发布了2025年全年财报。乍一看，这份成绩单其实挺亮眼的：营收2092.67亿港元，同比增长10.03",
+      "matched_keywords": [
+        "美妆",
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4845680"
+      }
+    },
+    {
+      "article_id": "e01cc2d4f0c6285b",
+      "title": "摇摆的屈臣氏",
+      "url": "https://www.huxiu.com/article/4827868.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Mon, 19 Jan 2026 12:48:10 GMT",
+      "collected_at": "2026-04-29T06:51:35.236318+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202601/19/6026-prod-kl-general-1-1768826856100.png\" /></figure>本文来自微信公众号： 灵兽 ，作者：晴山永远不要远离你的消费者，尤其是当他们已经改变，或者长大的时候。1被诟病的会员卡“充值99元就可以办个屈臣氏的年卡，然后每个月都会返25元，算下来真的很划算。”一",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202601/19/6026-prod-kl-general-1-1768826856100.png\" /></figure>本文来自微信公众号： 灵兽 ，作者：晴山永远不要远离你的消费者，尤其是当他们已经改变，或者长大的时候。1被诟病的会员卡“充值99元就可以办个屈臣氏的年卡，然后每个月都会返25元，算下来真的很划算。”一",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4827868"
+      }
+    },
+    {
+      "article_id": "55e9ecbf0e415f2d",
+      "title": "【视频】屈臣氏IPO：一场传统零售的“求生之战”",
+      "url": "https://www.huxiu.com/article/4820641.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Fri, 26 Dec 2025 07:00:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.236846+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202512/25/120906676089.jpg\" /></figure>一边是中国市场营收下滑、模式老化，一边是欧洲贡献超六成收入且增速显著。屈臣氏的IPO，本质是一场以空间换时间的传统零售转型豪赌。",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202512/25/120906676089.jpg\" /></figure>一边是中国市场营收下滑、模式老化，一边是欧洲贡献超六成收入且增速显著。屈臣氏的IPO，本质是一场以空间换时间的传统零售转型豪赌。",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4820641"
+      }
+    },
+    {
+      "article_id": "206e1e900b1f9687",
+      "title": "又一知名品牌关闭内地全部门店，与屈臣氏“死磕”多年",
+      "url": "https://www.huxiu.com/article/4818312.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 17 Dec 2025 11:36:22 GMT",
+      "collected_at": "2026-04-29T06:51:35.237320+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202512/17/1089-prod-jm-general-1-1765971346482.png\" /></figure>本文来自微信公众号： 新零售 ，作者：联商网编辑部同样是健与美个人护理连锁品牌，从香港到内地“死磕”多年，如今，屈臣氏(Watsons)与万宁(Mannings)境遇却大不相同。12月16日，亚洲知名",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202512/17/1089-prod-jm-general-1-1765971346482.png\" /></figure>本文来自微信公众号： 新零售 ，作者：联商网编辑部同样是健与美个人护理连锁品牌，从香港到内地“死磕”多年，如今，屈臣氏(Watsons)与万宁(Mannings)境遇却大不相同。12月16日，亚洲知名",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4818312"
+      }
+    },
+    {
+      "article_id": "c7a2c26d5e18ac81",
+      "title": "半年减少145家店，屈臣氏艰难收缩",
+      "url": "https://www.huxiu.com/article/4707431.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Mon, 18 Aug 2025 08:48:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.237802+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/article_default_picpath_v1.png\" /></figure>本文来自微信公众号：亿邦动力 （ID：iebrun），作者：张从容，原文标题：《半年减少145家店，李嘉诚旗下屈臣氏在中国艰难收缩》8月14日，屈臣氏母公司长江和记实业发布2025半年报。其中，由屈臣",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/article_default_picpath_v1.png\" /></figure>本文来自微信公众号：亿邦动力 （ID：iebrun），作者：张从容，原文标题：《半年减少145家店，李嘉诚旗下屈臣氏在中国艰难收缩》8月14日，屈臣氏母公司长江和记实业发布2025半年报。其中，由屈臣",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4707431"
+      }
+    },
+    {
+      "article_id": "c41d45d1fe04fc88",
+      "title": "【视频】从美妆先驱到社恐地狱，屈臣氏怎么过气了？",
+      "url": "https://www.huxiu.com/article/3904867.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 15 Jan 2025 07:34:22 GMT",
+      "collected_at": "2026-04-29T06:51:35.238342+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202501/14/171620392095.jpg\" /></figure>曾经的零售美妆鼻祖，如今在中国的存在感却越来越弱，近年来，屈臣氏的营收持续下滑，2024上半年屈臣氏中国总营收只有68.79亿港元，同比下降23%，再创新低。本期视频，我们就来聊聊屈臣为何高光不再。",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202501/14/171620392095.jpg\" /></figure>曾经的零售美妆鼻祖，如今在中国的存在感却越来越弱，近年来，屈臣氏的营收持续下滑，2024上半年屈臣氏中国总营收只有68.79亿港元，同比下降23%，再创新低。本期视频，我们就来聊聊屈臣为何高光不再。",
+      "matched_keywords": [
+        "美妆",
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-3904867"
+      }
+    },
+    {
+      "article_id": "7203499893f7e357",
+      "title": "中年屈臣氏，原地彷徨",
+      "url": "https://www.huxiu.com/article/3582952.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 16 Oct 2024 03:24:53 GMT",
+      "collected_at": "2026-04-29T06:51:35.238854+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-article-cover/202410/16/3582952-2-mjv2-4.png\" /></figure>本文来自微信公众号：雪豹财经社，作者：刘纾含，题图来自：AI生成从里到外弥漫着一股中年味儿的屈臣氏，正在成为“社恐”年轻人避之不及的地方。以中年女性为主的BA（beauty advicer，美容顾问）",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-article-cover/202410/16/3582952-2-mjv2-4.png\" /></figure>本文来自微信公众号：雪豹财经社，作者：刘纾含，题图来自：AI生成从里到外弥漫着一股中年味儿的屈臣氏，正在成为“社恐”年轻人避之不及的地方。以中年女性为主的BA（beauty advicer，美容顾问）",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-3582952"
+      }
+    },
+    {
+      "article_id": "b4a749cc719a30f9",
+      "title": "屈臣氏还能赢得这届年轻人吗？",
+      "url": "https://www.huxiu.com/article/3322624.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Mon, 05 Aug 2024 01:20:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.239379+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202408/05/090700090117.jpg\" /></figure>本文来自微信公众号：读数一帜，作者：王颖，编辑：杨秀红，头图来自：视觉中国百年零售巨头屈臣氏，正在筹划重启上市？前不久，新加坡主权财富基金淡马锡副首席执行长谢松辉对外透露：屈臣氏集团（下称“屈臣氏”）",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202408/05/090700090117.jpg\" /></figure>本文来自微信公众号：读数一帜，作者：王颖，编辑：杨秀红，头图来自：视觉中国百年零售巨头屈臣氏，正在筹划重启上市？前不久，新加坡主权财富基金淡马锡副首席执行长谢松辉对外透露：屈臣氏集团（下称“屈臣氏”）",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-3322624"
+      }
+    },
+    {
+      "article_id": "3d550bb19a4021d9",
+      "title": "不止屈臣氏，丝芙兰也被年轻人抛弃",
+      "url": "https://www.huxiu.com/article/1679267.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 14 Jun 2023 07:06:07 GMT",
+      "collected_at": "2026-04-29T06:51:35.239837+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202306/14/143138588050.jpg\" /></figure>本文来自微信公众号：网易数读 （ID：datablog163），作者：库洛洛，设计：Kown、姜姜、杨波浪，头图来自：视觉中国要说社恐最怕逛什么店，名单里一定得有丝芙兰。在丝芙兰，每个柜姐上辈子的工作",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202306/14/143138588050.jpg\" /></figure>本文来自微信公众号：网易数读 （ID：datablog163），作者：库洛洛，设计：Kown、姜姜、杨波浪，头图来自：视觉中国要说社恐最怕逛什么店，名单里一定得有丝芙兰。在丝芙兰，每个柜姐上辈子的工作",
+      "matched_keywords": [
+        "屈臣氏",
+        "丝芙兰"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-1679267",
+        "duplicate_sources": [
+          "rsshub_huxiu_search_sephora"
+        ]
+      }
+    },
+    {
+      "article_id": "faacbfee6de3b5ad",
+      "title": "屈臣氏拖累了屈臣氏",
+      "url": "https://www.huxiu.com/article/1090033.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Fri, 07 Apr 2023 13:14:47 GMT",
+      "collected_at": "2026-04-29T06:51:35.240261+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202304/07/203340740552.jpg\" /></figure>本文来自微信公众号：每经影视 （ID：meijingyingshi），作者：丁舟洋、杜蔚，编辑：张海妮，头图来自：视觉中国从李嘉诚到其长子李泽钜，长和（长江和记实业有限公司，HK00001，股价49.",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202304/07/203340740552.jpg\" /></figure>本文来自微信公众号：每经影视 （ID：meijingyingshi），作者：丁舟洋、杜蔚，编辑：张海妮，头图来自：视觉中国从李嘉诚到其长子李泽钜，长和（长江和记实业有限公司，HK00001，股价49.",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-1090033"
+      }
+    },
+    {
+      "article_id": "71236c8f81f1793e",
+      "title": "屈臣氏被私域“绑架”",
+      "url": "https://www.huxiu.com/article/732999.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Mon, 05 Dec 2022 01:38:19 GMT",
+      "collected_at": "2026-04-29T06:51:35.240699+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202212/05/084635965297.jpg\" /></figure>本文来自微信公众号：中国企业家杂志 （ID：iceo-com-cn），作者：胡楠楠，编辑：姚赟，头图来自：视觉中国多久没想起屈臣氏了？周末，位于北京东三环的屈臣氏，店内工作人员远超顾客数。一个女孩在店",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202212/05/084635965297.jpg\" /></figure>本文来自微信公众号：中国企业家杂志 （ID：iceo-com-cn），作者：胡楠楠，编辑：姚赟，头图来自：视觉中国多久没想起屈臣氏了？周末，位于北京东三环的屈臣氏，店内工作人员远超顾客数。一个女孩在店",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-732999"
+      }
+    },
+    {
+      "article_id": "1d03781f5cbfd5ab",
+      "title": "屈臣氏导购，别再加我微信了",
+      "url": "https://www.huxiu.com/article/583132.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Thu, 16 Jun 2022 00:45:46 GMT",
+      "collected_at": "2026-04-29T06:51:35.241171+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202206/16/072939843342.jpg\" /></figure>本文来自微信公众号：锐见Neweekly（ID：app-neweekly），作者：hh，头图来源：视觉中国想到屈臣氏的时候，我正在外地旅游。由于忘记带洗面奶和护肤乳，我在手机上搜到附近的屈臣氏门店——",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202206/16/072939843342.jpg\" /></figure>本文来自微信公众号：锐见Neweekly（ID：app-neweekly），作者：hh，头图来源：视觉中国想到屈臣氏的时候，我正在外地旅游。由于忘记带洗面奶和护肤乳，我在手机上搜到附近的屈臣氏门店——",
+      "matched_keywords": [
+        "护肤",
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-583132"
+      }
+    },
+    {
+      "article_id": "052ef39b6ec879f1",
+      "title": "利润持续下滑， “新试界”换不来屈臣氏的新世界？",
+      "url": "https://www.huxiu.com/article/523255.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 06 Apr 2022 11:38:11 GMT",
+      "collected_at": "2026-04-29T06:51:35.241691+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202204/06/181453066334.jpg\" /></figure>本文来自微信公众号：锌刻度（ID：znkedu），作者：黎炫岐，编辑：文婕，题图来自：视觉中国3月中旬，屈臣氏母公司长江和记实业有限公司公布了截止2021年12 月31日的年度财报。在过去的一年里，屈",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202204/06/181453066334.jpg\" /></figure>本文来自微信公众号：锌刻度（ID：znkedu），作者：黎炫岐，编辑：文婕，题图来自：视觉中国3月中旬，屈臣氏母公司长江和记实业有限公司公布了截止2021年12 月31日的年度财报。在过去的一年里，屈",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-523255"
+      }
+    },
+    {
+      "article_id": "d56ae69d6845e2e4",
+      "title": "大批药店要变成“屈臣氏”，零售药店分级改革来了",
+      "url": "https://www.huxiu.com/article/498834.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 16 Feb 2022 13:04:09 GMT",
+      "collected_at": "2026-04-29T06:51:35.242135+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202202/16/201245265904.jpg\" /></figure>本文来自微信公众号：健识局（ID：jianshiju01），作者：雷公，头图来自：视觉中国2月11日，广东省药监局发布通知，开展经营乙类非处方药综合改革试点工作。广东省内的便利店将可以设置乙类非处方药",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202202/16/201245265904.jpg\" /></figure>本文来自微信公众号：健识局（ID：jianshiju01），作者：雷公，头图来自：视觉中国2月11日，广东省药监局发布通知，开展经营乙类非处方药综合改革试点工作。广东省内的便利店将可以设置乙类非处方药",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-498834"
+      }
+    },
+    {
+      "article_id": "f5a40829d579677c",
+      "title": "【视频】“玩不起”的屈臣氏，该如何自救？",
+      "url": "https://www.huxiu.com/article/493048.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Sun, 23 Jan 2022 09:30:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.242609+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202201/23/084155984630.png\" /></figure>近日，全球个人护理美妆零售巨头屈臣氏频上热搜，先是主播在直播间辱骂消费者，再是一家分店涉嫌虚假价格诱骗交易，难道不再把顾客当成上帝了吗？危机之下，屈臣氏如何自救？近年来，更加年轻化的美妆个护品牌店涌入",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202201/23/084155984630.png\" /></figure>近日，全球个人护理美妆零售巨头屈臣氏频上热搜，先是主播在直播间辱骂消费者，再是一家分店涉嫌虚假价格诱骗交易，难道不再把顾客当成上帝了吗？危机之下，屈臣氏如何自救？近年来，更加年轻化的美妆个护品牌店涌入",
+      "matched_keywords": [
+        "个护",
+        "美妆",
+        "屈臣氏",
+        "直播"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-493048"
+      }
+    },
+    {
+      "article_id": "f85a70c6e23105c2",
+      "title": "屈臣氏去往低线市场，能找到出路吗？",
+      "url": "https://www.huxiu.com/article/414032.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 10 Mar 2021 02:52:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.243036+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202103/10/101057556616.jpg\" /></figure>本文来自微信公众号：极海品牌监控（ID：gh_37c72c5cf901），作者：极海，原文标题：《浮浮沉沉屈臣氏，去往低线市场寻出路》，头图来自：视觉中国2月28日，屈臣氏中国官宣了明星蔡徐坤成为品牌",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202103/10/101057556616.jpg\" /></figure>本文来自微信公众号：极海品牌监控（ID：gh_37c72c5cf901），作者：极海，原文标题：《浮浮沉沉屈臣氏，去往低线市场寻出路》，头图来自：视觉中国2月28日，屈臣氏中国官宣了明星蔡徐坤成为品牌",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-414032"
+      }
+    },
+    {
+      "article_id": "ac4a45793f7a3907",
+      "title": "蔡徐坤也“救不了”屈臣氏",
+      "url": "https://www.huxiu.com/article/412334.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Tue, 02 Mar 2021 02:14:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.243523+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202103/02/100303732744.jpg\" /></figure>年轻人不再青睐屈臣氏，转身投入新型美妆集合店的怀抱。汇聚国内外潮流品牌、随意试妆、无导购的模式深受年轻人喜爱。但与此同时，坪效低、可替代性高、供应链不稳定等质疑，也伴随左右。作为接棒者，新型美妆集合店",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202103/02/100303732744.jpg\" /></figure>年轻人不再青睐屈臣氏，转身投入新型美妆集合店的怀抱。汇聚国内外潮流品牌、随意试妆、无导购的模式深受年轻人喜爱。但与此同时，坪效低、可替代性高、供应链不稳定等质疑，也伴随左右。作为接棒者，新型美妆集合店",
+      "matched_keywords": [
+        "美妆",
+        "屈臣氏",
+        "供应链"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-412334"
+      }
+    },
+    {
+      "article_id": "a48528f69352896f",
+      "title": "屈臣氏的碎嘴导购，终于把顾客都赶走了",
+      "url": "https://www.huxiu.com/article/374035.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Fri, 07 Aug 2020 01:23:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.243968+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202008/07/091954871370.jpg\" /></figure>你想买什么根本不重要，重要的是屈臣氏的导购们想卖给你什么。本文来自微信公众号：新周刊（ID：new-weekly），作者：笺语，题图来自：视觉中国2020年开局难中间也难，就连实体零售行业的巨头们都不",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202008/07/091954871370.jpg\" /></figure>你想买什么根本不重要，重要的是屈臣氏的导购们想卖给你什么。本文来自微信公众号：新周刊（ID：new-weekly），作者：笺语，题图来自：视觉中国2020年开局难中间也难，就连实体零售行业的巨头们都不",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-374035"
+      }
+    },
+    {
+      "article_id": "1c8e6fa8d8b3920b",
+      "title": "屈臣氏的接班人",
+      "url": "https://www.huxiu.com/article/373852.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Thu, 06 Aug 2020 04:09:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.244421+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202008/06/121805602690.jpg\" /></figure>“前浪黯然退场，后浪来势汹汹。”本文来自微信公众号：新零售商业评论（ID：xinlingshou1001），作者：何意，题图来自：视觉中国曾几何时，屈臣氏、万宁作为商场的“流量收割机”，人气爆满、排队",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202008/06/121805602690.jpg\" /></figure>“前浪黯然退场，后浪来势汹汹。”本文来自微信公众号：新零售商业评论（ID：xinlingshou1001），作者：何意，题图来自：视觉中国曾几何时，屈臣氏、万宁作为商场的“流量收割机”，人气爆满、排队",
+      "matched_keywords": [
+        "屈臣氏",
+        "流量"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-373852"
+      }
+    },
+    {
+      "article_id": "1da8114805f3937c",
+      "title": "不足8小时，机器人被“劫持”，家庭生活恐被“直播”",
+      "url": "https://www.huxiu.com/article/4854151.html",
+      "source_name": "rsshub_huxiu_search_douyin_hour",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Mon, 27 Apr 2026 10:09:00 GMT",
+      "collected_at": "2026-04-29T06:51:35.724684+08:00",
+      "time_status": "in_window",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/27/18814-prod-db-general-1-1777284501211.png\" /></figure>本文来自微信公众号： IT时报 ，作者：潘少颖“能跑起来”不等于“能卖出去”作者／IT时报潘少颖编辑／孙妍当发令枪响，百余台人形机器人与上万名跑者同步出发，有的机器人步伐稳健、一马当先，有的小巧敦实、",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/27/18814-prod-db-general-1-1777284501211.png\" /></figure>本文来自微信公众号： IT时报 ，作者：潘少颖“能跑起来”不等于“能卖出去”作者／IT时报潘少颖编辑／孙妍当发令枪响，百余台人形机器人与上万名跑者同步出发，有的机器人步伐稳健、一马当先，有的小巧敦实、",
+      "matched_keywords": [
+        "直播"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/抖音小时达?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/抖音小时达?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4854151"
+      }
+    },
+    {
+      "article_id": "695965b332be669d",
+      "title": "Noah Kagan：如果你48小时内无法开启一门小生意，给你4800小时也一样",
+      "url": "https://www.huxiu.com/article/4853930.html",
+      "source_name": "rsshub_huxiu_search_douyin_hour",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Sun, 26 Apr 2026 14:27:05 GMT",
+      "collected_at": "2026-04-29T06:51:35.725283+08:00",
+      "time_status": "near_window",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/26/18716-prod-jm-general-1-1777213584868.png\" /></figure>本文来自微信公众号： BusinessCreator ，作者：爱思考的瑞如果你无法在48小时内，开启一门小生意，那么给你4800小时，你也无法做到。你有没有想做些事，但准备很久了，从来没开始？可能是想",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/26/18716-prod-jm-general-1-1777213584868.png\" /></figure>本文来自微信公众号： BusinessCreator ，作者：爱思考的瑞如果你无法在48小时内，开启一门小生意，那么给你4800小时，你也无法做到。你有没有想做些事，但准备很久了，从来没开始？可能是想",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/抖音小时达?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/huxiu/search/抖音小时达?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4853930"
+      }
+    },
+    {
+      "article_id": "2ce790a47ead9e3e",
+      "title": "为了永生，硅谷富豪想要养“无脑人”？",
+      "url": "https://www.36kr.com/p/3784276861148168",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 27 Apr 2026 00:16:37 GMT",
+      "collected_at": "2026-04-29T06:52:14.264272+08:00",
+      "time_status": "in_window",
+      "summary": "你想长生不老吗？大多数人当段子听，但硅谷那帮富豪真的开始行动了。",
+      "content": "你想长生不老吗？大多数人当段子听，但硅谷那帮富豪真的开始行动了。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3784276861148168"
+      }
+    },
+    {
+      "article_id": "3195f6c6f122afcc",
+      "title": "300亿蒸发，山西民工首富“破产”",
+      "url": "https://www.36kr.com/p/3764694611001862",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 13 Apr 2026 03:43:10 GMT",
+      "collected_at": "2026-04-29T06:52:14.264950+08:00",
+      "time_status": "old",
+      "summary": "信用破产的杨建新，能否重回巅峰？",
+      "content": "信用破产的杨建新，能否重回巅峰？",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3764694611001862"
+      }
+    },
+    {
+      "article_id": "4a10b4ed2efba88f",
+      "title": "北冰洋最不该做的就是拿信任换利润",
+      "url": "https://www.36kr.com/p/3759425801912832",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 09 Apr 2026 10:29:22 GMT",
+      "collected_at": "2026-04-29T06:52:14.265446+08:00",
+      "time_status": "old",
+      "summary": "当北冰洋也开始沉迷于包装上的文字游戏，它消耗的就不只是某一款产品的口碑，而是整个品牌最为宝贵的信誉资产。",
+      "content": "当北冰洋也开始沉迷于包装上的文字游戏，它消耗的就不只是某一款产品的口碑，而是整个品牌最为宝贵的信誉资产。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3759425801912832"
+      }
+    },
+    {
+      "article_id": "c63816246139954f",
+      "title": "635家首店涌入福建，谁是最大赢家？",
+      "url": "https://www.36kr.com/p/3757572944577287",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 08 Apr 2026 02:42:42 GMT",
+      "collected_at": "2026-04-29T06:52:14.265946+08:00",
+      "time_status": "old",
+      "summary": "下沉市场火力全开！",
+      "content": "下沉市场火力全开！",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3757572944577287"
+      }
+    },
+    {
+      "article_id": "53fdcc2932466699",
+      "title": "近300万家餐厅消失了",
+      "url": "https://www.36kr.com/p/3756142399422984",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 07 Apr 2026 02:33:28 GMT",
+      "collected_at": "2026-04-29T06:52:14.266369+08:00",
+      "time_status": "old",
+      "summary": "把招商放到“资产全生命周期”里看，而不是孤立“填铺”",
+      "content": "把招商放到“资产全生命周期”里看，而不是孤立“填铺”",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3756142399422984"
+      }
+    },
+    {
+      "article_id": "c5a1a98377b86a1e",
+      "title": "罗技的“雷”，该“炸”醒所有男性品牌了",
+      "url": "https://www.36kr.com/p/3742463052841223",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 30 Mar 2026 01:35:21 GMT",
+      "collected_at": "2026-04-29T06:52:14.266811+08:00",
+      "time_status": "old",
+      "summary": "所有男性品牌都应该“感谢”罗技！！！",
+      "content": "所有男性品牌都应该“感谢”罗技！！！",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3742463052841223"
+      }
+    },
+    {
+      "article_id": "36535f35b3a6c5e1",
+      "title": "假如外卖大战不打了",
+      "url": "https://www.36kr.com/p/3739620715020294",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 26 Mar 2026 12:57:50 GMT",
+      "collected_at": "2026-04-29T06:52:14.267233+08:00",
+      "time_status": "old",
+      "summary": "能否从多输到共赢",
+      "content": "能否从多输到共赢",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3739620715020294",
+        "duplicate_sources": [
+          "rsshub_36kr_search_jd_instant"
+        ]
+      }
+    },
+    {
+      "article_id": "bce52fda306ddb7c",
+      "title": "云南15个新商场来了，这个项目最抢眼！",
+      "url": "https://www.36kr.com/p/3737738740432905",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 25 Mar 2026 02:28:45 GMT",
+      "collected_at": "2026-04-29T06:52:14.267753+08:00",
+      "time_status": "old",
+      "summary": "龙湖昆明时代天街、3座壹然广场…今年将开业",
+      "content": "龙湖昆明时代天街、3座壹然广场…今年将开业",
+      "matched_keywords": [
+        "开业"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3737738740432905"
+      }
+    },
+    {
+      "article_id": "0766467910444ee6",
+      "title": "半年下滑5个亿，可复美难撑巨子生物的增长神话",
+      "url": "https://www.36kr.com/p/3736527438623233",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 24 Mar 2026 07:54:39 GMT",
+      "collected_at": "2026-04-29T06:52:14.268198+08:00",
+      "time_status": "old",
+      "summary": "械字号与线下能否突围？",
+      "content": "械字号与线下能否突围？",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3736527438623233"
+      }
+    },
+    {
+      "article_id": "77182b52271cd5bd",
+      "title": "挨骂含泪赚3000万，谁在制造二次元IP香水的“暴利神话”？",
+      "url": "https://www.36kr.com/p/3733995733725700",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 23 Mar 2026 03:49:25 GMT",
+      "collected_at": "2026-04-29T06:52:14.268636+08:00",
+      "time_status": "old",
+      "summary": "二次元可以交IP税，但不能交不走心的IP税。",
+      "content": "二次元可以交IP税，但不能交不走心的IP税。",
+      "matched_keywords": [
+        "香水"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3733995733725700"
+      }
+    },
+    {
+      "article_id": "566e8c0c4fe8618c",
+      "title": "斐萃屈臣氏华南四店联动狂欢，传递 “科学内养” 新主张",
+      "url": "https://www.36kr.com/p/3725449765337475",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 16 Mar 2026 10:04:31 GMT",
+      "collected_at": "2026-04-29T06:52:14.269062+08:00",
+      "time_status": "old",
+      "summary": "斐萃与屈臣氏华南联动，科学内养精准触达女性健康消费市场。",
+      "content": "斐萃与屈臣氏华南联动，科学内养精准触达女性健康消费市场。",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3725449765337475"
+      }
+    },
+    {
+      "article_id": "cf13d8d154374694",
+      "title": "太难了！180+品牌一年关店超15000家",
+      "url": "https://www.36kr.com/p/3724992064076163",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 16 Mar 2026 02:20:26 GMT",
+      "collected_at": "2026-04-29T06:52:14.269571+08:00",
+      "time_status": "old",
+      "summary": "昔日的“排队王”，又倒下一批",
+      "content": "昔日的“排队王”，又倒下一批",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3724992064076163"
+      }
+    },
+    {
+      "article_id": "f00c94b784d2caf2",
+      "title": "龙湖、华润、新城、世纪金源...西南今年49个商业“炸场”！",
+      "url": "https://www.36kr.com/p/3717937495651968",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 11 Mar 2026 02:46:24 GMT",
+      "collected_at": "2026-04-29T06:52:14.270056+08:00",
+      "time_status": "old",
+      "summary": "数量最多的不是川渝！",
+      "content": "数量最多的不是川渝！",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3717937495651968"
+      }
+    },
+    {
+      "article_id": "b89f7166aba8f957",
+      "title": "2026年：传统美妆零售败了？",
+      "url": "https://www.36kr.com/p/3714186707349891",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 09 Mar 2026 05:00:57 GMT",
+      "collected_at": "2026-04-29T06:52:14.270497+08:00",
+      "time_status": "old",
+      "summary": "多重考验下，传统美妆零售商何去何从？",
+      "content": "多重考验下，传统美妆零售商何去何从？",
+      "matched_keywords": [
+        "美妆"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3714186707349891"
+      }
+    },
+    {
+      "article_id": "d90d38d36e38920d",
+      "title": "一年吸金224亿，被全球女生追着买，这个海外巨头卖疯了",
+      "url": "https://www.36kr.com/p/3708640900264070",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Mar 2026 03:29:56 GMT",
+      "collected_at": "2026-04-29T06:52:14.270956+08:00",
+      "time_status": "old",
+      "summary": "韩国美妆零售之王是怎样炼成的？",
+      "content": "韩国美妆零售之王是怎样炼成的？",
+      "matched_keywords": [
+        "美妆"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3708640900264070"
+      }
+    },
+    {
+      "article_id": "2996c3f961f88d88",
+      "title": "日本平价彩妆销冠王闭店",
+      "url": "https://www.36kr.com/p/3709236654780801",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Mar 2026 02:49:22 GMT",
+      "collected_at": "2026-04-29T06:52:14.271399+08:00",
+      "time_status": "old",
+      "summary": "靠经典三色眉粉立足大中华区的TA，17年后突然宣布闭店。",
+      "content": "靠经典三色眉粉立足大中华区的TA，17年后突然宣布闭店。",
+      "matched_keywords": [
+        "彩妆",
+        "闭店"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3709236654780801"
+      }
+    },
+    {
+      "article_id": "d5adb73a34a464c4",
+      "title": "“塌房”的椰子水，失守的if",
+      "url": "https://www.36kr.com/p/3709402330821124",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Mar 2026 02:26:01 GMT",
+      "collected_at": "2026-04-29T06:52:14.271880+08:00",
+      "time_status": "old",
+      "summary": "当“中产饮料”的光环淡去。",
+      "content": "当“中产饮料”的光环淡去。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3709402330821124"
+      }
+    },
+    {
+      "article_id": "eea36d81b074f07a",
+      "title": "老广最爱的饮料，曾是国货顶流，现在又火了",
+      "url": "https://www.36kr.com/p/3669792022897285",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Feb 2026 02:52:38 GMT",
+      "collected_at": "2026-04-29T06:52:14.272305+08:00",
+      "time_status": "old",
+      "summary": "中式饮品的鼻祖，老广喝了几十年。",
+      "content": "中式饮品的鼻祖，老广喝了几十年。",
+      "matched_keywords": [
+        "国货"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3669792022897285"
+      }
+    },
+    {
+      "article_id": "76c141dc59bd3349",
+      "title": "巴黎水和圣培露，在华有了新“操盘手”：捷成饮料成为大陆地区总代理经销商，雀巢年收入超280亿饮用水业务在中国市场想“换档提速”",
+      "url": "https://www.36kr.com/p/3667684256801673",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 04 Feb 2026 02:25:13 GMT",
+      "collected_at": "2026-04-29T06:52:14.272779+08:00",
+      "time_status": "old",
+      "summary": "雀巢高端水在华转由捷成代理，轻资产运营迈出关键一步。",
+      "content": "雀巢高端水在华转由捷成代理，轻资产运营迈出关键一步。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3667684256801673"
+      }
+    },
+    {
+      "article_id": "d5b24d1855363c28",
+      "title": "2100亿，一个超级IPO要来了",
+      "url": "https://www.36kr.com/p/3655383042056320",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Sun, 25 Jan 2026 23:44:44 GMT",
+      "collected_at": "2026-04-29T06:52:14.273242+08:00",
+      "time_status": "old",
+      "summary": "对于投资者而言，现在或许是10年以来最好的退出时机。",
+      "content": "对于投资者而言，现在或许是10年以来最好的退出时机。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3655383042056320"
+      }
+    },
+    {
+      "article_id": "244eaf3bfe5185e1",
+      "title": "商汤科技正式发布并开源日日新SenseNova U1系列模型",
+      "url": "https://www.36kr.com/newsflashes/3786492691782919",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:59:33 GMT",
+      "collected_at": "2026-04-29T06:52:38.073639+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，今天，商汤科技正式发布并开源日日新SenseNova U1系列原生理解生成统一模型。它基于商汤于今年三月自主研发的NEO-unify架构，在单一模型架构上统一了多模态理解、推理与生成。据了解，SenseNova U1系列模型能够将语言与视觉信息作为统一的复合体直接建模，实现语言和视觉信息的高效协同，让理解与生成能力同步增强，在保留语义丰富度的同时，维持像素级的视觉保真度。",
+      "content": "36氪获悉，今天，商汤科技正式发布并开源日日新SenseNova U1系列原生理解生成统一模型。它基于商汤于今年三月自主研发的NEO-unify架构，在单一模型架构上统一了多模态理解、推理与生成。据了解，SenseNova U1系列模型能够将语言与视觉信息作为统一的复合体直接建模，实现语言和视觉信息的高效协同，让理解与生成能力同步增强，在保留语义丰富度的同时，维持像素级的视觉保真度。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786492691782919"
+      }
+    },
+    {
+      "article_id": "508a166caee04bcd",
+      "title": "热门中概股美股盘前多数下跌，理想汽车跌超4%",
+      "url": "https://www.36kr.com/newsflashes/3786484642372615",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:51:21 GMT",
+      "collected_at": "2026-04-29T06:52:38.074290+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，热门中概股美股盘前多数下跌，截至发稿，理想汽车跌超4%，小鹏集团跌超3%，腾讯音乐、阿里巴巴、B站跌超2%，百度、京东、网易、蔚来跌超1%；啊七一涨近1%。",
+      "content": "36氪获悉，热门中概股美股盘前多数下跌，截至发稿，理想汽车跌超4%，小鹏集团跌超3%，腾讯音乐、阿里巴巴、B站跌超2%，百度、京东、网易、蔚来跌超1%；啊七一涨近1%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786484642372615"
+      }
+    },
+    {
+      "article_id": "64278f2d6717dfc3",
+      "title": "美股大型科技股盘前跌多涨少，Arm跌超7%",
+      "url": "https://www.36kr.com/newsflashes/3786480947404041",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:47:36 GMT",
+      "collected_at": "2026-04-29T06:52:38.074756+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，美股大型科技股盘前跌多涨少，截至发稿，Arm跌超7%，英伟达跌超3%，特斯拉、微软、亚马逊、Meta跌超1%，谷歌跌近1%；苹果涨0.77%，奈飞涨0.76%。",
+      "content": "36氪获悉，美股大型科技股盘前跌多涨少，截至发稿，Arm跌超7%，英伟达跌超3%，特斯拉、微软、亚马逊、Meta跌超1%，谷歌跌近1%；苹果涨0.77%，奈飞涨0.76%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786480947404041"
+      }
+    },
+    {
+      "article_id": "cb2a7c020d6f4013",
+      "title": "清越科技：实施其他风险警示，股票停牌",
+      "url": "https://www.36kr.com/newsflashes/3786468315733251",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:34:45 GMT",
+      "collected_at": "2026-04-29T06:52:38.075176+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，清越科技公告，公司因2025年度内部控制被出具否定意见审计报告，触及《科创板股票上市规则》相关规定，股票自2026年4月29日开市起停牌1天，将于4月30日复牌并实施其他风险警示，股票简称变更为“ST清越”。实施期间，公司股票不进入风险警示板交易，涨跌幅仍为20%，投资者当日累计买入数量不得超过50万股。公司正积极配合证监会调查，并采取措施提升内控水平，争取撤销风险警示。",
+      "content": "36氪获悉，清越科技公告，公司因2025年度内部控制被出具否定意见审计报告，触及《科创板股票上市规则》相关规定，股票自2026年4月29日开市起停牌1天，将于4月30日复牌并实施其他风险警示，股票简称变更为“ST清越”。实施期间，公司股票不进入风险警示板交易，涨跌幅仍为20%，投资者当日累计买入数量不得超过50万股。公司正积极配合证监会调查，并采取措施提升内控水平，争取撤销风险警示。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786468315733251"
+      }
+    },
+    {
+      "article_id": "0d1f8e8b10bbef6b",
+      "title": "ADP：截至4月11日四周美国私营部门就业人数平均每周增加3.925万",
+      "url": "https://www.36kr.com/newsflashes/3786453125324033",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:19:18 GMT",
+      "collected_at": "2026-04-29T06:52:38.075623+08:00",
+      "time_status": "in_window",
+      "summary": "4月28日，根据ADP Research和斯坦福数字经济实验室的初步估计，截至4月11日的四周，美国私营部门就业人数平均每周增加3.925万人。（界面）",
+      "content": "4月28日，根据ADP Research和斯坦福数字经济实验室的初步估计，截至4月11日的四周，美国私营部门就业人数平均每周增加3.925万人。（界面）",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786453125324033"
+      }
+    },
+    {
+      "article_id": "bbba2ae7b71abc2b",
+      "title": "长芯博创：拟1.96亿元收购高速有源光缆公司长芯盛2.20%股份",
+      "url": "https://www.36kr.com/newsflashes/3786452077763584",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:18:14 GMT",
+      "collected_at": "2026-04-29T06:52:38.076058+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，长芯博创公告，公司拟以现金1.96亿元收购控股子公司长芯盛2.20%股份，交易完成后持股比例将升至62.65%。长芯盛是光通信解决方案提供商，主要产品应用于数据通信、消费及工业互联领域，产品包括用于数据中心内部互联的各类高速线缆、无源预端接跳线等，用于消费、工业以及医疗等行业互联的高速有源光缆（AOC）以及广泛应用于不同场景的各类处理器接口的高速模拟芯片、高速光电模组组件等。本公司控股股东、实际控制人长飞光纤光缆股份有限公司持有目标公司37.35%的股份。",
+      "content": "36氪获悉，长芯博创公告，公司拟以现金1.96亿元收购控股子公司长芯盛2.20%股份，交易完成后持股比例将升至62.65%。长芯盛是光通信解决方案提供商，主要产品应用于数据通信、消费及工业互联领域，产品包括用于数据中心内部互联的各类高速线缆、无源预端接跳线等，用于消费、工业以及医疗等行业互联的高速有源光缆（AOC）以及广泛应用于不同场景的各类处理器接口的高速模拟芯片、高速光电模组组件等。本公司控股股东、实际控制人长飞光纤光缆股份有限公司持有目标公司37.35%的股份。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786452077763584"
+      }
+    },
+    {
+      "article_id": "4ca7aff0ecaf9c81",
+      "title": "古井贡酒：第一季度净利润16.07亿元，同比下降31.03%",
+      "url": "https://www.36kr.com/newsflashes/3786443969305607",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:09:59 GMT",
+      "collected_at": "2026-04-29T06:52:38.076484+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，古井贡酒发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入74.46亿元，同比下降18.59%；归属于上市公司股东的净利润为16.07亿元，同比下降31.03%。",
+      "content": "36氪获悉，古井贡酒发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入74.46亿元，同比下降18.59%；归属于上市公司股东的净利润为16.07亿元，同比下降31.03%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786443969305607"
+      }
+    },
+    {
+      "article_id": "0af8a754e8ad8807",
+      "title": "华曙高科：拟募资不超39.1亿元，用于先进增材制造设备产能提升项目等",
+      "url": "https://www.36kr.com/newsflashes/3786438056582403",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:03:58 GMT",
+      "collected_at": "2026-04-29T06:52:38.076903+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，华曙高科公告，拟定增募资不超过39.1亿元，用于先进增材制造设备产能提升项目、增材制造综合服务平台建设项目、全球运营中心建设项目。",
+      "content": "36氪获悉，华曙高科公告，拟定增募资不超过39.1亿元，用于先进增材制造设备产能提升项目、增材制造综合服务平台建设项目、全球运营中心建设项目。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786438056582403"
+      }
+    },
+    {
+      "article_id": "533879bf394c8bd8",
+      "title": "久立特材：回购170万股，使用资金总额4934.31万元",
+      "url": "https://www.36kr.com/newsflashes/3786431608872199",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:57:24 GMT",
+      "collected_at": "2026-04-29T06:52:38.077311+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，久立特材公告，公司首次通过回购专用证券账户以集中竞价交易方式回购公司股份1,700,000股，占公司总股本的0.17%，最高成交价为29.18元/股，最低成交价为28.79元/股，成交总金额为49,343,073元（不含交易费用）。本次回购股份资金来源为公司自有资金，回购价格未超过回购方案中拟定的价格上限。本次回购符合相关法律法规的要求，符合既定的回购股份方案。",
+      "content": "36氪获悉，久立特材公告，公司首次通过回购专用证券账户以集中竞价交易方式回购公司股份1,700,000股，占公司总股本的0.17%，最高成交价为29.18元/股，最低成交价为28.79元/股，成交总金额为49,343,073元（不含交易费用）。本次回购股份资金来源为公司自有资金，回购价格未超过回购方案中拟定的价格上限。本次回购符合相关法律法规的要求，符合既定的回购股份方案。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786431608872199"
+      }
+    },
+    {
+      "article_id": "fc0c17fa8a55f837",
+      "title": "寒武纪：2025年度权益分派拟每10股派15元转增4.9股，股权登记日为2026年5月7日",
+      "url": "https://www.36kr.com/newsflashes/3786420670881032",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:46:17 GMT",
+      "collected_at": "2026-04-29T06:52:38.077739+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，寒武纪公告，公司2025年年度权益分派方案为，以实施权益分派股权登记日登记的总股本扣除回购专用账户股份为基数，向全体股东每10股派发现金红利15元(含税)，同时以资本公积金每10股转增4.9股。股权登记日为2026年5月7日，除权除息日为2026年5月8日。",
+      "content": "36氪获悉，寒武纪公告，公司2025年年度权益分派方案为，以实施权益分派股权登记日登记的总股本扣除回购专用账户股份为基数，向全体股东每10股派发现金红利15元(含税)，同时以资本公积金每10股转增4.9股。股权登记日为2026年5月7日，除权除息日为2026年5月8日。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786420670881032"
+      }
+    },
+    {
+      "article_id": "69b9b87f04177dd0",
+      "title": "天娱数科：一季度归母净利润3024.12万元，同比增加476.94%",
+      "url": "https://www.36kr.com/newsflashes/3786414097112067",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:39:36 GMT",
+      "collected_at": "2026-04-29T06:52:38.078270+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，天娱数科发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入5.47亿元，同比增长12.81%；归属于上市公司股东的净利润3024.12万元，上年同期归属于上市公司股东的净利润524.17万元，同比增长476.94%；基本每股收益0.0183元。",
+      "content": "36氪获悉，天娱数科发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入5.47亿元，同比增长12.81%；归属于上市公司股东的净利润3024.12万元，上年同期归属于上市公司股东的净利润524.17万元，同比增长476.94%；基本每股收益0.0183元。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786414097112067"
+      }
+    },
+    {
+      "article_id": "c00ad971bc6634b1",
+      "title": "可口可乐第一季度净营收124.72亿美元",
+      "url": "https://www.36kr.com/newsflashes/3786403225164809",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:28:32 GMT",
+      "collected_at": "2026-04-29T06:52:38.078746+08:00",
+      "time_status": "in_window",
+      "summary": "可口可乐4月28日公布第一季度业绩显示，净营收124.72亿美元，可比每股收益0.86美元。（界面）",
+      "content": "可口可乐4月28日公布第一季度业绩显示，净营收124.72亿美元，可比每股收益0.86美元。（界面）",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786403225164809"
+      }
+    },
+    {
+      "article_id": "31549f42da1dae07",
+      "title": "昆仑万维：第一季度营收同比增长45.69%，短剧业务单月流水超4800万美元",
+      "url": "https://www.36kr.com/newsflashes/3786398647377157",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:23:53 GMT",
+      "collected_at": "2026-04-29T06:52:38.079197+08:00",
+      "time_status": "in_window",
+      "summary": "4月28日，昆仑万维发布2026年第一季度报告。报告期内，公司营收25.7亿元，同比增长45.69%，其中海外业务收入24.87亿元，同比增长49.29%。伴随AI技术商业化落地加速推进，天工AI业务收入较2025年第四季度延续高速增长态势。公司经营活动产生的现金流量净额同比显著改善，内生造血能力明显增强。公司短剧和AI短剧平台业务单月流水超4800万美元，年度经常性收入（ARR）突破5.7亿美元。",
+      "content": "4月28日，昆仑万维发布2026年第一季度报告。报告期内，公司营收25.7亿元，同比增长45.69%，其中海外业务收入24.87亿元，同比增长49.29%。伴随AI技术商业化落地加速推进，天工AI业务收入较2025年第四季度延续高速增长态势。公司经营活动产生的现金流量净额同比显著改善，内生造血能力明显增强。公司短剧和AI短剧平台业务单月流水超4800万美元，年度经常性收入（ARR）突破5.7亿美元。",
+      "matched_keywords": [
+        "流量"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786398647377157"
+      }
+    },
+    {
+      "article_id": "383003e4beca1810",
+      "title": "现货黄金失守4600美元关口",
+      "url": "https://www.36kr.com/newsflashes/3786388151524615",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:13:12 GMT",
+      "collected_at": "2026-04-29T06:52:38.079622+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，现货黄金失守4600美元/盎司，日内跌幅1.75%。",
+      "content": "36氪获悉，现货黄金失守4600美元/盎司，日内跌幅1.75%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786388151524615"
+      }
+    },
+    {
+      "article_id": "c32afd6e716267ea",
+      "title": "科大讯飞：2025年公司实现营收271.05亿元，同比增长16.12%",
+      "url": "https://www.36kr.com/newsflashes/3786382504778755",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:07:27 GMT",
+      "collected_at": "2026-04-29T06:52:38.080043+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，科大讯飞发布2025年业绩报告。报告显示，2025年，公司实现营收271.05亿元，同比增长16.12%；归母净利润8.39亿元，同比增长49.85%；扣非净利润2.64亿元，同比增长40.47%。此外，公司去年销售回款总额超过274亿元，同比增长超过45亿元，报告期末经营活动产生的现金流量净额32.08亿元，均创历史新高。",
+      "content": "36氪获悉，科大讯飞发布2025年业绩报告。报告显示，2025年，公司实现营收271.05亿元，同比增长16.12%；归母净利润8.39亿元，同比增长49.85%；扣非净利润2.64亿元，同比增长40.47%。此外，公司去年销售回款总额超过274亿元，同比增长超过45亿元，报告期末经营活动产生的现金流量净额32.08亿元，均创历史新高。",
+      "matched_keywords": [
+        "流量"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786382504778755"
+      }
+    },
+    {
+      "article_id": "6444b1d3cd13222d",
+      "title": "中国石化：第一季度净利润170.06亿元，同比增长28.2%",
+      "url": "https://www.36kr.com/newsflashes/3786373135490306",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:57:55 GMT",
+      "collected_at": "2026-04-29T06:52:38.080452+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，中国石化发布2026年一季度业绩报告。报告显示，2026年第一季度营收为7066.95亿元，同比下降3.9%；净利润为170.06亿元，同比增长28.2%。",
+      "content": "36氪获悉，中国石化发布2026年一季度业绩报告。报告显示，2026年第一季度营收为7066.95亿元，同比下降3.9%；净利润为170.06亿元，同比增长28.2%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786373135490306"
+      }
+    },
+    {
+      "article_id": "6d4003898d412896",
+      "title": "影石创新：第一季度净利润8462.02万元，同比下降52.02%",
+      "url": "https://www.36kr.com/newsflashes/3786369707170816",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:54:26 GMT",
+      "collected_at": "2026-04-29T06:52:38.080880+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，影石创新发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入24.81亿元，同比增长83.11%；归属于上市公司股东的净利润为8462.02万元，同比下降52.02%。业绩变动主要系公司主动加大战略研发投入及市场开拓，相关费用有所增加，同时，存储元器件涨价、影像行业市场竞争加剧，公司毛利率有所下降所致。",
+      "content": "36氪获悉，影石创新发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入24.81亿元，同比增长83.11%；归属于上市公司股东的净利润为8462.02万元，同比下降52.02%。业绩变动主要系公司主动加大战略研发投入及市场开拓，相关费用有所增加，同时，存储元器件涨价、影像行业市场竞争加剧，公司毛利率有所下降所致。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786369707170816"
+      }
+    },
+    {
+      "article_id": "47700ac4a1d0f0cf",
+      "title": "顺丰控股：第一季度净利润25.26亿元，同比增长13.05%",
+      "url": "https://www.36kr.com/newsflashes/3786368036428805",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:52:44 GMT",
+      "collected_at": "2026-04-29T06:52:38.081285+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，顺丰控股发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入741.42亿元，同比增长6.14%；归属于上市公司股东的净利润为25.26亿元，同比增长13.05%。",
+      "content": "36氪获悉，顺丰控股发布2026年一季度业绩报告。报告显示，2026年第一季度实现营业收入741.42亿元，同比增长6.14%；归属于上市公司股东的净利润为25.26亿元，同比增长13.05%。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786368036428805"
+      }
+    },
+    {
+      "article_id": "c36174d5ce717c6e",
+      "title": "文峰股份：4月30日起实施其他风险警示，股票简称变更为ST文峰",
+      "url": "https://www.36kr.com/newsflashes/3786364682247425",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:49:20 GMT",
+      "collected_at": "2026-04-29T06:52:38.081705+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，文峰股份公告，因大信会计师事务所出具否定意见的内部控制审计报告，公司股票自2026年4月29日停牌1天，4月30日起实施其他风险警示，股票简称变更为ST文峰，日涨跌幅限制为5%。公司已制定整改措施，包括强化会计信息质量、优化采购和投资管理流程。",
+      "content": "36氪获悉，文峰股份公告，因大信会计师事务所出具否定意见的内部控制审计报告，公司股票自2026年4月29日停牌1天，4月30日起实施其他风险警示，股票简称变更为ST文峰，日涨跌幅限制为5%。公司已制定整改措施，包括强化会计信息质量、优化采购和投资管理流程。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786364682247425"
+      }
+    },
+    {
+      "article_id": "e48f6089f0264441",
+      "title": "比亚迪：一季度净利润40.8亿元，同比下降55.38%",
+      "url": "https://www.36kr.com/newsflashes/3786355448798213",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:39:56 GMT",
+      "collected_at": "2026-04-29T06:52:38.082113+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，比亚迪发布2026年一季度业绩报告。报告显示，一季度营业收入1502.25亿元，同比下降11.82%；归属于上市公司股东的净利润40.85亿元，同比大降55.38%；扣非净利润41.48亿元，同比下滑49.24%。第一季度基本每股收益0.4480元/股，同比下降56.89%；加权平均净资产收益率1.65%，同比下降2.72个百分点。",
+      "content": "36氪获悉，比亚迪发布2026年一季度业绩报告。报告显示，一季度营业收入1502.25亿元，同比下降11.82%；归属于上市公司股东的净利润40.85亿元，同比大降55.38%；扣非净利润41.48亿元，同比下滑49.24%。第一季度基本每股收益0.4480元/股，同比下降56.89%；加权平均净资产收益率1.65%，同比下降2.72个百分点。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3786355448798213"
+      }
+    },
+    {
+      "article_id": "1147c0a3d6d6a406",
+      "title": "闪电仓不是短期的流量战，而是供应链的持久战",
+      "url": "https://www.36kr.com/p/3786428052970505",
+      "source_name": "rsshub_36kr_search_meituan_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 12:58:10 GMT",
+      "collected_at": "2026-04-29T06:52:38.554286+08:00",
+      "time_status": "in_window",
+      "summary": "别再迷信开仓速度！闪电仓的天花板，是供应链！",
+      "content": "别再迷信开仓速度！闪电仓的天花板，是供应链！",
+      "matched_keywords": [
+        "供应链",
+        "流量"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/美团闪购?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/美团闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3786428052970505",
+        "duplicate_sources": [
+          "rsshub_36kr_search_instant_retail",
+          "rsshub_36kr_search_beauty"
+        ]
+      }
+    },
+    {
+      "article_id": "78e43888dacd976e",
+      "title": "4.4亿AI 用户驱动下，GEO行业如何从狂热走向合规重建？",
+      "url": "https://www.36kr.com/p/3786268268475137",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:53:09 GMT",
+      "collected_at": "2026-04-29T06:52:38.859645+08:00",
+      "time_status": "in_window",
+      "summary": "正确的GEO应该长什么样？",
+      "content": "正确的GEO应该长什么样？",
+      "matched_keywords": [
+        "合规"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3786268268475137"
+      }
+    },
+    {
+      "article_id": "1abc9505dd5ee68e",
+      "title": "2026年的零售业：谁在崛起，谁在崩塌",
+      "url": "https://www.36kr.com/p/3785706391165953",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 02:54:56 GMT",
+      "collected_at": "2026-04-29T06:52:38.860244+08:00",
+      "time_status": "in_window",
+      "summary": "喊了十年的零售变革，有了新信号。",
+      "content": "喊了十年的零售变革，有了新信号。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3785706391165953",
+        "duplicate_sources": [
+          "rsshub_36kr_search_instant_retail"
+        ]
+      }
+    },
+    {
+      "article_id": "701d48d7acb8138e",
+      "title": "QuestMobile2026 中国移动互联网春季大报告：结构性大变局来临，用户跨行业、跨终端迁移，部分行业黏性飙涨，如何适应新常态？",
+      "url": "https://www.36kr.com/p/3785860816395529",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 02:43:27 GMT",
+      "collected_at": "2026-04-29T06:52:38.860703+08:00",
+      "time_status": "in_window",
+      "summary": "全网用户月人均使用时长达192.2小时，同比增长9.3%，增长动能持续增强。",
+      "content": "全网用户月人均使用时长达192.2小时，同比增长9.3%，增长动能持续增强。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3785860816395529",
+        "duplicate_sources": [
+          "rsshub_36kr_search_instant_retail",
+          "rsshub_36kr_search_beauty"
+        ]
+      }
+    },
+    {
+      "article_id": "b984f744f6f2e9ff",
+      "title": "团购“无限战争”：美团、抖音、京东的流量分配权暗战",
+      "url": "https://www.36kr.com/p/3784949011985158",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 27 Apr 2026 12:28:27 GMT",
+      "collected_at": "2026-04-29T06:52:38.861130+08:00",
+      "time_status": "in_window",
+      "summary": "2026年了，这帮互联网老炮儿突然发现，外卖罚单吃到饱，还是骗你下楼吃火锅最赚钱。",
+      "content": "2026年了，这帮互联网老炮儿突然发现，外卖罚单吃到饱，还是骗你下楼吃火锅最赚钱。",
+      "matched_keywords": [
+        "流量"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3784949011985158",
+        "duplicate_sources": [
+          "rsshub_36kr_search_jd_instant",
+          "rsshub_36kr_search_instant_retail"
+        ]
+      }
+    },
+    {
+      "article_id": "02fff81c70f1728f",
+      "title": "主播接连出走，但东方甄选更能赚钱了？",
+      "url": "https://www.36kr.com/p/3786338199745284",
+      "source_name": "rsshub_36kr_search_instant_retail",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:55:10 GMT",
+      "collected_at": "2026-04-29T06:52:40.722996+08:00",
+      "time_status": "in_window",
+      "summary": "卖货的公司不谈理想主义",
+      "content": "卖货的公司不谈理想主义",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/即时零售?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/即时零售?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3786338199745284",
+        "duplicate_sources": [
+          "rsshub_36kr_search_beauty"
+        ]
+      }
+    },
+    {
+      "article_id": "92e32aafea6b637c",
+      "title": "“鼻祖”接连闭店，北京容不下城市奥莱？",
+      "url": "https://www.36kr.com/p/3785894709566729",
+      "source_name": "rsshub_36kr_search_instant_retail",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 03:08:37 GMT",
+      "collected_at": "2026-04-29T06:52:40.723427+08:00",
+      "time_status": "in_window",
+      "summary": "荟品仓、BIGOFFS、好特卖超级折扣厮杀五环外。",
+      "content": "荟品仓、BIGOFFS、好特卖超级折扣厮杀五环外。",
+      "matched_keywords": [
+        "折扣",
+        "闭店"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/即时零售?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/即时零售?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3785894709566729",
+        "duplicate_sources": [
+          "rsshub_36kr_search_beauty"
+        ]
+      }
+    },
+    {
+      "article_id": "0c090af2eeb52e06",
+      "title": "老牌日化上市以来首次年度亏损",
+      "url": "https://www.36kr.com/p/3786322983116040",
+      "source_name": "rsshub_36kr_search_beauty",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:37:00 GMT",
+      "collected_at": "2026-04-29T06:52:44.322234+08:00",
+      "time_status": "in_window",
+      "summary": "研发砍23%，营销砸3亿。",
+      "content": "研发砍23%，营销砸3亿。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/美妆?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/美妆?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3786322983116040"
+      }
+    },
+    {
+      "article_id": "b5006b7b6b7d91d2",
+      "title": "打破AI焦虑 审美才是顶级竞争力丨亿邦新竞争力品牌大会实录",
+      "url": "https://www.36kr.com/p/3786399282666756",
+      "source_name": "rsshub_36kr_search_beauty",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:35:45 GMT",
+      "collected_at": "2026-04-29T06:52:44.322725+08:00",
+      "time_status": "in_window",
+      "summary": "中国零售反思：科技与美学成破局关键。",
+      "content": "中国零售反思：科技与美学成破局关键。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/美妆?limit=20&sorted=true&filterout_time=7776000",
+        "route": "/36kr/search/articles/美妆?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3786399282666756"
+      }
+    }
+  ]
+}

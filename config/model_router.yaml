@@ -1,0 +1,69 @@
+default_model: LongCat-Flash-Lite
+global_fallback:
+- LongCat-Flash-Chat
+- LongCat-Flash-Thinking
+models:
+  LongCat-Flash-Chat:
+    description: 中等复杂度分析和JSON失败重试模型
+    max_tokens: 4096
+    temperature: 0.3
+    timeout: 150
+  LongCat-Flash-Lite:
+    description: 批量结构化任务默认模型
+    max_tokens: 2048
+    temperature: 0.1
+    timeout: 120
+  LongCat-Flash-Thinking:
+    description: 高复杂度推理模型（复杂经营判断，可选深度润色）
+    max_tokens: 8192
+    temperature: 0.3
+    timeout: 240
+routing:
+  analyze_business_impact:
+    fallback:
+    - LongCat-Flash-Thinking
+    params:
+      max_tokens: 4096
+      temperature: 0.3
+    priority_routing:
+      ARCHIVE: rule_only
+      P0: LongCat-Flash-Thinking
+      P1: LongCat-Flash-Chat
+      P2: LongCat-Flash-Lite
+  editor_review:
+    default: LongCat-Flash-Chat
+    fallback:
+    - LongCat-Flash-Lite
+    params:
+      max_tokens: 4096
+      temperature: 0.3
+  extract_events:
+    default: LongCat-Flash-Lite
+    fallback:
+    - LongCat-Flash-Chat
+    params:
+      max_tokens: 4096
+      temperature: 0.2
+  filter_relevant_articles:
+    default: LongCat-Flash-Lite
+    fallback:
+    - LongCat-Flash-Chat
+    params:
+      max_tokens: 2048
+      temperature: 0.1
+  generate_daily_report:
+    default: LongCat-Flash-Chat
+    fallback:
+    - LongCat-Flash-Lite
+    params:
+      max_tokens: 4096
+      temperature: 0.3
+    # Thinking 模型用于可选的深度润色，不作为默认生产流程依赖
+    optional_deep_review: LongCat-Flash-Thinking
+  generate_podcast:
+    default: LongCat-Flash-Chat
+    fallback:
+    - LongCat-Flash-Lite
+    params:
+      max_tokens: 4096
+      temperature: 0.3

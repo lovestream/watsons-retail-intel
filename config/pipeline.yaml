@@ -1,0 +1,127 @@
+# pipeline.yaml — 总控流水线配置（V2）
+
+# 步骤定义（固定顺序）
+# 注：当 filter_merged 后 cleaned_count=0 时，跳过 extract/score/analyze/generate_report，
+# 走 generate_no_signal_report 分支，输出"无新增信号"日报
+steps:
+  - name: collect
+    module: skills.collect_daily_articles.collect_daily_articles
+    function: collect_daily_articles
+    cli: skills/collect_daily_articles/collect_daily_articles.py
+    description: "采集原始文章（RSSHub+RSS+Web）"
+    
+  - name: filter
+    module: skills.filter_relevant_articles.filter_relevant_articles
+    function: filter_relevant_articles
+    cli: skills/filter_relevant_articles/filter_relevant_articles.py
+    description: "过滤与清洗文章"
+    
+  - name: source_health_report
+    module: skills.source_health_report.source_health_report
+    function: source_health_report
+    cli: skills/source_health_report/source_health_report.py
+    description: "源健康度诊断（best-effort，非阻塞）"
+    
+  - name: tavily_gap_search
+    module: skills.tavily_gap_search.tavily_gap_search
+    function: tavily_gap_search
+    cli: skills/tavily_gap_search/tavily_gap_search.py
+    description: "Tavily 缺口补搜（条件触发）"
+
+  - name: filter_merged
+    module: skills.filter_relevant_articles.filter_relevant_articles
+    function: filter_relevant_articles
+    cli: skills/filter_relevant_articles/filter_relevant_articles.py
+    description: "补搜后重过滤（rule-only）"
+
+  - name: extract
+    module: skills.extract_events.extract_events
+    function: extract_events
+    cli: skills/extract_events/extract_events.py
+    description: "事件抽取"
+    skip_when_no_signal: true
+
+  - name: score
+    module: skills.score_events.score_events
+    function: score_events
+    cli: skills/score_events/score_events.py
+    description: "事件八维评分"
+    skip_when_no_signal: true
+
+  - name: analyze
+    module: skills.analyze_business_impact.analyze_business_impact
+    function: analyze_business_impact
+    cli: skills/analyze_business_impact/analyze_business_impact.py
+    description: "经营影响分析"
+    skip_when_no_signal: true
+
+  - name: generate_report
+    module: skills.generate_daily_report.generate_daily_report
+    function: generate_daily_report
+    cli: skills/generate_daily_report/generate_daily_report.py
+    description: "日报生成（V1+V2双稿）"
+    skip_when_no_signal: true
+    no_signal_alternative: generate_no_signal_report
+
+  - name: editor_review
+    module: skills.editor_review.editor_review
+    function: editor_review
+    cli: skills/editor_review/editor_review.py
+    description: "审稿定稿"
+
+  - name: generate_podcast
+    module: skills.generate_podcast.generate_podcast
+    function: generate_podcast
+    cli: skills/generate_podcast/generate_podcast.py
+    description: "生成口播稿+音频播客"
+
+  - name: send_daily_report_email
+    module: skills.send_daily_report_email.send_daily_report_email
+    function: send_daily_report_email
+    cli: skills/send_daily_report_email/send_daily_report_email.py
+    description: "发送日报邮件（HTML+附件）"
+
+# 无信号日报分支（当 cleaned_count=0 时）
+no_signal:
+  module: skills.generate_no_signal_report.generate_no_signal_report
+  function: generate_no_signal_report
+  cli: skills/generate_no_signal_report/generate_no_signal_report.py
+  description: "无高质量新增信号日报"
+
+# 默认参数
+defaults:
+  use_llm: true
+  send_email: false
+  recipient: ""
+  resume: true
+  force: false
+  dry_run: false
+
+# 校验阈值
+validation:
+  collect:
+    min_raw_count: 20
+  filter:
+    min_cleaned_count: 3
+  source_health_report:
+    non_blocking: true
+  tavily_gap_search:
+    non_blocking: true
+  filter_merged:
+    min_cleaned_count: 3
+    no_signal_threshold: 0  # cleaned_count=0 走无信号分支
+  extract:
+    min_event_count: 1
+  score:
+    count_must_match: true
+  analyze:
+    count_must_match: true
+  generate_report:
+    min_event_ids: 1
+  generate_no_signal_report:
+    required_sections: 7
+  editor_review:
+    required_sections: 7
+  generate_podcast:
+    min_chinese_chars: 1800
+    max_chinese_chars: 2500

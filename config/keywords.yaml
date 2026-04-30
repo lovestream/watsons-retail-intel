@@ -1,0 +1,131 @@
+# 关键词字典
+# 按 platforms / categories / competitors / business_variables / scenarios 五类组织
+
+platforms:
+  instant_retail:
+    - 即时零售
+    - 即配
+    - 即时配送
+    - 闪购
+    - 即时电商
+    - 到家业务
+  meituan:
+    - 美团闪购
+    - 美团到家
+    - 美团优选
+  eleoda:
+    - 饿了么
+    - 蜂鸟即配
+    - 饿了么到家
+  jd_daojia:
+    - 京东到家
+    - 京东小时达
+    - 达达配送
+
+categories:
+  personal_care:
+    - 个护
+    - 洗护
+    - 口腔护理
+    - 沐浴
+    - 洗发
+  beauty:
+    - 美妆
+    - 彩妆
+    - 护肤
+    - 防晒
+    - 精华
+    - 面膜
+  fragrance:
+    - 香水
+    - 香氛
+    - 身体喷雾
+  mens_grooming:
+    - 男士护理
+    - 男士护肤
+    - 男士理容
+
+competitors:
+  drugstore_chains:
+    - 屈臣氏
+    - 丝芙兰
+    - 调色师
+    - 话梅
+    - 橘子炫风
+  e_commerce_beauty:
+    - 唯品会美妆
+    - 天猫美妆
+    - 抖音美妆
+    - 快手美妆
+  private_labels:
+    - 自有品牌
+    - PB品牌
+    - 代工
+
+business_variables:
+  pricing:
+    - 促销
+    - 折扣
+    - 满减
+    - 会员价
+    - 价格战
+    - 补贴
+  supply_chain:
+    - 供应链
+    - 仓储
+    - 冷链
+    - 缺货
+    - 备货
+    - 选品
+  traffic:
+    - 流量
+    - 曝光
+    - 转化率
+    - 复购
+    - 拉新
+    - 留存
+  compliance:
+    - 合规
+    - 备案
+    - 特证
+    - 飞检
+    - 标签
+    - 成分
+  seasons:
+    - 大促
+    - "38节"
+    - "618"
+    - 双11
+    - 双12
+    - 年货节
+    - 换季
+
+scenarios:
+  new_product_launch:
+    - 新品首发
+    - 上架
+    - 新品牌入驻
+    - 独家首发
+  store_operations:
+    - 门店运营
+    - 选址
+    - 闭店
+    - 开业
+    - 数字化
+  marketing_campaign:
+    - 营销活动
+    - 联名
+    - IP合作
+    - 达人种草
+    - 直播
+  policy_change:
+    - 政策
+    - 新规
+    - 通告
+    - 征求意见稿
+  consumer_trend:
+    - 消费趋势
+    - 成分党
+    - 敏感肌
+    - 国货
+    - 平替

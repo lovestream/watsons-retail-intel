@@ -1,0 +1,218 @@
+2026-04-28 12:18:15,581 [INFO] ============================================================
+2026-04-28 12:18:15,581 [INFO] 开始过滤: date=2026-04-28
+2026-04-28 12:18:15,581 [INFO] use_llm=True, llm_mode=borderline_only
+2026-04-28 12:18:15,581 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-28/raw_articles.json
+2026-04-28 12:18:15,581 [INFO] ============================================================
+2026-04-28 12:18:15,588 [INFO] 加载原始文章: 54 条
+2026-04-28 12:18:15,627 [INFO] LLM 客户端就绪: 6 个 Key 可用, 模型=LongCat-Flash-Thinking
+2026-04-28 12:18:15,640 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:18:30,052 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:18:30,912 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:18:31,624 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:18:52,375 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:19:03,756 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:19:11,282 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:19:12,433 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:19:40,992 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:19:58,213 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:20:00,904 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:20:20,953 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:20:23,929 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:20:35,799 [INFO]   进度: 20/54
+2026-04-28 12:20:35,800 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:20:54,075 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:21:10,056 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:21:16,042 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:21:23,577 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:21:25,452 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:21:30,411 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:21:34,561 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:21:35,743 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:21:37,446 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:21:56,589 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:22:19,196 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:22:19,965 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:22:20,777 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:22:21,787 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:22:22,652 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:22:23,511 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:22:44,399 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:23:12,110 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:23:25,004 [INFO]   进度: 40/54
+2026-04-28 12:23:25,005 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:23:34,279 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:23:53,209 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:24:34,184 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:24:37,395 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:24:46,650 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:24:50,546 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:24:55,849 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:24:56,666 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:25:02,345 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:25:28,957 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:25:48,489 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:25:49,381 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:26:18,131 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 12:28:24,827 [INFO] ============================================================
+2026-04-28 12:28:24,827 [INFO] 开始过滤: date=2026-04-28
+2026-04-28 12:28:24,827 [INFO] use_llm=False, llm_mode=borderline_only
+2026-04-28 12:28:24,827 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-28/raw_articles.json
+2026-04-28 12:28:24,827 [INFO] ============================================================
+2026-04-28 12:28:24,834 [INFO] 加载原始文章: 54 条
+2026-04-28 12:28:24,871 [INFO]   进度: 20/54
+2026-04-28 12:28:24,887 [INFO]   进度: 40/54
+2026-04-28 12:28:24,901 [INFO] ============================================================
+2026-04-28 12:28:24,901 [INFO] 过滤完成汇总:
+2026-04-28 12:28:24,902 [INFO]   raw_count: 54
+2026-04-28 12:28:24,902 [INFO]   cleaned_count: 0
+2026-04-28 12:28:24,902 [INFO]   reference_count: 8
+2026-04-28 12:28:24,902 [INFO]   rejected_count: 46
+2026-04-28 12:28:24,902 [INFO]   llm_reviewed_count: 0
+2026-04-28 12:28:24,902 [INFO]   llm_failed_count: 0
+2026-04-28 12:28:24,902 [INFO]   by_time_status: {'in_window': 25, 'near_window': 3, 'old': 26}
+2026-04-28 12:28:24,902 [INFO]   by_source: {'rsshub_huxiu_search_douyin_hour': 2, 'rsshub_huxiu_search_watsons': 20, 'rsshub_latepost': 10, 'rsshub_huxiu_consumer_channel': 9, 'rsshub_huxiu_article': 13}
+2026-04-28 12:28:24,902 [INFO]   top_matched_keywords: {'屈臣氏': 20, '供应链': 6, '美妆': 4, '直播': 2, '流量': 2, '政策': 2, '价格战': 2, '丝芙兰': 1, '护肤': 1, '个护': 1}
+2026-04-28 12:28:24,902 [INFO]   reject_reasons: {'reject': 46, 'reference': 8}
+2026-04-28 12:28:24,902 [INFO] ============================================================
+2026-04-28 12:29:21,439 [INFO] ============================================================
+2026-04-28 12:29:21,439 [INFO] 开始过滤: date=2026-04-28
+2026-04-28 12:29:21,439 [INFO] use_llm=False, llm_mode=borderline_only
+2026-04-28 12:29:21,439 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-28/raw_articles_merged.json
+2026-04-28 12:29:21,439 [INFO] ============================================================
+2026-04-28 12:29:21,456 [INFO] 加载原始文章: 109 条
+2026-04-28 12:29:21,493 [INFO]   进度: 20/109
+2026-04-28 12:29:21,508 [INFO]   进度: 40/109
+2026-04-28 12:29:21,511 [INFO]   进度: 60/109
+2026-04-28 12:29:21,519 [INFO]   进度: 80/109
+2026-04-28 12:29:21,527 [INFO]   进度: 100/109
+2026-04-28 12:29:21,557 [INFO] ============================================================
+2026-04-28 12:29:21,557 [INFO] 过滤完成汇总:
+2026-04-28 12:29:21,557 [INFO]   raw_count: 109
+2026-04-28 12:29:21,557 [INFO]   cleaned_count: 34
+2026-04-28 12:29:21,558 [INFO]   reference_count: 15
+2026-04-28 12:29:21,558 [INFO]   rejected_count: 60
+2026-04-28 12:29:21,558 [INFO]   llm_reviewed_count: 0
+2026-04-28 12:29:21,558 [INFO]   llm_failed_count: 0
+2026-04-28 12:29:21,558 [INFO]   by_time_status: {'in_window': 25, 'near_window': 3, 'old': 26, 'unknown_time': 55}
+2026-04-28 12:29:21,558 [INFO]   by_source: {'rsshub_huxiu_search_douyin_hour': 2, 'rsshub_huxiu_search_watsons': 20, 'rsshub_latepost': 10, 'rsshub_huxiu_consumer_channel': 9, 'rsshub_huxiu_article': 13, 'tavily_gap_search': 55}
+2026-04-28 12:29:21,558 [INFO]   top_matched_keywords: {'美妆': 44, '屈臣氏': 35, '闪购': 34, '即时零售': 31, '流量': 28, '个护': 27, '美团闪购': 25, '护肤': 20, '供应链': 20, '直播': 17}
+2026-04-28 12:29:21,558 [INFO]   reject_reasons: {'reject': 60, 'reference': 15, 'main': 34}
+2026-04-28 12:29:21,558 [INFO] ============================================================
+2026-04-28 12:29:32,122 [INFO] ============================================================
+2026-04-28 12:29:32,122 [INFO] 开始过滤: date=2026-04-28
+2026-04-28 12:29:32,122 [INFO] use_llm=False, llm_mode=borderline_only
+2026-04-28 12:29:32,122 [INFO] 输入文件: data/raw/2026-04-28/raw_articles_merged.json
+2026-04-28 12:29:32,122 [INFO] ============================================================
+2026-04-28 12:29:32,138 [INFO] 加载原始文章: 109 条
+2026-04-28 12:29:32,175 [INFO]   进度: 20/109
+2026-04-28 12:29:32,190 [INFO]   进度: 40/109
+2026-04-28 12:29:32,194 [INFO]   进度: 60/109
+2026-04-28 12:29:32,202 [INFO]   进度: 80/109
+2026-04-28 12:29:32,210 [INFO]   进度: 100/109
+2026-04-28 12:29:32,256 [INFO] ============================================================
+2026-04-28 12:29:32,257 [INFO] 过滤完成汇总:
+2026-04-28 12:29:32,257 [INFO]   raw_count: 109
+2026-04-28 12:29:32,257 [INFO]   cleaned_count: 34
+2026-04-28 12:29:32,257 [INFO]   reference_count: 15
+2026-04-28 12:29:32,257 [INFO]   rejected_count: 60
+2026-04-28 12:29:32,257 [INFO]   llm_reviewed_count: 0
+2026-04-28 12:29:32,257 [INFO]   llm_failed_count: 0
+2026-04-28 12:29:32,257 [INFO]   by_time_status: {'in_window': 25, 'near_window': 3, 'old': 26, 'unknown_time': 55}
+2026-04-28 12:29:32,257 [INFO]   by_source: {'rsshub_huxiu_search_douyin_hour': 2, 'rsshub_huxiu_search_watsons': 20, 'rsshub_latepost': 10, 'rsshub_huxiu_consumer_channel': 9, 'rsshub_huxiu_article': 13, 'tavily_gap_search': 55}
+2026-04-28 12:29:32,257 [INFO]   top_matched_keywords: {'美妆': 44, '屈臣氏': 35, '闪购': 34, '即时零售': 31, '流量': 28, '个护': 27, '美团闪购': 25, '护肤': 20, '供应链': 20, '直播': 17}
+2026-04-28 12:29:32,258 [INFO]   reject_reasons: {'reject': 60, 'reference': 15, 'main': 34}
+2026-04-28 12:29:32,258 [INFO] ============================================================
+2026-04-28 22:52:52,041 [INFO] ============================================================
+2026-04-28 22:52:52,041 [INFO] 开始过滤: date=2026-04-28
+2026-04-28 22:52:52,041 [INFO] use_llm=True, llm_mode=borderline_only
+2026-04-28 22:52:52,042 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-28/raw_articles.json
+2026-04-28 22:52:52,042 [INFO] ============================================================
+2026-04-28 22:52:52,044 [INFO] 加载原始文章: 71 条
+2026-04-28 22:52:52,081 [INFO] LLM 客户端就绪: 6 个 Key 可用, 模型=LongCat-Flash-Thinking
+2026-04-28 22:52:52,095 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:52:52,905 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:53:01,654 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:53:09,558 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:53:25,633 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:53:38,655 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:53:50,116 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:54:06,246 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:54:14,685 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:54:29,781 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:54:31,110 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:54:32,065 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:54:39,179 [INFO]   进度: 20/71
+2026-04-28 22:54:39,180 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:54:39,868 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:54:40,548 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:54:48,850 [INFO]   进度: 40/71
+2026-04-28 22:54:48,852 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:54:49,744 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:55:06,810 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:55:15,894 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:55:16,976 [INFO]   进度: 60/71
+2026-04-28 22:55:16,978 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-28 22:55:19,209 [INFO] ============================================================
+2026-04-28 22:55:19,210 [INFO] 过滤完成汇总:
+2026-04-28 22:55:19,210 [INFO]   raw_count: 71
+2026-04-28 22:55:19,210 [INFO]   cleaned_count: 1
+2026-04-28 22:55:19,210 [INFO]   reference_count: 10
+2026-04-28 22:55:19,210 [INFO]   rejected_count: 60
+2026-04-28 22:55:19,210 [INFO]   llm_reviewed_count: 20
+2026-04-28 22:55:19,210 [INFO]   llm_failed_count: 0
+2026-04-28 22:55:19,211 [INFO]   by_time_status: {'old': 39, 'in_window': 31, 'near_window': 1}
+2026-04-28 22:55:19,211 [INFO]   by_source: {'rsshub_huxiu_search_watsons': 20, 'rsshub_huxiu_search_douyin_hour': 2, 'rsshub_36kr_search_watsons': 20, 'rsshub_36kr_newsflashes': 20, 'rsshub_36kr_search_meituan_flash': 1, 'rsshub_36kr_search_taobao_flash': 4, 'rsshub_36kr_search_instant_retail': 2, 'rsshub_36kr_search_beauty': 2}
+2026-04-28 22:55:19,211 [INFO]   top_matched_keywords: {'屈臣氏': 21, '美妆': 6, '流量': 5, '直播': 2, '供应链': 2, '闭店': 2, '丝芙兰': 1, '护肤': 1, '个护': 1, '开业': 1}
+2026-04-28 22:55:19,211 [INFO]   reject_reasons: {'reject': 60, 'reference': 10, 'main': 1}
+2026-04-28 22:55:19,211 [INFO]   LLM status: available_keys=6, calls=20, failures=0
+2026-04-28 22:55:19,211 [INFO] ============================================================
+2026-04-28 22:55:37,919 [INFO] ============================================================
+2026-04-28 22:55:37,919 [INFO] 开始过滤: date=2026-04-28
+2026-04-28 22:55:37,919 [INFO] use_llm=False, llm_mode=borderline_only
+2026-04-28 22:55:37,920 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-28/raw_articles_merged.json
+2026-04-28 22:55:37,920 [INFO] ============================================================
+2026-04-28 22:55:37,930 [INFO] 加载原始文章: 124 条
+2026-04-28 22:55:37,968 [INFO]   进度: 20/124
+2026-04-28 22:55:37,969 [INFO]   进度: 40/124
+2026-04-28 22:55:37,971 [INFO]   进度: 60/124
+2026-04-28 22:55:37,975 [INFO]   进度: 80/124
+2026-04-28 22:55:37,983 [INFO]   进度: 100/124
+2026-04-28 22:55:37,991 [INFO]   进度: 120/124
+2026-04-28 22:55:38,014 [INFO] ============================================================
+2026-04-28 22:55:38,014 [INFO] 过滤完成汇总:
+2026-04-28 22:55:38,014 [INFO]   raw_count: 124
+2026-04-28 22:55:38,014 [INFO]   cleaned_count: 34
+2026-04-28 22:55:38,015 [INFO]   reference_count: 13
+2026-04-28 22:55:38,015 [INFO]   rejected_count: 77
+2026-04-28 22:55:38,015 [INFO]   llm_reviewed_count: 0
+2026-04-28 22:55:38,015 [INFO]   llm_failed_count: 0
+2026-04-28 22:55:38,015 [INFO]   by_time_status: {'old': 39, 'in_window': 31, 'near_window': 1, 'unknown_time': 53}
+2026-04-28 22:55:38,015 [INFO]   by_source: {'rsshub_huxiu_search_watsons': 20, 'rsshub_huxiu_search_douyin_hour': 2, 'rsshub_36kr_search_watsons': 20, 'rsshub_36kr_newsflashes': 20, 'rsshub_36kr_search_meituan_flash': 1, 'rsshub_36kr_search_taobao_flash': 4, 'rsshub_36kr_search_instant_retail': 2, 'rsshub_36kr_search_beauty': 2, 'tavily_gap_search': 53}
+2026-04-28 22:55:38,016 [INFO]   top_matched_keywords: {'美妆': 46, '屈臣氏': 36, '流量': 31, '闪购': 31, '即时零售': 31, '个护': 24, '美团闪购': 23, '直播': 20, '护肤': 19, '供应链': 16}
+2026-04-28 22:55:38,016 [INFO]   reject_reasons: {'reject': 77, 'reference': 13, 'main': 34}
+2026-04-28 22:55:38,016 [INFO] ============================================================
+2026-04-28 22:55:38,022 [INFO] ============================================================
+2026-04-28 22:55:38,022 [INFO] 开始过滤: date=2026-04-28
+2026-04-28 22:55:38,023 [INFO] use_llm=False, llm_mode=borderline_only
+2026-04-28 22:55:38,023 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-28/raw_articles_merged.json
+2026-04-28 22:55:38,023 [INFO] ============================================================
+2026-04-28 22:55:38,033 [INFO] 加载原始文章: 124 条
+2026-04-28 22:55:38,074 [INFO]   进度: 20/124
+2026-04-28 22:55:38,075 [INFO]   进度: 40/124
+2026-04-28 22:55:38,077 [INFO]   进度: 60/124
+2026-04-28 22:55:38,081 [INFO]   进度: 80/124
+2026-04-28 22:55:38,089 [INFO]   进度: 100/124
+2026-04-28 22:55:38,096 [INFO]   进度: 120/124
+2026-04-28 22:55:38,120 [INFO] ============================================================
+2026-04-28 22:55:38,120 [INFO] 过滤完成汇总:
+2026-04-28 22:55:38,120 [INFO]   raw_count: 124
+2026-04-28 22:55:38,120 [INFO]   cleaned_count: 34
+2026-04-28 22:55:38,121 [INFO]   reference_count: 13
+2026-04-28 22:55:38,121 [INFO]   rejected_count: 77
+2026-04-28 22:55:38,121 [INFO]   llm_reviewed_count: 0
+2026-04-28 22:55:38,121 [INFO]   llm_failed_count: 0
+2026-04-28 22:55:38,121 [INFO]   by_time_status: {'old': 39, 'in_window': 31, 'near_window': 1, 'unknown_time': 53}
+2026-04-28 22:55:38,121 [INFO]   by_source: {'rsshub_huxiu_search_watsons': 20, 'rsshub_huxiu_search_douyin_hour': 2, 'rsshub_36kr_search_watsons': 20, 'rsshub_36kr_newsflashes': 20, 'rsshub_36kr_search_meituan_flash': 1, 'rsshub_36kr_search_taobao_flash': 4, 'rsshub_36kr_search_instant_retail': 2, 'rsshub_36kr_search_beauty': 2, 'tavily_gap_search': 53}
+2026-04-28 22:55:38,122 [INFO]   top_matched_keywords: {'美妆': 46, '屈臣氏': 36, '流量': 31, '闪购': 31, '即时零售': 31, '个护': 24, '美团闪购': 23, '直播': 20, '护肤': 19, '供应链': 16}
+2026-04-28 22:55:38,122 [INFO]   reject_reasons: {'reject': 77, 'reference': 13, 'main': 34}
+2026-04-28 22:55:38,122 [INFO] ============================================================

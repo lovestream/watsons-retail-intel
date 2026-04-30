@@ -1,0 +1,74 @@
+# 运行时配置
+# 所有路径为相对路径（相对于项目根目录）
+
+# ── 每日情报窗口 ──
+# 明确：昨日 07:00 ~ 今日 07:00（北京时间 UTC+8）
+daily_window:
+  timezone: "Asia/Shanghai"
+  start: "yesterday_07:00"    # 昨日 07:00
+  end: "today_07:00"          # 今日 07:00
+  description: "每日采集窗口为北京时间昨日07:00至今日07:00，所有日报数据均基于此窗口"
+
+# ── 调度配置 ──
+schedule:
+  daily_collection:
+    cron: "0 8 * * *"          # 每日北京时间 08:00 触发（窗口已关闭1小时，确保数据完整）
+    timezone: "Asia/Shanghai"
+    description: "每日采集与评分，基于昨日07:00-今日07:00窗口"
+
+  daily_report:
+    cron: "0 9 * * *"          # 每日北京时间 09:00 发送日报
+    timezone: "Asia/Shanghai"
+
+  weekly_report:
+    cron: "0 10 * * 1"         # 每周一北京时间 10:00
+    timezone: "Asia/Shanghai"
+
+  monthly_report:
+    cron: "0 10 1 * *"         # 每月1日北京时间 10:00
+    timezone: "Asia/Shanghai"
+
+# ── 数据路径 ──
+data_paths:
+  raw: "data/raw"
+  cleaned: "data/cleaned"
+  rejected: "data/rejected"
+  events: "data/events"
+  drafts: "data/drafts"
+  reviews: "data/reviews"
+  logs: "data/logs"
+
+# ── 报告路径 ──
+report_paths:
+  daily: "reports/daily"
+  weekly: "reports/weekly"
+  monthly: "reports/monthly"
+  yearly: "reports/yearly"
+
+# ── 播客路径 ──
+podcast_paths:
+  scripts: "podcasts/scripts"
+  audio: "podcasts/audio"
+
+# ── 采集参数 ──
+fetch:
+  max_concurrent: 3                # 最大并发采集数
+  default_timeout_seconds: 30
+  retry:
+    max_attempts: 3
+    backoff_seconds: [5, 15, 60]
+  user_agent: "WatsonRetailIntelBot/0.1"
+
+# ── 清洗参数 ──
+cleaning:
+  min_content_length: 50           # 最少字数，低于此丢弃
+  max_content_length: 50000        # 最长字数，超过截断
+  strip_html: true
+  normalize_whitespace: true
+
+# ── 日志 ──
+logging:
+  level: "INFO"
+  file: "data/logs/runtime.log"
+  max_size_mb: 50
+  rotate_count: 5

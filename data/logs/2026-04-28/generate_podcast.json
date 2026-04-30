@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "date": "2026-04-28",
+  "report_file": "/app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md",
+  "script_file": "/app/working/projects/watsons-retail-intel/podcasts/scripts/2026-04-28.md",
+  "audio_file": "/app/working/projects/watsons-retail-intel/podcasts/audio/2026-04-28.mp3",
+  "script_length": 208,
+  "audio_exists": true,
+  "audio_size_bytes": 336240,
+  "is_no_signal": true,
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+0%",
+  "llm_used": false,
+  "tts_success": true,
+  "errors": []
+}

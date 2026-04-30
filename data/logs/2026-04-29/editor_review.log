@@ -1,0 +1,58 @@
+2026-04-30 15:42:25,123 [INFO]   ============================================================
+2026-04-30 15:42:25,124 [INFO]   开始审稿: date=2026-04-29
+2026-04-30 15:42:25,124 [INFO]     draft_file: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft.md
+2026-04-30 15:42:25,124 [INFO]     events_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json
+2026-04-30 15:42:25,124 [INFO]   加载 V1 初稿: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v1.md (4209 字符)
+2026-04-30 15:42:25,125 [INFO]   检测到 V2 重构稿: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v2.md (3118 字符)
+2026-04-30 15:42:25,161 [INFO]   加载初稿: 4209 字符
+2026-04-30 15:42:25,161 [INFO]   加载事件: 430 条
+2026-04-30 15:42:25,161 [INFO]   Step 1: 规则校验（初稿）...
+2026-04-30 15:42:25,241 [INFO]     V1初稿发现 0 个问题 (高=0, 中=0, 低=0)
+2026-04-30 15:42:25,241 [INFO]   Step 1b: V2 重构稿规则校验...
+2026-04-30 15:42:25,244 [INFO]     V2 发现 0 个问题 (高=0, 中=0, 低=0)
+2026-04-30 15:42:25,244 [INFO]   Step 1c: 两稿比较...
+2026-04-30 15:42:25,263 [INFO]     两稿比较发现 0 个差异
+2026-04-30 15:42:25,263 [INFO]   模型路由: editor_review 默认=LongCat-Flash-Chat, fallback=['LongCat-Flash-Lite']
+2026-04-30 15:42:25,263 [INFO]   Step 2: LLM 审稿 (默认模型)...
+2026-04-30 15:43:09,876 [INFO]     LLM 审稿成功，终稿长度: 3733 字符
+2026-04-30 15:43:09,876 [INFO]   Step 3: 终稿校验...
+2026-04-30 15:43:09,879 [INFO]   终稿校验通过，0个问题
+2026-04-30 15:43:09,879 [INFO]   审稿结论: sendable=True, validation_passed=True, final_high=0, final_medium=0, final_low=0
+2026-04-30 15:43:09,903 [INFO]   终稿已写入: /app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-29.md
+2026-04-30 15:43:09,905 [INFO]   审稿报告已写入: /app/working/projects/watsons-retail-intel/data/reviews/2026-04-29/editor_review.md
+2026-04-30 15:43:09,905 [INFO]   {
+  "ok": true,
+  "date": "2026-04-29",
+  "draft_file": "/app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v1.md",
+  "draft_v1_file": "/app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v1.md",
+  "draft_v2_file": "/app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v2.md",
+  "dual_mode": true,
+  "events_file": "/app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json",
+  "review_file": "/app/working/projects/watsons-retail-intel/data/reviews/2026-04-29/editor_review.md",
+  "final_file": "/app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-29.md",
+  "log_file": "/app/working/projects/watsons-retail-intel/data/logs/2026-04-29/editor_review.log",
+  "validation_passed": true,
+  "draft_issue_count": 5,
+  "draft_high_severity_count": 0,
+  "draft_medium_severity_count": 0,
+  "draft_low_severity_count": 0,
+  "v2_issue_count": 0,
+  "v2_high_severity_count": 0,
+  "compare_issue_count": 0,
+  "final_issue_count": 0,
+  "final_high_severity_count": 0,
+  "final_medium_severity_count": 0,
+  "final_low_severity_count": 0,
+  "fixed_issue_count": 0,
+  "sendable": true,
+  "model_used": "LongCat-Flash-Chat",
+  "fallback_used": false,
+  "draft_length": 4209,
+  "v1_length": 4209,
+  "v2_length": 3118,
+  "final_length": 3733,
+  "final_char_count": 3331,
+  "final_chinese_char_count": 2088,
+  "final_event_id_count": 15,
+  "errors": []
+}

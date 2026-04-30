@@ -1,0 +1,459 @@
+2026-04-28 12:34:20,163 [INFO]   ============================================================
+2026-04-28 12:34:20,164 [INFO]   开始经营分析: date=2026-04-28
+2026-04-28 12:34:20,164 [INFO]     events_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_scored.json
+2026-04-28 12:34:20,164 [INFO]     output_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_analyzed.json
+2026-04-28 12:34:20,164 [INFO]     use_llm: True
+2026-04-28 12:34:20,174 [INFO]   加载 102 条事件
+2026-04-28 12:34:20,175 [INFO]   LLM 可用: keys=6, model=LongCat-Flash-Thinking
+2026-04-28 12:34:20,219 [INFO]   模型路由: analyze priority=P0 → LongCat-Flash-Thinking, fallback=['LongCat-Flash-Thinking']
+2026-04-28 12:34:20,219 [INFO]   模型路由: analyze priority=P1 → LongCat-Flash-Chat, fallback=['LongCat-Flash-Thinking']
+2026-04-28 12:34:20,220 [INFO]   模型路由: analyze priority=P2 → LongCat-Flash-Lite, fallback=['LongCat-Flash-Thinking']
+2026-04-28 12:34:20,220 [INFO]   分析事件 1/102: [P2] 淘宝闪购新入驻品牌数和门店数大幅增长
+2026-04-28 12:34:22,404 [INFO]   事件 E20260428_0033 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:34:22,404 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:34:22,405 [INFO]   分析事件 2/102: [P2] 屈臣氏内地门店净关闭145家
+2026-04-28 12:37:24,331 [INFO]   事件 E20260428_0053 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:37:24,332 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:37:24,332 [INFO]   分析事件 3/102: [P2] 屈臣氏推出会员卡制度提升客单价
+2026-04-28 12:37:27,582 [INFO]   事件 E20260428_0019 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:37:27,583 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:37:27,583 [INFO]   分析事件 4/102: [P2] 美团闪购名创优品专场激励政策发布
+2026-04-28 12:37:33,148 [INFO]   事件 E20260428_0003 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:37:33,149 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=risk action=watch
+2026-04-28 12:37:33,149 [INFO]   分析事件 5/102: [P2] 美团提出至2027年闪电仓数量将超10万个
+2026-04-28 12:37:44,866 [INFO]   事件 E20260428_0070 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:37:44,867 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=watch
+2026-04-28 12:37:44,867 [INFO]   分析事件 6/102: [P2] 2026年中国即时零售市场规模突破万亿元
+2026-04-28 12:37:51,231 [INFO]   事件 E20260428_0083 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:37:51,231 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:37:51,231 [INFO]   分析事件 7/102: [P2] 美团平台上线的潮流联名剃须刀和旅行洗护套装获得高市场反响
+2026-04-28 12:37:52,553 [INFO]   事件 E20260428_0097 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:37:52,554 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:37:52,554 [INFO]   分析事件 8/102: [P2] 屈臣氏在美团闪购‘超级品牌日’期间开展直播并取得GMV峰值
+2026-04-28 12:37:54,306 [INFO]   事件 E20260428_0009 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:37:54,307 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:37:54,307 [INFO]   分析事件 9/102: [P2] 淘宝闪购在天猫旗舰店页面新增闪购选项卡
+2026-04-28 12:37:55,585 [INFO]   事件 E20260428_0062 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:37:55,586 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:37:55,586 [INFO]   分析事件 10/102: [P2] 淘宝闪购上线并启动500亿消费券计划
+2026-04-28 12:37:56,885 [INFO]   事件 E20260428_0060 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:37:56,886 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=risk action=watch
+2026-04-28 12:37:56,886 [INFO]   分析事件 11/102: [P2] 淘宝闪购上线后推动果切行业订单翻倍增长
+2026-04-28 12:37:59,315 [INFO]   事件 E20260428_0031 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:37:59,316 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:37:59,316 [INFO]   分析事件 12/102: [P2] 淘宝闪购订单量翻倍，单日峰值激发超1亿新增订单
+2026-04-28 12:38:00,606 [INFO]   事件 E20260428_0036 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:38:00,606 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:38:00,607 [INFO]   分析事件 13/102: [P2] 乡镇外卖订单量同比激增217%
+2026-04-28 12:38:05,330 [INFO]   事件 E20260428_0064 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:38:05,330 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:38:05,331 [INFO]   分析事件 14/102: [P2] 滔搏即时零售销售额月涨幅超30%
+2026-04-28 12:38:24,033 [INFO]   事件 E20260428_0014 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:38:24,034 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:38:24,034 [INFO]   分析事件 15/102: [P2] 阿里AI在全国百城百万餐饮门店开启试运营
+2026-04-28 12:38:28,155 [INFO]   事件 E20260428_0087 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:38:28,156 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:38:28,156 [INFO]   分析事件 16/102: [P2] 美团闪购双11期间高端化妆品订单量同比增长426%
+2026-04-28 12:38:44,045 [INFO]   事件 E20260428_0066 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:38:44,046 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:38:44,046 [INFO]   分析事件 17/102: [P2] 屈臣氏新会员转化率在活动期间增长近2倍
+2026-04-28 12:39:06,440 [INFO]   事件 E20260428_0010 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:39:06,441 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:39:06,441 [INFO]   分析事件 18/102: [P2] 屈臣氏与美团闪购打通会员系统并推出专享福利
+2026-04-28 12:39:52,174 [INFO]   ============================================================
+2026-04-28 12:39:52,174 [INFO]   开始经营分析: date=2026-04-28
+2026-04-28 12:39:52,174 [INFO]     events_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_scored.json
+2026-04-28 12:39:52,175 [INFO]     output_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_analyzed.json
+2026-04-28 12:39:52,175 [INFO]     use_llm: True
+2026-04-28 12:39:52,185 [INFO]   加载 102 条事件
+2026-04-28 12:39:52,185 [INFO]   LLM 可用: keys=6, model=LongCat-Flash-Thinking
+2026-04-28 12:39:52,230 [INFO]   模型路由: analyze priority=P0 → LongCat-Flash-Thinking, fallback=['LongCat-Flash-Thinking']
+2026-04-28 12:39:52,230 [INFO]   模型路由: analyze priority=P1 → LongCat-Flash-Chat, fallback=['LongCat-Flash-Thinking']
+2026-04-28 12:39:52,230 [INFO]   模型路由: analyze priority=P2 → LongCat-Flash-Lite, fallback=['LongCat-Flash-Thinking']
+2026-04-28 12:39:52,230 [INFO]   分析事件 1/102: [P2] 淘宝闪购新入驻品牌数和门店数大幅增长
+2026-04-28 12:40:10,934 [INFO]   事件 E20260428_0033 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:40:10,935 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:40:10,935 [INFO]   分析事件 2/102: [P2] 屈臣氏内地门店净关闭145家
+2026-04-28 12:40:13,851 [INFO]   事件 E20260428_0053 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:40:13,852 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:40:13,852 [INFO]   分析事件 3/102: [P2] 屈臣氏推出会员卡制度提升客单价
+2026-04-28 12:40:40,586 [INFO]   事件 E20260428_0019 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:40:40,587 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=watch
+2026-04-28 12:40:40,588 [INFO]   分析事件 4/102: [P2] 美团闪购名创优品专场激励政策发布
+2026-04-28 12:41:02,558 [INFO]   事件 E20260428_0003 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:41:02,559 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:41:02,560 [INFO]   分析事件 5/102: [P2] 美团提出至2027年闪电仓数量将超10万个
+2026-04-28 12:41:23,227 [INFO]   事件 E20260428_0070 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:41:23,228 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:41:23,228 [INFO]   分析事件 6/102: [P2] 2026年中国即时零售市场规模突破万亿元
+2026-04-28 12:41:42,091 [INFO]   事件 E20260428_0083 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:41:42,092 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=watch
+2026-04-28 12:41:42,092 [INFO]   分析事件 7/102: [P2] 美团平台上线的潮流联名剃须刀和旅行洗护套装获得高市场反响
+2026-04-28 12:41:52,283 [INFO]   事件 E20260428_0097 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:41:52,284 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:41:52,284 [INFO]   分析事件 8/102: [P2] 屈臣氏在美团闪购‘超级品牌日’期间开展直播并取得GMV峰值
+2026-04-28 12:41:53,604 [INFO]   事件 E20260428_0009 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:41:53,605 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:41:53,605 [INFO]   分析事件 9/102: [P2] 淘宝闪购在天猫旗舰店页面新增闪购选项卡
+2026-04-28 12:42:10,440 [INFO]   事件 E20260428_0062 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:42:10,441 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:42:10,441 [INFO]   分析事件 10/102: [P2] 淘宝闪购上线并启动500亿消费券计划
+2026-04-28 12:42:12,201 [INFO]   事件 E20260428_0060 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:42:12,201 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:42:12,201 [INFO]   分析事件 11/102: [P2] 淘宝闪购上线后推动果切行业订单翻倍增长
+2026-04-28 12:42:35,427 [INFO]   事件 E20260428_0031 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:42:35,428 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:42:35,428 [INFO]   分析事件 12/102: [P2] 淘宝闪购订单量翻倍，单日峰值激发超1亿新增订单
+2026-04-28 12:42:42,676 [INFO]   事件 E20260428_0036 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:42:42,677 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:42:42,677 [INFO]   分析事件 13/102: [P2] 乡镇外卖订单量同比激增217%
+2026-04-28 12:42:44,257 [INFO]   事件 E20260428_0064 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:42:44,257 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:42:44,258 [INFO]   分析事件 14/102: [P2] 滔搏即时零售销售额月涨幅超30%
+2026-04-28 12:42:47,849 [INFO]   事件 E20260428_0014 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:42:47,850 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:42:47,850 [INFO]   分析事件 15/102: [P2] 阿里AI在全国百城百万餐饮门店开启试运营
+2026-04-28 12:43:11,843 [INFO]   事件 E20260428_0087 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:43:11,844 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:43:11,844 [INFO]   分析事件 16/102: [P2] 美团闪购双11期间高端化妆品订单量同比增长426%
+2026-04-28 12:43:38,224 [INFO]   事件 E20260428_0066 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:43:38,225 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:43:38,225 [INFO]   分析事件 17/102: [P2] 屈臣氏新会员转化率在活动期间增长近2倍
+2026-04-28 12:43:42,488 [INFO]   事件 E20260428_0010 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:43:42,489 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:43:42,503 [INFO]   分析事件 18/102: [P2] 屈臣氏与美团闪购打通会员系统并推出专享福利
+2026-04-28 12:43:46,791 [INFO]   事件 E20260428_0007 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:43:46,792 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:43:46,792 [INFO]   分析事件 19/102: [P2] 成都春熙路店接入淘宝闪购后业绩显著提升
+2026-04-28 12:43:48,127 [INFO]   事件 E20260428_0077 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:43:48,128 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:43:48,128 [INFO]   分析事件 20/102: [P2] 美团闪购推出五大服务保障以提升消费者体验
+2026-04-28 12:43:49,523 [INFO]   事件 E20260428_0067 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:43:49,524 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:43:49,524 [INFO]   分析事件 21/102: [P2] 屈臣氏调整门店服务模式减少推销行为
+2026-04-28 12:43:55,868 [INFO]   事件 E20260428_0018 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:43:55,869 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=test
+2026-04-28 12:43:55,869 [INFO]   分析事件 22/102: [P2] 抖音发布即时零售选品广场带货操作攻略
+2026-04-28 12:44:18,525 [INFO]   事件 E20260428_0041 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:44:18,526 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:44:18,526 [INFO]   分析事件 23/102: [P2] 淘宝升级小时达到淘宝闪购并设首页入口
+2026-04-28 12:44:21,650 [INFO]   事件 E20260428_0079 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:44:21,651 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:44:21,652 [INFO]   分析事件 24/102: [P2] 抖音超市业务或将合并至小时达，入口仍独立
+2026-04-28 12:44:27,001 [INFO]   事件 E20260428_0045 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:44:27,002 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:44:27,002 [INFO]   分析事件 25/102: [P2] 屈臣氏中国关闭低客流门店并扩大线上履约能力
+2026-04-28 12:44:50,047 [INFO]   事件 E20260428_0050 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:44:50,048 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:44:50,048 [INFO]   分析事件 26/102: [P2] 抖音超市合并至抖音小时达
+2026-04-28 12:44:51,663 [INFO]   事件 E20260428_0044 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:44:51,664 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:44:51,664 [INFO]   分析事件 27/102: [P2] 屈臣氏与高德地图达成战略合作，推进香港门店数字化升级
+2026-04-28 12:44:52,996 [INFO]   事件 E20260428_0020 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:44:52,997 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:44:52,997 [INFO]   分析事件 28/102: [P2] 抖音推出小时达与次日达双模式服务
+2026-04-28 12:44:58,923 [INFO]   事件 E20260428_0042 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:44:58,924 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:44:58,924 [INFO]   分析事件 29/102: [P2] 美团闪购双十一期间美妆个护订单量同比增长196%，高端化妆品订单量增长426%
+2026-04-28 12:45:16,163 [INFO]   事件 E20260428_0057 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:45:16,164 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:45:16,164 [INFO]   分析事件 30/102: [P2] 颜沿优选全球购与多家平台达成战略合作
+2026-04-28 12:46:14,079 [INFO]   事件 E20260428_0088 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:46:14,080 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:46:14,080 [INFO]   分析事件 31/102: [P2] 京东到家与更多品牌商达成合作以优化库存管理提升配送时效
+2026-04-28 12:46:44,795 [INFO]   事件 E20260428_0085 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:46:44,795 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:46:44,796 [INFO]   分析事件 32/102: [P2] 美团闪购更新屈臣氏美妆会场优惠券政策
+2026-04-28 12:47:03,253 [INFO]   事件 E20260428_0005 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:47:03,254 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=watch
+2026-04-28 12:47:03,254 [INFO]   分析事件 33/102: [P2] 屈臣氏与美团闪购达成业务合作，预计年底覆盖2500家门店
+2026-04-28 12:47:05,616 [INFO]   事件 E20260428_0011 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:47:05,617 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=immediate
+2026-04-28 12:47:05,617 [INFO]     ⬇️ 硬降级: confidence=low → action_level不可为immediate
+2026-04-28 12:47:05,617 [INFO]   分析事件 34/102: [P2] 美团闪购美妆个护闪电仓扩展至4000家
+2026-04-28 12:47:07,349 [INFO]   事件 E20260428_0028 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:47:07,350 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=risk action=immediate
+2026-04-28 12:47:07,350 [INFO]     ⬇️ 硬降级: source_credibility=1<2 → action_level不可为immediate
+2026-04-28 12:47:07,350 [INFO]   分析事件 35/102: [P2] 屈臣氏计划新增500家社区店以拓展即时零售市场
+2026-04-28 12:47:08,960 [INFO]   事件 E20260428_0025 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:47:08,961 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=immediate
+2026-04-28 12:47:08,962 [INFO]     ⬇️ 硬降级: source_credibility=1<2 → action_level不可为immediate
+2026-04-28 12:47:08,962 [INFO]   分析事件 36/102: [P2] 名创优品24H超级店累计业绩破亿元，开设约500家
+2026-04-28 12:47:10,417 [INFO]   事件 E20260428_0069 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:47:10,418 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:47:10,418 [INFO]   分析事件 37/102: [P2] 顺丰同城ROE同比增长近一倍
+2026-04-28 12:47:23,537 [INFO]   事件 E20260428_0086 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:47:23,538 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:47:23,538 [INFO]   分析事件 38/102: [P2] 淘宝闪购推动非餐品牌商家成交额显著增长
+2026-04-28 12:47:24,789 [INFO]   事件 E20260428_0032 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:47:24,790 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:47:24,790 [INFO]   分析事件 39/102: [P2] 万宁关闭内地所有门店
+2026-04-28 12:47:26,225 [INFO]   事件 E20260428_0052 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:47:26,226 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:47:26,226 [INFO]   分析事件 40/102: [P2] 颜沿优选全球购帮助品牌商搭建品牌即时零售流量池
+2026-04-28 12:47:58,656 [INFO]   事件 E20260428_0090 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:47:58,656 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:47:58,657 [INFO]   分析事件 41/102: [P2] 自然堂在淘宝闪购两周内跃居美妆品类前五名
+2026-04-28 12:48:02,306 [INFO]   事件 E20260428_0022 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:48:02,307 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:48:02,307 [INFO]   分析事件 42/102: [P2] 饿了么平台彩妆品类订单量在2025年五一期间环比增长超100%
+2026-04-28 12:48:09,413 [INFO]   事件 E20260428_0029 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:48:09,414 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=immediate
+2026-04-28 12:48:09,414 [INFO]     ⬇️ 硬降级: source_credibility=1<2 → action_level不可为immediate
+2026-04-28 12:48:09,414 [INFO]   分析事件 43/102: [P2] 名创优品多品类在淘宝闪购实现高速增长
+2026-04-28 12:48:10,854 [INFO]   事件 E20260428_0075 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:48:10,855 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:48:10,855 [INFO]   分析事件 44/102: [P2] 美团闪购推出“巧克力+鲜花”跨界组合营销活动
+2026-04-28 12:48:12,329 [INFO]   事件 E20260428_0004 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:48:12,330 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=test
+2026-04-28 12:48:12,330 [INFO]   分析事件 45/102: [P2] 抖音开放全量电商达人小时达带货权限
+2026-04-28 12:48:16,424 [INFO]   事件 E20260428_0040 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:48:16,425 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:48:16,426 [INFO]   分析事件 46/102: [P2] 美团闪购宣布拓展覆盖城市并加强线下实体店数字化对接
+2026-04-28 12:48:18,116 [INFO]   事件 E20260428_0084 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:48:18,117 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:48:18,117 [INFO]   分析事件 47/102: [P2] 优布劳在淘宝闪购订单增长40%，占比接近美团
+2026-04-28 12:48:19,696 [INFO]   事件 E20260428_0037 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:48:19,697 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:48:19,697 [INFO]   分析事件 48/102: [P2] 屈臣氏在美团闪购双11直播活动中交易额与订单量创历史新高
+2026-04-28 12:48:45,480 [INFO]   事件 E20260428_0065 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:48:45,481 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:48:45,481 [INFO]   分析事件 49/102: [P2] 名创优品与美团深化战略合作，加码即时零售闪电仓业务
+2026-04-28 12:49:03,055 [INFO]   事件 E20260428_0068 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:49:03,056 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:49:03,056 [INFO]   分析事件 50/102: [P2] 饿了么APP更名为淘宝闪购
+2026-04-28 12:49:20,349 [INFO]   事件 E20260428_0061 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:49:20,350 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:49:20,350 [INFO]   分析事件 51/102: [P2] 淘宝闪购推出超时20分钟免单服务
+2026-04-28 12:49:24,051 [INFO]   事件 E20260428_0012 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:49:24,052 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:49:24,052 [INFO]   分析事件 52/102: [P2] 屈臣氏计划在下沉市场引入多元品牌与品类
+2026-04-28 12:49:25,531 [INFO]   事件 E20260428_0016 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:49:25,532 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=opportunity action=test
+2026-04-28 12:49:25,532 [INFO]   分析事件 53/102: [P2] 中国功能洗护行业市场规模预计2025年达1458.4亿元
+2026-04-28 12:49:48,775 [INFO]   事件 E20260428_0098 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 12:49:48,776 [INFO]     LLM分析成功(model=LongCat-Flash-Lite): impact=watch action=watch
+2026-04-28 12:49:48,776 [INFO]   分析事件 54/102: [P2] 名创优品在淘宝闪购平台美妆品类成交额翻倍
+2026-04-28 13:05:33,495 [INFO]   ============================================================
+2026-04-28 13:05:33,499 [INFO]   开始经营分析: date=2026-04-28
+2026-04-28 13:05:33,499 [INFO]     events_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_scored.json
+2026-04-28 13:05:33,499 [INFO]     output_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_analyzed.json
+2026-04-28 13:05:33,499 [INFO]     use_llm: True
+2026-04-28 13:05:33,506 [INFO]   加载 102 条事件
+2026-04-28 13:05:33,507 [INFO]   LLM 可用: keys=6, model=LongCat-Flash-Thinking
+2026-04-28 13:05:33,552 [INFO]   模型路由: analyze priority=P0 → LongCat-Flash-Thinking, fallback=['LongCat-Flash-Thinking']
+2026-04-28 13:05:33,552 [INFO]   模型路由: analyze priority=P1 → LongCat-Flash-Chat, fallback=['LongCat-Flash-Thinking']
+2026-04-28 13:05:33,552 [INFO]   模型路由: analyze priority=P2 → LongCat-Flash-Lite, fallback=['LongCat-Flash-Thinking']
+2026-04-28 13:05:33,553 [INFO]   事件分流: 59 条 LLM, 43 条规则
+2026-04-28 13:05:33,556 [INFO]   并行 LLM 分析 59 条事件 (max_workers=6)...
+2026-04-28 13:05:34,973 [INFO]   事件 E20260428_0003 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:34,976 [INFO]     事件 4/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:05:35,055 [INFO]   事件 E20260428_0053 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:35,058 [INFO]     事件 2/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:05:40,460 [INFO]   事件 E20260428_0033 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:40,462 [INFO]     事件 1/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:05:41,713 [INFO]   事件 E20260428_0062 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:41,716 [INFO]     事件 9/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:05:43,743 [INFO]   事件 E20260428_0009 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:43,746 [INFO]     事件 8/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:05:44,107 [INFO]   事件 E20260428_0060 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:44,110 [INFO]     事件 10/102 LLM分析成功: impact=risk action=watch
+2026-04-28 13:05:48,924 [INFO]   事件 E20260428_0036 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:48,927 [INFO]     事件 12/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:05:50,908 [INFO]   事件 E20260428_0031 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:50,911 [INFO]     事件 11/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:05:53,783 [INFO]   事件 E20260428_0064 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:53,786 [INFO]     事件 13/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:05:54,734 [INFO]   事件 E20260428_0097 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:54,737 [INFO]     事件 7/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:05:54,963 [INFO]   事件 E20260428_0083 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:54,966 [INFO]     事件 6/102 LLM分析成功: impact=opportunity action=watch
+2026-04-28 13:05:54,991 [INFO]   事件 E20260428_0019 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:54,992 [INFO]     事件 3/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:05:56,148 [INFO]   事件 E20260428_0010 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:56,151 [INFO]     事件 17/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:05:59,694 [INFO]   事件 E20260428_0007 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:05:59,695 [INFO]     事件 18/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:02,009 [INFO]   事件 E20260428_0066 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:02,011 [INFO]     事件 16/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:03,033 [INFO]   事件 E20260428_0067 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:03,036 [INFO]     事件 20/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:09,998 [INFO]   事件 E20260428_0070 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:10,001 [INFO]     事件 5/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:10,477 [INFO]   事件 E20260428_0077 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:10,480 [INFO]     事件 19/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:10,514 [INFO]   事件 E20260428_0014 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:10,517 [INFO]     事件 14/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:13,059 [INFO]   事件 E20260428_0018 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:13,063 [INFO]     事件 21/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:14,424 [INFO]   事件 E20260428_0041 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:14,427 [INFO]     事件 22/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:14,532 [INFO]   事件 E20260428_0044 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:14,535 [INFO]     事件 26/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:15,601 [INFO]   事件 E20260428_0020 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:15,604 [INFO]     事件 27/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:16,746 [INFO]   事件 E20260428_0042 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:16,749 [INFO]     事件 28/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:17,395 [INFO]   事件 E20260428_0050 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:17,398 [INFO]     事件 25/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:18,916 [INFO]   事件 E20260428_0088 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:18,919 [INFO]     事件 30/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:19,399 [INFO]   事件 E20260428_0085 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:19,402 [INFO]     事件 31/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:22,696 [INFO]   事件 E20260428_0087 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:22,700 [INFO]     事件 15/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:27,187 [INFO]   事件 E20260428_0045 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:27,190 [INFO]     事件 24/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:28,511 [INFO]   事件 E20260428_0025 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:28,514 [INFO]     事件 35/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:28,889 [INFO]   事件 E20260428_0011 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:28,892 [INFO]     事件 33/102 LLM分析成功: impact=opportunity action=immediate
+2026-04-28 13:06:29,163 [INFO]   事件 E20260428_0028 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:29,166 [INFO]     事件 34/102 LLM分析成功: impact=risk action=immediate
+2026-04-28 13:06:29,497 [INFO]   事件 E20260428_0057 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:29,500 [INFO]     事件 29/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:30,161 [INFO]   事件 E20260428_0079 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:30,164 [INFO]     事件 23/102 LLM分析成功: impact=opportunity action=immediate
+2026-04-28 13:06:35,029 [INFO]   事件 E20260428_0090 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:35,032 [INFO]     事件 40/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:35,891 [INFO]   事件 E20260428_0032 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:35,892 [INFO]     事件 38/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:37,207 [INFO]   事件 E20260428_0005 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:37,210 [INFO]     事件 32/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:37,845 [INFO]   事件 E20260428_0052 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:37,848 [INFO]     事件 39/102 LLM分析成功: impact=opportunity action=watch
+2026-04-28 13:06:41,414 [INFO]   事件 E20260428_0069 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:41,417 [INFO]     事件 36/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:42,547 [INFO]   事件 E20260428_0022 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:42,548 [INFO]     事件 41/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:46,388 [INFO]   事件 E20260428_0086 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:46,390 [INFO]     事件 37/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:46,406 [INFO]   事件 E20260428_0029 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:46,409 [INFO]     事件 42/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:48,123 [INFO]   事件 E20260428_0065 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:48,126 [INFO]     事件 48/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:48,156 [INFO]   事件 E20260428_0075 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:48,160 [INFO]     事件 43/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:49,893 [INFO]   事件 E20260428_0040 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:49,896 [INFO]     事件 45/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:50,182 [INFO]   事件 E20260428_0084 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:50,184 [INFO]     事件 46/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:51,066 [INFO]   事件 E20260428_0012 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:51,069 [INFO]     事件 51/102 LLM分析成功: impact=risk action=watch
+2026-04-28 13:06:51,996 [INFO]   事件 E20260428_0016 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:51,999 [INFO]     事件 52/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:52,004 [INFO]   事件 E20260428_0037 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:52,007 [INFO]     事件 47/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:52,369 [INFO]   事件 E20260428_0098 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:52,372 [INFO]     事件 53/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:53,931 [INFO]   事件 E20260428_0061 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:53,934 [INFO]     事件 50/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:06:55,503 [INFO]   事件 E20260428_0074 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:55,506 [INFO]     事件 57/102 LLM分析成功: impact=watch action=test
+2026-04-28 13:06:59,144 [INFO]   事件 E20260428_0006 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:59,147 [INFO]     事件 58/102 LLM分析成功: impact=opportunity action=test
+2026-04-28 13:06:59,155 [INFO]   事件 E20260428_0091 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:06:59,156 [INFO]     事件 55/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:07:09,455 [INFO]   事件 E20260428_0068 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:07:09,456 [INFO]     事件 49/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:07:11,306 [INFO]   事件 E20260428_0030 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:07:11,307 [INFO]     事件 54/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:07:11,569 [INFO]   事件 E20260428_0024 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:07:11,570 [INFO]     事件 56/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:07:18,804 [INFO]   事件 E20260428_0004 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:07:18,805 [INFO]     事件 44/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:07:34,807 [INFO]   事件 E20260428_0073 LLM分析使用模型: LongCat-Flash-Lite
+2026-04-28 13:07:34,810 [INFO]     事件 59/102 LLM分析成功: impact=watch action=watch
+2026-04-28 13:07:34,811 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,812 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,812 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,812 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-28 13:07:34,813 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,813 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-28 13:07:34,813 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,813 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,813 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,814 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-28 13:07:34,814 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,814 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,814 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,814 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-28 13:07:34,815 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,815 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,815 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,815 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,816 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,816 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,816 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-28 13:07:34,816 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,816 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,817 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,817 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,817 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-28 13:07:34,817 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,818 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-04-28 13:07:34,818 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,818 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,818 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-04-28 13:07:34,818 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-28 13:07:34,819 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,819 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,819 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,819 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,819 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,819 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,820 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-04-28 13:07:34,820 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,820 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,820 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,820 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-04-28 13:07:34,821 [INFO]     ⬇️ 硬降级: confidence=low → action_level不可为immediate
+2026-04-28 13:07:34,821 [INFO]     ⬇️ 硬降级: confidence=low → action_level不可为immediate
+2026-04-28 13:07:34,821 [INFO]     ⬇️ 硬降级: source_credibility=1<2 → action_level不可为immediate
+2026-04-28 13:07:34,822 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-04-28 13:07:34,851 [INFO]   经营分析完成: 102 条事件
+2026-04-28 13:07:34,851 [INFO]     LLM成功=59, LLM失败=0
+2026-04-28 13:07:34,851 [INFO]     immediate=0 test=28 watch=31 archive=43
+2026-04-28 13:07:34,851 [INFO]     by_impact_type: {'opportunity': 34, 'watch': 30, 'risk': 5, 'noise': 33}
+2026-04-28 13:07:34,851 [INFO]     by_action_level: {'test': 28, 'watch': 31, 'archive': 43}
+2026-04-28 13:07:34,852 [INFO]     by_owner_hint: {'即时零售运营': 55, '商品/货盘团队': 6, '天猫运营': 1, '平台BD': 4, '暂不分派': 35, '会员/私域': 1}
+2026-04-28 13:07:34,852 [INFO]     downgrade_stats: {'硬降级: confidence=low → action_level不可为immediate': 2, '硬降级: source_credibility=1<2 → action_level不可为immediate': 1, '注意: tracking_metrics不明确，已补充follow_up_questions': 1}
+2026-04-28 13:07:34,852 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏在淘宝闪购的门店覆盖密度与货盘匹配度，优先在高增长区域补充非餐类门店入驻，并争取平台新商家扶持资源。
+2026-04-28 13:07:34,852 [INFO]     ACTION: [test] 商品/货盘团队 — 评估会员卡制度的实际转化效果，优化办卡激励与返现规则，测试不同门槛或返现比例对小范围门店的影响。
+2026-04-28 13:07:34,852 [INFO]     ACTION: [test] 即时零售运营 — 评估当前闪电仓合作门店的履约表现与GMV贡献，优先在高潜力区域试点接入新闪电仓点位，并同步监控平台资源位分配变化。
+2026-04-28 13:07:34,852 [INFO]     ACTION: [test] 即时零售运营 — 在美团闪购平台测试屈臣氏自有品牌或合作IP的限量联名旅行洗护套装及剃须刀产品，评估用户互动与转化表现。
+2026-04-28 13:07:34,853 [INFO]     ACTION: [test] 即时零售运营 — 复制‘小黄人IP+货品搭配’模式至其他平台（如京东秒送、抖音小时达）的超级品牌日活动，并优化直播选品与节奏以提升ROI。
+2026-04-28 13:07:34,853 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏现有即时零售渠道（如美团闪购、京东秒送）是否可引入果切类高毛利短保商品，并测试小范围试点以提升GMV和订单密度。
+2026-04-28 13:07:34,853 [INFO]     ACTION: [test] 即时零售运营 — 立即与淘宝闪购运营团队沟通，争取更多活动资源位和曝光支持，同步优化商品供给与履约效率以承接增量流量。
+2026-04-28 13:07:34,853 [INFO]     ACTION: [test] 商品/货盘团队 — 联合平台BD团队评估在重点乡镇区域增设合作门店或优化现有门店覆盖半径，优先选择高潜力低线城市试点即时零售服务。
+2026-04-28 13:07:34,853 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏在美团闪购平台的高端化妆品SKU覆盖与库存匹配度，优先扩充热门高端品牌货盘，并针对性优化相关商品的活动曝光与履约能力。
+2026-04-28 13:07:34,853 [INFO]     ACTION: [test] 即时零售运营 — 分析活动期间的具体运营动作（如优惠券、首单礼遇、推送策略），并在其他即时零售渠道复制成功模式。
+2026-04-28 13:07:34,853 [INFO]     ACTION: [test] 即时零售运营 — 推动其他即时零售平台（如京东到家、抖音小时达）同步开展会员互通及专属权益活动，形成跨平台会员激励闭环。
+2026-04-28 13:07:34,854 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏现有门店接入淘宝闪购的可行性，优先在试点城市（如成都）选择高流量门店进行小范围测试，验证订单增长与客群结构变化。
+2026-04-28 13:07:34,854 [INFO]     ACTION: [test] 平台BD — 立即与淘宝平台BD沟通，争取首页闪购入口的优先展示位，同步优化天猫与闪购间的货盘一致性，确保价格与库存实时同步。
+2026-04-28 13:07:34,854 [INFO]     ACTION: [test] 暂不分派 — 评估现有门店网络对线上履约的协同效应，优先在高密度城市试点将关闭门店区域订单转由邻近履约中心承接，优化配送时效与成本。
+2026-04-28 13:07:34,854 [INFO]     ACTION: [test] 即时零售运营 — 评估接入抖店即时零售的可行性，优先测试小时达模式在核心城市（如上海、北京）的履约能力与订单转化效果。
+2026-04-28 13:07:34,854 [INFO]     ACTION: [test] 即时零售运营 — 立即评估屈臣氏在美团闪购上的高端美妆商品结构与库存匹配度，并针对高增长品类制定双十一后延续性促销或会员专享活动，以承接消费热度。
+2026-04-28 13:07:34,854 [INFO]     ACTION: [test] 即时零售运营 — 立即评估该政策对屈臣氏美妆品类GMV和转化率的影响，并考虑在自有B2C及To B渠道同步推出类似叠加优惠机制以维持竞争力。
+2026-04-28 13:07:34,855 [INFO]     ACTION: [test] 即时零售运营 — 立即启动与美团闪购的技术对接与商品上架流程，优先在核心城市试点上线500家门店，同步优化履约时效与库存同步机制。
+2026-04-28 13:07:34,855 [INFO]     ACTION: [test] 即时零售运营 — 立即评估屈臣氏在美团闪购平台上的闪电仓覆盖城市与门店密度，对比竞品布局缺口，并制定加速入驻或提升服务质量的短期行动计划。
+2026-04-28 13:07:34,855 [INFO]     ACTION: [test] 即时零售运营 — 立即评估现有社区店选址模型在三线城市的适用性，优先在目标城市试点10-20家新店，同步优化库存与配送链路，并监控首月订单量及履约时效变化。
+2026-04-28 13:07:34,855 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏在淘宝闪购的现有表现，并针对性加强美妆个护类目的商品供给与活动资源投入，测试小时达履约能力。
+2026-04-28 13:07:34,855 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏在饿了么平台的彩妆商品供给与库存匹配度，优先补足高需求SKU，并考虑联合平台开展限时促销或曝光资源置换。
+2026-04-28 13:07:34,855 [INFO]     ACTION: [test] 平台BD — 主动对接抖音平台BD，申请入驻小时达并争取优质达人合作资源，同时优化商品在小时达页面的展示与促销策略。
+2026-04-28 13:07:34,855 [INFO]     ACTION: [test] 平台BD — 主动联系美团闪购BD团队，争取在新拓展城市中优先入驻或获取优质资源位，同步推动屈臣氏门店接入其数字化系统以提升履约响应速度。
+2026-04-28 13:07:34,855 [INFO]     ACTION: [test] 即时零售运营 — 复盘本次直播的选品结构、话术设计与履约链路，提炼可复用的直播运营模板，并在后续大促或日常营销中复制推广。
+2026-04-28 13:07:34,856 [INFO]     ACTION: [test] 商品/货盘团队 — 建议电商团队同步评估下沉市场需求，在B2C和即时零售渠道试点引入部分高潜力新锐国货或IP周边产品，测试消费者反馈。
+2026-04-28 13:07:34,856 [INFO]     ACTION: [test] 即时零售运营 — 分析名创优品在淘宝闪购上的用户获取策略及商品组合，评估是否可借鉴用于屈臣氏即时零售渠道的新客引流。
+2026-04-28 13:07:34,856 [INFO]     ACTION: [test] 即时零售运营 — 在美团闪购渠道持续测试小黄人IP套组的市场反馈，优化产品组合与定价策略，探索是否扩展至其他即时零售平台或B2C渠道进行联动推广。
+2026-04-28 13:07:34,856 [INFO]   {
+  "ok": true,
+  "date": "2026-04-28",
+  "input_file": "/app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_scored.json",
+  "output_file": "/app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_analyzed.json",
+  "log_file": "/app/working/projects/watsons-retail-intel/data/logs/2026-04-28/analyze_business_impact.log",
+  "event_count": 102,
+  "analyzed_count": 102,
+  "llm_failed_count": 0,
+  "errors": []
+}

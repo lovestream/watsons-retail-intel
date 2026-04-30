@@ -1,0 +1,252 @@
+{
+  "date": "2026-04-28",
+  "started_at": "2026-04-28T23:16:53.026747+08:00",
+  "finished_at": "2026-04-28T23:16:53.127885+08:00",
+  "duration_seconds": 0.101138,
+  "ok": true,
+  "sendable": false,
+  "report_type": "normal",
+  "no_signal": false,
+  "final_report_file": "/app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md",
+  "podcast_ok": false,
+  "podcast_audio": true,
+  "email_sent": false,
+  "steps": [
+    {
+      "name": "collect",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.052175+08:00",
+      "finished_at": "2026-04-28T23:16:53.058925+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/data/raw/2026-04-28/raw_articles.json"
+      ],
+      "stats": {
+        "raw_count": 54
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "filter",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.059335+08:00",
+      "finished_at": "2026-04-28T23:16:53.076764+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/data/cleaned/2026-04-28/cleaned_articles.json",
+        "/app/working/projects/watsons-retail-intel/data/cleaned/2026-04-28/reference_articles.json",
+        "/app/working/projects/watsons-retail-intel/data/rejected/2026-04-28/rejected_articles.json"
+      ],
+      "stats": {
+        "cleaned_count": 34,
+        "reference_count": 15,
+        "rejected_count": 60
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "source_health_report",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.077206+08:00",
+      "finished_at": "2026-04-28T23:16:53.077783+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/data/logs/2026-04-28/source_health_report.json",
+        "/app/working/projects/watsons-retail-intel/data/logs/2026-04-28/source_health_report.md"
+      ],
+      "stats": {
+        "health_report_sources": 5
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "tavily_gap_search",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.078114+08:00",
+      "finished_at": "2026-04-28T23:16:53.078284+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [],
+      "stats": {},
+      "warnings": [
+        "Tavily gap search 未触发（无需补搜或条件不满足）"
+      ],
+      "errors": []
+    },
+    {
+      "name": "filter_merged",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.078574+08:00",
+      "finished_at": "2026-04-28T23:16:53.094553+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/data/cleaned/2026-04-28/cleaned_articles.json",
+        "/app/working/projects/watsons-retail-intel/data/cleaned/2026-04-28/reference_articles.json",
+        "/app/working/projects/watsons-retail-intel/data/rejected/2026-04-28/rejected_articles.json"
+      ],
+      "stats": {
+        "cleaned_count": 34,
+        "reference_count": 15,
+        "rejected_count": 60
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "extract",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.094969+08:00",
+      "finished_at": "2026-04-28T23:16:53.098843+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_raw.json",
+        "/app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_rejected_articles.json",
+        "/app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_failed_articles.json"
+      ],
+      "stats": {
+        "event_count": 100
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "score",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.099241+08:00",
+      "finished_at": "2026-04-28T23:16:53.108745+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_scored.json"
+      ],
+      "stats": {
+        "scored_count": 102,
+        "p0_count": 0,
+        "p1_count": 0,
+        "p2_count": 59,
+        "archive_count": 43
+      },
+      "warnings": [
+        "评分事件数 102 ≠ 原始事件数 100"
+      ],
+      "errors": []
+    },
+    {
+      "name": "analyze",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.109182+08:00",
+      "finished_at": "2026-04-28T23:16:53.124778+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/data/events/2026-04-28/events_analyzed.json"
+      ],
+      "stats": {
+        "analyzed_count": 102
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "generate_report",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.125232+08:00",
+      "finished_at": "2026-04-28T23:16:53.125446+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [],
+      "stats": {},
+      "warnings": [],
+      "errors": [
+        "日报文件不存在: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-28/daily_report_draft_v1.md",
+        "日报文件不存在: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-28/daily_report_draft_v2.md",
+        "日报文件不存在: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-28/daily_report_draft.md"
+      ]
+    },
+    {
+      "name": "editor_review",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.125764+08:00",
+      "finished_at": "2026-04-28T23:16:53.126247+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/data/reviews/2026-04-28/editor_review.md",
+        "/app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-28.md"
+      ],
+      "stats": {
+        "event_id_count": 0,
+        "sendable": false
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "name": "generate_podcast",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.126586+08:00",
+      "finished_at": "2026-04-28T23:16:53.127154+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/podcasts/scripts/2026-04-28.md",
+        "/app/working/projects/watsons-retail-intel/podcasts/audio/2026-04-28.mp3"
+      ],
+      "stats": {
+        "script_length": 206,
+        "audio_exists": true,
+        "audio_size_bytes": 328320,
+        "is_no_signal": true,
+        "llm_used": false,
+        "tts_success": true,
+        "voice": "zh-CN-XiaoxiaoNeural"
+      },
+      "warnings": [
+        "口播稿偏短（206 < 1800 中文字符）"
+      ],
+      "errors": []
+    },
+    {
+      "name": "send_daily_report_email",
+      "status": "dry_run",
+      "started_at": "2026-04-28T23:16:53.127452+08:00",
+      "finished_at": "2026-04-28T23:16:53.127823+08:00",
+      "duration_seconds": 0,
+      "call_method": "",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/data/logs/2026-04-28/send_daily_report_email.json"
+      ],
+      "stats": {
+        "sent": false,
+        "dry_run": true,
+        "sendable": false,
+        "html_length": 0,
+        "markdown_attachment": false,
+        "podcast_attachment": false
+      },
+      "warnings": [],
+      "errors": []
+    }
+  ],
+  "errors": []
+}

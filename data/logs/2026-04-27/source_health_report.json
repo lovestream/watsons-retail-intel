@@ -1,0 +1,141 @@
+{
+  "date": "2026-04-27",
+  "generated_at": "2026-04-27T23:27:59.576320+08:00",
+  "totals": {
+    "raw_count": 53,
+    "cleaned_count": 0,
+    "reference_count": 0,
+    "rejected_count": 0,
+    "source_count": 5,
+    "grade_distribution": {
+      "B": 4,
+      "C": 1
+    },
+    "recommendation_distribution": {
+      "keep_secondary_limit": 4,
+      "reference_only": 1
+    },
+    "total_in_window": 24,
+    "total_near_window": 2,
+    "total_old": 27
+  },
+  "sources": [
+    {
+      "source_name": "rsshub_huxiu_article",
+      "total_count": 13,
+      "in_window_count": 13,
+      "near_window_count": 0,
+      "old_count": 0,
+      "unknown_time_count": 0,
+      "matched_keyword_count": 1,
+      "cleaned_count": 0,
+      "reference_count": 0,
+      "rejected_count": 0,
+      "old_ratio": 0.0,
+      "recent_ratio": 1.0,
+      "cleaned_yield_rate": 0.0,
+      "top_titles": [
+        "只会做产品的公司和个体没有未来，他还要会生产现实",
+        "全军覆没，欧美的电池产业，为什么干不过中国",
+        "平台没死，只是换了一种方式控制你",
+        "Manus 资本困局：中国基因难消，硅谷融资后总部迁坡裁员",
+        "Manus-Meta并购案被否：“新加坡洗白”失效"
+      ],
+      "grade": "B",
+      "recommendation": "keep_secondary_limit"
+    },
+    {
+      "source_name": "rsshub_huxiu_consumer_channel",
+      "total_count": 8,
+      "in_window_count": 7,
+      "near_window_count": 1,
+      "old_count": 0,
+      "unknown_time_count": 0,
+      "matched_keyword_count": 0,
+      "cleaned_count": 0,
+      "reference_count": 0,
+      "rejected_count": 0,
+      "old_ratio": 0.0,
+      "recent_ratio": 1.0,
+      "cleaned_yield_rate": 0.0,
+      "top_titles": [
+        "这该航空公司管吗",
+        "一份逆势而为的“契约”，长城汽车能守多久？",
+        "赵长江跟王传福“擦肩而过”，智界呢？",
+        "在梵蒂冈大小的展馆里，见证汽车界的寒武纪爆发",
+        "余承东，请把发布会交给汽车厂家"
+      ],
+      "grade": "B",
+      "recommendation": "keep_secondary_limit"
+    },
+    {
+      "source_name": "rsshub_huxiu_search_douyin_hour",
+      "total_count": 2,
+      "in_window_count": 2,
+      "near_window_count": 0,
+      "old_count": 0,
+      "unknown_time_count": 0,
+      "matched_keyword_count": 1,
+      "cleaned_count": 0,
+      "reference_count": 0,
+      "rejected_count": 0,
+      "old_ratio": 0.0,
+      "recent_ratio": 1.0,
+      "cleaned_yield_rate": 0.0,
+      "top_titles": [
+        "不足8小时，机器人被“劫持”，家庭生活恐被“直播”",
+        "Noah Kagan：如果你48小时内无法开启一门小生意，给你4800小时也一样"
+      ],
+      "grade": "B",
+      "recommendation": "keep_secondary_limit"
+    },
+    {
+      "source_name": "rsshub_huxiu_search_watsons",
+      "total_count": 20,
+      "in_window_count": 0,
+      "near_window_count": 0,
+      "old_count": 20,
+      "unknown_time_count": 0,
+      "matched_keyword_count": 20,
+      "cleaned_count": 0,
+      "reference_count": 0,
+      "rejected_count": 0,
+      "old_ratio": 1.0,
+      "recent_ratio": 0.0,
+      "cleaned_yield_rate": 0.0,
+      "top_titles": [
+        "谁还在逛屈臣氏？",
+        "每3天关一家店，屈臣氏怎么就在中国不行？",
+        "摇摆的屈臣氏",
+        "【视频】屈臣氏IPO：一场传统零售的“求生之战”",
+        "又一知名品牌关闭内地全部门店，与屈臣氏“死磕”多年"
+      ],
+      "grade": "C",
+      "recommendation": "reference_only"
+    },
+    {
+      "source_name": "rsshub_latepost",
+      "total_count": 10,
+      "in_window_count": 2,
+      "near_window_count": 1,
+      "old_count": 7,
+      "unknown_time_count": 0,
+      "matched_keyword_count": 9,
+      "cleaned_count": 0,
+      "reference_count": 0,
+      "rejected_count": 0,
+      "old_ratio": 0.7,
+      "recent_ratio": 0.3,
+      "cleaned_yield_rate": 0.0,
+      "top_titles": [
+        "一代人有一代人的 VC",
+        "全员 token-maxxing，一场没人敢停的军备竞赛",
+        "制造确定性：别克至境的防御与反击",
+        "对话小马智行楼天城：驯服脱缰的野马，让 AI 自我进化",
+        "对话原力灵机唐文斌：当中国最早的 AI 创业者做具身，他选择先不做人形"
+      ],
+      "grade": "B",
+      "recommendation": "keep_secondary_limit"
+    }
+  ]
+}

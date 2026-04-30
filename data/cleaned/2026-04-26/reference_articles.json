@@ -1,0 +1,554 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "date": "2026-04-26",
+    "source_file": "./data/raw/2026-04-26/raw_articles_merged.json",
+    "created_at": "2026-04-27T23:03:08.902869",
+    "total_raw": 355,
+    "total_reference": 14
+  },
+  "articles": [
+    {
+      "article_id": "f966def9d2b838b2",
+      "title": "亨亨的产品变量 | 从入驻闪电仓的一线视角，来看美团即时零售的新故事",
+      "url": "https://www.huxiu.com/brief/207708.html",
+      "source_name": "rsshub_huxiu_search_meituan_flash",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Sat, 16 Nov 2024 04:46:32 GMT",
+      "collected_at": "2026-04-27T21:49:30.549658+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/img/brief_column/202405/24/181305215657.png\" /></figure>今年名创优品的团队宣布，其4000家门店都已全部接入<em>美团闪购，</em>除此之外，美团和名创优品还建立了战略合作，计划再开800家专门做纯线上的闪电仓。\n \n对于名创优品来说，押注闪电仓的胜率极高。",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/img/brief_column/202405/24/181305215657.png\" /></figure>今年名创优品的团队宣布，其4000家门店都已全部接入<em>美团闪购，</em>除此之外，美团和名创优品还建立了战略合作，计划再开800家专门做纯线上的闪电仓。\n \n对于名创优品来说，押注闪电仓的胜率极高。",
+      "matched_keywords": [
+        "即时零售",
+        "闪购",
+        "美团闪购"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/美团闪购?limit=20&sorted=true",
+        "route": "/huxiu/search/美团闪购?limit=20&sorted=true",
+        "entry_id": "huxiu-brief-207708"
+      },
+      "filter": {
+        "rule_score": 6,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+4 命中即时零售: 美团闪购",
+          "+3 命中竞对: 名创优品",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule_score>=6 但 time_status=old"
+      }
+    },
+    {
+      "article_id": "675122150abfaa2e",
+      "title": "每3天关一家店，屈臣氏怎么就在中国不行？",
+      "url": "https://www.huxiu.com/article/4845680.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Thu, 26 Mar 2026 10:18:50 GMT",
+      "collected_at": "2026-04-27T21:49:42.731034+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202603/26/15174-prod-db-general-1-1774520289062.png\" /></figure>本文来自微信公众号： 美妆研究所SHOWCASE ，作者：美妆研究所上周，屈臣氏母公司长江和记实业发布了2025年全年财报。乍一看，这份成绩单其实挺亮眼的：营收2092.67亿港元，同比增长10.03",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202603/26/15174-prod-db-general-1-1774520289062.png\" /></figure>本文来自微信公众号： 美妆研究所SHOWCASE ，作者：美妆研究所上周，屈臣氏母公司长江和记实业发布了2025年全年财报。乍一看，这份成绩单其实挺亮眼的：营收2092.67亿港元，同比增长10.03",
+      "matched_keywords": [
+        "美妆",
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4845680"
+      },
+      "filter": {
+        "rule_score": 7,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+3 命中美妆个护: 美妆",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule_score>=6 但 time_status=old"
+      }
+    },
+    {
+      "article_id": "206e1e900b1f9687",
+      "title": "又一知名品牌关闭内地全部门店，与屈臣氏“死磕”多年",
+      "url": "https://www.huxiu.com/article/4818312.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 17 Dec 2025 11:36:22 GMT",
+      "collected_at": "2026-04-27T21:49:42.732310+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202512/17/1089-prod-jm-general-1-1765971346482.png\" /></figure>本文来自微信公众号： 新零售 ，作者：联商网编辑部同样是健与美个人护理连锁品牌，从香港到内地“死磕”多年，如今，屈臣氏(Watsons)与万宁(Mannings)境遇却大不相同。12月16日，亚洲知名",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202512/17/1089-prod-jm-general-1-1765971346482.png\" /></figure>本文来自微信公众号： 新零售 ，作者：联商网编辑部同样是健与美个人护理连锁品牌，从香港到内地“死磕”多年，如今，屈臣氏(Watsons)与万宁(Mannings)境遇却大不相同。12月16日，亚洲知名",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4818312"
+      },
+      "filter": {
+        "rule_score": 7,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+3 命中竞对: 万宁",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule_score>=6 但 time_status=old"
+      }
+    },
+    {
+      "article_id": "c41d45d1fe04fc88",
+      "title": "【视频】从美妆先驱到社恐地狱，屈臣氏怎么过气了？",
+      "url": "https://www.huxiu.com/article/3904867.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 15 Jan 2025 07:34:22 GMT",
+      "collected_at": "2026-04-27T21:49:42.733380+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202501/14/171620392095.jpg\" /></figure>曾经的零售美妆鼻祖，如今在中国的存在感却越来越弱，近年来，屈臣氏的营收持续下滑，2024上半年屈臣氏中国总营收只有68.79亿港元，同比下降23%，再创新低。本期视频，我们就来聊聊屈臣为何高光不再。",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202501/14/171620392095.jpg\" /></figure>曾经的零售美妆鼻祖，如今在中国的存在感却越来越弱，近年来，屈臣氏的营收持续下滑，2024上半年屈臣氏中国总营收只有68.79亿港元，同比下降23%，再创新低。本期视频，我们就来聊聊屈臣为何高光不再。",
+      "matched_keywords": [
+        "美妆",
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-3904867"
+      },
+      "filter": {
+        "rule_score": 7,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+3 命中美妆个护: 美妆",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule_score>=6 但 time_status=old"
+      }
+    },
+    {
+      "article_id": "3d550bb19a4021d9",
+      "title": "不止屈臣氏，丝芙兰也被年轻人抛弃",
+      "url": "https://www.huxiu.com/article/1679267.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 14 Jun 2023 07:06:07 GMT",
+      "collected_at": "2026-04-27T21:49:42.735371+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202306/14/143138588050.jpg\" /></figure>本文来自微信公众号：网易数读 （ID：datablog163），作者：库洛洛，设计：Kown、姜姜、杨波浪，头图来自：视觉中国要说社恐最怕逛什么店，名单里一定得有丝芙兰。在丝芙兰，每个柜姐上辈子的工作",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202306/14/143138588050.jpg\" /></figure>本文来自微信公众号：网易数读 （ID：datablog163），作者：库洛洛，设计：Kown、姜姜、杨波浪，头图来自：视觉中国要说社恐最怕逛什么店，名单里一定得有丝芙兰。在丝芙兰，每个柜姐上辈子的工作",
+      "matched_keywords": [
+        "屈臣氏",
+        "丝芙兰"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-1679267",
+        "duplicate_sources": [
+          "rsshub_huxiu_search_sephora"
+        ]
+      },
+      "filter": {
+        "rule_score": 7,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+3 命中竞对: 丝芙兰",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule_score>=6 但 time_status=old"
+      }
+    },
+    {
+      "article_id": "1d03781f5cbfd5ab",
+      "title": "屈臣氏导购，别再加我微信了",
+      "url": "https://www.huxiu.com/article/583132.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Thu, 16 Jun 2022 00:45:46 GMT",
+      "collected_at": "2026-04-27T21:49:42.736690+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202206/16/072939843342.jpg\" /></figure>本文来自微信公众号：锐见Neweekly（ID：app-neweekly），作者：hh，头图来源：视觉中国想到屈臣氏的时候，我正在外地旅游。由于忘记带洗面奶和护肤乳，我在手机上搜到附近的屈臣氏门店——",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202206/16/072939843342.jpg\" /></figure>本文来自微信公众号：锐见Neweekly（ID：app-neweekly），作者：hh，头图来源：视觉中国想到屈臣氏的时候，我正在外地旅游。由于忘记带洗面奶和护肤乳，我在手机上搜到附近的屈臣氏门店——",
+      "matched_keywords": [
+        "护肤",
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-583132"
+      },
+      "filter": {
+        "rule_score": 7,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+3 命中美妆个护: 护肤",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule_score>=6 但 time_status=old"
+      }
+    },
+    {
+      "article_id": "f5a40829d579677c",
+      "title": "【视频】“玩不起”的屈臣氏，该如何自救？",
+      "url": "https://www.huxiu.com/article/493048.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Sun, 23 Jan 2022 09:30:00 GMT",
+      "collected_at": "2026-04-27T21:49:42.738030+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202201/23/084155984630.png\" /></figure>近日，全球个人护理美妆零售巨头屈臣氏频上热搜，先是主播在直播间辱骂消费者，再是一家分店涉嫌虚假价格诱骗交易，难道不再把顾客当成上帝了吗？危机之下，屈臣氏如何自救？近年来，更加年轻化的美妆个护品牌店涌入",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202201/23/084155984630.png\" /></figure>近日，全球个人护理美妆零售巨头屈臣氏频上热搜，先是主播在直播间辱骂消费者，再是一家分店涉嫌虚假价格诱骗交易，难道不再把顾客当成上帝了吗？危机之下，屈臣氏如何自救？近年来，更加年轻化的美妆个护品牌店涌入",
+      "matched_keywords": [
+        "个护",
+        "美妆",
+        "屈臣氏",
+        "直播"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-493048"
+      },
+      "filter": {
+        "rule_score": 8,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+3 命中美妆个护: 美妆, 个护",
+          "+1 命中经营变量: 价格",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule_score>=6 但 time_status=old"
+      }
+    },
+    {
+      "article_id": "ac4a45793f7a3907",
+      "title": "蔡徐坤也“救不了”屈臣氏",
+      "url": "https://www.huxiu.com/article/412334.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Tue, 02 Mar 2021 02:14:00 GMT",
+      "collected_at": "2026-04-27T21:49:42.738892+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202103/02/100303732744.jpg\" /></figure>年轻人不再青睐屈臣氏，转身投入新型美妆集合店的怀抱。汇聚国内外潮流品牌、随意试妆、无导购的模式深受年轻人喜爱。但与此同时，坪效低、可替代性高、供应链不稳定等质疑，也伴随左右。作为接棒者，新型美妆集合店",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202103/02/100303732744.jpg\" /></figure>年轻人不再青睐屈臣氏，转身投入新型美妆集合店的怀抱。汇聚国内外潮流品牌、随意试妆、无导购的模式深受年轻人喜爱。但与此同时，坪效低、可替代性高、供应链不稳定等质疑，也伴随左右。作为接棒者，新型美妆集合店",
+      "matched_keywords": [
+        "美妆",
+        "屈臣氏",
+        "供应链"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-412334"
+      },
+      "filter": {
+        "rule_score": 7,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+3 命中美妆个护: 美妆",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule_score>=6 但 time_status=old"
+      }
+    },
+    {
+      "article_id": "1c8e6fa8d8b3920b",
+      "title": "屈臣氏的接班人",
+      "url": "https://www.huxiu.com/article/373852.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Thu, 06 Aug 2020 04:09:00 GMT",
+      "collected_at": "2026-04-27T21:49:42.739737+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202008/06/121805602690.jpg\" /></figure>“前浪黯然退场，后浪来势汹汹。”本文来自微信公众号：新零售商业评论（ID：xinlingshou1001），作者：何意，题图来自：视觉中国曾几何时，屈臣氏、万宁作为商场的“流量收割机”，人气爆满、排队",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202008/06/121805602690.jpg\" /></figure>“前浪黯然退场，后浪来势汹汹。”本文来自微信公众号：新零售商业评论（ID：xinlingshou1001），作者：何意，题图来自：视觉中国曾几何时，屈臣氏、万宁作为商场的“流量收割机”，人气爆满、排队",
+      "matched_keywords": [
+        "屈臣氏",
+        "流量"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-373852"
+      },
+      "filter": {
+        "rule_score": 8,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+3 命中竞对: 万宁",
+          "+1 命中经营变量: 流量",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule_score>=6 但 time_status=old"
+      }
+    },
+    {
+      "article_id": "88ed6950423fd7b9",
+      "title": "出海潜望镜 | 2024年美国五大电商平台公布；全球电商市场预计2029年用户将增长至36亿；TikTok在海外开启本地生活业务",
+      "url": "https://www.huxiu.com/brief/168522.html",
+      "source_name": "rsshub_huxiu_search_personal_care",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Fri, 12 Jul 2024 11:19:42 GMT",
+      "collected_at": "2026-04-27T21:49:50.338368+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/img/brief/202302/15/181419515436.png\" /></figure>美妆<em>个护</em>产品稳居美国TikTok第一大热门品类，占比约为20.95%，紧随其后的是女装与内衣类目，其销售占比达到11.44%。",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/img/brief/202302/15/181419515436.png\" /></figure>美妆<em>个护</em>产品稳居美国TikTok第一大热门品类，占比约为20.95%，紧随其后的是女装与内衣类目，其销售占比达到11.44%。",
+      "matched_keywords": [
+        "个护",
+        "美妆"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/个护?limit=20&sorted=true",
+        "route": "/huxiu/search/个护?limit=20&sorted=true",
+        "entry_id": "huxiu-brief-168522"
+      },
+      "filter": {
+        "rule_score": 6,
+        "rule_decision": "keep",
+        "rule_reasons": [
+          "+4 命中即时零售: 本地生活",
+          "+3 命中美妆个护: 美妆, 个护",
+          "+1 source_tier=2",
+          "-2 time_status=old"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule_score>=6 但 time_status=old"
+      }
+    },
+    {
+      "article_id": "1fe6b127685b80f1",
+      "title": "提安明多630争议背后，中外美妆产业链上游的秩序会发生重构吗？",
+      "url": "https://www.huxiu.com/article/4853569.html",
+      "source_name": "rsshub_huxiu_search_beauty",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Fri, 24 Apr 2026 11:33:21 GMT",
+      "collected_at": "2026-04-27T21:50:00.081292+08:00",
+      "time_status": "near_window",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/24/18557-prod-db-general-1-1777030361424.png\" /></figure>本文来自微信公众号： Vogue Business ，作者：Thea&nbsp;Sun，编辑：EvelynWang，原文标题：《提安明多 630 争议背后，中外美妆产业链上游的秩序会发生重构吗？》在经历了品牌分",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/24/18557-prod-db-general-1-1777030361424.png\" /></figure>本文来自微信公众号： Vogue Business ，作者：Thea&nbsp;Sun，编辑：EvelynWang，原文标题：《提安明多 630 争议背后，中外美妆产业链上游的秩序会发生重构吗？》在经历了品牌分",
+      "matched_keywords": [
+        "美妆"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/美妆?limit=20&sorted=true",
+        "route": "/huxiu/search/美妆?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4853569"
+      },
+      "filter": {
+        "rule_score": 5,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆",
+          "+1 source_tier=2",
+          "+1 time_status=near_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule=review, score=5, 无LLM结果→reference"
+      }
+    },
+    {
+      "article_id": "14c3d3cf4b8634ef",
+      "title": "抖音入局“小时达”巨头激战即时零售",
+      "url": "https://www.stcn.com/article/detail/1026894.html",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-28T07:02:57.196187+08:00",
+      "time_status": "unknown_time",
+      "summary": "京东2023年一季度财报显示，京东小时购GMV（商品交易总额）同比增长60%，已与超过30万家实体门店展开合作，在超过2000个县市提供小时购业务。\n\n到了今年二季度，京东将即时零售服务统一更名为小时达，包括京东App重要入口之一的城市频道名称改为小时达。根据京东财报，今年第二季度，小时达频道的日活用户同比增长超过100%，成交额同比增长超过300%。\n\n江瀚认为，从抖音小时达的发展情况来看，其背后依托的是抖音这个巨大的流量池。抖音作为一款短视频应用，拥有数亿的用户和很高的日活，这为小时达提供了源源不断的用户基础。在如此庞大的用户基数上，抖音小时达有着很大的发展空间。\n\n艾瑞咨询的数据显示，预计2026年即时配送服务行业订单规模将接近千亿量级，达到957.8亿单，2021—2026年年复合增速为28.0%，行业整体仍处于快速发展阶段。在传统的零售电商逐渐触碰到增量天花板的背景下，即时配送或许能为平台带来新的增长点。\n\n“针对未来的布局，抖音小时达可以首先着眼于拓展商家资源，为消费者提供更多元化的选择。只有商品丰富，才能吸引更多的用户。其次，抖音小时达还需要持续优化其配送服务。配送的效率和准确性是消费者关心的重点，也是小时达服务的核心竞争力所在。通过技术和数据的驱动，提高配送效率，减少配送时间，将有助于提高用户满意度。”江瀚说。\n\n责任编辑： 李志强\n\n机构\n\n抖音\n\n阿里巴巴\n\n声明：证券时报力求信息真实、准确，文章提及内容仅供参考，不构成实质性投资建议，据此操作风险自担\n\n下载\"证券时报\"官方APP，或关注官方微信公众号，即可随时了解股市动态，洞察政策信息，把握财富机会。\n\n用户评论\n\n登录后可以发言\n\n网友评论仅供其表达个人看法，并不表明证券时报立场\n\n发表评论\n\n暂无评论\n\n时报热榜\n\n换一换\n\n  \n\n热点视频\n\n换一换 [...] 首页\n 快讯\n 新闻 \n\n  要闻   金融   评论   产经   创投   滚动\n 视频\n 投资 \n\n  A股   公司   新股   基金   港美股\n 数据\n 信披+\n 专题\n 服务 \n\n  人民鉴真   投关服务   投教服务   其他服务\n\n公众号\n\n  电子报   客户端 \n\n您当前的位置：证券时报 > 创投 > 正文\n\n抖音入局“小时达”巨头激战即时零售\n\n来源：中国经营报2023-11-06 14:06\n\n字号\n\n超大\n\n大\n\n标准\n\n小\n\n抖音小时达内的商户除了可以通过同城推荐卖货，还可以通过直播来卖货。记者在抖音小时达搜索发现，各类商品均显示60分钟送达，不知后期是否会有所提升。\n\n点赞\n\n分享\n\n近日，抖音上线了“小时达”业务，市场普遍认为该业务与美团“闪购”业务、京东“小时达”等即时零售业务平台展开了竞争。用户可以在抖音上搜索小时达，也可以通过抖音商城进入小时达业务。《中国经营报》记者发现，小时达业务已经上线了蔬果、肉蛋水产、米面粮油、服饰鞋包、美妆、手机数码、药品等类目。\n\n盘古智库高级研究员江瀚向本报记者说，“与美团相比，抖音小时达业务有着自己的优势和劣势。优势在于，抖音有着强大的社交属性。用户可以通过抖音短视频了解商品，再通过小时达服务快速购买，形成了从了解到购买的完整闭环。而劣势则在于，抖音小时达作为后来者，在配送网络和商家资源上可能还没有美团那么完善。”\n\n抖音试水\n\n抖音小时达内的商户除了可以通过同城推荐卖货，还可以通过直播来卖货。记者在抖音小时达搜索发现，各类商品均显示60分钟送达，不知后期是否会有所提升。\n\n实际上，早在2022年8月，抖音就曾首次试水小时达服务，并将深圳设为首个试点城市。经过一年多的滚动，小时达服务的势力范围不断扩大，目前已覆盖北上广深、杭州、成都、重庆、合肥、福州、武汉、苏州、天津、西安等城市。 [...] 在市场前景方面，即时零售被认为是电商市场的新增量。根据商务部发布的《即时零售行业发展报告》，近年来即时零售一直保持50%以上的年均增速，2022年即时零售的市场规模已经达到5042.86亿元，预计2025年的市场规模将较去年翻3倍。抖音显然很看好这一市场机会，其超7亿日活的巨大流量，也给了抖音入局即时零售赛道的底气。\n\n巨头激战\n\n然而，即时零售的市场前景虽好，但面临的挑战亦不小。目前，即时零售赛道已经是互联网巨头的核心战场之一，美团、京东、阿里巴巴等早有布局。根据交银国际数据，美团包含美团闪购（平台）及美团买菜（自营前置仓）2022年总销售额合计1600亿元，排名第一；其次是饿了么（不包含外卖），估算交易规模1080亿元；然后是京东到家，交易规模合计630亿元。该机构数据显示，上述三大巨头已经占据了75%的市场份额。也就是说，抖音要想切走即时零售市场的蛋糕，需要先打败强大的对手。\n\n京东在8月将“小时达”作为App首页的一",
+      "content": "京东2023年一季度财报显示，京东小时购GMV（商品交易总额）同比增长60%，已与超过30万家实体门店展开合作，在超过2000个县市提供小时购业务。\n\n到了今年二季度，京东将即时零售服务统一更名为小时达，包括京东App重要入口之一的城市频道名称改为小时达。根据京东财报，今年第二季度，小时达频道的日活用户同比增长超过100%，成交额同比增长超过300%。\n\n江瀚认为，从抖音小时达的发展情况来看，其背后依托的是抖音这个巨大的流量池。抖音作为一款短视频应用，拥有数亿的用户和很高的日活，这为小时达提供了源源不断的用户基础。在如此庞大的用户基数上，抖音小时达有着很大的发展空间。\n\n艾瑞咨询的数据显示，预计2026年即时配送服务行业订单规模将接近千亿量级，达到957.8亿单，2021—2026年年复合增速为28.0%，行业整体仍处于快速发展阶段。在传统的零售电商逐渐触碰到增量天花板的背景下，即时配送或许能为平台带来新的增长点。\n\n“针对未来的布局，抖音小时达可以首先着眼于拓展商家资源，为消费者提供更多元化的选择。只有商品丰富，才能吸引更多的用户。其次，抖音小时达还需要持续优化其配送服务。配送的效率和准确性是消费者关心的重点，也是小时达服务的核心竞争力所在。通过技术和数据的驱动，提高配送效率，减少配送时间，将有助于提高用户满意度。”江瀚说。\n\n责任编辑： 李志强\n\n机构\n\n抖音\n\n阿里巴巴\n\n声明：证券时报力求信息真实、准确，文章提及内容仅供参考，不构成实质性投资建议，据此操作风险自担\n\n下载\"证券时报\"官方APP，或关注官方微信公众号，即可随时了解股市动态，洞察政策信息，把握财富机会。\n\n用户评论\n\n登录后可以发言\n\n网友评论仅供其表达个人看法，并不表明证券时报立场\n\n发表评论\n\n暂无评论\n\n时报热榜\n\n换一换\n\n  \n\n热点视频\n\n换一换 [...] 首页\n 快讯\n 新闻 \n\n  要闻   金融   评论   产经   创投   滚动\n 视频\n 投资 \n\n  A股   公司   新股   基金   港美股\n 数据\n 信披+\n 专题\n 服务 \n\n  人民鉴真   投关服务   投教服务   其他服务\n\n公众号\n\n  电子报   客户端 \n\n您当前的位置：证券时报 > 创投 > 正文\n\n抖音入局“小时达”巨头激战即时零售\n\n来源：中国经营报2023-11-06 14:06\n\n字号\n\n超大\n\n大\n\n标准\n\n小\n\n抖音小时达内的商户除了可以通过同城推荐卖货，还可以通过直播来卖货。记者在抖音小时达搜索发现，各类商品均显示60分钟送达，不知后期是否会有所提升。\n\n点赞\n\n分享\n\n近日，抖音上线了“小时达”业务，市场普遍认为该业务与美团“闪购”业务、京东“小时达”等即时零售业务平台展开了竞争。用户可以在抖音上搜索小时达，也可以通过抖音商城进入小时达业务。《中国经营报》记者发现，小时达业务已经上线了蔬果、肉蛋水产、米面粮油、服饰鞋包、美妆、手机数码、药品等类目。\n\n盘古智库高级研究员江瀚向本报记者说，“与美团相比，抖音小时达业务有着自己的优势和劣势。优势在于，抖音有着强大的社交属性。用户可以通过抖音短视频了解商品，再通过小时达服务快速购买，形成了从了解到购买的完整闭环。而劣势则在于，抖音小时达作为后来者，在配送网络和商家资源上可能还没有美团那么完善。”\n\n抖音试水\n\n抖音小时达内的商户除了可以通过同城推荐卖货，还可以通过直播来卖货。记者在抖音小时达搜索发现，各类商品均显示60分钟送达，不知后期是否会有所提升。\n\n实际上，早在2022年8月，抖音就曾首次试水小时达服务，并将深圳设为首个试点城市。经过一年多的滚动，小时达服务的势力范围不断扩大，目前已覆盖北上广深、杭州、成都、重庆、合肥、福州、武汉、苏州、天津、西安等城市。 [...] 在市场前景方面，即时零售被认为是电商市场的新增量。根据商务部发布的《即时零售行业发展报告》，近年来即时零售一直保持50%以上的年均增速，2022年即时零售的市场规模已经达到5042.86亿元，预计2025年的市场规模将较去年翻3倍。抖音显然很看好这一市场机会，其超7亿日活的巨大流量，也给了抖音入局即时零售赛道的底气。\n\n巨头激战\n\n然而，即时零售的市场前景虽好，但面临的挑战亦不小。目前，即时零售赛道已经是互联网巨头的核心战场之一，美团、京东、阿里巴巴等早有布局。根据交银国际数据，美团包含美团闪购（平台）及美团买菜（自营前置仓）2022年总销售额合计1600亿元，排名第一；其次是饿了么（不包含外卖），估算交易规模1080亿元；然后是京东到家，交易规模合计630亿元。该机构数据显示，上述三大巨头已经占据了75%的市场份额。也就是说，抖音要想切走即时零售市场的蛋糕，需要先打败强大的对手。\n\n京东在8月将“小时达”作为App首页的一个TAB（标签），并设置了小时达专区。而淘宝App内，小时达业务（淘鲜达）放置在首页App的频道内，而美团则是在今年的App迭代中，将外卖、小时达等业务统统放置在首页顶端的外卖专区内。\n\n根据公开资料，抖音主要依赖达达、闪送和顺丰同城这三大平台进行小时达服务。这三家平台都表示，只要在抖音下单，它们都能做到即时送达。\n\n京东经过多年物流经验积累，以及跟达达的合作，能做到小时达、次日达，且入库商品能够保证质量。阿里巴巴收购饿了么后，为400个城市提供配送服务。饿了么蜂鸟业务，也为大润发、欧尚、顺客隆等近千家商超提供配送服务。简单说，就是“零售版的饿了么+渗透的商超”。美团有多个配送渠道，除自己的配送服务外，合作的有蜂鸟、UU跑腿、顺丰、闪送等。",
+      "matched_keywords": [
+        "即时配送",
+        "饿了么",
+        "直播",
+        "美妆",
+        "流量",
+        "即时零售",
+        "京东到家",
+        "美团闪购",
+        "闪购",
+        "政策",
+        "标签"
+      ],
+      "raw": {
+        "query": "抖音小时达 美妆 日百 最新",
+        "score": 0.9814534,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 5,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+4 命中即时零售: 美团闪购",
+          "+3 命中美妆个护: 美妆",
+          "+1 命中经营变量: 流量",
+          "-3 泛领域: A股"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule=review, score=5, 无LLM结果→reference"
+      }
+    },
+    {
+      "article_id": "210eff7d31a47581",
+      "title": "抖音小时达——即时零售新风口，商家必争的红利项目_流量_商超_用户",
+      "url": "https://www.sohu.com/a/902806728_122373369",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-28T07:02:58.388161+08:00",
+      "time_status": "unknown_time",
+      "summary": "# 抖音小时达——即时零售新风口，商家必争的红利项目\n\n抖音小时达作为抖音电商推出的即时零售服务，以“线上下单+线下即时配送”为核心，覆盖生鲜、商超、医药等高需求品类，1小时内即可完成履约，成为本地商家拓展线上渠道、提升销量的新引擎。\n\n抖音小时达依托平台6亿日活用户流量池，通过短视频和直播的内容生态，将商品曝光与即时消费结合，用户“刷到即买，下单即达”。商务部数据显示，即时零售市场年均增速超50%，2025年规模或达万亿级。抖音凭借流量优势，重点扶持小时达业务，商家可享受自然流量倾斜，甚至无需付费投流即可获客。\n\n低门槛高转化：中小商家无需高成本即可入驻，转化率远超传统电商。\n\n流量扶持：平台为小时达直播间提供稳定免费流量，覆盖门店周边5-10公里用户。\n\n多场景销售：支持短视频挂车、直播带货、搜索入口等多渠道曝光。\n\n快递助手作为抖音官方合作的订单管理工具，支持多平台订单聚合、电子面单打印等功能。更有“多门店管理”功能可一键处理连锁店铺订单，提升运营效率。返回搜狐，查看更多",
+      "content": "# 抖音小时达——即时零售新风口，商家必争的红利项目\n\n抖音小时达作为抖音电商推出的即时零售服务，以“线上下单+线下即时配送”为核心，覆盖生鲜、商超、医药等高需求品类，1小时内即可完成履约，成为本地商家拓展线上渠道、提升销量的新引擎。\n\n抖音小时达依托平台6亿日活用户流量池，通过短视频和直播的内容生态，将商品曝光与即时消费结合，用户“刷到即买，下单即达”。商务部数据显示，即时零售市场年均增速超50%，2025年规模或达万亿级。抖音凭借流量优势，重点扶持小时达业务，商家可享受自然流量倾斜，甚至无需付费投流即可获客。\n\n低门槛高转化：中小商家无需高成本即可入驻，转化率远超传统电商。\n\n流量扶持：平台为小时达直播间提供稳定免费流量，覆盖门店周边5-10公里用户。\n\n多场景销售：支持短视频挂车、直播带货、搜索入口等多渠道曝光。\n\n快递助手作为抖音官方合作的订单管理工具，支持多平台订单聚合、电子面单打印等功能。更有“多门店管理”功能可一键处理连锁店铺订单，提升运营效率。返回搜狐，查看更多",
+      "matched_keywords": [
+        "即时配送",
+        "转化率",
+        "直播",
+        "流量",
+        "即时零售",
+        "曝光"
+      ],
+      "raw": {
+        "query": "抖音小时达 个护 即时零售 最新",
+        "score": 0.9997241,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 5,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+4 命中即时零售: 抖音小时达",
+          "+1 命中经营变量: 流量, 转化率, 履约"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule=review, score=5, 无LLM结果→reference"
+      }
+    },
+    {
+      "article_id": "60ec02a51ce4aa4b",
+      "title": "闪购大战2025：决战前的较量-虎嗅网",
+      "url": "https://www.huxiu.com/article/4723428.html",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "collector": "tavily_gap_search",
+      "published_at": "",
+      "collected_at": "2026-04-28T07:03:01.490281+08:00",
+      "time_status": "unknown_time",
+      "summary": "活动结束后，前置仓当日涉及上述品牌的订单被商家全部导出，提交到美团后，商家领取每单的合作差价补贴金，然后美团以上述品牌的全国闪购仓销售数据作为重要转化数据，提交给广告主。\n\n参与的品牌今天可以是水饮、连锁奶茶品牌，快餐品牌这些低毛利行业，明天可能是小米、华为，也可能是苹果，大疆，安克。\n\n再举一个看似完全不适合闪购的大服饰行业的例子。\n\n某品牌运动鞋在美团闪购开始一个限时互动，本地区30个前置仓提前备50款鞋子，35款平销，5款限量，10款闪购特供，仅限量款由云仓备货，其余45款全部放置前置仓。\n\n如果活动开启，所在城市的800万～1500万人可以在30分钟内拿到货，限时结束后立刻进行下一轮其他品牌活动，这种效率是动辄预售半个月起，期间定金不退，0点开始降价，持续24小时，直到售罄为止，此后是长达15天发货周期的年中大促所无法比拟的。\n\n王莆中试图构建的完全是翻版巨量引擎的本地推广，这也许是他当年在百度想做但没做成的事情。\n\n一位受访者称，美团素来极其重视数据和技术。战略上先打外卖和买菜两个最高频业务，之后再提升非餐订单，也就是电商单，下一步需要把品牌方和经销商赶到美团上来。但是有的大品牌——举例如大疆，产品非常符合高客单、小件、年轻用户受众的特性，但是无人机需要身份证才能购买，美团过去的闪购招商模式明显不具备这个销售资质审批，所以买无人机只能通过京东天猫门店渠道，但是如果美团改变思路，自己有了自营前置仓，问题就能实现了。\n\n换言之，美团过去3年至今仍持续不断的闪店仓基建和蓄谋已久的闪购业务投入，绝不是因为外部声音拍脑袋冲动的大笔一挥，也不是只用一个月决策周期就制定500亿元投入的土豪作风，而是根据用户真实数据反馈后，业务部门推演后得到结论后的决断。\n\n但是为什么美团要做自营品牌？ [...] 从京东方面看，早在2014年，初步完成仓配物流基建后，刘强东就已经注意到，行业里已经存在比京东物流更快、履约效率更高的方式方法。于是在距今10年前，京东到家业务模块成立测试。\n\n这个模块从纬度层面上与京东的所有基建供应链体系完全相反，且在下场测试后，京东发现其存在高成本，高投入，低回报，低人效，因此其走得一路坎坷。\n\n2016年，到家业务被卖给达达，直到2021年并表后才再次出现在京东财报中，而这一年恰好是美团闪购业务的元年——歪马送酒作为美团第一批测试性行业产品，开始建立前置仓，投入市场检验，结果大获成功。于是次年，美团闪购开始进行iPhone14首发的同城配送，这是其第一次在电商领域竞争最激烈的3c数码类目里“跨服匹配”，跟拼多多、京东、淘宝同台竞争。\n\n今天和过去最大的不同点是，前置仓玩家不需要囤货了。过去如果在杭州开30个仓，覆盖全城，那是真的要把iPhone从经销商这里吃下货，再送到前置仓，然后发货，压力可想而知。\n\n现在完全就是前置仓可以在无货的情况下接单，只要能保证2个小时内给你送达，我甚至可以从中心仓乃至更远的地方调货给客户送去。从成本角度看，哪怕今天送过去，这一单的运费达到50块，我都是可以接受的，因为即时到家和物流快递预约到家是两条时间线和运输线，用户一生可能只会换十几个手机。\n\n一位参与过iPhone首发之战的前置仓玩家认为，传统货架电商供应链的极致效率成本是京东，但京东的本质是以亚洲一号仓为核心的囤货+快销，其在618地一次备货，商家、平台都要准备半年，而用户一买就是半年的量。 [...] 拼多多是最危险的敌人，美团的BD找到一个好工厂供应商，除了餐饮相关外，其效率和概率都远低于拼多多的人效，因为他们的模式就是跟工厂深度绑定的，美团做的事情，拼多多在几年前就开始了，黑标是拼多多认证的优质商家、品牌。\n\n后续拼多多的做法就是试验性地开几个仓，把黑标商家的工厂商品贴个从没见过的标（不是拼多多品牌），它们甚至不会宣传这是拼多多旗下的业务，然后跟沃尔玛山姆店开市客的爆款单品进行横向对比，极致的性价比把喜欢这个单品的中产用户全刮走后再换一个类目，出一批新单品，继续收割。\n\n一位受访者谈起拼多多和美团，说他们自始自终都像赌场里两个一桌一桌赢钱的超级赌客，赢光了钱立刻换下一桌，以类目行业为单位，一个个打爆线上和线上。直到有一天，两个赌客卷完了每一桌后，被迫在同一桌坐下。\n\n2025年7月对于美团来说是个值得庆祝的日子，闪购大战导致美团在2025年提前33天达到历史全年最高峰值。因为往年或通常情况下，夏季的9月才是峰值，不同于货架电商的年底的大促消费，长尾商品尽管毛利很高，但囤货时间长也导致售罄时间较长，快销品的特点是毛利低但量大。\n\n但是闪购行业拥有一个特别不一样的点，快销品在闪购业务上的利润巨高无比，长年困扰货架电商平台的极高退货率问题和非理性的价格战都在这里消失了。\n\n很难想象，美团平台上一分钱一包辣条的促销活动，凑单起送",
+      "content": "活动结束后，前置仓当日涉及上述品牌的订单被商家全部导出，提交到美团后，商家领取每单的合作差价补贴金，然后美团以上述品牌的全国闪购仓销售数据作为重要转化数据，提交给广告主。\n\n参与的品牌今天可以是水饮、连锁奶茶品牌，快餐品牌这些低毛利行业，明天可能是小米、华为，也可能是苹果，大疆，安克。\n\n再举一个看似完全不适合闪购的大服饰行业的例子。\n\n某品牌运动鞋在美团闪购开始一个限时互动，本地区30个前置仓提前备50款鞋子，35款平销，5款限量，10款闪购特供，仅限量款由云仓备货，其余45款全部放置前置仓。\n\n如果活动开启，所在城市的800万～1500万人可以在30分钟内拿到货，限时结束后立刻进行下一轮其他品牌活动，这种效率是动辄预售半个月起，期间定金不退，0点开始降价，持续24小时，直到售罄为止，此后是长达15天发货周期的年中大促所无法比拟的。\n\n王莆中试图构建的完全是翻版巨量引擎的本地推广，这也许是他当年在百度想做但没做成的事情。\n\n一位受访者称，美团素来极其重视数据和技术。战略上先打外卖和买菜两个最高频业务，之后再提升非餐订单，也就是电商单，下一步需要把品牌方和经销商赶到美团上来。但是有的大品牌——举例如大疆，产品非常符合高客单、小件、年轻用户受众的特性，但是无人机需要身份证才能购买，美团过去的闪购招商模式明显不具备这个销售资质审批，所以买无人机只能通过京东天猫门店渠道，但是如果美团改变思路，自己有了自营前置仓，问题就能实现了。\n\n换言之，美团过去3年至今仍持续不断的闪店仓基建和蓄谋已久的闪购业务投入，绝不是因为外部声音拍脑袋冲动的大笔一挥，也不是只用一个月决策周期就制定500亿元投入的土豪作风，而是根据用户真实数据反馈后，业务部门推演后得到结论后的决断。\n\n但是为什么美团要做自营品牌？ [...] 从京东方面看，早在2014年，初步完成仓配物流基建后，刘强东就已经注意到，行业里已经存在比京东物流更快、履约效率更高的方式方法。于是在距今10年前，京东到家业务模块成立测试。\n\n这个模块从纬度层面上与京东的所有基建供应链体系完全相反，且在下场测试后，京东发现其存在高成本，高投入，低回报，低人效，因此其走得一路坎坷。\n\n2016年，到家业务被卖给达达，直到2021年并表后才再次出现在京东财报中，而这一年恰好是美团闪购业务的元年——歪马送酒作为美团第一批测试性行业产品，开始建立前置仓，投入市场检验，结果大获成功。于是次年，美团闪购开始进行iPhone14首发的同城配送，这是其第一次在电商领域竞争最激烈的3c数码类目里“跨服匹配”，跟拼多多、京东、淘宝同台竞争。\n\n今天和过去最大的不同点是，前置仓玩家不需要囤货了。过去如果在杭州开30个仓，覆盖全城，那是真的要把iPhone从经销商这里吃下货，再送到前置仓，然后发货，压力可想而知。\n\n现在完全就是前置仓可以在无货的情况下接单，只要能保证2个小时内给你送达，我甚至可以从中心仓乃至更远的地方调货给客户送去。从成本角度看，哪怕今天送过去，这一单的运费达到50块，我都是可以接受的，因为即时到家和物流快递预约到家是两条时间线和运输线，用户一生可能只会换十几个手机。\n\n一位参与过iPhone首发之战的前置仓玩家认为，传统货架电商供应链的极致效率成本是京东，但京东的本质是以亚洲一号仓为核心的囤货+快销，其在618地一次备货，商家、平台都要准备半年，而用户一买就是半年的量。 [...] 拼多多是最危险的敌人，美团的BD找到一个好工厂供应商，除了餐饮相关外，其效率和概率都远低于拼多多的人效，因为他们的模式就是跟工厂深度绑定的，美团做的事情，拼多多在几年前就开始了，黑标是拼多多认证的优质商家、品牌。\n\n后续拼多多的做法就是试验性地开几个仓，把黑标商家的工厂商品贴个从没见过的标（不是拼多多品牌），它们甚至不会宣传这是拼多多旗下的业务，然后跟沃尔玛山姆店开市客的爆款单品进行横向对比，极致的性价比把喜欢这个单品的中产用户全刮走后再换一个类目，出一批新单品，继续收割。\n\n一位受访者谈起拼多多和美团，说他们自始自终都像赌场里两个一桌一桌赢钱的超级赌客，赢光了钱立刻换下一桌，以类目行业为单位，一个个打爆线上和线上。直到有一天，两个赌客卷完了每一桌后，被迫在同一桌坐下。\n\n2025年7月对于美团来说是个值得庆祝的日子，闪购大战导致美团在2025年提前33天达到历史全年最高峰值。因为往年或通常情况下，夏季的9月才是峰值，不同于货架电商的年底的大促消费，长尾商品尽管毛利很高，但囤货时间长也导致售罄时间较长，快销品的特点是毛利低但量大。\n\n但是闪购行业拥有一个特别不一样的点，快销品在闪购业务上的利润巨高无比，长年困扰货架电商平台的极高退货率问题和非理性的价格战都在这里消失了。\n\n很难想象，美团平台上一分钱一包辣条的促销活动，凑单起送后第二份恢复原价，而当该笔订单辣条数量达到10份时，毛利就达到了高得惊人的20块。\n\n闪购的特殊供给模式，使其成为目前消费者唯一愿意接受加价的地方——前文提到，台风天在会所下单的奔富407，深夜偷钓者下单户外椅就是典型案例。\n\n闪购业务所覆盖的核心订单仍然是整个大商超行业覆盖的电商和线下商超、卖场、便利店。\n\n朱思码记算了这样一笔账，横向对比普通商超、山姆&开市客、盒马、朴朴买菜：",
+      "matched_keywords": [
+        "备货",
+        "到家业务",
+        "补贴",
+        "促销",
+        "618",
+        "大促",
+        "京东到家",
+        "美团闪购",
+        "闪购",
+        "价格战",
+        "供应链"
+      ],
+      "raw": {
+        "query": "调色师 美团闪购 最新投入",
+        "score": 0.9942251,
+        "search_depth": "advanced"
+      },
+      "filter": {
+        "rule_score": 5,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+4 命中即时零售: 美团闪购",
+          "+1 命中经营变量: 价格, 补贴, 毛利"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule=review, score=5, 无LLM结果→reference"
+      }
+    }
+  ]
+}

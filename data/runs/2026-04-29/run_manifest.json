@@ -1,0 +1,69 @@
+{
+  "date": "2026-04-29",
+  "started_at": "2026-04-29T07:41:28.140790+08:00",
+  "finished_at": "2026-04-29T07:41:50.702332+08:00",
+  "duration_seconds": 22.561542,
+  "ok": true,
+  "sendable": true,
+  "report_type": "normal",
+  "no_signal": false,
+  "final_report_file": "/app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-29.md",
+  "podcast_ok": true,
+  "podcast_audio": true,
+  "email_sent": false,
+  "steps": [
+    {
+      "name": "generate_podcast",
+      "status": "warning",
+      "started_at": "2026-04-29T07:41:28.164627+08:00",
+      "finished_at": "2026-04-29T07:41:46.910332+08:00",
+      "duration_seconds": 18.745743989944458,
+      "call_method": "import",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/podcasts/scripts/2026-04-29.md",
+        "/app/working/projects/watsons-retail-intel/podcasts/audio/2026-04-29.mp3"
+      ],
+      "stats": {
+        "script_length": 1106,
+        "audio_exists": true,
+        "audio_size_bytes": 1632672,
+        "is_no_signal": false,
+        "llm_used": true,
+        "tts_success": true,
+        "voice": "zh-CN-XiaoxiaoNeural"
+      },
+      "warnings": [
+        "口播稿偏短（1106 < 1800 中文字符）"
+      ],
+      "errors": []
+    },
+    {
+      "name": "send_daily_report_email",
+      "status": "success",
+      "started_at": "2026-04-29T07:41:46.910711+08:00",
+      "finished_at": "2026-04-29T07:41:50.702269+08:00",
+      "duration_seconds": 3.7915921211242676,
+      "call_method": "import",
+      "input_files": [],
+      "output_files": [
+        "/app/working/projects/watsons-retail-intel/data/logs/2026-04-29/send_daily_report_email.log",
+        "/app/working/projects/watsons-retail-intel/data/logs/2026-04-29/send_daily_report_email.json"
+      ],
+      "stats": {
+        "sendable": true,
+        "sent": true,
+        "dry_run": false,
+        "html_length": 10115,
+        "markdown_attachment": true,
+        "podcast_attachment": true,
+        "script_attachment": false
+      },
+      "warnings": [],
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "podcast_status": "⚠️ 失败/部分成功",
+  "email_status": "✅ 已发送"
+}

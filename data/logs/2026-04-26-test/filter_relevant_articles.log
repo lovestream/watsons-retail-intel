@@ -1,0 +1,82 @@
+2026-04-26 09:55:52,140 [INFO] ============================================================
+2026-04-26 09:55:52,141 [INFO] 开始过滤: date=2026-04-26-test
+2026-04-26 09:55:52,141 [INFO] use_llm=False, llm_mode=borderline_only
+2026-04-26 09:55:52,141 [INFO] 输入文件: data/raw/2026-04-26-test/raw_articles.json
+2026-04-26 09:55:52,141 [INFO] ============================================================
+2026-04-26 09:55:52,141 [INFO] 加载原始文章: 7 条
+2026-04-26 09:55:52,164 [INFO] ============================================================
+2026-04-26 09:55:52,165 [INFO] 过滤完成汇总:
+2026-04-26 09:55:52,165 [INFO]   raw_count: 7
+2026-04-26 09:55:52,165 [INFO]   cleaned_count: 3
+2026-04-26 09:55:52,165 [INFO]   reference_count: 1
+2026-04-26 09:55:52,165 [INFO]   rejected_count: 3
+2026-04-26 09:55:52,165 [INFO]   llm_reviewed_count: 0
+2026-04-26 09:55:52,165 [INFO]   llm_failed_count: 0
+2026-04-26 09:55:52,165 [INFO]   by_time_status: {'in_window': 4, 'near_window': 2, 'old': 1}
+2026-04-26 09:55:52,165 [INFO]   by_source: {'36kr_newsflashes': 1, 'huxiu': 2, 'latepost': 1, 'auto_news': 1, 'unknown': 1, 'job_board': 1}
+2026-04-26 09:55:52,165 [INFO]   top_matched_keywords: {'即时零售': 3, '屈臣氏': 2, '美妆': 2, '美团闪购': 1, '丝芙兰': 1, '万宁': 1, '私域': 1, '复购': 1, '天猫超市': 1, 'SKU': 1}
+2026-04-26 09:55:52,166 [INFO]   reject_reasons: {'main': 3, 'reject': 3, 'reference': 1}
+2026-04-26 09:55:52,166 [INFO] ============================================================
+2026-04-26 10:03:54,361 [INFO] ============================================================
+2026-04-26 10:03:54,361 [INFO] 开始过滤: date=2026-04-26-test
+2026-04-26 10:03:54,361 [INFO] use_llm=True, llm_mode=borderline_only
+2026-04-26 10:03:54,361 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-26-test/raw_articles.json
+2026-04-26 10:03:54,362 [INFO] ============================================================
+2026-04-26 10:03:54,362 [INFO] 加载原始文章: 7 条
+2026-04-26 10:03:54,628 [INFO] LLM 客户端就绪: 6 个 Key 可用, 模型=LongCat-Flash-Thinking
+2026-04-26 10:03:54,661 [INFO] ============================================================
+2026-04-26 10:03:54,661 [INFO] 过滤完成汇总:
+2026-04-26 10:03:54,661 [INFO]   raw_count: 7
+2026-04-26 10:03:54,662 [INFO]   cleaned_count: 3
+2026-04-26 10:03:54,662 [INFO]   reference_count: 1
+2026-04-26 10:03:54,662 [INFO]   rejected_count: 3
+2026-04-26 10:03:54,662 [INFO]   llm_reviewed_count: 0
+2026-04-26 10:03:54,662 [INFO]   llm_failed_count: 0
+2026-04-26 10:03:54,662 [INFO]   by_time_status: {'in_window': 4, 'near_window': 2, 'old': 1}
+2026-04-26 10:03:54,663 [INFO]   by_source: {'36kr_newsflashes': 1, 'huxiu': 2, 'latepost': 1, 'auto_news': 1, 'unknown': 1, 'job_board': 1}
+2026-04-26 10:03:54,663 [INFO]   top_matched_keywords: {'即时零售': 3, '屈臣氏': 2, '美妆': 2, '美团闪购': 1, '丝芙兰': 1, '万宁': 1, '私域': 1, '复购': 1, '天猫超市': 1, 'SKU': 1}
+2026-04-26 10:03:54,663 [INFO]   reject_reasons: {'main': 3, 'reject': 3, 'reference': 1}
+2026-04-26 10:03:54,663 [INFO]   LLM status: available_keys=6, calls=0, failures=0
+2026-04-26 10:03:54,663 [INFO] ============================================================
+2026-04-26 10:14:18,374 [INFO] ============================================================
+2026-04-26 10:14:18,375 [INFO] 开始过滤: date=2026-04-26-test
+2026-04-26 10:14:18,375 [INFO] use_llm=True, llm_mode=borderline_only
+2026-04-26 10:14:18,375 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-26-test/raw_articles.json
+2026-04-26 10:14:18,375 [INFO] ============================================================
+2026-04-26 10:14:18,376 [INFO] 加载原始文章: 7 条
+2026-04-26 10:14:18,644 [INFO] LLM 客户端就绪: 6 个 Key 可用, 模型=LongCat-Flash-Thinking
+2026-04-26 10:14:18,670 [INFO] ============================================================
+2026-04-26 10:14:18,670 [INFO] 过滤完成汇总:
+2026-04-26 10:14:18,670 [INFO]   raw_count: 7
+2026-04-26 10:14:18,670 [INFO]   cleaned_count: 3
+2026-04-26 10:14:18,670 [INFO]   reference_count: 1
+2026-04-26 10:14:18,670 [INFO]   rejected_count: 3
+2026-04-26 10:14:18,671 [INFO]   llm_reviewed_count: 0
+2026-04-26 10:14:18,671 [INFO]   llm_failed_count: 0
+2026-04-26 10:14:18,671 [INFO]   by_time_status: {'in_window': 4, 'near_window': 2, 'old': 1}
+2026-04-26 10:14:18,671 [INFO]   by_source: {'36kr_newsflashes': 1, 'huxiu': 2, 'latepost': 1, 'auto_news': 1, 'unknown': 1, 'job_board': 1}
+2026-04-26 10:14:18,671 [INFO]   top_matched_keywords: {'即时零售': 3, '屈臣氏': 2, '美妆': 2, '美团闪购': 1, '丝芙兰': 1, '万宁': 1, '私域': 1, '复购': 1, '天猫超市': 1, 'SKU': 1}
+2026-04-26 10:14:18,671 [INFO]   reject_reasons: {'main': 3, 'reject': 3, 'reference': 1}
+2026-04-26 10:14:18,672 [INFO]   LLM status: available_keys=6, calls=0, failures=0
+2026-04-26 10:14:18,672 [INFO] ============================================================
+2026-04-26 10:14:37,557 [INFO] ============================================================
+2026-04-26 10:14:37,557 [INFO] 开始过滤: date=2026-04-26-test
+2026-04-26 10:14:37,557 [INFO] use_llm=True, llm_mode=borderline_only
+2026-04-26 10:14:37,557 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-26-test/raw_articles.json
+2026-04-26 10:14:37,557 [INFO] ============================================================
+2026-04-26 10:14:37,558 [INFO] 加载原始文章: 9 条
+2026-04-26 10:14:37,828 [INFO] LLM 客户端就绪: 6 个 Key 可用, 模型=LongCat-Flash-Thinking
+2026-04-26 10:16:47,247 [INFO] ============================================================
+2026-04-26 10:16:47,247 [INFO] 过滤完成汇总:
+2026-04-26 10:16:47,248 [INFO]   raw_count: 9
+2026-04-26 10:16:47,248 [INFO]   cleaned_count: 3
+2026-04-26 10:16:47,248 [INFO]   reference_count: 3
+2026-04-26 10:16:47,248 [INFO]   rejected_count: 3
+2026-04-26 10:16:47,248 [INFO]   llm_reviewed_count: 2
+2026-04-26 10:16:47,248 [INFO]   llm_failed_count: 0
+2026-04-26 10:16:47,248 [INFO]   by_time_status: {'in_window': 6, 'near_window': 2, 'old': 1}
+2026-04-26 10:16:47,249 [INFO]   by_source: {'36kr_newsflashes': 2, 'huxiu': 2, 'latepost': 2, 'auto_news': 1, 'unknown': 1, 'job_board': 1}
+2026-04-26 10:16:47,249 [INFO]   top_matched_keywords: {'即时零售': 3, '屈臣氏': 2, '美妆': 2, '私域': 2, '复购': 2, '客单价': 2, '美团闪购': 1, '丝芙兰': 1, '万宁': 1, '天猫超市': 1}
+2026-04-26 10:16:47,249 [INFO]   reject_reasons: {'main': 3, 'reject': 3, 'reference': 3}
+2026-04-26 10:16:47,249 [INFO]   LLM status: available_keys=6, calls=2, failures=0
+2026-04-26 10:16:47,249 [INFO] ============================================================

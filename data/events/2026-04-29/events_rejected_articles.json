@@ -2,132 +2,75 @@
   "metadata": {
     "version": "3.0",
     "date": "2026-04-29",
-    "total_rejected": 75,
+    "total_rejected": 54,
     "reject_reason_stats": {
-      "LLM拒绝: 文章内容未提供明确的新增事实事件，仅包含背景信息": 1,
-      "LLM拒绝: 文章内容仅为背景陈述，未提供明确的新增事实事件，如市场动作、政策变化或数据信号等，不符合事件抽取标准。": 1,
-      "LLM拒绝: 文章内容未提供明确的新增事实或可抽取的事件，仅提及财报公布及利润下滑趋势，属于背景信息，无具体经营动作或数据信号。": 1,
-      "LLM拒绝: 文章未包含明确新增事实，仅列举现有头部玩家": 1,
-      "LLM拒绝: 正文内容不完整，仅截断至‘即时零售的“基’，无法提取明确发生的事实事件": 1,
-      "LLM拒绝: 文章仅描述即时零售场景下的订单活跃现象，未包含任何明确发生的新事件（如平台规则变更、品牌行动、品类趋势等），不符合事件抽取标准": 1,
-      "LLM拒绝: 正文为空，未包含任何明确发生的事实事件": 1,
-      "LLM拒绝: 文章内容未涉及屈臣氏电商经营相关的新增事实，仅描述科技行业动态，无明确事件服务于屈臣氏电商经营分析。": 1,
-      "LLM拒绝: 文章内容为体育赛事报道，未涉及屈臣氏相关业务或市场动态": 1,
-      "LLM拒绝: 文章未提供任何明确发生的新事实事件，仅描述背景情况，无具体行动、数据或趋势变化。": 1,
-      "LLM拒绝: 文章内容属于背景描述和社会观察，未涉及屈臣氏电商经营相关的明确事实事件，如平台规则变化、品牌动作、品类趋势或消费场景变动等。": 1,
-      "LLM拒绝: 文章内容主要讨论华为内部管理理念，与屈臣氏电商经营无直接关联，未提及任何具体商业事件或趋势。": 1,
-      "LLM拒绝: 文章内容仅为对每日优鲜现状的分析与讨论，未包含任何明确发生的新事实事件，不符合事件抽取标准。": 1,
-      "LLM拒绝: 文章内容仅为概念阐述，未包含明确发生的新事实事件": 1,
-      "LLM拒绝: 文章仅引用第三方机构发布的趋势观点，未提供任何具体企业行动、平台规则变更、消费者行为变化或可验证的新事实，无法提取有效事件": 1,
-      "LLM拒绝: 文章为观点性内容，未陈述任何具体发生的事件或可验证的事实变化": 1,
-      "LLM拒绝: 文章内容不涉及屈臣氏或零售相关动态，属于地缘政治新闻，无商业分析价值": 1,
-      "LLM拒绝: 文章内容涉及金融市场资金流向，与屈臣氏电商经营无直接关联，无法提取有效业务事件": 1,
-      "LLM拒绝: 文章内容涉及房地产土地交易，与屈臣氏电商经营无关": 1,
-      "LLM拒绝: 内容与屈臣氏电商经营无关": 2,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实": 10,
+      "LLM拒绝: 文章内容主要为背景信息，未包含明确新增事实或可提取的事件。": 1,
+      "LLM拒绝: 文章内容仅为背景介绍，未包含明确新增事实或事件": 1,
+      "LLM拒绝: 正文内容不完整，仅截断至‘即时零售的“基’，无法提取明确事实事件": 1,
+      "LLM拒绝: 文章仅描述外卖平台订单持续推送的现象，未提及任何具体事件（如平台规则变更、企业行动、品类趋势等），不符合事件抽取标准。": 1,
+      "LLM拒绝: 正文为空，无新增事实信息": 1,
+      "LLM拒绝: 文章内容属于背景信息描述，未包含明确发生的新事实事件": 1,
+      "LLM拒绝: 文章内容主要围绕任正非的讲话和前置仓的商业讨论，未提及屈臣氏电商相关的新增事实或事件。": 1,
+      "LLM拒绝: 文章内容仅为背景介绍，未包含明确发生的新事实事件": 1,
+      "LLM拒绝: 文章仅引用第三方机构发布的趋势观点，未提供具体企业行动、平台规则变更、消费者行为数据等可验证的新事实，不符合事件抽取标准": 1,
+      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实": 9,
       "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于证券监管事件，与业务分析无关。": 1,
-      "LLM拒绝: 事件与屈臣氏电商经营无关，属于银行内部人事变动": 1,
-      "LLM拒绝: 文章内容为国家财政政策公告，与屈臣氏电商经营无直接关联": 1,
-      "LLM拒绝: 内容为宏观经济数据通报，与屈臣氏电商经营无直接关联": 1,
-      "LLM拒绝: 事件主体为Meta公司及其股价评级变动，与屈臣氏电商经营无直接关联": 1,
-      "LLM拒绝: 文章内容仅描述国际油价变动，未涉及屈臣氏电商经营相关的新增事实或事件。": 1,
       "LLM拒绝: 文章为观点性内容，未包含明确发生的新事实事件": 1,
+      "LLM拒绝: 内容与屈臣氏电商经营无关": 1,
       "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事件": 2,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于企业资本运作信息，与零售经营分析无关。": 1,
-      "LLM拒绝: 内容为宏观经济数据发布，与屈臣氏电商经营无直接关联": 1,
-      "LLM拒绝: 文章内容属于宏观经济统计数据发布，与屈臣氏电商经营无直接关联": 1,
-      "LLM拒绝: 正文内容仅为重复性表述，未包含任何明确发生的事实事件": 1,
-      "LLM拒绝: 文章内容为证券交易所监管行动通报，不涉及屈臣氏相关业务或市场动态": 1,
-      "LLM拒绝: 文章内容与公司电商经营无关": 1,
-      "LLM拒绝: 事件主体为江西铜业及其子公司，属于有色金属行业资本运作，与屈臣氏电商业务无直接关联": 1,
-      "LLM拒绝: 文章内容涉及国际石油政治，与屈臣氏电商经营无直接关联，未体现任何影响流量、转化率、客单价等核心业务变量的信号。": 1,
-      "LLM拒绝: 文章内容仅为上市公司股票异动公告，未涉及屈臣氏电商经营相关的新事实或动态，无实际业务分析价值。": 1,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，仅为公司股票异动公告": 1,
-      "LLM拒绝: 文章内容为国铁集团财务数据披露，与屈臣氏电商经营无直接关联，未涉及流量、转化率、客单价等关键业务变量或平台动态。": 1,
-      "LLM拒绝: 文章内容涉及国际石油供应评估会议，属于宏观能源政策范畴，未提及任何与屈臣氏电商业务相关的品牌、平台、品类或消费者行为变化，无法服务于电商经营分析": 1,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于企业高管个人行为与公司治理范畴，无直接业务变量影响": 1,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于金融领域人物澄清事件": 1,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关的新增事实": 2,
-      "LLM拒绝: 文章内容仅为背景信息，未涉及屈臣氏电商经营相关的新增事实或事件": 1,
-      "LLM拒绝: 文章内容主要围绕美联储主席杰罗姆·鲍威尔的任期结束及其政策影响展开，属于宏观经济和政治背景信息，未涉及屈臣氏电商经营相关的任何事实事件。": 1,
-      "LLM拒绝: 文章内容涉及国际军事政治事件，与屈臣氏电商经营分析无关": 1,
-      "LLM拒绝: 文章内容涉及美国军事部署调整，属于地缘政治新闻，未提及任何与零售、电商、美妆或屈臣氏相关的商业行为或趋势": 1,
-      "LLM拒绝: 文章内容属于宏观科技哲学讨论，未涉及屈臣氏电商经营相关的具体事实事件，如平台规则、品牌动作、品类趋势或消费场景变化等可操作的业务信号。": 1,
-      "LLM拒绝: 文章内容涉及企业高管人事变动及调查传闻，与屈臣氏电商经营无直接关联": 1,
-      "LLM拒绝: 文章内容聚焦于山西长治崇庆寺的历史建筑与文物保护信息，属于文化旅游类报道，未涉及任何与屈臣氏电商业务相关的事件或信号": 1,
-      "LLM拒绝: 文章内容关于地缘政治与航运数据，与屈臣氏电商经营无关": 1,
-      "LLM拒绝: 文章内容属于宏观人口与行业趋势分析，未涉及屈臣氏电商经营相关的具体事件或信号": 1,
-      "LLM拒绝: 文章内容涉及国际政治与历史文学，与屈臣氏电商经营无关，无新增商业事实": 1,
-      "LLM拒绝: 文章内容与美国政治及枪械相关，与屈臣氏电商经营无关，无法服务于屈臣氏电商经营分析。": 1,
-      "LLM拒绝: 文章内容聚焦于国际石油政治动态，与屈臣氏电商经营无直接关联，未涉及任何明确的新增事实事件服务于电商分析。": 1,
-      "LLM拒绝: 文章主题为汽车行业动态，与屈臣氏电商经营无直接关联，未包含影响屈臣氏业务的事件信息": 1,
-      "LLM拒绝: 文章内容聚焦影视创作与历史题材讨论，未涉及屈臣氏电商经营相关的新增事实或业务动态。": 1,
-      "LLM拒绝: 文章内容主要涉及国际政治、地缘冲突及泰国外交政策调整，与屈臣氏电商经营无直接关联，未包含任何明确的新增商业事实或可服务于电商分析的事件信息。": 1,
-      "LLM拒绝: 文章内容聚焦于造船业技术进展和市场竞争格局，与屈臣氏电商经营无直接关联，未涉及流量、转化率、客单价等电商核心变量或平台动态。": 1,
-      "LLM拒绝: 正文为空，未包含任何新增事实信息": 2,
-      "LLM拒绝: 文章内容仅为展会背景介绍，未包含对屈臣氏电商经营有直接影响的明确事实事件": 1
+      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于企业资本运作信息，与零售经营分析无关": 1,
+      "LLM拒绝: 内容为宏观经济数据通报，与屈臣氏电商经营无直接关联": 1,
+      "LLM拒绝: 文章内容涉及半导体行业公司股权变动，与屈臣氏电商经营分析无关": 1,
+      "LLM拒绝: 文章内容未提及屈臣氏电商经营相关的新增事实": 1,
+      "LLM拒绝: 正文仅包含抽象表述，未提及任何明确发生的事实事件": 1,
+      "LLM拒绝: 文章内容涉及上市公司股东减持行为，与屈臣氏电商经营分析无关": 1,
+      "LLM拒绝: 文章内容涉及国际石油政治，与屈臣氏电商经营无直接关联": 1,
+      "LLM拒绝: 文章内容仅涉及公司股价异动及经营情况说明，无新增事实或业务相关事件，不服务于屈臣氏电商经营分析。": 1,
+      "LLM拒绝: 文章内容为国铁集团财务数据披露，与屈臣氏电商经营无直接关联，未涉及流量、转化率、客单价等关键业务变量或行业动态。": 1,
+      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于公司股东行为公告，与零售业务无直接关联": 1,
+      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关的新增事实": 1,
+      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于国际能源政策背景信息": 1,
+      "LLM拒绝: 文章内容涉及伊朗政治表态，属于地缘政治背景信息，未提及任何与屈臣氏、电商平台、零售或消费相关的商业动态，无法服务于电商经营分析。": 1,
+      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于背景信息或无业务关联事件": 1,
+      "LLM拒绝: 文章内容为公司治理变动，与屈臣氏电商经营无直接关联，未涉及流量、转化、货盘、平台规则等经营要素": 1,
+      "LLM拒绝: 事件为宏观背景信息，与屈臣氏电商经营无直接关联": 1,
+      "LLM拒绝: 文章内容聚焦于美联储货币政策、通胀与就业等宏观经济议题，未涉及屈臣氏电商经营相关的任何事实性事件（如平台规则变动、品牌动作、品类趋势、渠道变化或消费场景等），无法服务于屈臣氏电商经营分析目标。": 1,
+      "LLM拒绝: 文章内容与国际政治事件相关，与屈臣氏电商经营无直接关联": 1,
+      "LLM拒绝: 文章内容与美国军事部署相关，与屈臣氏电商经营无关": 1,
+      "LLM拒绝: 文章内容属于对未来AI发展趋势的理论探讨和哲学思考，未提及任何与屈臣氏电商经营相关的具体事实或事件，如平台变动、品牌动作、品类趋势、消费场景变化等，无法服务于屈臣氏电商经营分析。": 1,
+      "LLM拒绝: 文章内容涉及企业高管变动及调查事件，与屈臣氏电商经营无直接关联，未体现流量、转化率、客单价等核心业务变量或平台运营动态。": 1,
+      "LLM拒绝: 文章主题为山西长治崇庆寺的历史建筑介绍，属于文化古迹内容，未涉及任何与屈臣氏电商业务相关的事件或信号": 1,
+      "LLM拒绝: 文章内容属于宏观人口与行业结构背景信息，未涉及屈臣氏电商经营相关的具体事件或信号": 1,
+      "LLM拒绝: 文章内容聚焦于特朗普对伊朗的军事行动命名及《伊利亚特》的现代改编演出，属于国际政治与文化评论范畴，未涉及屈臣氏电商相关的任何经营动态、市场趋势或商业行为，无法服务于屈臣氏电商经营分析目标。": 1,
+      "LLM拒绝: 文章内容主要涉及航空燃料技术进展，与屈臣氏电商经营分析无关": 1,
+      "LLM拒绝: 文章内容主要描述北京车展现象及中美汽车价格对比，未涉及屈臣氏电商经营相关的新增事实或事件。": 1,
+      "LLM拒绝: 文章内容聚焦于电视剧创作理念、导演访谈及艺术表达，未涉及屈臣氏电商经营相关的任何事实性事件（如平台规则变动、品牌动作、品类趋势、渠道变化等），无法服务于屈臣氏电商经营分析目标。": 1,
+      "LLM拒绝: 文章内容聚焦于国际政治、能源供应及泰国外交政策调整，未涉及任何与屈臣氏电商业务相关的新事实或趋势，无法服务于电商经营分析目标。": 1,
+      "LLM拒绝: 文章内容与中国造船业相关，与屈臣氏电商经营无关": 1,
+      "LLM拒绝: 正文为空，未包含任何新增事实信息": 2
     }
   },
   "articles": [
     {
-      "article_id": "675122150abfaa2e",
-      "title": "每3天关一家店，屈臣氏怎么就在中国不行？",
-      "url": "https://www.huxiu.com/article/4845680.html",
+      "article_id": "b4a749cc719a30f9",
+      "title": "屈臣氏还能赢得这届年轻人吗？",
+      "url": "https://www.huxiu.com/article/3322624.html",
       "source_name": "rsshub_huxiu_search_watsons",
       "source_type": "rsshub",
       "source_tier": 2,
       "collector": "rsshub",
-      "published_at": "Thu, 26 Mar 2026 10:18:50 GMT",
-      "collected_at": "2026-04-30T17:56:53.096137+08:00",
+      "published_at": "Mon, 05 Aug 2024 01:20:00 GMT",
+      "collected_at": "2026-04-30T17:56:53.099370+08:00",
       "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202603/26/15174-prod-db-general-1-1774520289062.png\" /></figure>本文来自微信公众号： 美妆研究所SHOWCASE ，作者：美妆研究所上周，屈臣氏母公司长江和记实业发布了2025年全年财报。乍一看，这份成绩单其实挺亮眼的：营收2092.67亿港元，同比增长10.03",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202603/26/15174-prod-db-general-1-1774520289062.png\" /></figure>本文来自微信公众号： 美妆研究所SHOWCASE ，作者：美妆研究所上周，屈臣氏母公司长江和记实业发布了2025年全年财报。乍一看，这份成绩单其实挺亮眼的：营收2092.67亿港元，同比增长10.03",
-      "matched_keywords": [
-        "美妆",
-        "屈臣氏"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
-        "entry_id": "huxiu-article-4845680"
-      },
-      "filter": {
-        "rule_score": 8,
-        "rule_decision": "keep",
-        "rule_reasons": [
-          "+5 命中屈臣氏: 屈臣氏",
-          "+3 命中美妆个护: 美妆",
-          "+1 source_tier=2",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "main",
-        "final_reason": "time_status=old(搜索源/allow_old) score=8>=4→main"
-      },
-      "is_reference": false,
-      "reject_reason": "LLM拒绝: 文章内容未提供明确的新增事实事件，仅包含背景信息"
-    },
-    {
-      "article_id": "faacbfee6de3b5ad",
-      "title": "屈臣氏拖累了屈臣氏",
-      "url": "https://www.huxiu.com/article/1090033.html",
-      "source_name": "rsshub_huxiu_search_watsons",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Fri, 07 Apr 2023 13:14:47 GMT",
-      "collected_at": "2026-04-30T17:56:53.100277+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202304/07/203340740552.jpg\" /></figure>本文来自微信公众号：每经影视 （ID：meijingyingshi），作者：丁舟洋、杜蔚，编辑：张海妮，头图来自：视觉中国从李嘉诚到其长子李泽钜，长和（长江和记实业有限公司，HK00001，股价49.",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202304/07/203340740552.jpg\" /></figure>本文来自微信公众号：每经影视 （ID：meijingyingshi），作者：丁舟洋、杜蔚，编辑：张海妮，头图来自：视觉中国从李嘉诚到其长子李泽钜，长和（长江和记实业有限公司，HK00001，股价49.",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202408/05/090700090117.jpg\" /></figure>本文来自微信公众号：读数一帜，作者：王颖，编辑：杨秀红，头图来自：视觉中国百年零售巨头屈臣氏，正在筹划重启上市？前不久，新加坡主权财富基金淡马锡副首席执行长谢松辉对外透露：屈臣氏集团（下称“屈臣氏”）",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202408/05/090700090117.jpg\" /></figure>本文来自微信公众号：读数一帜，作者：王颖，编辑：杨秀红，头图来自：视觉中国百年零售巨头屈臣氏，正在筹划重启上市？前不久，新加坡主权财富基金淡马锡副首席执行长谢松辉对外透露：屈臣氏集团（下称“屈臣氏”）",
       "matched_keywords": [
         "屈臣氏"
       ],
       "raw": {
         "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
         "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
-        "entry_id": "huxiu-article-1090033"
+        "entry_id": "huxiu-article-3322624"
       },
       "filter": {
         "rule_score": 5,
@@ -143,44 +86,7 @@
         "final_reason": "time_status=old(搜索源/allow_old) score=5>=4→main"
       },
       "is_reference": false,
-      "reject_reason": "LLM拒绝: 文章内容仅为背景陈述，未提供明确的新增事实事件，如市场动作、政策变化或数据信号等，不符合事件抽取标准。"
-    },
-    {
-      "article_id": "052ef39b6ec879f1",
-      "title": "利润持续下滑， “新试界”换不来屈臣氏的新世界？",
-      "url": "https://www.huxiu.com/article/523255.html",
-      "source_name": "rsshub_huxiu_search_watsons",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Wed, 06 Apr 2022 11:38:11 GMT",
-      "collected_at": "2026-04-30T17:56:53.101634+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202204/06/181453066334.jpg\" /></figure>本文来自微信公众号：锌刻度（ID：znkedu），作者：黎炫岐，编辑：文婕，题图来自：视觉中国3月中旬，屈臣氏母公司长江和记实业有限公司公布了截止2021年12 月31日的年度财报。在过去的一年里，屈",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202204/06/181453066334.jpg\" /></figure>本文来自微信公众号：锌刻度（ID：znkedu），作者：黎炫岐，编辑：文婕，题图来自：视觉中国3月中旬，屈臣氏母公司长江和记实业有限公司公布了截止2021年12 月31日的年度财报。在过去的一年里，屈",
-      "matched_keywords": [
-        "屈臣氏"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
-        "entry_id": "huxiu-article-523255"
-      },
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+5 命中屈臣氏: 屈臣氏",
-          "+1 source_tier=2",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "main",
-        "final_reason": "time_status=old(搜索源/allow_old) score=5>=4→main"
-      },
-      "is_reference": false,
-      "reject_reason": "LLM拒绝: 文章内容未提供明确的新增事实或可抽取的事件，仅提及财报公布及利润下滑趋势，属于背景信息，无具体经营动作或数据信号。"
+      "reject_reason": "LLM拒绝: 文章内容主要为背景信息，未包含明确新增事实或可提取的事件。"
     },
     {
       "article_id": "a43858f32a07f046",
@@ -217,7 +123,7 @@
         "final_reason": "time_status=old(搜索源/allow_old) score=4>=4→main"
       },
       "is_reference": false,
-      "reject_reason": "LLM拒绝: 文章未包含明确新增事实，仅列举现有头部玩家"
+      "reject_reason": "LLM拒绝: 文章内容仅为背景介绍，未包含明确新增事实或事件"
     },
     {
       "article_id": "c7e715758e4f0b96",
@@ -255,7 +161,7 @@
         "final_reason": "time_status=old(搜索源/allow_old) score=4>=4→main"
       },
       "is_reference": false,
-      "reject_reason": "LLM拒绝: 正文内容不完整，仅截断至‘即时零售的“基’，无法提取明确发生的事实事件"
+      "reject_reason": "LLM拒绝: 正文内容不完整，仅截断至‘即时零售的“基’，无法提取明确事实事件"
     },
     {
       "article_id": "2fe3bbbfc37ecf7c",
@@ -293,7 +199,7 @@
         "final_reason": "time_status=old(搜索源/allow_old) score=4>=4→main"
       },
       "is_reference": false,
-      "reject_reason": "LLM拒绝: 文章仅描述即时零售场景下的订单活跃现象，未包含任何明确发生的新事件（如平台规则变更、品牌行动、品类趋势等），不符合事件抽取标准"
+      "reject_reason": "LLM拒绝: 文章仅描述外卖平台订单持续推送的现象，未提及任何具体事件（如平台规则变更、企业行动、品类趋势等），不符合事件抽取标准。"
     },
     {
       "article_id": "7477f3c5542938c5",
@@ -334,114 +240,7 @@
         "final_reason": "rule_score=6>=6"
       },
       "is_reference": false,
-      "reject_reason": "LLM拒绝: 正文为空，未包含任何明确发生的事实事件"
-    },
-    {
-      "article_id": "37ddfbd901b1d7d1",
-      "title": "微信、抖音、淘宝，会被AI降维打击么？",
-      "url": "https://www.huxiu.com/article/4854863.html",
-      "source_name": "rsshub_huxiu_search_douyin_hour",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Wed, 29 Apr 2026 11:57:08 GMT",
-      "collected_at": "2026-04-30T17:56:53.268039+08:00",
-      "time_status": "in_window",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/29/19083-prod-kl-general-1-1777463796065.png\" /></figure>本文来自微信公众号： 非凡油条 ，作者：豆腐乳儿手机又要大变样了。这次杀入手机圈的，是OpenAI。OpenAI正在与联发科、高通合作开发手机处理器，而设想中的这款手机将会交由立讯精密制造，预计202",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/29/19083-prod-kl-general-1-1777463796065.png\" /></figure>本文来自微信公众号： 非凡油条 ，作者：豆腐乳儿手机又要大变样了。这次杀入手机圈的，是OpenAI。OpenAI正在与联发科、高通合作开发手机处理器，而设想中的这款手机将会交由立讯精密制造，预计202",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/抖音小时达?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/抖音小时达?limit=20&sorted=true",
-        "entry_id": "huxiu-article-4854863"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容未涉及屈臣氏电商经营相关的新增事实，仅描述科技行业动态，无明确事件服务于屈臣氏电商经营分析。"
-    },
-    {
-      "article_id": "12a33b96f8c0deda",
-      "title": "马拉松纪录破2小时大关，15年前神预言成真后，人类极限在哪里？",
-      "url": "https://www.huxiu.com/article/4854623.html",
-      "source_name": "rsshub_huxiu_search_douyin_hour",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Wed, 29 Apr 2026 00:57:37 GMT",
-      "collected_at": "2026-04-30T17:56:53.268723+08:00",
-      "time_status": "in_window",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/29/18996-prod-db-general-1-1777424214549.png\" /></figure>本文来自微信公众号： 一个生物狗的科普小园 ，作者：Y博的科普园2026年伦敦马拉松，来自肯尼亚的Sabastian Sawe跑出了1小时59分30秒的成绩，不仅刷新世界纪录，还正式把马拉松推进了2小",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/29/18996-prod-db-general-1-1777424214549.png\" /></figure>本文来自微信公众号： 一个生物狗的科普小园 ，作者：Y博的科普园2026年伦敦马拉松，来自肯尼亚的Sabastian Sawe跑出了1小时59分30秒的成绩，不仅刷新世界纪录，还正式把马拉松推进了2小",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/抖音小时达?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/抖音小时达?limit=20&sorted=true",
-        "entry_id": "huxiu-article-4854623"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容为体育赛事报道，未涉及屈臣氏相关业务或市场动态"
-    },
-    {
-      "article_id": "f41459f297ab4b3d",
-      "title": "定焦One | 从“平替”到“全球品牌500强”只用5年，徕芬是怎么杀出来的？",
-      "url": "https://www.huxiu.com/brief/269412.html",
-      "source_name": "rsshub_huxiu_search_personal_care",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Tue, 10 Jun 2025 04:26:26 GMT",
-      "collected_at": "2026-04-30T17:57:09.935075+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/img/brief_column/202409/10/112438154439.png\" /></figure>徕芬入场前，<em>个护</em>市场由国际巨头凭借先发优势占据高地；国货品牌本应更懂中国消费者，但面对高度集中的市场，创新动力不足。",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/img/brief_column/202409/10/112438154439.png\" /></figure>徕芬入场前，<em>个护</em>市场由国际巨头凭借先发优势占据高地；国货品牌本应更懂中国消费者，但面对高度集中的市场，创新动力不足。",
-      "matched_keywords": [
-        "个护",
-        "国货",
-        "平替"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/个护?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/个护?limit=20&sorted=true",
-        "entry_id": "huxiu-brief-269412"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 个护",
-          "+1 source_tier=2",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章未提供任何明确发生的新事实事件，仅描述背景情况，无具体行动、数据或趋势变化。"
+      "reject_reason": "LLM拒绝: 正文为空，无新增事实信息"
     },
     {
       "article_id": "6f28e82c07599e5f",
@@ -472,13 +271,23 @@
           "+1 source_tier=2",
           "-1 time_status=old(搜索源/allow_old)"
         ],
-        "llm_reviewed": false,
-        "llm_result": null,
+        "llm_reviewed": true,
+        "llm_result": {
+          "llm_relevance": "low",
+          "business_relevance_type": "irrelevant",
+          "related_channels": [],
+          "related_categories": [],
+          "business_variables": [],
+          "reason": "文章主题为日本老人护理生态，虽含‘个护’关键词但内容与屈臣氏即时零售×个护美妆经营无实质关联。",
+          "recommended_pool": "reject",
+          "confidence": "high",
+          "llm_reviewed": true
+        },
         "final_pool": "reference",
         "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容属于背景描述和社会观察，未涉及屈臣氏电商经营相关的明确事实事件，如平台规则变化、品牌动作、品类趋势或消费场景变动等。"
+      "reject_reason": "LLM拒绝: 文章内容属于背景信息描述，未包含明确发生的新事实事件"
     },
     {
       "article_id": "41ace8e3da89bc45",
@@ -512,41 +321,7 @@
         "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容主要讨论华为内部管理理念，与屈臣氏电商经营无直接关联，未提及任何具体商业事件或趋势。"
-    },
-    {
-      "article_id": "2d7a77bee17f8cae",
-      "title": "生鲜零售业的前置仓模式，无法持续？",
-      "url": "https://www.huxiu.com/article/626161.html",
-      "source_name": "rsshub_huxiu_search_front_warehouse",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 04 Aug 2022 05:56:57 GMT",
-      "collected_at": "2026-04-30T17:57:10.689451+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202208/04/114622798339.jpg\" /></figure>本文来自微信公众号：庄帅零售电商频道（ID：zhuangshuaiec），作者：庄帅，原文标题：《每日优鲜的困局与前置仓模式的“替代性假设”》，题图来源：视觉中国探讨每日优鲜今日之困局，可以从外部和内",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202208/04/114622798339.jpg\" /></figure>本文来自微信公众号：庄帅零售电商频道（ID：zhuangshuaiec），作者：庄帅，原文标题：《每日优鲜的困局与前置仓模式的“替代性假设”》，题图来源：视觉中国探讨每日优鲜今日之困局，可以从外部和内",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/前置仓?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/前置仓?limit=20&sorted=true",
-        "entry_id": "huxiu-article-626161"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 前置仓",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容仅为对每日优鲜现状的分析与讨论，未包含任何明确发生的新事实事件，不符合事件抽取标准。"
+      "reject_reason": "LLM拒绝: 文章内容主要围绕任正非的讲话和前置仓的商业讨论，未提及屈臣氏电商相关的新增事实或事件。"
     },
     {
       "article_id": "789d7c4319be21eb",
@@ -580,7 +355,7 @@
         "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容仅为概念阐述，未包含明确发生的新事实事件"
+      "reject_reason": "LLM拒绝: 文章内容仅为背景介绍，未包含明确发生的新事实事件"
     },
     {
       "article_id": "e3de3cfdcfa73f61",
@@ -611,289 +386,28 @@
           "+1 source_tier=2",
           "-1 time_status=old(搜索源/allow_old)"
         ],
-        "llm_reviewed": false,
-        "llm_result": null,
+        "llm_reviewed": true,
+        "llm_result": {
+          "llm_relevance": "medium",
+          "business_relevance_type": "indirect",
+          "related_channels": [],
+          "related_categories": [
+            "美妆行业趋势"
+          ],
+          "business_variables": [
+            "消费者行为变化",
+            "零售模式转型"
+          ],
+          "reason": "文章讨论美妆行业回归‘人感时代’的趋势，虽未直接提及屈臣氏，但涉及个护美妆消费体验升级，可能间接影响其即时零售策略。",
+          "recommended_pool": "reference",
+          "confidence": "medium",
+          "llm_reviewed": true
+        },
         "final_pool": "reference",
         "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章仅引用第三方机构发布的趋势观点，未提供任何具体企业行动、平台规则变更、消费者行为变化或可验证的新事实，无法提取有效事件"
-    },
-    {
-      "article_id": "069b03c363b85b54",
-      "title": "美妆博主集体开炮：美妆圈“烂完了”，怪谁呢？",
-      "url": "https://www.huxiu.com/article/4829190.html",
-      "source_name": "rsshub_huxiu_search_beauty",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Fri, 23 Jan 2026 11:00:54 GMT",
-      "collected_at": "2026-04-30T17:57:10.722452+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202601/23/6666-prod-jm-general-1-1769166015095.png\" /></figure>本文来自微信公众号： 美妆研究所SHOWCASE ，作者：美妆研究所针对开年美妆圈掀起的“美妆圈越来越无聊”、“是谁在制造焦虑”等激烈讨论，本文将基于行业内部的观察，试图回应以下几个核心问题：2026",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202601/23/6666-prod-jm-general-1-1769166015095.png\" /></figure>本文来自微信公众号： 美妆研究所SHOWCASE ，作者：美妆研究所针对开年美妆圈掀起的“美妆圈越来越无聊”、“是谁在制造焦虑”等激烈讨论，本文将基于行业内部的观察，试图回应以下几个核心问题：2026",
-      "matched_keywords": [
-        "美妆"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/美妆?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/美妆?limit=20&sorted=true",
-        "entry_id": "huxiu-article-4829190"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆",
-          "+1 source_tier=2",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章为观点性内容，未陈述任何具体发生的事件或可验证的事实变化"
-    },
-    {
-      "article_id": "210ec44bd801af5d",
-      "title": "财联社4月30日电，乌克兰称其袭击了俄罗斯彼尔姆炼油厂。",
-      "url": "https://api3.cls.cn/share/article/2361223?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:54:30 GMT",
-      "collected_at": "2026-04-30T17:57:11.042863+08:00",
-      "time_status": "in_window",
-      "summary": "财联社4月30日电，乌克兰称其袭击了俄罗斯彼尔姆炼油厂。",
-      "content": "财联社4月30日电，乌克兰称其袭击了俄罗斯彼尔姆炼油厂。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361223?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 1,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window",
-          "-2 内容极短且无关键词"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏或零售相关动态，属于地缘政治新闻，无商业分析价值"
-    },
-    {
-      "article_id": "40dc974351cdf434",
-      "title": "南向资金今日净买入约122亿港元 中芯国际获买入居前",
-      "url": "https://api3.cls.cn/share/article/2361207?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:49:25 GMT",
-      "collected_at": "2026-04-30T17:57:11.044902+08:00",
-      "time_status": "in_window",
-      "summary": "【南向资金今日净买入约122亿港元 中芯国际获买入居前】财联社4月30日电，南向资金今日净买入约121.92亿港元。中芯国际、中国石油股份分别获净买入约14.93亿港元、11.68亿港元；腾讯控股遭净卖出10.69亿港元。",
-      "content": "【南向资金今日净买入约122亿港元 中芯国际获买入居前】财联社4月30日电，南向资金今日净买入约121.92亿港元。中芯国际、中国石油股份分别获净买入约14.93亿港元、11.68亿港元；腾讯控股遭净卖出10.69亿港元。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361207?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及金融市场资金流向，与屈臣氏电商经营无直接关联，无法提取有效业务事件"
-    },
-    {
-      "article_id": "863346e8b625b161",
-      "title": "重庆1宗宅地溢价9.49%成交",
-      "url": "https://api3.cls.cn/share/article/2361208?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:46:10 GMT",
-      "collected_at": "2026-04-30T17:57:11.045358+08:00",
-      "time_status": "in_window",
-      "summary": "【重庆1宗宅地溢价9.49%成交】财联社4月30日电，重庆出让1宗渝中区宅地，土地出让面积10053.47㎡，规划建筑面积22117.63㎡，容积率2.2，起始价1.84亿元，起始楼面价8300元/㎡。最终重庆山昇以总价2.01亿元竞得该地块，成交楼面价9088元/㎡，溢价率9.49%。",
-      "content": "【重庆1宗宅地溢价9.49%成交】财联社4月30日电，重庆出让1宗渝中区宅地，土地出让面积10053.47㎡，规划建筑面积22117.63㎡，容积率2.2，起始价1.84亿元，起始楼面价8300元/㎡。最终重庆山昇以总价2.01亿元竞得该地块，成交楼面价9088元/㎡，溢价率9.49%。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361208?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及房地产土地交易，与屈臣氏电商经营无关"
-    },
-    {
-      "article_id": "3358f2459d5adf36",
-      "title": "财联社4月30日电，国际能源署（IEA）预测，受限于电网拥堵而非资金或需求，到2030年仅能实现17GW的增长（增长率为70%），这可能导致AI基础设施建设延期。",
-      "url": "https://api3.cls.cn/share/article/2361209?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:46:09 GMT",
-      "collected_at": "2026-04-30T17:57:11.045835+08:00",
-      "time_status": "in_window",
-      "summary": "财联社4月30日电，国际能源署（IEA）预测，受限于电网拥堵而非资金或需求，到2030年仅能实现17GW的增长（增长率为70%），这可能导致AI基础设施建设延期。",
-      "content": "财联社4月30日电，国际能源署（IEA）预测，受限于电网拥堵而非资金或需求，到2030年仅能实现17GW的增长（增长率为70%），这可能导致AI基础设施建设延期。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361209?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 内容与屈臣氏电商经营无关"
-    },
-    {
-      "article_id": "502c0bb9a6814c96",
-      "title": "上海商业航天海上发射公司成立",
-      "url": "https://api3.cls.cn/share/article/2361205?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:45:56 GMT",
-      "collected_at": "2026-04-30T17:57:11.046285+08:00",
-      "time_status": "in_window",
-      "summary": "【上海商业航天海上发射公司成立】财联社4月30日电，天眼查App显示，今日，上海商业航天海上发射技术有限公司成立，法定代表人为哈尔曼，注册资本11亿元人民币，经营范围含民用航天发射技术服务；火箭控制系统研发；火箭发动机研发与制造；火箭发射设备研发和制造；特种设备设计等。股东结构方面，有五家国央企公司，分别为上海垣信卫星科技有限公司（为千帆星座运营商）、中国海洋工程装备技术发展有限公司、中国航天科技集团商业火箭有限公司、上海市莘庄工业区经济技术发展有限公司、上海国盛（集团）有限公司，股权结构情况暂未更新。（财联社记者 梁祥才）",
-      "content": "【上海商业航天海上发射公司成立】财联社4月30日电，天眼查App显示，今日，上海商业航天海上发射技术有限公司成立，法定代表人为哈尔曼，注册资本11亿元人民币，经营范围含民用航天发射技术服务；火箭控制系统研发；火箭发动机研发与制造；火箭发射设备研发和制造；特种设备设计等。股东结构方面，有五家国央企公司，分别为上海垣信卫星科技有限公司（为千帆星座运营商）、中国海洋工程装备技术发展有限公司、中国航天科技集团商业火箭有限公司、上海市莘庄工业区经济技术发展有限公司、上海国盛（集团）有限公司，股权结构情况暂未更新。（财联社记者 梁祥才）",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361205?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "44272f5aa93806f6",
-      "title": "自然人仪文明内幕交易获利621万 被证监会罚没近2500万",
-      "url": "https://api3.cls.cn/share/article/2361201?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:39:55 GMT",
-      "collected_at": "2026-04-30T17:57:11.047728+08:00",
-      "time_status": "in_window",
-      "summary": "【自然人仪文明内幕交易获利621万 被证监会罚没近2500万】财联社4月30日电，证监会发布行政处罚决定书，对仪文明内幕交易案进行了立案调查。经查明，仪文明存在以下违法事实：2024年4月27日,相关公司发布重大资产重组公告。该重大资产重组事项,构成《证券法》第八十条第二款第二项规定的重大事件，公开前属于内幕信息。该内幕信息不晚于2023年12月27日形成,公开于2024年4月27日。2024年2月26日至4月16日，相关内幕信息知情人多次告知仪文明上述资产重组事项及进展情况。2024年2月26日至4月19日，仪文明控制使用本人证券账户买入相关公司股票，获利6,208,614.34元。证监会决定：对仪文明内幕交易行为，没收违法所得6,208,614.34元，并处以18,625,843.02元罚款。",
-      "content": "【自然人仪文明内幕交易获利621万 被证监会罚没近2500万】财联社4月30日电，证监会发布行政处罚决定书，对仪文明内幕交易案进行了立案调查。经查明，仪文明存在以下违法事实：2024年4月27日,相关公司发布重大资产重组公告。该重大资产重组事项,构成《证券法》第八十条第二款第二项规定的重大事件，公开前属于内幕信息。该内幕信息不晚于2023年12月27日形成,公开于2024年4月27日。2024年2月26日至4月16日，相关内幕信息知情人多次告知仪文明上述资产重组事项及进展情况。2024年2月26日至4月19日，仪文明控制使用本人证券账户买入相关公司股票，获利6,208,614.34元。证监会决定：对仪文明内幕交易行为，没收违法所得6,208,614.34元，并处以18,625,843.02元罚款。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361201?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "11d0284a217bd9af",
-      "title": "自然人杨伟智内幕交易、泄露内幕信息 被证监会罚款210万元",
-      "url": "https://api3.cls.cn/share/article/2361195?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:39:51 GMT",
-      "collected_at": "2026-04-30T17:57:11.048160+08:00",
-      "time_status": "in_window",
-      "summary": "【自然人杨伟智内幕交易、泄露内幕信息 被证监会罚款210万元】财联社4月30日电，证监会发布行政处罚决定书，对杨伟智内幕交易、泄露内幕信息一案进行了立案调查。经查明，杨伟智存在以下违法事实：2024年4月27日，相关公司发布重大资产重组公告。该重大资产重组事项,构成《证券法》第八十条第二款第二项规定的重大事件，公开前属于内幕信息。该内幕信息不晚于2023年12月27日形成，公开于2024年4月27日。不晚于2024年3月15日，杨伟智知悉并参与上述重大资产重组相关工作。2024年2月28日至3月13日，杨伟智控制使用多个他人证券账户买入相关公司股票，交易结果为亏损。2024年2月26日至4月16日，杨伟智多次告知他人上述资产重组事项及进展情况，导致他人买入相关公司股票。证监会决定：对杨伟智内幕交易行为，处以1,500,000元罚款；对杨伟智泄露内幕信息行为，处以600,000元罚款；合计处以2,100,000元罚款。",
-      "content": "【自然人杨伟智内幕交易、泄露内幕信息 被证监会罚款210万元】财联社4月30日电，证监会发布行政处罚决定书，对杨伟智内幕交易、泄露内幕信息一案进行了立案调查。经查明，杨伟智存在以下违法事实：2024年4月27日，相关公司发布重大资产重组公告。该重大资产重组事项,构成《证券法》第八十条第二款第二项规定的重大事件，公开前属于内幕信息。该内幕信息不晚于2023年12月27日形成，公开于2024年4月27日。不晚于2024年3月15日，杨伟智知悉并参与上述重大资产重组相关工作。2024年2月28日至3月13日，杨伟智控制使用多个他人证券账户买入相关公司股票，交易结果为亏损。2024年2月26日至4月16日，杨伟智多次告知他人上述资产重组事项及进展情况，导致他人买入相关公司股票。证监会决定：对杨伟智内幕交易行为，处以1,500,000元罚款；对杨伟智泄露内幕信息行为，处以600,000元罚款；合计处以2,100,000元罚款。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361195?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于证券监管事件，与业务分析无关。"
+      "reject_reason": "LLM拒绝: 文章仅引用第三方机构发布的趋势观点，未提供具体企业行动、平台规则变更、消费者行为数据等可验证的新事实，不符合事件抽取标准"
     },
     {
       "article_id": "8e9f5e1db7733ad7",
@@ -927,42 +441,7 @@
         "final_reason": "rule=review, score=3, time=in_window→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 事件与屈臣氏电商经营无关，属于银行内部人事变动"
-    },
-    {
-      "article_id": "232472cf3d765f9d",
-      "title": "财政部拟发行2026年记账式贴现（二十七期）国债 招标面值总额200亿元",
-      "url": "https://api3.cls.cn/share/article/2361194?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:35:26 GMT",
-      "collected_at": "2026-04-30T17:57:11.049536+08:00",
-      "time_status": "in_window",
-      "summary": "【财政部拟发行2026年记账式贴现（二十七期）国债 招标面值总额200亿元】财联社4月30日电，财政部拟发行2026年记账式贴现（二十七期）国债。现就本次发行工作有关事宜通知如下：本期国债为期限28天的贴现债。本期国债竞争性招标面值总额200亿元，进行甲类成员追加投标。本期国债发行价格通过竞争性招标确定，以低于票面金额的价格贴现发行。本期国债自2026年5月7日开始计息，于2026年6月4日（节假日顺延）按面值偿还。",
-      "content": "【财政部拟发行2026年记账式贴现（二十七期）国债 招标面值总额200亿元】财联社4月30日电，财政部拟发行2026年记账式贴现（二十七期）国债。现就本次发行工作有关事宜通知如下：本期国债为期限28天的贴现债。本期国债竞争性招标面值总额200亿元，进行甲类成员追加投标。本期国债发行价格通过竞争性招标确定，以低于票面金额的价格贴现发行。本期国债自2026年5月7日开始计息，于2026年6月4日（节假日顺延）按面值偿还。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361194?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=4>=4, 无LLM→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容为国家财政政策公告，与屈臣氏电商经营无直接关联"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
     },
     {
       "article_id": "823217ed4cc9c126",
@@ -996,112 +475,7 @@
         "final_reason": "rule=review, score=3, time=in_window→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "046a2288f92bbdf8",
-      "title": "财联社4月30日电，南非3月PPI环比上涨1.1%，预估增幅为0.8%。",
-      "url": "https://api3.cls.cn/share/article/2361190?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:33:29 GMT",
-      "collected_at": "2026-04-30T17:57:11.050396+08:00",
-      "time_status": "in_window",
-      "summary": "财联社4月30日电，南非3月PPI环比上涨1.1%，预估增幅为0.8%。",
-      "content": "财联社4月30日电，南非3月PPI环比上涨1.1%，预估增幅为0.8%。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361190?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 1,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window",
-          "-2 内容极短且无关键词"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 内容为宏观经济数据通报，与屈臣氏电商经营无直接关联"
-    },
-    {
-      "article_id": "d3549c786756e5ee",
-      "title": "财联社4月30日电，摩根大通将Meta目标价从825美元下调至725美元，评级由增持调整为中性。",
-      "url": "https://api3.cls.cn/share/article/2361187?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:32:25 GMT",
-      "collected_at": "2026-04-30T17:57:11.050987+08:00",
-      "time_status": "in_window",
-      "summary": "财联社4月30日电，摩根大通将Meta目标价从825美元下调至725美元，评级由增持调整为中性。",
-      "content": "财联社4月30日电，摩根大通将Meta目标价从825美元下调至725美元，评级由增持调整为中性。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361187?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 1,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window",
-          "-2 内容极短且无关键词"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 事件主体为Meta公司及其股价评级变动，与屈臣氏电商经营无直接关联"
-    },
-    {
-      "article_id": "e50c30139538a8b0",
-      "title": "财联社4月30日电，国际油价转跌，截至目前，WTI原油期货价格跌0.09%，报106.779美元/桶；布伦特原油期货价格跌0.03%，报110.402美元/桶。",
-      "url": "https://api3.cls.cn/share/article/2361185?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:31:21 GMT",
-      "collected_at": "2026-04-30T17:57:11.051602+08:00",
-      "time_status": "in_window",
-      "summary": "财联社4月30日电，国际油价转跌，截至目前，WTI原油期货价格跌0.09%，报106.779美元/桶；布伦特原油期货价格跌0.03%，报110.402美元/桶。",
-      "content": "财联社4月30日电，国际油价转跌，截至目前，WTI原油期货价格跌0.09%，报106.779美元/桶；布伦特原油期货价格跌0.03%，报110.402美元/桶。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361185?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=4>=4, 无LLM→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容仅描述国际油价变动，未涉及屈臣氏电商经营相关的新增事实或事件。"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于证券监管事件，与业务分析无关。"
     },
     {
       "article_id": "b89f7166aba8f957",
@@ -1274,7 +648,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于企业资本运作信息，与零售经营分析无关。"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于企业资本运作信息，与零售经营分析无关"
     },
     {
       "article_id": "eabdea502663fc5a",
@@ -1308,7 +682,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 内容为宏观经济数据发布，与屈臣氏电商经营无直接关联"
+      "reject_reason": "LLM拒绝: 内容为宏观经济数据通报，与屈臣氏电商经营无直接关联"
     },
     {
       "article_id": "12ae83a1be24535c",
@@ -1344,6 +718,39 @@
       "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
     },
     {
+      "article_id": "a5ca83a02b11f98b",
+      "title": "三安光电：控股股东被动减持股份达到1%",
+      "url": "https://www.36kr.com/newsflashes/3789090346622214",
+      "source_name": "rsshub_36kr_newsflashes",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Thu, 30 Apr 2026 09:02:01 GMT",
+      "collected_at": "2026-04-30T17:58:01.421661+08:00",
+      "time_status": "in_window",
+      "summary": "36氪获悉，三安光电公告，公司控股股东三安电子通过集中竞价和大宗交易方式被动减持股份，截至2026年4月29日，其持股比例由24.33%降至23.13%，权益变动触及1%刻度。三安电子与一致行动人三安集团合计持股比例由29.47%降至28.28%。本次减持不触及要约收购，不会导致公司控制权变更。",
+      "content": "36氪获悉，三安光电公告，公司控股股东三安电子通过集中竞价和大宗交易方式被动减持股份，截至2026年4月29日，其持股比例由24.33%降至23.13%，权益变动触及1%刻度。三安电子与一致行动人三安集团合计持股比例由29.47%降至28.28%。本次减持不触及要约收购，不会导致公司控制权变更。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
+        "route": "/36kr/newsflashes?limit=30&sorted=true",
+        "entry_id": "https://www.36kr.com/newsflashes/3789090346622214"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
+      },
+      "is_reference": true,
+      "reject_reason": "LLM拒绝: 文章内容涉及半导体行业公司股权变动，与屈臣氏电商经营分析无关"
+    },
+    {
       "article_id": "fa7086ae7e1753a1",
       "title": "香港金管局：3月份港元货币供应量M2及M3同比均上升1.2%",
       "url": "https://www.36kr.com/newsflashes/3789083440061446",
@@ -1375,7 +782,7 @@
         "final_reason": "rule=review, score=3, time=in_window→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容属于宏观经济统计数据发布，与屈臣氏电商经营无直接关联"
+      "reject_reason": "LLM拒绝: 文章内容未提及屈臣氏电商经营相关的新增事实"
     },
     {
       "article_id": "2579d8c4e8d327bc",
@@ -1444,40 +851,7 @@
         "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 正文内容仅为重复性表述，未包含任何明确发生的事实事件"
-    },
-    {
-      "article_id": "1da7ac4e57a006e9",
-      "title": "<b>深交所本周共对207起证券异常交易行为采取了自律监管措施 |</b> 据深交所公众号，4月27日至4月30日，深交所共对207起证券异常交易行为采取了自律监管措施，涉...",
-      "url": "https://www.yicai.com/brief/103162594.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:53:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.855816+08:00",
-      "time_status": "in_window",
-      "summary": "<b>深交所本周共对207起证券异常交易行为采取了自律监管措施  |</b> 据深交所公众号，4月27日至4月30日，深交所共对207起证券异常交易行为采取了自律监管措施，涉及盘中拉抬打压、虚假申报等异常交易情形；共对10起上市公司重大事项进行核查，并上报证监会3起涉嫌违法违规案件线索。",
-      "content": "<b>深交所本周共对207起证券异常交易行为采取了自律监管措施  |</b> 据深交所公众号，4月27日至4月30日，深交所共对207起证券异常交易行为采取了自律监管措施，涉及盘中拉抬打压、虚假申报等异常交易情形；共对10起上市公司重大事项进行核查，并上报证监会3起涉嫌违法违规案件线索。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162594.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容为证券交易所监管行动通报，不涉及屈臣氏相关业务或市场动态"
+      "reject_reason": "LLM拒绝: 正文仅包含抽象表述，未提及任何明确发生的事实事件"
     },
     {
       "article_id": "d878c563d81c3b60",
@@ -1510,7 +884,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容与公司电商经营无关"
+      "reject_reason": "LLM拒绝: 文章内容涉及上市公司股东减持行为，与屈臣氏电商经营分析无关"
     },
     {
       "article_id": "165d565b836d32af",
@@ -1543,7 +917,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 事件主体为江西铜业及其子公司，属于有色金属行业资本运作，与屈臣氏电商业务无直接关联"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
     },
     {
       "article_id": "e1196289394b340b",
@@ -1576,43 +950,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及国际石油政治，与屈臣氏电商经营无直接关联，未体现任何影响流量、转化率、客单价等核心业务变量的信号。"
-    },
-    {
-      "article_id": "e6fffb7d6ef5dd7d",
-      "title": "<b>舒华体育：股票交易异常波动，未涉及市场热点概念 |</b> 舒华体育公告，公司股票于4月29日、4月30日连续两个交易日内收盘价格涨幅偏离值累计超过20%，属于股...",
-      "url": "https://www.yicai.com/brief/103162555.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:32:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.859175+08:00",
-      "time_status": "in_window",
-      "summary": "<b>舒华体育：股票交易异常波动，未涉及市场热点概念  |</b> 舒华体育公告，公司股票于4月29日、4月30日连续两个交易日内收盘价格涨幅偏离值累计超过20%，属于股票交易异常波动情形。公司目前生产经营活动一切正常，市场环境、行业政策没有发生重大调整，生产成本和销售等情况没有出现大幅波动，内部生产经营秩序正常。公司未发现存在对公司股票交易价格可能产生重大影响的媒体报道及市场传闻，也未涉及市场热点概念。",
-      "content": "<b>舒华体育：股票交易异常波动，未涉及市场热点概念  |</b> 舒华体育公告，公司股票于4月29日、4月30日连续两个交易日内收盘价格涨幅偏离值累计超过20%，属于股票交易异常波动情形。公司目前生产经营活动一切正常，市场环境、行业政策没有发生重大调整，生产成本和销售等情况没有出现大幅波动，内部生产经营秩序正常。公司未发现存在对公司股票交易价格可能产生重大影响的媒体报道及市场传闻，也未涉及市场热点概念。",
-      "matched_keywords": [
-        "政策"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162555.html"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格, 活动",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容仅为上市公司股票异动公告，未涉及屈臣氏电商经营相关的新事实或动态，无实际业务分析价值。"
+      "reject_reason": "LLM拒绝: 文章内容涉及国际石油政治，与屈臣氏电商经营无直接关联"
     },
     {
       "article_id": "3213ca749f04ebc6",
@@ -1646,7 +984,7 @@
         "final_reason": "rule=review, score=3, time=in_window→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，仅为公司股票异动公告"
+      "reject_reason": "LLM拒绝: 文章内容仅涉及公司股价异动及经营情况说明，无新增事实或业务相关事件，不服务于屈臣氏电商经营分析。"
     },
     {
       "article_id": "6f6bc8357d8a423e",
@@ -1679,7 +1017,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容为国铁集团财务数据披露，与屈臣氏电商经营无直接关联，未涉及流量、转化率、客单价等关键业务变量或平台动态。"
+      "reject_reason": "LLM拒绝: 文章内容为国铁集团财务数据披露，与屈臣氏电商经营无直接关联，未涉及流量、转化率、客单价等关键业务变量或行业动态。"
     },
     {
       "article_id": "a10ffa5317bbe297",
@@ -1712,7 +1050,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事件"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于公司股东行为公告，与零售业务无直接关联"
     },
     {
       "article_id": "375299d8d6821787",
@@ -1746,7 +1084,7 @@
         "final_reason": "rule=review, score=3, time=in_window→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关的新增事实"
     },
     {
       "article_id": "1150776868275688",
@@ -1779,7 +1117,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及国际石油供应评估会议，属于宏观能源政策范畴，未提及任何与屈臣氏电商业务相关的品牌、平台、品类或消费者行为变化，无法服务于电商经营分析"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于国际能源政策背景信息"
     },
     {
       "article_id": "4b7a23e409ab6bd9",
@@ -1812,7 +1150,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
+      "reject_reason": "LLM拒绝: 文章内容涉及伊朗政治表态，属于地缘政治背景信息，未提及任何与屈臣氏、电商平台、零售或消费相关的商业动态，无法服务于电商经营分析。"
     },
     {
       "article_id": "920c3c43f26ad48b",
@@ -1845,7 +1183,40 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于企业高管个人行为与公司治理范畴，无直接业务变量影响"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于背景信息或无业务关联事件"
+    },
+    {
+      "article_id": "5d54acda5491e67a",
+      "title": "<b>百利电气：公司董事长变更为张建新 |</b> 百利电气公告，左小鹏因工作调整原因申请辞去公司董事、董事长、法定代表人、战略发展委员会主任委员、薪酬与考核委...",
+      "url": "https://www.yicai.com/brief/103162455.html",
+      "source_name": "rsshub_yicai",
+      "source_type": "rsshub",
+      "source_tier": 3,
+      "collector": "rsshub",
+      "published_at": "Thu, 30 Apr 2026 08:23:00 GMT",
+      "collected_at": "2026-04-30T17:58:10.867386+08:00",
+      "time_status": "in_window",
+      "summary": "<b>百利电气：公司董事长变更为张建新  |</b> 百利电气公告，左小鹏因工作调整原因申请辞去公司董事、董事长、法定代表人、战略发展委员会主任委员、薪酬与考核委员会委员的职务，辞职后将不再担任公司任何职务。公司于2026年4月30日召开董事会九届十二次会议，选举董事张建新为董事长、执行公司事务的董事长、法定代表人，任期与第九届董事会任期一致。",
+      "content": "<b>百利电气：公司董事长变更为张建新  |</b> 百利电气公告，左小鹏因工作调整原因申请辞去公司董事、董事长、法定代表人、战略发展委员会主任委员、薪酬与考核委员会委员的职务，辞职后将不再担任公司任何职务。公司于2026年4月30日召开董事会九届十二次会议，选举董事张建新为董事长、执行公司事务的董事长、法定代表人，任期与第九届董事会任期一致。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
+        "route": "/yicai/brief?limit=30",
+        "entry_id": "https://www.yicai.com/brief/103162455.html"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
+      },
+      "is_reference": true,
+      "reject_reason": "LLM拒绝: 文章内容为公司治理变动，与屈臣氏电商经营无直接关联，未涉及流量、转化、货盘、平台规则等经营要素"
     },
     {
       "article_id": "a0768672536551c4",
@@ -1880,7 +1251,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于金融领域人物澄清事件"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
     },
     {
       "article_id": "487917962f48d326",
@@ -1914,7 +1285,7 @@
         "final_reason": "rule=review, score=3, time=in_window→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关的新增事实"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
     },
     {
       "article_id": "0e8f8731194fb72a",
@@ -1949,7 +1320,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容仅为背景信息，未涉及屈臣氏电商经营相关的新增事实或事件"
+      "reject_reason": "LLM拒绝: 事件为宏观背景信息，与屈臣氏电商经营无直接关联"
     },
     {
       "article_id": "cc6fc5c954a81d98",
@@ -1987,40 +1358,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容主要围绕美联储主席杰罗姆·鲍威尔的任期结束及其政策影响展开，属于宏观经济和政治背景信息，未涉及屈臣氏电商经营相关的任何事实事件。"
-    },
-    {
-      "article_id": "ca1d69028739405c",
-      "title": "美军拟以“高超音速导弹”打击伊朗，周四将向特朗普汇报新“打击计划”",
-      "url": "https://wallstreetcn.com/articles/3771344",
-      "source_name": "rsshub_wallstreetcn",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 06:57:45 GMT",
-      "collected_at": "2026-04-30T17:58:18.867527+08:00",
-      "time_status": "in_window",
-      "summary": "<p>特朗普政府正在推进对伊朗潜在军事行动的规划。</p>\n<p>4月30日，据<a href=\"https://wallstreetcn.com/livenews/3097176\" rel=\"noopener\" target=\"_blank\">新华社</a>援引美国彭博社29日报道，美国中央司令部已提出申请，<strong>计划将“暗鹰”高超音速导弹部署至中东地区。</strong>若申请获批，<strong>这将是美国首次在实战中部署高超音速导弹，或将用于打击伊朗腹地的弹道导弹发射装置。</strong></p>\n<p>报道援引知情人士的话称，美军此次计划部署，是因为伊朗已将导弹发射装置转移至美军现有精确打击导弹的射程范围之外。目前，美国的高超音速导弹研发进度严重滞后，至今尚未宣布全面投入实战。知情人士透露，该申请尚未获批。美国中央司令部拒绝对此事发表评论。</p>\n<p>特朗普周三曾表示，他认为对伊朗的海上封锁\"比轰炸更有效\"，但若伊朗仍拒绝妥协，他将考虑采取军事行动。</p>\n<p>值得注意的是，外界目前高度关注本周五，也就是5月1日。根据美国法律对开战日期的计算方式，<strong>冲突即将进入第60天，届时总统继续动武就要获得国会授权。</strong></p>\n<p><strong>消息后，布伦特原油6月期货价快速拉升超4%，涨至122美元上方，创下伊朗战争以来新高。</strong></p>\n<p><img class=\" wscnph\" src=\"https://wpimg-wscn.awtmt.com/ff82ef3f-6851-435c-adec-bb0da1565dcf.png\" /></p>\n<p><a href=\"https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&amp;item_id=14609841937353397754&amp;channelId=1119\" rel=\"noopener\" target=\"_blank\">此前央视新闻提及</a>，美伊冲突逼近60天节点，未来48小时是关键观察期。外界目前高度关注本周五，也就是5月1日的时间节点。</p>\n<p>根据美国《战争权力法》，如果总统动武没有获得国会正式授权，时间到第60天就必须终止行动。</p>\n<div>\n<h2 id=\"709b83f7\">多套方案在案，打击目标各有侧重</h2>\n</div>\n<p>据报道援引知情人士透露，美国中央司令部司令Brad Cooper上将定于周四向特朗普汇报针对伊朗的最新军事行动方案，参谋长联席会议主席Dan Caine上将也将出席。</p>\n<p>报道称此次简报预计将涵盖至少三套备选方案。</p>\n<p><strong>第一套方案</strong>为针对伊朗基础设施的\"短促而有力\"波次打击，核心逻辑是通过有限军事压力迫使伊朗在核问题上展现更大灵活性，推动谈判重启。</p>\n<p><strong>第二套方案</strong>聚焦于夺取霍尔木兹海峡部分控制权，以恢复商业航运通道。报道援引知情人士称，该行动可能涉及地面部队部署，规模和复杂程度较单纯空中打击更高。</p>\n<p><strong>第三套方案</strong>此前曾被讨论，即通过特种部队行动控制伊朗高浓缩铀库存。这一选项若付诸实施，将直接针对伊朗核能力核心，政治与军事敏感性极高。</p>\n<p>分析人士和投资者须注意的是，军事简报本身并不等同于决策，但其时机与规模传递出明确信号。</p>\n<p><strong>此前Brad Cooper曾于2月26日向特朗普进行过一次类似简报，而两天后，美国与以色列便对伊朗发动了战争。</strong></p>\n<p>一名接近特朗普的人士表示，那次简报对特朗普最终决定开战产生了实质性影响。</p><div style=\"color: #666; margin-bottom: 15px;\">风险提示及免责条款</div>\n          <div>\n            市场有风险，投资需谨慎。本文不构成个人投资建议，也未考虑到个别用户特殊的投资目标、财务状况或需要。用户应考虑本文中的任何意见、观点或结论是否符合其特定状况。据此投资，责任自负。\n          </div>",
-      "content": "<p>特朗普政府正在推进对伊朗潜在军事行动的规划。</p>\n<p>4月30日，据<a href=\"https://wallstreetcn.com/livenews/3097176\" rel=\"noopener\" target=\"_blank\">新华社</a>援引美国彭博社29日报道，美国中央司令部已提出申请，<strong>计划将“暗鹰”高超音速导弹部署至中东地区。</strong>若申请获批，<strong>这将是美国首次在实战中部署高超音速导弹，或将用于打击伊朗腹地的弹道导弹发射装置。</strong></p>\n<p>报道援引知情人士的话称，美军此次计划部署，是因为伊朗已将导弹发射装置转移至美军现有精确打击导弹的射程范围之外。目前，美国的高超音速导弹研发进度严重滞后，至今尚未宣布全面投入实战。知情人士透露，该申请尚未获批。美国中央司令部拒绝对此事发表评论。</p>\n<p>特朗普周三曾表示，他认为对伊朗的海上封锁\"比轰炸更有效\"，但若伊朗仍拒绝妥协，他将考虑采取军事行动。</p>\n<p>值得注意的是，外界目前高度关注本周五，也就是5月1日。根据美国法律对开战日期的计算方式，<strong>冲突即将进入第60天，届时总统继续动武就要获得国会授权。</strong></p>\n<p><strong>消息后，布伦特原油6月期货价快速拉升超4%，涨至122美元上方，创下伊朗战争以来新高。</strong></p>\n<p><img class=\" wscnph\" src=\"https://wpimg-wscn.awtmt.com/ff82ef3f-6851-435c-adec-bb0da1565dcf.png\" /></p>\n<p><a href=\"https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&amp;item_id=14609841937353397754&amp;channelId=1119\" rel=\"noopener\" target=\"_blank\">此前央视新闻提及</a>，美伊冲突逼近60天节点，未来48小时是关键观察期。外界目前高度关注本周五，也就是5月1日的时间节点。</p>\n<p>根据美国《战争权力法》，如果总统动武没有获得国会正式授权，时间到第60天就必须终止行动。</p>\n<div>\n<h2 id=\"709b83f7\">多套方案在案，打击目标各有侧重</h2>\n</div>\n<p>据报道援引知情人士透露，美国中央司令部司令Brad Cooper上将定于周四向特朗普汇报针对伊朗的最新军事行动方案，参谋长联席会议主席Dan Caine上将也将出席。</p>\n<p>报道称此次简报预计将涵盖至少三套备选方案。</p>\n<p><strong>第一套方案</strong>为针对伊朗基础设施的\"短促而有力\"波次打击，核心逻辑是通过有限军事压力迫使伊朗在核问题上展现更大灵活性，推动谈判重启。</p>\n<p><strong>第二套方案</strong>聚焦于夺取霍尔木兹海峡部分控制权，以恢复商业航运通道。报道援引知情人士称，该行动可能涉及地面部队部署，规模和复杂程度较单纯空中打击更高。</p>\n<p><strong>第三套方案</strong>此前曾被讨论，即通过特种部队行动控制伊朗高浓缩铀库存。这一选项若付诸实施，将直接针对伊朗核能力核心，政治与军事敏感性极高。</p>\n<p>分析人士和投资者须注意的是，军事简报本身并不等同于决策，但其时机与规模传递出明确信号。</p>\n<p><strong>此前Brad Cooper曾于2月26日向特朗普进行过一次类似简报，而两天后，美国与以色列便对伊朗发动了战争。</strong></p>\n<p>一名接近特朗普的人士表示，那次简报对特朗普最终决定开战产生了实质性影响。</p><div style=\"color: #666; margin-bottom: 15px;\">风险提示及免责条款</div>\n          <div>\n            市场有风险，投资需谨慎。本文不构成个人投资建议，也未考虑到个别用户特殊的投资目标、财务状况或需要。用户应考虑本文中的任何意见、观点或结论是否符合其特定状况。据此投资，责任自负。\n          </div>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/wallstreetcn/news?limit=30&filterout_time=604800",
-        "route": "/wallstreetcn/news?limit=30",
-        "entry_id": "3771344"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及国际军事政治事件，与屈臣氏电商经营分析无关"
+      "reject_reason": "LLM拒绝: 文章内容聚焦于美联储货币政策、通胀与就业等宏观经济议题，未涉及屈臣氏电商经营相关的任何事实性事件（如平台规则变动、品牌动作、品类趋势、渠道变化或消费场景等），无法服务于屈臣氏电商经营分析目标。"
     },
     {
       "article_id": "c1da085b2d0e83a2",
@@ -2053,7 +1391,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
+      "reject_reason": "LLM拒绝: 文章内容与国际政治事件相关，与屈臣氏电商经营无直接关联"
     },
     {
       "article_id": "df9ba54e1c044b72",
@@ -2086,7 +1424,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及美国军事部署调整，属于地缘政治新闻，未提及任何与零售、电商、美妆或屈臣氏相关的商业行为或趋势"
+      "reject_reason": "LLM拒绝: 文章内容与美国军事部署相关，与屈臣氏电商经营无关"
     },
     {
       "article_id": "13232f288b757a93",
@@ -2119,7 +1457,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容属于宏观科技哲学讨论，未涉及屈臣氏电商经营相关的具体事实事件，如平台规则、品牌动作、品类趋势或消费场景变化等可操作的业务信号。"
+      "reject_reason": "LLM拒绝: 文章内容属于对未来AI发展趋势的理论探讨和哲学思考，未提及任何与屈臣氏电商经营相关的具体事实或事件，如平台变动、品牌动作、品类趋势、消费场景变化等，无法服务于屈臣氏电商经营分析。"
     },
     {
       "article_id": "a494dccf1ed746bf",
@@ -2152,7 +1490,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及企业高管人事变动及调查传闻，与屈臣氏电商经营无直接关联"
+      "reject_reason": "LLM拒绝: 文章内容涉及企业高管变动及调查事件，与屈臣氏电商经营无直接关联，未体现流量、转化率、客单价等核心业务变量或平台运营动态。"
     },
     {
       "article_id": "fcd6230f7f226133",
@@ -2185,7 +1523,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事件"
     },
     {
       "article_id": "f772aa3a58783471",
@@ -2218,7 +1556,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容聚焦于山西长治崇庆寺的历史建筑与文物保护信息，属于文化旅游类报道，未涉及任何与屈臣氏电商业务相关的事件或信号"
+      "reject_reason": "LLM拒绝: 文章主题为山西长治崇庆寺的历史建筑介绍，属于文化古迹内容，未涉及任何与屈臣氏电商业务相关的事件或信号"
     },
     {
       "article_id": "f85bb92cd3b123e2",
@@ -2251,7 +1589,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容关于地缘政治与航运数据，与屈臣氏电商经营无关"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
     },
     {
       "article_id": "0099d3bdd63ee5e0",
@@ -2284,7 +1622,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容属于宏观人口与行业趋势分析，未涉及屈臣氏电商经营相关的具体事件或信号"
+      "reject_reason": "LLM拒绝: 文章内容属于宏观人口与行业结构背景信息，未涉及屈臣氏电商经营相关的具体事件或信号"
     },
     {
       "article_id": "61729f38644e78f0",
@@ -2318,7 +1656,7 @@
         "final_reason": "rule=review, score=3, time=in_window→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关的新增事实"
+      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
     },
     {
       "article_id": "c4751764820ca421",
@@ -2351,62 +1689,26 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及国际政治与历史文学，与屈臣氏电商经营无关，无新增商业事实"
+      "reject_reason": "LLM拒绝: 文章内容聚焦于特朗普对伊朗的军事行动命名及《伊利亚特》的现代改编演出，属于国际政治与文化评论范畴，未涉及屈臣氏电商相关的任何经营动态、市场趋势或商业行为，无法服务于屈臣氏电商经营分析目标。"
     },
     {
-      "article_id": "af7229fe263a7793",
-      "title": "白宫晚宴枪击案当晚，特朗普身旁特工配中企装备？",
-      "url": "https://www.guancha.cn/internation/2026_04_30_815477_s.shtml",
+      "article_id": "86345e1c87df124f",
+      "title": "航油告急，全球慌神！中国科学家提出解决方案",
+      "url": "https://www.guancha.cn/internation/2026_04_29_815378_s.shtml",
       "source_name": "rsshub_guancha",
       "source_type": "rsshub",
       "source_tier": 4,
       "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 03:54:53 GMT",
-      "collected_at": "2026-04-30T17:58:29.048135+08:00",
+      "published_at": "Wed, 29 Apr 2026 07:31:47 GMT",
+      "collected_at": "2026-04-30T17:58:29.049903+08:00",
       "time_status": "in_window",
-      "summary": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/30/20260430110339307.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 柳白】\n</p>\n<p>\n上周发生的白宫记者协会晚宴枪击事件现场，一名美国特工持枪戒备的现场照片，引发了美国枪械圈的争论。\n</p>\n<p>\n争议的焦点并非这名特工的行动本身，而是她的格洛克手枪上疑似安装了一款中国制造的Holosun品牌红点瞄准镜。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/social/2026/04/30/20260430101506367.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/social/2026/04/30/20260430101950538.jpg\" title=\"点击查看大图\" /> \n</p>\n<p class=\"content-pic-desc\">\n白宫记者协会晚宴枪击事件现场，美国特工拔枪戒备。有网民将其使用的红点瞄准镜与Holosun产品对比<span>&nbsp;社交媒体</span> \n</p>\n<p>\n香港英文媒体《南华早报》29日注意到，这张照片在社交媒体上传播后，迅速在美国枪械论坛中扩散。画面显示，一名便衣特工在美国总统特朗普被紧急护送离开讲台时拔枪戒备。\n</p>\n<p>\n虽然不少评论者认为该特工属于美国特勤局，但部分美国媒体则称，照片中的团队是美国陆军刑事调查司令部（CID）行政保护局的特别探员。\n</p>\n<p>\n美国射击圈中的一些人过去一直认为中国制造的光学瞄准设备质量较差，但当外界发现负责保护总统的人可能正在使用Holosun产品后，这一话题在枪械拥有者群体中迅速升温。\n</p>\n<p>\nHolosun在美国加州设有公司和销售总部，面向执法、军方及民用射击市场销售产品。公司官方宣传强调了自己“总部位于加州”以及“全球制造网络”，但被枪械圈认为与中国关系密切，本质上是中国品牌的国际化包装，产品长期主要在中国生产。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/social/2026/04/30/20260430101555405.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\nHolosun网页强调“加州总部”和“全球制造网络”<span></span> \n</p>\n<p>\n该品牌瞄准镜以多种功能著称，包括太阳能备用供电系统、动作感应启动技术以及多准星模式等，而且价格通常低于美国品牌Trijicon或瑞典品牌Aimpoint。\n</p>\n<p>\n《南华早报》联系了一名位于中国的Holosun品牌经销商，以确认照片中这名特工格洛克手枪上的瞄准镜是否确为Holosun产品。\n</p>\n<p>\n这名要求匿名的经销商表示，第一眼看上去“确实有点像（Holosun产品）”。\n</p>\n<p>\n在查看高清图片后，他补充称：“从外形轮廓来看，它非常像509T（Holosun瞄准镜型号）。”\n</p>\n<p>\n一名社交媒体用户惊呼：“特勤局用的是Holosun？是我眼花了吗？那把美国特勤局格洛克手枪上装的是 Holosun瞄准镜吗？”\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/social/2026/04/30/20260430101639459.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n美国网民评论：特勤局用的是Holosun？是我眼花了吗？<span></span> \n</p>\n<p>\n还有用户说：“我对Holosun没意见，我自己就有好几个。”\n</p>\n<p>\n这条评论很快获得数百个点赞。\n</p>\n<p>\n但他同时表示：“不过我觉得特勤局使用中国电子设备还是有点奇怪。你会以为他们应该配备美国本土产品……”\n</p>\n<p>\n另一名用户回应说：“这几乎说明政府自己并不践行他们宣扬的那一套。”\n</p>\n<p>\n还有评论者表示：“问题已经不再是价格，而是缺乏完整的供应链。一款红点瞄准镜本身就涉及几十家厂商提供的零部件，而设计测试迭代也需要与许多供应商合作。”\n</p>\n<p>\n“在中国做这些事，字面意义上只需要走几步路；而在美国，可能得飞十趟航班。”\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
-      "content": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/30/20260430110339307.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 柳白】\n</p>\n<p>\n上周发生的白宫记者协会晚宴枪击事件现场，一名美国特工持枪戒备的现场照片，引发了美国枪械圈的争论。\n</p>\n<p>\n争议的焦点并非这名特工的行动本身，而是她的格洛克手枪上疑似安装了一款中国制造的Holosun品牌红点瞄准镜。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/social/2026/04/30/20260430101506367.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/social/2026/04/30/20260430101950538.jpg\" title=\"点击查看大图\" /> \n</p>\n<p class=\"content-pic-desc\">\n白宫记者协会晚宴枪击事件现场，美国特工拔枪戒备。有网民将其使用的红点瞄准镜与Holosun产品对比<span>&nbsp;社交媒体</span> \n</p>\n<p>\n香港英文媒体《南华早报》29日注意到，这张照片在社交媒体上传播后，迅速在美国枪械论坛中扩散。画面显示，一名便衣特工在美国总统特朗普被紧急护送离开讲台时拔枪戒备。\n</p>\n<p>\n虽然不少评论者认为该特工属于美国特勤局，但部分美国媒体则称，照片中的团队是美国陆军刑事调查司令部（CID）行政保护局的特别探员。\n</p>\n<p>\n美国射击圈中的一些人过去一直认为中国制造的光学瞄准设备质量较差，但当外界发现负责保护总统的人可能正在使用Holosun产品后，这一话题在枪械拥有者群体中迅速升温。\n</p>\n<p>\nHolosun在美国加州设有公司和销售总部，面向执法、军方及民用射击市场销售产品。公司官方宣传强调了自己“总部位于加州”以及“全球制造网络”，但被枪械圈认为与中国关系密切，本质上是中国品牌的国际化包装，产品长期主要在中国生产。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/social/2026/04/30/20260430101555405.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\nHolosun网页强调“加州总部”和“全球制造网络”<span></span> \n</p>\n<p>\n该品牌瞄准镜以多种功能著称，包括太阳能备用供电系统、动作感应启动技术以及多准星模式等，而且价格通常低于美国品牌Trijicon或瑞典品牌Aimpoint。\n</p>\n<p>\n《南华早报》联系了一名位于中国的Holosun品牌经销商，以确认照片中这名特工格洛克手枪上的瞄准镜是否确为Holosun产品。\n</p>\n<p>\n这名要求匿名的经销商表示，第一眼看上去“确实有点像（Holosun产品）”。\n</p>\n<p>\n在查看高清图片后，他补充称：“从外形轮廓来看，它非常像509T（Holosun瞄准镜型号）。”\n</p>\n<p>\n一名社交媒体用户惊呼：“特勤局用的是Holosun？是我眼花了吗？那把美国特勤局格洛克手枪上装的是 Holosun瞄准镜吗？”\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/social/2026/04/30/20260430101639459.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n美国网民评论：特勤局用的是Holosun？是我眼花了吗？<span></span> \n</p>\n<p>\n还有用户说：“我对Holosun没意见，我自己就有好几个。”\n</p>\n<p>\n这条评论很快获得数百个点赞。\n</p>\n<p>\n但他同时表示：“不过我觉得特勤局使用中国电子设备还是有点奇怪。你会以为他们应该配备美国本土产品……”\n</p>\n<p>\n另一名用户回应说：“这几乎说明政府自己并不践行他们宣扬的那一套。”\n</p>\n<p>\n还有评论者表示：“问题已经不再是价格，而是缺乏完整的供应链。一款红点瞄准镜本身就涉及几十家厂商提供的零部件，而设计测试迭代也需要与许多供应商合作。”\n</p>\n<p>\n“在中国做这些事，字面意义上只需要走几步路；而在美国，可能得飞十趟航班。”\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
-      "matched_keywords": [
-        "供应链"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/guancha/headline?limit=20&filterout_time=259200",
-        "route": "/guancha/headline?limit=20",
-        "entry_id": "https://www.guancha.cn/internation/2026_04_30_815477_s.shtml"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容与美国政治及枪械相关，与屈臣氏电商经营无关，无法服务于屈臣氏电商经营分析。"
-    },
-    {
-      "article_id": "d288f904c4131501",
-      "title": "“下一个要退的是哈萨克斯坦？”",
-      "url": "https://www.guancha.cn/internation/2026_04_29_815417_s.shtml",
-      "source_name": "rsshub_guancha",
-      "source_type": "rsshub",
-      "source_tier": 4,
-      "collector": "rsshub",
-      "published_at": "Wed, 29 Apr 2026 11:04:33 GMT",
-      "collected_at": "2026-04-30T17:58:29.049435+08:00",
-      "time_status": "in_window",
-      "summary": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/29/20260429190617283.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 齐倩】\n</p>\n<p>\n阿联酋<a href=\"https://www.guancha.cn/internation/2026_04_28_815295.shtml\" target=\"_blank\">宣布退出</a>石油输出国组织欧佩克（OPEC），引发全球关注。有分析认为，未来在OPEC和OPEC+组织内，或有其他成员国效仿阿联酋，哈萨克斯坦可能是下一个。\n</p>\n<p>\n据哈萨克斯坦KazTAG通讯社消息，当地时间4月29日，哈萨克斯坦能源部否认上述传闻。\n</p>\n<p>\n报道称，被问及相关问题时，能源部长顾问兼能源部官方发言人阿塞尔·谢里克帕耶娃发表声明称，退出OPEC+目前不在官方议程上，“改变本国参与联盟形式的问题尚未被考虑”。\n</p>\n<p>\n28日，阿联酋宣布将于5月1日退出OPEC，被认为将对OPEC及其主要成员国沙特构成重大打击。\n</p>\n<p>\n据香港《南华早报》29日报道，分析师表示，尽管霍尔木兹海峡这一主要通道持续关闭，可能无法立即缓解油价飙升，但依赖石油进口的亚洲经济体，比如日韩印，仍将从阿联酋退出OPEC中受益。\n</p>\n<p>\n还有学者认为，阿联酋退出，反映出全球石油供应的结构性转变：在各国转向可再生能源之际，石油生产国认为，重中之重应是最大化产量并确保市场份额。OPEC为其成员国设定生产上限和个别配额，阿联酋此前已对配额制度表示不满。\n</p>\n<p>\n<strong>阿联酋退出，将利好亚洲多国？</strong> \n</p>\n<p>\n在阿联酋退出前，OPEC共有11个成员国，包括阿尔及利亚、巴林、埃及、伊拉克、科威特、利比亚、卡塔尔、沙特、叙利亚、阿拉伯联合酋长国、突尼斯。\n</p>\n<p>\nOPEC于1960年由沙特、伊朗、伊拉克、委内瑞拉和科威特创立。成员国合计占全球石油产量的36%，共同控制着全球已探明石油储量的近80%。OPEC为其成员国设定生产上限和个别配额，以管理全球石油供应并影响价格。提高或降低石油产量需要全体成员国一致同意。\n</p>\n<p>\nOPEC+是由OPEC成员国和其他产油国盟友（包括俄罗斯、哈萨克斯坦）组成的更大集团。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/social/2026/04/29/20260429180019365.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n阿联酋的石油生产设施<span> 资料图</span> \n</p>\n<p>\n29日，全球油价继续上涨。基准布伦特原油价格升至每桶111美元，美国西德克萨斯中质原油（WTI）接近每桶100美元。伊朗战争前，布伦特原油交易价格约为每桶70美元，而WTI约为每桶65美元。\n</p>\n<p>\n“霍尔木兹海峡的关闭掩盖了阿联酋退出的即时影响，”睿咨得能源咨询公司（Rystad Energy ）中东高级副总裁阿迪蒂亚·萨拉斯瓦特说，“但一旦海峡重新开放，阿联酋自由增产至每日480万桶，将真正改变全球石油需求的1%到2%。”\n</p>\n<p>\n据介绍，目前，阿联酋在OPEC配额限制下每日生产340万桶。作为全球第六大石油生产国，阿联酋拥有超过1000亿桶探明储量，正计划将产能扩大至每日500万桶。\n</p>\n<p>\n萨拉斯瓦特说：“从长期来看，这对日本、印度和韩国等亚洲进口依赖型经济体来说，这是结构性的好消息。尽管短期内亚洲炼油厂已大幅削减开工，局面依然痛苦。”\n</p>\n<p>\n他表示：“若OPEC开始瓦解，该组织管理价格底线的能力将显著削弱，而亚洲将成为竞争海湾原油的关键战场。”他还警告称，哈萨克斯坦可能成为下一个。\n</p>\n<p>\n哈萨克斯坦作为OPEC+成员长期超额生产，对配额约束的抵触情绪持续积累，与阿联酋此前的处境颇为相似。\n</p>\n<p>\n哈萨克斯坦5月获分配的生产配额为每日160万桶，专家估计其实际产能仅略高于此水平。相比之下，阿联酋受到了更大的约束。据多数市场估计，阿联酋产能在每日470万至480万桶之间，而OPEC规定其5月配额仅约为每日350万桶。\n</p>\n<p>\n报道称，阿联酋的退出暴露了全球最强大石油卡特尔在产量问题上的裂痕。\n</p>\n\n<p>\n随着阿联酋和沙特阿拉伯在地区政治和经济问题上的竞争加剧，分歧已浮出水面。两国是少数拥有大量闲置产能的成员国之一，而闲置产能正是OPEC施加市场影响力和应对供应冲击的机制。\n</p>\n<p>\n<strong>“石油生产国认为，当下应最大化产量”</strong> \n</p>\n<p>\n睿咨得能源咨询公司地缘政治分析主管豪尔赫·莱昂称，最终结果是供应格局更加分散，随着时间的推移，石油市场可能会更加波动，因为OPEC平息失衡的能力正在减弱。\n</p>\n<p>\n莱昂分析认为，随着石油需求接近峰值并开始下降，生产商的激励机制也随之改变。“拥有闲置产能的生产商可能会优先考虑将储备变现和维护市场份额，而不是集体克制。在这种情况下，先行者（阿联酋）的退出策略就显得更有说服力。”\n</p>\n<p>\n石油供应中断之际，亚洲各国正寻求转向更清洁的能源生产，以实现净零排放目标并减少进口。\n</p>\n<p>\n印度智库“印度研究者论坛”战略合作与伙伴关系主任斯里尼瓦桑·巴拉克里希南称，阿联酋的退出不仅仅是一次例行的卡特尔争端或短期石油市场调整，“这标志着美国一个重要伙伴有计划地主张战略自主权，对能源安全、联盟信誉和不断演变的全球经济力量格局有着深远的影响”。\n</p>\n<p>\n他提到，美国总统特朗普此前一直敦促OPEC降低油价，因为油价直接影响到全球通胀；伊拉克和科威特等OPEC成员国也对生产上限感到不满，现在他们将有更强的先例和动力重新评估其成员资格。\n</p>\n<p>\n能源经济与金融分析研究所南亚主任维布蒂·加尔格则分析称，阿联酋的退出，反映了石油生产商对未来石油需求看法的结构性转变。\n</p>\n<p>\n“我们已经看到需求替代的早期迹象，”她说，“在交通部门，电动汽车的快速扩张正开始取代石油消费，而效率提升和可再生能源在电力系统中的份额增加，正在进一步降低若干经济体的石油依赖程度。”\n</p>\n<p>\n她指出：“这不是遥远的风险，而是一个已经在进行且预计会加速的趋势。”\n</p>\n<p>\n加尔格进一步表示，在这一趋势下，对于阿联酋等生产商而言，受OPEC生产配额约束，等于限制了他们充分利用资源的能力。随着可再生能源变得更具竞争力以及石油需求前景减弱，这些产油国的重点正从捍卫价格转向最大化产量。\n</p>\n<p>\n“更高的价格会加速替代，而有竞争力的定价有助于维持需求，”她指出，“随着长期石油需求不确定性上升，在需求仍存在时，这些国家战略优先事项将转向最大化产量并确保市场份额。”\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
-      "content": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/29/20260429190617283.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 齐倩】\n</p>\n<p>\n阿联酋<a href=\"https://www.guancha.cn/internation/2026_04_28_815295.shtml\" target=\"_blank\">宣布退出</a>石油输出国组织欧佩克（OPEC），引发全球关注。有分析认为，未来在OPEC和OPEC+组织内，或有其他成员国效仿阿联酋，哈萨克斯坦可能是下一个。\n</p>\n<p>\n据哈萨克斯坦KazTAG通讯社消息，当地时间4月29日，哈萨克斯坦能源部否认上述传闻。\n</p>\n<p>\n报道称，被问及相关问题时，能源部长顾问兼能源部官方发言人阿塞尔·谢里克帕耶娃发表声明称，退出OPEC+目前不在官方议程上，“改变本国参与联盟形式的问题尚未被考虑”。\n</p>\n<p>\n28日，阿联酋宣布将于5月1日退出OPEC，被认为将对OPEC及其主要成员国沙特构成重大打击。\n</p>\n<p>\n据香港《南华早报》29日报道，分析师表示，尽管霍尔木兹海峡这一主要通道持续关闭，可能无法立即缓解油价飙升，但依赖石油进口的亚洲经济体，比如日韩印，仍将从阿联酋退出OPEC中受益。\n</p>\n<p>\n还有学者认为，阿联酋退出，反映出全球石油供应的结构性转变：在各国转向可再生能源之际，石油生产国认为，重中之重应是最大化产量并确保市场份额。OPEC为其成员国设定生产上限和个别配额，阿联酋此前已对配额制度表示不满。\n</p>\n<p>\n<strong>阿联酋退出，将利好亚洲多国？</strong> \n</p>\n<p>\n在阿联酋退出前，OPEC共有11个成员国，包括阿尔及利亚、巴林、埃及、伊拉克、科威特、利比亚、卡塔尔、沙特、叙利亚、阿拉伯联合酋长国、突尼斯。\n</p>\n<p>\nOPEC于1960年由沙特、伊朗、伊拉克、委内瑞拉和科威特创立。成员国合计占全球石油产量的36%，共同控制着全球已探明石油储量的近80%。OPEC为其成员国设定生产上限和个别配额，以管理全球石油供应并影响价格。提高或降低石油产量需要全体成员国一致同意。\n</p>\n<p>\nOPEC+是由OPEC成员国和其他产油国盟友（包括俄罗斯、哈萨克斯坦）组成的更大集团。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/social/2026/04/29/20260429180019365.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n阿联酋的石油生产设施<span> 资料图</span> \n</p>\n<p>\n29日，全球油价继续上涨。基准布伦特原油价格升至每桶111美元，美国西德克萨斯中质原油（WTI）接近每桶100美元。伊朗战争前，布伦特原油交易价格约为每桶70美元，而WTI约为每桶65美元。\n</p>\n<p>\n“霍尔木兹海峡的关闭掩盖了阿联酋退出的即时影响，”睿咨得能源咨询公司（Rystad Energy ）中东高级副总裁阿迪蒂亚·萨拉斯瓦特说，“但一旦海峡重新开放，阿联酋自由增产至每日480万桶，将真正改变全球石油需求的1%到2%。”\n</p>\n<p>\n据介绍，目前，阿联酋在OPEC配额限制下每日生产340万桶。作为全球第六大石油生产国，阿联酋拥有超过1000亿桶探明储量，正计划将产能扩大至每日500万桶。\n</p>\n<p>\n萨拉斯瓦特说：“从长期来看，这对日本、印度和韩国等亚洲进口依赖型经济体来说，这是结构性的好消息。尽管短期内亚洲炼油厂已大幅削减开工，局面依然痛苦。”\n</p>\n<p>\n他表示：“若OPEC开始瓦解，该组织管理价格底线的能力将显著削弱，而亚洲将成为竞争海湾原油的关键战场。”他还警告称，哈萨克斯坦可能成为下一个。\n</p>\n<p>\n哈萨克斯坦作为OPEC+成员长期超额生产，对配额约束的抵触情绪持续积累，与阿联酋此前的处境颇为相似。\n</p>\n<p>\n哈萨克斯坦5月获分配的生产配额为每日160万桶，专家估计其实际产能仅略高于此水平。相比之下，阿联酋受到了更大的约束。据多数市场估计，阿联酋产能在每日470万至480万桶之间，而OPEC规定其5月配额仅约为每日350万桶。\n</p>\n<p>\n报道称，阿联酋的退出暴露了全球最强大石油卡特尔在产量问题上的裂痕。\n</p>\n\n<p>\n随着阿联酋和沙特阿拉伯在地区政治和经济问题上的竞争加剧，分歧已浮出水面。两国是少数拥有大量闲置产能的成员国之一，而闲置产能正是OPEC施加市场影响力和应对供应冲击的机制。\n</p>\n<p>\n<strong>“石油生产国认为，当下应最大化产量”</strong> \n</p>\n<p>\n睿咨得能源咨询公司地缘政治分析主管豪尔赫·莱昂称，最终结果是供应格局更加分散，随着时间的推移，石油市场可能会更加波动，因为OPEC平息失衡的能力正在减弱。\n</p>\n<p>\n莱昂分析认为，随着石油需求接近峰值并开始下降，生产商的激励机制也随之改变。“拥有闲置产能的生产商可能会优先考虑将储备变现和维护市场份额，而不是集体克制。在这种情况下，先行者（阿联酋）的退出策略就显得更有说服力。”\n</p>\n<p>\n石油供应中断之际，亚洲各国正寻求转向更清洁的能源生产，以实现净零排放目标并减少进口。\n</p>\n<p>\n印度智库“印度研究者论坛”战略合作与伙伴关系主任斯里尼瓦桑·巴拉克里希南称，阿联酋的退出不仅仅是一次例行的卡特尔争端或短期石油市场调整，“这标志着美国一个重要伙伴有计划地主张战略自主权，对能源安全、联盟信誉和不断演变的全球经济力量格局有着深远的影响”。\n</p>\n<p>\n他提到，美国总统特朗普此前一直敦促OPEC降低油价，因为油价直接影响到全球通胀；伊拉克和科威特等OPEC成员国也对生产上限感到不满，现在他们将有更强的先例和动力重新评估其成员资格。\n</p>\n<p>\n能源经济与金融分析研究所南亚主任维布蒂·加尔格则分析称，阿联酋的退出，反映了石油生产商对未来石油需求看法的结构性转变。\n</p>\n<p>\n“我们已经看到需求替代的早期迹象，”她说，“在交通部门，电动汽车的快速扩张正开始取代石油消费，而效率提升和可再生能源在电力系统中的份额增加，正在进一步降低若干经济体的石油依赖程度。”\n</p>\n<p>\n她指出：“这不是遥远的风险，而是一个已经在进行且预计会加速的趋势。”\n</p>\n<p>\n加尔格进一步表示，在这一趋势下，对于阿联酋等生产商而言，受OPEC生产配额约束，等于限制了他们充分利用资源的能力。随着可再生能源变得更具竞争力以及石油需求前景减弱，这些产油国的重点正从捍卫价格转向最大化产量。\n</p>\n<p>\n“更高的价格会加速替代，而有竞争力的定价有助于维持需求，”她指出，“随着长期石油需求不确定性上升，在需求仍存在时，这些国家战略优先事项将转向最大化产量并确保市场份额。”\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
+      "summary": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/29/20260429152602741.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 王一】\n</p>\n<p>\n香港《南华早报》4月29日注意到，在全球能源价格飙升、航空业成本压力加剧之际，中国科研人员公布了一项将温室气体转化为航空燃料的技术，正推动其从实验室走向规模化生产。\n</p>\n<p>\n今年3月，全球航空燃油价格一度飙升至每桶175美元，同比上涨94.4%；4月更是突破200美元大关，较去年同期翻倍上涨。除了成本高涨，不少航空公司还面临“有价无油”的局面，部分航司已被迫削减航班，全球航空运输业面临严峻挑战。\n</p>\n<p>\n而与此同时，中国科学院上海高等研究院公开了一条将二氧化碳转化为航空燃料的工业化路径。\n</p>\n<p>\n相关研究成果于4月15日发表在该领域权威期刊《ACS催化》（ACS Catalysis）上。该研究聚焦于将二氧化碳直接转化为长链化学品，这些化学品可进一步制成航空燃料。整个过程类似“逆向燃烧”：废气与水发生反应，分子重新组合，生成高能量密度的液体燃料。\n</p>\n<p>\n长期以来，这一化学路径面临两大难题：一是碳链难以增长，二是难以高效定向生成高价值的长链产物。\n</p>\n<p>\n为突破瓶颈，研究团队设计了一种经钾和铝共修饰的铁基催化剂。在反应过程中，该催化剂会自然形成一种特殊界面，这一界面显著提升了反应效率，并有助于生成适宜长度的分子结构。\n</p>\n<p>\n实验结果显示，在330摄氏度和中等压力条件下，该催化剂每克每小时可生成453.7毫克的重质烯烃，这一物质是液体燃料的基本组成部分。其中，可直接转化为航空燃料的部分达到252.7毫克。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/official/2026/04/29/20260429150226154.jpg\" /> \n</p>\n<p class=\"content-pic-desc\">\n反应路径示意图<span> 《ACS催化》</span> \n</p>\n<p>\n报道指出，更具产业意义的是，该催化剂在800个小时的连续运行中保持了性能稳定，显示出从实验室走向工业化应用的潜力。\n</p>\n<p>\n中国科学院27日公布消息称，“这一研究为开发具有动态结构演化的铁基催化剂、高效制备高碳烯烃与航煤馏分产物，提供了简便策略”。\n</p>\n<p>\n据《南华早报》报道，中国已开始推进二氧化碳衍生燃料的商业化。该领域的前沿企业费曼动力去年10月与内蒙古自治区政府签署协议，计划建设一个年产3000吨电合成可持续航空燃料的项目。\n</p>\n<p>\n不过，公司创始人、天津大学教授胡适表示，将实验室成果转化为获得认证的航空燃料仍是一场“马拉松”。\n</p>\n<p>\n“航空业需要适航认证来确认安全性和可持续性，而目前航空业并不认可通过二氧化碳加氢路径制得的燃料。”他说。\n</p>\n<p>\n胡适将这一过程比作新药研发，实验室结果积极，也已建成试验生产线，证明可以规模化生产，但一期和二期临床试验尚未完成。但他补充称，费曼动力目前生产的航空燃料已通过相关适航认证。\n</p>\n<p>\n费曼动力采用的是电催化与热催化相结合的工艺：首先利用可再生电力将二氧化碳分解为一氧化碳和氧气，再经已通过考验的费托合成工艺将一氧化碳转化为液态烃类，其中符合航空标准的部分即为航空燃料。\n</p>\n<p>\n胡适认为，从长远看，以电力驱动燃料生产是航空业的最佳解决方案。在他看来，航空领域难以实现电动化，“飞机必须不停歇地飞行，无法在空中充电，而且除非是在小型示范项目中，它们所需的能量远远超过电池所能承受的范围”。\n</p>\n<p>\n“将废弃食用油转化为可持续航空燃料的技术目前已切实可行，但废油的供应从根本上来说是有限的。”胡适说，“我们预计，二氧化碳路径有望在未来十年内实现成本持平，把温室气体从全球性问题转变为稳定的航空燃料来源。”\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
+      "content": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/29/20260429152602741.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 王一】\n</p>\n<p>\n香港《南华早报》4月29日注意到，在全球能源价格飙升、航空业成本压力加剧之际，中国科研人员公布了一项将温室气体转化为航空燃料的技术，正推动其从实验室走向规模化生产。\n</p>\n<p>\n今年3月，全球航空燃油价格一度飙升至每桶175美元，同比上涨94.4%；4月更是突破200美元大关，较去年同期翻倍上涨。除了成本高涨，不少航空公司还面临“有价无油”的局面，部分航司已被迫削减航班，全球航空运输业面临严峻挑战。\n</p>\n<p>\n而与此同时，中国科学院上海高等研究院公开了一条将二氧化碳转化为航空燃料的工业化路径。\n</p>\n<p>\n相关研究成果于4月15日发表在该领域权威期刊《ACS催化》（ACS Catalysis）上。该研究聚焦于将二氧化碳直接转化为长链化学品，这些化学品可进一步制成航空燃料。整个过程类似“逆向燃烧”：废气与水发生反应，分子重新组合，生成高能量密度的液体燃料。\n</p>\n<p>\n长期以来，这一化学路径面临两大难题：一是碳链难以增长，二是难以高效定向生成高价值的长链产物。\n</p>\n<p>\n为突破瓶颈，研究团队设计了一种经钾和铝共修饰的铁基催化剂。在反应过程中，该催化剂会自然形成一种特殊界面，这一界面显著提升了反应效率，并有助于生成适宜长度的分子结构。\n</p>\n<p>\n实验结果显示，在330摄氏度和中等压力条件下，该催化剂每克每小时可生成453.7毫克的重质烯烃，这一物质是液体燃料的基本组成部分。其中，可直接转化为航空燃料的部分达到252.7毫克。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/official/2026/04/29/20260429150226154.jpg\" /> \n</p>\n<p class=\"content-pic-desc\">\n反应路径示意图<span> 《ACS催化》</span> \n</p>\n<p>\n报道指出，更具产业意义的是，该催化剂在800个小时的连续运行中保持了性能稳定，显示出从实验室走向工业化应用的潜力。\n</p>\n<p>\n中国科学院27日公布消息称，“这一研究为开发具有动态结构演化的铁基催化剂、高效制备高碳烯烃与航煤馏分产物，提供了简便策略”。\n</p>\n<p>\n据《南华早报》报道，中国已开始推进二氧化碳衍生燃料的商业化。该领域的前沿企业费曼动力去年10月与内蒙古自治区政府签署协议，计划建设一个年产3000吨电合成可持续航空燃料的项目。\n</p>\n<p>\n不过，公司创始人、天津大学教授胡适表示，将实验室成果转化为获得认证的航空燃料仍是一场“马拉松”。\n</p>\n<p>\n“航空业需要适航认证来确认安全性和可持续性，而目前航空业并不认可通过二氧化碳加氢路径制得的燃料。”他说。\n</p>\n<p>\n胡适将这一过程比作新药研发，实验室结果积极，也已建成试验生产线，证明可以规模化生产，但一期和二期临床试验尚未完成。但他补充称，费曼动力目前生产的航空燃料已通过相关适航认证。\n</p>\n<p>\n费曼动力采用的是电催化与热催化相结合的工艺：首先利用可再生电力将二氧化碳分解为一氧化碳和氧气，再经已通过考验的费托合成工艺将一氧化碳转化为液态烃类，其中符合航空标准的部分即为航空燃料。\n</p>\n<p>\n胡适认为，从长远看，以电力驱动燃料生产是航空业的最佳解决方案。在他看来，航空领域难以实现电动化，“飞机必须不停歇地飞行，无法在空中充电，而且除非是在小型示范项目中，它们所需的能量远远超过电池所能承受的范围”。\n</p>\n<p>\n“将废弃食用油转化为可持续航空燃料的技术目前已切实可行，但废油的供应从根本上来说是有限的。”胡适说，“我们预计，二氧化碳路径有望在未来十年内实现成本持平，把温室气体从全球性问题转变为稳定的航空燃料来源。”\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
       "matched_keywords": [],
       "raw": {
         "feed_url": "http://192.168.2.100:1200/guancha/headline?limit=20&filterout_time=259200",
         "route": "/guancha/headline?limit=20",
-        "entry_id": "https://www.guancha.cn/internation/2026_04_29_815417_s.shtml"
+        "entry_id": "https://www.guancha.cn/internation/2026_04_29_815378_s.shtml"
       },
       "filter": {
         "rule_score": 0,
@@ -2414,7 +1716,7 @@
         "rule_reasons": [
           "+1 命中经营变量: 价格",
           "+2 time_status=in_window",
-          "-3 无关主题: 汽车"
+          "-3 无关主题: 临床试验"
         ],
         "llm_reviewed": false,
         "llm_result": null,
@@ -2422,7 +1724,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容聚焦于国际石油政治动态，与屈臣氏电商经营无直接关联，未涉及任何明确的新增事实事件服务于电商分析。"
+      "reject_reason": "LLM拒绝: 文章内容主要涉及航空燃料技术进展，与屈臣氏电商经营分析无关"
     },
     {
       "article_id": "718a778f61e8a669",
@@ -2459,7 +1761,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章主题为汽车行业动态，与屈臣氏电商经营无直接关联，未包含影响屈臣氏业务的事件信息"
+      "reject_reason": "LLM拒绝: 文章内容主要描述北京车展现象及中美汽车价格对比，未涉及屈臣氏电商经营相关的新增事实或事件。"
     },
     {
       "article_id": "2f8175de90dcc62a",
@@ -2495,7 +1797,7 @@
         "final_reason": "rule=review, score=3, time=in_window→reference"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容聚焦影视创作与历史题材讨论，未涉及屈臣氏电商经营相关的新增事实或业务动态。"
+      "reject_reason": "LLM拒绝: 文章内容聚焦于电视剧创作理念、导演访谈及艺术表达，未涉及屈臣氏电商经营相关的任何事实性事件（如平台规则变动、品牌动作、品类趋势、渠道变化等），无法服务于屈臣氏电商经营分析目标。"
     },
     {
       "article_id": "6c1f1b833cf19297",
@@ -2532,7 +1834,7 @@
         "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容主要涉及国际政治、地缘冲突及泰国外交政策调整，与屈臣氏电商经营无直接关联，未包含任何明确的新增商业事实或可服务于电商分析的事件信息。"
+      "reject_reason": "LLM拒绝: 文章内容聚焦于国际政治、能源供应及泰国外交政策调整，未涉及任何与屈臣氏电商业务相关的新事实或趋势，无法服务于电商经营分析目标。"
     },
     {
       "article_id": "e1a7e7e75c96ce9c",
@@ -2568,7 +1870,7 @@
         "final_reason": "rule=reject但time=near_window→reference(降级保留)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容聚焦于造船业技术进展和市场竞争格局，与屈臣氏电商经营无直接关联，未涉及流量、转化率、客单价等电商核心变量或平台动态。"
+      "reject_reason": "LLM拒绝: 文章内容与中国造船业相关，与屈臣氏电商经营无关"
     },
     {
       "article_id": "de3cc16687a86b7c",
@@ -2607,7 +1909,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章标题和来源表明其内容为宏观经济和行业趋势分析，未提及屈臣氏、即时零售或个护美妆等具体业务信息。",
+          "reason": "文章标题和来源表明其内容为宏观经济和行业趋势分析，未提及屈臣氏、即时零售或个护美妆相关具体信息。",
           "recommended_pool": "reference",
           "confidence": "high",
           "llm_reviewed": true
@@ -2649,7 +1951,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章聚焦2026年线上消费市场机遇，虽未直接提及屈臣氏，但属于影响个护美妆电商经营的宏观趋势分析。",
+          "reason": "文章聚焦2026年线上消费市场整体机遇，虽涉及即时零售趋势但未明确关联屈臣氏或个护美妆具体经营策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -2659,52 +1961,6 @@
       },
       "is_reference": true,
       "reject_reason": "LLM拒绝: 正文为空，未包含任何新增事实信息"
-    },
-    {
-      "article_id": "d11645d29d46bfec",
-      "title": "三十向新，当潮而上！第30届CBE四大焕新，让生意增长更直接",
-      "url": "http://zt.5588.tv/news/2026cbe0512/816259.html",
-      "content": "Apr 20, 2026 — 2026年5月12-14日，CBE中国美容博览会迈入第30届：23万平方米的展览面积，超40个国家及地区3200+化妆品企业，80000+美妆特色产品及新品，121个国家及地区的 ...Read more",
-      "summary": "Apr 20, 2026 — 2026年5月12-14日，CBE中国美容博览会迈入第30届：23万平方米的展览面积，超40个国家及地区3200+化妆品企业，80000+美妆特色产品及新品，121个国家及地区的 ...Read more",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail_today",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-30T17:56:34.723436+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "美妆"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆"
-          ],
-          "business_variables": [],
-          "reason": "文章聚焦CBE中国美容博览会，属于行业展会动态，虽涉及美妆品类但未直接关联屈臣氏即时零售经营或个护美妆业务策略。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容仅为展会背景介绍，未包含对屈臣氏电商经营有直接影响的明确事实事件"
     }
   ]
 }

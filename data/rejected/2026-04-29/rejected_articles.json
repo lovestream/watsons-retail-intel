@@ -3,7 +3,7 @@
     "version": "2.0",
     "date": "2026-04-29",
     "source_file": "/app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json",
-    "created_at": "2026-04-30T15:59:21.032424",
+    "created_at": "2026-04-30T22:51:39.489714",
     "total_raw": 557,
     "total_rejected": 162,
     "reject_reason_distribution": {
@@ -89,7 +89,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章讨论马拉松世界纪录突破，与屈臣氏即时零售×个护美妆经营完全无关。",
+          "reason": "文章讨论马拉松世界纪录，与屈臣氏即时零售×个护美妆经营完全无关。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -134,7 +134,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容聚焦人形机器人赛事及直播风险，未涉及屈臣氏、即时零售或个护美妆业务。",
+          "reason": "文章讨论的是人形机器人参与跑步比赛及被劫持直播的风险，与屈臣氏即时零售×个护美妆经营无直接、间接或背景关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -172,12 +172,12 @@
         ],
         "llm_reviewed": true,
         "llm_result": {
-          "llm_relevance": "low",
+          "llm_relevance": "none",
           "business_relevance_type": "irrelevant",
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容聚焦个人创业心态与行动力，未涉及屈臣氏、即时零售或个护美妆行业相关内容。",
+          "reason": "文章内容聚焦于创业启动心态与行动力，未涉及屈臣氏、即时零售或个护美妆相关话题。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -220,7 +220,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容聚焦世界读书日主题，与屈臣氏即时零售×个护美妆经营无直接关联。",
+          "reason": "文章内容聚焦世界读书日主题，与屈臣氏即时零售及个护美妆业务无直接关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -353,7 +353,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章讨论深圳网约车司机工作制改革，与屈臣氏即时零售×个护美妆经营完全无关。",
+          "reason": "文章内容聚焦网约车司机工作制改革，与屈臣氏即时零售及个护美妆业务无直接或间接关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -396,7 +396,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容聚焦于AI公司Claude账号被封事件，与屈臣氏即时零售及个护美妆业务无任何关联。",
+          "reason": "文章内容聚焦于AI工具Claude的实名事件，与屈臣氏即时零售及个护美妆业务无任何关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -527,7 +527,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容聚焦于史家小学的校园文化和网友回忆，与屈臣氏即时零售或个护美妆业务无任何关联。",
+          "reason": "文章内容聚焦于北京史家胡同小学的社交媒体传播现象，与屈臣氏即时零售或个护美妆业务无任何关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -615,7 +615,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容聚焦网约车司机疲劳驾驶新规，与屈臣氏即时零售及个护美妆业务无任何关联。",
+          "reason": "文章内容聚焦网约车司机疲劳驾驶新规，与屈臣氏即时零售及个护美妆业务无直接或间接关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -701,7 +701,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容聚焦于AI生成图像引发的伦理争议，与屈臣氏即时零售及个护美妆业务无任何关联。",
+          "reason": "文章内容聚焦于AI伦理争议及虚构事件，与屈臣氏即时零售或个护美妆业务无任何关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -744,7 +744,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容聚焦网约车司机收入问题，与屈臣氏即时零售及个护美妆业务无任何关联。",
+          "reason": "文章讨论网约车司机收入问题，与屈臣氏即时零售×个护美妆经营完全无关。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -787,7 +787,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章讨论的是抖音与美团在到店团购领域的竞争，未涉及屈臣氏、即时零售或个护美妆相关内容。",
+          "reason": "文章讨论的是外卖和到店团购市场竞争，未涉及屈臣氏或个护美妆业务。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -831,7 +831,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章讨论的是服务业员工的工作条件问题，与屈臣氏即时零售×个护美妆经营无直接关联。",
+          "reason": "文章讨论的是普通服务业员工的工作条件问题，与屈臣氏即时零售×个护美妆经营无直接或间接关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -921,7 +921,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章主要涉及阿里组织架构调整及阿里云人事变动，虽提及淘宝闪购但未聚焦屈臣氏即时零售或个护美妆业务，与主题无直接关联。",
+          "reason": "文章内容主要涉及阿里组织架构调整及阿里云人事变动，虽提及淘宝闪购但未聚焦屈臣氏即时零售或个护美妆业务，与主题无直接关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -968,9 +968,9 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章主要讨论北京市监管部门约谈平台企业，涉及淘宝闪购等电商渠道，但未提及屈臣氏或个护美妆行业，仅因包含‘闪购’关键词被匹配，实际内容与屈臣氏即时零售×个护美妆经营无直接关联。",
-          "recommended_pool": "reject",
-          "confidence": "high",
+          "reason": "文章主要讨论平台企业竞争监管问题，虽提及淘宝闪购但未涉及屈臣氏或个护美妆业务，仅间接反映即时零售行业政策环境变化。",
+          "recommended_pool": "reference",
+          "confidence": "medium",
           "llm_reviewed": true
         },
         "final_pool": "reject",
@@ -1125,7 +1125,7 @@
             "达人补贴",
             "内容创作激励"
           ],
-          "reason": "文章提及对美妆个护领域达人的补贴政策，虽未直接涉及屈臣氏，但反映了平台在美妆个护内容生态的投入趋势，可能影响消费者行为与品牌曝光。",
+          "reason": "文章提及对美妆个护领域达人的补贴，属于平台级内容生态策略，可能间接影响屈臣氏在即时零售×个护美妆领域的竞争环境。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1174,7 +1174,7 @@
             "个护美妆"
           ],
           "business_variables": [],
-          "reason": "文章聚焦于品牌故事与创业者精神，虽涉及个护领域但未直接关联屈臣氏即时零售经营或具体业务动态。",
+          "reason": "文章聚焦于个护品牌故事，虽未直接提及屈臣氏，但属于个护美妆行业背景内容，可能间接影响消费者偏好或品类趋势。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1299,7 +1299,7 @@
             "美妆企业IPO动态",
             "行业资本热度"
           ],
-          "reason": "文章聚焦2025年美妆企业IPO热潮，虽未直接提及屈臣氏即时零售业务，但涉及美妆行业整体资本动向和竞争格局，间接影响屈臣氏在个护美妆市场的战略环境。",
+          "reason": "文章聚焦2025年美妆企业IPO热潮，虽未直接提及屈臣氏即时零售业务，但反映了美妆行业整体资本动向和竞争格局变化，间接影响屈臣氏在个护美妆市场的战略环境。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1343,7 +1343,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容涉及乌克兰袭击俄罗斯炼油厂，属于地缘政治军事事件，与屈臣氏即时零售×个护美妆经营完全无关。",
+          "reason": "文章内容涉及乌克兰袭击俄罗斯炼油厂，属于国际军事事件，与屈臣氏即时零售×个护美妆经营完全无关。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -1515,7 +1515,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容涉及重庆土地拍卖，属于房地产领域，与屈臣氏即时零售×个护美妆经营无任何关联。",
+          "reason": "文章内容涉及重庆土地拍卖，属于房地产行业，与屈臣氏即时零售×个护美妆经营无直接或间接关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -1558,7 +1558,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容聚焦于国际能源署对电网拥堵和AI基础设施的预测，与屈臣氏即时零售×个护美妆业务无任何关联。",
+          "reason": "文章内容聚焦于国际能源署对电网拥堵和AI基础设施的预测，与屈臣氏即时零售及个护美妆业务无任何关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -1601,7 +1601,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容涉及商业航天发射技术，与屈臣氏即时零售×个护美妆业务无任何关联。",
+          "reason": "文章内容涉及商业航天发射技术，与屈臣氏即时零售×个护美妆经营无任何关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -1646,7 +1646,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容涉及证券分析师合规管理，与屈臣氏即时零售×个护美妆经营无直接或间接关联。",
+          "reason": "文章内容涉及证券分析师评选规范，与屈臣氏即时零售×个护美妆经营无直接或间接关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -1692,7 +1692,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容涉及证券分析师评选规范，与屈臣氏即时零售×个护美妆经营无直接或间接关联。",
+          "reason": "文章内容聚焦证券分析师评选规范，与屈臣氏即时零售及个护美妆业务无直接或间接关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -1735,7 +1735,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容涉及证券内幕交易处罚，与屈臣氏即时零售×个护美妆经营无直接或间接关联。",
+          "reason": "文章内容涉及证券内幕交易案件，与屈臣氏即时零售×个护美妆经营无直接或间接关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -1866,7 +1866,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容涉及Meta公司股价调整，与屈臣氏即时零售×个护美妆业务无直接或间接关联。",
+          "reason": "文章内容涉及Meta公司股价评级调整，与屈臣氏即时零售×个护美妆经营完全无关。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -4758,7 +4758,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容聚焦电力零售市场监管政策，与屈臣氏即时零售×个护美妆业务无直接关联。",
+          "reason": "文章内容聚焦电力零售市场监管政策，与屈臣氏即时零售×个护美妆业务无直接或间接关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -4801,7 +4801,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章聚焦于市场监管政策，未提及屈臣氏或即时零售×个护美妆相关内容。",
+          "reason": "文章主要讨论市场监管政策，未提及屈臣氏或即时零售×个护美妆相关内容。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -5451,7 +5451,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章内容涉及九州通医药集团的董事会决议，与屈臣氏即时零售×个护美妆经营无直接或间接关联。",
+          "reason": "文章内容聚焦九州通医药集团董事会决议，未涉及屈臣氏、即时零售或个护美妆相关议题。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -5818,7 +5818,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章标题和来源虽与美妆零售相关，但内容聚焦于稳健医疗（300888.SZ），未提及屈臣氏或即时零售×个护美妆经营。",
+          "reason": "文章标题为稳健医疗，未提及屈臣氏或即时零售×个护美妆相关内容。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -5862,7 +5862,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章主要讨论中国宏观经济、股市资金热度和政策对经济的影响，未涉及屈臣氏即时零售或个护美妆相关内容。",
+          "reason": "文章内容聚焦中国宏观经济与股市表现，未提及屈臣氏、即时零售或个护美妆相关议题。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true

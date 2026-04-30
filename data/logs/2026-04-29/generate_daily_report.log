@@ -66,3 +66,73 @@
 2026-04-30 15:52:34,680 [WARNING]     ⚠️ 缺少章节: 08 明日追踪清单
 2026-04-30 15:52:34,680 [WARNING]     ⚠️ 低置信度事件可能缺少标注：淘宝闪购日订单突破8000万，非餐饮订单超1300万
 2026-04-30 15:52:34,680 [WARNING]     ⚠️ 低置信度事件可能缺少标注：美团启动闪电仓合作商招募
+2026-04-30 23:02:37,281 [INFO]   ============================================================
+2026-04-30 23:02:37,281 [INFO]   开始生成日报: date=2026-04-29
+2026-04-30 23:02:37,281 [INFO]     events_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json
+2026-04-30 23:02:37,281 [INFO]     output_file: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft.md
+2026-04-30 23:02:37,317 [INFO]   加载 446 条事件
+2026-04-30 23:02:37,335 [INFO]   加载 211 篇参考文章
+2026-04-30 23:02:37,336 [INFO]   使用事件: 170
+2026-04-30 23:02:37,337 [INFO]   P1: 2, P2: 168
+2026-04-30 23:02:37,337 [INFO]   核心信号: 3
+2026-04-30 23:02:37,337 [INFO]   唯一建议动作事件: E20260429_0316 - 2025年即时零售市场规模突破万亿
+2026-04-30 23:02:37,337 [INFO]   Phase 1: 并行生成 V1/V2 规则稿...
+2026-04-30 23:02:37,355 [INFO]   V2 规则稿长度: 约2926字
+2026-04-30 23:02:37,356 [INFO]   V1 规则初稿长度: 约6045字
+2026-04-30 23:02:37,356 [INFO]   模型路由: generate_daily_report 默认=LongCat-Flash-Chat, fallback=['LongCat-Flash-Lite']
+2026-04-30 23:02:37,357 [INFO]   Phase 2: 并行 LLM 润色 V1 + V2...
+2026-04-30 23:02:58,418 [INFO]   V2 LLM 重构使用模型: LongCat-Flash-Chat
+2026-04-30 23:02:58,419 [INFO]   V2 LLM 重构成功
+2026-04-30 23:03:19,102 [INFO]   日报 LLM 润色使用模型: LongCat-Flash-Chat
+2026-04-30 23:03:19,103 [INFO]   V1 LLM 润色成功
+2026-04-30 23:03:19,111 [WARNING]   V1 校验警告 (3):
+2026-04-30 23:03:19,111 [WARNING]     ⚠️ 低置信度事件可能缺少标注：2025年即时零售市场规模突破万亿
+2026-04-30 23:03:19,112 [WARNING]     ⚠️ 低置信度事件可能缺少标注：2025年即时零售市场规模达9714亿元，同比增长24%
+2026-04-30 23:03:19,112 [WARNING]     ⚠️ 低置信度事件可能缺少标注：饿了么正式更名为淘宝闪购
+2026-04-30 23:03:19,112 [WARNING]   V2 校验警告 (10):
+2026-04-30 23:03:19,112 [WARNING]     ⚠️ 缺少章节: 01 今日一句话判断
+2026-04-30 23:03:19,112 [WARNING]     ⚠️ 缺少章节: 02 今日最值得关注的3个信号
+2026-04-30 23:03:19,112 [WARNING]     ⚠️ 缺少章节: 03 平台变化解读
+2026-04-30 23:03:19,112 [WARNING]     ⚠️ 缺少章节: 04 竞对与品牌动作
+2026-04-30 23:03:19,113 [WARNING]     ⚠️ 缺少章节: 05 品类与场景机会
+2026-04-30 23:03:19,113 [WARNING]     ⚠️ 缺少章节: 06 对屈臣氏的经营提示
+2026-04-30 23:03:19,113 [WARNING]     ⚠️ 缺少章节: 07 今日唯一建议动作
+2026-04-30 23:03:19,113 [WARNING]     ⚠️ 缺少章节: 08 明日追踪清单
+2026-04-30 23:03:19,113 [WARNING]     ⚠️ 低置信度事件可能缺少标注：2025年即时零售市场规模突破万亿
+2026-04-30 23:03:19,113 [WARNING]     ⚠️ 低置信度事件可能缺少标注：饿了么正式更名为淘宝闪购
+2026-04-30 23:03:19,114 [INFO]   V1 已写入: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v1.md
+2026-04-30 23:03:19,114 [INFO]   V2 已写入: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v2.md
+2026-04-30 23:03:19,114 [INFO]   兼容稿已写入: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft.md
+2026-04-30 23:03:19,120 [INFO]   {
+  "ok": true,
+  "date": "2026-04-29",
+  "events_file": "/app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json",
+  "reference_file": "/app/working/projects/watsons-retail-intel/data/cleaned/2026-04-29/reference_articles.json",
+  "output_file": "/app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft.md",
+  "v1_file": "/app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v1.md",
+  "v2_file": "/app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v2.md",
+  "log_file": "/app/working/projects/watsons-retail-intel/data/logs/2026-04-29/generate_daily_report.log",
+  "event_count": 446,
+  "used_event_count": 170,
+  "core_signal_count": 3,
+  "unique_action_event_id": "E20260429_0316",
+  "v1_llm_refined": true,
+  "v2_llm_refined": true,
+  "v1_length": 4883,
+  "v2_length": 2232,
+  "v1_chinese_chars": 2488,
+  "v2_chinese_chars": 1161,
+  "v1_validation_passed": true,
+  "v2_validation_passed": false,
+  "validation_passed": true,
+  "validation_warnings": [
+    "低置信度事件可能缺少标注：2025年即时零售市场规模突破万亿",
+    "低置信度事件可能缺少标注：2025年即时零售市场规模达9714亿元，同比增长24%",
+    "低置信度事件可能缺少标注：饿了么正式更名为淘宝闪购"
+  ],
+  "errors": [],
+  "p1_used_count": 2,
+  "p2_used_count": 168,
+  "low_confidence_used_count": 154,
+  "rule_fallback_used_count": 0
+}

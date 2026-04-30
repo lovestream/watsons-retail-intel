@@ -56,3 +56,64 @@
   "final_event_id_count": 15,
   "errors": []
 }
+2026-04-30 23:03:19,128 [INFO]   ============================================================
+2026-04-30 23:03:19,129 [INFO]   开始审稿: date=2026-04-29
+2026-04-30 23:03:19,129 [INFO]     draft_file: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft.md
+2026-04-30 23:03:19,129 [INFO]     events_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json
+2026-04-30 23:03:19,129 [INFO]   加载 V1 初稿: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v1.md (4883 字符)
+2026-04-30 23:03:19,130 [INFO]   检测到 V2 重构稿: /app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v2.md (2232 字符)
+2026-04-30 23:03:19,167 [INFO]   加载初稿: 4883 字符
+2026-04-30 23:03:19,168 [INFO]   加载事件: 446 条
+2026-04-30 23:03:19,168 [INFO]   模型路由: editor_review 默认=LongCat-Flash-Chat, fallback=['LongCat-Flash-Lite']
+2026-04-30 23:03:19,168 [INFO]   Step 1+2: 并行规则校验 + LLM 审稿...
+2026-04-30 23:03:19,264 [INFO]     V1初稿发现 3 个问题
+2026-04-30 23:03:22,055 [WARNING]   LLM 审稿返回为空
+2026-04-30 23:03:22,056 [WARNING]   默认模型审稿失败，尝试 fallback...
+2026-04-30 23:03:22,057 [INFO]     Fallback 模型: LongCat-Flash-Lite
+2026-04-30 23:03:24,885 [WARNING]   LLM 审稿返回为空
+2026-04-30 23:03:24,886 [INFO]     [medium] low_confidence_strong_claim: 低置信度事件 E20260429_0151 缺少'⚠️待验证'标记
+2026-04-30 23:03:24,886 [INFO]     [medium] low_confidence_strong_claim: 低置信度事件 E20260429_0164 缺少'⚠️待验证'标记
+2026-04-30 23:03:24,887 [INFO]     [medium] low_confidence_strong_claim: 低置信度事件 E20260429_0197 缺少'⚠️待验证'标记
+2026-04-30 23:03:24,887 [INFO]   Step 3: 终稿校验...
+2026-04-30 23:03:24,891 [WARNING]   终稿校验问题 (2): 高=0, 中=2, 低=0
+2026-04-30 23:03:24,891 [WARNING]     [medium] low_confidence_strong_claim: 低置信度事件 E20260429_0164 缺少'⚠️待验证'标记
+2026-04-30 23:03:24,891 [WARNING]     [medium] low_confidence_strong_claim: 低置信度事件 E20260429_0197 缺少'⚠️待验证'标记
+2026-04-30 23:03:24,891 [INFO]   审稿结论: sendable=True, validation_passed=True, final_high=0, final_medium=2, final_low=0
+2026-04-30 23:03:24,907 [INFO]   终稿已写入: /app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-29.md
+2026-04-30 23:03:24,909 [INFO]   审稿报告已写入: /app/working/projects/watsons-retail-intel/data/reviews/2026-04-29/editor_review.md
+2026-04-30 23:03:24,909 [INFO]   {
+  "ok": true,
+  "date": "2026-04-29",
+  "draft_file": "/app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v1.md",
+  "draft_v1_file": "/app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v1.md",
+  "draft_v2_file": "/app/working/projects/watsons-retail-intel/data/drafts/2026-04-29/daily_report_draft_v2.md",
+  "dual_mode": true,
+  "events_file": "/app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json",
+  "review_file": "/app/working/projects/watsons-retail-intel/data/reviews/2026-04-29/editor_review.md",
+  "final_file": "/app/working/projects/watsons-retail-intel/reports/daily/2026/04/2026-04-29.md",
+  "log_file": "/app/working/projects/watsons-retail-intel/data/logs/2026-04-29/editor_review.log",
+  "validation_passed": true,
+  "draft_issue_count": 3,
+  "draft_high_severity_count": 0,
+  "draft_medium_severity_count": 3,
+  "draft_low_severity_count": 0,
+  "v2_issue_count": 0,
+  "v2_high_severity_count": 0,
+  "compare_issue_count": 0,
+  "final_issue_count": 2,
+  "final_high_severity_count": 0,
+  "final_medium_severity_count": 2,
+  "final_low_severity_count": 0,
+  "fixed_issue_count": 0,
+  "sendable": true,
+  "model_used": "rule_compress",
+  "fallback_used": false,
+  "draft_length": 4883,
+  "v1_length": 4883,
+  "v2_length": 2232,
+  "final_length": 4883,
+  "final_char_count": 4145,
+  "final_chinese_char_count": 2488,
+  "final_event_id_count": 21,
+  "errors": []
+}

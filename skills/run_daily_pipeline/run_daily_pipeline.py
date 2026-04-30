@@ -1516,9 +1516,8 @@ def run_daily_pipeline(
     # 只有 send_email=True 时才运行，默认 disabled
     se_step_in_main = any(s["name"] == "send_daily_report_email" for s in step_results)
 
-    # email_sent: 如果主循环已运行过邮件步骤，则保留主循环结果；否则初始化为 False
-    if not se_step_in_main:
-        email_sent = False
+    # email_sent: 始终初始化，再从主循环结果覆盖
+    email_sent = False
 
     if send_email and not se_step_in_main:
         se_step = {

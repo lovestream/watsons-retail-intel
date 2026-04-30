@@ -3,7 +3,7 @@
     "version": "2.0",
     "date": "2026-04-29",
     "source_file": "/app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json",
-    "created_at": "2026-04-30T15:59:21.032414",
+    "created_at": "2026-04-30T22:51:39.489705",
     "total_raw": 557,
     "total_reference": 211
   },
@@ -155,9 +155,11 @@
           ],
           "business_variables": [
             "穆斯林市场",
-            "美妆产品适应性"
+            "清真认证",
+            "口红",
+            "底妆产品"
           ],
-          "reason": "文章讨论穆斯林市场对美妆个护产品的需求，属于特定区域市场的消费趋势分析，间接影响屈臣氏在东南亚等穆斯林人口密集地区的经营策略。",
+          "reason": "文章讨论穆斯林市场对美妆个护产品的需求及清真认证趋势，虽未直接涉及屈臣氏即时零售，但属于个护美妆品类的重要区域市场动态。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -207,11 +209,10 @@
             "国货品牌"
           ],
           "business_variables": [
-            "国货崛起",
-            "个护市场竞争格局",
-            "平替产品趋势"
+            "国货个护品牌崛起",
+            "市场竞争格局变化"
           ],
-          "reason": "文章讨论徕芬作为国货个护品牌的崛起路径，涉及个护市场格局变化和国货创新动力，间接影响屈臣氏在即时零售×个护美妆领域的竞争策略。",
+          "reason": "文章讨论徕芬作为国货个护品牌的成功路径，属于行业趋势分析，间接影响屈臣氏在个护美妆市场的竞争策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -259,7 +260,7 @@
             "美妆个护"
           ],
           "business_variables": [],
-          "reason": "文章提及美妆个护为招募重点品类，虽未直接涉及屈臣氏即时零售业务，但反映平台对美妆个护品类的重视，间接影响行业趋势。",
+          "reason": "文章提及美妆个护为招募重点品类，虽未直接涉及屈臣氏即时零售业务，但反映平台对美妆个护品类的重视趋势，间接影响行业格局。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -306,7 +307,7 @@
             "美容个护"
           ],
           "business_variables": [],
-          "reason": "文章提及美容个护赛道趋势，属于行业背景信息，间接影响屈臣氏经营策略。",
+          "reason": "文章聚焦美容个护赛道趋势，虽未直接提及屈臣氏，但属于其核心业务领域，提供品类发展背景信息。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -352,14 +353,13 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "美妆个护",
-            "新品趋势"
+            "美妆个护"
           ],
           "business_variables": [
-            "新品备案数量",
-            "国际美妆集团动态"
+            "新品发布趋势",
+            "国际美妆集团策略"
           ],
-          "reason": "文章讨论国际美妆集团在中国的新品备案下滑，属于行业趋势变化，间接影响屈臣氏在即时零售×个护美妆领域的竞争环境。",
+          "reason": "文章讨论国际美妆集团在中国的新品备案下滑，间接影响屈臣氏等渠道的供应链和选品策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -455,14 +455,14 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "个护美妆"
+            "美妆",
+            "个护"
           ],
           "business_variables": [
-            "销售额",
-            "市场销量",
-            "有机销售额"
+            "销售额下滑",
+            "市场趋势"
           ],
-          "reason": "文章讨论宝洁旗下SK-II及整体个护产品在大中华区的销售下滑，属于竞对动态和品类趋势，间接影响屈臣氏经营判断。",
+          "reason": "文章讨论宝洁旗下SK-II及整体个护美妆品类销售下滑，属于竞对动态与行业趋势，间接影响屈臣氏经营策略。",
           "recommended_pool": "reference",
           "confidence": "high",
           "llm_reviewed": true
@@ -511,10 +511,10 @@
             "美妆个护"
           ],
           "business_variables": [
-            "跨境电商政策",
-            "品类准入标准"
+            "跨境电商合规",
+            "中东市场准入"
           ],
-          "reason": "文章讨论中东电商市场的美妆个护合规问题，虽未直接涉及屈臣氏，但为跨境美妆个护经营提供背景参考。",
+          "reason": "文章讨论中东电商市场机会，涉及美妆个护品类合规要求，虽未直接提及屈臣氏，但对其出海战略有间接参考价值。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -558,13 +558,14 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "个护美妆"
+            "个护美妆",
+            "社交媒体营销"
           ],
           "business_variables": [
-            "内容营销",
-            "KOL合作"
+            "内容营销策略",
+            "KOL合作模式"
           ],
-          "reason": "文章讨论了个护美妆品牌的小红书运营策略，涉及KOL选择和内容植入方式，虽未直接提及屈臣氏，但属于即时零售×个护美妆领域的间接经营参考。",
+          "reason": "文章讨论了个护美妆品牌的社交媒体运营策略，虽未直接提及屈臣氏，但涉及行业通用的营销方法，对屈臣氏即时零售×个护美妆经营有间接参考价值。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -611,10 +612,10 @@
             "个护美妆"
           ],
           "business_variables": [
-            "品牌形象",
-            "消费者信任"
+            "品牌营销趋势",
+            "消费者审美偏好"
           ],
-          "reason": "文章讨论多芬（联合利华旗下个护品牌）拒绝使用AI生成女性图像的广告策略，属于个护美妆行业趋势，间接影响屈臣氏在品牌形象和消费者信任方面的经营考量。",
+          "reason": "文章讨论多芬在广告中拒绝使用AI生成女性形象，属于个护美妆品牌的营销伦理决策，虽不直接涉及屈臣氏即时零售业务，但反映了行业对真实性与消费者信任的关注，间接影响品牌形象和消费趋势。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -670,9 +671,9 @@
             "小众赛道扩张",
             "护肤刚需品类需求"
           ],
-          "reason": "文章聚焦美妆个护品类趋势，特别是香水和面霜的增长动态，虽未直接提及屈臣氏，但属于其核心经营品类，影响其选品与库存策略。",
+          "reason": "文章聚焦美妆个护品类趋势，特别是香水和面霜的增长数据，直接影响屈臣氏即时零售×个护美妆的经营策略制定。",
           "recommended_pool": "reference",
-          "confidence": "medium",
+          "confidence": "high",
           "llm_reviewed": true
         },
         "final_pool": "reference",
@@ -715,7 +716,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章主题为日本老人护理生态，与屈臣氏即时零售×个护美妆经营无直接关联。",
+          "reason": "文章主题为日本老人护理生态，虽含‘个护’关键词但内容与屈臣氏即时零售×个护美妆经营无实质关联。",
           "recommended_pool": "reject",
           "confidence": "high",
           "llm_reviewed": true
@@ -769,7 +770,7 @@
             "618大促销售表现",
             "国货品牌增长趋势"
           ],
-          "reason": "文章聚焦618期间美妆个护赛道销售数据及国货品牌表现，虽未直接提及屈臣氏，但反映了即时零售×个护美妆市场的整体热度与竞争格局，对屈臣氏经营策略有间接参考价值。",
+          "reason": "文章聚焦618期间美妆个护赛道销售数据及国货品牌表现，虽未直接提及屈臣氏，但反映了即时零售×个护美妆行业的整体趋势和消费者行为变化，对屈臣氏经营具有间接参考价值。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1267,14 +1268,14 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "美妆产业链",
-            "上游供应链"
+            "美妆"
           ],
           "business_variables": [
-            "美妆品牌合作模式",
-            "供应链稳定性"
+            "上游供应链",
+            "品牌合作模式",
+            "行业监管政策"
           ],
-          "reason": "文章讨论中外美妆产业链上游秩序重构，虽涉及美妆行业但聚焦于品牌与供应商关系，未直接关联屈臣氏即时零售或个护美妆经营。",
+          "reason": "文章讨论中外美妆产业链上游秩序重构，涉及品牌与供应商关系，可能间接影响屈臣氏等零售商的采购策略和供应链稳定性。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1324,7 +1325,7 @@
             "竞对股价波动",
             "创始人股权变动"
           ],
-          "reason": "文章涉及珀莱雅联合创始人股份被冻结，属于美妆行业重大事件，可能影响投资者信心及行业格局，间接影响屈臣氏在个护美妆市场的竞争环境。",
+          "reason": "文章涉及珀莱雅创始人股份被冻结，属于美妆行业重大事件，可能影响投资者情绪和市场竞争格局，间接影响屈臣氏在个护美妆市场的经营环境。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1368,14 +1369,10 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "美妆品牌营销",
-            "明星代言"
+            "美妆"
           ],
-          "business_variables": [
-            "代言人策略",
-            "品牌形象风险"
-          ],
-          "reason": "文章讨论美妆品牌选择代言人及公众人物税务问题，虽涉及美妆行业但聚焦于营销与合规风险，间接影响屈臣氏等品牌的代言人决策与声誉管理。",
+          "business_variables": [],
+          "reason": "文章讨论美妆品牌代言人选择与税务问题，属于美妆行业背景信息，间接影响屈臣氏的品牌营销策略和消费者信任度。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1426,7 +1423,7 @@
             "品牌出海策略",
             "内容营销渠道"
           ],
-          "reason": "文章讨论美妆品牌通过综艺平台出海，虽未直接涉及屈臣氏即时零售业务，但反映了美妆行业营销趋势变化，可能间接影响屈臣氏在个护美妆市场的竞争环境。",
+          "reason": "文章讨论美妆品牌通过综艺节目进行海外推广，属于个护美妆行业的营销趋势，间接影响屈臣氏在出海或内容合作方面的战略考量。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1472,10 +1469,13 @@
           "related_categories": [
             "美妆"
           ],
-          "business_variables": [],
-          "reason": "文章讨论雅诗兰黛的业绩复苏策略，属于美妆行业头部品牌动态，间接影响屈臣氏在个护美妆市场的竞争环境。",
+          "business_variables": [
+            "品牌业绩",
+            "美妆行业趋势"
+          ],
+          "reason": "文章聚焦雅诗兰黛的业绩复苏策略，属于美妆行业头部品牌的经营动态，对屈臣氏所在的美妆个护市场竞争格局有间接参考价值。",
           "recommended_pool": "reference",
-          "confidence": "medium",
+          "confidence": "high",
           "llm_reviewed": true
         },
         "final_pool": "reference",
@@ -1518,14 +1518,14 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "美妆品牌代言",
-            "个护美妆市场"
+            "美妆",
+            "个护"
           ],
           "business_variables": [
             "品牌代言人策略",
-            "GMV增长"
+            "GMV转化效果"
           ],
-          "reason": "文章讨论美妆品牌代言人策略及其对销售的影响，属于个护美妆行业趋势，间接影响屈臣氏的品牌营销和市场竞争策略。",
+          "reason": "文章讨论美妆品牌代言人策略及其对销售的影响，属于个护美妆行业趋势，间接影响屈臣氏的品牌营销与品类经营逻辑。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1572,10 +1572,10 @@
             "美妆行业并购"
           ],
           "business_variables": [
-            "竞对战略动态",
-            "美妆集团整合趋势"
+            "竞争格局",
+            "品牌集中度"
           ],
-          "reason": "文章讨论雅诗兰黛与Puig的并购谈判，属于美妆行业重大资本运作，虽不直接涉及屈臣氏即时零售业务，但可能影响市场竞争格局和供应链策略。",
+          "reason": "文章讨论雅诗兰黛与Puig的并购动态，属于美妆行业重大资本运作，可能影响市场竞争格局和品牌策略，间接影响屈臣氏在个护美妆领域的经营环境。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1620,13 +1620,15 @@
           "related_channels": [],
           "related_categories": [
             "美妆营销",
-            "MCN机构"
+            "MCN机构",
+            "内容创作"
           ],
           "business_variables": [
-            "品牌营销效率",
-            "内容创作同质化"
+            "美妆品牌营销策略",
+            "KOL/博主影响力",
+            "内容同质化风险"
           ],
-          "reason": "文章聚焦美妆行业营销乱象及博主维权，虽未直接提及屈臣氏，但涉及美妆品牌与MCN合作模式，可能影响屈臣氏在即时零售×个护美妆领域的营销策略和供应链合作。",
+          "reason": "文章聚焦美妆行业营销乱象及博主控诉，虽未直接提及屈臣氏，但涉及美妆品牌与MCN合作模式，可能间接影响屈臣氏在即时零售×个护美妆领域的竞争策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1678,9 +1680,9 @@
             "市场份额",
             "品类趋势"
           ],
-          "reason": "文章讨论国货美妆市场表现及趋势，虽未直接涉及屈臣氏即时零售业务，但作为个护美妆行业的重要品类动态，可能间接影响屈臣氏经营策略。",
+          "reason": "文章讨论国货美妆市场表现及份额变化，属于行业趋势分析，间接影响屈臣氏个护美妆经营策略。",
           "recommended_pool": "reference",
-          "confidence": "medium",
+          "confidence": "high",
           "llm_reviewed": true
         },
         "final_pool": "reference",
@@ -1722,13 +1724,16 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "美妆"
+            "美妆",
+            "内容营销",
+            "全球市场"
           ],
           "business_variables": [
-            "内容营销",
-            "全球市场拓展"
+            "社交媒体影响",
+            "品牌出海策略",
+            "消费者行为变化"
           ],
-          "reason": "文章聚焦YouTube美妆生态与中国品牌全球化，虽涉及美妆行业趋势，但未直接关联屈臣氏即时零售或个护美妆经营。",
+          "reason": "文章聚焦YouTube美妆生态与中国品牌全球化，虽未直接涉及屈臣氏即时零售业务，但揭示了美妆品牌在数字内容平台上的战略机遇，可能间接影响屈臣氏在个护美妆领域的竞争格局与营销策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1776,9 +1781,9 @@
           ],
           "business_variables": [
             "消费者行为变化",
-            "零售体验升级"
+            "零售模式转型"
           ],
-          "reason": "文章讨论美妆行业从算法驱动回归“人感时代”的趋势，虽未直接提及屈臣氏即时零售业务，但涉及个护美妆消费体验变革，可能间接影响其经营策略。",
+          "reason": "文章讨论美妆行业回归‘人感时代’的趋势，虽未直接提及屈臣氏，但涉及个护美妆消费体验升级，可能间接影响其即时零售策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1825,9 +1830,9 @@
             "美妆"
           ],
           "business_variables": [],
-          "reason": "文章讨论的是美妆品牌代言合作周期过短的现象，属于个护美妆行业动态，但未涉及屈臣氏即时零售业务或相关经营策略。",
+          "reason": "文章讨论美妆品牌代言合作周期，属于个护美妆行业动态，可能间接影响屈臣氏的品牌策略或消费者偏好。",
           "recommended_pool": "reference",
-          "confidence": "high",
+          "confidence": "medium",
           "llm_reviewed": true
         },
         "final_pool": "reference",
@@ -1869,14 +1874,13 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "美妆品牌案例",
-            "创始人IP风险"
+            "美妆"
           ],
           "business_variables": [
-            "品牌可持续性",
-            "IP依赖风险"
+            "品牌风险",
+            "创始人IP驱动型品牌"
           ],
-          "reason": "文章分析Pat McGrath Labs和Jeffree Star等创始人IP驱动型美妆品牌的破产风险，虽不直接涉及屈臣氏即时零售业务，但为个护美妆行业趋势提供背景参考。",
+          "reason": "文章讨论美妆品牌创始人IP模式的风险，虽涉及美妆行业趋势，但未直接关联屈臣氏即时零售或个护美妆经营。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1924,8 +1928,12 @@
             "美妆",
             "护肤"
           ],
-          "business_variables": [],
-          "reason": "文章讨论OTC渠道对美妆品牌的价值，虽未直接提及屈臣氏，但涉及即时零售场景和功效护肤趋势，可能间接影响屈臣氏即时零售×个护美妆的经营策略。",
+          "business_variables": [
+            "渠道拓展",
+            "OTC渠道",
+            "功效护肤"
+          ],
+          "reason": "文章讨论美妆品牌进入OTC渠道的趋势，虽未直接提及屈臣氏，但涉及即时零售相关的渠道策略和功效护肤品类，对屈臣氏经营有间接影响。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1972,7 +1980,7 @@
             "美妆"
           ],
           "business_variables": [],
-          "reason": "文章讨论美妆行业趋势和焦虑制造问题，虽未直接涉及屈臣氏即时零售业务，但属于个护美妆行业背景信息，可能间接影响消费者行为和市场环境。",
+          "reason": "文章讨论美妆行业趋势和消费者焦虑，属于个护美妆品类背景分析，间接影响屈臣氏经营策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -2016,13 +2024,14 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "美妆"
+            "美妆营销",
+            "艺人代言"
           ],
           "business_variables": [
-            "代言人营销效果",
-            "限量礼盒销售策略"
+            "品牌营销效果",
+            "消费者转化"
           ],
-          "reason": "文章讨论耽美类艺人代言对美妆品牌转化的影响，属于美妆行业营销策略范畴，虽不直接涉及屈臣氏即时零售业务，但反映了当前美妆品牌的营销趋势，可能间接影响屈臣氏在个护美妆领域的竞争策略。",
+          "reason": "文章讨论美妆品牌通过耽美类艺人代言实现高转化率，属于美妆行业营销趋势，间接影响屈臣氏等零售商的营销策略制定。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -2071,9 +2080,9 @@
           ],
           "business_variables": [
             "美妆品牌增长",
-            "创业者跨界影响"
+            "跨界创业趋势"
           ],
-          "reason": "文章提及投行女性转行做美妆年入十亿，属于个护美妆行业的创业成功案例，间接反映行业高增长潜力，可能影响屈臣氏在即时零售中的品牌招商与品类策略。",
+          "reason": "文章提及投行女性转行做美妆年入十亿，属于美妆行业成功案例，间接反映个护美妆市场潜力，但未涉及屈臣氏即时零售具体经营。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -2121,10 +2130,10 @@
             "外资并购"
           ],
           "business_variables": [
-            "美妆包装供应商整合",
-            "外资进入中国市场"
+            "供应链稳定性",
+            "行业竞争格局"
           ],
-          "reason": "文章涉及美妆行业供应链层面的外资收购，虽不直接关联屈臣氏即时零售业务，但反映了美妆行业资本动态和供应链格局变化，可能间接影响竞争环境。",
+          "reason": "文章涉及美妆行业上游包装供应商被外资收购，虽不直接关联屈臣氏即时零售业务，但可能影响供应链成本与竞争环境。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -6371,11 +6380,11 @@
         "llm_reviewed": true,
         "llm_result": {
           "llm_relevance": "low",
-          "business_relevance_type": "background",
+          "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章聚焦于互联网平台价格监管政策，未提及屈臣氏或个护美妆行业具体动态。",
+          "reason": "文章聚焦互联网平台价格监管政策，虽可能间接影响电商平台运营环境，但未直接涉及屈臣氏即时零售或个护美妆业务。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -6411,11 +6420,11 @@
         "llm_reviewed": true,
         "llm_result": {
           "llm_relevance": "low",
-          "business_relevance_type": "indirect",
+          "business_relevance_type": "background",
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章讨论的是互联网平台价格行为规则，属于宏观监管政策，虽可能间接影响屈臣氏等平台的定价策略，但未直接涉及即时零售或个护美妆业务。",
+          "reason": "文章讨论的是互联网平台价格行为规则，属于宏观监管政策，虽可能间接影响零售行业，但未直接涉及屈臣氏即时零售或个护美妆业务。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -6460,13 +6469,13 @@
             "法规政策",
             "进口化妆品备案"
           ],
-          "reason": "文章涉及中国化妆品法规动态及进口普通化妆品备案问题，属于个护美妆行业监管范畴，可能间接影响屈臣氏等企业的合规经营。",
+          "reason": "文章涉及中国化妆品法规动态及进口普通化妆品备案问题，属于个护美妆行业监管范畴，间接影响屈臣氏等企业的合规经营。",
           "recommended_pool": "reference",
-          "confidence": "medium",
+          "confidence": "high",
           "llm_reviewed": true
         },
         "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
+        "final_reason": "LLM推荐reference (confidence=high)"
       }
     },
     {
@@ -6504,15 +6513,13 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "美妆",
-            "个护"
+            "美妆"
           ],
           "business_variables": [
-            "产品合规",
-            "新原料备案",
-            "牙膏分类"
+            "政策法规",
+            "产品准入"
           ],
-          "reason": "文章涉及化妆品和牙膏的新规政策，直接影响个护美妆行业的产品注册与上市，间接影响屈臣氏等零售商的供应链和产品策略。",
+          "reason": "文章讨论2026年即将实施的新规对美妆产品的影响，属于行业政策变化，间接影响屈臣氏即时零售×个护美妆的经营环境。",
           "recommended_pool": "reference",
           "confidence": "high",
           "llm_reviewed": true
@@ -6555,10 +6562,10 @@
             "品牌运营"
           ],
           "business_variables": [
-            "存量竞争格局",
-            "零售商转型"
+            "竞争格局",
+            "转型策略"
           ],
-          "reason": "文章讨论美妆零售商的转型趋势，虽未直接提及屈臣氏或即时零售，但涉及行业整体发展方向，对屈臣氏经营有间接参考价值。",
+          "reason": "文章讨论美妆零售商在存量竞争下的转型趋势，虽未直接提及屈臣氏或即时零售，但涉及行业整体战略调整，间接影响屈臣氏经营环境。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -6607,7 +6614,7 @@
             "竞对促销动态",
             "美妆品类趋势"
           ],
-          "reason": "文章聚焦丝芙兰春季大促，属于个护美妆行业竞对活动，虽非屈臣氏直接经营内容，但反映美妆零售市场促销趋势和消费者关注点。",
+          "reason": "文章聚焦丝芙兰春季大促，属于个护美妆行业竞对活动，虽非屈臣氏直接经营内容，但反映行业促销趋势和消费者关注点，间接影响屈臣氏即时零售策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -6653,7 +6660,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章标题和来源表明其内容为宏观经济和行业趋势分析，未提及屈臣氏或即时零售×个护美妆相关内容。",
+          "reason": "文章标题和来源表明其内容为宏观经济和行业趋势分析，未提及屈臣氏、即时零售或个护美妆相关具体信息。",
           "recommended_pool": "reference",
           "confidence": "high",
           "llm_reviewed": true
@@ -6697,9 +6704,9 @@
           ],
           "business_variables": [
             "竞品动态",
-            "商业模式"
+            "渠道策略"
           ],
-          "reason": "文章分析了完美日记与花西子的商业模式差异，属于个护美妆行业竞对分析，间接影响屈臣氏在即时零售×个护美妆领域的竞争策略。",
+          "reason": "文章分析完美日记与花西子的渠道模式差异，属于个护美妆行业竞对策略，间接影响屈臣氏即时零售战略参考。",
           "recommended_pool": "reference",
           "confidence": "high",
           "llm_reviewed": true
@@ -6743,8 +6750,11 @@
           "related_categories": [
             "彩妆"
           ],
-          "business_variables": [],
-          "reason": "文章聚焦国货彩妆品牌在抖音渠道的销售表现，属于个护美妆品类趋势，间接影响屈臣氏在即时零售×个护美妆领域的竞争环境。",
+          "business_variables": [
+            "国货彩妆品牌崛起",
+            "抖音渠道销售表现"
+          ],
+          "reason": "文章聚焦国货彩妆品牌在抖音的销售增长，虽未直接提及屈臣氏，但反映了即时零售×个护美妆中彩妆品类的竞争格局变化，间接影响屈臣氏经营策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -6786,13 +6796,14 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "美妆"
+            "美妆",
+            "国货"
           ],
           "business_variables": [
-            "国货美妆品牌表现",
-            "美妆行业营收对比"
+            "品牌竞争格局",
+            "消费者偏好变化"
           ],
-          "reason": "文章讨论国货美妆品牌（如毛戈平、完美日记）的营收表现，属于美妆行业趋势分析，间接影响屈臣氏个护美妆品类经营策略。",
+          "reason": "文章讨论国货美妆品牌（如毛戈平、完美日记）的市场表现，属于行业趋势分析，间接影响屈臣氏在个护美妆品类的选品与竞争策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -6839,11 +6850,8 @@
             "美妆",
             "彩妆"
           ],
-          "business_variables": [
-            "国货品牌崛起",
-            "消费者偏好变化"
-          ],
-          "reason": "文章聚焦国产美妆出海及国货彩妆趋势，虽未直接提及屈臣氏，但反映了即时零售×个护美妆中品类竞争格局的变化，间接影响屈臣氏的选品与经营策略。",
+          "business_variables": [],
+          "reason": "文章聚焦国产美妆出海及国货彩妆趋势，虽未直接提及屈臣氏，但涉及个护美妆品类动态，可能间接影响屈臣氏在即时零售市场的竞争策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -6890,11 +6898,8 @@
           "related_categories": [
             "彩妆"
           ],
-          "business_variables": [
-            "直播",
-            "大促"
-          ],
-          "reason": "文章聚焦花西子通过直播实现618大促领先，反映国货美妆在直播电商的成功模式，间接影响屈臣氏在即时零售×个护美妆领域的竞争策略。",
+          "business_variables": [],
+          "reason": "文章聚焦花西子直播与国货美妆表现，虽涉及个护美妆品类和直播渠道，但未直接关联屈臣氏即时零售业务或电商经营策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -6937,11 +6942,9 @@
           "llm_relevance": "medium",
           "business_relevance_type": "indirect",
           "related_channels": [],
-          "related_categories": [
-            "个护美妆"
-          ],
+          "related_categories": [],
           "business_variables": [],
-          "reason": "文章讨论天猫618大促中个护美妆品牌的表现，虽未直接提及屈臣氏，但涉及竞对动态和平台促销趋势，间接影响屈臣氏经营策略。",
+          "reason": "文章聚焦天猫618大促中完美日记、花西子等美妆品牌的表现，属于个护美妆行业电商促销动态，虽未直接提及屈臣氏，但反映了美妆品牌在主流电商平台的销售趋势，对屈臣氏即时零售×个护美妆经营有间接参考价值。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -6985,11 +6988,10 @@
             "美妆"
           ],
           "business_variables": [
-            "美妆市场增长",
-            "本土品牌表现",
-            "进口美妆趋势"
+            "品类增长趋势",
+            "市场复苏信号"
           ],
-          "reason": "文章讨论中国美妆市场整体复苏及本土品牌增长，属于行业趋势分析，间接影响屈臣氏即时零售×个护美妆的经营策略。",
+          "reason": "文章聚焦中国美妆市场整体复苏及本土品牌增长，属于行业趋势性信息，间接影响屈臣氏即时零售×个护美妆的经营策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -7040,7 +7042,7 @@
             "洗护"
           ],
           "business_variables": [],
-          "reason": "文章聚焦国货美妆展会趋势，虽未直接提及屈臣氏，但涉及个护美妆品类动态，可能间接影响其经营策略。",
+          "reason": "文章聚焦国货美妆展会趋势，虽未直接提及屈臣氏即时零售业务，但涉及个护美妆核心品类及国货品牌动态，可能间接影响屈臣氏经营策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -7090,7 +7092,7 @@
             "美妆"
           ],
           "business_variables": [],
-          "reason": "报告聚焦中国日化美妆行业整体趋势，虽提及美妆但未涉及屈臣氏即时零售具体经营或个护美妆业务模式。",
+          "reason": "报告聚焦中国日化美妆行业整体趋势，虽涉及美妆品类但未直接讨论屈臣氏即时零售业务或电商经营。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -7130,7 +7132,7 @@
           "related_channels": [],
           "related_categories": [],
           "business_variables": [],
-          "reason": "文章聚焦线上消费市场整体机遇，虽未直接提及屈臣氏，但可能影响其即时零售与个护美妆业务策略。",
+          "reason": "文章聚焦2026年线上消费市场整体机遇，虽涉及即时零售趋势但未明确关联屈臣氏或个护美妆具体经营策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -7224,7 +7226,7 @@
             "个护美妆"
           ],
           "business_variables": [],
-          "reason": "文章讨论丝芙兰大促及Ouai香水产品，属于竞对促销活动，间接影响屈臣氏经营策略。",
+          "reason": "文章讨论丝芙兰大促及Ouai香水产品，属于竞对促销活动，间接影响屈臣氏个护美妆品类经营策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -7268,7 +7270,7 @@
             "美妆"
           ],
           "business_variables": [],
-          "reason": "文章聚焦CBE中国美容博览会，属于行业展会动态，虽涉及美妆品类趋势，但未直接关联屈臣氏即时零售或个护美妆经营策略。",
+          "reason": "文章聚焦CBE中国美容博览会，属于行业展会动态，虽涉及美妆品类但未直接关联屈臣氏即时零售业务或经营策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -7314,7 +7316,7 @@
             "渠道红利",
             "品牌竞争格局"
           ],
-          "reason": "文章讨论薇诺娜在药妆和药店渠道的红利消退，涉及个护美妆品类趋势及渠道动态，间接影响屈臣氏经营策略。",
+          "reason": "文章讨论薇诺娜在药妆和药店渠道的红利变化，属于个护美妆行业趋势及竞对动态，间接影响屈臣氏经营策略。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -7360,7 +7362,7 @@
             "国货"
           ],
           "business_variables": [],
-          "reason": "文章讨论国货美妆品牌贝泰妮的渠道扩张和业绩表现，属于个护美妆行业动态，间接影响屈臣氏在美妆品类的竞争格局。",
+          "reason": "文章讨论贝泰妮在OTC药房和专柜渠道的扩张，属于国货美妆品牌动态，间接影响屈臣氏作为零售终端的竞争环境。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -7404,7 +7406,7 @@
             "美妆"
           ],
           "business_variables": [],
-          "reason": "文章讨论欧莱雅AI战略及市场地位，属于美妆行业动态，间接影响屈臣氏个护美妆经营环境。",
+          "reason": "文章讨论欧莱雅AI战略及市场地位，属于美妆行业动态，间接影响屈臣氏在个护美妆领域的竞争环境。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true

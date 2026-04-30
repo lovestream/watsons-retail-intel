@@ -1,28 +1,95 @@
 {
-  "generate_podcast": {
-    "status": "warning",
-    "duration_seconds": 18.745743989944458,
+  "collect": {
+    "status": "skipped",
+    "duration_seconds": 0,
     "stats": {
-      "script_length": 1106,
+      "raw_count": 557
+    }
+  },
+  "filter": {
+    "status": "skipped",
+    "duration_seconds": 0,
+    "stats": {
+      "cleaned_count": 184,
+      "reference_count": 211,
+      "rejected_count": 162
+    }
+  },
+  "source_health_report": {
+    "status": "skipped",
+    "duration_seconds": 0,
+    "stats": {}
+  },
+  "tavily_gap_search": {
+    "status": "skipped",
+    "duration_seconds": 0,
+    "stats": {}
+  },
+  "filter_merged": {
+    "status": "skipped",
+    "duration_seconds": 0,
+    "stats": {
+      "cleaned_count": 184,
+      "reference_count": 211,
+      "rejected_count": 162
+    }
+  },
+  "extract": {
+    "status": "skipped",
+    "duration_seconds": 0,
+    "stats": {
+      "event_count": 446
+    }
+  },
+  "score": {
+    "status": "skipped",
+    "duration_seconds": 0,
+    "stats": {
+      "scored_count": 446,
+      "p0_count": 0,
+      "p1_count": 2,
+      "p2_count": 168,
+      "archive_count": 276
+    }
+  },
+  "analyze": {
+    "status": "skipped",
+    "duration_seconds": 0,
+    "stats": {
+      "analyzed_count": 446
+    }
+  },
+  "generate_report": {
+    "status": "skipped",
+    "duration_seconds": 0,
+    "stats": {
+      "event_id_count": 29
+    }
+  },
+  "editor_review": {
+    "status": "skipped",
+    "duration_seconds": 0,
+    "stats": {
+      "event_id_count": 21,
+      "sendable": true
+    }
+  },
+  "generate_podcast": {
+    "status": "skipped",
+    "duration_seconds": 0,
+    "stats": {
+      "script_length": 1216,
       "audio_exists": true,
       "audio_size_bytes": 1632672,
       "is_no_signal": false,
       "llm_used": true,
-      "tts_success": true,
+      "tts_success": false,
       "voice": "zh-CN-XiaoxiaoNeural"
     }
   },
   "send_daily_report_email": {
-    "status": "success",
-    "duration_seconds": 3.7915921211242676,
-    "stats": {
-      "sendable": true,
-      "sent": true,
-      "dry_run": false,
-      "html_length": 10115,
-      "markdown_attachment": true,
-      "podcast_attachment": true,
-      "script_attachment": false
-    }
+    "status": "skipped",
+    "duration_seconds": 0,
+    "stats": {}
   }
 }

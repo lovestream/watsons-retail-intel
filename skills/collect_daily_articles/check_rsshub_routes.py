@@ -1,490 +1,398 @@
 #!/usr/bin/env python3
-"""
-check_rsshub_routes.py — RSSHub 路由健康检查
-
-读取 config/sources.yaml 中 rsshub_sources，
-逐条请求 RSS，统计条目数、标题数、URL数、pubDate数等健康指标，
-输出 JSON 和 Markdown 摘要。
-
-用法:
-    python check_rsshub_routes.py \
-        --project-root /app/working/projects/watsons-retail-intel \
-        --date 2026-04-26
-
-输出:
-    data/logs/rsshub_health/YYYY-MM-DD.json
-    data/logs/rsshub_health/YYYY-MM-DD.md
+"""RSSHub 路由健康检查脚本
+按 RSSHub 采集配置指引 V2 第 5 节实现。
+输出: data/logs/rsshub_health/YYYY-MM-DD.json + .md
 """
 
-import argparse
-import json
-import logging
-import os
-import sys
-import time as time_mod
-from datetime import datetime, timedelta
+import argparse, json, logging, os, sys, time
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from typing import Dict, List, Optional
-from urllib.parse import urlparse
+from typing import Any, Dict, List, Optional, Tuple
+from urllib.parse import urljoin, quote
 
-# ===================== 依赖检查 =====================
-_MISSING = []
-try:
-    import yaml
-except ImportError:
-    _MISSING.append("PyYAML")
+import xml.etree.ElementTree as ET
 
-try:
-    import requests
-except ImportError:
-    _MISSING.append("requests")
+CST = timezone(timedelta(hours=8))
 
-try:
-    import feedparser
-except ImportError:
-    _MISSING.append("feedparser")
-
-try:
-    from dateutil import parser as dateutil_parser
-    from dateutil import tz as dateutil_tz
-except ImportError:
-    _MISSING.append("python-dateutil")
-
-if _MISSING:
-    print(f"ERROR: 缺少必要依赖: {', '.join(_MISSING)}\n"
-          f"请运行: pip install {' '.join(_MISSING)}", file=sys.stderr)
-    sys.exit(1)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+log = logging.getLogger("rsshub_health")
 
 
-CST = dateutil_tz.gettz("Asia/Shanghai")
-DEFAULT_RSSHUB_BASE = "http://192.168.2.100:1200"
-DEFAULT_TIMEOUT = 20
-USER_AGENT = "WatsonRetailIntelBot/0.2-HealthCheck"
+def load_yaml(path: str) -> dict:
+    try:
+        import yaml
+        with open(path, "r", encoding="utf-8") as f:
+            return yaml.safe_load(f) or {}
+    except ImportError:
+        log.error("需要 PyYAML: pip install pyyaml")
+        sys.exit(1)
 
 
-def load_yaml(filepath: str) -> dict:
-    p = Path(filepath)
-    if not p.exists():
-        raise FileNotFoundError(f"配置文件不存在: {filepath}")
-    with open(p, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
+def parse_rss_date(date_str: str) -> Optional[datetime]:
+    """解析 RSS pubDate，兼容 GMT/UTC 时区。"""
+    if not date_str:
+        return None
+    # Python strptime %z 不认 GMT，先替换
+    normalized = date_str.strip()
+    normalized = normalized.replace(" GMT", " +0000").replace(" UT", " +0000")
+    for fmt in [
+        "%a, %d %b %Y %H:%M:%S %z",
+        "%Y-%m-%dT%H:%M:%S%z",
+        "%Y-%m-%dT%H:%M:%SZ",
+        "%Y-%m-%dT%H:%M:%S.%f%z",
+        "%Y-%m-%dT%H:%M:%S.%fZ",
+    ]:
+        try:
+            return datetime.strptime(normalized, fmt)
+        except (ValueError, OverflowError):
+            continue
+    return None
 
 
-def get_rsshub_base(source_config: dict, rsshub_base_arg: Optional[str] = None) -> str:
-    if rsshub_base_arg:
-        return rsshub_base_arg.rstrip("/")
-    env_val = os.environ.get("RSSHUB_BASE_URL")
-    if env_val:
-        return env_val.rstrip("/")
-    config_val = source_config.get("rsshub_base")
-    if config_val:
-        return str(config_val).rstrip("/")
-    return DEFAULT_RSSHUB_BASE
-
-
-def classify_grade(ok, item_count, items_with_url, old_ratio):
-    """分级：
-    A类：ok=true 且 item_count>=5 且 items_with_url>=5 且 old_item_ratio<=0.8
-    B类：ok=true 但 item_count<5
-    C类：ok=true 但 old_item_ratio>0.8
-    D类：失败或超时
+def parse_rss_items(xml_text: str) -> Tuple[int, int, int, int, Optional[str], List[str]]:
+    """解析 RSS XML，返回统计信息。
+    Returns:
+        (item_count, items_with_title, items_with_url, items_with_pubdate,
+         latest_pubdate, pubdate_list)
     """
+    try:
+        root = ET.fromstring(xml_text)
+        # RSSHub 可能返回 RSS 2.0 或 Atom
+        ns = {"atom": "http://www.w3.org/2005/Atom"}
+        items = root.findall(".//item")
+        if not items:
+            items = root.findall(".//atom:entry", ns)
+
+        item_count = len(items)
+        with_title = 0
+        with_url = 0
+        with_pub = 0
+        pubdates = []
+        latest = None
+
+        for item in items:
+            title = item.findtext("title")
+            if title:
+                with_title += 1
+
+            link = item.findtext("link") or item.findtext("atom:link", namespaces=ns)
+            if not link:
+                link_el = item.find("link")
+                if link_el is not None:
+                    link = link_el.text or link_el.get("href", "")
+            if link:
+                with_url += 1
+
+            pub_el = item.findtext("pubDate") or item.findtext("published") or item.findtext("updated")
+            if pub_el:
+                with_pub += 1
+                pubdates.append(pub_el)
+                dt = parse_rss_date(pub_el)
+                if dt and (latest is None or dt > latest):
+                    latest = dt
+
+        latest_str = latest.isoformat() if latest else None
+        return item_count, with_title, with_url, with_pub, latest_str, pubdates
+
+    except ET.ParseError as e:
+        log.warning(f"XML 解析失败: {e}")
+        return 0, 0, 0, 0, None, []
+
+
+def compute_ratios(
+    pubdates: List[str], window_start: datetime, window_end: datetime
+) -> Tuple[float, float]:
+    """计算 old_item_ratio 和 unknown_time_ratio。"""
+    total = len(pubdates)
+    if total == 0:
+        return 1.0, 1.0  # 全部视为旧+未知
+
+    old_count = 0
+    unknown_count = 0
+    for pd_str in pubdates:
+        parsed = parse_rss_date(pd_str)
+        if parsed is None:
+            unknown_count += 1
+            continue
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=CST)
+        if parsed < window_start - timedelta(hours=12):
+            old_count += 1
+
+    return old_count / total, unknown_count / total
+
+
+def classify_grade(
+    ok: bool,
+    item_count: int,
+    items_with_url: int,
+    old_item_ratio: float,
+) -> str:
+    """A/B/C/D 分级。"""
     if not ok:
         return "D"
-    if item_count < 5 or items_with_url < 5:
+    if item_count >= 5 and items_with_url >= 5 and old_item_ratio <= 0.8:
+        return "A"
+    if item_count < 5:
         return "B"
-    if old_ratio > 0.8:
+    if old_item_ratio > 0.8:
         return "C"
-    return "A"
+    return "A"  # fallback
 
 
 def check_single_route(
-    route_id: str,
-    route_name: str,
-    full_url: str,
-    timeout: int = DEFAULT_TIMEOUT,
-    window_hours: int = 24,
+    source: dict,
+    rsshub_base: str,
+    window_start: datetime,
+    window_end: datetime,
+    timeout: int = 15,
 ) -> dict:
-    """检查单条 RSSHub 路由的健康状态。"""
+    """检查单条 RSSHub 路由。"""
+    route = source.get("route", "")
+    source_id = source.get("id", "unknown")
+    source_name = source.get("name", source_id)
+
+    full_url = urljoin(rsshub_base, route.lstrip("/"))
+    if "?" in route and not ("?" in full_url.split(rsshub_base)[-1] if rsshub_base in full_url else False):
+        # urljoin may drop query params, handle manually
+        base = rsshub_base.rstrip("/")
+        full_url = f"{base}{route}" if route.startswith("/") else f"{base}/{route}"
+
+    # Percent-encode Chinese characters in path
+    from urllib.parse import urlparse, urlunparse, quote
+    parsed = urlparse(full_url)
+    encoded_path = quote(parsed.path, safe="/%")
+    encoded_query = parsed.query  # query is already encoded or safe
+    full_url = urlunparse((parsed.scheme, parsed.netloc, encoded_path, parsed.params, encoded_query, parsed.fragment))
+
     result = {
-        "id": route_id,
-        "name": route_name,
+        "id": source_id,
+        "name": source_name,
         "url": full_url,
         "ok": False,
-        "status_code": None,
+        "status_code": 0,
         "item_count": 0,
         "items_with_title": 0,
         "items_with_url": 0,
         "items_with_pubdate": 0,
         "latest_pubdate": None,
-        "old_item_ratio": 0.0,
-        "unknown_time_ratio": 0.0,
-        "recent_24h_count": 0,
+        "old_item_ratio": 1.0,
+        "unknown_time_ratio": 1.0,
         "latency_ms": 0,
         "grade": "D",
         "error": None,
     }
 
-    session = requests.Session()
-    session.headers.update({
-        "User-Agent": USER_AGENT,
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    })
-
-    start_ts = time_mod.time()
     try:
-        resp = session.get(full_url, timeout=timeout, allow_redirects=True)
-        result["latency_ms"] = int((time_mod.time() - start_ts) * 1000)
-        result["status_code"] = resp.status_code
+        import urllib.request
+        import urllib.error
 
-        if resp.status_code >= 400:
-            result["error"] = f"HTTP {resp.status_code}"
+        start = time.time()
+        req = urllib.request.Request(full_url, headers={"User-Agent": "QwenPaw-RSSHub-HealthCheck/1.0"})
+        resp = urllib.request.urlopen(req, timeout=timeout)
+        latency_ms = round((time.time() - start) * 1000)
+
+        result["status_code"] = resp.status
+        result["latency_ms"] = latency_ms
+
+        if resp.status != 200:
+            result["error"] = f"HTTP {resp.status}"
             return result
 
-    except requests.exceptions.Timeout:
-        result["latency_ms"] = int((time_mod.time() - start_ts) * 1000)
-        result["error"] = f"Timeout after {timeout}s"
-        return result
+        xml_text = resp.read().decode("utf-8", errors="replace")
+
+        item_count, with_title, with_url, with_pub, latest, pubdates = parse_rss_items(xml_text)
+
+        old_ratio, unk_ratio = compute_ratios(pubdates, window_start, window_end)
+
+        result["ok"] = True
+        result["item_count"] = item_count
+        result["items_with_title"] = with_title
+        result["items_with_url"] = with_url
+        result["items_with_pubdate"] = with_pub
+        result["latest_pubdate"] = latest
+        result["old_item_ratio"] = round(old_ratio, 3)
+        result["unknown_time_ratio"] = round(unk_ratio, 3)
+        result["grade"] = classify_grade(True, item_count, with_url, old_ratio)
+
+    except urllib.error.URLError as e:
+        result["error"] = f"连接失败: {e.reason}"
     except Exception as e:
-        result["latency_ms"] = int((time_mod.time() - start_ts) * 1000)
-        result["error"] = str(e)
-        return result
-
-    # 解析 RSS
-    try:
-        feed = feedparser.parse(resp.text)
-    except Exception as e:
-        result["error"] = f"Feed parse error: {e}"
-        return result
-
-    # 检查 feed 是否有错误
-    if hasattr(feed, "bozo_exception") and feed.bozo_exception:
-        bozo_err = str(feed.bozo_exception)
-        # 不因为 bozo 就判定失败，某些 RSS 有小问题但仍可用
-        result["error"] = f"bozo: {bozo_err[:200]}"
-        # 继续处理
-
-    entries = feed.entries
-    item_count = len(entries)
-    result["item_count"] = item_count
-
-    if item_count == 0:
-        result["ok"] = True  # HTTP 200 但无条目
-        result["grade"] = classify_grade(True, 0, 0, 0.0)
-        return result
-
-    items_with_title = 0
-    items_with_url = 0
-    items_with_pubdate = 0
-    old_count = 0
-    unknown_time_count = 0
-    recent_24h_count = 0
-    latest_dt = None
-
-    now = datetime.now(CST)
-    cutoff_old = now - timedelta(hours=window_hours * 3)  # old = 超过72小时
-    cutoff_24h = now - timedelta(hours=24)
-
-    for entry in entries:
-        title = entry.get("title", "").strip()
-        link = entry.get("link", "").strip()
-        pub_date_str = entry.get("published", entry.get("updated", ""))
-
-        if title:
-            items_with_title += 1
-        if link:
-            items_with_url += 1
-
-        if pub_date_str:
-            items_with_pubdate += 1
-            try:
-                dt = dateutil_parser.parse(pub_date_str)
-                if dt.tzinfo is None:
-                    dt = dt.replace(tzinfo=CST)
-
-                if latest_dt is None or dt > latest_dt:
-                    latest_dt = dt
-
-                if dt >= cutoff_24h:
-                    recent_24h_count += 1
-                if dt < cutoff_old:
-                    old_count += 1
-            except (ValueError, TypeError, OverflowError):
-                unknown_time_count += 1
-        else:
-            unknown_time_count += 1
-
-    result["ok"] = True
-    result["items_with_title"] = items_with_title
-    result["items_with_url"] = items_with_url
-    result["items_with_pubdate"] = items_with_pubdate
-    result["latest_pubdate"] = latest_dt.isoformat() if latest_dt else None
-    result["old_item_ratio"] = round(old_count / max(item_count, 1), 4)
-    result["unknown_time_ratio"] = round(unknown_time_count / max(item_count, 1), 4)
-    result["recent_24h_count"] = recent_24h_count
-
-    result["grade"] = classify_grade(
-        result["ok"],
-        result["item_count"],
-        result["items_with_url"],
-        result["old_item_ratio"],
-    )
+        result["error"] = str(e)[:200]
 
     return result
 
 
-def check_rsshub_routes(
+def run_health_check(
     project_root: str,
-    date: Optional[str] = None,
-    rsshub_base: Optional[str] = None,
-    sources_file: str = "config/sources.yaml",
-    timeout: int = DEFAULT_TIMEOUT,
-    interval_seconds: float = 0.5,
+    date: str,
+    sources_path: str = "config/sources.yaml",
 ) -> dict:
-    """执行所有 RSSHub 路由的健康检查。"""
-    if not date:
-        date = datetime.now(CST).strftime("%Y-%m-%d")
-
-    sources_path = os.path.join(project_root, sources_file)
-    config = load_yaml(sources_path)
-
-    resolved_base = get_rsshub_base(config, rsshub_base)
+    """运行全部路由健康检查。"""
+    config = load_yaml(os.path.join(project_root, sources_path))
+    rsshub_base = config.get("rsshub_base", "http://192.168.2.100:1200")
+    defaults = config.get("defaults", {})
+    timeout = defaults.get("timeout_seconds", 20)
     rsshub_sources = config.get("rsshub_sources", [])
 
-    enabled_routes = [s for s in rsshub_sources if s.get("enabled", True)]
+    # 时间窗口
+    try:
+        report_date = datetime.strptime(date, "%Y-%m-%d").replace(tzinfo=CST)
+    except ValueError:
+        report_date = datetime.now(CST)
 
-    print(f"RSSHub 健康检查: date={date}")
-    print(f"RSSHub 基础地址: {resolved_base}")
-    print(f"启用路由数: {len(enabled_routes)}")
-    print("=" * 70)
+    window_start = report_date - timedelta(days=1)
+    window_start = window_start.replace(hour=7, minute=0, second=0, microsecond=0)
+    window_end = report_date.replace(hour=7, minute=0, second=0, microsecond=0)
 
-    results: List[dict] = []
+    log.info(f"健康检查: {len(rsshub_sources)} 条路由, 窗口: {window_start.isoformat()} ~ {window_end.isoformat()}")
 
-    for i, source in enumerate(enabled_routes):
-        route_id = source.get("id", f"unknown_{i}")
-        route_name = source.get("name", route_id)
-        route = source.get("route", "")
-
-        if not route:
-            # 处理 routes 列表
-            routes = source.get("routes", [])
-            if routes:
-                for sub_route in routes:
-                    full_url = f"{resolved_base}{sub_route}"
-                    print(f"  [{i+1}/{len(enabled_routes)}] {route_id} (sub-route: {sub_route})...", end=" ", flush=True)
-                    result = check_single_route(f"{route_id}_{sub_route.replace('/', '_')}", route_name, full_url, timeout)
-                    results.append(result)
-                    print(f"{'✅' if result['ok'] else '❌'} Grade={result['grade']} Items={result['item_count']}")
-            else:
-                result = {
-                    "id": route_id, "name": route_name, "url": "",
-                    "ok": False, "status_code": None, "item_count": 0,
-                    "items_with_title": 0, "items_with_url": 0,
-                    "items_with_pubdate": 0, "latest_pubdate": None,
-                    "old_item_ratio": 0.0, "unknown_time_ratio": 0.0,
-                    "recent_24h_count": 0, "latency_ms": 0,
-                    "grade": "D", "error": "no route defined",
-                }
-                results.append(result)
-                print(f"  [{i+1}/{len(enabled_routes)}] {route_id} — 无路由配置 ❌")
+    results = []
+    for i, src in enumerate(rsshub_sources):
+        if not src.get("enabled", True):
             continue
+        log.info(f"[{i+1}/{len(rsshub_sources)}] 检查: {src.get('name', src.get('id', '?'))}")
+        r = check_single_route(src, rsshub_base, window_start, window_end, timeout)
+        results.append(r)
+        # 友好间隔
+        time.sleep(0.3)
 
-        full_url = f"{resolved_base}{route}"
-        print(f"  [{i+1}/{len(enabled_routes)}] {route_id}: {route_name}...", end=" ", flush=True)
-
-        result = check_single_route(route_id, route_name, full_url, timeout)
-        results.append(result)
-        print(f"{'✅' if result['ok'] else '❌'} Grade={result['grade']} Items={result['item_count']} Latency={result['latency_ms']}ms")
-
-        # 请求间隔
-        if i < len(enabled_routes) - 1:
-            time_mod.sleep(interval_seconds)
-
-    # ---- 统计汇总 ----
-    grade_counts = {"A": 0, "B": 0, "C": 0, "D": 0}
-    failed_routes: List[dict] = []
-    recent_24h_sorted: List[dict] = []
-
+    # 统计
+    grades = {"A": 0, "B": 0, "C": 0, "D": 0}
     for r in results:
-        grade = r.get("grade", "D")
-        grade_counts[grade] = grade_counts.get(grade, 0) + 1
-        if not r.get("ok"):
-            failed_routes.append(r)
-        if r.get("recent_24h_count", 0) > 0:
-            recent_24h_sorted.append(r)
+        grades[r["grade"]] += 1
 
-    recent_24h_sorted.sort(key=lambda x: x.get("recent_24h_count", 0), reverse=True)
-    top_10 = recent_24h_sorted[:10]
+    top10 = sorted(
+        [r for r in results if r["ok"] and r["items_with_pubdate"] > 0],
+        key=lambda r: r["latest_pubdate"] or "",
+        reverse=True,
+    )[:10]
 
-    # 建议禁用：D 类
-    suggest_disable = [r for r in results if r.get("grade") == "D"]
-    # 建议保留：A + B 类
-    suggest_keep = [r for r in results if r.get("grade") in ("A", "B")]
+    failed = [r for r in results if r["grade"] == "D"]
+    suggest_disable = [r for r in results if r["grade"] in ("D",)]
+    # C类搜索源：旧文比高，建议降级
+    suggest_keep = [r for r in results if r["grade"] in ("A", "B")]
 
     summary = {
         "date": date,
-        "rsshub_base": resolved_base,
-        "total_routes": len(results),
-        "grade_counts": grade_counts,
-        "failed_routes": [
-            {"id": r["id"], "name": r.get("name", ""), "error": r.get("error", "")}
-            for r in failed_routes
+        "rsshub_base": rsshub_base,
+        "checked_at": datetime.now(CST).isoformat(),
+        "total_routes": len(rsshub_sources),
+        "checked": len(results),
+        "grades": grades,
+        "top10_latest": [
+            {
+                "id": r["id"],
+                "name": r["name"],
+                "latest_pubdate": r["latest_pubdate"],
+                "item_count": r["item_count"],
+                "old_item_ratio": r["old_item_ratio"],
+                "grade": r["grade"],
+            }
+            for r in top10
         ],
-        "top_10_by_recent_24h": [
-            {"id": r["id"], "name": r.get("name", ""), "recent_24h_count": r.get("recent_24h_count", 0),
-             "item_count": r.get("item_count", 0), "grade": r.get("grade", "")}
-            for r in top_10
-        ],
-        "suggest_disable": [
-            {"id": r["id"], "name": r.get("name", ""), "error": r.get("error", "")}
-            for r in suggest_disable
-        ],
-        "suggest_keep": [
-            {"id": r["id"], "name": r.get("name", ""), "grade": r.get("grade", ""),
-             "item_count": r.get("item_count", 0)}
-            for r in suggest_keep
-        ],
+        "failed_routes": [{"id": r["id"], "name": r["name"], "error": r["error"]} for r in failed],
+        "suggest_disable": [r["id"] for r in suggest_disable],
+        "suggest_keep": [r["id"] for r in suggest_keep],
         "routes": results,
     }
-
-    # ---- 保存 JSON ----
-    output_dir = os.path.join(project_root, "data", "logs", "rsshub_health")
-    os.makedirs(output_dir, exist_ok=True)
-
-    json_path = os.path.join(output_dir, f"{date}.json")
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(summary, f, ensure_ascii=False, indent=2)
-
-    # ---- 生成 Markdown 报告 ----
-    md_lines = []
-    md_lines.append(f"# RSSHub 路由健康检查报告 — {date}\n")
-    md_lines.append(f"**RSSHub 基础地址**: `{resolved_base}`\n")
-    md_lines.append(f"**检查路由数**: {len(results)}\n")
-
-    md_lines.append("## 分级汇总\n")
-    md_lines.append("| 分级 | 数量 | 说明 |")
-    md_lines.append("|------|------|------|")
-    md_lines.append(f"| A类 | {grade_counts.get('A', 0)} | 可稳定使用 |")
-    md_lines.append(f"| B类 | {grade_counts.get('B', 0)} | 可用但产出少 |")
-    md_lines.append(f"| C类 | {grade_counts.get('C', 0)} | 旧文比例高，仅作参考 |")
-    md_lines.append(f"| D类 | {grade_counts.get('D', 0)} | 失败或超时 |\n")
-
-    md_lines.append("## 失败路由列表\n")
-    if failed_routes:
-        md_lines.append("| ID | 名称 | 错误 |")
-        md_lines.append("|-----|------|------|")
-        for r in failed_routes:
-            md_lines.append(f"| {r['id']} | {r.get('name', '')} | {r.get('error', 'N/A')[:80]} |")
-    else:
-        md_lines.append("✅ 无失败路由")
-    md_lines.append("")
-
-    md_lines.append("## 近24小时有效条目最多的前10个源\n")
-    md_lines.append("| ID | 名称 | 24h条目 | 总条目 | 分级 |")
-    md_lines.append("|-----|------|---------|--------|------|")
-    for r in top_10:
-        md_lines.append(
-            f"| {r['id']} | {r.get('name', '')} "
-            f"| {r.get('recent_24h_count', 0)} | {r.get('item_count', 0)} "
-            f"| {r.get('grade', '')} |"
-        )
-    md_lines.append("")
-
-    md_lines.append("## 建议禁用的源\n")
-    if suggest_disable:
-        md_lines.append("| ID | 名称 | 错误 |")
-        md_lines.append("|-----|------|------|")
-        for r in suggest_disable:
-            md_lines.append(f"| {r['id']} | {r.get('name', '')} | {r.get('error', 'N/A')[:80]} |")
-    else:
-        md_lines.append("✅ 无建议禁用的源")
-    md_lines.append("")
-
-    md_lines.append("## 建议保留的源（A/B类）\n")
-    md_lines.append("| ID | 名称 | 分级 | 条目数 |")
-    md_lines.append("|-----|------|------|--------|")
-    for r in suggest_keep:
-        md_lines.append(f"| {r['id']} | {r.get('name', '')} | {r.get('grade', '')} | {r.get('item_count', 0)} |")
-    md_lines.append("")
-
-    md_lines.append("## 全部路由详情\n")
-    md_lines.append("| ID | 名称 | 分级 | OK | 条目 | 有标题 | 有URL | 有日期 | 24h | 旧文率 | 延迟ms | 错误 |")
-    md_lines.append("|-----|------|------|-----|------|--------|-------|--------|-----|--------|--------|------|")
-    for r in results:
-        ok_text = "✅" if r.get("ok") else "❌"
-        error_text = (r.get("error") or "")[:40]
-        md_lines.append(
-            f"| {r['id']} | {r.get('name', '')} | {r.get('grade', '')} "
-            f"| {ok_text} | {r.get('item_count', 0)} | {r.get('items_with_title', 0)} "
-            f"| {r.get('items_with_url', 0)} | {r.get('items_with_pubdate', 0)} "
-            f"| {r.get('recent_24h_count', 0)} | {r.get('old_item_ratio', 0):.1%} "
-            f"| {r.get('latency_ms', 0)} | {error_text} |"
-        )
-
-    md_content = "\n".join(md_lines)
-
-    md_path = os.path.join(output_dir, f"{date}.md")
-    with open(md_path, "w", encoding="utf-8") as f:
-        f.write(md_content)
-
-    # ---- 打印汇总 ----
-    print("\n" + "=" * 70)
-    print("RSSHub 健康检查汇总")
-    print("=" * 70)
-    print(f"A 类源数量: {grade_counts.get('A', 0)}")
-    print(f"B 类源数量: {grade_counts.get('B', 0)}")
-    print(f"C 类源数量: {grade_counts.get('C', 0)}")
-    print(f"D 类源数量: {grade_counts.get('D', 0)}")
-    print()
-    if failed_routes:
-        print("失败源列表:")
-        for r in failed_routes:
-            print(f"  ❌ {r['id']}: {r.get('name', '')} — {r.get('error', 'N/A')[:60]}")
-    else:
-        print("✅ 无失败路由")
-    print()
-    print("近24小时有效条目最多的前10个源:")
-    for r in top_10:
-        print(f"  {r['id']}: {r.get('name', '')} — {r.get('recent_24h_count', 0)} 条/24h (共 {r.get('item_count', 0)} 条)")
-    print()
-    print("建议禁用的源:")
-    if suggest_disable:
-        for r in suggest_disable:
-            print(f"  ❌ {r['id']}: {r.get('name', '')} — {r.get('error', 'N/A')[:60]}")
-    else:
-        print("  ✅ 无建议禁用")
-    print()
-    print("建议保留的源 (A/B类):")
-    for r in suggest_keep:
-        print(f"  ✅ {r['id']}: {r.get('name', '')} — {r.get('grade', '')} 类, {r.get('item_count', 0)} 条")
-
-    print(f"\nJSON 输出: {json_path}")
-    print(f"MD 报告: {md_path}")
 
     return summary
 
 
+def save_results(summary: dict, project_root: str):
+    """保存 JSON 和 Markdown 结果。"""
+    date = summary["date"]
+    out_dir = Path(project_root) / "data" / "logs" / "rsshub_health"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    # JSON
+    json_path = out_dir / f"{date}.json"
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(summary, f, ensure_ascii=False, indent=2)
+    log.info(f"JSON: {json_path}")
+
+    # Markdown
+    md_path = out_dir / f"{date}.md"
+    grades = summary["grades"]
+    with open(md_path, "w", encoding="utf-8") as f:
+        f.write(f"# RSSHub 路由健康报告 | {date}\n\n")
+        f.write(f"**检查时间**: {summary['checked_at']}\n")
+        f.write(f"**RSSHub 地址**: {summary['rsshub_base']}\n")
+        f.write(f"**检查路由数**: {summary['checked']}/{summary['total_routes']}\n\n")
+
+        f.write("## 分级统计\n\n")
+        f.write(f"| 等级 | 数量 | 说明 |\n")
+        f.write(f"|------|------|------|\n")
+        f.write(f"| A | {grades['A']} | 稳定可用 |\n")
+        f.write(f"| B | {grades['B']} | 可用但产出少 |\n")
+        f.write(f"| C | {grades['C']} | 旧文比例高，仅参考 |\n")
+        f.write(f"| D | {grades['D']} | 失败/超时 |\n\n")
+
+        f.write("## 近24h有效条目 Top 10\n\n")
+        f.write("| 源 | 最新时间 | 条目数 | 旧文比 | 等级 |\n")
+        f.write("|----|----------|--------|--------|------|\n")
+        for r in summary["top10_latest"]:
+            f.write(f"| {r['name']} | {r['latest_pubdate'] or 'N/A'} | {r['item_count']} | {r['old_item_ratio']} | {r['grade']} |\n")
+        f.write("\n")
+
+        if summary["failed_routes"]:
+            f.write("## 失败路由\n\n")
+            for r in summary["failed_routes"]:
+                f.write(f"- **{r['name']}** ({r['id']}): {r['error']}\n")
+            f.write("\n")
+
+        if summary["suggest_disable"]:
+            f.write("## 建议禁用的源\n\n")
+            for sid in summary["suggest_disable"]:
+                f.write(f"- `{sid}`\n")
+            f.write("\n")
+
+        f.write("## 全路由详情\n\n")
+        f.write("| id | 名称 | 条目 | 有标题 | 有URL | 有日期 | 旧文比 | 延迟ms | 等级 |\n")
+        f.write("|----|------|------|--------|-------|--------|--------|--------|------|\n")
+        for r in summary["routes"]:
+            f.write(
+                f"| {r['id']} | {r['name']} | {r['item_count']} | "
+                f"{r['items_with_title']} | {r['items_with_url']} | "
+                f"{r['items_with_pubdate']} | {r['old_item_ratio']} | "
+                f"{r['latency_ms']} | **{r['grade']}** |\n"
+            )
+
+    log.info(f"Markdown: {md_path}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="RSSHub 路由健康检查")
-    parser.add_argument("--project-root", required=True, help="项目根目录路径")
-    parser.add_argument("--date", default=None, help="检查日期 (YYYY-MM-DD)")
-    parser.add_argument("--rsshub-base", default=None, help="RSSHub 基础地址")
-    parser.add_argument("--sources-file", default="config/sources.yaml", help="源配置文件路径")
-    parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT, help="请求超时秒数")
-    parser.add_argument("--interval", type=float, default=0.5, help="请求间隔秒数")
-
+    parser.add_argument("--project-root", required=True, help="项目根目录")
+    parser.add_argument("--date", required=True, help="报告日期 YYYY-MM-DD")
+    parser.add_argument("--sources", default="config/sources.yaml", help="sources.yaml 路径")
     args = parser.parse_args()
 
-    result = check_rsshub_routes(
-        project_root=args.project_root,
-        date=args.date,
-        rsshub_base=args.rsshub_base,
-        sources_file=args.sources_file,
-        timeout=args.timeout,
-        interval_seconds=args.interval,
-    )
+    if not os.path.isdir(args.project_root):
+        log.error(f"项目目录不存在: {args.project_root}")
+        sys.exit(1)
 
-    return result
+    summary = run_health_check(args.project_root, args.date, args.sources)
+    save_results(summary, args.project_root)
+
+    # 控制台摘要
+    grades = summary["grades"]
+    print(f"\n{'='*60}")
+    print(f"RSSHub 健康检查完成 | {args.date}")
+    print(f"{'='*60}")
+    print(f"  A 类（稳定）: {grades['A']}")
+    print(f"  B 类（产出少）: {grades['B']}")
+    print(f"  C 类（旧文多）: {grades['C']}")
+    print(f"  D 类（失败）: {grades['D']}")
+    print(f"  失败路由: {len(summary['failed_routes'])}")
+    if summary["failed_routes"]:
+        for r in summary["failed_routes"]:
+            print(f"    - {r['name']}: {r['error']}")
+    print(f"  近24h Top 3:")
+    for r in summary["top10_latest"][:3]:
+        print(f"    {r['name']}: {r['item_count']}条, 最新={r['latest_pubdate']}, 等级={r['grade']}")
+    print(f"{'='*60}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,284 @@
+# ================================================================
+# sources.yaml V3 — 信息源配置（精简重构版）
+# 
+# 设计原则：
+#   - XCrawl 为主力（中文新闻时效性最佳）
+#   - RSSHub 关键词搜索为辅助（只保留高相关路由）
+#   - Tavily 为补充（覆盖面广但中文时效性一般）
+#   - Web 直连为专项补充
+#   - filterout_days=1 严格限定当天
+# ================================================================
+
+rsshub_base: http://192.168.2.100:1200
+
+defaults:
+  timeout_seconds: 20
+  max_items_per_route: 15          # 降低避免噪音
+  request_interval_seconds: 0.5
+  allow_unknown_time: false         # 未知时间的文章默认拒绝
+  allow_old: false
+  filterout_days: 1                 # ⚠️ 只保留24h内文章！
+
+collection_limits:
+  max_total_items_before_dedup: 800
+  max_items_after_dedup: 400
+  max_items_for_fulltext: 200
+  max_items_for_filter_skill: 400
+
+# ── Tavily 配置 ──
+tavily:
+  rotation: round_robin
+  keys_env_vars:
+  - tavily_key
+  - tavily_key1
+  - tavily_key2
+  monthly_limit_per_key: 1000
+  timeout_seconds: 30
+  max_results_per_query: 10
+  search_depth: advanced
+
+# ── XCrawl 配置 ──
+xcrawl:
+  keys_env_vars:
+  - xcrawl_key
+  - xcrawl_key1
+  - xcrawl_key2
+  monthly_limit_per_key: 1000
+
+# ================================================================
+# 主力：XCrawl 搜索源（中文新闻，时效性最佳）
+# ================================================================
+other_sources:
+
+# ── 即时零售核心 ──
+- id: xcrawl_instant_retail_core
+  name: XCrawl-即时零售核心动态
+  method: xcrawl
+  search_queries:
+  - 即时零售 最新 新闻 2026
+  - 即时零售 市场规模 增长
+  - 即时零售 万亿 行业报告
+  - 美团闪购 即时零售 2026
+  - 京东秒送 京东到家 即时零售
+  - 淘宝闪购 饿了么 即时零售
+  description: 即时零售行业核心新闻
+  source_tier: 1
+  role: direct_signal
+  category: 即时零售
+  enabled: true
+  max_items: 10
+  daily_priority: 100
+
+# ── 平台政策与监管 ──
+- id: xcrawl_platform_regulation
+  name: XCrawl-平台监管合规
+  method: xcrawl
+  search_queries:
+  - 即时零售 监管 政策 合规 2026
+  - 美团 淘宝闪购 京东 自查 整改
+  - 化妆品 备案 新规 2026
+  - 外卖平台 入网 资质 审核
+  - 闪电仓 许可证 消防 合规
+  description: 平台政策与监管动态
+  source_tier: 1
+  role: compliance_signal
+  category: 政策合规
+  enabled: true
+  max_items: 10
+  daily_priority: 90
+
+# ── 竞对动态 ──
+- id: xcrawl_competitor_moves
+  name: XCrawl-竞对动态
+  method: xcrawl
+  search_queries:
+  - 屈臣氏 即时零售 门店 会员
+  - 丝芙兰 中国 即时零售 经营
+  - 名创优品 美团 闪购 即时零售
+  - 万宁 关店 即时零售 2026
+  - WOW COLOUR THE COLORIST 即时零售
+  description: 竞对最新动态
+  source_tier: 1
+  role: competitor_signal
+  category: 竞对
+  enabled: true
+  max_items: 10
+  daily_priority: 85
+
+# ── 美妆个护零售 ──
+- id: xcrawl_beauty_retail
+  name: XCrawl-美妆个护零售
+  method: xcrawl
+  search_queries:
+  - 美妆 个护 即时零售 品牌 入驻
+  - 贝泰妮 珀莱雅 即时零售 OMO
+  - 完美日记 花西子 即时零售 渠道
+  - 国货美妆 即时零售 线下 线上
+  - 美妆品牌 闪购 到家 2026
+  description: 美妆个护品牌即时零售动态
+  source_tier: 1
+  role: direct_signal
+  category: 个护美妆
+  enabled: true
+  max_items: 10
+  daily_priority: 80
+
+# ── 前置仓/闪电仓 ──
+- id: xcrawl_warehouse
+  name: XCrawl-前置仓闪电仓
+  method: xcrawl
+  search_queries:
+  - 前置仓 闪电仓 即时零售 2026
+  - 叮咚买菜 美团 闪电仓 收购
+  - 前置仓 模式 盈利 即时配送
+  - 社区仓 门店仓 即时零售 履约
+  description: 前置仓/闪电仓最新动态
+  source_tier: 2
+  role: direct_signal
+  category: 即时零售
+  enabled: true
+  max_items: 10
+  daily_priority: 75
+
+# ================================================================
+# 辅助：RSSHub 关键词搜索（仅保留高相关路由）
+# ================================================================
+# ⚠️ RSSHub search 按相关性排序（非时间），filterout_days=1 过滤旧文
+
+- id: rsshub_huxiu_instant_retail
+  name: 虎嗅搜索-即时零售
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/即时零售?limit=10&sorted=true
+  fetch:
+    timeout_seconds: 30
+    filterout_days: 1
+  description: 虎嗅「即时零售」关键词搜索
+  source_tier: 2
+  role: direct_signal
+  category: 即时零售
+  max_items: 10
+  daily_priority: 60
+
+- id: rsshub_huxiu_beauty
+  name: 虎嗅搜索-美妆零售
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/美妆 零售?limit=10&sorted=true
+  fetch:
+    timeout_seconds: 30
+    filterout_days: 1
+  description: 虎嗅美妆零售关键词搜索
+  source_tier: 2
+  role: direct_signal
+  category: 个护美妆
+  max_items: 10
+  daily_priority: 55
+
+- id: rsshub_huxiu_watsons
+  name: 虎嗅搜索-屈臣氏
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/屈臣氏?limit=10&sorted=true
+  fetch:
+    timeout_seconds: 30
+    filterout_days: 1
+  description: 虎嗅「屈臣氏」关键词搜索
+  source_tier: 2
+  role: competitor_signal
+  category: 竞对
+  max_items: 10
+  daily_priority: 50
+
+- id: rsshub_huxiu_meituan_flash
+  name: 虎嗅搜索-美团闪购
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/美团闪购?limit=10&sorted=true
+  fetch:
+    timeout_seconds: 30
+    filterout_days: 1
+  description: 虎嗅「美团闪购」关键词搜索
+  source_tier: 2
+  role: platform_signal
+  category: 即时零售
+  max_items: 10
+  daily_priority: 45
+
+# ================================================================
+# 辅助：Tavily 搜索（覆盖面广，中文时效性一般）
+# ================================================================
+
+- id: tavily_instant_retail
+  name: Tavily-即时零售综合
+  method: tavily
+  search_queries:
+  - 即时零售 最新 动态 2026年4月
+  - 美团闪购 京东秒送 即时零售 新闻
+  description: Tavily即时零售综合搜索
+  source_tier: 2
+  role: direct_signal
+  category: 即时零售
+  enabled: true
+  max_items: 8
+  daily_priority: 40
+
+- id: tavily_beauty_retail
+  name: Tavily-美妆零售
+  method: tavily
+  search_queries:
+  - 美妆 个护 即时零售 品牌 2026
+  - 屈臣氏 丝芙兰 即时零售 经营
+  description: Tavily美妆零售搜索
+  source_tier: 2
+  role: direct_signal
+  category: 个护美妆
+  enabled: true
+  max_items: 8
+  daily_priority: 35
+
+- id: tavily_regulation
+  name: Tavily-监管合规
+  method: tavily
+  search_queries:
+  - 即时零售 监管 合规 2026
+  - 化妆品 备案 监管 新规
+  description: Tavily监管合规搜索
+  source_tier: 2
+  role: compliance_signal
+  category: 政策合规
+  enabled: true
+  max_items: 8
+  daily_priority: 30
+
+# ================================================================
+# 辅助：Web 直连（专项站点）
+# ================================================================
+
+- id: web_jd_daojia
+  name: 京东到家
+  method: web
+  url: https://daojia.jd.com
+  description: 京东到家首页（用于检测重大更新）
+  source_tier: 3
+  role: platform_signal
+  category: 即时零售
+  enabled: true
+  max_items: 5
+  fetch:
+    interval_minutes: 360
+    timeout_seconds: 30
+
+- id: web_sephora_cn
+  name: 丝芙兰中国
+  method: web
+  url: https://www.sephora.cn/news
+  description: 丝芙兰中国新闻（新品/活动）
+  source_tier: 3
+  role: competitor_signal
+  category: 竞对
+  enabled: true
+  max_items: 5
+  fetch:
+    interval_minutes: 360
+    timeout_seconds: 30

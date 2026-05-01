@@ -2,226 +2,37 @@
   "metadata": {
     "version": "3.0",
     "date": "2026-04-29",
-    "total_rejected": 54,
+    "total_rejected": 5,
     "reject_reason_stats": {
-      "LLM拒绝: 文章内容主要为背景信息，未包含明确新增事实或可提取的事件。": 1,
-      "LLM拒绝: 文章内容仅为背景介绍，未包含明确新增事实或事件": 1,
-      "LLM拒绝: 正文内容不完整，仅截断至‘即时零售的“基’，无法提取明确事实事件": 1,
-      "LLM拒绝: 文章仅描述外卖平台订单持续推送的现象，未提及任何具体事件（如平台规则变更、企业行动、品类趋势等），不符合事件抽取标准。": 1,
-      "LLM拒绝: 正文为空，无新增事实信息": 1,
-      "LLM拒绝: 文章内容属于背景信息描述，未包含明确发生的新事实事件": 1,
-      "LLM拒绝: 文章内容主要围绕任正非的讲话和前置仓的商业讨论，未提及屈臣氏电商相关的新增事实或事件。": 1,
-      "LLM拒绝: 文章内容仅为背景介绍，未包含明确发生的新事实事件": 1,
-      "LLM拒绝: 文章仅引用第三方机构发布的趋势观点，未提供具体企业行动、平台规则变更、消费者行为数据等可验证的新事实，不符合事件抽取标准": 1,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实": 9,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于证券监管事件，与业务分析无关。": 1,
-      "LLM拒绝: 文章为观点性内容，未包含明确发生的新事实事件": 1,
-      "LLM拒绝: 内容与屈臣氏电商经营无关": 1,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事件": 2,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于企业资本运作信息，与零售经营分析无关": 1,
-      "LLM拒绝: 内容为宏观经济数据通报，与屈臣氏电商经营无直接关联": 1,
-      "LLM拒绝: 文章内容涉及半导体行业公司股权变动，与屈臣氏电商经营分析无关": 1,
-      "LLM拒绝: 文章内容未提及屈臣氏电商经营相关的新增事实": 1,
-      "LLM拒绝: 正文仅包含抽象表述，未提及任何明确发生的事实事件": 1,
-      "LLM拒绝: 文章内容涉及上市公司股东减持行为，与屈臣氏电商经营分析无关": 1,
-      "LLM拒绝: 文章内容涉及国际石油政治，与屈臣氏电商经营无直接关联": 1,
-      "LLM拒绝: 文章内容仅涉及公司股价异动及经营情况说明，无新增事实或业务相关事件，不服务于屈臣氏电商经营分析。": 1,
-      "LLM拒绝: 文章内容为国铁集团财务数据披露，与屈臣氏电商经营无直接关联，未涉及流量、转化率、客单价等关键业务变量或行业动态。": 1,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于公司股东行为公告，与零售业务无直接关联": 1,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关的新增事实": 1,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于国际能源政策背景信息": 1,
-      "LLM拒绝: 文章内容涉及伊朗政治表态，属于地缘政治背景信息，未提及任何与屈臣氏、电商平台、零售或消费相关的商业动态，无法服务于电商经营分析。": 1,
-      "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于背景信息或无业务关联事件": 1,
-      "LLM拒绝: 文章内容为公司治理变动，与屈臣氏电商经营无直接关联，未涉及流量、转化、货盘、平台规则等经营要素": 1,
-      "LLM拒绝: 事件为宏观背景信息，与屈臣氏电商经营无直接关联": 1,
-      "LLM拒绝: 文章内容聚焦于美联储货币政策、通胀与就业等宏观经济议题，未涉及屈臣氏电商经营相关的任何事实性事件（如平台规则变动、品牌动作、品类趋势、渠道变化或消费场景等），无法服务于屈臣氏电商经营分析目标。": 1,
-      "LLM拒绝: 文章内容与国际政治事件相关，与屈臣氏电商经营无直接关联": 1,
-      "LLM拒绝: 文章内容与美国军事部署相关，与屈臣氏电商经营无关": 1,
-      "LLM拒绝: 文章内容属于对未来AI发展趋势的理论探讨和哲学思考，未提及任何与屈臣氏电商经营相关的具体事实或事件，如平台变动、品牌动作、品类趋势、消费场景变化等，无法服务于屈臣氏电商经营分析。": 1,
-      "LLM拒绝: 文章内容涉及企业高管变动及调查事件，与屈臣氏电商经营无直接关联，未体现流量、转化率、客单价等核心业务变量或平台运营动态。": 1,
-      "LLM拒绝: 文章主题为山西长治崇庆寺的历史建筑介绍，属于文化古迹内容，未涉及任何与屈臣氏电商业务相关的事件或信号": 1,
-      "LLM拒绝: 文章内容属于宏观人口与行业结构背景信息，未涉及屈臣氏电商经营相关的具体事件或信号": 1,
-      "LLM拒绝: 文章内容聚焦于特朗普对伊朗的军事行动命名及《伊利亚特》的现代改编演出，属于国际政治与文化评论范畴，未涉及屈臣氏电商相关的任何经营动态、市场趋势或商业行为，无法服务于屈臣氏电商经营分析目标。": 1,
-      "LLM拒绝: 文章内容主要涉及航空燃料技术进展，与屈臣氏电商经营分析无关": 1,
-      "LLM拒绝: 文章内容主要描述北京车展现象及中美汽车价格对比，未涉及屈臣氏电商经营相关的新增事实或事件。": 1,
-      "LLM拒绝: 文章内容聚焦于电视剧创作理念、导演访谈及艺术表达，未涉及屈臣氏电商经营相关的任何事实性事件（如平台规则变动、品牌动作、品类趋势、渠道变化等），无法服务于屈臣氏电商经营分析目标。": 1,
-      "LLM拒绝: 文章内容聚焦于国际政治、能源供应及泰国外交政策调整，未涉及任何与屈臣氏电商业务相关的新事实或趋势，无法服务于电商经营分析目标。": 1,
-      "LLM拒绝: 文章内容与中国造船业相关，与屈臣氏电商经营无关": 1,
-      "LLM拒绝: 正文为空，未包含任何新增事实信息": 2
+      "LLM拒绝: 正文为空，仅包含标题性陈述，无具体事件事实": 1,
+      "LLM拒绝: 文章内容仅为会议预告与回顾，未包含任何明确发生的经营相关事实": 1,
+      "LLM拒绝: 文章内容仅为观点陈述，未包含明确发生的新事实事件": 1,
+      "LLM拒绝: 文章内容仅为研究背景描述，未提及任何具体企业行动、市场变化或可验证的新事实，不符合事件抽取标准": 1,
+      "LLM拒绝: 正文内容为重复的logo和标签，无实质性新增事实信息": 1
     }
   },
   "articles": [
     {
-      "article_id": "b4a749cc719a30f9",
-      "title": "屈臣氏还能赢得这届年轻人吗？",
-      "url": "https://www.huxiu.com/article/3322624.html",
-      "source_name": "rsshub_huxiu_search_watsons",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Mon, 05 Aug 2024 01:20:00 GMT",
-      "collected_at": "2026-04-30T17:56:53.099370+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202408/05/090700090117.jpg\" /></figure>本文来自微信公众号：读数一帜，作者：王颖，编辑：杨秀红，头图来自：视觉中国百年零售巨头屈臣氏，正在筹划重启上市？前不久，新加坡主权财富基金淡马锡副首席执行长谢松辉对外透露：屈臣氏集团（下称“屈臣氏”）",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202408/05/090700090117.jpg\" /></figure>本文来自微信公众号：读数一帜，作者：王颖，编辑：杨秀红，头图来自：视觉中国百年零售巨头屈臣氏，正在筹划重启上市？前不久，新加坡主权财富基金淡马锡副首席执行长谢松辉对外透露：屈臣氏集团（下称“屈臣氏”）",
-      "matched_keywords": [
-        "屈臣氏"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
-        "entry_id": "huxiu-article-3322624"
-      },
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+5 命中屈臣氏: 屈臣氏",
-          "+1 source_tier=2",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "main",
-        "final_reason": "time_status=old(搜索源/allow_old) score=5>=4→main"
-      },
-      "is_reference": false,
-      "reject_reason": "LLM拒绝: 文章内容主要为背景信息，未包含明确新增事实或可提取的事件。"
-    },
-    {
-      "article_id": "a43858f32a07f046",
-      "title": "李云龙讲增长 | 监管风暴来袭：美团、淘宝们的\"用工责任\"时代到来了",
-      "url": "https://www.huxiu.com/brief/292461.html",
-      "source_name": "rsshub_huxiu_search_jd_instant",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Fri, 13 Feb 2026 03:44:11 GMT",
-      "collected_at": "2026-04-30T17:56:53.156725+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/img/brief_column/202407/31/164518258780.jpg\" /></figure>美团、淘宝闪购、<em>京东秒送、</em>滴滴、顺丰同城、盒马，还有圆通、中通、韵达、极兔等快递企业，它们都是各自领域里面的头部玩家。",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/img/brief_column/202407/31/164518258780.jpg\" /></figure>美团、淘宝闪购、<em>京东秒送、</em>滴滴、顺丰同城、盒马，还有圆通、中通、韵达、极兔等快递企业，它们都是各自领域里面的头部玩家。",
-      "matched_keywords": [
-        "闪购"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/京东秒送?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/京东秒送?limit=20&sorted=true",
-        "entry_id": "huxiu-brief-292461"
-      },
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 京东秒送",
-          "+1 source_tier=2",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "main",
-        "final_reason": "time_status=old(搜索源/allow_old) score=4>=4→main"
-      },
-      "is_reference": false,
-      "reject_reason": "LLM拒绝: 文章内容仅为背景介绍，未包含明确新增事实或事件"
-    },
-    {
-      "article_id": "c7e715758e4f0b96",
-      "title": "不控货，不稳价，品牌做不好即时零售",
-      "url": "https://www.huxiu.com/article/4819021.html",
-      "source_name": "rsshub_huxiu_search_instant_retail",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Fri, 19 Dec 2025 10:38:29 GMT",
-      "collected_at": "2026-04-30T17:56:54.174237+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202512/19/1441-prod-db-general-1-1766140678995.png\" /></figure>本文来自微信公众号： 新经销 ，作者：袁来，原文标题：《不控货，不稳价，品牌做不好即时零售！》前段时间，一直在跟行业内的朋友一起交流研讨即时零售闪购业务的发展。交流完后，发现有一个共识：即时零售的“基",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202512/19/1441-prod-db-general-1-1766140678995.png\" /></figure>本文来自微信公众号： 新经销 ，作者：袁来，原文标题：《不控货，不稳价，品牌做不好即时零售！》前段时间，一直在跟行业内的朋友一起交流研讨即时零售闪购业务的发展。交流完后，发现有一个共识：即时零售的“基",
-      "matched_keywords": [
-        "即时零售",
-        "闪购"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/即时零售?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/即时零售?limit=20&sorted=true",
-        "entry_id": "huxiu-article-4819021"
-      },
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 即时零售",
-          "+1 source_tier=2",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "main",
-        "final_reason": "time_status=old(搜索源/allow_old) score=4>=4→main"
-      },
-      "is_reference": false,
-      "reject_reason": "LLM拒绝: 正文内容不完整，仅截断至‘即时零售的“基’，无法提取明确事实事件"
-    },
-    {
-      "article_id": "2fe3bbbfc37ecf7c",
-      "title": "即时零售战火烧向餐饮之外",
-      "url": "https://www.huxiu.com/article/4603106.html",
-      "source_name": "rsshub_huxiu_search_instant_retail",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Mon, 21 Jul 2025 11:41:00 GMT",
-      "collected_at": "2026-04-30T17:56:54.176549+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-article-cover/202507/21/4603106-prod-2-klv2-2.png\" /></figure>本文来自微信公众号：经济观察报 （ID：eeo-com-cn），作者：钱玉娟，题图来自：AI生成广州连续多日高温橙色预警，深夜10点后仍然闷热。出单机里不断弹出来自美团、饿了么、京东等外卖平台的订单，",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-article-cover/202507/21/4603106-prod-2-klv2-2.png\" /></figure>本文来自微信公众号：经济观察报 （ID：eeo-com-cn），作者：钱玉娟，题图来自：AI生成广州连续多日高温橙色预警，深夜10点后仍然闷热。出单机里不断弹出来自美团、饿了么、京东等外卖平台的订单，",
-      "matched_keywords": [
-        "即时零售",
-        "饿了么"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/即时零售?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/即时零售?limit=20&sorted=true",
-        "entry_id": "huxiu-article-4603106"
-      },
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 饿了么",
-          "+1 source_tier=2",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "main",
-        "final_reason": "time_status=old(搜索源/allow_old) score=4>=4→main"
-      },
-      "is_reference": false,
-      "reject_reason": "LLM拒绝: 文章仅描述外卖平台订单持续推送的现象，未提及任何具体事件（如平台规则变更、企业行动、品类趋势等），不符合事件抽取标准。"
-    },
-    {
-      "article_id": "7477f3c5542938c5",
-      "title": "即时零售行业发展报告（2024）",
-      "url": "https://www.caitec.org.cn/upfiles/file/2024/11/20241213113011188.pdf",
+      "article_id": "70cc633b4ef01539",
+      "title": "即时零售2026：四大真相重构“快”的生意",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604201821352860_1.pdf?1776722504000.pdf",
       "content": "",
       "summary": "",
       "published_at": "",
-      "source_name": "xcrawl_competitor_today",
+      "source_name": "xcrawl_instant_retail_core",
       "source_type": "xcrawl",
       "time_status": "unknown_time",
-      "collected_at": "2026-04-30T17:56:34.723436+08:00",
+      "collected_at": "2026-04-29T07:00:00+08:00",
       "keywords_matched": [],
       "tier": 1,
-      "role": "competitor_signal",
-      "category": "竞对",
+      "role": "direct_signal",
+      "category": "即时零售",
       "raw_collector": "xcrawl",
       "raw": {
         "duplicate_sources": [
-          "tavily_instant_retail_beauty",
-          "tavily_instant_retail_beauty",
-          "tavily_industry_data"
+          "xcrawl_warehouse",
+          "tavily_instant_retail",
+          "xcrawl_competitor_moves"
         ]
       },
       "matched_keywords": [
@@ -240,151 +51,33 @@
         "final_reason": "rule_score=6>=6"
       },
       "is_reference": false,
-      "reject_reason": "LLM拒绝: 正文为空，无新增事实信息"
+      "reject_reason": "LLM拒绝: 正文为空，仅包含标题性陈述，无具体事件事实"
     },
     {
-      "article_id": "6f28e82c07599e5f",
-      "title": "一个护理人员眼中的日本老人生存困境",
-      "url": "https://www.huxiu.com/article/2054766.html",
-      "source_name": "rsshub_huxiu_search_personal_care",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Sat, 16 Sep 2023 07:00:15 GMT",
-      "collected_at": "2026-04-30T17:57:09.941953+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202309/16/141957966125.jpg\" /></figure>本文来自微信公众号：一览扶桑 （ID：sjcff2016），作者：结城康博，原文标题：《一个护理人员眼中的日本老人生态》，题图来源：视觉中国笔者在护理一线进行工作后才知道不同的“经济状况”“家庭构成”",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202309/16/141957966125.jpg\" /></figure>本文来自微信公众号：一览扶桑 （ID：sjcff2016），作者：结城康博，原文标题：《一个护理人员眼中的日本老人生态》，题图来源：视觉中国笔者在护理一线进行工作后才知道不同的“经济状况”“家庭构成”",
-      "matched_keywords": [
-        "个护"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/个护?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/个护?limit=20&sorted=true",
-        "entry_id": "huxiu-article-2054766"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 个护",
-          "+1 source_tier=2",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章主题为日本老人护理生态，虽含‘个护’关键词但内容与屈臣氏即时零售×个护美妆经营无实质关联。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容属于背景信息描述，未包含明确发生的新事实事件"
-    },
-    {
-      "article_id": "41ace8e3da89bc45",
-      "title": "前置仓：一个早已写好结局的商业故事",
-      "url": "https://www.huxiu.com/article/647742.html",
-      "source_name": "rsshub_huxiu_search_front_warehouse",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Mon, 29 Aug 2022 06:11:48 GMT",
-      "collected_at": "2026-04-30T17:57:10.688811+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202208/29/130831385292.jpg\" /></figure>本文来自微信公众号：新零售商业评论 （ID：xinlingshou1001），作者：田巧云，编辑：葛伟炜，题图来自：视觉中国最近，任正非在华为内部发表的一篇文章被全网疯转。文章里“不要讲故事，一定要讲",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202208/29/130831385292.jpg\" /></figure>本文来自微信公众号：新零售商业评论 （ID：xinlingshou1001），作者：田巧云，编辑：葛伟炜，题图来自：视觉中国最近，任正非在华为内部发表的一篇文章被全网疯转。文章里“不要讲故事，一定要讲",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/前置仓?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/前置仓?limit=20&sorted=true",
-        "entry_id": "huxiu-article-647742"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 前置仓",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容主要围绕任正非的讲话和前置仓的商业讨论，未提及屈臣氏电商相关的新增事实或事件。"
-    },
-    {
-      "article_id": "789d7c4319be21eb",
-      "title": "前置仓启示录",
-      "url": "https://www.huxiu.com/article/308135.html",
-      "source_name": "rsshub_huxiu_search_front_warehouse",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 11 Jul 2019 11:42:00 GMT",
-      "collected_at": "2026-04-30T17:57:10.691320+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/201907/11/194212912951.jpg\" /></figure>头图来自：东方IC；本文来自微信公众号：云阳子O2O新零售（ID：yyzxlsnc）；作者：云阳子前置仓模式是电商逻辑，主要为了解决即时消费需求，比如：提供一个小时到家服务。解决即时消费需求，电商可以",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/201907/11/194212912951.jpg\" /></figure>头图来自：东方IC；本文来自微信公众号：云阳子O2O新零售（ID：yyzxlsnc）；作者：云阳子前置仓模式是电商逻辑，主要为了解决即时消费需求，比如：提供一个小时到家服务。解决即时消费需求，电商可以",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/前置仓?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/前置仓?limit=20&sorted=true",
-        "entry_id": "huxiu-article-308135"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 前置仓",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容仅为背景介绍，未包含明确发生的新事实事件"
-    },
-    {
-      "article_id": "e3de3cfdcfa73f61",
-      "title": "算法退潮，人性归位：美妆行业即将回归“人感时代”",
-      "url": "https://www.huxiu.com/article/4837192.html",
-      "source_name": "rsshub_huxiu_search_beauty",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 26 Feb 2026 10:40:03 GMT",
-      "collected_at": "2026-04-30T17:57:10.718977+08:00",
-      "time_status": "old",
-      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202602/26/10922-prod-jm-general-1-1772102369750.png\" /></figure>本文来自微信公众号： 中国化妆品 ，作者：中国化妆品杂志，原文标题：《算法退潮，人性归位：美妆行业即将回归“人感时代” | 全球观察·新趋势》近日，全球知名市场研究机构英敏特（MINTEL）发布了三项",
-      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202602/26/10922-prod-jm-general-1-1772102369750.png\" /></figure>本文来自微信公众号： 中国化妆品 ，作者：中国化妆品杂志，原文标题：《算法退潮，人性归位：美妆行业即将回归“人感时代” | 全球观察·新趋势》近日，全球知名市场研究机构英敏特（MINTEL）发布了三项",
+      "article_id": "47b2a39d2621782e",
+      "title": "美妆头条",
+      "url": "https://www.mztoutiao.com/",
+      "content": "04月. 已结束. 2026中国化妆品开品大会. 时间：04月23日. 地点：广州花都皇冠假日酒店 · 12月. 已结束. 2025第二届GBC全球美妆大会. 时间：12月26日. 地点：广州白云国际会议 ...",
+      "summary": "04月. 已结束. 2026中国化妆品开品大会. 时间：04月23日. 地点：广州花都皇冠假日酒店 · 12月. 已结束. 2025第二届GBC全球美妆大会. 时间：12月26日. 地点：广州白云国际会议 ...",
+      "published_at": "",
+      "source_name": "xcrawl_beauty_retail",
+      "source_type": "xcrawl",
+      "time_status": "unknown_time",
+      "collected_at": "2026-04-29T07:00:00+08:00",
+      "keywords_matched": [],
+      "tier": 1,
+      "role": "direct_signal",
+      "category": "个护美妆",
+      "raw_collector": "xcrawl",
       "matched_keywords": [
         "美妆"
       ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/huxiu/search/美妆?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/huxiu/search/美妆?limit=20&sorted=true",
-        "entry_id": "huxiu-article-4837192"
-      },
       "filter": {
-        "rule_score": 3,
+        "rule_score": 5,
         "rule_decision": "review",
         "rule_reasons": [
           "+3 命中美妆个护: 美妆",
-          "+1 source_tier=2",
-          "-1 time_status=old(搜索源/allow_old)"
+          "+2 source_tier=1"
         ],
         "llm_reviewed": true,
         "llm_result": {
@@ -392,1566 +85,10 @@
           "business_relevance_type": "indirect",
           "related_channels": [],
           "related_categories": [
-            "美妆行业趋势"
+            "美妆"
           ],
-          "business_variables": [
-            "消费者行为变化",
-            "零售模式转型"
-          ],
-          "reason": "文章讨论美妆行业回归‘人感时代’的趋势，虽未直接提及屈臣氏，但涉及个护美妆消费体验升级，可能间接影响其即时零售策略。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章仅引用第三方机构发布的趋势观点，未提供具体企业行动、平台规则变更、消费者行为数据等可验证的新事实，不符合事件抽取标准"
-    },
-    {
-      "article_id": "8e9f5e1db7733ad7",
-      "title": "招商银行：聘任王小青为招商银行行长 执行董事及行长王良因年龄原因辞任",
-      "url": "https://api3.cls.cn/share/article/2361199?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:37:08 GMT",
-      "collected_at": "2026-04-30T17:57:11.048637+08:00",
-      "time_status": "in_window",
-      "summary": "【招商银行：聘任王小青为招商银行行长 执行董事及行长王良因年龄原因辞任】财联社4月30日电，招商银行(600036.SH)公告称，公司执行董事、行长王良因年龄原因辞去执行董事、行长等职务，辞任自2026年4月30日起生效。王良确认与董事会无不同意见，董事会对其贡献予以高度评价，并授予“招商银行终身荣誉行员”称号。另外，董事会同意聘任王小青为招商银行行长，任期自本公司收到国家金融监督管理总局任职资格批复之日起，至第十三届董事会届满之日止。自董事会审议通过本项议案之日起，王小青代为履行招商银行行长职务，直至其行长任期生效。",
-      "content": "【招商银行：聘任王小青为招商银行行长 执行董事及行长王良因年龄原因辞任】财联社4月30日电，招商银行(600036.SH)公告称，公司执行董事、行长王良因年龄原因辞去执行董事、行长等职务，辞任自2026年4月30日起生效。王良确认与董事会无不同意见，董事会对其贡献予以高度评价，并授予“招商银行终身荣誉行员”称号。另外，董事会同意聘任王小青为招商银行行长，任期自本公司收到国家金融监督管理总局任职资格批复之日起，至第十三届董事会届满之日止。自董事会审议通过本项议案之日起，王小青代为履行招商银行行长职务，直至其行长任期生效。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361199?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "823217ed4cc9c126",
-      "title": "自然人杨旭泄露内幕信息 被证监会罚款50万元",
-      "url": "https://api3.cls.cn/share/article/2361183?os=web&sv=8.4.6&app=CailianpressWeb",
-      "source_name": "rsshub_cls_telegraph",
-      "source_type": "rsshub",
-      "source_tier": 2,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:33:53 GMT",
-      "collected_at": "2026-04-30T17:57:11.049979+08:00",
-      "time_status": "in_window",
-      "summary": "【自然人杨旭泄露内幕信息 被证监会罚款50万元】财联社4月30日电，证监会发布行政处罚决定书，对杨旭泄露内幕信息一案进行了立案调查。经查明，杨旭存在以下违法事实：相关公司拟筹划重大资产重组，公开前属于内幕信息。内幕信息不晚于2023年12月27日形成，公开于2024年4月27日。不晚于2023年12月31日，杨旭知悉上述重大资产重组事项及进展情况。内幕信息敏感期内，杨旭多次告知相关人员上述资产重组事项及进展情况。2024年2月28日至3月13日，相关人员买入相关公司股票。证监会决定：对杨旭泄露内幕信息行为处以500,000元罚款。",
-      "content": "【自然人杨旭泄露内幕信息 被证监会罚款50万元】财联社4月30日电，证监会发布行政处罚决定书，对杨旭泄露内幕信息一案进行了立案调查。经查明，杨旭存在以下违法事实：相关公司拟筹划重大资产重组，公开前属于内幕信息。内幕信息不晚于2023年12月27日形成，公开于2024年4月27日。不晚于2023年12月31日，杨旭知悉上述重大资产重组事项及进展情况。内幕信息敏感期内，杨旭多次告知相关人员上述资产重组事项及进展情况。2024年2月28日至3月13日，相关人员买入相关公司股票。证监会决定：对杨旭泄露内幕信息行为处以500,000元罚款。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/cls/telegraph?limit=30&filterout_time=604800",
-        "route": "/cls/telegraph?limit=30",
-        "entry_id": "https://api3.cls.cn/share/article/2361183?os=web&sv=8.4.6&app=CailianpressWeb"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 source_tier=2",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于证券监管事件，与业务分析无关。"
-    },
-    {
-      "article_id": "b89f7166aba8f957",
-      "title": "2026年：传统美妆零售败了？",
-      "url": "https://www.36kr.com/p/3714186707349891",
-      "source_name": "rsshub_36kr_search_watsons",
-      "source_type": "rsshub",
-      "source_tier": 4,
-      "collector": "rsshub",
-      "published_at": "Mon, 09 Mar 2026 05:00:57 GMT",
-      "collected_at": "2026-04-30T17:57:41.168861+08:00",
-      "time_status": "old",
-      "summary": "多重考验下，传统美妆零售商何去何从？",
-      "content": "多重考验下，传统美妆零售商何去何从？",
-      "matched_keywords": [
-        "美妆"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
-        "entry_id": "https://www.36kr.com/p/3714186707349891"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "time_status=old(搜索源/allow_old) score=2→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章为观点性内容，未包含明确发生的新事实事件"
-    },
-    {
-      "article_id": "42aba3d1d6b9aba7",
-      "title": "2连板金瑞矿业：主要原材料天青石若延续涨价趋势，将对公司经营业绩产生不利影响",
-      "url": "https://www.36kr.com/newsflashes/3789143113063425",
-      "source_name": "rsshub_36kr_newsflashes",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:55:41 GMT",
-      "collected_at": "2026-04-30T17:58:01.414942+08:00",
-      "time_status": "in_window",
-      "summary": "36氪获悉，金瑞矿业公告。公司主营业务未发生重大变化，生产经营情况正常。2026年第一季度，公司实现归属于上市公司股东的净利润为-108万元，较上年同期大幅下降。主要原因系一季度开展年度例行停产检修近两个多月，致使营业收入大幅减少，利润总额随之减少，造成亏损。受地缘局势等因素影响，公司主要原材料天青石采购价格同比上涨15.78%，环比上涨34.32%。若后续延续涨价趋势，将对公司经营业绩产生不利影响。",
-      "content": "36氪获悉，金瑞矿业公告。公司主营业务未发生重大变化，生产经营情况正常。2026年第一季度，公司实现归属于上市公司股东的净利润为-108万元，较上年同期大幅下降。主要原因系一季度开展年度例行停产检修近两个多月，致使营业收入大幅减少，利润总额随之减少，造成亏损。受地缘局势等因素影响，公司主要原材料天青石采购价格同比上涨15.78%，环比上涨34.32%。若后续延续涨价趋势，将对公司经营业绩产生不利影响。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
-        "route": "/36kr/newsflashes?limit=30&sorted=true",
-        "entry_id": "https://www.36kr.com/newsflashes/3789143113063425"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "27bbab185fd6e06d",
-      "title": "兰剑智能：股东济南创投拟减持不超1%公司股份",
-      "url": "https://www.36kr.com/newsflashes/3789119001844744",
-      "source_name": "rsshub_36kr_newsflashes",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:31:10 GMT",
-      "collected_at": "2026-04-30T17:58:01.416960+08:00",
-      "time_status": "in_window",
-      "summary": "36氪获悉，兰剑智能公告，公司持股5%以上股东济南科技创业投资集团计划自2026年5月27日至2026年8月26日，通过集中竞价方式减持公司股份不超过102万股，即不超过公司总股本的1%。减持原因为公司经营发展需要，本次减持不设价格区间。",
-      "content": "36氪获悉，兰剑智能公告，公司持股5%以上股东济南科技创业投资集团计划自2026年5月27日至2026年8月26日，通过集中竞价方式减持公司股份不超过102万股，即不超过公司总股本的1%。减持原因为公司经营发展需要，本次减持不设价格区间。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
-        "route": "/36kr/newsflashes?limit=30&sorted=true",
-        "entry_id": "https://www.36kr.com/newsflashes/3789119001844744"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 内容与屈臣氏电商经营无关"
-    },
-    {
-      "article_id": "f4413499aa12e6ad",
-      "title": "天通股份：实际控制人及其一致行动人拟合计减持不超1.56%股份",
-      "url": "https://www.36kr.com/newsflashes/3789112845098248",
-      "source_name": "rsshub_36kr_newsflashes",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:24:54 GMT",
-      "collected_at": "2026-04-30T17:58:01.417382+08:00",
-      "time_status": "in_window",
-      "summary": "36氪获悉，天通股份公告，因自身资金需求，实际控制人潘建忠、潘娟美、於志华计划合计减持公司股份不超过1923.41万股，占公司总股本的1.56%。其中，通过集中竞价减持不超过1223.41万股，占0.99%；通过大宗交易减持不超过700万股，占0.57%。减持期间为公告披露之日起15个交易日后的3个月内。",
-      "content": "36氪获悉，天通股份公告，因自身资金需求，实际控制人潘建忠、潘娟美、於志华计划合计减持公司股份不超过1923.41万股，占公司总股本的1.56%。其中，通过集中竞价减持不超过1223.41万股，占0.99%；通过大宗交易减持不超过700万股，占0.57%。减持期间为公告披露之日起15个交易日后的3个月内。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
-        "route": "/36kr/newsflashes?limit=30&sorted=true",
-        "entry_id": "https://www.36kr.com/newsflashes/3789112845098248"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事件"
-    },
-    {
-      "article_id": "2c2a04cf9e734adf",
-      "title": "江西铜业：拟筹划分拆江铜铜箔至香港联合交易所上市",
-      "url": "https://www.36kr.com/newsflashes/3789110130678793",
-      "source_name": "rsshub_36kr_newsflashes",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:22:08 GMT",
-      "collected_at": "2026-04-30T17:58:01.417817+08:00",
-      "time_status": "in_window",
-      "summary": "36氪获悉，江西铜业公告，为进一步优化产业布局、拓宽融资渠道，提高控股子公司江铜铜箔的核心竞争力，持续做强铜箔业务，公司拟筹划分拆江铜铜箔至香港联合交易所上市。本次分拆事项不会导致公司丧失对江铜铜箔的控制权，江铜铜箔仍为公司合并报表范围内的控股子公司，不会对公司其他业务板块的经营发展构成实质性影响。",
-      "content": "36氪获悉，江西铜业公告，为进一步优化产业布局、拓宽融资渠道，提高控股子公司江铜铜箔的核心竞争力，持续做强铜箔业务，公司拟筹划分拆江铜铜箔至香港联合交易所上市。本次分拆事项不会导致公司丧失对江铜铜箔的控制权，江铜铜箔仍为公司合并报表范围内的控股子公司，不会对公司其他业务板块的经营发展构成实质性影响。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
-        "route": "/36kr/newsflashes?limit=30&sorted=true",
-        "entry_id": "https://www.36kr.com/newsflashes/3789110130678793",
-        "duplicate_sources": [
-          "rsshub_wallstreetcn"
-        ]
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于企业资本运作信息，与零售经营分析无关"
-    },
-    {
-      "article_id": "eabdea502663fc5a",
-      "title": "欧元区3月失业率为6.2%，符合预期",
-      "url": "https://www.36kr.com/newsflashes/3789098480622853",
-      "source_name": "rsshub_36kr_newsflashes",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:10:17 GMT",
-      "collected_at": "2026-04-30T17:58:01.419951+08:00",
-      "time_status": "in_window",
-      "summary": "欧元区3月失业率为6.2%，预期为6.2%，前值为6.3%。（界面）",
-      "content": "欧元区3月失业率为6.2%，预期为6.2%，前值为6.3%。（界面）",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
-        "route": "/36kr/newsflashes?limit=30&sorted=true",
-        "entry_id": "https://www.36kr.com/newsflashes/3789098480622853"
-      },
-      "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window",
-          "-2 内容极短且无关键词"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 内容为宏观经济数据通报，与屈臣氏电商经营无直接关联"
-    },
-    {
-      "article_id": "12ae83a1be24535c",
-      "title": "恒生指数公司推出四条新指数",
-      "url": "https://www.36kr.com/newsflashes/3789092968176903",
-      "source_name": "rsshub_36kr_newsflashes",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:04:41 GMT",
-      "collected_at": "2026-04-30T17:58:01.421226+08:00",
-      "time_status": "in_window",
-      "summary": "36氪获悉，恒生指数公司推出以下四条新指数：恒生生科指短仓指数、恒生生科指2倍短仓指数、恒生生科指2倍杠杆指数、恒生生科指股息累计2倍杠杆指数。新指数旨在反映恒生生物科技指数之短仓或杠杆投资策略的表现，相关策略每天按照预定的杠杆比例而进行投资。",
-      "content": "36氪获悉，恒生指数公司推出以下四条新指数：恒生生科指短仓指数、恒生生科指2倍短仓指数、恒生生科指2倍杠杆指数、恒生生科指股息累计2倍杠杆指数。新指数旨在反映恒生生物科技指数之短仓或杠杆投资策略的表现，相关策略每天按照预定的杠杆比例而进行投资。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
-        "route": "/36kr/newsflashes?limit=30&sorted=true",
-        "entry_id": "https://www.36kr.com/newsflashes/3789092968176903"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "a5ca83a02b11f98b",
-      "title": "三安光电：控股股东被动减持股份达到1%",
-      "url": "https://www.36kr.com/newsflashes/3789090346622214",
-      "source_name": "rsshub_36kr_newsflashes",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:02:01 GMT",
-      "collected_at": "2026-04-30T17:58:01.421661+08:00",
-      "time_status": "in_window",
-      "summary": "36氪获悉，三安光电公告，公司控股股东三安电子通过集中竞价和大宗交易方式被动减持股份，截至2026年4月29日，其持股比例由24.33%降至23.13%，权益变动触及1%刻度。三安电子与一致行动人三安集团合计持股比例由29.47%降至28.28%。本次减持不触及要约收购，不会导致公司控制权变更。",
-      "content": "36氪获悉，三安光电公告，公司控股股东三安电子通过集中竞价和大宗交易方式被动减持股份，截至2026年4月29日，其持股比例由24.33%降至23.13%，权益变动触及1%刻度。三安电子与一致行动人三安集团合计持股比例由29.47%降至28.28%。本次减持不触及要约收购，不会导致公司控制权变更。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
-        "route": "/36kr/newsflashes?limit=30&sorted=true",
-        "entry_id": "https://www.36kr.com/newsflashes/3789090346622214"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及半导体行业公司股权变动，与屈臣氏电商经营分析无关"
-    },
-    {
-      "article_id": "fa7086ae7e1753a1",
-      "title": "香港金管局：3月份港元货币供应量M2及M3同比均上升1.2%",
-      "url": "https://www.36kr.com/newsflashes/3789083440061446",
-      "source_name": "rsshub_36kr_newsflashes",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 08:54:59 GMT",
-      "collected_at": "2026-04-30T17:58:01.422161+08:00",
-      "time_status": "in_window",
-      "summary": "4月30日，香港金融管理局发表的统计数字显示，认可机构的存款总额在2026年3月份上升0.1%，其中港元存款上升0.7%，外币存款则下跌0.3%。2026年第1季，存款总额及港元存款分别上升1.0%及1.9%。香港人民币存款在3月份上升0.6%，于3月底为10,352亿元人民币。跨境贸易结算的人民币汇款总额于3月份为12,900亿元人民币，而2月份为8,665亿元人民币。存款变动受多项因素影响，包括利率走势、市场集资活动等，因此适宜观察较长期趋势，毋须过度解读个别月份的波动。（界面）",
-      "content": "4月30日，香港金融管理局发表的统计数字显示，认可机构的存款总额在2026年3月份上升0.1%，其中港元存款上升0.7%，外币存款则下跌0.3%。2026年第1季，存款总额及港元存款分别上升1.0%及1.9%。香港人民币存款在3月份上升0.6%，于3月底为10,352亿元人民币。跨境贸易结算的人民币汇款总额于3月份为12,900亿元人民币，而2月份为8,665亿元人民币。存款变动受多项因素影响，包括利率走势、市场集资活动等，因此适宜观察较长期趋势，毋须过度解读个别月份的波动。（界面）",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
-        "route": "/36kr/newsflashes?limit=30&sorted=true",
-        "entry_id": "https://www.36kr.com/newsflashes/3789083440061446"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 活动",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容未提及屈臣氏电商经营相关的新增事实"
-    },
-    {
-      "article_id": "2579d8c4e8d327bc",
-      "title": "百利电气：董事长左小鹏因工作调整辞职，张建新接棒",
-      "url": "https://www.36kr.com/newsflashes/3789059580910849",
-      "source_name": "rsshub_36kr_newsflashes",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 08:30:43 GMT",
-      "collected_at": "2026-04-30T17:58:01.423567+08:00",
-      "time_status": "in_window",
-      "summary": "36氪获悉，百利电气公告，左小鹏因工作调整原因申请辞去公司董事、董事长、法定代表人、战略发展委员会主任委员、薪酬与考核委员会委员的职务，辞职后将不再担任公司任何职务。公司于2026年4月30日召开董事会九届十二次会议，选举董事张建新为董事长、执行公司事务的董事长、法定代表人，任期与第九届董事会任期一致。",
-      "content": "36氪获悉，百利电气公告，左小鹏因工作调整原因申请辞去公司董事、董事长、法定代表人、战略发展委员会主任委员、薪酬与考核委员会委员的职务，辞职后将不再担任公司任何职务。公司于2026年4月30日召开董事会九届十二次会议，选举董事张建新为董事长、执行公司事务的董事长、法定代表人，任期与第九届董事会任期一致。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/36kr/newsflashes?limit=30&sorted=true&filterout_time=5184000",
-        "route": "/36kr/newsflashes?limit=30&sorted=true",
-        "entry_id": "https://www.36kr.com/newsflashes/3789059580910849"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "7d0c1c8a15e3565d",
-      "title": "巨头即时零售阴影下",
-      "url": "https://www.36kr.com/p/3744983276253702",
-      "source_name": "rsshub_36kr_search_meituan_flash",
-      "source_type": "rsshub",
-      "source_tier": 4,
-      "collector": "rsshub",
-      "published_at": "Mon, 30 Mar 2026 05:47:57 GMT",
-      "collected_at": "2026-04-30T17:58:02.152886+08:00",
-      "time_status": "old",
-      "summary": "更多浮沉应该被看到。",
-      "content": "更多浮沉应该被看到。",
-      "matched_keywords": [
-        "即时零售"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/美团闪购?limit=20&sorted=true&filterout_time=7776000",
-        "route": "/36kr/search/articles/美团闪购?limit=20&sorted=true",
-        "entry_id": "https://www.36kr.com/p/3744983276253702"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 即时零售",
-          "-1 time_status=old(搜索源/allow_old)"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "time_status=old(搜索源/allow_old) score=3→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 正文仅包含抽象表述，未提及任何明确发生的事实事件"
-    },
-    {
-      "article_id": "d878c563d81c3b60",
-      "title": "<b>天通股份：实控人的一致行动人拟合计减持不超1.56%公司股份 |</b> 天通股份公告，股东潘建忠、潘娟美、於志华计划合计减持公司股份不超过1923.41万股（含），...",
-      "url": "https://www.yicai.com/brief/103162586.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:48:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.856424+08:00",
-      "time_status": "in_window",
-      "summary": "<b>天通股份：实控人的一致行动人拟合计减持不超1.56%公司股份  |</b> 天通股份公告，股东潘建忠、潘娟美、於志华计划合计减持公司股份不超过1923.41万股（含），占公司总股本的1.56%。上述股东是公司实际控制人潘建清的一致行动人。",
-      "content": "<b>天通股份：实控人的一致行动人拟合计减持不超1.56%公司股份  |</b> 天通股份公告，股东潘建忠、潘娟美、於志华计划合计减持公司股份不超过1923.41万股（含），占公司总股本的1.56%。上述股东是公司实际控制人潘建清的一致行动人。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162586.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及上市公司股东减持行为，与屈臣氏电商经营分析无关"
-    },
-    {
-      "article_id": "165d565b836d32af",
-      "title": "<b>江西铜业：筹划控股子公司江铜铜箔分拆上市 |</b> 江西铜业公告，公司拟筹划分拆控股子公司江铜铜箔至香港联合交易所有限公司上市。",
-      "url": "https://www.yicai.com/brief/103162583.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:41:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.856909+08:00",
-      "time_status": "in_window",
-      "summary": "<b>江西铜业：筹划控股子公司江铜铜箔分拆上市  |</b> 江西铜业公告，公司拟筹划分拆控股子公司江铜铜箔至香港联合交易所有限公司上市。",
-      "content": "<b>江西铜业：筹划控股子公司江铜铜箔分拆上市  |</b> 江西铜业公告，公司拟筹划分拆控股子公司江铜铜箔至香港联合交易所有限公司上市。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162583.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "e1196289394b340b",
-      "title": "<b>俄罗斯：无意退出“欧佩克+”机制 |</b> 据新华社，俄罗斯多名高级官员日前表示，俄罗斯没有计划退出“欧佩克+”机制。<br /><br />俄副总理诺瓦克4月30日表...",
-      "url": "https://www.yicai.com/brief/103162581.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:40:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.857352+08:00",
-      "time_status": "in_window",
-      "summary": "<b>俄罗斯：无意退出“欧佩克+”机制  |</b> 据新华社，俄罗斯多名高级官员日前表示，俄罗斯没有计划退出“欧佩克+”机制。<br /><br />俄副总理诺瓦克4月30日表示，作为世界重要石油生产国，俄方不打算退出“欧佩克+”机制，俄方相信这一机制能有效缓解当前能源危机背景下的石油市场风险，有助于稳定投资战略、维护行业发展前景，并保障各国间持续合作。",
-      "content": "<b>俄罗斯：无意退出“欧佩克+”机制  |</b> 据新华社，俄罗斯多名高级官员日前表示，俄罗斯没有计划退出“欧佩克+”机制。<br /><br />俄副总理诺瓦克4月30日表示，作为世界重要石油生产国，俄方不打算退出“欧佩克+”机制，俄方相信这一机制能有效缓解当前能源危机背景下的石油市场风险，有助于稳定投资战略、维护行业发展前景，并保障各国间持续合作。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162581.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及国际石油政治，与屈臣氏电商经营无直接关联"
-    },
-    {
-      "article_id": "3213ca749f04ebc6",
-      "title": "<b>德方纳米：股票交易异常波动，公司目前经营情况未发生重大变化 |</b> 德方纳米公告，公司股票4月28日、4月29日、4月30日连续3个交易日内收盘价涨幅偏离值累计...",
-      "url": "https://www.yicai.com/brief/103162549.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:21:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.859638+08:00",
-      "time_status": "in_window",
-      "summary": "<b>德方纳米：股票交易异常波动，公司目前经营情况未发生重大变化  |</b> 德方纳米公告，公司股票4月28日、4月29日、4月30日连续3个交易日内收盘价涨幅偏离值累计超过30%，属于股票交易异常波动的情况。除已披露的公告外，公司未发现近期公共传媒报道了可能或已经对公司股票交易价格产生较大影响的未公开重大信息；公司目前经营情况及内外部经营环境未发生重大变化。",
-      "content": "<b>德方纳米：股票交易异常波动，公司目前经营情况未发生重大变化  |</b> 德方纳米公告，公司股票4月28日、4月29日、4月30日连续3个交易日内收盘价涨幅偏离值累计超过30%，属于股票交易异常波动的情况。除已披露的公告外，公司未发现近期公共传媒报道了可能或已经对公司股票交易价格产生较大影响的未公开重大信息；公司目前经营情况及内外部经营环境未发生重大变化。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162549.html"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容仅涉及公司股价异动及经营情况说明，无新增事实或业务相关事件，不服务于屈臣氏电商经营分析。"
-    },
-    {
-      "article_id": "6f6bc8357d8a423e",
-      "title": "<b>国铁集团一季度实现营业收入2859亿元 同比增长1.6% |</b> 4月30日，中国国家铁路集团有限公司（简称“国铁集团”）披露2025年度和2026年一季度财务决算。2025...",
-      "url": "https://www.yicai.com/brief/103162547.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:19:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.860083+08:00",
-      "time_status": "in_window",
-      "summary": "<b>国铁集团一季度实现营业收入2859亿元 同比增长1.6%  |</b> 4月30日，中国国家铁路集团有限公司（简称“国铁集团”）披露2025年度和2026年一季度财务决算。2025年，国铁集团实现营业收入12987亿元，同比增长1.2%，净利润43.4亿元；2026年一季度，国铁集团实现营业收入2859亿元，同比增长1.6%，净利润3.8亿元，铁路客货运输多项指标创历史新高，国铁企业经营效益稳步提升。",
-      "content": "<b>国铁集团一季度实现营业收入2859亿元 同比增长1.6%  |</b> 4月30日，中国国家铁路集团有限公司（简称“国铁集团”）披露2025年度和2026年一季度财务决算。2025年，国铁集团实现营业收入12987亿元，同比增长1.2%，净利润43.4亿元；2026年一季度，国铁集团实现营业收入2859亿元，同比增长1.6%，净利润3.8亿元，铁路客货运输多项指标创历史新高，国铁企业经营效益稳步提升。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162547.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容为国铁集团财务数据披露，与屈臣氏电商经营无直接关联，未涉及流量、转化率、客单价等关键业务变量或行业动态。"
-    },
-    {
-      "article_id": "a10ffa5317bbe297",
-      "title": "<b>天岳先进：股东拟合计减持不超2.2%公司股份 |</b> 天岳先进公告，股东辽宁中德产业股权投资基金合伙企业(有限合伙)、辽宁海通新能源低碳产业股权投资基金有限...",
-      "url": "https://www.yicai.com/brief/103162542.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:08:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.860986+08:00",
-      "time_status": "in_window",
-      "summary": "<b>天岳先进：股东拟合计减持不超2.2%公司股份  |</b> 天岳先进公告，股东辽宁中德产业股权投资基金合伙企业(有限合伙)、辽宁海通新能源低碳产业股权投资基金有限公司及海通创新证券投资有限公司为一致行动人，合计持有7.0120%公司股份，计划减持公司股份合计不超过1066.16万股，即不超过公司总股本的2.2%。",
-      "content": "<b>天岳先进：股东拟合计减持不超2.2%公司股份  |</b> 天岳先进公告，股东辽宁中德产业股权投资基金合伙企业(有限合伙)、辽宁海通新能源低碳产业股权投资基金有限公司及海通创新证券投资有限公司为一致行动人，合计持有7.0120%公司股份，计划减持公司股份合计不超过1066.16万股，即不超过公司总股本的2.2%。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162542.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于公司股东行为公告，与零售业务无直接关联"
-    },
-    {
-      "article_id": "375299d8d6821787",
-      "title": "<b>十四届全国政协经济委员会原副主任易会满被“双开” |</b> 据央视新闻，经中共中央批准，中央纪委国家监委对第二十届中央委员、十四届全国政协经济委员会原副...",
-      "url": "https://www.yicai.com/brief/103162526.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:00:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.862789+08:00",
-      "time_status": "in_window",
-      "summary": "<b>十四届全国政协经济委员会原副主任易会满被“双开”  |</b> 据央视新闻，经中共中央批准，中央纪委国家监委对第二十届中央委员、十四届全国政协经济委员会原副主任易会满严重违纪违法问题进行了立案审查调查。<br /><br />经查，易会满丧失理想信念，背弃初心使命，贯彻落实党中央关于资本市场的重大决策部署阳奉阴违、推诿卸责，搞迷信活动；违反中央八项规定精神，违规收受礼品、礼金，接受可能影响公正执行公务的宴请、旅游活动安排；违反组织原则，在组织函询时不如实说明问题，在干部选拔任用等工作中为他人谋取利益并收受财物；廉洁底线失守，纵容、默许亲属利用本人职权谋取私利，违规从事营利活动，利用职权或者职务上的影响为亲属谋取利益，将应当由本人支付的费用由他人支付，搞权色、钱色交易；利用职务便利为他人在职务提拔、上市审批、融资贷款等方面谋利，并非法收受巨额财物。<br /><br />易会满严重违反党的政治纪律、组织纪律、廉洁纪律和生活纪律，构成严重职务违法并涉嫌受贿犯罪，且在党的十八大后不收敛、不收手，性质严重，影响恶劣，应予严肃处理。依据《中国共产党纪律处分条例》《中华人民共和国监察法》《中华人民共和国公职人员政务处分法》等有关规定，经中央纪委常委会会议研究并报中央政治局会议审议，决定给予易会满开除党籍处分；由国家监委给予其开除公职处分；终止其党的二十大代表资格；收缴其违纪违法所得；将其涉嫌犯罪问题移送检察机关依法审查起诉，所涉财物一并移送。给予其开除党籍的处分，待召开中央委员会全体会议时予以追认。",
-      "content": "<b>十四届全国政协经济委员会原副主任易会满被“双开”  |</b> 据央视新闻，经中共中央批准，中央纪委国家监委对第二十届中央委员、十四届全国政协经济委员会原副主任易会满严重违纪违法问题进行了立案审查调查。<br /><br />经查，易会满丧失理想信念，背弃初心使命，贯彻落实党中央关于资本市场的重大决策部署阳奉阴违、推诿卸责，搞迷信活动；违反中央八项规定精神，违规收受礼品、礼金，接受可能影响公正执行公务的宴请、旅游活动安排；违反组织原则，在组织函询时不如实说明问题，在干部选拔任用等工作中为他人谋取利益并收受财物；廉洁底线失守，纵容、默许亲属利用本人职权谋取私利，违规从事营利活动，利用职权或者职务上的影响为亲属谋取利益，将应当由本人支付的费用由他人支付，搞权色、钱色交易；利用职务便利为他人在职务提拔、上市审批、融资贷款等方面谋利，并非法收受巨额财物。<br /><br />易会满严重违反党的政治纪律、组织纪律、廉洁纪律和生活纪律，构成严重职务违法并涉嫌受贿犯罪，且在党的十八大后不收敛、不收手，性质严重，影响恶劣，应予严肃处理。依据《中国共产党纪律处分条例》《中华人民共和国监察法》《中华人民共和国公职人员政务处分法》等有关规定，经中央纪委常委会会议研究并报中央政治局会议审议，决定给予易会满开除党籍处分；由国家监委给予其开除公职处分；终止其党的二十大代表资格；收缴其违纪违法所得；将其涉嫌犯罪问题移送检察机关依法审查起诉，所涉财物一并移送。给予其开除党籍的处分，待召开中央委员会全体会议时予以追认。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162526.html"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 活动",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关的新增事实"
-    },
-    {
-      "article_id": "1150776868275688",
-      "title": "<b>俄副总理：“欧佩克+”5月3日将开会评估其石油供应能力 |</b> 据央视新闻，俄罗斯副总理诺瓦克30日表示，参与自愿减产协议的“欧佩克+”国家将在5月3日的会议...",
-      "url": "https://www.yicai.com/brief/103162523.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 08:56:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.863231+08:00",
-      "time_status": "in_window",
-      "summary": "<b>俄副总理：“欧佩克+”5月3日将开会评估其石油供应能力  |</b> 据央视新闻，俄罗斯副总理诺瓦克30日表示，参与自愿减产协议的“欧佩克+”国家将在5月3日的会议上评估其向全球市场供应原油和石油产品的能力。他强调，在当前形势下确保市场供应至关重要，需要审视现有潜力。",
-      "content": "<b>俄副总理：“欧佩克+”5月3日将开会评估其石油供应能力  |</b> 据央视新闻，俄罗斯副总理诺瓦克30日表示，参与自愿减产协议的“欧佩克+”国家将在5月3日的会议上评估其向全球市场供应原油和石油产品的能力。他强调，在当前形势下确保市场供应至关重要，需要审视现有潜力。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162523.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于国际能源政策背景信息"
-    },
-    {
-      "article_id": "4b7a23e409ab6bd9",
-      "title": "<b>伊朗总统称任何企图在海上封锁伊朗的行动注定失败 |</b> 据新华社援引伊朗国家电视台30日报道，伊朗总统佩泽希齐扬当日说，任何企图对伊朗实施封锁和海上限制...",
-      "url": "https://www.yicai.com/brief/103162520.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 08:50:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.863688+08:00",
-      "time_status": "in_window",
-      "summary": "<b>伊朗总统称任何企图在海上封锁伊朗的行动注定失败  |</b> 据新华社援引伊朗国家电视台30日报道，伊朗总统佩泽希齐扬当日说，任何企图对伊朗实施封锁和海上限制的行动都注定失败。<br /><br />当日是伊朗的“国家波斯湾日”。佩泽希齐扬为此发表致辞说：“波斯湾不是强加外国单方面意志的场所，只有沿海国家通力合作、互相尊重主权，才能确保这一区域的安全。”他说，这条战略水道是伊朗民族认同不可分割的一部分，也是伊朗主权的象征。",
-      "content": "<b>伊朗总统称任何企图在海上封锁伊朗的行动注定失败  |</b> 据新华社援引伊朗国家电视台30日报道，伊朗总统佩泽希齐扬当日说，任何企图对伊朗实施封锁和海上限制的行动都注定失败。<br /><br />当日是伊朗的“国家波斯湾日”。佩泽希齐扬为此发表致辞说：“波斯湾不是强加外国单方面意志的场所，只有沿海国家通力合作、互相尊重主权，才能确保这一区域的安全。”他说，这条战略水道是伊朗民族认同不可分割的一部分，也是伊朗主权的象征。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162520.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及伊朗政治表态，属于地缘政治背景信息，未提及任何与屈臣氏、电商平台、零售或消费相关的商业动态，无法服务于电商经营分析。"
-    },
-    {
-      "article_id": "920c3c43f26ad48b",
-      "title": "<b>俞敏洪回应股权奖励，称未在东方甄选领过工资 |</b> 4月30日，俞敏洪发文表示，股权授予是上市公司常规的员工激励方式，最初曾明确拒绝过。从东方甄选创立至...",
-      "url": "https://www.yicai.com/brief/103162507.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 08:39:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.864580+08:00",
-      "time_status": "in_window",
-      "summary": "<b>俞敏洪回应股权奖励，称未在东方甄选领过工资  |</b> 4月30日，俞敏洪发文表示，股权授予是上市公司常规的员工激励方式，最初曾明确拒绝过。从东方甄选创立至今，从未领过一分钱工资。但董事会及股东认为，如果没有股权激励，与为东方甄选做出的努力是不对等的。<br /><br />同时俞敏洪承诺，未来股权兑现、完成纳税后，全部现金收益将分为三大用途：一是设立董事长奖励基金，奖励为东方甄选做出杰出贡献的员工；二是捐赠至新东方基金会，全部用于支持农村中小学生；三是捐献一部分给北大，帮助来自农村的北大学生。（第一财经记者 吕倩）",
-      "content": "<b>俞敏洪回应股权奖励，称未在东方甄选领过工资  |</b> 4月30日，俞敏洪发文表示，股权授予是上市公司常规的员工激励方式，最初曾明确拒绝过。从东方甄选创立至今，从未领过一分钱工资。但董事会及股东认为，如果没有股权激励，与为东方甄选做出的努力是不对等的。<br /><br />同时俞敏洪承诺，未来股权兑现、完成纳税后，全部现金收益将分为三大用途：一是设立董事长奖励基金，奖励为东方甄选做出杰出贡献的员工；二是捐赠至新东方基金会，全部用于支持农村中小学生；三是捐献一部分给北大，帮助来自农村的北大学生。（第一财经记者 吕倩）",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162507.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实，属于背景信息或无业务关联事件"
-    },
-    {
-      "article_id": "5d54acda5491e67a",
-      "title": "<b>百利电气：公司董事长变更为张建新 |</b> 百利电气公告，左小鹏因工作调整原因申请辞去公司董事、董事长、法定代表人、战略发展委员会主任委员、薪酬与考核委...",
-      "url": "https://www.yicai.com/brief/103162455.html",
-      "source_name": "rsshub_yicai",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 08:23:00 GMT",
-      "collected_at": "2026-04-30T17:58:10.867386+08:00",
-      "time_status": "in_window",
-      "summary": "<b>百利电气：公司董事长变更为张建新  |</b> 百利电气公告，左小鹏因工作调整原因申请辞去公司董事、董事长、法定代表人、战略发展委员会主任委员、薪酬与考核委员会委员的职务，辞职后将不再担任公司任何职务。公司于2026年4月30日召开董事会九届十二次会议，选举董事张建新为董事长、执行公司事务的董事长、法定代表人，任期与第九届董事会任期一致。",
-      "content": "<b>百利电气：公司董事长变更为张建新  |</b> 百利电气公告，左小鹏因工作调整原因申请辞去公司董事、董事长、法定代表人、战略发展委员会主任委员、薪酬与考核委员会委员的职务，辞职后将不再担任公司任何职务。公司于2026年4月30日召开董事会九届十二次会议，选举董事张建新为董事长、执行公司事务的董事长、法定代表人，任期与第九届董事会任期一致。",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/yicai/brief?limit=30&filterout_time=604800",
-        "route": "/yicai/brief?limit=30",
-        "entry_id": "https://www.yicai.com/brief/103162455.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容为公司治理变动，与屈臣氏电商经营无直接关联，未涉及流量、转化、货盘、平台规则等经营要素"
-    },
-    {
-      "article_id": "a0768672536551c4",
-      "title": "“私募魔女”李蓓买入18倍牛股？此“李蓓”非彼“李蓓”",
-      "url": "https://wallstreetcn.com/livenews/3097392",
-      "source_name": "rsshub_wallstreetcn",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:50:25 GMT",
-      "collected_at": "2026-04-30T17:58:18.855266+08:00",
-      "time_status": "in_window",
-      "summary": "<p>上纬新材近日披露的2026年一季报显示，截至2026年一季度末，李蓓新进该公司前十大流通股东名单，期末持股市值超过1亿元，“私募魔女持仓曝光的消息”不胫而走。此次李蓓出现在上市公司前十大流通股东名单中备受市场关注。对此，记者采访半夏投资创始人李蓓获悉，出现在上纬新材股东名单中的李蓓并非其本人。(上证报)</p>",
-      "content": "<p>上纬新材近日披露的2026年一季报显示，截至2026年一季度末，李蓓新进该公司前十大流通股东名单，期末持股市值超过1亿元，“私募魔女持仓曝光的消息”不胫而走。此次李蓓出现在上市公司前十大流通股东名单中备受市场关注。对此，记者采访半夏投资创始人李蓓获悉，出现在上纬新材股东名单中的李蓓并非其本人。(上证报)</p>",
-      "matched_keywords": [
-        "曝光"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/wallstreetcn/news?limit=30&filterout_time=604800",
-        "route": "/wallstreetcn/news?limit=30",
-        "entry_id": "3097392"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "487917962f48d326",
-      "title": "易会满被“双开”！",
-      "url": "https://wallstreetcn.com/articles/3771391",
-      "source_name": "rsshub_wallstreetcn",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:10:50 GMT",
-      "collected_at": "2026-04-30T17:58:18.857298+08:00",
-      "time_status": "in_window",
-      "summary": "<p>经中共中央批准，中央纪委国家监委对第二十届中央委员、十四届全国政协经济委员会原副主任易会满严重违纪违法问题进行了立案审查调查。</p>\n<p>经查，易会满丧失理想信念，背弃初心使命，贯彻落实党中央关于资本市场的重大决策部署阳奉阴违、推诿卸责，<strong>搞迷信活动</strong>；违反中央八项规定精神，<strong>违规收受礼品、礼金，接受可能影响公正执行公务的宴请、旅游活动安排</strong>；违反组织原则，在组织函询时不如实说明问题，在干部选拔任用等工作中为他人谋取利益并收受财物；廉洁底线失守，纵容、默许亲属利用本人职权谋取私利，违规从事营利活动，利用职权或者职务上的影响为亲属谋取利益，将应当由本人支付的费用由他人支付，<strong>搞权色、钱色交易</strong>；利用职务便利为他人在职务提拔、上市审批、融资贷款等方面谋利，<strong>并非法收受巨额财物。</strong></p>\n<p>易会满严重违反党的政治纪律、组织纪律、廉洁纪律和生活纪律，构成严重职务违法并涉嫌受贿犯罪，且在党的十八大后不收敛、不收手，性质严重，影响恶劣，应予严肃处理。依据《中国共产党纪律处分条例》《中华人民共和国监察法》《中华人民共和国公职人员政务处分法》等有关规定，经中央纪委常委会会议研究并报中央政治局会议审议，决定给予易会满开除党籍处分；由国家监委给予其开除公职处分；终止其党的二十大代表资格；收缴其违纪违法所得；将其涉嫌犯罪问题移送检察机关依法审查起诉，所涉财物一并移送。给予其开除党籍的处分，待召开中央委员会全体会议时予以追认。</p>\n<p><span style=\"color: #808080;\">来源：<a href=\"https://content-static.cctvnews.cctv.com/snow-book/index.html?item_id=18373677104689905935&amp;t=1777539143065&amp;toc_style_id=feeds_default&amp;share_to=qq&amp;track_id=4afda24e-9b9a-4642-a5a4-d86b0b3e5add\" rel=\"noopener\" target=\"_blank\">央视新闻</a></span></p>\n<p>&nbsp;</p><div style=\"color: #666; margin-bottom: 15px;\">风险提示及免责条款</div>\n          <div>\n            市场有风险，投资需谨慎。本文不构成个人投资建议，也未考虑到个别用户特殊的投资目标、财务状况或需要。用户应考虑本文中的任何意见、观点或结论是否符合其特定状况。据此投资，责任自负。\n          </div>",
-      "content": "<p>经中共中央批准，中央纪委国家监委对第二十届中央委员、十四届全国政协经济委员会原副主任易会满严重违纪违法问题进行了立案审查调查。</p>\n<p>经查，易会满丧失理想信念，背弃初心使命，贯彻落实党中央关于资本市场的重大决策部署阳奉阴违、推诿卸责，<strong>搞迷信活动</strong>；违反中央八项规定精神，<strong>违规收受礼品、礼金，接受可能影响公正执行公务的宴请、旅游活动安排</strong>；违反组织原则，在组织函询时不如实说明问题，在干部选拔任用等工作中为他人谋取利益并收受财物；廉洁底线失守，纵容、默许亲属利用本人职权谋取私利，违规从事营利活动，利用职权或者职务上的影响为亲属谋取利益，将应当由本人支付的费用由他人支付，<strong>搞权色、钱色交易</strong>；利用职务便利为他人在职务提拔、上市审批、融资贷款等方面谋利，<strong>并非法收受巨额财物。</strong></p>\n<p>易会满严重违反党的政治纪律、组织纪律、廉洁纪律和生活纪律，构成严重职务违法并涉嫌受贿犯罪，且在党的十八大后不收敛、不收手，性质严重，影响恶劣，应予严肃处理。依据《中国共产党纪律处分条例》《中华人民共和国监察法》《中华人民共和国公职人员政务处分法》等有关规定，经中央纪委常委会会议研究并报中央政治局会议审议，决定给予易会满开除党籍处分；由国家监委给予其开除公职处分；终止其党的二十大代表资格；收缴其违纪违法所得；将其涉嫌犯罪问题移送检察机关依法审查起诉，所涉财物一并移送。给予其开除党籍的处分，待召开中央委员会全体会议时予以追认。</p>\n<p><span style=\"color: #808080;\">来源：<a href=\"https://content-static.cctvnews.cctv.com/snow-book/index.html?item_id=18373677104689905935&amp;t=1777539143065&amp;toc_style_id=feeds_default&amp;share_to=qq&amp;track_id=4afda24e-9b9a-4642-a5a4-d86b0b3e5add\" rel=\"noopener\" target=\"_blank\">央视新闻</a></span></p>\n<p>&nbsp;</p><div style=\"color: #666; margin-bottom: 15px;\">风险提示及免责条款</div>\n          <div>\n            市场有风险，投资需谨慎。本文不构成个人投资建议，也未考虑到个别用户特殊的投资目标、财务状况或需要。用户应考虑本文中的任何意见、观点或结论是否符合其特定状况。据此投资，责任自负。\n          </div>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/wallstreetcn/news?limit=30&filterout_time=604800",
-        "route": "/wallstreetcn/news?limit=30",
-        "entry_id": "3771391"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 活动",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "0e8f8731194fb72a",
-      "title": "美国加州汽油价格自2023年以来首次突破每加仑6美元。",
-      "url": "https://wallstreetcn.com/livenews/3097350",
-      "source_name": "rsshub_wallstreetcn",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 08:57:43 GMT",
-      "collected_at": "2026-04-30T17:58:18.859467+08:00",
-      "time_status": "in_window",
-      "summary": "<p>美国加州汽油价格自2023年以来首次突破每加仑6美元。</p>",
-      "content": "<p>美国加州汽油价格自2023年以来首次突破每加仑6美元。</p>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/wallstreetcn/news?limit=30&filterout_time=604800",
-        "route": "/wallstreetcn/news?limit=30",
-        "entry_id": "3097350"
-      },
-      "filter": {
-        "rule_score": 1,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "+2 time_status=in_window",
-          "-2 内容极短且无关键词"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 事件为宏观背景信息，与屈臣氏电商经营无直接关联"
-    },
-    {
-      "article_id": "cc6fc5c954a81d98",
-      "title": "“下次不再见”！鲍威尔谢幕：一个“外行”掌舵美联储最动荡的八年",
-      "url": "https://wallstreetcn.com/articles/3771381",
-      "source_name": "rsshub_wallstreetcn",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 08:20:14 GMT",
-      "collected_at": "2026-04-30T17:58:18.862141+08:00",
-      "time_status": "in_window",
-      "summary": "<p style=\"text-align: left;\">“I won't see you next time”，任期将尽，鲍威尔时代进入倒计时。</p>\n<p style=\"text-align: left;\">2026年4月29日，美联储例行新闻发布会的末尾，主席杰罗姆·鲍威尔走下讲台前，向在场记者说出了这句看似轻描淡写、实则意味深长的话——“非常感谢大家，下次不再见。”随后，他离开讲台，走出会场，结束了自己作为美联储主席的最后一场新闻发布会。</p>\n<p style=\"text-align: left;\">2026年5月15日，鲍威尔的主席任期将正式画上句点。这一天，他的继任者、特朗普提名的凯文·沃什预计将通过参议院银行委员会确认投票，接掌这一全球最具权势的货币政策职位。</p>\n<p style=\"text-align: left;\"><strong>八年，两届任期，横跨两任总统、一场百年一遇的全球大疫情、美国四十年来最严峻的通胀。鲍威尔留下的，是一份功过交织、争议并存的历史账单</strong>：他主导下的美联储成功守住了就业底线，将月均失业率压至4.6%，低于前任格林斯潘、伯南克和耶伦；但与此同时，他任内的平均通胀率高达3.09%，远超美联储2%的政策目标，也远高于前几任主席的任期均值。</p>\n<p style=\"text-align: left;\">在谈及自己的施政遗产时，鲍威尔引用了弗兰克·辛纳屈的名言，他说，他有过一些遗憾，但并不多。这句话，或许是对这八年最恰当的注脚。</p>\n<h2 style=\"text-align: left;\">非典型央行行长：从普林斯顿文科生到美联储掌门人</h2>\n<p style=\"text-align: left;\">2017年11月，时任总统特朗普宣布提名杰罗姆·鲍威尔接替珍妮特·耶伦，出任美联储第16任主席。这一任命一经公布，立即在学界引发轩然大波。</p>\n<p style=\"text-align: left;\">原因只有一个：鲍威尔不是经济学家。</p>\n<p style=\"text-align: left;\">过去三十年，从格林斯潘（1987年）开始，美联储的历任主席均持有经济学博士学位，均是宏观经济领域的顶尖学者。而鲍威尔的履历，在这条精英轨道上，显得格外另类。</p>\n<p style=\"text-align: left;\"><strong>鲍威尔1975年毕业于普林斯顿大学，获文学学士学位，</strong>随后进入乔治城大学法学院，取得法律博士学位。他的职业起步是在纽约做投资银行家，此后进入财政部，在老布什政府期间担任财政部官员，处理国内金融、债务和税务政策。1997年至2005年间，他以合伙人身份供职于华盛顿著名的私募机构凯雷集团，2008年又转至私募股权公司全球环境基金担任管理合伙人。</p>\n<p style=\"text-align: left;\">2011年，时任总统奥巴马提名他出任美联储理事会成员。此举在当时被普遍解读为向共和党人抛出的橄榄枝。<strong>2012年，《华尔街日报》披露，鲍威尔个人资产在2130万至7220万美元之间，是当时美联储理事会成员中最富有的一位。</strong></p>\n<p style=\"text-align: left;\">然而，华尔街的财富积累，并不能弥补学术背景的缺失。金融服务公司Bankrate.com首席财务分析师格雷格·麦克布莱德直言：\"杰罗姆·鲍威尔没有经济学博士学位，但他将被赋予引导全球最大经济体的重任。让一个非经济学家来掌舵美联储，这是打破传统之举。\"</p>\n<p style=\"text-align: left;\">批评者言辞更为尖锐。经济政策研究所研究总监乔什·拜文斯呼吁保留耶伦，并指出：\"现在是需要一位真正的宏观经济学专家掌舵的时候，而不是一个可能听命于理事会的人。\"</p>\n<p style=\"text-align: left;\">更有评论以\"最后一位非经济学家担任美联储主席\"G·威廉·米勒为例，指出米勒在卡特政府时期因对通胀形势判断失误，在任仅17个月便被迫离职，警告历史可能重演。</p>\n<p style=\"text-align: left;\">然而，布鲁金斯学会经济研究员亚伦·克莱因则持不同看法。他认为，<strong>鲍威尔在财政部和美联储多年积累的实务经验，完全使其胜任这一职位。更重要的是，其与众不同的背景，或许恰恰能帮助美联储打破长期存在的\"群体思维\"。</strong></p>\n<p style=\"text-align: left;\">\"没有什么神奇的秘密配方是经济学博士专属的，\"克莱因说，\"有一位背景不同的主席，可能是一种优势——前提是他知道何时应该抛开模型、凭借直觉做判断。\"</p>\n<p style=\"text-align: left;\">这一争论，在接下来的八年里，将以最戏剧化的方式得到检验。</p>\n<h2 style=\"text-align: left;\">2018年接棒：承接的是一个布满暗礁的开局</h2>\n<p style=\"text-align: left;\">2018年2月5日，鲍威尔宣誓就职，正式从耶伦手中接过美联储的掌舵权。</p>\n<p style=\"text-align: left;\">从表面上看，他接手的是一个相当不错的局面：通货膨胀低于美联储2%的政策目标，运行在约1.5%的水平；失业率为4.1%，是17年来的最低点；经济增长经历多年低迷后重获动能，股市屡创历史新高，特朗普政府的税改方案也正为经济注入财政刺激。</p>\n<p style=\"text-align: left;\"><strong>然而，暗礁已在水面之下悄然聚集。</strong></p>\n<p style=\"text-align: left;\">资深观察人士David Wessel在当时就指出，耶伦留给鲍威尔的，远不止一份亮丽的成绩单，更是一系列棘手的难题：如何在通胀压力升温之前把握好加息节奏？如何评估大规模减税对已接近满负荷运转的经济的影响？何时、又以何种方式动用非常规货币政策工具应对下一轮衰退？</p>\n<p style=\"text-align: left;\">另一些批评者则更为悲观。他们认为，<strong>耶伦的宽松政策维持时间过长，任由美国股市估值攀升至过去百年来仅出现过三次的高位，</strong>全球政府债券收益率也降至历史低点，信用风险被系统性低估——这一切，都将成为留给鲍威尔的定时炸弹。</p>\n<p style=\"text-align: left;\">更棘手的是政治层面的变量。鲍威尔上任仅五个月，特朗普便公开在CNBC节目中炮轰：\"我不喜欢我们在经济上付出这么多努力，然后眼睁睁看着利率上涨。\"</p>\n<p style=\"text-align: left;\">鲍威尔选择无视。但这场与特朗普长达数年的政治角力，才刚刚拉开序幕。</p>\n<p style=\"text-align: left;\">2018年秋季，鲍威尔在一次采访中表示，美联储距离利率的中性水平\"还有很长的路要走\"，随即引发市场大幅波动。当年12月，他又因一句资产负债表缩减\"在自动驾驶轨道上\"进行的表述，引发新一轮市场恐慌。特朗普一度考虑将其解职。</p>\n<p style=\"text-align: left;\">这两次舆论风波，让鲍威尔深刻领悟到了一个道理：身为美联储主席，每一个字，都具有撼动市场的力量。</p>\n<h2 style=\"text-align: left;\">疫情冲击：危机中的\"越线者\"</h2>\n<p style=\"text-align: left;\">如果说接棒之初的政策磨合期只是一次热身，那么2020年春天，才是鲍威尔真正意义上的第一场大考。</p>\n<p style=\"text-align: left;\">2020年初，新冠疫情席卷全球，美国经济在短短数周内急速坠入悬崖。2020年4月，美国失业率飙升至14.8%，创下1948年有现代失业统计以来的最高纪录，数以千万计的美国人在一夜之间失去工作。</p>\n<p style=\"text-align: left;\">面对这场百年一遇的危机，鲍威尔的反应之迅速、力度之激进，令华尔街咋舌。<strong>美联储在极短时间内将基准利率紧急降至近零水平，同时重启并大幅扩大量化宽松规模，在数周内购入数万亿美元的债券；与此同时，鲍威尔还联手财政部，推出了一系列远超传统央行业务边界的紧急信贷工具。</strong></p>\n<p style=\"text-align: left;\">他事后坦承，这些行动已远远超出了常规货币政策的疆域。</p>\n<p style=\"text-align: left;\">\"我们越过了很多红线，\"2020年5月，鲍威尔在普林斯顿大学的一次活动上说，\"在这种情况下，你先做了这件事，然后事后再想办法解决。\"</p>\n<p style=\"text-align: left;\">这场豪赌，最终奏效。美国经济成功避免了第二次大萧条，就业市场在约两年内完成了从疫情重创到基本复原的历程——而2008年金融危机之后，这一过程整整用了六年。鲍威尔也因此赢得了广泛赞誉，被视为在危机关头展现出沃尔克式果敢的领导人。</p>\n<p style=\"text-align: left;\">然而，“事后再想办法解决”这句话，也为接下来的政策失误埋下了伏笔。</p>\n<h2 style=\"text-align: left;\">高通胀时代：从“暂时性”的傲慢到“沃尔克式”的铁腕</h2>\n<p style=\"text-align: left;\"><strong>疫情救市的代价，在2021年开始集中兑现。</strong></p>\n<p style=\"text-align: left;\">随着天量财政刺激资金涌入市场，消费需求爆发式反弹，而全球供应链的修复却远比预期迟缓；与此同时，劳动力市场供给持续偏紧，能源、租金、工资等成本轮番上涨。需求端和供给端的双重失衡，以及此后俄乌战争引发的能源价格暴涨，共同将美国通货膨胀推向失控边缘。</p>\n<p style=\"text-align: left;\"><strong>2021年8月，面对通胀压力已显著升温的现实，鲍威尔在一年一度的杰克逊霍尔央行年会上，做出了日后令他悔恨不已的那个判断——他称当前通胀为\"暂时性的（transitory）\"，认为供应链扰动终将消退，价格终将回归正轨。</strong></p>\n<p style=\"text-align: left;\">这一判断，成为他任内最大的政策失误。</p>\n<p style=\"text-align: left;\">事实证明，通胀不仅没有\"暂时性\"地自行消退，反而持续加速。<strong>截至2022年2月，美国核心CPI同比涨幅已攀升至6.4%，创下四十年来的最高水平；</strong>同年6月，综合CPI同比涨幅进一步冲高至9.1%的峰值。这不仅是美联储的判断失误，也是鲍威尔本人历史评价中一道难以抹去的污点。</p>\n<p style=\"text-align: left;\"><img class=\"wscnph\" src=\"https://wpimg-wscn.awtmt.com/e649a455-7ac4-4b64-b61e-b8032127efda.png\" /></p>\n<p style=\"text-align: left;\">在国会听证会上，参议员直接追问：为何美联储对通胀形势出现如此严重的误判？鲍威尔承认，这一波通胀在2021年中期之后突然快速攀升，超出了几乎所有主流宏观经济学家的预期；供应链的修复速度也远慢于预期，这是历史上几乎没有先例的情况。<strong>他承认，\"我们本应该更早采取行动。\"</strong></p>\n<p style=\"text-align: left;\">迟到的纠偏，力度空前。</p>\n<p style=\"text-align: left;\">2022年3月，美联储正式开启本轮加息周期。随后的一年多时间里，鲍威尔主导的连续激进加息令市场震惊——<strong>在不到两年时间内，基准利率从接近零的水平累计上调了500多个基点，加息速度之快，在现代美联储历史上极为罕见。</strong></p>\n<p style=\"text-align: left;\"><strong><img class=\"wscnph\" src=\"https://wpimg-wscn.awtmt.com/71848759-3005-4d1c-b76a-249d45450d01.png\" /></strong></p>\n<p style=\"text-align: left;\">与2020年的危机救市形成强烈对比，这一次，鲍威尔引用的精神偶像从凯恩斯变成了沃尔克。他在2022年的杰克逊霍尔年会上明确警告，将价格稳定\"带回来\"将给就业和增长带来\"一些痛苦\"，<strong>并喊出将\"不惜一切代价维护价格稳定\"，</strong>以此向市场传递铁腕治通胀的决心。</p>\n<p style=\"text-align: left;\">批评者指出，这是一次迟到的转变，美联储为此付出了沉重代价——数以百万计的美国家庭在此期间承受了购买力的大幅缩水。但也有经济学家为鲍威尔辩护，认为这波通胀的主因是疫情与地缘政治冲击带来的供给侧扰动，并非货币政策单独能够左右的结果。</p>\n<p style=\"text-align: left;\"><strong>而最令外界意外的结局是：这场史无前例的激进加息，并未触发广泛预期的经济衰退。</strong></p>\n<p style=\"text-align: left;\">到2024年底，美国经济年增长率仍维持在2.5%，通胀在未推高失业率的情况下大幅回落，劳动力市场保持接近充分就业的状态。几乎整个经济学界都曾预言的衰退，始终未曾到来。</p>\n<p style=\"text-align: left;\">鲍威尔本人在哈佛大学经济学课堂上坦言，几乎被认为不可能的\"软着陆\"，是他认为最值得自豪的成就之一。</p>\n<h2 style=\"text-align: left;\">遗产与争议并存：独立性才是最大的遗产</h2>\n<p style=\"text-align: left;\">历史对鲍威尔的终极评价，或许不会落在任何一项具体的经济指标上，而是落在一个更根本的问题上：<strong>他守住了美联储的独立性。</strong></p>\n<p style=\"text-align: left;\">特朗普在第一个总统任期内已频繁抨击鲍威尔不肯降息，一度考虑将其解职。2025年特朗普重返白宫后，这场政治施压升级为正面冲突——白宫授意司法部以联邦储备委员会总部大楼翻新工程造价超支为由，对鲍威尔展开刑事调查，在美联储112年历史上几乎是破天荒的第一次。</p>\n<p style=\"text-align: left;\">分析人士普遍认为，这场调查的真实动机，是迫使美联储降息以配合特朗普的政治议程。</p>\n<p style=\"text-align: left;\">面对这场前所未有的政治压力，鲍威尔于2026年1月发布视频声明公开还击，将其定性为\"美联储根据对公众最有利的判断设定利率，而非顺从总统偏好的后果\"。这段视频迅速在金融圈广泛流传，为他赢得了两党的国会支持，也让他得以在任期届满之际，以自己的方式完成历史性的谢幕。</p>\n<p style=\"text-align: left;\">美联储历史上，上一次有主席面临如此强烈的政治压力，还要追溯到五十多年前：尼克松曾向时任主席亚瑟·伯恩斯施压，要求维持宽松货币政策，最终酿成那个时代通胀失控。相较之下，鲍威尔的顶住压力、拒绝妥协，使他在历史上的位置，显然要比那位就范的前辈高出许多。</p>\n<p style=\"text-align: left;\">充分就业，是鲍威尔另一项为人称道的遗产。</p>\n<p style=\"text-align: left;\">鲍威尔任内月均失业率4.6%，低于格林斯潘（5.5%）、伯南克（7.3%）和耶伦（5.1%）。这份数字背后是实实在在的民生改善：低失业率不对称地惠及了劳动力市场中最弱势的群体——2019年至2024年间，收入处于底部10%的工人实际工资累计涨幅达15.3%；黑人失业率于2023年降至4.8%，创下历史新低。研究者迪恩·贝克写道，<strong>鲍威尔对充分就业目标的认真执行，使数以百万计的工人在本可失业的情况下依然持有工作，数以千万计的人获得了本不会有的工资涨幅。</strong></p>\n<p style=\"text-align: left;\"><strong><img class=\"wscnph\" src=\"https://wpimg-wscn.awtmt.com/e698db0d-5185-4d62-abba-7fe5ec7154c0.png\" /></strong></p>\n<p style=\"text-align: left;\">鲍威尔的批评者同样不乏理由。</p>\n<p style=\"text-align: left;\">在监管层面，2023年硅谷银行的骤然倒闭，暴露出美联储在银行监管上的松弛。贝克直言：\"他在监管方面存在严重缺陷，让局面走到了不得不救助硅谷银行的地步。\"</p>\n<p style=\"text-align: left;\"><strong>在通胀问题上，鲍威尔任内平均通胀率3.09%，较美联储2%的目标高出逾一个百分点，</strong>也高于格林斯潘（2.5%）、伯南克（1.84%）和耶伦（1.17%）时代。<strong>卸任时，美联储资产负债表仍高达约6.7万亿美元，较上任时翻了不止一番，继任者凯文·沃什已将这一\"遗留包袱\"列为首要整治对象。</strong></p>\n<p style=\"text-align: left;\">低失业率与高通胀，构成他向历史递交的这份双面成绩单的两面。</p>\n<p style=\"text-align: left;\">他自己用一句话定位了这份工作的本质：<strong>\"我们是在建堤坝，而不是在预防飓风。\"</strong></p>\n<p style=\"text-align: left;\">这既是对美联储职能边界的自谦表述，也是他对这八年的自我注解——不是说他预见了一切，更不是说他从未失误，而是说，在最动荡的时代，他试图将这个机构建得足够坚固，使其不被政治的狂风、疫情的暴雨和通胀的洪流彻底摧毁。</p><div style=\"color: #666; margin-bottom: 15px;\">风险提示及免责条款</div>\n          <div>\n            市场有风险，投资需谨慎。本文不构成个人投资建议，也未考虑到个别用户特殊的投资目标、财务状况或需要。用户应考虑本文中的任何意见、观点或结论是否符合其特定状况。据此投资，责任自负。\n          </div>",
-      "content": "<p style=\"text-align: left;\">“I won't see you next time”，任期将尽，鲍威尔时代进入倒计时。</p>\n<p style=\"text-align: left;\">2026年4月29日，美联储例行新闻发布会的末尾，主席杰罗姆·鲍威尔走下讲台前，向在场记者说出了这句看似轻描淡写、实则意味深长的话——“非常感谢大家，下次不再见。”随后，他离开讲台，走出会场，结束了自己作为美联储主席的最后一场新闻发布会。</p>\n<p style=\"text-align: left;\">2026年5月15日，鲍威尔的主席任期将正式画上句点。这一天，他的继任者、特朗普提名的凯文·沃什预计将通过参议院银行委员会确认投票，接掌这一全球最具权势的货币政策职位。</p>\n<p style=\"text-align: left;\"><strong>八年，两届任期，横跨两任总统、一场百年一遇的全球大疫情、美国四十年来最严峻的通胀。鲍威尔留下的，是一份功过交织、争议并存的历史账单</strong>：他主导下的美联储成功守住了就业底线，将月均失业率压至4.6%，低于前任格林斯潘、伯南克和耶伦；但与此同时，他任内的平均通胀率高达3.09%，远超美联储2%的政策目标，也远高于前几任主席的任期均值。</p>\n<p style=\"text-align: left;\">在谈及自己的施政遗产时，鲍威尔引用了弗兰克·辛纳屈的名言，他说，他有过一些遗憾，但并不多。这句话，或许是对这八年最恰当的注脚。</p>\n<h2 style=\"text-align: left;\">非典型央行行长：从普林斯顿文科生到美联储掌门人</h2>\n<p style=\"text-align: left;\">2017年11月，时任总统特朗普宣布提名杰罗姆·鲍威尔接替珍妮特·耶伦，出任美联储第16任主席。这一任命一经公布，立即在学界引发轩然大波。</p>\n<p style=\"text-align: left;\">原因只有一个：鲍威尔不是经济学家。</p>\n<p style=\"text-align: left;\">过去三十年，从格林斯潘（1987年）开始，美联储的历任主席均持有经济学博士学位，均是宏观经济领域的顶尖学者。而鲍威尔的履历，在这条精英轨道上，显得格外另类。</p>\n<p style=\"text-align: left;\"><strong>鲍威尔1975年毕业于普林斯顿大学，获文学学士学位，</strong>随后进入乔治城大学法学院，取得法律博士学位。他的职业起步是在纽约做投资银行家，此后进入财政部，在老布什政府期间担任财政部官员，处理国内金融、债务和税务政策。1997年至2005年间，他以合伙人身份供职于华盛顿著名的私募机构凯雷集团，2008年又转至私募股权公司全球环境基金担任管理合伙人。</p>\n<p style=\"text-align: left;\">2011年，时任总统奥巴马提名他出任美联储理事会成员。此举在当时被普遍解读为向共和党人抛出的橄榄枝。<strong>2012年，《华尔街日报》披露，鲍威尔个人资产在2130万至7220万美元之间，是当时美联储理事会成员中最富有的一位。</strong></p>\n<p style=\"text-align: left;\">然而，华尔街的财富积累，并不能弥补学术背景的缺失。金融服务公司Bankrate.com首席财务分析师格雷格·麦克布莱德直言：\"杰罗姆·鲍威尔没有经济学博士学位，但他将被赋予引导全球最大经济体的重任。让一个非经济学家来掌舵美联储，这是打破传统之举。\"</p>\n<p style=\"text-align: left;\">批评者言辞更为尖锐。经济政策研究所研究总监乔什·拜文斯呼吁保留耶伦，并指出：\"现在是需要一位真正的宏观经济学专家掌舵的时候，而不是一个可能听命于理事会的人。\"</p>\n<p style=\"text-align: left;\">更有评论以\"最后一位非经济学家担任美联储主席\"G·威廉·米勒为例，指出米勒在卡特政府时期因对通胀形势判断失误，在任仅17个月便被迫离职，警告历史可能重演。</p>\n<p style=\"text-align: left;\">然而，布鲁金斯学会经济研究员亚伦·克莱因则持不同看法。他认为，<strong>鲍威尔在财政部和美联储多年积累的实务经验，完全使其胜任这一职位。更重要的是，其与众不同的背景，或许恰恰能帮助美联储打破长期存在的\"群体思维\"。</strong></p>\n<p style=\"text-align: left;\">\"没有什么神奇的秘密配方是经济学博士专属的，\"克莱因说，\"有一位背景不同的主席，可能是一种优势——前提是他知道何时应该抛开模型、凭借直觉做判断。\"</p>\n<p style=\"text-align: left;\">这一争论，在接下来的八年里，将以最戏剧化的方式得到检验。</p>\n<h2 style=\"text-align: left;\">2018年接棒：承接的是一个布满暗礁的开局</h2>\n<p style=\"text-align: left;\">2018年2月5日，鲍威尔宣誓就职，正式从耶伦手中接过美联储的掌舵权。</p>\n<p style=\"text-align: left;\">从表面上看，他接手的是一个相当不错的局面：通货膨胀低于美联储2%的政策目标，运行在约1.5%的水平；失业率为4.1%，是17年来的最低点；经济增长经历多年低迷后重获动能，股市屡创历史新高，特朗普政府的税改方案也正为经济注入财政刺激。</p>\n<p style=\"text-align: left;\"><strong>然而，暗礁已在水面之下悄然聚集。</strong></p>\n<p style=\"text-align: left;\">资深观察人士David Wessel在当时就指出，耶伦留给鲍威尔的，远不止一份亮丽的成绩单，更是一系列棘手的难题：如何在通胀压力升温之前把握好加息节奏？如何评估大规模减税对已接近满负荷运转的经济的影响？何时、又以何种方式动用非常规货币政策工具应对下一轮衰退？</p>\n<p style=\"text-align: left;\">另一些批评者则更为悲观。他们认为，<strong>耶伦的宽松政策维持时间过长，任由美国股市估值攀升至过去百年来仅出现过三次的高位，</strong>全球政府债券收益率也降至历史低点，信用风险被系统性低估——这一切，都将成为留给鲍威尔的定时炸弹。</p>\n<p style=\"text-align: left;\">更棘手的是政治层面的变量。鲍威尔上任仅五个月，特朗普便公开在CNBC节目中炮轰：\"我不喜欢我们在经济上付出这么多努力，然后眼睁睁看着利率上涨。\"</p>\n<p style=\"text-align: left;\">鲍威尔选择无视。但这场与特朗普长达数年的政治角力，才刚刚拉开序幕。</p>\n<p style=\"text-align: left;\">2018年秋季，鲍威尔在一次采访中表示，美联储距离利率的中性水平\"还有很长的路要走\"，随即引发市场大幅波动。当年12月，他又因一句资产负债表缩减\"在自动驾驶轨道上\"进行的表述，引发新一轮市场恐慌。特朗普一度考虑将其解职。</p>\n<p style=\"text-align: left;\">这两次舆论风波，让鲍威尔深刻领悟到了一个道理：身为美联储主席，每一个字，都具有撼动市场的力量。</p>\n<h2 style=\"text-align: left;\">疫情冲击：危机中的\"越线者\"</h2>\n<p style=\"text-align: left;\">如果说接棒之初的政策磨合期只是一次热身，那么2020年春天，才是鲍威尔真正意义上的第一场大考。</p>\n<p style=\"text-align: left;\">2020年初，新冠疫情席卷全球，美国经济在短短数周内急速坠入悬崖。2020年4月，美国失业率飙升至14.8%，创下1948年有现代失业统计以来的最高纪录，数以千万计的美国人在一夜之间失去工作。</p>\n<p style=\"text-align: left;\">面对这场百年一遇的危机，鲍威尔的反应之迅速、力度之激进，令华尔街咋舌。<strong>美联储在极短时间内将基准利率紧急降至近零水平，同时重启并大幅扩大量化宽松规模，在数周内购入数万亿美元的债券；与此同时，鲍威尔还联手财政部，推出了一系列远超传统央行业务边界的紧急信贷工具。</strong></p>\n<p style=\"text-align: left;\">他事后坦承，这些行动已远远超出了常规货币政策的疆域。</p>\n<p style=\"text-align: left;\">\"我们越过了很多红线，\"2020年5月，鲍威尔在普林斯顿大学的一次活动上说，\"在这种情况下，你先做了这件事，然后事后再想办法解决。\"</p>\n<p style=\"text-align: left;\">这场豪赌，最终奏效。美国经济成功避免了第二次大萧条，就业市场在约两年内完成了从疫情重创到基本复原的历程——而2008年金融危机之后，这一过程整整用了六年。鲍威尔也因此赢得了广泛赞誉，被视为在危机关头展现出沃尔克式果敢的领导人。</p>\n<p style=\"text-align: left;\">然而，“事后再想办法解决”这句话，也为接下来的政策失误埋下了伏笔。</p>\n<h2 style=\"text-align: left;\">高通胀时代：从“暂时性”的傲慢到“沃尔克式”的铁腕</h2>\n<p style=\"text-align: left;\"><strong>疫情救市的代价，在2021年开始集中兑现。</strong></p>\n<p style=\"text-align: left;\">随着天量财政刺激资金涌入市场，消费需求爆发式反弹，而全球供应链的修复却远比预期迟缓；与此同时，劳动力市场供给持续偏紧，能源、租金、工资等成本轮番上涨。需求端和供给端的双重失衡，以及此后俄乌战争引发的能源价格暴涨，共同将美国通货膨胀推向失控边缘。</p>\n<p style=\"text-align: left;\"><strong>2021年8月，面对通胀压力已显著升温的现实，鲍威尔在一年一度的杰克逊霍尔央行年会上，做出了日后令他悔恨不已的那个判断——他称当前通胀为\"暂时性的（transitory）\"，认为供应链扰动终将消退，价格终将回归正轨。</strong></p>\n<p style=\"text-align: left;\">这一判断，成为他任内最大的政策失误。</p>\n<p style=\"text-align: left;\">事实证明，通胀不仅没有\"暂时性\"地自行消退，反而持续加速。<strong>截至2022年2月，美国核心CPI同比涨幅已攀升至6.4%，创下四十年来的最高水平；</strong>同年6月，综合CPI同比涨幅进一步冲高至9.1%的峰值。这不仅是美联储的判断失误，也是鲍威尔本人历史评价中一道难以抹去的污点。</p>\n<p style=\"text-align: left;\"><img class=\"wscnph\" src=\"https://wpimg-wscn.awtmt.com/e649a455-7ac4-4b64-b61e-b8032127efda.png\" /></p>\n<p style=\"text-align: left;\">在国会听证会上，参议员直接追问：为何美联储对通胀形势出现如此严重的误判？鲍威尔承认，这一波通胀在2021年中期之后突然快速攀升，超出了几乎所有主流宏观经济学家的预期；供应链的修复速度也远慢于预期，这是历史上几乎没有先例的情况。<strong>他承认，\"我们本应该更早采取行动。\"</strong></p>\n<p style=\"text-align: left;\">迟到的纠偏，力度空前。</p>\n<p style=\"text-align: left;\">2022年3月，美联储正式开启本轮加息周期。随后的一年多时间里，鲍威尔主导的连续激进加息令市场震惊——<strong>在不到两年时间内，基准利率从接近零的水平累计上调了500多个基点，加息速度之快，在现代美联储历史上极为罕见。</strong></p>\n<p style=\"text-align: left;\"><strong><img class=\"wscnph\" src=\"https://wpimg-wscn.awtmt.com/71848759-3005-4d1c-b76a-249d45450d01.png\" /></strong></p>\n<p style=\"text-align: left;\">与2020年的危机救市形成强烈对比，这一次，鲍威尔引用的精神偶像从凯恩斯变成了沃尔克。他在2022年的杰克逊霍尔年会上明确警告，将价格稳定\"带回来\"将给就业和增长带来\"一些痛苦\"，<strong>并喊出将\"不惜一切代价维护价格稳定\"，</strong>以此向市场传递铁腕治通胀的决心。</p>\n<p style=\"text-align: left;\">批评者指出，这是一次迟到的转变，美联储为此付出了沉重代价——数以百万计的美国家庭在此期间承受了购买力的大幅缩水。但也有经济学家为鲍威尔辩护，认为这波通胀的主因是疫情与地缘政治冲击带来的供给侧扰动，并非货币政策单独能够左右的结果。</p>\n<p style=\"text-align: left;\"><strong>而最令外界意外的结局是：这场史无前例的激进加息，并未触发广泛预期的经济衰退。</strong></p>\n<p style=\"text-align: left;\">到2024年底，美国经济年增长率仍维持在2.5%，通胀在未推高失业率的情况下大幅回落，劳动力市场保持接近充分就业的状态。几乎整个经济学界都曾预言的衰退，始终未曾到来。</p>\n<p style=\"text-align: left;\">鲍威尔本人在哈佛大学经济学课堂上坦言，几乎被认为不可能的\"软着陆\"，是他认为最值得自豪的成就之一。</p>\n<h2 style=\"text-align: left;\">遗产与争议并存：独立性才是最大的遗产</h2>\n<p style=\"text-align: left;\">历史对鲍威尔的终极评价，或许不会落在任何一项具体的经济指标上，而是落在一个更根本的问题上：<strong>他守住了美联储的独立性。</strong></p>\n<p style=\"text-align: left;\">特朗普在第一个总统任期内已频繁抨击鲍威尔不肯降息，一度考虑将其解职。2025年特朗普重返白宫后，这场政治施压升级为正面冲突——白宫授意司法部以联邦储备委员会总部大楼翻新工程造价超支为由，对鲍威尔展开刑事调查，在美联储112年历史上几乎是破天荒的第一次。</p>\n<p style=\"text-align: left;\">分析人士普遍认为，这场调查的真实动机，是迫使美联储降息以配合特朗普的政治议程。</p>\n<p style=\"text-align: left;\">面对这场前所未有的政治压力，鲍威尔于2026年1月发布视频声明公开还击，将其定性为\"美联储根据对公众最有利的判断设定利率，而非顺从总统偏好的后果\"。这段视频迅速在金融圈广泛流传，为他赢得了两党的国会支持，也让他得以在任期届满之际，以自己的方式完成历史性的谢幕。</p>\n<p style=\"text-align: left;\">美联储历史上，上一次有主席面临如此强烈的政治压力，还要追溯到五十多年前：尼克松曾向时任主席亚瑟·伯恩斯施压，要求维持宽松货币政策，最终酿成那个时代通胀失控。相较之下，鲍威尔的顶住压力、拒绝妥协，使他在历史上的位置，显然要比那位就范的前辈高出许多。</p>\n<p style=\"text-align: left;\">充分就业，是鲍威尔另一项为人称道的遗产。</p>\n<p style=\"text-align: left;\">鲍威尔任内月均失业率4.6%，低于格林斯潘（5.5%）、伯南克（7.3%）和耶伦（5.1%）。这份数字背后是实实在在的民生改善：低失业率不对称地惠及了劳动力市场中最弱势的群体——2019年至2024年间，收入处于底部10%的工人实际工资累计涨幅达15.3%；黑人失业率于2023年降至4.8%，创下历史新低。研究者迪恩·贝克写道，<strong>鲍威尔对充分就业目标的认真执行，使数以百万计的工人在本可失业的情况下依然持有工作，数以千万计的人获得了本不会有的工资涨幅。</strong></p>\n<p style=\"text-align: left;\"><strong><img class=\"wscnph\" src=\"https://wpimg-wscn.awtmt.com/e698db0d-5185-4d62-abba-7fe5ec7154c0.png\" /></strong></p>\n<p style=\"text-align: left;\">鲍威尔的批评者同样不乏理由。</p>\n<p style=\"text-align: left;\">在监管层面，2023年硅谷银行的骤然倒闭，暴露出美联储在银行监管上的松弛。贝克直言：\"他在监管方面存在严重缺陷，让局面走到了不得不救助硅谷银行的地步。\"</p>\n<p style=\"text-align: left;\"><strong>在通胀问题上，鲍威尔任内平均通胀率3.09%，较美联储2%的目标高出逾一个百分点，</strong>也高于格林斯潘（2.5%）、伯南克（1.84%）和耶伦（1.17%）时代。<strong>卸任时，美联储资产负债表仍高达约6.7万亿美元，较上任时翻了不止一番，继任者凯文·沃什已将这一\"遗留包袱\"列为首要整治对象。</strong></p>\n<p style=\"text-align: left;\">低失业率与高通胀，构成他向历史递交的这份双面成绩单的两面。</p>\n<p style=\"text-align: left;\">他自己用一句话定位了这份工作的本质：<strong>\"我们是在建堤坝，而不是在预防飓风。\"</strong></p>\n<p style=\"text-align: left;\">这既是对美联储职能边界的自谦表述，也是他对这八年的自我注解——不是说他预见了一切，更不是说他从未失误，而是说，在最动荡的时代，他试图将这个机构建得足够坚固，使其不被政治的狂风、疫情的暴雨和通胀的洪流彻底摧毁。</p><div style=\"color: #666; margin-bottom: 15px;\">风险提示及免责条款</div>\n          <div>\n            市场有风险，投资需谨慎。本文不构成个人投资建议，也未考虑到个别用户特殊的投资目标、财务状况或需要。用户应考虑本文中的任何意见、观点或结论是否符合其特定状况。据此投资，责任自负。\n          </div>",
-      "matched_keywords": [
-        "供应链",
-        "政策"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/wallstreetcn/news?limit=30&filterout_time=604800",
-        "route": "/wallstreetcn/news?limit=30",
-        "entry_id": "3771381"
-      },
-      "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格, 活动",
-          "+2 time_status=in_window",
-          "-3 泛领域: 宏观经济"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容聚焦于美联储货币政策、通胀与就业等宏观经济议题，未涉及屈臣氏电商经营相关的任何事实性事件（如平台规则变动、品牌动作、品类趋势、渠道变化或消费场景等），无法服务于屈臣氏电商经营分析目标。"
-    },
-    {
-      "article_id": "c1da085b2d0e83a2",
-      "title": "美对伊战5月1日面临红线",
-      "url": "https://wallstreetcn.com/livenews/3097272",
-      "source_name": "rsshub_wallstreetcn",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 06:56:17 GMT",
-      "collected_at": "2026-04-30T17:58:18.868014+08:00",
-      "time_status": "in_window",
-      "summary": "<p>外界目前高度关注本周五，也就是5月1日。根据美国法律对开战日期的计算方式，冲突即将进入第60天，届时总统继续动武就要获得国会授权。(CCTV国际时讯)</p>",
-      "content": "<p>外界目前高度关注本周五，也就是5月1日。根据美国法律对开战日期的计算方式，冲突即将进入第60天，届时总统继续动武就要获得国会授权。(CCTV国际时讯)</p>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/wallstreetcn/news?limit=30&filterout_time=604800",
-        "route": "/wallstreetcn/news?limit=30",
-        "entry_id": "3097272"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容与国际政治事件相关，与屈臣氏电商经营无直接关联"
-    },
-    {
-      "article_id": "df9ba54e1c044b72",
-      "title": "特朗普称考虑撤出部分驻德美军 系美国在欧最大兵力部署",
-      "url": "https://international.caixin.com/2026-04-30/102439781.html",
-      "source_name": "rsshub_caixin",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:14:46 GMT",
-      "collected_at": "2026-04-30T17:58:22.758787+08:00",
-      "time_status": "in_window",
-      "summary": "<blockquote><p>驻德美军构成美国在欧洲规模最大兵力部署，同时也是美国欧洲司令部所在地</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177754106196056_840_560.jpg\" /></dt>\n     <dd>资料图：德国巴伐利亚州，驻德美军。图：视觉中国</dd>\n    </dl>\n   <br />\n       <p>　　<b>【财新网】</b>当地时间4月29日，已多次指责北约盟友未能充分支持美国对伊朗军事行动的美国总统特朗普表示，该国正考虑撤出部分驻德美军。</p>\n<p>　　他在社交媒体“真实社交”上写道：“美国正在研究并审查（studying and reviewing）可能削减驻德士兵的方案，相关决定将在近期内做出。”</p>\n<p>　　路透社报道称，本月初一名未具名白宫官员曾透露，特朗普曾讨论从欧洲撤出部分美军的可能性。</p>\n<p>　　驻德美军构成美国在欧洲规模最大的兵力部署，同时也是美国欧洲司令部所在地。</p>",
-      "content": "<blockquote><p>驻德美军构成美国在欧洲规模最大兵力部署，同时也是美国欧洲司令部所在地</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177754106196056_840_560.jpg\" /></dt>\n     <dd>资料图：德国巴伐利亚州，驻德美军。图：视觉中国</dd>\n    </dl>\n   <br />\n       <p>　　<b>【财新网】</b>当地时间4月29日，已多次指责北约盟友未能充分支持美国对伊朗军事行动的美国总统特朗普表示，该国正考虑撤出部分驻德美军。</p>\n<p>　　他在社交媒体“真实社交”上写道：“美国正在研究并审查（studying and reviewing）可能削减驻德士兵的方案，相关决定将在近期内做出。”</p>\n<p>　　路透社报道称，本月初一名未具名白宫官员曾透露，特朗普曾讨论从欧洲撤出部分美军的可能性。</p>\n<p>　　驻德美军构成美国在欧洲规模最大的兵力部署，同时也是美国欧洲司令部所在地。</p>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800",
-        "route": "/caixin/latest?limit=20",
-        "entry_id": "caixin:latest:https://international.caixin.com/2026-04-30/102439781.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容与美国军事部署相关，与屈臣氏电商经营无关"
-    },
-    {
-      "article_id": "13232f288b757a93",
-      "title": "AI革命是人的革命：碳硅融合与“超级人类”诞生｜争鸣",
-      "url": "https://opinion.caixin.com/2026-04-30/102439780.html",
-      "source_name": "rsshub_caixin",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 09:13:54 GMT",
-      "collected_at": "2026-04-30T17:58:22.759407+08:00",
-      "time_status": "in_window",
-      "summary": "<blockquote><p>我们正在经历的技术跃升，与历史上任何一次都不同。它不再仅仅是外部工具的改进，而是碳基智能与硅基智能的深度融合，是人类第一次有机会从内部重构自身。这可能是一次彻底的“人的革命”</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177754086269688_840_560.jpg\" /></dt>\n     <dd>图：视觉中国</dd>\n    </dl>\n   <br />\n       <p>　　最近与朋友闲聊，他抛来一个尖锐问题：“能不能用真正长周期的视角、成体系的框架，分析AI到底会给人类命运带来怎样的前途？”他特别提到达里奥的大周期著作。几乎所有此类长周期分析，核心叙事都绕着“生产力提升—经济增长—制度与权力再分配”打转，镜头始终对准外部环境，却很少真正把焦点拉回人类自身——我们的肉身、认知、寿命、欲望、恐惧，以及“我们作为一种存在”的根本形态。</p>\n<p>　　这给我带来一丝侥幸。或许我可以尝试从人类自身发展的角度去看待大周期，去看待AI的前景。我认为，我们正在经历的技术跃升，与历史上任何一次都不同。它不再仅仅是外部工具的改进，而是碳基智能与硅基智能的深度融合，是人类第一次有机会从内部重构自身。这可能是一次彻底的“人的革命”：它有望打破数千年“曲棍球杆”形态下的平台期，更可能突破人性恒常的某些边界，让我们走向资源极大丰富、个体永续存在、价值自主创造的超级人类时代。</p>",
-      "content": "<blockquote><p>我们正在经历的技术跃升，与历史上任何一次都不同。它不再仅仅是外部工具的改进，而是碳基智能与硅基智能的深度融合，是人类第一次有机会从内部重构自身。这可能是一次彻底的“人的革命”</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177754086269688_840_560.jpg\" /></dt>\n     <dd>图：视觉中国</dd>\n    </dl>\n   <br />\n       <p>　　最近与朋友闲聊，他抛来一个尖锐问题：“能不能用真正长周期的视角、成体系的框架，分析AI到底会给人类命运带来怎样的前途？”他特别提到达里奥的大周期著作。几乎所有此类长周期分析，核心叙事都绕着“生产力提升—经济增长—制度与权力再分配”打转，镜头始终对准外部环境，却很少真正把焦点拉回人类自身——我们的肉身、认知、寿命、欲望、恐惧，以及“我们作为一种存在”的根本形态。</p>\n<p>　　这给我带来一丝侥幸。或许我可以尝试从人类自身发展的角度去看待大周期，去看待AI的前景。我认为，我们正在经历的技术跃升，与历史上任何一次都不同。它不再仅仅是外部工具的改进，而是碳基智能与硅基智能的深度融合，是人类第一次有机会从内部重构自身。这可能是一次彻底的“人的革命”：它有望打破数千年“曲棍球杆”形态下的平台期，更可能突破人性恒常的某些边界，让我们走向资源极大丰富、个体永续存在、价值自主创造的超级人类时代。</p>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800",
-        "route": "/caixin/latest?limit=20",
-        "entry_id": "caixin:latest:https://opinion.caixin.com/2026-04-30/102439780.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容属于对未来AI发展趋势的理论探讨和哲学思考，未提及任何与屈臣氏电商经营相关的具体事实或事件，如平台变动、品牌动作、品类趋势、消费场景变化等，无法服务于屈臣氏电商经营分析。"
-    },
-    {
-      "article_id": "a494dccf1ed746bf",
-      "title": "深圳地铁宣布辛杰卸任董事长 半年前公司官网删除其姓名照片",
-      "url": "https://www.caixin.com/2026-04-30/102439766.html",
-      "source_name": "rsshub_caixin",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 08:12:07 GMT",
-      "collected_at": "2026-04-30T17:58:22.760878+08:00",
-      "time_status": "in_window",
-      "summary": "<blockquote><p>辛杰于2025年9月失联。同年11月，深圳地铁的法人代表变更为黄力平</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177753693709216_840_560.jpg\" /></dt>\n     <dd>资料图：辛杰。</dd>\n    </dl>\n   <br />\n       <p><b>　　【财新网】</b>深圳地铁集团（下称“深圳地铁”）在4月29日宣布，辛杰卸任董事长职务。</p>\n<p>　　财新此前从多个信源处获悉，辛杰于2025年9月失联。同月中下旬，辛杰被有关部门带走配合调查的消息在深圳流传。</p>\n<p>　　深圳地铁是万科集团（000002.SZ/02202.HK，下称“万科”）大股东。2025年1月27日，辛杰接替郁亮，兼任万科董事会主席。当年10月13日，万科宣布更换董事长。辛杰书面辞去万科董事长职务，深圳地铁总经理黄力平接任他在万科的职位。（详见财新网报道《<a href=\"https://www.caixin.com/2025-10-13/102370939.html\" target=\"_blank\">辛杰辞去万科董事长 深铁总经理黄力平接棒</a>》）</p>",
-      "content": "<blockquote><p>辛杰于2025年9月失联。同年11月，深圳地铁的法人代表变更为黄力平</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177753693709216_840_560.jpg\" /></dt>\n     <dd>资料图：辛杰。</dd>\n    </dl>\n   <br />\n       <p><b>　　【财新网】</b>深圳地铁集团（下称“深圳地铁”）在4月29日宣布，辛杰卸任董事长职务。</p>\n<p>　　财新此前从多个信源处获悉，辛杰于2025年9月失联。同月中下旬，辛杰被有关部门带走配合调查的消息在深圳流传。</p>\n<p>　　深圳地铁是万科集团（000002.SZ/02202.HK，下称“万科”）大股东。2025年1月27日，辛杰接替郁亮，兼任万科董事会主席。当年10月13日，万科宣布更换董事长。辛杰书面辞去万科董事长职务，深圳地铁总经理黄力平接任他在万科的职位。（详见财新网报道《<a href=\"https://www.caixin.com/2025-10-13/102370939.html\" target=\"_blank\">辛杰辞去万科董事长 深铁总经理黄力平接棒</a>》）</p>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800",
-        "route": "/caixin/latest?limit=20",
-        "entry_id": "caixin:latest:https://www.caixin.com/2026-04-30/102439766.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容涉及企业高管变动及调查事件，与屈臣氏电商经营无直接关联，未体现流量、转化率、客单价等核心业务变量或平台运营动态。"
-    },
-    {
-      "article_id": "fcd6230f7f226133",
-      "title": "【市场动态】渣打集团第一季度盈利超预期 淡化中东冲突的影响",
-      "url": "https://database.caixin.com/2026-04-30/102439746.html",
-      "source_name": "rsshub_caixin",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 07:09:53 GMT",
-      "collected_at": "2026-04-30T17:58:22.761798+08:00",
-      "time_status": "in_window",
-      "summary": "<blockquote><p>渣打集团公布创纪录的第一季度业绩，主要受财富管理业务提振，并淡化了中东冲突的影响</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2018-11-10/1541836022921532_840_560.jpg\" /></dt>\n     <dd>图/视觉中国</dd>\n    </dl>\n   <br />",
-      "content": "<blockquote><p>渣打集团公布创纪录的第一季度业绩，主要受财富管理业务提振，并淡化了中东冲突的影响</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2018-11-10/1541836022921532_840_560.jpg\" /></dt>\n     <dd>图/视觉中国</dd>\n    </dl>\n   <br />",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800",
-        "route": "/caixin/latest?limit=20",
-        "entry_id": "caixin:latest:https://database.caixin.com/2026-04-30/102439746.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事件"
-    },
-    {
-      "article_id": "f772aa3a58783471",
-      "title": "在山西长治看崇庆寺｜行路中国看古迹④",
-      "url": "https://mini.caixin.com/2026-04-30/102439070.html",
-      "source_name": "rsshub_caixin",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 06:58:47 GMT",
-      "collected_at": "2026-04-30T17:58:22.762726+08:00",
-      "time_status": "in_window",
-      "summary": "<blockquote><p>寺内主殿千佛殿结构可谓简洁合理、古朴概括。该殿建于宋大中祥符九年（1016年），因此其堪称宋代建筑活化石</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177753035968586_840_560.jpg\" /></dt>\n     \n    </dl>\n   <br />\n       <p>　　<b>《行路中国看古迹》“财新mini+”连载中，查看<a href=\"https://key.caixin.com/topic/BQ02.000008004\" target=\"_blank\">已更新内容</a></b></p>\n<p>　　<b><a href=\"https://j.youzan.com/dpRMMk\" target=\"_blank\">《行路中国》点此优惠购买</a></b></p>\n<p>　　<b>山西·长治</b></p>\n<p><b>　　崇庆寺</b></p>\n<p><b>　　推荐级别：●●●●●</b></p>\n<p>　　简介◎</p>\n<p>　　崇庆寺始建于北宋大中祥符九年（1016年），北宋元丰二年（1079年）建造完成，明清均有扩建和修葺。1996年被国务院列为第四批全国重点文物保护单位。</p>\n<p>　　地址：山西省长治市长子县紫云山</p>\n<p>　　崇庆寺山门是该寺院的正门，与天王殿为一殿两用，属明清改建制式。寺内主殿千佛殿外观可见四周檐柱均向内倾斜，形成侧脚，角柱增高提升，使屋顶荷重向中心聚集，以增强建筑的稳固力，结构可谓简洁合理、古朴概括。题记明确记载该殿建于宋大中祥符九年（1016年），因此其堪称宋代建筑活化石。殿内采用中央佛坛式布局，左壁存有佛殿初建时期的影塑造像，弥足珍贵。</p>",
-      "content": "<blockquote><p>寺内主殿千佛殿结构可谓简洁合理、古朴概括。该殿建于宋大中祥符九年（1016年），因此其堪称宋代建筑活化石</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177753035968586_840_560.jpg\" /></dt>\n     \n    </dl>\n   <br />\n       <p>　　<b>《行路中国看古迹》“财新mini+”连载中，查看<a href=\"https://key.caixin.com/topic/BQ02.000008004\" target=\"_blank\">已更新内容</a></b></p>\n<p>　　<b><a href=\"https://j.youzan.com/dpRMMk\" target=\"_blank\">《行路中国》点此优惠购买</a></b></p>\n<p>　　<b>山西·长治</b></p>\n<p><b>　　崇庆寺</b></p>\n<p><b>　　推荐级别：●●●●●</b></p>\n<p>　　简介◎</p>\n<p>　　崇庆寺始建于北宋大中祥符九年（1016年），北宋元丰二年（1079年）建造完成，明清均有扩建和修葺。1996年被国务院列为第四批全国重点文物保护单位。</p>\n<p>　　地址：山西省长治市长子县紫云山</p>\n<p>　　崇庆寺山门是该寺院的正门，与天王殿为一殿两用，属明清改建制式。寺内主殿千佛殿外观可见四周檐柱均向内倾斜，形成侧脚，角柱增高提升，使屋顶荷重向中心聚集，以增强建筑的稳固力，结构可谓简洁合理、古朴概括。题记明确记载该殿建于宋大中祥符九年（1016年），因此其堪称宋代建筑活化石。殿内采用中央佛坛式布局，左壁存有佛殿初建时期的影塑造像，弥足珍贵。</p>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800",
-        "route": "/caixin/latest?limit=20",
-        "entry_id": "caixin:latest:https://mini.caixin.com/2026-04-30/102439070.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章主题为山西长治崇庆寺的历史建筑介绍，属于文化古迹内容，未涉及任何与屈臣氏电商业务相关的事件或信号"
-    },
-    {
-      "article_id": "f85bb92cd3b123e2",
-      "title": "【霍尔木兹日报】美国或延长伊朗港口封锁 海峡通行船只数量仍较少",
-      "url": "https://database.caixin.com/2026-04-30/102439662.html",
-      "source_name": "rsshub_caixin",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 05:38:29 GMT",
-      "collected_at": "2026-04-30T17:58:22.763647+08:00",
-      "time_status": "in_window",
-      "summary": "<blockquote><p>4月29日，波斯湾船舶通行总量为12艘次，驶入4艘次，驶出8艘次</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177752737931426_840_560.jpg\" /></dt>\n     <dd>4月30日，一艘名为“AMINA”的干散货船在凌晨驶出波斯湾。</dd>\n    </dl>\n   <br />",
-      "content": "<blockquote><p>4月29日，波斯湾船舶通行总量为12艘次，驶入4艘次，驶出8艘次</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177752737931426_840_560.jpg\" /></dt>\n     <dd>4月30日，一艘名为“AMINA”的干散货船在凌晨驶出波斯湾。</dd>\n    </dl>\n   <br />",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800",
-        "route": "/caixin/latest?limit=20",
-        "entry_id": "caixin:latest:https://database.caixin.com/2026-04-30/102439662.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "0099d3bdd63ee5e0",
-      "title": "2025年农民工继续变老 年龄结构和行业分布有何变化？",
-      "url": "https://economy.caixin.com/2026-04-30/102439649.html",
-      "source_name": "rsshub_caixin",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 04:51:41 GMT",
-      "collected_at": "2026-04-30T17:58:22.765021+08:00",
-      "time_status": "in_window",
-      "summary": "<blockquote><p>50岁以上农民工占比继续上升，41—50岁占比下降，导致40岁以下占比出现有数据以来首次上升；制造业农民工占比连续四年上升，建筑业农民工占比降至有数据以来最低</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177752496811015_840_560.jpg\" /></dt>\n     <dd>2025年2月5日，山东省济南市，春节后的第一个工作日，不少农民工已经提前来到劳务市场门前开始寻找工作。图：IC photo</dd>\n    </dl>\n   <br />\n       <p>　　<b>【财新网】</b>随着中国经济结构和人口结构的变化，中国农民工年龄持续上升，越来越多的农民工进入服务业，收入增速放缓。</p>\n<p>　　国家统计局4月30日发布的《2025年农民工监测调查报告》显示，2025年全国农民工总量3.01亿人，比上年增加142万人，同比增长0.5%，增速较上年放缓0.2个百分点。其中，本地农民工1.2109亿人，比上年增加7万人，增长0.1%；外出农民工1.8006亿人，比上年增加135万人，增长0.8%。年末在城镇居住的进城农民工13092万人，较2024年末减少115万人。</p>",
-      "content": "<blockquote><p>50岁以上农民工占比继续上升，41—50岁占比下降，导致40岁以下占比出现有数据以来首次上升；制造业农民工占比连续四年上升，建筑业农民工占比降至有数据以来最低</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177752496811015_840_560.jpg\" /></dt>\n     <dd>2025年2月5日，山东省济南市，春节后的第一个工作日，不少农民工已经提前来到劳务市场门前开始寻找工作。图：IC photo</dd>\n    </dl>\n   <br />\n       <p>　　<b>【财新网】</b>随着中国经济结构和人口结构的变化，中国农民工年龄持续上升，越来越多的农民工进入服务业，收入增速放缓。</p>\n<p>　　国家统计局4月30日发布的《2025年农民工监测调查报告》显示，2025年全国农民工总量3.01亿人，比上年增加142万人，同比增长0.5%，增速较上年放缓0.2个百分点。其中，本地农民工1.2109亿人，比上年增加7万人，增长0.1%；外出农民工1.8006亿人，比上年增加135万人，增长0.8%。年末在城镇居住的进城农民工13092万人，较2024年末减少115万人。</p>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800",
-        "route": "/caixin/latest?limit=20",
-        "entry_id": "caixin:latest:https://economy.caixin.com/2026-04-30/102439649.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容属于宏观人口与行业结构背景信息，未涉及屈臣氏电商经营相关的具体事件或信号"
-    },
-    {
-      "article_id": "61729f38644e78f0",
-      "title": "保交所原董事长任春生因受贿罪被判12年 罚款150万元",
-      "url": "https://finance.caixin.com/2026-04-30/102439638.html",
-      "source_name": "rsshub_caixin",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 04:25:58 GMT",
-      "collected_at": "2026-04-30T17:58:22.765934+08:00",
-      "time_status": "in_window",
-      "summary": "<blockquote><p>此前披露，任春生身为国有金融企业党员领导干部，违反廉洁纪律，违规买卖股票，利用职务上的便利，为他人谋取利益并收受财物</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177752322209832_840_560.jpg\" /></dt>\n     <dd>资料图：任春生。</dd>\n    </dl>\n   <br />\n       <p>　　<b>【财新网】</b>2026年4月30日，北京市第二中级人民法院依法公开宣判<a href=\"https://s.ccxe.com.cn/entities/companies/202033551?originReferrer=pcarticle\" target=\"_blank\">上海保险交易所股份有限公司</a>原党委书记、董事长<a href=\"https://s.ccxe.com.cn/entities/persons/304207463?originReferrer=pcarticle\" target=\"_blank\">任春生</a>受贿一案，对被告人任春生以受贿罪判处有期徒刑12年，并处罚金人民币150万元。对追缴在案的任春生受贿犯罪所得财物依法予以没收，上缴国库。</p>\n<p>　　2025年3月，任春生被“双开”。经查，任春生身为国有金融企业党员领导干部，丧失理想信念，背弃初心使命，目无党纪国法，违反政治纪律，参加迷信活动；违反中央八项规定精神，接受可能影响公正执行公务的旅游活动和宴请，将应由本人承担的费用交由他人支付，收受可能影响公正执行公务的消费卡；违反组织纪律，在接受组织函询时不如实向组织说明问题，利用职权和职务影响为他人在人员录用工作中谋利；违反廉洁纪律，违规买卖股票。利用职务上的便利，为他人谋取利益并收受财物，数额特别巨大，涉嫌受贿犯罪（参见财新网《<a href=\"https://finance.caixin.com/2025-03-21/102300783.html\" target=\"_blank\">保交所原董事长任春生被双开 涉嫌受贿移交司法</a>》）。</p>",
-      "content": "<blockquote><p>此前披露，任春生身为国有金融企业党员领导干部，违反廉洁纪律，违规买卖股票，利用职务上的便利，为他人谋取利益并收受财物</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177752322209832_840_560.jpg\" /></dt>\n     <dd>资料图：任春生。</dd>\n    </dl>\n   <br />\n       <p>　　<b>【财新网】</b>2026年4月30日，北京市第二中级人民法院依法公开宣判<a href=\"https://s.ccxe.com.cn/entities/companies/202033551?originReferrer=pcarticle\" target=\"_blank\">上海保险交易所股份有限公司</a>原党委书记、董事长<a href=\"https://s.ccxe.com.cn/entities/persons/304207463?originReferrer=pcarticle\" target=\"_blank\">任春生</a>受贿一案，对被告人任春生以受贿罪判处有期徒刑12年，并处罚金人民币150万元。对追缴在案的任春生受贿犯罪所得财物依法予以没收，上缴国库。</p>\n<p>　　2025年3月，任春生被“双开”。经查，任春生身为国有金融企业党员领导干部，丧失理想信念，背弃初心使命，目无党纪国法，违反政治纪律，参加迷信活动；违反中央八项规定精神，接受可能影响公正执行公务的旅游活动和宴请，将应由本人承担的费用交由他人支付，收受可能影响公正执行公务的消费卡；违反组织纪律，在接受组织函询时不如实向组织说明问题，利用职权和职务影响为他人在人员录用工作中谋利；违反廉洁纪律，违规买卖股票。利用职务上的便利，为他人谋取利益并收受财物，数额特别巨大，涉嫌受贿犯罪（参见财新网《<a href=\"https://finance.caixin.com/2025-03-21/102300783.html\" target=\"_blank\">保交所原董事长任春生被双开 涉嫌受贿移交司法</a>》）。</p>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800",
-        "route": "/caixin/latest?limit=20",
-        "entry_id": "caixin:latest:https://finance.caixin.com/2026-04-30/102439638.html"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 活动",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容不涉及屈臣氏电商经营相关事实"
-    },
-    {
-      "article_id": "c4751764820ca421",
-      "title": "《伊利亚特》：史诗、独角戏和伊朗战争",
-      "url": "https://mini.caixin.com/2026-04-30/102439633.html",
-      "source_name": "rsshub_caixin",
-      "source_type": "rsshub",
-      "source_tier": 3,
-      "collector": "rsshub",
-      "published_at": "Thu, 30 Apr 2026 04:18:25 GMT",
-      "collected_at": "2026-04-30T17:58:22.766392+08:00",
-      "time_status": "in_window",
-      "summary": "<blockquote><p>从阿喀琉斯“暴怒”，到特朗普“狂怒”，生命成为儿戏。后者的战争之举则更像是阿伽门农鬼魂附体</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177752232363050_840_560.jpg\" /></dt>\n     \n    </dl>\n   <br />\n       <p>　　特朗普为其对伊朗军事行动选定的名称是“史诗狂怒行动”（Operation Epic Fury）。或许因为这个原因，最近悉尼剧院上演的荷马史诗《伊利亚特》的现代改编剧——An Iliad，格外受到关注。</p>\n<p>　　荷马史诗《伊利亚特》一开头就涉及“愤怒”主题：“歌唱吧，女神！歌唱裴琉斯之子阿基琉斯的愤怒—/女神：缪斯。/他的暴怒招致了这场凶险的灾祸，给阿开亚人/带来了受之不尽的苦难，将许多豪杰强健的魂魄/打入了哀地斯，而把他们的躯体，作为美食，扔给了/狗和兀鸟……”[1]</p>",
-      "content": "<blockquote><p>从阿喀琉斯“暴怒”，到特朗普“狂怒”，生命成为儿戏。后者的战争之举则更像是阿伽门农鬼魂附体</p></blockquote><br />\n    <dl class=\"media_pic\">\n     <dt><img class=\"cx-img-loader\" src=\"https://img.caixin.com/2026-04-30/177752232363050_840_560.jpg\" /></dt>\n     \n    </dl>\n   <br />\n       <p>　　特朗普为其对伊朗军事行动选定的名称是“史诗狂怒行动”（Operation Epic Fury）。或许因为这个原因，最近悉尼剧院上演的荷马史诗《伊利亚特》的现代改编剧——An Iliad，格外受到关注。</p>\n<p>　　荷马史诗《伊利亚特》一开头就涉及“愤怒”主题：“歌唱吧，女神！歌唱裴琉斯之子阿基琉斯的愤怒—/女神：缪斯。/他的暴怒招致了这场凶险的灾祸，给阿开亚人/带来了受之不尽的苦难，将许多豪杰强健的魂魄/打入了哀地斯，而把他们的躯体，作为美食，扔给了/狗和兀鸟……”[1]</p>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/caixin/latest?limit=20&filterout_time=604800",
-        "route": "/caixin/latest?limit=20",
-        "entry_id": "caixin:latest:https://mini.caixin.com/2026-04-30/102439633.html"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容聚焦于特朗普对伊朗的军事行动命名及《伊利亚特》的现代改编演出，属于国际政治与文化评论范畴，未涉及屈臣氏电商相关的任何经营动态、市场趋势或商业行为，无法服务于屈臣氏电商经营分析目标。"
-    },
-    {
-      "article_id": "86345e1c87df124f",
-      "title": "航油告急，全球慌神！中国科学家提出解决方案",
-      "url": "https://www.guancha.cn/internation/2026_04_29_815378_s.shtml",
-      "source_name": "rsshub_guancha",
-      "source_type": "rsshub",
-      "source_tier": 4,
-      "collector": "rsshub",
-      "published_at": "Wed, 29 Apr 2026 07:31:47 GMT",
-      "collected_at": "2026-04-30T17:58:29.049903+08:00",
-      "time_status": "in_window",
-      "summary": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/29/20260429152602741.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 王一】\n</p>\n<p>\n香港《南华早报》4月29日注意到，在全球能源价格飙升、航空业成本压力加剧之际，中国科研人员公布了一项将温室气体转化为航空燃料的技术，正推动其从实验室走向规模化生产。\n</p>\n<p>\n今年3月，全球航空燃油价格一度飙升至每桶175美元，同比上涨94.4%；4月更是突破200美元大关，较去年同期翻倍上涨。除了成本高涨，不少航空公司还面临“有价无油”的局面，部分航司已被迫削减航班，全球航空运输业面临严峻挑战。\n</p>\n<p>\n而与此同时，中国科学院上海高等研究院公开了一条将二氧化碳转化为航空燃料的工业化路径。\n</p>\n<p>\n相关研究成果于4月15日发表在该领域权威期刊《ACS催化》（ACS Catalysis）上。该研究聚焦于将二氧化碳直接转化为长链化学品，这些化学品可进一步制成航空燃料。整个过程类似“逆向燃烧”：废气与水发生反应，分子重新组合，生成高能量密度的液体燃料。\n</p>\n<p>\n长期以来，这一化学路径面临两大难题：一是碳链难以增长，二是难以高效定向生成高价值的长链产物。\n</p>\n<p>\n为突破瓶颈，研究团队设计了一种经钾和铝共修饰的铁基催化剂。在反应过程中，该催化剂会自然形成一种特殊界面，这一界面显著提升了反应效率，并有助于生成适宜长度的分子结构。\n</p>\n<p>\n实验结果显示，在330摄氏度和中等压力条件下，该催化剂每克每小时可生成453.7毫克的重质烯烃，这一物质是液体燃料的基本组成部分。其中，可直接转化为航空燃料的部分达到252.7毫克。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/official/2026/04/29/20260429150226154.jpg\" /> \n</p>\n<p class=\"content-pic-desc\">\n反应路径示意图<span> 《ACS催化》</span> \n</p>\n<p>\n报道指出，更具产业意义的是，该催化剂在800个小时的连续运行中保持了性能稳定，显示出从实验室走向工业化应用的潜力。\n</p>\n<p>\n中国科学院27日公布消息称，“这一研究为开发具有动态结构演化的铁基催化剂、高效制备高碳烯烃与航煤馏分产物，提供了简便策略”。\n</p>\n<p>\n据《南华早报》报道，中国已开始推进二氧化碳衍生燃料的商业化。该领域的前沿企业费曼动力去年10月与内蒙古自治区政府签署协议，计划建设一个年产3000吨电合成可持续航空燃料的项目。\n</p>\n<p>\n不过，公司创始人、天津大学教授胡适表示，将实验室成果转化为获得认证的航空燃料仍是一场“马拉松”。\n</p>\n<p>\n“航空业需要适航认证来确认安全性和可持续性，而目前航空业并不认可通过二氧化碳加氢路径制得的燃料。”他说。\n</p>\n<p>\n胡适将这一过程比作新药研发，实验室结果积极，也已建成试验生产线，证明可以规模化生产，但一期和二期临床试验尚未完成。但他补充称，费曼动力目前生产的航空燃料已通过相关适航认证。\n</p>\n<p>\n费曼动力采用的是电催化与热催化相结合的工艺：首先利用可再生电力将二氧化碳分解为一氧化碳和氧气，再经已通过考验的费托合成工艺将一氧化碳转化为液态烃类，其中符合航空标准的部分即为航空燃料。\n</p>\n<p>\n胡适认为，从长远看，以电力驱动燃料生产是航空业的最佳解决方案。在他看来，航空领域难以实现电动化，“飞机必须不停歇地飞行，无法在空中充电，而且除非是在小型示范项目中，它们所需的能量远远超过电池所能承受的范围”。\n</p>\n<p>\n“将废弃食用油转化为可持续航空燃料的技术目前已切实可行，但废油的供应从根本上来说是有限的。”胡适说，“我们预计，二氧化碳路径有望在未来十年内实现成本持平，把温室气体从全球性问题转变为稳定的航空燃料来源。”\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
-      "content": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/29/20260429152602741.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 王一】\n</p>\n<p>\n香港《南华早报》4月29日注意到，在全球能源价格飙升、航空业成本压力加剧之际，中国科研人员公布了一项将温室气体转化为航空燃料的技术，正推动其从实验室走向规模化生产。\n</p>\n<p>\n今年3月，全球航空燃油价格一度飙升至每桶175美元，同比上涨94.4%；4月更是突破200美元大关，较去年同期翻倍上涨。除了成本高涨，不少航空公司还面临“有价无油”的局面，部分航司已被迫削减航班，全球航空运输业面临严峻挑战。\n</p>\n<p>\n而与此同时，中国科学院上海高等研究院公开了一条将二氧化碳转化为航空燃料的工业化路径。\n</p>\n<p>\n相关研究成果于4月15日发表在该领域权威期刊《ACS催化》（ACS Catalysis）上。该研究聚焦于将二氧化碳直接转化为长链化学品，这些化学品可进一步制成航空燃料。整个过程类似“逆向燃烧”：废气与水发生反应，分子重新组合，生成高能量密度的液体燃料。\n</p>\n<p>\n长期以来，这一化学路径面临两大难题：一是碳链难以增长，二是难以高效定向生成高价值的长链产物。\n</p>\n<p>\n为突破瓶颈，研究团队设计了一种经钾和铝共修饰的铁基催化剂。在反应过程中，该催化剂会自然形成一种特殊界面，这一界面显著提升了反应效率，并有助于生成适宜长度的分子结构。\n</p>\n<p>\n实验结果显示，在330摄氏度和中等压力条件下，该催化剂每克每小时可生成453.7毫克的重质烯烃，这一物质是液体燃料的基本组成部分。其中，可直接转化为航空燃料的部分达到252.7毫克。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/official/2026/04/29/20260429150226154.jpg\" /> \n</p>\n<p class=\"content-pic-desc\">\n反应路径示意图<span> 《ACS催化》</span> \n</p>\n<p>\n报道指出，更具产业意义的是，该催化剂在800个小时的连续运行中保持了性能稳定，显示出从实验室走向工业化应用的潜力。\n</p>\n<p>\n中国科学院27日公布消息称，“这一研究为开发具有动态结构演化的铁基催化剂、高效制备高碳烯烃与航煤馏分产物，提供了简便策略”。\n</p>\n<p>\n据《南华早报》报道，中国已开始推进二氧化碳衍生燃料的商业化。该领域的前沿企业费曼动力去年10月与内蒙古自治区政府签署协议，计划建设一个年产3000吨电合成可持续航空燃料的项目。\n</p>\n<p>\n不过，公司创始人、天津大学教授胡适表示，将实验室成果转化为获得认证的航空燃料仍是一场“马拉松”。\n</p>\n<p>\n“航空业需要适航认证来确认安全性和可持续性，而目前航空业并不认可通过二氧化碳加氢路径制得的燃料。”他说。\n</p>\n<p>\n胡适将这一过程比作新药研发，实验室结果积极，也已建成试验生产线，证明可以规模化生产，但一期和二期临床试验尚未完成。但他补充称，费曼动力目前生产的航空燃料已通过相关适航认证。\n</p>\n<p>\n费曼动力采用的是电催化与热催化相结合的工艺：首先利用可再生电力将二氧化碳分解为一氧化碳和氧气，再经已通过考验的费托合成工艺将一氧化碳转化为液态烃类，其中符合航空标准的部分即为航空燃料。\n</p>\n<p>\n胡适认为，从长远看，以电力驱动燃料生产是航空业的最佳解决方案。在他看来，航空领域难以实现电动化，“飞机必须不停歇地飞行，无法在空中充电，而且除非是在小型示范项目中，它们所需的能量远远超过电池所能承受的范围”。\n</p>\n<p>\n“将废弃食用油转化为可持续航空燃料的技术目前已切实可行，但废油的供应从根本上来说是有限的。”胡适说，“我们预计，二氧化碳路径有望在未来十年内实现成本持平，把温室气体从全球性问题转变为稳定的航空燃料来源。”\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
-      "matched_keywords": [],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/guancha/headline?limit=20&filterout_time=259200",
-        "route": "/guancha/headline?limit=20",
-        "entry_id": "https://www.guancha.cn/internation/2026_04_29_815378_s.shtml"
-      },
-      "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "+2 time_status=in_window",
-          "-3 无关主题: 临床试验"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容主要涉及航空燃料技术进展，与屈臣氏电商经营分析无关"
-    },
-    {
-      "article_id": "718a778f61e8a669",
-      "title": "又被震，“花一辆美国新车的钱，在中国足够买五辆”",
-      "url": "https://www.guancha.cn/internation/2026_04_28_815273_s.shtml",
-      "source_name": "rsshub_guancha",
-      "source_type": "rsshub",
-      "source_tier": 4,
-      "collector": "rsshub",
-      "published_at": "Tue, 28 Apr 2026 11:22:45 GMT",
-      "collected_at": "2026-04-30T17:58:29.052075+08:00",
-      "time_status": "in_window",
-      "summary": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/28/20260428192038455.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 柳白】\n</p>\n<p>\n本届北京车展不仅集中展现了中国新能源汽车的技术实力，也让中外汽车市场的价格差成为关注焦点。\n</p>\n<p>\n“这是一种截然不同的价格震撼。”路透社4月28日用一种惊叹的论调指出，美国一辆新车的均价，足足可入手五台全新中国电动汽车，向人们直观展示了中国汽车行业竞争之激烈——在这个全球最大的汽车市场，新车价格压低到了全球第二大汽车市场美国的零头水平。\n</p>\n<p>\n美国汽车评估指南“凯利蓝皮书”（Kelley Blue Book）数据显示，美国3月新车平均标价为51456美元（约35.17万元人民币）。而在中国，根据汽车资讯与交易平台懂车帝（DCar）的数据，目前售价低于2.5万美元（约合人民币18万元）的新能源车型（包括混动车）超过200款。\n</p>\n<p>\n路透社结合懂车帝数据，整理出中国销量最高、起售价低于1.2万美元的五款电动车名单。\n</p>\n<p>\n这些小型电动车目前并未在美国销售，而且未来也未必会进入美国市场。但按照一辆美国平均新车的价格，中国消费者几乎可以买下这五款车各一辆。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/dfic/2026/04/28/20260428183515689.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n2026年4月26日，北京，工作人员正在擦拭在北京国际汽车展览会上展出的比亚迪海鸥电动汽车。<span> IC Photo</span> \n</p>\n<p>\n报道先后提到了起售价10060美元（约 7.24 万元人民币）的吉利EX2；起售价6560美元（约4.72万元人民币）的五菱宏光MiniEV；起售价10200 美元（约 7.34 万元人民币）的比亚迪海鸥、10945美元（约 7.88 万元人民币）的比亚迪元UP以及起售价11675 美元（约 8.41 万元人民币）的比亚迪秦PLUS DM。\n</p>\n<p>\n“坐进去后，你不会觉得自己是在一辆小车里。无论是质感还是空间感，它都超出了人们对小型车的预期。”汽车分析师费利佩·穆尼奥斯（Felipe Munoz）说。\n</p>\n<p>\n极致的性价比与出色的产品力，让中国新能源车收获广泛认可，也让大洋彼岸的美国民众心生羡慕。\n</p>\n<p>\n路透社早前注意到，在北京车展上，美国大V正在为外国游客提供中国汽车的第一手体验，而许多美国消费者只能在网上浏览，“看得着摸不着”。\n</p>\n<p>\n“你看到的这款车可能只要3万美元，而且配置齐全，”在YouTube拥有21万订阅者的罗伯逊说，“而在美国，3万美元几乎买不到任何电动汽车或混合动力车。”\n</p>\n<p>\n这种价格差异，是罗伯逊频道的美国观众感到着迷和沮丧的重要原因。\n</p>\n<p>\n“在我们的评论区，大家频频抱怨称，‘我无法相信美国政府不允许他们在我的国家卖这款车’。”罗伯逊说。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/dfic/2026/04/28/20260428183328326.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n2026北京国际车展，公众热情到现场参观<span> IC Photo</span> \n</p>\n<p>\n多家国际媒体认为，本届北京车展已不仅是传统汽车展会，而是中国新能源汽车与智能驾驶技术全面领先的集中展示窗口，中国汽车产业竞争正从“价格战”转向“技术战”，AI辅助驾驶、超快充和智能座舱成为核心焦点。\n</p>\n<p>\n路透社还指出，中国车企如今已开始直接挑战德国豪华品牌市场。报道援引行业人士的话称，中国汽车行业竞争已从单纯“价格战”升级为“物超所值之战（value-for-money war）”，大量高端智能车型正以明显低于德系豪车的价格进入市场。\n</p>\n<p>\n彭博社直言，本届车展凸显出“中国已经牢牢坐上驾驶席（firmly in the driver’s seat）”，曾被外国品牌主导的中国市场发生剧变，外国传统车企如今争相依赖与中国本土科技公司的合作以求生存。\n</p>\n<p>\n美联社（AP）同样感慨，北京车展展现出中国汽车产业“激进而高速的技术进步”，中国企业正在电动车、电池和智能驾驶等关键领域“为全球设定节奏”，而曾经主导市场的欧美与日系品牌正在被中国厂商超越。\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
-      "content": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/28/20260428192038455.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 柳白】\n</p>\n<p>\n本届北京车展不仅集中展现了中国新能源汽车的技术实力，也让中外汽车市场的价格差成为关注焦点。\n</p>\n<p>\n“这是一种截然不同的价格震撼。”路透社4月28日用一种惊叹的论调指出，美国一辆新车的均价，足足可入手五台全新中国电动汽车，向人们直观展示了中国汽车行业竞争之激烈——在这个全球最大的汽车市场，新车价格压低到了全球第二大汽车市场美国的零头水平。\n</p>\n<p>\n美国汽车评估指南“凯利蓝皮书”（Kelley Blue Book）数据显示，美国3月新车平均标价为51456美元（约35.17万元人民币）。而在中国，根据汽车资讯与交易平台懂车帝（DCar）的数据，目前售价低于2.5万美元（约合人民币18万元）的新能源车型（包括混动车）超过200款。\n</p>\n<p>\n路透社结合懂车帝数据，整理出中国销量最高、起售价低于1.2万美元的五款电动车名单。\n</p>\n<p>\n这些小型电动车目前并未在美国销售，而且未来也未必会进入美国市场。但按照一辆美国平均新车的价格，中国消费者几乎可以买下这五款车各一辆。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/dfic/2026/04/28/20260428183515689.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n2026年4月26日，北京，工作人员正在擦拭在北京国际汽车展览会上展出的比亚迪海鸥电动汽车。<span> IC Photo</span> \n</p>\n<p>\n报道先后提到了起售价10060美元（约 7.24 万元人民币）的吉利EX2；起售价6560美元（约4.72万元人民币）的五菱宏光MiniEV；起售价10200 美元（约 7.34 万元人民币）的比亚迪海鸥、10945美元（约 7.88 万元人民币）的比亚迪元UP以及起售价11675 美元（约 8.41 万元人民币）的比亚迪秦PLUS DM。\n</p>\n<p>\n“坐进去后，你不会觉得自己是在一辆小车里。无论是质感还是空间感，它都超出了人们对小型车的预期。”汽车分析师费利佩·穆尼奥斯（Felipe Munoz）说。\n</p>\n<p>\n极致的性价比与出色的产品力，让中国新能源车收获广泛认可，也让大洋彼岸的美国民众心生羡慕。\n</p>\n<p>\n路透社早前注意到，在北京车展上，美国大V正在为外国游客提供中国汽车的第一手体验，而许多美国消费者只能在网上浏览，“看得着摸不着”。\n</p>\n<p>\n“你看到的这款车可能只要3万美元，而且配置齐全，”在YouTube拥有21万订阅者的罗伯逊说，“而在美国，3万美元几乎买不到任何电动汽车或混合动力车。”\n</p>\n<p>\n这种价格差异，是罗伯逊频道的美国观众感到着迷和沮丧的重要原因。\n</p>\n<p>\n“在我们的评论区，大家频频抱怨称，‘我无法相信美国政府不允许他们在我的国家卖这款车’。”罗伯逊说。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/dfic/2026/04/28/20260428183328326.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n2026北京国际车展，公众热情到现场参观<span> IC Photo</span> \n</p>\n<p>\n多家国际媒体认为，本届北京车展已不仅是传统汽车展会，而是中国新能源汽车与智能驾驶技术全面领先的集中展示窗口，中国汽车产业竞争正从“价格战”转向“技术战”，AI辅助驾驶、超快充和智能座舱成为核心焦点。\n</p>\n<p>\n路透社还指出，中国车企如今已开始直接挑战德国豪华品牌市场。报道援引行业人士的话称，中国汽车行业竞争已从单纯“价格战”升级为“物超所值之战（value-for-money war）”，大量高端智能车型正以明显低于德系豪车的价格进入市场。\n</p>\n<p>\n彭博社直言，本届车展凸显出“中国已经牢牢坐上驾驶席（firmly in the driver’s seat）”，曾被外国品牌主导的中国市场发生剧变，外国传统车企如今争相依赖与中国本土科技公司的合作以求生存。\n</p>\n<p>\n美联社（AP）同样感慨，北京车展展现出中国汽车产业“激进而高速的技术进步”，中国企业正在电动车、电池和智能驾驶等关键领域“为全球设定节奏”，而曾经主导市场的欧美与日系品牌正在被中国厂商超越。\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
-      "matched_keywords": [
-        "价格战"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/guancha/headline?limit=20&filterout_time=259200",
-        "route": "/guancha/headline?limit=20",
-        "entry_id": "https://www.guancha.cn/internation/2026_04_28_815273_s.shtml"
-      },
-      "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "+2 time_status=in_window",
-          "-3 无关主题: 汽车"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容主要描述北京车展现象及中美汽车价格对比，未涉及屈臣氏电商经营相关的新增事实或事件。"
-    },
-    {
-      "article_id": "2f8175de90dcc62a",
-      "title": "“年轻观众对历史的认知非常犀利，不能糊弄”",
-      "url": "https://www.guancha.cn/zhangyongxin/2026_04_28_815246_s.shtml",
-      "source_name": "rsshub_guancha",
-      "source_type": "rsshub",
-      "source_tier": 4,
-      "collector": "rsshub",
-      "published_at": "Tue, 28 Apr 2026 08:04:33 GMT",
-      "collected_at": "2026-04-30T17:58:29.052511+08:00",
-      "time_status": "in_window",
-      "summary": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/25/20260425172349293.jpg\" width=\"970px\" />\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/origin/2026/04/25/20260425142653251.jpg\" /> \n</p>\n<p>\n<strong>编者按：</strong>距离《觉醒年代》成为现象级历史题材剧，已过去了五年，这期间，导演张永新一直没有新的作品播出，直到今年4月，以抗日战争为故事背景的《八千里路云和月》开播。\n</p>\n<p>\n这部剧讲述了将军与厨子命运错位的故事。国民党旅长张云魁一心报国，却因高层指挥不当、军队内部腐化而蒙冤；厨子孟万福，只想过好自己的小日子，却被国民党抓去充军，受张云魁“临终”托付远赴南京报丧。不料张云魁奇迹生还，但战争年代信息不畅，误会丛生——张云魁和妻子都误以为对方丧生，孟万福的未婚妻韩小月误以为孟万福战死。厨子与将军从此阴差阳错地以对方之名继续投身抗日事业。张云魁加入游击队，成为共产党的一员，和小月携手抗敌；而孟万福则照料起张云魁一家老小，活成了“张云魁”。\n</p>\n<p>\n由于一如往常没有启用话题度大的所谓“流量”演员，剧集开播时声量并不高，然而，随着剧情推进，这部剧凭借双线叙事和拉大场域的抗战视角逐渐发酵。此外，围绕剧中情感线的讨论也颇为热烈，大结局播出后，网上出现了对四人情感关系错位的不同看法。\n</p>\n<p>\n近日，观察者网新潮观鱼栏目独家对话《八千里路云和月》导演张永新。针对观众关心的选角思路、张家“宅斗”是否用力过猛、男主角戏份比重、女性角色力量，以及与于和伟三搭等问题，张永新一一作出回应。\n</p>\n<p>\n张永新强调这是一部群像戏，戏份多少并非判断“戏眼”的标准。他不愿用“被迫”形容孟万福的成长，而是将其解读为个体在时代洪流中的淬炼与重塑，每一个看似身不由己的选择，最终沉淀为自发的信仰和行动。\n</p>\n<p>\n“今天的观众，特别是年轻观众，我认为他们对历史的认知非常犀利。作为创作者，我们不能有糊弄的想法，创作者要有敬畏之心。”\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425150625683.jpg\" /> \n</p>\n<p>\n【对话/新潮观鱼 严珊珊】\n</p>\n<blockquote class=\"content-quote\">\n<p>\n<strong>“剧本辗转到了我手里，正好我一直想拍抗战故事”</strong> \n</p>\n</blockquote>\n<p>\n<strong>新潮观鱼：张导您好，很高兴与您交流。《觉醒年代》的成功让大家觉得您很会拍革命历史题材，我们很好奇，这部以抗战为故事背景的《八千里路云和月》，是题材先行的“命题作文”，还是自发的创作？片名会让人想到岳飞的词和1947年的同名抗战电影，这其中有关联吗？</strong> \n</p>\n<p>\n<strong>张永新：</strong>我可以负责任地说，这部剧绝对不是“任务剧”，而是编剧老师自发原创的剧本。他们多年前有了这个想法，然后落实了剧本，但阴差阳错一直没拍成，后来这个剧本辗转到了我手里，我很感兴趣。\n</p>\n<p>\n因为我特别渴望能在这个阶段拍一部讲述抗日战争故事的剧，我想看看那段历史能带给今天的人们什么样的感受。从这个角度来说，我们一拍即合。大家都希望能在那样一个波澜壮阔的时代里，找到一个能写家国、写热血、写青春、写成长的故事，去叩问这些命题、去讲述我们民族高贵的精气神的凝聚。\n</p>\n<p>\n剧名是编剧老师的功劳，其实筹备阶段它一度叫《厨子与将军》，后来改成了《八千里路云和月》。白杨老师主演的那部经典电影我们都看过，我记得还有同名的电视纪录片和电视剧。不过，归根结底这句词出自岳飞的《满江红·写怀》，我们没有往“重名”那方面想，主要是因为这八个字能准确地形容我们这部剧所建构的戏剧空间——无论是物理和时间上的大跨度，还是那个时代的整体状况——与我们的创作诉求高度一致。\n</p>\n<p>\n当初我们和编剧老师讨论这部戏真正的骨架和“戏眼”是什么，在漫长的抗战历程中，我们故事选择了1937年8月淞沪会战开始，到1945年抗战胜利，历经九个中秋节，没有一个是在平顺中度过的。中秋节是我们中国人特别看重的节日，但那九年里的每次团圆背后，总是裹挟着硝烟和风雨，夹杂人生的大起大伏，大悲大喜，构成了极其强烈的戏剧冲突，这种冲突是我们做一部好剧的基础。片尾曲的《九个月亮》就是一个意象，用来指代九个中秋节。\n</p>\n<p>\n<strong>新潮观鱼：很多观众表示，《八千里路云和月》没有只盯着英雄将领，而是从国家兴亡“伙夫”有责的切口展现了全景式抗战故事，我们看到孟万福从幻想“事不关己”到领悟“覆巢之下无完卵”，这种转变并非一蹴而就，过程中几次想逃跑，您是否想展现普通人面对战争的“被迫成长”？</strong> \n</p>\n<p>\n<strong>张永新：</strong>首先，我以为一个人的成长没有“被迫”之说，无论你想不想，生命的历程都必须往前走，这是历史的长河在我们短暂的生命中所形成的观照。\n</p>\n<p>\n我们为什么有一条线是用孟万福的视角来讲故事？因为他是当时四万万五千万中国人中的普通一员。作为一个饱受欺凌的底层小人物，他的起点不高，信奉的生存哲学是如何让“小我”活得自如。但是命运的吊诡就在于，他卷入了时代的洪流中，他上了战场，也完成了对旅长的承诺，甚至后来肩负起了照顾旅长家人的责任，一次又一次的“选择”，其实就是他内心自发的成长，让他完成了从“小我”到“大我”的转变。\n</p>\n<p>\n孟万福这个角色的生命弧光非常长，也非常耀眼，我们想让此类角色的转变呈现一个自然的过程。因为一个人价值观、理解力和判断力的成长不是一蹴而就的，还需要一些突发事件的刺激，尤其是绝境，最能考验一个人真正的三观是什么。\n</p>\n<p align=\"center\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425144919981.jpg\" /> \n</p>\n<p>\n整个时代的洪流所淬炼、解构和重新建构出来的，恰恰是各色人等在所处时代中最真实的状态。像孟万福，他最终成长为一个共产主义战士，但这个过程也有反复，我们就想按照这种最真实的逻辑来塑造人物。假如我们用生活的经纬来看他，他有血有肉，有很多优点，也有性格瑕疵，很复杂，他身上体现了那个时代很多普通人的感受——当战争危险离我还很远的时候，如何安放“小我”，当时代的推手将我推至十字路口时，又该何去何从？\n</p>\n<p>\n这个命题不仅是孟万福一个人面对，张云旗、李淑媛这些跟他同时代的人，都在面临抉择。随着剧情的推展，你会看到有人高唱《满江红》，满嘴仁义道德，但当大厦将倾，还是做出了精致利己的选择。那些沉渣，只是极小的一部分，真正的主流是众志成城的四万万五千万人，无数个孟万福、丁玉娇、张云魁、张汝贤、田家泰、韩小月，才构成了这个民族的主体。\n</p>\n<p>\n时代的大潮滚滚向前，泥沙俱下，那些不堪的东西最终会被时代冲刷掉，荡涤出我们这个民族真正的精神。这也是我们这个民族浴火重生、涅槃重生的必经之路。\n</p>\n<p>\n我们这部剧想尽可能把场域开得大一些，让观众看到那个时代的中国人如何做选择。路在脚下，往哪走全看你的双脚，有人走向光明，有人走向沉沦，有人走向黑暗，甚至有人走向背叛，各色人等才构成真正的大千世界。\n</p>\n<blockquote class=\"content-quote\">\n<p>\n<strong>“这是一部群像戏，选角时我们深思熟虑”</strong> \n</p>\n</blockquote>\n<p>\n<strong>新潮观鱼：</strong><span style=\"font-weight: bold;\">孟万福这个角色前后期的对比引发了很多讨论，</span><strong>有观众认为这部剧的“戏眼”落在了孟万福身上，您怎么看这种讨论？</strong> \n</p>\n<p>\n<strong>张永新：</strong>首先感谢观众朋友们细致的观察，但我想强调，这是一部真正意义上的群像戏，也就是说，戏份大小、出场时长，未必是判断一部剧“戏眼”的唯一标准。\n</p>\n<p>\n这部剧里的角色各自在成长，严格来说，是双线叙事——一个是战争区域的硝烟板块，另一个是后方的烟火板块，相当于一枚硬币的两面。后方何尝不是战场，烟火中何尝没有硝烟？这是一种镜像关系，就像剧中两个人要互换名字，张云魁躲藏时期隐姓埋名，用勤务兵“孔二包”的名字来生存；而“孔二包”是孟万福前期的一个“分身”，随着剧情展开，他也一度被迫扮演“张云魁”，并最终把自己活成了张云魁。在那样一个乱世中，这是光怪陆离、阴差阳错的命运抉择。\n</p>\n<p>\n剧中的人物都不是十全十美。王阳饰演的张云魁，从奔赴战场，到蒙冤，再到努力洗冤，最后成长为新四军指战员，随着戏剧勾连，这个角色的人生路径逐渐清晰，展现了一个人在精神层面经历淬炼后的蜕变。他虽然没有孟万福的势利、机巧，但他也有笨拙和执拗的一面，需要一步步破除内心深处的执念。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425150830954.jpg\" /> \n</p>\n<p>\n还有张汝贤这个角色，我们看到了老太爷的大义，看到他作为最后一波仕人坚守的文人精神，傲岸、有风骨，但同时我们也调侃了他身上所谓的“迂腐”和“食古不化”，特别是在和万福的冲突中所暴露的“抱残守缺”，这是一体两面的，恰恰是一个真实的人的精神构成。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425145335450.jpg\" /> \n</p>\n<p>\n孟万福这种 “苟活派”， 他是一个矛盾的综合体——他的人生哲学是“只要能活，可以跪万物”，可是他骨子里又信奉“膝盖只能跪天跪地跪爹娘”。那我们就要考量他的“跪”到底是什么层面上的“跪”。从生理意义上讲，双膝一弯膝头着地，就是跪；但在特殊环境下，为了内心深处更大的目标，必须要和敌人周旋，那就是另外一个意义上的“不跪”，这是一种辩证的关系。\n</p>\n<p>\n我一再强调这部剧是群像戏，王阳、万茜、黄澄澄、于和伟、毕彦君、王和老师，每个人都在努力塑造角色，都是非常优秀的演员。合作中我最真切的体会就是，他们都是一群用生命去演戏的人，作为导演，我非常敬佩他们。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425145125730.png\" /> \n</p>\n\n<p>\n<strong>新潮观鱼：在这部剧里，我们看到了演员黄澄澄这样观众不太熟悉但特别“贴”角色的演员，在偏好流量的当下影视市场，当初剧组怎么有魄力定下来他演孟万福的？</strong> \n</p>\n<p>\n<strong>张永新：</strong>这部剧所有选角，都是由我们导演团队、制片部门和平台一起商讨决定的。我认为我们有一套比较科学的筛选体系，每个角色都有备选，大家一起推荐适合这个角色的1号2号3号4号演员，然后我们再去看他们以往的作品和表演片段，有时候甚至会看完全集。\n</p>\n<p>\n每个演员的表演能力如何，在他们之前的作品里是留有痕迹的。在这个过程中，我们会讨论、做论证，某些角色还会开会商议，直至确定最合适的选角。\n</p>\n<p>\n我和黄澄澄老师是第一次合作，他作为青年演员，表演质量非常高，塑造过很多鲜活的角色，我能看出来他身上的潜质，包括他的爆发力，那种灵活的劲儿，尤其是他对底层小人物有独特的理解。看到观众朋友们认可他的塑造，我们作为主创也很开心。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425154626692.jpg\" /> \n</p>\n<p>\n<strong>新潮观鱼：有部分观众觉得张家所谓“宅斗”的剧情，万福的一些表现是不是“用力过猛”，您怎么看？</strong> \n</p>\n<p>\n<strong>张永新：</strong>我也注意到了，有些网友是这么判断的，对此我们持一种开放、虚心的态度。一部剧出来后，观众朋友的眼睛是雪亮的，大家见仁见智，各种评判我们都接受。\n</p>\n<p>\n我想强调的是，在上海因为房子问题产生的争斗，我们要做的不是“宅斗”，而是换了一个环境的战场，这个战场更聚焦，矛盾冲突极其尖锐。目的是要用这种高密度、强化的戏剧冲突，来塑造丁玉娇、孟万福他们在另一个“战场”上的博弈。\n</p>\n<p>\n尤其像丁玉娇这种角色，从一个养尊处优的少夫人，到真正感知到生活的艰难和残酷，甚至发现射向你的暗箭竟然来自亲人，人性中“恶”的那一面在战乱的裹挟中露出了狰狞的面目，这里面还夹杂着亲情，会让一个内心深处不设防的人手足无措。\n</p>\n<p>\n丁玉娇在这种被伤害被侵害的过程中一点点成长，我认为这里写得很真实，因为她要经过一番天人交战，一方面和恶亲戚做斗争，另一方面又和孟万福之间因为某些具体的事产生分歧，这里面还有他俩阶层上的差异。在这种既合作又斗争，最后一起往前走的过程中，我们能看到人底色里最温暖的东西，也会鞭挞那些最丑恶的东西。\n</p>\n<p>\n我们通过上海弄堂里的一栋房子，聚焦了社会万花筒里的一个子单元，而这一切都是因为日本人的侵略、因为战乱导致的外界压迫，在这样的环境中，每个人在利益面前何去何从。这个群像场域描绘了这些人各自的生存态势，以及他们命运走向的必然。\n</p>\n<p>\n<strong>新潮观鱼：剧中有段情节引发了热议，万福骂忍气吞声的丁玉娇和舍命救自己的张云魁都是“大傻子”，丁玉娇气急之下打了万福三巴掌，后来在丁玉娇崩溃时万福把这巴掌还回去了，可以分享下这组情节的设计吗？</strong> \n</p>\n<p>\n<strong>张永新：</strong>我们在艺术创作里特意做了这种勾连和设定，有点像“草蛇灰线，伏脉千里”的处理方式，这种信息上的闭环和镜像关系，是承载叙事的一个手段。一些道具，像万福给小月的发簪，玉娇的蚕豆，小月给万福的“云遮月”荷包，都有戏剧闭环，这都裹挟着人物命运起伏，会让观众唏嘘不已。\n</p>\n<p>\n这三巴掌，就是两个各自无助的人在那一刻的对撞。玉娇为什么会突然暴起打人？那是她内心深处绝望的外放——到上海寻夫，没寻到，太爷和刘嫂也失踪了，住在自己的房子里却活得像寄人篱下，磨难重重，让她这个养尊处优的大家闺秀心理彻底失衡了。那时候她心中最大的不解是什么？她可能对自己的存在都产生了怀疑。恰恰在这个阶段，孟万福用他那套人生哲学做了一番表达，他着急于丁玉娇这一类人的“体面”，已经影响到了“生存”，他跟丁玉娇形成了极大的对照。\n</p>\n<p align=\"center\">\n<img alt=\"\" height=\"299\" src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425151558599.png\" width=\"600\" /> \n</p>\n<p>\n如果仔细看丁玉娇的反应和状态，那三巴掌打完以后其实她内心有懊恼和懊悔，但也没有能当场给万福道歉，只是用手反复擦桌子。后来等她和万福达成共识的时候，她对万福说要不然你打我三巴掌“还回来”，其实是一种变相的道歉。\n</p>\n<p style=\"text-align: center;\">\n<img alt=\"\" height=\"298\" src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425151544582.png\" width=\"600\" /> \n</p>\n<blockquote class=\"content-quote\">\n<p>\n<strong>“大悲大喜的戏不宜多，我们去咀嚼苦难，不是要消费苦难”</strong> \n</p>\n</blockquote>\n<p>\n<strong>新潮观鱼：从《大军师司马懿之军师联盟》《觉醒年代》到《八千里路云和月》，您很擅长塑造男性群像，同时也会打造有力量的女性角色，这部剧有关丁玉娇和韩小月这两个角色的讨论很多，与演员合作的感受如何？</strong> \n</p>\n<p>\n<strong>张永新：</strong>演丁玉娇的万茜老师和演韩小月的王和老师，我都是头一回跟她们合作，我觉得她们都很好地完成了角色塑造。\n</p>\n<p>\n丁玉娇这个角色从表演上来说，难度非常大，所经受的这种大悲大喜、大荣大辱、跌宕起伏，命运震荡的速度是最大的，表演难度很大。我认为万茜奉献了非常精准、非常高级的表演，把这个角色塑造得感人肺腑，在我看来非常成功。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425145950532.jpg\" /> \n</p>\n<p>\n王和是刚刚大学毕业的年轻演员，她身上这种青春朝气，甚至带一些稚气的状态，恰恰吻合小月的人生轨迹，有一种青春无处不在的力量感。她哪怕不演，站在镜头内，也会带给观众一种联想。这就是演员在塑造角色时非常好的状态。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425145847655.jpg\" /> \n</p>\n<p>\n<strong>新潮观鱼：现在很多观众都喜欢看轻松下饭的剧，抗战剧难免会有一些情绪特别强烈、让人不太忍心看的镜头。我看花絮里您提到这种戏“不宜多”，您会有意控制这类镜头的比重吗？</strong> \n</p>\n<p>\n<strong>张永新：</strong>会。比如丁玉娇雨中怒吼那段，那是她人生产生质变的一场戏，她被压到最低谷后绝地重生的关键节点，这种戏的表演张力极大，对演员考验非常大。我在片场强调“不宜反复拍”，因为这个过程极其消耗演员的体力和心力。演完一场戏以后，你会发现演员都不说话了，他们默默地坐在片场，要缓一会儿。但是从叙事的角度来说，为了发挥戏剧强冲突的作用，这种戏又回避不了。所以我想强调的是，在那样一个乱世当中，我们去咀嚼苦难，不是要消费苦难。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425150958119.jpg\" /> \n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425150959302.jpg\" /> \n</p>\n\n<p>\n<strong>新潮观鱼：这部剧的战争场面也比较克制，每当有伤亡出现时，就会响起悲壮的唢呐配上清澈积极的童声，看剧时会产生一种复杂的情感体验，您是否希望通过童声“消解”观众的揪心？</strong> \n</p>\n<p>\n<strong>张永新：</strong>在我们中华文化谱系里，当孩子都唱起战歌，意味着所有人都卷入了战争，到了民族生死存亡的关头，是最后一战。换个角度来理解，战争本该发生在谁和谁之间？当战争把母亲、孩子都逼到濒死绝境时，意味着什么？对于那些在战场上浴血奋战的将士们来说，听到孩子用这么纯粹和干净的声音唱起战歌时，他们心里是什么感受？\n</p>\n<p>\n这个点，恰恰是我们想表达的东西。我认为童声唱战歌内在的精神肌理，就是咱们中国人骨子里那种不畏强权、不畏暴政、不畏惧敌人的精神，我们不畏侵略，或者愤而抗击，这种气节深植于中华民族精神文化当中。正如国歌里所唱，“中华民族到了最危险的时候”，被逼到绝境时，我们这个民族绝不会低头，这是中华民族最宝贵的精气神。\n</p>\n<p>\n不知道大家注意到没有，在剧里，有个不到一分钟的画面——抗战初期，一群孩子唱着《义勇军进行曲》发抗日救亡传单。小队伍里领头者是一位老师，那是一个年长者，也是文化工作者、教育工作者，这首歌是老师教给孩子们的。这样一种薪火相传，浸润在我们所有中国人的心脉与血脉之中。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425152633184.jpg\" /> \n</p>\n<p>\n我把这首歌放进剧里，一方面是因为《义勇军进行曲》本身准确地反映了那个时代的精气神，另一方面，当这首歌由一群孩子唱出来时，你不禁会思考，孩子们当时未必全然理解歌词的含义，更不知道短短十几年后，这首《风云儿女》的主题曲会成为新中国的国歌。\n</p>\n<p>\n孩子们唱着《义勇军进行曲》，只是那个时代的一个表征，但如果我们从今天回望那段历史，会发现，正是在这样平平常常的状态下孕育出了中华民族的底色。短短十几年后，这首歌就传唱大江南北、响遍神州大地，成为新中国的国歌。我希望通过这一细节，展现历史带给我们的抚今追昔的独特魅力。\n</p>\n<blockquote class=\"content-quote\">\n<p>\n<strong>“于和伟、张桐都是老朋友了，这次的角色也很适合他们”</strong> \n</p>\n</blockquote>\n<p>\n<strong>新潮观鱼：观众在《八百里路云和月》看到了不少《觉醒年代》老熟人，包括于和伟和张桐老师，这次合作您的感受如何？</strong> \n</p>\n<p>\n<strong>张永新：</strong>我和于和伟老师和张桐老师都是好朋友，也不是第一次合作了，看到这部剧有合适的角色，设定符合他们的性格和表演状态，就邀请他们加入了。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425144936197.png\" /> \n</p>\n<p class=\"content-pic-desc\">\n片场花絮中的导演张永新（右）和于和伟<span> 视频截图</span> \n</p>\n<p>\n和伟老师扮演的田家泰是一个非常重要的角色，他作为一个民族实业家，有着和万福完全不一样的生存态势，某种意义上他们也可以互为镜像关系。他身上有着孟万福的困惑，也有张云魁的困惑，他可以说也是张云魁的另外一个折射。\n</p>\n<p>\n张桐老师扮演的谢语峰是一个新四军的指挥员，他身上所体现出来的那种精气神，和张云魁形成了一个事实上的参照与对比，这是编剧老师在一度创作里打下的底子，这个故事是大环套小环的关系。我们从一开始就形成了这个概念，就是强化对比关系。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425150138477.jpg\" /> \n</p>\n<p>\n<strong>新潮观鱼：我看画面也用了很多对比，比如白家宅被战火摧毁时，镜头给了血溅落在棉花上的特写，红与白的对撞很有冲击感。听说剧组花了好几个月种棉花，这是您在开拍前就想好的镜头语言吗？</strong> \n</p>\n<p>\n<strong>张永新：</strong>对，这是在剧本论证过程中产生的想法，围读的时候我们设定了用白家宅和柳镇来侧写淞沪会战，一开始倒是没想过要种，想试着找找哪个地方有棉花田。\n</p>\n<p>\n过完年我们才开机，那时候全国有棉花地的地方比较少，我们也想过要不要去新疆或者海南取景，但是算来算去成本都太高了，操作起来不现实，索性退而求其次，自己种。一开始我们想得很好，规划要种多少亩，但是后来条件限制，规模种得不大。剧组很呵护这块棉花地，整天提心吊胆，就怕它被破坏了或者蔫了，还请了专人去维护。\n</p>\n<p>\n为什么在棉花地打？这是淞沪会战的一个特点，长三角地区自古以来就是中国棉花种植的重要区域，棉花也是我们无数中国人赖以生存的东西，棉花地都成了战场，说明已经退无可退了。镜头里，洁白的棉花和猩红狰狞的鲜血一碰撞，观众从视觉和心理上，会感受到战争的残酷，以及战争对我们生活的侵害。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425183217944.gif\" /> \n</p>\n<p>\n正如剧中张云魁所说，我们没办法再往后退了，因为身后站的是我们的父母，我们的妻子，我们的孩子，我们往哪退，苦难就会降临到哪里。所以他们退无可退，才会形成这种决战的态势。当时祖国不也是这样吗？我们退无可退，输不起了，再输那就是完全意义上的“亡国”。\n</p>\n<p>\n<strong>新潮观鱼：我们看到您的作品基本上都响应了“剧本中心制”的号召，文本非常扎实，不是靠“人带剧”，《觉醒年代》之后时隔五年我们才看到这部《八千里路云和月》，是因为一直在挑剧本吗？面对现在越来越敏锐的年轻观众，您在拍历史题材时会不会有一些特别的考量？</strong> \n</p>\n<p>\n<strong>张永新：</strong>这五年，我们也是不断在看剧本，接触不同的项目。对我来说，关键是一部作品真正的原动力在哪里？一度创作对于一部剧到底意味着什么？一切都要服务于讲好故事，讲好中国人的故事，坚持人民史观。\n</p>\n<p>\n比如说抗战题材，一定要想清楚这个故事如何能传达出抗战时期中国人的精气神，这是灵魂，不会说想着去选用一些什么样的演员，靠他们引起大家的关注。最终观众看的还是故事讲得好与不好，演员演得好与不好，这是衡量一部剧的标准。一部作品有没有深度，有没有温度，要看故事。\n</p>\n<p>\n今天的观众，特别是年轻观众，我认为他们对历史的认知非常犀利。作为创作者，我们不能有糊弄的想法，不能想着随便讲个故事，短平快拍完就行了。特别是做这种历史相关的题材，创作者要有敬畏之心，面对抗战这个时期，没有任何人有权利去调侃它或把玩它，我们要始终保持对历史的敬畏，对先辈先烈付出和牺牲的敬畏。\n</p>\n<p>\n所以我们全剧组，从编剧老师到服化道摄影各职能部门，包括演员们，大家付出了很多心血，点点滴滴我都看在眼里。每个人都非常尊重自己的职业，非常尊重这段历史，只有这个状态才有可能拍出一部好作品。\n</p>\n<p>\n<strong>新潮观鱼：您近年来深耕历史题材电视剧，这是不是您接下来一段时间的创作重点？可以和我们透露下《伟大的长征》的进度吗？</strong> \n</p>\n<p>\n<strong>张永新：</strong>我不排斥任何一个题材，只要是好作品，我总希望能参与其中。但对于历史故事，我本人确实有天然的喜好，无论是近代史还是古代史，都是我们国家影视创作的一个富矿，中国历史里有太多好故事可以讲。所以题材上我不会给自己设限，任何题材只要写得好，剧就可以好，但是这个写得好很难。\n</p>\n<p>\n电视剧《伟大的长征》已经杀青，我正在做这部剧的后期工作，开播时间目前还不清楚，要看我们的生产进度，希望能够尽早和观众朋友们见面。\n</p>\n<p align=\"center\">\n<img src=\"https://i.guancha.cn/shiping-banner.jpg\" width=\"530px\" /> \n</p>\n<p>\n<strong>本文系观察者网独家稿件，文章内容纯属作者个人观点，不代表平台观点，未经授权，不得转载，否则将追究法律责任。关注观察者网微信guanchacn，每日阅读趣味文章。</strong> \n</p>",
-      "content": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/25/20260425172349293.jpg\" width=\"970px\" />\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/origin/2026/04/25/20260425142653251.jpg\" /> \n</p>\n<p>\n<strong>编者按：</strong>距离《觉醒年代》成为现象级历史题材剧，已过去了五年，这期间，导演张永新一直没有新的作品播出，直到今年4月，以抗日战争为故事背景的《八千里路云和月》开播。\n</p>\n<p>\n这部剧讲述了将军与厨子命运错位的故事。国民党旅长张云魁一心报国，却因高层指挥不当、军队内部腐化而蒙冤；厨子孟万福，只想过好自己的小日子，却被国民党抓去充军，受张云魁“临终”托付远赴南京报丧。不料张云魁奇迹生还，但战争年代信息不畅，误会丛生——张云魁和妻子都误以为对方丧生，孟万福的未婚妻韩小月误以为孟万福战死。厨子与将军从此阴差阳错地以对方之名继续投身抗日事业。张云魁加入游击队，成为共产党的一员，和小月携手抗敌；而孟万福则照料起张云魁一家老小，活成了“张云魁”。\n</p>\n<p>\n由于一如往常没有启用话题度大的所谓“流量”演员，剧集开播时声量并不高，然而，随着剧情推进，这部剧凭借双线叙事和拉大场域的抗战视角逐渐发酵。此外，围绕剧中情感线的讨论也颇为热烈，大结局播出后，网上出现了对四人情感关系错位的不同看法。\n</p>\n<p>\n近日，观察者网新潮观鱼栏目独家对话《八千里路云和月》导演张永新。针对观众关心的选角思路、张家“宅斗”是否用力过猛、男主角戏份比重、女性角色力量，以及与于和伟三搭等问题，张永新一一作出回应。\n</p>\n<p>\n张永新强调这是一部群像戏，戏份多少并非判断“戏眼”的标准。他不愿用“被迫”形容孟万福的成长，而是将其解读为个体在时代洪流中的淬炼与重塑，每一个看似身不由己的选择，最终沉淀为自发的信仰和行动。\n</p>\n<p>\n“今天的观众，特别是年轻观众，我认为他们对历史的认知非常犀利。作为创作者，我们不能有糊弄的想法，创作者要有敬畏之心。”\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425150625683.jpg\" /> \n</p>\n<p>\n【对话/新潮观鱼 严珊珊】\n</p>\n<blockquote class=\"content-quote\">\n<p>\n<strong>“剧本辗转到了我手里，正好我一直想拍抗战故事”</strong> \n</p>\n</blockquote>\n<p>\n<strong>新潮观鱼：张导您好，很高兴与您交流。《觉醒年代》的成功让大家觉得您很会拍革命历史题材，我们很好奇，这部以抗战为故事背景的《八千里路云和月》，是题材先行的“命题作文”，还是自发的创作？片名会让人想到岳飞的词和1947年的同名抗战电影，这其中有关联吗？</strong> \n</p>\n<p>\n<strong>张永新：</strong>我可以负责任地说，这部剧绝对不是“任务剧”，而是编剧老师自发原创的剧本。他们多年前有了这个想法，然后落实了剧本，但阴差阳错一直没拍成，后来这个剧本辗转到了我手里，我很感兴趣。\n</p>\n<p>\n因为我特别渴望能在这个阶段拍一部讲述抗日战争故事的剧，我想看看那段历史能带给今天的人们什么样的感受。从这个角度来说，我们一拍即合。大家都希望能在那样一个波澜壮阔的时代里，找到一个能写家国、写热血、写青春、写成长的故事，去叩问这些命题、去讲述我们民族高贵的精气神的凝聚。\n</p>\n<p>\n剧名是编剧老师的功劳，其实筹备阶段它一度叫《厨子与将军》，后来改成了《八千里路云和月》。白杨老师主演的那部经典电影我们都看过，我记得还有同名的电视纪录片和电视剧。不过，归根结底这句词出自岳飞的《满江红·写怀》，我们没有往“重名”那方面想，主要是因为这八个字能准确地形容我们这部剧所建构的戏剧空间——无论是物理和时间上的大跨度，还是那个时代的整体状况——与我们的创作诉求高度一致。\n</p>\n<p>\n当初我们和编剧老师讨论这部戏真正的骨架和“戏眼”是什么，在漫长的抗战历程中，我们故事选择了1937年8月淞沪会战开始，到1945年抗战胜利，历经九个中秋节，没有一个是在平顺中度过的。中秋节是我们中国人特别看重的节日，但那九年里的每次团圆背后，总是裹挟着硝烟和风雨，夹杂人生的大起大伏，大悲大喜，构成了极其强烈的戏剧冲突，这种冲突是我们做一部好剧的基础。片尾曲的《九个月亮》就是一个意象，用来指代九个中秋节。\n</p>\n<p>\n<strong>新潮观鱼：很多观众表示，《八千里路云和月》没有只盯着英雄将领，而是从国家兴亡“伙夫”有责的切口展现了全景式抗战故事，我们看到孟万福从幻想“事不关己”到领悟“覆巢之下无完卵”，这种转变并非一蹴而就，过程中几次想逃跑，您是否想展现普通人面对战争的“被迫成长”？</strong> \n</p>\n<p>\n<strong>张永新：</strong>首先，我以为一个人的成长没有“被迫”之说，无论你想不想，生命的历程都必须往前走，这是历史的长河在我们短暂的生命中所形成的观照。\n</p>\n<p>\n我们为什么有一条线是用孟万福的视角来讲故事？因为他是当时四万万五千万中国人中的普通一员。作为一个饱受欺凌的底层小人物，他的起点不高，信奉的生存哲学是如何让“小我”活得自如。但是命运的吊诡就在于，他卷入了时代的洪流中，他上了战场，也完成了对旅长的承诺，甚至后来肩负起了照顾旅长家人的责任，一次又一次的“选择”，其实就是他内心自发的成长，让他完成了从“小我”到“大我”的转变。\n</p>\n<p>\n孟万福这个角色的生命弧光非常长，也非常耀眼，我们想让此类角色的转变呈现一个自然的过程。因为一个人价值观、理解力和判断力的成长不是一蹴而就的，还需要一些突发事件的刺激，尤其是绝境，最能考验一个人真正的三观是什么。\n</p>\n<p align=\"center\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425144919981.jpg\" /> \n</p>\n<p>\n整个时代的洪流所淬炼、解构和重新建构出来的，恰恰是各色人等在所处时代中最真实的状态。像孟万福，他最终成长为一个共产主义战士，但这个过程也有反复，我们就想按照这种最真实的逻辑来塑造人物。假如我们用生活的经纬来看他，他有血有肉，有很多优点，也有性格瑕疵，很复杂，他身上体现了那个时代很多普通人的感受——当战争危险离我还很远的时候，如何安放“小我”，当时代的推手将我推至十字路口时，又该何去何从？\n</p>\n<p>\n这个命题不仅是孟万福一个人面对，张云旗、李淑媛这些跟他同时代的人，都在面临抉择。随着剧情的推展，你会看到有人高唱《满江红》，满嘴仁义道德，但当大厦将倾，还是做出了精致利己的选择。那些沉渣，只是极小的一部分，真正的主流是众志成城的四万万五千万人，无数个孟万福、丁玉娇、张云魁、张汝贤、田家泰、韩小月，才构成了这个民族的主体。\n</p>\n<p>\n时代的大潮滚滚向前，泥沙俱下，那些不堪的东西最终会被时代冲刷掉，荡涤出我们这个民族真正的精神。这也是我们这个民族浴火重生、涅槃重生的必经之路。\n</p>\n<p>\n我们这部剧想尽可能把场域开得大一些，让观众看到那个时代的中国人如何做选择。路在脚下，往哪走全看你的双脚，有人走向光明，有人走向沉沦，有人走向黑暗，甚至有人走向背叛，各色人等才构成真正的大千世界。\n</p>\n<blockquote class=\"content-quote\">\n<p>\n<strong>“这是一部群像戏，选角时我们深思熟虑”</strong> \n</p>\n</blockquote>\n<p>\n<strong>新潮观鱼：</strong><span style=\"font-weight: bold;\">孟万福这个角色前后期的对比引发了很多讨论，</span><strong>有观众认为这部剧的“戏眼”落在了孟万福身上，您怎么看这种讨论？</strong> \n</p>\n<p>\n<strong>张永新：</strong>首先感谢观众朋友们细致的观察，但我想强调，这是一部真正意义上的群像戏，也就是说，戏份大小、出场时长，未必是判断一部剧“戏眼”的唯一标准。\n</p>\n<p>\n这部剧里的角色各自在成长，严格来说，是双线叙事——一个是战争区域的硝烟板块，另一个是后方的烟火板块，相当于一枚硬币的两面。后方何尝不是战场，烟火中何尝没有硝烟？这是一种镜像关系，就像剧中两个人要互换名字，张云魁躲藏时期隐姓埋名，用勤务兵“孔二包”的名字来生存；而“孔二包”是孟万福前期的一个“分身”，随着剧情展开，他也一度被迫扮演“张云魁”，并最终把自己活成了张云魁。在那样一个乱世中，这是光怪陆离、阴差阳错的命运抉择。\n</p>\n<p>\n剧中的人物都不是十全十美。王阳饰演的张云魁，从奔赴战场，到蒙冤，再到努力洗冤，最后成长为新四军指战员，随着戏剧勾连，这个角色的人生路径逐渐清晰，展现了一个人在精神层面经历淬炼后的蜕变。他虽然没有孟万福的势利、机巧，但他也有笨拙和执拗的一面，需要一步步破除内心深处的执念。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425150830954.jpg\" /> \n</p>\n<p>\n还有张汝贤这个角色，我们看到了老太爷的大义，看到他作为最后一波仕人坚守的文人精神，傲岸、有风骨，但同时我们也调侃了他身上所谓的“迂腐”和“食古不化”，特别是在和万福的冲突中所暴露的“抱残守缺”，这是一体两面的，恰恰是一个真实的人的精神构成。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425145335450.jpg\" /> \n</p>\n<p>\n孟万福这种 “苟活派”， 他是一个矛盾的综合体——他的人生哲学是“只要能活，可以跪万物”，可是他骨子里又信奉“膝盖只能跪天跪地跪爹娘”。那我们就要考量他的“跪”到底是什么层面上的“跪”。从生理意义上讲，双膝一弯膝头着地，就是跪；但在特殊环境下，为了内心深处更大的目标，必须要和敌人周旋，那就是另外一个意义上的“不跪”，这是一种辩证的关系。\n</p>\n<p>\n我一再强调这部剧是群像戏，王阳、万茜、黄澄澄、于和伟、毕彦君、王和老师，每个人都在努力塑造角色，都是非常优秀的演员。合作中我最真切的体会就是，他们都是一群用生命去演戏的人，作为导演，我非常敬佩他们。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425145125730.png\" /> \n</p>\n\n<p>\n<strong>新潮观鱼：在这部剧里，我们看到了演员黄澄澄这样观众不太熟悉但特别“贴”角色的演员，在偏好流量的当下影视市场，当初剧组怎么有魄力定下来他演孟万福的？</strong> \n</p>\n<p>\n<strong>张永新：</strong>这部剧所有选角，都是由我们导演团队、制片部门和平台一起商讨决定的。我认为我们有一套比较科学的筛选体系，每个角色都有备选，大家一起推荐适合这个角色的1号2号3号4号演员，然后我们再去看他们以往的作品和表演片段，有时候甚至会看完全集。\n</p>\n<p>\n每个演员的表演能力如何，在他们之前的作品里是留有痕迹的。在这个过程中，我们会讨论、做论证，某些角色还会开会商议，直至确定最合适的选角。\n</p>\n<p>\n我和黄澄澄老师是第一次合作，他作为青年演员，表演质量非常高，塑造过很多鲜活的角色，我能看出来他身上的潜质，包括他的爆发力，那种灵活的劲儿，尤其是他对底层小人物有独特的理解。看到观众朋友们认可他的塑造，我们作为主创也很开心。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425154626692.jpg\" /> \n</p>\n<p>\n<strong>新潮观鱼：有部分观众觉得张家所谓“宅斗”的剧情，万福的一些表现是不是“用力过猛”，您怎么看？</strong> \n</p>\n<p>\n<strong>张永新：</strong>我也注意到了，有些网友是这么判断的，对此我们持一种开放、虚心的态度。一部剧出来后，观众朋友的眼睛是雪亮的，大家见仁见智，各种评判我们都接受。\n</p>\n<p>\n我想强调的是，在上海因为房子问题产生的争斗，我们要做的不是“宅斗”，而是换了一个环境的战场，这个战场更聚焦，矛盾冲突极其尖锐。目的是要用这种高密度、强化的戏剧冲突，来塑造丁玉娇、孟万福他们在另一个“战场”上的博弈。\n</p>\n<p>\n尤其像丁玉娇这种角色，从一个养尊处优的少夫人，到真正感知到生活的艰难和残酷，甚至发现射向你的暗箭竟然来自亲人，人性中“恶”的那一面在战乱的裹挟中露出了狰狞的面目，这里面还夹杂着亲情，会让一个内心深处不设防的人手足无措。\n</p>\n<p>\n丁玉娇在这种被伤害被侵害的过程中一点点成长，我认为这里写得很真实，因为她要经过一番天人交战，一方面和恶亲戚做斗争，另一方面又和孟万福之间因为某些具体的事产生分歧，这里面还有他俩阶层上的差异。在这种既合作又斗争，最后一起往前走的过程中，我们能看到人底色里最温暖的东西，也会鞭挞那些最丑恶的东西。\n</p>\n<p>\n我们通过上海弄堂里的一栋房子，聚焦了社会万花筒里的一个子单元，而这一切都是因为日本人的侵略、因为战乱导致的外界压迫，在这样的环境中，每个人在利益面前何去何从。这个群像场域描绘了这些人各自的生存态势，以及他们命运走向的必然。\n</p>\n<p>\n<strong>新潮观鱼：剧中有段情节引发了热议，万福骂忍气吞声的丁玉娇和舍命救自己的张云魁都是“大傻子”，丁玉娇气急之下打了万福三巴掌，后来在丁玉娇崩溃时万福把这巴掌还回去了，可以分享下这组情节的设计吗？</strong> \n</p>\n<p>\n<strong>张永新：</strong>我们在艺术创作里特意做了这种勾连和设定，有点像“草蛇灰线，伏脉千里”的处理方式，这种信息上的闭环和镜像关系，是承载叙事的一个手段。一些道具，像万福给小月的发簪，玉娇的蚕豆，小月给万福的“云遮月”荷包，都有戏剧闭环，这都裹挟着人物命运起伏，会让观众唏嘘不已。\n</p>\n<p>\n这三巴掌，就是两个各自无助的人在那一刻的对撞。玉娇为什么会突然暴起打人？那是她内心深处绝望的外放——到上海寻夫，没寻到，太爷和刘嫂也失踪了，住在自己的房子里却活得像寄人篱下，磨难重重，让她这个养尊处优的大家闺秀心理彻底失衡了。那时候她心中最大的不解是什么？她可能对自己的存在都产生了怀疑。恰恰在这个阶段，孟万福用他那套人生哲学做了一番表达，他着急于丁玉娇这一类人的“体面”，已经影响到了“生存”，他跟丁玉娇形成了极大的对照。\n</p>\n<p align=\"center\">\n<img alt=\"\" height=\"299\" src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425151558599.png\" width=\"600\" /> \n</p>\n<p>\n如果仔细看丁玉娇的反应和状态，那三巴掌打完以后其实她内心有懊恼和懊悔，但也没有能当场给万福道歉，只是用手反复擦桌子。后来等她和万福达成共识的时候，她对万福说要不然你打我三巴掌“还回来”，其实是一种变相的道歉。\n</p>\n<p style=\"text-align: center;\">\n<img alt=\"\" height=\"298\" src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425151544582.png\" width=\"600\" /> \n</p>\n<blockquote class=\"content-quote\">\n<p>\n<strong>“大悲大喜的戏不宜多，我们去咀嚼苦难，不是要消费苦难”</strong> \n</p>\n</blockquote>\n<p>\n<strong>新潮观鱼：从《大军师司马懿之军师联盟》《觉醒年代》到《八千里路云和月》，您很擅长塑造男性群像，同时也会打造有力量的女性角色，这部剧有关丁玉娇和韩小月这两个角色的讨论很多，与演员合作的感受如何？</strong> \n</p>\n<p>\n<strong>张永新：</strong>演丁玉娇的万茜老师和演韩小月的王和老师，我都是头一回跟她们合作，我觉得她们都很好地完成了角色塑造。\n</p>\n<p>\n丁玉娇这个角色从表演上来说，难度非常大，所经受的这种大悲大喜、大荣大辱、跌宕起伏，命运震荡的速度是最大的，表演难度很大。我认为万茜奉献了非常精准、非常高级的表演，把这个角色塑造得感人肺腑，在我看来非常成功。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425145950532.jpg\" /> \n</p>\n<p>\n王和是刚刚大学毕业的年轻演员，她身上这种青春朝气，甚至带一些稚气的状态，恰恰吻合小月的人生轨迹，有一种青春无处不在的力量感。她哪怕不演，站在镜头内，也会带给观众一种联想。这就是演员在塑造角色时非常好的状态。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425145847655.jpg\" /> \n</p>\n<p>\n<strong>新潮观鱼：现在很多观众都喜欢看轻松下饭的剧，抗战剧难免会有一些情绪特别强烈、让人不太忍心看的镜头。我看花絮里您提到这种戏“不宜多”，您会有意控制这类镜头的比重吗？</strong> \n</p>\n<p>\n<strong>张永新：</strong>会。比如丁玉娇雨中怒吼那段，那是她人生产生质变的一场戏，她被压到最低谷后绝地重生的关键节点，这种戏的表演张力极大，对演员考验非常大。我在片场强调“不宜反复拍”，因为这个过程极其消耗演员的体力和心力。演完一场戏以后，你会发现演员都不说话了，他们默默地坐在片场，要缓一会儿。但是从叙事的角度来说，为了发挥戏剧强冲突的作用，这种戏又回避不了。所以我想强调的是，在那样一个乱世当中，我们去咀嚼苦难，不是要消费苦难。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425150958119.jpg\" /> \n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425150959302.jpg\" /> \n</p>\n\n<p>\n<strong>新潮观鱼：这部剧的战争场面也比较克制，每当有伤亡出现时，就会响起悲壮的唢呐配上清澈积极的童声，看剧时会产生一种复杂的情感体验，您是否希望通过童声“消解”观众的揪心？</strong> \n</p>\n<p>\n<strong>张永新：</strong>在我们中华文化谱系里，当孩子都唱起战歌，意味着所有人都卷入了战争，到了民族生死存亡的关头，是最后一战。换个角度来理解，战争本该发生在谁和谁之间？当战争把母亲、孩子都逼到濒死绝境时，意味着什么？对于那些在战场上浴血奋战的将士们来说，听到孩子用这么纯粹和干净的声音唱起战歌时，他们心里是什么感受？\n</p>\n<p>\n这个点，恰恰是我们想表达的东西。我认为童声唱战歌内在的精神肌理，就是咱们中国人骨子里那种不畏强权、不畏暴政、不畏惧敌人的精神，我们不畏侵略，或者愤而抗击，这种气节深植于中华民族精神文化当中。正如国歌里所唱，“中华民族到了最危险的时候”，被逼到绝境时，我们这个民族绝不会低头，这是中华民族最宝贵的精气神。\n</p>\n<p>\n不知道大家注意到没有，在剧里，有个不到一分钟的画面——抗战初期，一群孩子唱着《义勇军进行曲》发抗日救亡传单。小队伍里领头者是一位老师，那是一个年长者，也是文化工作者、教育工作者，这首歌是老师教给孩子们的。这样一种薪火相传，浸润在我们所有中国人的心脉与血脉之中。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425152633184.jpg\" /> \n</p>\n<p>\n我把这首歌放进剧里，一方面是因为《义勇军进行曲》本身准确地反映了那个时代的精气神，另一方面，当这首歌由一群孩子唱出来时，你不禁会思考，孩子们当时未必全然理解歌词的含义，更不知道短短十几年后，这首《风云儿女》的主题曲会成为新中国的国歌。\n</p>\n<p>\n孩子们唱着《义勇军进行曲》，只是那个时代的一个表征，但如果我们从今天回望那段历史，会发现，正是在这样平平常常的状态下孕育出了中华民族的底色。短短十几年后，这首歌就传唱大江南北、响遍神州大地，成为新中国的国歌。我希望通过这一细节，展现历史带给我们的抚今追昔的独特魅力。\n</p>\n<blockquote class=\"content-quote\">\n<p>\n<strong>“于和伟、张桐都是老朋友了，这次的角色也很适合他们”</strong> \n</p>\n</blockquote>\n<p>\n<strong>新潮观鱼：观众在《八百里路云和月》看到了不少《觉醒年代》老熟人，包括于和伟和张桐老师，这次合作您的感受如何？</strong> \n</p>\n<p>\n<strong>张永新：</strong>我和于和伟老师和张桐老师都是好朋友，也不是第一次合作了，看到这部剧有合适的角色，设定符合他们的性格和表演状态，就邀请他们加入了。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425144936197.png\" /> \n</p>\n<p class=\"content-pic-desc\">\n片场花絮中的导演张永新（右）和于和伟<span> 视频截图</span> \n</p>\n<p>\n和伟老师扮演的田家泰是一个非常重要的角色，他作为一个民族实业家，有着和万福完全不一样的生存态势，某种意义上他们也可以互为镜像关系。他身上有着孟万福的困惑，也有张云魁的困惑，他可以说也是张云魁的另外一个折射。\n</p>\n<p>\n张桐老师扮演的谢语峰是一个新四军的指挥员，他身上所体现出来的那种精气神，和张云魁形成了一个事实上的参照与对比，这是编剧老师在一度创作里打下的底子，这个故事是大环套小环的关系。我们从一开始就形成了这个概念，就是强化对比关系。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425150138477.jpg\" /> \n</p>\n<p>\n<strong>新潮观鱼：我看画面也用了很多对比，比如白家宅被战火摧毁时，镜头给了血溅落在棉花上的特写，红与白的对撞很有冲击感。听说剧组花了好几个月种棉花，这是您在开拍前就想好的镜头语言吗？</strong> \n</p>\n<p>\n<strong>张永新：</strong>对，这是在剧本论证过程中产生的想法，围读的时候我们设定了用白家宅和柳镇来侧写淞沪会战，一开始倒是没想过要种，想试着找找哪个地方有棉花田。\n</p>\n<p>\n过完年我们才开机，那时候全国有棉花地的地方比较少，我们也想过要不要去新疆或者海南取景，但是算来算去成本都太高了，操作起来不现实，索性退而求其次，自己种。一开始我们想得很好，规划要种多少亩，但是后来条件限制，规模种得不大。剧组很呵护这块棉花地，整天提心吊胆，就怕它被破坏了或者蔫了，还请了专人去维护。\n</p>\n<p>\n为什么在棉花地打？这是淞沪会战的一个特点，长三角地区自古以来就是中国棉花种植的重要区域，棉花也是我们无数中国人赖以生存的东西，棉花地都成了战场，说明已经退无可退了。镜头里，洁白的棉花和猩红狰狞的鲜血一碰撞，观众从视觉和心理上，会感受到战争的残酷，以及战争对我们生活的侵害。\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/internet/2026/04/25/20260425183217944.gif\" /> \n</p>\n<p>\n正如剧中张云魁所说，我们没办法再往后退了，因为身后站的是我们的父母，我们的妻子，我们的孩子，我们往哪退，苦难就会降临到哪里。所以他们退无可退，才会形成这种决战的态势。当时祖国不也是这样吗？我们退无可退，输不起了，再输那就是完全意义上的“亡国”。\n</p>\n<p>\n<strong>新潮观鱼：我们看到您的作品基本上都响应了“剧本中心制”的号召，文本非常扎实，不是靠“人带剧”，《觉醒年代》之后时隔五年我们才看到这部《八千里路云和月》，是因为一直在挑剧本吗？面对现在越来越敏锐的年轻观众，您在拍历史题材时会不会有一些特别的考量？</strong> \n</p>\n<p>\n<strong>张永新：</strong>这五年，我们也是不断在看剧本，接触不同的项目。对我来说，关键是一部作品真正的原动力在哪里？一度创作对于一部剧到底意味着什么？一切都要服务于讲好故事，讲好中国人的故事，坚持人民史观。\n</p>\n<p>\n比如说抗战题材，一定要想清楚这个故事如何能传达出抗战时期中国人的精气神，这是灵魂，不会说想着去选用一些什么样的演员，靠他们引起大家的关注。最终观众看的还是故事讲得好与不好，演员演得好与不好，这是衡量一部剧的标准。一部作品有没有深度，有没有温度，要看故事。\n</p>\n<p>\n今天的观众，特别是年轻观众，我认为他们对历史的认知非常犀利。作为创作者，我们不能有糊弄的想法，不能想着随便讲个故事，短平快拍完就行了。特别是做这种历史相关的题材，创作者要有敬畏之心，面对抗战这个时期，没有任何人有权利去调侃它或把玩它，我们要始终保持对历史的敬畏，对先辈先烈付出和牺牲的敬畏。\n</p>\n<p>\n所以我们全剧组，从编剧老师到服化道摄影各职能部门，包括演员们，大家付出了很多心血，点点滴滴我都看在眼里。每个人都非常尊重自己的职业，非常尊重这段历史，只有这个状态才有可能拍出一部好作品。\n</p>\n<p>\n<strong>新潮观鱼：您近年来深耕历史题材电视剧，这是不是您接下来一段时间的创作重点？可以和我们透露下《伟大的长征》的进度吗？</strong> \n</p>\n<p>\n<strong>张永新：</strong>我不排斥任何一个题材，只要是好作品，我总希望能参与其中。但对于历史故事，我本人确实有天然的喜好，无论是近代史还是古代史，都是我们国家影视创作的一个富矿，中国历史里有太多好故事可以讲。所以题材上我不会给自己设限，任何题材只要写得好，剧就可以好，但是这个写得好很难。\n</p>\n<p>\n电视剧《伟大的长征》已经杀青，我正在做这部剧的后期工作，开播时间目前还不清楚，要看我们的生产进度，希望能够尽早和观众朋友们见面。\n</p>\n<p align=\"center\">\n<img src=\"https://i.guancha.cn/shiping-banner.jpg\" width=\"530px\" /> \n</p>\n<p>\n<strong>本文系观察者网独家稿件，文章内容纯属作者个人观点，不代表平台观点，未经授权，不得转载，否则将追究法律责任。关注观察者网微信guanchacn，每日阅读趣味文章。</strong> \n</p>",
-      "matched_keywords": [
-        "流量"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/guancha/headline?limit=20&filterout_time=259200",
-        "route": "/guancha/headline?limit=20",
-        "entry_id": "https://www.guancha.cn/zhangyongxin/2026_04_28_815246_s.shtml"
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 流量",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=review, score=3, time=in_window→reference"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容聚焦于电视剧创作理念、导演访谈及艺术表达，未涉及屈臣氏电商经营相关的任何事实性事件（如平台规则变动、品牌动作、品类趋势、渠道变化等），无法服务于屈臣氏电商经营分析目标。"
-    },
-    {
-      "article_id": "6c1f1b833cf19297",
-      "title": "泰国外长：美国一点忙没帮，我们找中俄",
-      "url": "https://www.guancha.cn/internation/2026_04_28_815186_s.shtml",
-      "source_name": "rsshub_guancha",
-      "source_type": "rsshub",
-      "source_tier": 4,
-      "collector": "rsshub",
-      "published_at": "Tue, 28 Apr 2026 01:03:39 GMT",
-      "collected_at": "2026-04-30T17:58:29.053396+08:00",
-      "time_status": "in_window",
-      "summary": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/28/20260428084720879.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 王一】\n</p>\n<p>\n在美以对伊朗战争的影响持续外溢之际，作为美国长期条约盟友的泰国却直言，因为“没有从美国得到任何直接帮助”，他们只能向其他大国寻求帮助。\n</p>\n<p>\n据美国《华盛顿邮报》4月27日报道，泰国副总理兼外长西哈萨25日在泰国南部甲米府接受采访时表示，伊朗战争已给泰国造成了广泛的经济损害，但特朗普政府并未向泰方提供任何直接援助。在缺乏美方支持的情况下，泰国正转而向中国和俄罗斯寻求帮助。\n</p>\n<p>\n“我认为他们清楚战争带来了后果，”西哈萨在谈及特朗普政府官员时说，“但他们没有主动与我们讨论如何提供帮助，也没有直接联系我们说，‘哦，我们理解你们正在承受战争的影响，我们可以帮助你们’。”\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/official/2026/04/28/20260428084816902.jpg\" /> \n</p>\n<p class=\"content-pic-desc\">\n泰国副总理兼外长西哈萨<span> 资料图</span> \n</p>\n<p>\n西哈萨补充说，美方唯一的“表态”是美国总统特朗普呼吁有燃料需求的国家购买美国石油和天然气。\n</p>\n<p>\n该报指出，特朗普的原话是，“从美利坚合众国购买石油吧，我们储量充足”。美国挑起的伊朗战事已持续两个多月，其国内经济开始感受到冲击，而战争带来的影响在亚洲更为广泛且更为严重。由于亚洲对中东地区的能源和化肥依赖程度高于全球其他地区，相关供应受阻带来的连锁反应尤为明显。\n</p>\n<p>\n而原定在巴基斯坦举行的新一轮谈判破裂，美伊双方又加大对霍尔木兹海峡的封锁力度，停火前景更加渺茫。\n</p>\n<p>\n美联社称，两名知情官员27日透露，伊朗已提出一项方案，若美国解除对其的封锁并结束战争，伊方将结束对霍尔木兹海峡的控制，这一提议推迟了有关伊朗核计划的讨论。不过，报道认为，特朗普似乎不太可能接受这一提议，因为其无法解决导致美以2月28日开战的最初理由。\n</p>\n<p>\n白宫新闻秘书卡罗琳·莱维特回应说，特朗普的国家安全团队27日举行会议，讨论了伊朗的提议，但她没有透露讨论的细节，也没有说明该提议的接受程度。她表示，特朗普稍后会就此事发表讲话。\n</p>\n<p>\n外界普遍认为，这场战争从一开始就不应该发生。西哈萨告诉《华盛顿邮报》，“我们的立场是，这场战争根本就不应该发生。我们不想直接谴责美国，但这确实是一场不应该发生的战争。”\n</p>\n<p>\n作为美国在亚洲的重要后勤和加油枢纽之一，泰国如今难以与更富裕国家竞争，难以及时替代滞留在中东的燃料和化肥供应。该国农民组织称，自战争爆发以来，对泰国超1000万农民至关重要的尿素的价格几乎翻倍。本月，柴油价格也创下历史新高。\n</p>\n<p>\n在此背景下，泰国开始转向中国和俄罗斯寻求支持。西哈萨透露，为了在5月泰国播种季开始前确保化肥供应，泰国农业与合作社部部长阿塔功近日前往莫斯科与俄罗斯官员进行接触磋商。泰国还尝试采购俄罗斯原油，但由于担心触及美国制裁，泰国银行在相关交易推进上持谨慎态度。\n</p>\n<p>\n对中国，泰方的诉求则更为直接。西哈萨称，24日他在与中方高层会晤中，请求中方协助确保8艘泰国船只安全通过霍尔木兹海峡。\n</p>\n<p>\n针对当前中东海湾地区局势，中方此前已表示，中方主张立即、全面停火止战，支持一切有利于恢复和平的努力，坚持通过政治外交途径化解争端。霍尔木兹海峡应该保持正常通行，这符合地区国家和国际社会共同利益。中方支持地区国家构建睦邻、发展、安全、合作的共同家园，把前途命运掌握在自己手中，促进地区长治久安。\n</p>\n<p>\n尽管4月中旬美伊一度达成停火协议，霍尔木兹海峡通航量曾短暂回升，但随着双方威胁再起，航运再次陷入停滞。分析人士指出，即便船只在纸面上获得通行许可，仍需面对沟通失误以及水雷等安全风险。\n</p>\n<p>\n战争刚爆发时，一艘悬挂泰国国旗的散货船“Mayuree Naree”号3月在试图穿越海峡时遭导弹击中，3名泰籍船员死亡，20名船员获救。运营该船的船东珍宝航运（Precious Shipping）称，事前已获得通行许可，但伊朗方面则回称并未批准通行。西哈萨表示，目前相关事件仍在调查之中，“我们尚不清楚具体发生了什么”。\n</p>\n<p>\n另据泰国《曼谷邮报》报道，泰国政府27日宣布，因受霍尔木兹海峡关闭影响，泰国将重启连接泰国湾与安达曼海的“陆桥计划”。该项目总投资预计达1万亿泰铢（约合2107.6亿元人民币），拟通过约90公里的陆路运输网络连接，形成横跨泰国南部、连接印度洋与太平洋的货运通道。\n</p>\n<p>\n泰国总理阿努廷表示，当前国际局势导致全球海运通道面临挑战，泰国有必要推进该计划，以增强国家物流安全和自主能力。\n</p>\n<p>\n上周，泰国外长还前往阿曼，就确保船只安全通行问题展开磋商。西哈萨说，阿曼方面对短期内实现停火并不乐观，他本人也持相似看法，原因在于特朗普政府的目标似乎“一直在变化”，美方一度看上去以推动伊朗政权更迭为战争目标，但现在似乎又更强调终结伊朗核计划。\n</p>\n<p>\n西哈萨表示，美国政策的不确定性正迫使包括泰国在内的盟友重新评估对外关系。他指出，美国政策存在很大不确定性，这还并不局限于战争领域。特朗普全面加征关税的举措令许多盟友感到措手不及，而他迅速取消美国对外援助项目，也使世界各地的贫困群体更易受到疾病和灾害威胁。\n</p>\n<p>\n相比之下，西哈萨认为，中国在亚洲国家眼中展现出更加具有稳定性的合作姿态。他直言：“这并不意味着中国在核心利益问题上不会展现大国行为，但我们至少清楚其核心利益在哪里。这并不是要在地缘政治竞争中选边站，而是美国当前的做法，正在迫使我们重新审视一些关系。”\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
-      "content": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/28/20260428084720879.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 王一】\n</p>\n<p>\n在美以对伊朗战争的影响持续外溢之际，作为美国长期条约盟友的泰国却直言，因为“没有从美国得到任何直接帮助”，他们只能向其他大国寻求帮助。\n</p>\n<p>\n据美国《华盛顿邮报》4月27日报道，泰国副总理兼外长西哈萨25日在泰国南部甲米府接受采访时表示，伊朗战争已给泰国造成了广泛的经济损害，但特朗普政府并未向泰方提供任何直接援助。在缺乏美方支持的情况下，泰国正转而向中国和俄罗斯寻求帮助。\n</p>\n<p>\n“我认为他们清楚战争带来了后果，”西哈萨在谈及特朗普政府官员时说，“但他们没有主动与我们讨论如何提供帮助，也没有直接联系我们说，‘哦，我们理解你们正在承受战争的影响，我们可以帮助你们’。”\n</p>\n<p style=\"text-align: center;\">\n<img src=\"https://i.guancha.cn/news/official/2026/04/28/20260428084816902.jpg\" /> \n</p>\n<p class=\"content-pic-desc\">\n泰国副总理兼外长西哈萨<span> 资料图</span> \n</p>\n<p>\n西哈萨补充说，美方唯一的“表态”是美国总统特朗普呼吁有燃料需求的国家购买美国石油和天然气。\n</p>\n<p>\n该报指出，特朗普的原话是，“从美利坚合众国购买石油吧，我们储量充足”。美国挑起的伊朗战事已持续两个多月，其国内经济开始感受到冲击，而战争带来的影响在亚洲更为广泛且更为严重。由于亚洲对中东地区的能源和化肥依赖程度高于全球其他地区，相关供应受阻带来的连锁反应尤为明显。\n</p>\n<p>\n而原定在巴基斯坦举行的新一轮谈判破裂，美伊双方又加大对霍尔木兹海峡的封锁力度，停火前景更加渺茫。\n</p>\n<p>\n美联社称，两名知情官员27日透露，伊朗已提出一项方案，若美国解除对其的封锁并结束战争，伊方将结束对霍尔木兹海峡的控制，这一提议推迟了有关伊朗核计划的讨论。不过，报道认为，特朗普似乎不太可能接受这一提议，因为其无法解决导致美以2月28日开战的最初理由。\n</p>\n<p>\n白宫新闻秘书卡罗琳·莱维特回应说，特朗普的国家安全团队27日举行会议，讨论了伊朗的提议，但她没有透露讨论的细节，也没有说明该提议的接受程度。她表示，特朗普稍后会就此事发表讲话。\n</p>\n<p>\n外界普遍认为，这场战争从一开始就不应该发生。西哈萨告诉《华盛顿邮报》，“我们的立场是，这场战争根本就不应该发生。我们不想直接谴责美国，但这确实是一场不应该发生的战争。”\n</p>\n<p>\n作为美国在亚洲的重要后勤和加油枢纽之一，泰国如今难以与更富裕国家竞争，难以及时替代滞留在中东的燃料和化肥供应。该国农民组织称，自战争爆发以来，对泰国超1000万农民至关重要的尿素的价格几乎翻倍。本月，柴油价格也创下历史新高。\n</p>\n<p>\n在此背景下，泰国开始转向中国和俄罗斯寻求支持。西哈萨透露，为了在5月泰国播种季开始前确保化肥供应，泰国农业与合作社部部长阿塔功近日前往莫斯科与俄罗斯官员进行接触磋商。泰国还尝试采购俄罗斯原油，但由于担心触及美国制裁，泰国银行在相关交易推进上持谨慎态度。\n</p>\n<p>\n对中国，泰方的诉求则更为直接。西哈萨称，24日他在与中方高层会晤中，请求中方协助确保8艘泰国船只安全通过霍尔木兹海峡。\n</p>\n<p>\n针对当前中东海湾地区局势，中方此前已表示，中方主张立即、全面停火止战，支持一切有利于恢复和平的努力，坚持通过政治外交途径化解争端。霍尔木兹海峡应该保持正常通行，这符合地区国家和国际社会共同利益。中方支持地区国家构建睦邻、发展、安全、合作的共同家园，把前途命运掌握在自己手中，促进地区长治久安。\n</p>\n<p>\n尽管4月中旬美伊一度达成停火协议，霍尔木兹海峡通航量曾短暂回升，但随着双方威胁再起，航运再次陷入停滞。分析人士指出，即便船只在纸面上获得通行许可，仍需面对沟通失误以及水雷等安全风险。\n</p>\n<p>\n战争刚爆发时，一艘悬挂泰国国旗的散货船“Mayuree Naree”号3月在试图穿越海峡时遭导弹击中，3名泰籍船员死亡，20名船员获救。运营该船的船东珍宝航运（Precious Shipping）称，事前已获得通行许可，但伊朗方面则回称并未批准通行。西哈萨表示，目前相关事件仍在调查之中，“我们尚不清楚具体发生了什么”。\n</p>\n<p>\n另据泰国《曼谷邮报》报道，泰国政府27日宣布，因受霍尔木兹海峡关闭影响，泰国将重启连接泰国湾与安达曼海的“陆桥计划”。该项目总投资预计达1万亿泰铢（约合2107.6亿元人民币），拟通过约90公里的陆路运输网络连接，形成横跨泰国南部、连接印度洋与太平洋的货运通道。\n</p>\n<p>\n泰国总理阿努廷表示，当前国际局势导致全球海运通道面临挑战，泰国有必要推进该计划，以增强国家物流安全和自主能力。\n</p>\n<p>\n上周，泰国外长还前往阿曼，就确保船只安全通行问题展开磋商。西哈萨说，阿曼方面对短期内实现停火并不乐观，他本人也持相似看法，原因在于特朗普政府的目标似乎“一直在变化”，美方一度看上去以推动伊朗政权更迭为战争目标，但现在似乎又更强调终结伊朗核计划。\n</p>\n<p>\n西哈萨表示，美国政策的不确定性正迫使包括泰国在内的盟友重新评估对外关系。他指出，美国政策存在很大不确定性，这还并不局限于战争领域。特朗普全面加征关税的举措令许多盟友感到措手不及，而他迅速取消美国对外援助项目，也使世界各地的贫困群体更易受到疾病和灾害威胁。\n</p>\n<p>\n相比之下，西哈萨认为，中国在亚洲国家眼中展现出更加具有稳定性的合作姿态。他直言：“这并不意味着中国在核心利益问题上不会展现大国行为，但我们至少清楚其核心利益在哪里。这并不是要在地缘政治竞争中选边站，而是美国当前的做法，正在迫使我们重新审视一些关系。”\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
-      "matched_keywords": [
-        "政策"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/guancha/headline?limit=20&filterout_time=259200",
-        "route": "/guancha/headline?limit=20",
-        "entry_id": "https://www.guancha.cn/internation/2026_04_28_815186_s.shtml"
-      },
-      "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "+2 time_status=in_window",
-          "-3 无关主题: 农业"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容聚焦于国际政治、能源供应及泰国外交政策调整，未涉及任何与屈臣氏电商业务相关的新事实或趋势，无法服务于电商经营分析目标。"
-    },
-    {
-      "article_id": "e1a7e7e75c96ce9c",
-      "title": "中国交付最大LNG船，韩国还能守住“最后防线”吗？",
-      "url": "https://www.guancha.cn/internation/2026_04_27_815160_s.shtml",
-      "source_name": "rsshub_guancha",
-      "source_type": "rsshub",
-      "source_tier": 4,
-      "collector": "rsshub",
-      "published_at": "Mon, 27 Apr 2026 13:58:13 GMT",
-      "collected_at": "2026-04-30T17:58:29.053833+08:00",
-      "time_status": "near_window",
-      "summary": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/27/20260427191802324.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 熊超然】\n</p>\n<p>\n4月27日，香港《南华早报》报道称，中国日前交付了迄今为止建造完工最大的液化天然气（LNG）运输船，使国内具备设计和建造此类先进船舶能力的造船厂数量增至五家，随着中国加大力度挑战韩国在这一高附加值领域的主导地位，此进展尤为引人关注。\n</p>\n<p>\n这一里程碑由招商局集团旗下的招商局重工（江苏）有限公司（江苏重工）实现，该公司于4月26日交付了这艘容量为18万立方米的船舶——“乔治敦”号，该船总长298.8米，型宽48米，采用双燃料低速推进系统，具备低蒸发率、高环保性能等优势，标志着我国船企在大型清洁能源船舶建造领域实现重大突破。\n</p>\n<p>\n沪东中华造船集团是中国首家进入LNG运输船市场的企业，于2008年交付首艘相关船舶。近年来，该行业发展迅速、江南造船集团、大连船舶重工集团、扬子江船业集团以及江苏重工四大企业也于2024年开始获得订单。\n</p>\n<p>\n这一扩张，正值中国巩固全球最大造船国地位之际。行业数据显示，2025年中国获得了全球近70%的新船订单，在散货船和集装箱船领域继续保持领先。不过，在利润丰厚的高端细分市场，韩国仍是一个强劲竞争对手。\n</p>\n<p>\n韩国商业媒体“Business Korea”今年2月也提到，韩中两国年初即在全球LNG运输船市场展开了激烈竞争。韩国计划通过核心技术国产化巩固领先地位，而中国则凭借价格竞争力和技术提升力争市场头把交椅。“对于韩国而言，LNG运输船领域已成为其捍卫造船业荣耀的‘最后一道防线’。”韩媒如此写道。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/mainland/2026/04/27/20260427182256894.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n2026年4月26日，我国自主设计建造的首艘18万立方米LNG运输船“乔治敦”号驶离江苏南通招商重工码头。（南通出入境边防检查站供图）<span> 新华社</span> \n</p>\n<p>\n据报道，“乔治敦”号是丹麦Celsius Shipping公司订购的六艘同型系列船中的首制船，而该系列的第二艘船计划于三个月后交付。\n</p>\n<p>\n造船方表示，该船的完工标志着大型清洁能源运输船建造领域的一项“重大突破”。LNG运输船用于在低至零下163摄氏度的环境中运输燃料，由于其复杂的设计和工程技术，普遍被视为造船技术的巅峰之作。\n</p>\n<p>\n在本月早些时候在船舶命名仪式上，招商局集团董事长缪建民表示，这标志着该集团正式进入大型LNG船建造商的“全球核心阵营”。他还承诺，在“十五五”期间，将推进集团港口、航运和造船业务向“高科技、智能化、绿色化和国际化”发展。\n</p>\n<p>\n《韩国先驱报》（The Korea Herald）今年2月报道称，韩国企业目前仍占据全球LNG运输船市场约70%的份额，但它们也正面临着巨大的压力。\n</p>\n<p>\n“在造船技术的许多领域，中国已经迎头赶上，”首尔大学船舶与海洋工程系教授李信亨（Rhee Shin-hyung，音译）在报道中表示：“关于传统的造船工艺，许多人认为两国之间的差距已微乎其微。照此看来，韩国充其量也只能再保持两三年的领先优势。若不开发出真正具有突破性的新技术，将很难维持长久的竞争优势。”\n</p>\n<p>\n与此同时，行业高管和分析人士表示，在经历2025年的低迷之后，随着LNG产量增长和船舶燃料效率提升推动需求，全球LNG运输船订单在今年有望实现反弹。\n</p>\n<p>\n路透社当地时间4月27日报道指出，尽管中东战争可能导致供应中断，在短期内削弱航运需求，并对运费构成压力，但订单增长正在抵消这些担忧。\n</p>\n<p>\n咨询机构Poten &amp; Partners和Drewry的数据显示，自去年年底以来，韩国和中国的造船厂已获得了更多订单，今年第一季度已签订35艘LNG运输船建造合同。相比之下，2025年全年仅订购了37艘，而2022年则创纪录地达到171艘。据悉，每艘LNG运输船的造价为2.5亿至2.6亿美元，建造周期超过三年。\n</p>\n\n<p>\n韩媒“Business Korea”预计，韩中两国在LNG运输船订单方面的竞争将进一步加剧。主要分析观点认为，在全球造船市场前景喜忧参半的背景下，LNG运输船的需求今年仍将保持强劲。随着环保趋势的兴起以及美国LNG项目的推进，LNG需求不断增加，寻求扩充LNG船队的航运公司数量也随之增长。\n</p>\n<p>\n此外，两国之间的竞争态势，预计也将进一步推高LNG运输船市场的竞争烈度。尽管韩国过去有着“造船强国”之称，但在集装箱船和超大型原油运输船（VLCC）领域，韩国实际上已将其领先地位拱手让给了中国。\n</p>\n<p>\n去年，在全球造船市场中，中国占据了63%的市场份额，而韩国仅获得21%。对于韩国而言，LNG运输船领域已成为其捍卫造船业荣耀的“最后一道防线”。\n</p>\n<p>\n报道称，韩国造船企业正加快LNG货舱国产化进程，以巩固其领先地位。作为LNG运输船核心技术的货舱设计，目前几乎被法国GTT公司垄断，如果实现国产化，韩国在该市场的地位有望得到稳固。\n</p>\n<p>\n中国的目标也是夺取LNG运输船市场的头把交椅，并以此确立在全球造船市场的绝对强国地位。一名业内人士表示：“随着中国在造船市场影响力的提升，韩国在LNG运输船市场的领先地位已无法得到保证。”\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/mainland/2026/04/27/20260427182502742.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n2026年4月20日，江苏靖江新扬子造船有限公司厂区，多艘大型船舶加紧建造。<span> IC Photo</span> \n</p>\n<p>\n韩媒最后提到，韩中两国之间的订单竞争，也将在VLCC市场激烈展开。由于老旧船只的更新换代需求，VLCC市场目前正呈现出增长态势。\n</p>\n<p>\n对于当前中东战事，停火止战、劝和促谈，一直是中方的坚定立场。但另一方面，这场战争确实也深度影响了全球经济、制造业以及供应链格局。\n</p>\n<p>\n《南华早报》4月22日曾报道称，随着原油运输受阻情况的加剧，全球对大型油轮的需求上升，中国造船厂正因美以对伊朗发动的这场战争而进一步成为更多船东的业务承接方，并因此获得了大量新订单。凭借着强大的产能、更低的成本和更短的交付周期，中国造船厂在近几周至少从两家瑞士公司和一家新加坡公司那里斩获了VLCC订单。\n</p>\n<p>\n今年年初，中国船舶工业行业协会副会长李彦庆表示，经过数十年的发展，中国已经成长为全球造船业的领导者，与竞争对手拉开了明显的差距。他强调，中国造船业自上世纪80年代进入国际市场以来，成功融入全球分工。通过遵循国际规则并发挥比较优势，发展到今天的规模，并为全球航运做出重要贡献。\n</p>\n<p>\n据工业和信息化部今年2月1日发布的数据显示，2025年，我国造船业三大指标继续领跑全球，连续16年保持世界第一。\n</p>\n<p>\n此外，2025年，中国骨干船企国际竞争力不断增强，分别有6家企业位居世界造船完工量、新接订单量和手持订单量的前10强。18种主要船型中有16种船型新接订单量位居世界第一，多型世界级绿色智能船舶交付，高端转型取得重要突破。\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
-      "content": "<img height=\"374px\" src=\"https://i.guancha.cn/news/2026/04/27/20260427191802324.jpg\" width=\"970px\" />\n<p>\n【文/观察者网 熊超然】\n</p>\n<p>\n4月27日，香港《南华早报》报道称，中国日前交付了迄今为止建造完工最大的液化天然气（LNG）运输船，使国内具备设计和建造此类先进船舶能力的造船厂数量增至五家，随着中国加大力度挑战韩国在这一高附加值领域的主导地位，此进展尤为引人关注。\n</p>\n<p>\n这一里程碑由招商局集团旗下的招商局重工（江苏）有限公司（江苏重工）实现，该公司于4月26日交付了这艘容量为18万立方米的船舶——“乔治敦”号，该船总长298.8米，型宽48米，采用双燃料低速推进系统，具备低蒸发率、高环保性能等优势，标志着我国船企在大型清洁能源船舶建造领域实现重大突破。\n</p>\n<p>\n沪东中华造船集团是中国首家进入LNG运输船市场的企业，于2008年交付首艘相关船舶。近年来，该行业发展迅速、江南造船集团、大连船舶重工集团、扬子江船业集团以及江苏重工四大企业也于2024年开始获得订单。\n</p>\n<p>\n这一扩张，正值中国巩固全球最大造船国地位之际。行业数据显示，2025年中国获得了全球近70%的新船订单，在散货船和集装箱船领域继续保持领先。不过，在利润丰厚的高端细分市场，韩国仍是一个强劲竞争对手。\n</p>\n<p>\n韩国商业媒体“Business Korea”今年2月也提到，韩中两国年初即在全球LNG运输船市场展开了激烈竞争。韩国计划通过核心技术国产化巩固领先地位，而中国则凭借价格竞争力和技术提升力争市场头把交椅。“对于韩国而言，LNG运输船领域已成为其捍卫造船业荣耀的‘最后一道防线’。”韩媒如此写道。\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/mainland/2026/04/27/20260427182256894.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n2026年4月26日，我国自主设计建造的首艘18万立方米LNG运输船“乔治敦”号驶离江苏南通招商重工码头。（南通出入境边防检查站供图）<span> 新华社</span> \n</p>\n<p>\n据报道，“乔治敦”号是丹麦Celsius Shipping公司订购的六艘同型系列船中的首制船，而该系列的第二艘船计划于三个月后交付。\n</p>\n<p>\n造船方表示，该船的完工标志着大型清洁能源运输船建造领域的一项“重大突破”。LNG运输船用于在低至零下163摄氏度的环境中运输燃料，由于其复杂的设计和工程技术，普遍被视为造船技术的巅峰之作。\n</p>\n<p>\n在本月早些时候在船舶命名仪式上，招商局集团董事长缪建民表示，这标志着该集团正式进入大型LNG船建造商的“全球核心阵营”。他还承诺，在“十五五”期间，将推进集团港口、航运和造船业务向“高科技、智能化、绿色化和国际化”发展。\n</p>\n<p>\n《韩国先驱报》（The Korea Herald）今年2月报道称，韩国企业目前仍占据全球LNG运输船市场约70%的份额，但它们也正面临着巨大的压力。\n</p>\n<p>\n“在造船技术的许多领域，中国已经迎头赶上，”首尔大学船舶与海洋工程系教授李信亨（Rhee Shin-hyung，音译）在报道中表示：“关于传统的造船工艺，许多人认为两国之间的差距已微乎其微。照此看来，韩国充其量也只能再保持两三年的领先优势。若不开发出真正具有突破性的新技术，将很难维持长久的竞争优势。”\n</p>\n<p>\n与此同时，行业高管和分析人士表示，在经历2025年的低迷之后，随着LNG产量增长和船舶燃料效率提升推动需求，全球LNG运输船订单在今年有望实现反弹。\n</p>\n<p>\n路透社当地时间4月27日报道指出，尽管中东战争可能导致供应中断，在短期内削弱航运需求，并对运费构成压力，但订单增长正在抵消这些担忧。\n</p>\n<p>\n咨询机构Poten &amp; Partners和Drewry的数据显示，自去年年底以来，韩国和中国的造船厂已获得了更多订单，今年第一季度已签订35艘LNG运输船建造合同。相比之下，2025年全年仅订购了37艘，而2022年则创纪录地达到171艘。据悉，每艘LNG运输船的造价为2.5亿至2.6亿美元，建造周期超过三年。\n</p>\n\n<p>\n韩媒“Business Korea”预计，韩中两国在LNG运输船订单方面的竞争将进一步加剧。主要分析观点认为，在全球造船市场前景喜忧参半的背景下，LNG运输船的需求今年仍将保持强劲。随着环保趋势的兴起以及美国LNG项目的推进，LNG需求不断增加，寻求扩充LNG船队的航运公司数量也随之增长。\n</p>\n<p>\n此外，两国之间的竞争态势，预计也将进一步推高LNG运输船市场的竞争烈度。尽管韩国过去有着“造船强国”之称，但在集装箱船和超大型原油运输船（VLCC）领域，韩国实际上已将其领先地位拱手让给了中国。\n</p>\n<p>\n去年，在全球造船市场中，中国占据了63%的市场份额，而韩国仅获得21%。对于韩国而言，LNG运输船领域已成为其捍卫造船业荣耀的“最后一道防线”。\n</p>\n<p>\n报道称，韩国造船企业正加快LNG货舱国产化进程，以巩固其领先地位。作为LNG运输船核心技术的货舱设计，目前几乎被法国GTT公司垄断，如果实现国产化，韩国在该市场的地位有望得到稳固。\n</p>\n<p>\n中国的目标也是夺取LNG运输船市场的头把交椅，并以此确立在全球造船市场的绝对强国地位。一名业内人士表示：“随着中国在造船市场影响力的提升，韩国在LNG运输船市场的领先地位已无法得到保证。”\n</p>\n<p style=\"text-align: center;\">\n<img class=\"bigimg\" src=\"https://i.guancha.cn/news/mainland/2026/04/27/20260427182502742.jpg\" title=\"点击查看大图\" width=\"530\" /> \n</p>\n<p class=\"content-pic-desc\">\n2026年4月20日，江苏靖江新扬子造船有限公司厂区，多艘大型船舶加紧建造。<span> IC Photo</span> \n</p>\n<p>\n韩媒最后提到，韩中两国之间的订单竞争，也将在VLCC市场激烈展开。由于老旧船只的更新换代需求，VLCC市场目前正呈现出增长态势。\n</p>\n<p>\n对于当前中东战事，停火止战、劝和促谈，一直是中方的坚定立场。但另一方面，这场战争确实也深度影响了全球经济、制造业以及供应链格局。\n</p>\n<p>\n《南华早报》4月22日曾报道称，随着原油运输受阻情况的加剧，全球对大型油轮的需求上升，中国造船厂正因美以对伊朗发动的这场战争而进一步成为更多船东的业务承接方，并因此获得了大量新订单。凭借着强大的产能、更低的成本和更短的交付周期，中国造船厂在近几周至少从两家瑞士公司和一家新加坡公司那里斩获了VLCC订单。\n</p>\n<p>\n今年年初，中国船舶工业行业协会副会长李彦庆表示，经过数十年的发展，中国已经成长为全球造船业的领导者，与竞争对手拉开了明显的差距。他强调，中国造船业自上世纪80年代进入国际市场以来，成功融入全球分工。通过遵循国际规则并发挥比较优势，发展到今天的规模，并为全球航运做出重要贡献。\n</p>\n<p>\n据工业和信息化部今年2月1日发布的数据显示，2025年，我国造船业三大指标继续领跑全球，连续16年保持世界第一。\n</p>\n<p>\n此外，2025年，中国骨干船企国际竞争力不断增强，分别有6家企业位居世界造船完工量、新接订单量和手持订单量的前10强。18种主要船型中有16种船型新接订单量位居世界第一，多型世界级绿色智能船舶交付，高端转型取得重要突破。\n</p>\n<p>\n<strong>本文系观察者网独家稿件，未经授权，不得转载。</strong> \n</p>",
-      "matched_keywords": [
-        "供应链"
-      ],
-      "raw": {
-        "feed_url": "http://192.168.2.100:1200/guancha/headline?limit=20&filterout_time=259200",
-        "route": "/guancha/headline?limit=20",
-        "entry_id": "https://www.guancha.cn/internation/2026_04_27_815160_s.shtml"
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "+1 time_status=near_window"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reference",
-        "final_reason": "rule=reject但time=near_window→reference(降级保留)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 文章内容与中国造船业相关，与屈臣氏电商经营无关"
-    },
-    {
-      "article_id": "de3cc16687a86b7c",
-      "title": "中国宏观经济、 行业趋势、投资交易及税务快讯",
-      "url": "https://assets.kpmg.com/content/dam/kpmgsites/cn/pdf/zh/2026/03/consumer-and-retail-industry-analysis-2025-h2.pdf.coredownload.inline.pdf",
-      "content": "",
-      "summary": "",
-      "published_at": "",
-      "source_name": "xcrawl_competitor_today",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-30T17:56:34.723436+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "competitor_signal",
-      "category": "竞对",
-      "raw_collector": "xcrawl",
-      "raw": {
-        "duplicate_sources": [
-          "xcrawl_instant_retail_today"
-        ]
-      },
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": -3,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "-3 泛领域: 宏观经济",
-          "-2 内容极短且无关键词"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "background",
-          "related_channels": [],
-          "related_categories": [],
           "business_variables": [],
-          "reason": "文章标题和来源表明其内容为宏观经济和行业趋势分析，未提及屈臣氏、即时零售或个护美妆相关具体信息。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      },
-      "is_reference": true,
-      "reject_reason": "LLM拒绝: 正文为空，未包含任何新增事实信息"
-    },
-    {
-      "article_id": "d721d1c038f63cfc",
-      "title": "2026年线上消费市场机遇洞察",
-      "url": "https://pdf.dfcfw.com/pdf/H3_AP202601161817895100_1.pdf?1768596662000.pdf",
-      "content": "",
-      "summary": "",
-      "published_at": "",
-      "source_name": "xcrawl_instant_retail_today",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-30T17:56:34.723436+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "-2 内容极短且无关键词"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章聚焦2026年线上消费市场整体机遇，虽涉及即时零售趋势但未明确关联屈臣氏或个护美妆具体经营策略。",
+          "reason": "文章提及美妆行业大会，属于个护美妆领域活动，间接反映行业趋势，但不直接涉及屈臣氏即时零售经营。",
           "recommended_pool": "reference",
           "confidence": "medium",
           "llm_reviewed": true
@@ -1960,7 +97,142 @@
         "final_reason": "LLM推荐reference (confidence=medium)"
       },
       "is_reference": true,
-      "reject_reason": "LLM拒绝: 正文为空，未包含任何新增事实信息"
+      "reject_reason": "LLM拒绝: 文章内容仅为会议预告与回顾，未包含任何明确发生的经营相关事实"
+    },
+    {
+      "article_id": "0548b51c31f93a7b",
+      "title": "出海2026：当国货美妆开始争夺全球市场“定义权”",
+      "url": "https://www.jiemian.com/article/14038376.html",
+      "content": "一位北美零售观察人士指出，品牌通常需先通过DTC官网及TikTok Shop等社交渠道验证产品匹配度、积累用户反馈与数据，才能具备说服线下渠道买手的“入场券”。 false. 在东南亚 ...",
+      "summary": "一位北美零售观察人士指出，品牌通常需先通过DTC官网及TikTok Shop等社交渠道验证产品匹配度、积累用户反馈与数据，才能具备说服线下渠道买手的“入场券”。 false. 在东南亚 ...",
+      "published_at": "",
+      "source_name": "xcrawl_beauty_retail",
+      "source_type": "xcrawl",
+      "time_status": "unknown_time",
+      "collected_at": "2026-04-29T07:00:00+08:00",
+      "keywords_matched": [],
+      "tier": 1,
+      "role": "direct_signal",
+      "category": "个护美妆",
+      "raw_collector": "xcrawl",
+      "matched_keywords": [
+        "美妆",
+        "国货"
+      ],
+      "filter": {
+        "rule_score": 5,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆",
+          "+2 source_tier=1"
+        ],
+        "llm_reviewed": true,
+        "llm_result": {
+          "llm_relevance": "medium",
+          "business_relevance_type": "indirect",
+          "related_channels": [],
+          "related_categories": [
+            "美妆"
+          ],
+          "business_variables": [],
+          "reason": "文章讨论国货美妆出海策略及DTC渠道验证，虽涉及美妆品类，但未直接关联屈臣氏即时零售业务或个护美妆经营。",
+          "recommended_pool": "reference",
+          "confidence": "medium",
+          "llm_reviewed": true
+        },
+        "final_pool": "reference",
+        "final_reason": "LLM推荐reference (confidence=medium)"
+      },
+      "is_reference": true,
+      "reject_reason": "LLM拒绝: 文章内容仅为观点陈述，未包含明确发生的新事实事件"
+    },
+    {
+      "article_id": "6b7eafdc02f3b0aa",
+      "title": "匹配不确定下AI虚拟展厅对零售商定价策略与利润的影响研究",
+      "url": "https://pdf.hanspub.org/ecl_2318539.pdf",
+      "content": "",
+      "summary": "",
+      "published_at": "",
+      "source_name": "xcrawl_competitor_moves",
+      "source_type": "xcrawl",
+      "time_status": "unknown_time",
+      "collected_at": "2026-04-29T07:00:00+08:00",
+      "keywords_matched": [],
+      "tier": 1,
+      "role": "competitor_signal",
+      "category": "竞对",
+      "raw_collector": "xcrawl",
+      "matched_keywords": [],
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 source_tier=1",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": true,
+        "llm_result": {
+          "llm_relevance": "medium",
+          "business_relevance_type": "indirect",
+          "related_channels": [],
+          "related_categories": [],
+          "business_variables": [],
+          "reason": "研究聚焦AI虚拟展厅对零售商定价与利润的影响，虽涉及零售技术趋势，但未直接关联屈臣氏即时零售或个护美妆业务。",
+          "recommended_pool": "reference",
+          "confidence": "medium",
+          "llm_reviewed": true
+        },
+        "final_pool": "reference",
+        "final_reason": "LLM推荐reference (confidence=medium)"
+      },
+      "is_reference": true,
+      "reject_reason": "LLM拒绝: 文章内容仅为研究背景描述，未提及任何具体企业行动、市场变化或可验证的新事实，不符合事件抽取标准"
+    },
+    {
+      "article_id": "cd713ac238034b63",
+      "title": "屈臣氏不想输掉新零售战争- DoNews专栏",
+      "url": "https://www.donews.com/article/detail/5099/89050.html",
+      "source_name": "tavily_beauty_retail",
+      "source_type": "tavily",
+      "source_tier": 3,
+      "collector": "tavily",
+      "published_at": "",
+      "collected_at": "2026-05-01T07:55:29.912872+08:00",
+      "time_status": "unknown_time",
+      "summary": "logo   logo\n\n\n\n标签: 屈臣氏\n\n关于我们| 电子协议| 合作联系| 蜀ICP备2024059877号-1",
+      "content": "logo   logo\n\n\n\n标签: 屈臣氏\n\n关于我们| 电子协议| 合作联系| 蜀ICP备2024059877号-1",
+      "matched_keywords": [
+        "屈臣氏",
+        "标签"
+      ],
+      "raw": {
+        "query": "屈臣氏 丝芙兰 即时零售 经营",
+        "tavily_score": 0.96909106,
+        "tavily_key_used": "tvly-dev..."
+      },
+      "filter": {
+        "rule_score": 5,
+        "rule_decision": "review",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏"
+        ],
+        "llm_reviewed": true,
+        "llm_result": {
+          "llm_relevance": "medium",
+          "business_relevance_type": "indirect",
+          "related_channels": [],
+          "related_categories": [],
+          "business_variables": [],
+          "reason": "文章标题提及屈臣氏与新零售战争相关，但正文内容缺失且无实质性信息，仅凭标题和标签无法确认是否涉及即时零售×个护美妆的具体经营策略。",
+          "recommended_pool": "reference",
+          "confidence": "low",
+          "llm_reviewed": true
+        },
+        "final_pool": "reference",
+        "final_reason": "LLM推荐reference (confidence=low)"
+      },
+      "is_reference": true,
+      "reject_reason": "LLM拒绝: 正文内容为重复的logo和标签，无实质性新增事实信息"
     }
   ]
 }

@@ -179,3 +179,40 @@
 2026-04-30 22:51:39,565 [INFO]   reject_reasons: {'main': 184, 'reference': 211, 'reject': 162}
 2026-04-30 22:51:39,565 [INFO]   LLM status: available_keys=6, calls=100, failures=0
 2026-04-30 22:51:39,565 [INFO] ============================================================
+2026-04-30 23:57:12,977 [INFO] ============================================================
+2026-04-30 23:57:12,977 [INFO] 开始过滤: date=2026-04-29
+2026-04-30 23:57:12,977 [INFO] use_llm=True, llm_mode=borderline_only
+2026-04-30 23:57:12,977 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json
+2026-04-30 23:57:12,978 [INFO] ============================================================
+2026-04-30 23:57:12,986 [INFO] 加载原始文章: 128 条
+2026-04-30 23:57:13,273 [INFO] LLM 客户端就绪: 6 个 Key 可用, 模型=LongCat-Flash-Thinking
+2026-04-30 23:57:13,284 [INFO]   Phase1 进度: 100/128
+2026-04-30 23:57:13,291 [INFO] Phase1 完成: 128 篇规则评分, 需要LLM复核: 56 篇
+2026-04-30 23:57:13,322 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-04-30 23:57:13,323 [INFO]   Phase2 LLM 批量: 1-5/56
+2026-04-30 23:57:28,421 [INFO]   Phase2 LLM 批量: 6-10/56
+2026-04-30 23:57:45,988 [INFO]   Phase2 LLM 批量: 11-15/56
+2026-04-30 23:57:50,493 [INFO]   Phase2 LLM 批量: 16-20/56
+2026-04-30 23:57:55,769 [INFO]   Phase2 LLM 批量: 21-25/56
+2026-04-30 23:58:18,209 [INFO]   Phase2 LLM 批量: 26-30/56
+2026-04-30 23:58:29,294 [INFO]   Phase2 LLM 批量: 31-35/56
+2026-04-30 23:59:06,118 [INFO]   Phase2 LLM 批量: 36-40/56
+2026-04-30 23:59:15,996 [INFO]   Phase2 LLM 批量: 41-45/56
+2026-04-30 23:59:18,066 [INFO]   Phase2 LLM 批量: 46-50/56
+2026-04-30 23:59:23,382 [INFO]   Phase2 LLM 批量: 51-55/56
+2026-04-30 23:59:31,256 [INFO]   Phase2 LLM 批量: 56-56/56
+2026-05-01 00:00:07,468 [INFO] Phase2 完成: 56 成功, 0 失败
+2026-05-01 00:00:07,508 [INFO] ============================================================
+2026-05-01 00:00:07,509 [INFO] 过滤完成汇总:
+2026-05-01 00:00:07,509 [INFO]   raw_count: 128
+2026-05-01 00:00:07,509 [INFO]   cleaned_count: 47
+2026-05-01 00:00:07,509 [INFO]   reference_count: 35
+2026-05-01 00:00:07,509 [INFO]   rejected_count: 46
+2026-05-01 00:00:07,509 [INFO]   llm_reviewed_count: 56
+2026-05-01 00:00:07,510 [INFO]   llm_failed_count: 0
+2026-05-01 00:00:07,510 [INFO]   by_time_status: {'near_window': 16, 'in_window': 7, 'unknown_time': 105}
+2026-05-01 00:00:07,510 [INFO]   by_source: {'xcrawl_platform_regulation': 18, 'xcrawl_beauty_retail': 21, 'xcrawl_instant_retail_core': 19, 'xcrawl_competitor_moves': 11, 'xcrawl_warehouse': 6, 'tavily_instant_retail': 15, 'tavily_regulation': 18, 'tavily_beauty_retail': 20}
+2026-05-01 00:00:07,510 [INFO]   top_matched_keywords: {'即时零售': 47, '美妆': 36, '闪购': 29, '美团闪购': 21, '流量': 19, '政策': 17, '备案': 16, '护肤': 16, '供应链': 15, '补贴': 14}
+2026-05-01 00:00:07,510 [INFO]   reject_reasons: {'reject': 46, 'reference': 35, 'main': 47}
+2026-05-01 00:00:07,511 [INFO]   LLM status: available_keys=6, calls=56, failures=0
+2026-05-01 00:00:07,511 [INFO] ============================================================

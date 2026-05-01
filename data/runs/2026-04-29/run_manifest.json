@@ -1,8 +1,8 @@
 {
   "date": "2026-04-29",
-  "started_at": "2026-05-01T07:09:31.996328+08:00",
-  "finished_at": "2026-05-01T07:09:32.419835+08:00",
-  "duration_seconds": 0.423507,
+  "started_at": "2026-05-01T08:05:22.629689+08:00",
+  "finished_at": "2026-05-01T08:05:22.780662+08:00",
+  "duration_seconds": 0.150973,
   "ok": true,
   "sendable": true,
   "report_type": "normal",
@@ -15,8 +15,8 @@
     {
       "name": "collect",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.020102+08:00",
-      "finished_at": "2026-05-01T07:09:32.048708+08:00",
+      "started_at": "2026-05-01T08:05:22.653314+08:00",
+      "finished_at": "2026-05-01T08:05:22.661912+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],
@@ -24,7 +24,7 @@
         "/app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json"
       ],
       "stats": {
-        "raw_count": 557
+        "raw_count": 128
       },
       "warnings": [],
       "errors": []
@@ -32,8 +32,8 @@
     {
       "name": "filter",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.075747+08:00",
-      "finished_at": "2026-05-01T07:09:32.102720+08:00",
+      "started_at": "2026-05-01T08:05:22.670070+08:00",
+      "finished_at": "2026-05-01T08:05:22.678441+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],
@@ -43,9 +43,9 @@
         "/app/working/projects/watsons-retail-intel/data/rejected/2026-04-29/rejected_articles.json"
       ],
       "stats": {
-        "cleaned_count": 184,
-        "reference_count": 211,
-        "rejected_count": 162
+        "cleaned_count": 47,
+        "reference_count": 35,
+        "rejected_count": 46
       },
       "warnings": [],
       "errors": []
@@ -53,8 +53,8 @@
     {
       "name": "source_health_report",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.129305+08:00",
-      "finished_at": "2026-05-01T07:09:32.129679+08:00",
+      "started_at": "2026-05-01T08:05:22.686913+08:00",
+      "finished_at": "2026-05-01T08:05:22.687144+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],
@@ -68,8 +68,8 @@
     {
       "name": "tavily_gap_search",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.129998+08:00",
-      "finished_at": "2026-05-01T07:09:32.130123+08:00",
+      "started_at": "2026-05-01T08:05:22.687451+08:00",
+      "finished_at": "2026-05-01T08:05:22.687636+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],
@@ -83,8 +83,8 @@
     {
       "name": "filter_merged",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.130392+08:00",
-      "finished_at": "2026-05-01T07:09:32.156134+08:00",
+      "started_at": "2026-05-01T08:05:22.687932+08:00",
+      "finished_at": "2026-05-01T08:05:22.696024+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],
@@ -94,9 +94,9 @@
         "/app/working/projects/watsons-retail-intel/data/rejected/2026-04-29/rejected_articles.json"
       ],
       "stats": {
-        "cleaned_count": 184,
-        "reference_count": 211,
-        "rejected_count": 162
+        "cleaned_count": 47,
+        "reference_count": 35,
+        "rejected_count": 46
       },
       "warnings": [],
       "errors": []
@@ -104,8 +104,8 @@
     {
       "name": "extract",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.182055+08:00",
-      "finished_at": "2026-05-01T07:09:32.195213+08:00",
+      "started_at": "2026-05-01T08:05:22.704291+08:00",
+      "finished_at": "2026-05-01T08:05:22.708731+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],
@@ -115,7 +115,7 @@
         "/app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_failed_articles.json"
       ],
       "stats": {
-        "event_count": 446
+        "event_count": 155
       },
       "warnings": [],
       "errors": []
@@ -123,8 +123,8 @@
     {
       "name": "score",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.208152+08:00",
-      "finished_at": "2026-05-01T07:09:32.246813+08:00",
+      "started_at": "2026-05-01T08:05:22.713506+08:00",
+      "finished_at": "2026-05-01T08:05:22.726991+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],
@@ -132,11 +132,11 @@
         "/app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_scored.json"
       ],
       "stats": {
-        "scored_count": 446,
+        "scored_count": 155,
         "p0_count": 0,
-        "p1_count": 2,
-        "p2_count": 168,
-        "archive_count": 276
+        "p1_count": 0,
+        "p2_count": 59,
+        "archive_count": 96
       },
       "warnings": [],
       "errors": []
@@ -144,8 +144,8 @@
     {
       "name": "analyze",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.284763+08:00",
-      "finished_at": "2026-05-01T07:09:32.350057+08:00",
+      "started_at": "2026-05-01T08:05:22.738724+08:00",
+      "finished_at": "2026-05-01T08:05:22.756719+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],
@@ -153,7 +153,7 @@
         "/app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json"
       ],
       "stats": {
-        "analyzed_count": 446
+        "analyzed_count": 155
       },
       "warnings": [],
       "errors": []
@@ -161,8 +161,8 @@
     {
       "name": "generate_report",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.414367+08:00",
-      "finished_at": "2026-05-01T07:09:32.415590+08:00",
+      "started_at": "2026-05-01T08:05:22.775057+08:00",
+      "finished_at": "2026-05-01T08:05:22.776251+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],
@@ -180,8 +180,8 @@
     {
       "name": "editor_review",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.416571+08:00",
-      "finished_at": "2026-05-01T07:09:32.417146+08:00",
+      "started_at": "2026-05-01T08:05:22.777237+08:00",
+      "finished_at": "2026-05-01T08:05:22.777822+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],
@@ -199,8 +199,8 @@
     {
       "name": "generate_podcast",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.417822+08:00",
-      "finished_at": "2026-05-01T07:09:32.418665+08:00",
+      "started_at": "2026-05-01T08:05:22.778519+08:00",
+      "finished_at": "2026-05-01T08:05:22.779361+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],
@@ -225,8 +225,8 @@
     {
       "name": "send_daily_report_email",
       "status": "skipped",
-      "started_at": "2026-05-01T07:09:32.419611+08:00",
-      "finished_at": "2026-05-01T07:09:32.419759+08:00",
+      "started_at": "2026-05-01T08:05:22.780376+08:00",
+      "finished_at": "2026-05-01T08:05:22.780570+08:00",
       "duration_seconds": 0,
       "call_method": "",
       "input_files": [],

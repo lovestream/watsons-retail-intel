@@ -189,3 +189,39 @@
 2026-04-30 22:59:52,170 [INFO]   top_business_variables: {'品类机会': 117, '竞争格局': 109, '货盘': 84, '履约': 76, '流量': 71, '门店覆盖': 31, '价格': 29, '转化率': 22, 'SKU': 22, '平台资源位': 19}
 2026-04-30 22:59:52,171 [INFO]   LLM status: available_keys=6, calls=495, failures=0
 2026-04-30 22:59:52,171 [INFO] ============================================================
+2026-05-01 00:02:08,755 [INFO] ============================================================
+2026-05-01 00:02:08,755 [INFO] 开始事件抽取: date=2026-04-29
+2026-05-01 00:02:08,755 [INFO] use_llm=True, max_articles=None
+2026-05-01 00:02:08,755 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/cleaned/2026-04-29/cleaned_articles.json
+2026-05-01 00:02:08,755 [INFO] ============================================================
+2026-05-01 00:02:08,761 [INFO] 加载 reference 文章: 35 篇
+2026-05-01 00:02:08,761 [INFO] 加载文章总计: 82 篇 (main=47, reference=35)
+2026-05-01 00:02:09,009 [INFO] LLM 客户端就绪: 6 Key, 模型=LongCat-Flash-Thinking
+2026-05-01 00:02:09,022 [INFO] 模型路由: extract_events 默认=LongCat-Flash-Lite, fallback=['LongCat-Flash-Chat']
+2026-05-01 00:02:09,045 [INFO] 并行 LLM 抽取 82 篇文章 (max_workers=4, model=LongCat-Flash-Lite)...
+2026-05-01 00:04:05,372 [INFO] 并行抽取统计: {'total': 82, 'success': 82, 'failed': 0, 'elapsed_seconds': 116.33}
+2026-05-01 00:04:05,372 [INFO] LLM 抽取完成，开始合并结果...
+2026-05-01 00:04:05,373 [INFO]   文章 70cc633b4ef01539 被LLM拒绝(业务): 正文为空，仅包含标题性陈述，无具体事件事实
+2026-05-01 00:04:05,374 [INFO]   文章 47b2a39d2621782e 被LLM拒绝(业务): 文章内容仅为会议预告与回顾，未包含任何明确发生的经营相关事实
+2026-05-01 00:04:05,374 [INFO]   文章 0548b51c31f93a7b 被LLM拒绝(业务): 文章内容仅为观点陈述，未包含明确发生的新事实事件
+2026-05-01 00:04:05,374 [INFO]   文章 6b7eafdc02f3b0aa 被LLM拒绝(业务): 文章内容仅为研究背景描述，未提及任何具体企业行动、市场变化或可验证的新事实，不符合事件抽取标准
+2026-05-01 00:04:05,376 [INFO]   文章 cd713ac238034b63 被LLM拒绝(业务): 正文内容为重复的logo和标签，无实质性新增事实信息
+2026-05-01 00:04:05,376 [INFO]   合并完成: 155 个事件, 82 LLM成功, 0 LLM失败
+2026-05-01 00:04:05,395 [INFO] ============================================================
+2026-05-01 00:04:05,395 [INFO] 事件抽取完成汇总:
+2026-05-01 00:04:05,395 [INFO]   article_count: 82
+2026-05-01 00:04:05,395 [INFO]   event_count: 155
+2026-05-01 00:04:05,395 [INFO]   rejected_article_count: 5
+2026-05-01 00:04:05,395 [INFO]   failed_article_count: 0
+2026-05-01 00:04:05,395 [INFO]   llm_success_count: 82
+2026-05-01 00:04:05,396 [INFO]   llm_failed_count: 0
+2026-05-01 00:04:05,396 [INFO]   retry_success_count: 0
+2026-05-01 00:04:05,396 [INFO]   retry_failed_count: 0
+2026-05-01 00:04:05,396 [INFO]   rule_fallback_count: 0
+2026-05-01 00:04:05,396 [INFO]   by_event_type: {'policy_signal': 13, 'brand_move': 28, 'consumer_scene': 8, 'category_trend': 15, 'platform_move': 43, 'competitor_move': 18, 'channel_shift': 2, 'background_only': 10, 'data_signal': 11, 'platform_rule': 7}
+2026-05-01 00:04:05,396 [INFO]   by_confidence: {'low': 133, 'high': 22}
+2026-05-01 00:04:05,396 [INFO]   by_source: {'xcrawl_platform_regulation': 4, 'xcrawl_beauty_retail': 18, 'xcrawl_instant_retail_core': 13, 'xcrawl_competitor_moves': 10, 'tavily_instant_retail': 10, 'tavily_regulation': 7, 'tavily_beauty_retail': 16, 'xcrawl_warehouse': 4}
+2026-05-01 00:04:05,397 [INFO]   by_failure_type: {}
+2026-05-01 00:04:05,397 [INFO]   top_business_variables: {'履约': 44, '品类机会': 38, '竞争格局': 37, '货盘': 31, '流量': 31, '门店覆盖': 15, 'SKU': 14, '组织执行': 14, '转化率': 9, '复购': 9}
+2026-05-01 00:04:05,397 [INFO]   LLM status: available_keys=6, calls=82, failures=0
+2026-05-01 00:04:05,397 [INFO] ============================================================

@@ -1109,51 +1109,31 @@ def _extract_date_from_snippet(snippet: str) -> str:
     """从 XCrawl snippet 中提取发布日期。
 
     XCrawl 不返回标准的 publishedDate 字段，
-    但 snippet 开头通常包含 "X hours ago — ..." 或 "X天前 — ..." 或 "2026年4月29日 — ..."。
+    但 snippet 开头通常包含 "X hours ago — ..." 或 "2026年4月29日 — ..."。
     """
     import re
     if not snippet:
         return ""
     cst = __import__('datetime').timezone(__import__('datetime').timedelta(hours=8))
     now = __import__('datetime').datetime.now(cst)
-    dt_mod = __import__('datetime')
 
-    # ── 英文相对时间 ──
-    # Pattern 1: "X hours ago — ..." / "X minutes ago — ..." / "X days ago"
+    # Pattern 1: "X hours ago — ..." / "X minutes ago — ..."
     m = re.match(r"(\d+)\s*hours?\s*ago", snippet, re.IGNORECASE)
     if m:
         hours = int(m.group(1))
-        dt = now - dt_mod.timedelta(hours=hours)
+        dt = now - __import__('datetime').timedelta(hours=hours)
         return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
     m = re.match(r"(\d+)\s*minutes?\s*ago", snippet, re.IGNORECASE)
     if m:
         minutes = int(m.group(1))
-        dt = now - dt_mod.timedelta(minutes=minutes)
+        dt = now - __import__('datetime').timedelta(minutes=minutes)
         return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
     m = re.match(r"(\d+)\s*days?\s*ago", snippet, re.IGNORECASE)
     if m:
         days = int(m.group(1))
-        dt = now - dt_mod.timedelta(days=days)
+        dt = now - __import__('datetime').timedelta(days=days)
         return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
 
-    # ── 中文相对时间 ──
-    m = re.search(r"(\d+)\s*天前", snippet)
-    if m:
-        days = int(m.group(1))
-        dt = now - dt_mod.timedelta(days=days)
-        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
-    m = re.search(r"(\d+)\s*小时前", snippet)
-    if m:
-        hours = int(m.group(1))
-        dt = now - dt_mod.timedelta(hours=hours)
-        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
-    m = re.search(r"(\d+)\s*分钟前", snippet)
-    if m:
-        minutes = int(m.group(1))
-        dt = now - dt_mod.timedelta(minutes=minutes)
-        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
-
-    # ── 绝对日期 ──
     # Pattern 2: "2026年4月29日 — ..." / "2026-04-29 — ..."
     m = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日", snippet)
     if m:
@@ -1182,7 +1162,7 @@ def collect_xcrawl(
     window_end: datetime,
     timeout: int = 30,
 ) -> Tuple[List[dict], dict]:
-    """通过 XCrawl Search API (Python SDK) 采集最新新闻。
+    """通过 XCrawl 搜索 API 采集最新新闻。
 
     XCrawl 是专门针对中文新闻优化的搜索引擎，
     对百度资讯、新浪、网易等中文新闻源有极好的时效性覆盖。
@@ -1217,7 +1197,6 @@ def collect_xcrawl(
     all_keywords = _try_load_keywords()
 
     seen_urls: set = set()
-    global_r_idx = 0  # 跨 query 全局索引
 
     for query in search_queries:
         api_key = key_rotator.get_key()
@@ -1226,39 +1205,67 @@ def collect_xcrawl(
             break
 
         # ── 日期限定的搜索关键词 ──
+        # XCrawl 对自然语言时间敏感，在 query 中包含日期词可获得更好时效性
         today_str = window_end.strftime("%Y年%-m月%-d日")
         enhanced_query = f"{query} {today_str}" if today_str not in query else query
 
         logging.info(f"[XCrawl] {source_id}: 搜索 '{enhanced_query}'")
 
         try:
-            from xcrawl import XcrawlClient
+            import subprocess, tempfile
 
-            client = XcrawlClient(api_key=api_key, timeout=timeout)
-            response = client.search({
-                "query": enhanced_query,
-                "limit": max_results,
-                "language": "zh",
-            })
+            tmpfile = tempfile.NamedTemporaryFile(
+                suffix=".json", prefix=f"xcrawl_{source_id}_", delete=False
+            )
+            tmpfile.close()
+
+            cmd = [
+                "xcrawl", "search", enhanced_query,
+                "--limit", str(max_results),
+                "--json",
+                "--output", tmpfile.name,
+            ]
+            env = os.environ.copy()
+            env["XCRAWL_API_KEY"] = api_key
+
+            result = subprocess.run(
+                cmd, capture_output=True, text=True,
+                timeout=timeout, env=env,
+            )
+
+            if result.returncode != 0:
+                logging.warning(f"[XCrawl] 搜索失败: {result.stderr[:200]}")
+                stats["failed"] += 1
+                os.unlink(tmpfile.name)
+                continue
 
             key_rotator.record_call(api_key)
 
-            # XCrawl SDK 返回结构: response["data"]["data"] 是结果数组
-            data_block = response.get("data", {})
-            results = data_block.get("data", [])
+            try:
+                with open(tmpfile.name, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+            except Exception:
+                os.unlink(tmpfile.name)
+                stats["failed"] += 1
+                continue
 
-            logging.info(f"[XCrawl] {source_id}: '{enhanced_query}' 返回 {len(results)} 条")
+            os.unlink(tmpfile.name)
 
-            for result in results:
+            results = data.get("results", [])
+            query_count = 0
+
+            for r_idx, result in enumerate(results):
                 title = result.get("title", "")
                 link = result.get("url", "")
-                snippet = result.get("description", "")
+                snippet = result.get("snippet", "")
+                pub_date = result.get("publishedDate", "")
 
                 if not title or not link:
                     continue
 
-                # 从 description 提取发布日期
-                pub_date = _extract_date_from_snippet(snippet)
+                # V2: XCrawl 不返回 publishedDate，从 snippet 中提取时间
+                if not pub_date:
+                    pub_date = _extract_date_from_snippet(snippet)
 
                 # 去重
                 norm = normalize_url(link)
@@ -1270,7 +1277,7 @@ def collect_xcrawl(
                 time_status = classify_time_status(pub_date, window_start, window_end)
 
                 article = {
-                    "article_id": generate_article_id(link, source_id, global_r_idx),
+                    "article_id": generate_article_id(link, source_id, r_idx),
                     "title": title,
                     "url": link,
                     "content": snippet[:5000] if snippet else "",
@@ -1291,17 +1298,21 @@ def collect_xcrawl(
                     article["keywords_matched"] = match_keywords(article, all_keywords)
 
                 articles.append(article)
-                global_r_idx += 1
+                query_count += 1
 
-            stats["success"] += len(results)
+            logging.info(f"[XCrawl] {source_id}: '{enhanced_query}' → {query_count} 篇")
+            stats["success"] += query_count
 
+        except subprocess.TimeoutExpired:
+            logging.warning(f"[XCrawl] {source_id}: 搜索超时 '{query}'")
+            stats["failed"] += 1
         except Exception as e:
             logging.warning(f"[XCrawl] {source_id}: 搜索异常 '{query}': {e}")
             stats["failed"] += 1
-            continue
 
     logging.info(f"[XCrawl] {source_id}: 共采集 {len(articles)} 篇文章 ({stats['success']} 成功, {stats['failed']} 失败)")
     return articles, stats
+
 
 def _try_load_keywords() -> Optional[List[str]]:
     """尝试加载关键词配置。"""

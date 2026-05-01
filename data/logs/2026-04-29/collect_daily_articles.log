@@ -1128,3 +1128,611 @@
 2026-04-30 09:59:01,353 [INFO]   源 [tavily_industry_data]: 成功 50, 失败 2, 耗时 4.8s, 错误: None
 2026-04-30 09:59:01,353 [INFO]   源 [tavily_today_beauty_retail]: 成功 50, 失败 2, 耗时 4.12s, 错误: None
 2026-04-30 09:59:01,353 [INFO] ============================================================
+2026-04-30 23:41:32,898 [INFO] ============================================================
+2026-04-30 23:41:32,898 [INFO] 开始采集 (V2): date=2026-04-29
+2026-04-30 23:41:32,899 [INFO] 时间窗口: 2026-04-28 07:00:00+08:00 ~ 2026-04-29 07:00:00+08:00
+2026-04-30 23:41:32,899 [INFO] 项目根目录: /app/working/projects/watsons-retail-intel
+2026-04-30 23:41:32,899 [INFO] ============================================================
+2026-04-30 23:41:32,954 [INFO] 加载 98 个关键词
+2026-04-30 23:41:32,954 [INFO] RSSHub 基础地址: http://192.168.2.100:1200
+2026-04-30 23:41:32,954 [INFO] Tavily: 3 个 Key 已加载，轮换策略: round_robin
+2026-04-30 23:41:32,954 [INFO] XCrawl: 3 个 Key 已加载
+2026-04-30 23:41:32,955 [INFO] 启用源数量: 14 (rsshub: 0, other: 14, legacy: 0)
+2026-04-30 23:41:32,955 [INFO] RSSHub filterout_days 全局默认: 1 天
+2026-04-30 23:41:32,979 [INFO] 源级并行采集已启用, workers: {'rsshub': 6, 'rss': 4, 'web': 2, 'tavily': 6, 'xcrawl': 4}
+2026-04-30 23:41:32,979 [INFO] 并行采集 [rsshub] 组: 4 个源, max_workers=4
+2026-04-30 23:41:32,980 [INFO] [RSSHub] rsshub_huxiu_instant_retail: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:41:32,981 [INFO] [RSSHub] rsshub_huxiu_instant_retail: 请求 http://192.168.2.100:1200/huxiu/search/即时零售?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:41:32,982 [INFO] [RSSHub] rsshub_huxiu_beauty: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:41:32,983 [INFO] [RSSHub] rsshub_huxiu_beauty: 请求 http://192.168.2.100:1200/huxiu/search/美妆 零售?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:41:32,982 [INFO] [RSSHub] rsshub_huxiu_watsons: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:41:32,984 [INFO] [RSSHub] rsshub_huxiu_watsons: 请求 http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:41:32,985 [INFO] [RSSHub] rsshub_huxiu_meituan_flash: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:41:32,985 [INFO] [RSSHub] rsshub_huxiu_meituan_flash: 请求 http://192.168.2.100:1200/huxiu/search/美团闪购?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:41:36,526 [INFO] 完成采集: [rsshub] rsshub_huxiu_watsons — 成功 10, 失败 0, 耗时 3.54s
+2026-04-30 23:41:36,598 [INFO] 完成采集: [rsshub] rsshub_huxiu_beauty — 成功 10, 失败 0, 耗时 3.62s
+2026-04-30 23:41:36,728 [INFO] 完成采集: [rsshub] rsshub_huxiu_meituan_flash — 成功 10, 失败 0, 耗时 3.74s
+2026-04-30 23:41:36,798 [INFO] 完成采集: [rsshub] rsshub_huxiu_instant_retail — 成功 10, 失败 0, 耗时 3.82s
+2026-04-30 23:41:36,799 [INFO] 并行采集 [web] 组: 2 个源, max_workers=2
+2026-04-30 23:41:36,800 [INFO] [Web] web_jd_daojia: 抓取首页 https://daojia.jd.com
+2026-04-30 23:41:36,800 [INFO] [Web] web_sephora_cn: 抓取首页 https://www.sephora.cn/news
+2026-04-30 23:41:37,117 [WARNING] HTTP GET 失败: https://www.sephora.cn/news — 404 Client Error: Not Found for url: https://www.sephora.cn/news
+2026-04-30 23:41:37,120 [INFO] 完成采集: [web] web_sephora_cn — 成功 0, 失败 0, 耗时 0.32s
+2026-04-30 23:41:37,167 [INFO] [Web] web_jd_daojia: 提取到 0 个候选链接
+2026-04-30 23:41:37,167 [INFO] 完成采集: [web] web_jd_daojia — 成功 0, 失败 0, 耗时 0.37s
+2026-04-30 23:41:37,168 [INFO] 并行采集 [xcrawl] 组: 5 个源, max_workers=4
+2026-04-30 23:41:37,207 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '美妆 个护 即时零售 品牌 入驻 2026年4月29日'
+2026-04-30 23:41:37,217 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '屈臣氏 即时零售 门店 会员 2026年4月29日'
+2026-04-30 23:41:37,222 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '即时零售 监管 政策 合规 2026 2026年4月29日'
+2026-04-30 23:41:37,237 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 最新 新闻 2026 2026年4月29日'
+2026-04-30 23:41:37,251 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '即时零售 最新 新闻 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,251 [WARNING] [XCrawl] xcrawl_beauty_retail: 搜索异常 '美妆 个护 即时零售 品牌 入驻': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,252 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 市场规模 增长 2026年4月29日'
+2026-04-30 23:41:37,252 [WARNING] [XCrawl] xcrawl_competitor_moves: 搜索异常 '屈臣氏 即时零售 门店 会员': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,253 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '贝泰妮 珀莱雅 即时零售 OMO 2026年4月29日'
+2026-04-30 23:41:37,253 [WARNING] [XCrawl] xcrawl_platform_regulation: 搜索异常 '即时零售 监管 政策 合规 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,254 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '丝芙兰 中国 即时零售 经营 2026年4月29日'
+2026-04-30 23:41:37,256 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '美团 淘宝闪购 京东 自查 整改 2026年4月29日'
+2026-04-30 23:41:37,258 [WARNING] [XCrawl] xcrawl_beauty_retail: 搜索异常 '贝泰妮 珀莱雅 即时零售 OMO': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,259 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '完美日记 花西子 即时零售 渠道 2026年4月29日'
+2026-04-30 23:41:37,260 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '即时零售 市场规模 增长': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,260 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 万亿 行业报告 2026年4月29日'
+2026-04-30 23:41:37,262 [WARNING] [XCrawl] xcrawl_platform_regulation: 搜索异常 '美团 淘宝闪购 京东 自查 整改': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,263 [WARNING] [XCrawl] xcrawl_competitor_moves: 搜索异常 '丝芙兰 中国 即时零售 经营': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,263 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '化妆品 备案 新规 2026 2026年4月29日'
+2026-04-30 23:41:37,264 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '名创优品 美团 闪购 即时零售 2026年4月29日'
+2026-04-30 23:41:37,265 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '即时零售 万亿 行业报告': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,269 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '美团闪购 即时零售 2026 2026年4月29日'
+2026-04-30 23:41:37,270 [WARNING] [XCrawl] xcrawl_platform_regulation: 搜索异常 '化妆品 备案 新规 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,270 [WARNING] [XCrawl] xcrawl_beauty_retail: 搜索异常 '完美日记 花西子 即时零售 渠道': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,271 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '外卖平台 入网 资质 审核 2026年4月29日'
+2026-04-30 23:41:37,272 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '国货美妆 即时零售 线下 线上 2026年4月29日'
+2026-04-30 23:41:37,273 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '美团闪购 即时零售 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,273 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '京东秒送 京东到家 即时零售 2026年4月29日'
+2026-04-30 23:41:37,273 [WARNING] [XCrawl] xcrawl_competitor_moves: 搜索异常 '名创优品 美团 闪购 即时零售': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,275 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '万宁 关店 即时零售 2026 2026年4月29日'
+2026-04-30 23:41:37,277 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '京东秒送 京东到家 即时零售': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,278 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '淘宝闪购 饿了么 即时零售 2026年4月29日'
+2026-04-30 23:41:37,281 [WARNING] [XCrawl] xcrawl_platform_regulation: 搜索异常 '外卖平台 入网 资质 审核': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,281 [WARNING] [XCrawl] xcrawl_beauty_retail: 搜索异常 '国货美妆 即时零售 线下 线上': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,282 [WARNING] [XCrawl] xcrawl_competitor_moves: 搜索异常 '万宁 关店 即时零售 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,282 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '闪电仓 许可证 消防 合规 2026年4月29日'
+2026-04-30 23:41:37,283 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '美妆品牌 闪购 到家 2026 2026年4月29日'
+2026-04-30 23:41:37,283 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '淘宝闪购 饿了么 即时零售': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,283 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 'WOW COLOUR THE COLORIST 即时零售 2026年4月29日'
+2026-04-30 23:41:37,284 [INFO] [XCrawl] xcrawl_instant_retail_core: 共采集 0 篇文章 (0 成功, 6 失败)
+2026-04-30 23:41:37,287 [INFO] 完成采集: [xcrawl] xcrawl_instant_retail_core — 成功 0, 失败 6, 耗时 0.12s
+2026-04-30 23:41:37,287 [WARNING] [XCrawl] xcrawl_platform_regulation: 搜索异常 '闪电仓 许可证 消防 合规': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,290 [INFO] [XCrawl] xcrawl_platform_regulation: 共采集 0 篇文章 (0 成功, 5 失败)
+2026-04-30 23:41:37,296 [INFO] 完成采集: [xcrawl] xcrawl_platform_regulation — 成功 0, 失败 5, 耗时 0.13s
+2026-04-30 23:41:37,306 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '前置仓 闪电仓 即时零售 2026 2026年4月29日'
+2026-04-30 23:41:37,306 [WARNING] [XCrawl] xcrawl_beauty_retail: 搜索异常 '美妆品牌 闪购 到家 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,307 [WARNING] [XCrawl] xcrawl_competitor_moves: 搜索异常 'WOW COLOUR THE COLORIST 即时零售': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,307 [INFO] [XCrawl] xcrawl_beauty_retail: 共采集 0 篇文章 (0 成功, 5 失败)
+2026-04-30 23:41:37,307 [INFO] [XCrawl] xcrawl_competitor_moves: 共采集 0 篇文章 (0 成功, 5 失败)
+2026-04-30 23:41:37,308 [INFO] 完成采集: [xcrawl] xcrawl_beauty_retail — 成功 0, 失败 5, 耗时 0.13s
+2026-04-30 23:41:37,308 [INFO] 完成采集: [xcrawl] xcrawl_competitor_moves — 成功 0, 失败 5, 耗时 0.13s
+2026-04-30 23:41:37,309 [WARNING] [XCrawl] xcrawl_warehouse: 搜索异常 '前置仓 闪电仓 即时零售 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,310 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '叮咚买菜 美团 闪电仓 收购 2026年4月29日'
+2026-04-30 23:41:37,312 [WARNING] [XCrawl] xcrawl_warehouse: 搜索异常 '叮咚买菜 美团 闪电仓 收购': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,312 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '前置仓 模式 盈利 即时配送 2026年4月29日'
+2026-04-30 23:41:37,313 [WARNING] [XCrawl] xcrawl_warehouse: 搜索异常 '前置仓 模式 盈利 即时配送': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,314 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '社区仓 门店仓 即时零售 履约 2026年4月29日'
+2026-04-30 23:41:37,315 [WARNING] [XCrawl] xcrawl_warehouse: 搜索异常 '社区仓 门店仓 即时零售 履约': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:41:37,316 [INFO] [XCrawl] xcrawl_warehouse: 共采集 0 篇文章 (0 成功, 4 失败)
+2026-04-30 23:41:37,316 [INFO] 完成采集: [xcrawl] xcrawl_warehouse — 成功 0, 失败 4, 耗时 0.03s
+2026-04-30 23:41:37,317 [INFO] 并行采集 [tavily] 组: 3 个源, max_workers=3
+2026-04-30 23:41:37,318 [INFO] [Tavily] tavily_instant_retail: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:41:37,318 [INFO] [Tavily tavily_instant_retail] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:41:37,318 [INFO] [Tavily] tavily_beauty_retail: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:41:37,319 [INFO] [Tavily] tavily_regulation: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:41:37,319 [INFO] [Tavily tavily_beauty_retail] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:41:37,320 [INFO] [Tavily tavily_regulation] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:41:40,742 [INFO] [Tavily tavily_instant_retail] 完成: 2/2 成功, 0 失败, 耗时 3.4s
+2026-04-30 23:41:40,742 [INFO] [Tavily] tavily_instant_retail: query 0 返回 10 条结果
+2026-04-30 23:41:40,742 [INFO] [Tavily] tavily_instant_retail: query 1 返回 10 条结果
+2026-04-30 23:41:40,742 [INFO] [Tavily] tavily_instant_retail: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:41:40,743 [INFO] 完成采集: [tavily] tavily_instant_retail — 成功 20, 失败 0, 耗时 3.43s
+2026-04-30 23:41:41,344 [INFO] [Tavily tavily_regulation] 完成: 2/2 成功, 0 失败, 耗时 4.0s
+2026-04-30 23:41:41,344 [INFO] [Tavily] tavily_regulation: query 0 返回 10 条结果
+2026-04-30 23:41:41,345 [INFO] [Tavily] tavily_regulation: query 1 返回 10 条结果
+2026-04-30 23:41:41,345 [INFO] [Tavily] tavily_regulation: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:41:41,345 [INFO] 完成采集: [tavily] tavily_regulation — 成功 20, 失败 0, 耗时 4.03s
+2026-04-30 23:41:42,191 [INFO] [Tavily tavily_beauty_retail] 完成: 2/2 成功, 0 失败, 耗时 4.9s
+2026-04-30 23:41:42,192 [INFO] [Tavily] tavily_beauty_retail: query 0 返回 10 条结果
+2026-04-30 23:41:42,192 [INFO] [Tavily] tavily_beauty_retail: query 1 返回 10 条结果
+2026-04-30 23:41:42,192 [INFO] [Tavily] tavily_beauty_retail: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:41:42,192 [INFO] 完成采集: [tavily] tavily_beauty_retail — 成功 20, 失败 0, 耗时 4.87s
+2026-04-30 23:41:42,193 [INFO] 总采集数: 100
+2026-04-30 23:41:42,197 [INFO] 去重后数量: 100
+2026-04-30 23:41:42,197 [INFO] allow_old 过滤: 丢弃 40 条 old 文章 (allow_old=false 的源不允许 old)
+2026-04-30 23:41:42,197 [INFO] allow_old 过滤后数量: 60 (过滤前 100, 丢弃 40)
+2026-04-30 23:41:42,197 [INFO] 时间窗口内: 0, 近窗口: 0, 早于窗口: 0, 无法识别: 60
+2026-04-30 23:41:42,223 [INFO] 输出文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json
+2026-04-30 23:41:42,223 [INFO] ============================================================
+2026-04-30 23:41:42,223 [INFO] 采集完成汇总:
+2026-04-30 23:41:42,224 [INFO]   总采集数: 100
+2026-04-30 23:41:42,224 [INFO]   去重后数量: 60
+2026-04-30 23:41:42,224 [INFO]   in_window: 0
+2026-04-30 23:41:42,224 [INFO]   near_window: 0
+2026-04-30 23:41:42,224 [INFO]   old: 0
+2026-04-30 23:41:42,224 [INFO]   unknown_time: 60
+2026-04-30 23:41:42,224 [INFO]   rsshub: 40
+2026-04-30 23:41:42,225 [INFO]   web: 0
+2026-04-30 23:41:42,225 [INFO]   xcrawl: 0
+2026-04-30 23:41:42,225 [INFO]   tavily: 60
+2026-04-30 23:41:42,225 [INFO]   Tavily Key 状态:
+2026-04-30 23:41:42,225 [INFO]     key_0_tavily_key: calls=3, remaining=997, exhausted=False
+2026-04-30 23:41:42,225 [INFO]     key_1_tavily_key1: calls=3, remaining=997, exhausted=False
+2026-04-30 23:41:42,226 [INFO]     key_2_tavily_key2: calls=0, remaining=1000, exhausted=False
+2026-04-30 23:41:42,226 [INFO]   源 [rsshub_huxiu_watsons]: 成功 10, 失败 0, 耗时 3.54s, 错误: None
+2026-04-30 23:41:42,226 [INFO]   源 [rsshub_huxiu_beauty]: 成功 10, 失败 0, 耗时 3.62s, 错误: None
+2026-04-30 23:41:42,226 [INFO]   源 [rsshub_huxiu_meituan_flash]: 成功 10, 失败 0, 耗时 3.74s, 错误: None
+2026-04-30 23:41:42,226 [INFO]   源 [rsshub_huxiu_instant_retail]: 成功 10, 失败 0, 耗时 3.82s, 错误: None
+2026-04-30 23:41:42,226 [INFO]   源 [web_sephora_cn]: 成功 0, 失败 0, 耗时 0.32s, 错误: Failed to fetch index: https://www.sephora.cn/news
+2026-04-30 23:41:42,227 [INFO]   源 [web_jd_daojia]: 成功 0, 失败 0, 耗时 0.37s, 错误: None
+2026-04-30 23:41:42,227 [INFO]   源 [xcrawl_instant_retail_core]: 成功 0, 失败 6, 耗时 0.12s, 错误: None
+2026-04-30 23:41:42,227 [INFO]   源 [xcrawl_platform_regulation]: 成功 0, 失败 5, 耗时 0.13s, 错误: None
+2026-04-30 23:41:42,227 [INFO]   源 [xcrawl_beauty_retail]: 成功 0, 失败 5, 耗时 0.13s, 错误: None
+2026-04-30 23:41:42,227 [INFO]   源 [xcrawl_competitor_moves]: 成功 0, 失败 5, 耗时 0.13s, 错误: None
+2026-04-30 23:41:42,227 [INFO]   源 [xcrawl_warehouse]: 成功 0, 失败 4, 耗时 0.03s, 错误: None
+2026-04-30 23:41:42,228 [INFO]   源 [tavily_instant_retail]: 成功 20, 失败 0, 耗时 3.43s, 错误: None
+2026-04-30 23:41:42,228 [INFO]   源 [tavily_regulation]: 成功 20, 失败 0, 耗时 4.03s, 错误: None
+2026-04-30 23:41:42,228 [INFO]   源 [tavily_beauty_retail]: 成功 20, 失败 0, 耗时 4.87s, 错误: None
+2026-04-30 23:41:42,228 [INFO] ============================================================
+2026-04-30 23:44:46,870 [INFO] ============================================================
+2026-04-30 23:44:46,870 [INFO] 开始采集 (V2): date=2026-04-29
+2026-04-30 23:44:46,870 [INFO] 时间窗口: 2026-04-28 07:00:00+08:00 ~ 2026-04-29 07:00:00+08:00
+2026-04-30 23:44:46,870 [INFO] 项目根目录: /app/working/projects/watsons-retail-intel
+2026-04-30 23:44:46,871 [INFO] ============================================================
+2026-04-30 23:44:46,927 [INFO] 加载 98 个关键词
+2026-04-30 23:44:46,927 [INFO] RSSHub 基础地址: http://192.168.2.100:1200
+2026-04-30 23:44:46,927 [INFO] Tavily: 3 个 Key 已加载，轮换策略: round_robin
+2026-04-30 23:44:46,927 [INFO] XCrawl: 3 个 Key 已加载
+2026-04-30 23:44:46,928 [INFO] 启用源数量: 14 (rsshub: 0, other: 14, legacy: 0)
+2026-04-30 23:44:46,928 [INFO] RSSHub filterout_days 全局默认: 1 天
+2026-04-30 23:44:46,952 [INFO] 源级并行采集已启用, workers: {'rsshub': 6, 'rss': 4, 'web': 2, 'tavily': 6, 'xcrawl': 4}
+2026-04-30 23:44:46,953 [INFO] 并行采集 [rsshub] 组: 4 个源, max_workers=4
+2026-04-30 23:44:46,954 [INFO] [RSSHub] rsshub_huxiu_instant_retail: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:44:46,954 [INFO] [RSSHub] rsshub_huxiu_instant_retail: 请求 http://192.168.2.100:1200/huxiu/search/即时零售?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:44:46,955 [INFO] [RSSHub] rsshub_huxiu_beauty: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:44:46,956 [INFO] [RSSHub] rsshub_huxiu_beauty: 请求 http://192.168.2.100:1200/huxiu/search/美妆 零售?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:44:46,957 [INFO] [RSSHub] rsshub_huxiu_watsons: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:44:46,958 [INFO] [RSSHub] rsshub_huxiu_meituan_flash: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:44:46,959 [INFO] [RSSHub] rsshub_huxiu_watsons: 请求 http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:44:46,960 [INFO] [RSSHub] rsshub_huxiu_meituan_flash: 请求 http://192.168.2.100:1200/huxiu/search/美团闪购?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:44:47,022 [INFO] 完成采集: [rsshub] rsshub_huxiu_instant_retail — 成功 10, 失败 0, 耗时 0.07s
+2026-04-30 23:44:47,054 [INFO] 完成采集: [rsshub] rsshub_huxiu_beauty — 成功 10, 失败 0, 耗时 0.1s
+2026-04-30 23:44:47,114 [INFO] 完成采集: [rsshub] rsshub_huxiu_meituan_flash — 成功 10, 失败 0, 耗时 0.16s
+2026-04-30 23:44:47,115 [INFO] 完成采集: [rsshub] rsshub_huxiu_watsons — 成功 10, 失败 0, 耗时 0.16s
+2026-04-30 23:44:47,115 [INFO] 并行采集 [web] 组: 2 个源, max_workers=2
+2026-04-30 23:44:47,116 [INFO] [Web] web_jd_daojia: 抓取首页 https://daojia.jd.com
+2026-04-30 23:44:47,119 [INFO] [Web] web_sephora_cn: 抓取首页 https://www.sephora.cn/news
+2026-04-30 23:44:47,383 [WARNING] HTTP GET 失败: https://www.sephora.cn/news — 404 Client Error: Not Found for url: https://www.sephora.cn/news
+2026-04-30 23:44:47,386 [INFO] 完成采集: [web] web_sephora_cn — 成功 0, 失败 0, 耗时 0.27s
+2026-04-30 23:44:47,457 [INFO] [Web] web_jd_daojia: 提取到 0 个候选链接
+2026-04-30 23:44:47,457 [INFO] 完成采集: [web] web_jd_daojia — 成功 0, 失败 0, 耗时 0.34s
+2026-04-30 23:44:47,458 [INFO] 并行采集 [xcrawl] 组: 5 个源, max_workers=4
+2026-04-30 23:44:47,503 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 最新 新闻 2026 2026年4月29日'
+2026-04-30 23:44:47,508 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '即时零售 监管 政策 合规 2026 2026年4月29日'
+2026-04-30 23:44:47,524 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '屈臣氏 即时零售 门店 会员 2026年4月29日'
+2026-04-30 23:44:47,528 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '美妆 个护 即时零售 品牌 入驻 2026年4月29日'
+2026-04-30 23:44:47,542 [WARNING] [XCrawl] xcrawl_beauty_retail: 搜索异常 '美妆 个护 即时零售 品牌 入驻': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,542 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '贝泰妮 珀莱雅 即时零售 OMO 2026年4月29日'
+2026-04-30 23:44:47,543 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '即时零售 最新 新闻 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,543 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 市场规模 增长 2026年4月29日'
+2026-04-30 23:44:47,545 [WARNING] [XCrawl] xcrawl_competitor_moves: 搜索异常 '屈臣氏 即时零售 门店 会员': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,545 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '丝芙兰 中国 即时零售 经营 2026年4月29日'
+2026-04-30 23:44:47,549 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '即时零售 市场规模 增长': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,550 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 万亿 行业报告 2026年4月29日'
+2026-04-30 23:44:47,551 [WARNING] [XCrawl] xcrawl_platform_regulation: 搜索异常 '即时零售 监管 政策 合规 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,551 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '美团 淘宝闪购 京东 自查 整改 2026年4月29日'
+2026-04-30 23:44:47,552 [WARNING] [XCrawl] xcrawl_beauty_retail: 搜索异常 '贝泰妮 珀莱雅 即时零售 OMO': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,552 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '完美日记 花西子 即时零售 渠道 2026年4月29日'
+2026-04-30 23:44:47,555 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '即时零售 万亿 行业报告': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,556 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '美团闪购 即时零售 2026 2026年4月29日'
+2026-04-30 23:44:47,556 [WARNING] [XCrawl] xcrawl_competitor_moves: 搜索异常 '丝芙兰 中国 即时零售 经营': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,557 [WARNING] [XCrawl] xcrawl_beauty_retail: 搜索异常 '完美日记 花西子 即时零售 渠道': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,558 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '国货美妆 即时零售 线下 线上 2026年4月29日'
+2026-04-30 23:44:47,558 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '名创优品 美团 闪购 即时零售 2026年4月29日'
+2026-04-30 23:44:47,562 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '美团闪购 即时零售 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,563 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '京东秒送 京东到家 即时零售 2026年4月29日'
+2026-04-30 23:44:47,565 [WARNING] [XCrawl] xcrawl_beauty_retail: 搜索异常 '国货美妆 即时零售 线下 线上': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,565 [WARNING] [XCrawl] xcrawl_platform_regulation: 搜索异常 '美团 淘宝闪购 京东 自查 整改': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,566 [WARNING] [XCrawl] xcrawl_competitor_moves: 搜索异常 '名创优品 美团 闪购 即时零售': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,566 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '美妆品牌 闪购 到家 2026 2026年4月29日'
+2026-04-30 23:44:47,567 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '化妆品 备案 新规 2026 2026年4月29日'
+2026-04-30 23:44:47,567 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '万宁 关店 即时零售 2026 2026年4月29日'
+2026-04-30 23:44:47,572 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '京东秒送 京东到家 即时零售': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,574 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '淘宝闪购 饿了么 即时零售 2026年4月29日'
+2026-04-30 23:44:47,575 [WARNING] [XCrawl] xcrawl_beauty_retail: 搜索异常 '美妆品牌 闪购 到家 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,575 [WARNING] [XCrawl] xcrawl_competitor_moves: 搜索异常 '万宁 关店 即时零售 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,575 [INFO] [XCrawl] xcrawl_beauty_retail: 共采集 0 篇文章 (0 成功, 5 失败)
+2026-04-30 23:44:47,576 [WARNING] [XCrawl] xcrawl_platform_regulation: 搜索异常 '化妆品 备案 新规 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,577 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '外卖平台 入网 资质 审核 2026年4月29日'
+2026-04-30 23:44:47,576 [INFO] 完成采集: [xcrawl] xcrawl_beauty_retail — 成功 0, 失败 5, 耗时 0.1s
+2026-04-30 23:44:47,576 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 'WOW COLOUR THE COLORIST 即时零售 2026年4月29日'
+2026-04-30 23:44:47,578 [WARNING] [XCrawl] xcrawl_instant_retail_core: 搜索异常 '淘宝闪购 饿了么 即时零售': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,585 [INFO] [XCrawl] xcrawl_instant_retail_core: 共采集 0 篇文章 (0 成功, 6 失败)
+2026-04-30 23:44:47,586 [INFO] 完成采集: [xcrawl] xcrawl_instant_retail_core — 成功 0, 失败 6, 耗时 0.13s
+2026-04-30 23:44:47,596 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '前置仓 闪电仓 即时零售 2026 2026年4月29日'
+2026-04-30 23:44:47,598 [WARNING] [XCrawl] xcrawl_warehouse: 搜索异常 '前置仓 闪电仓 即时零售 2026': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,598 [WARNING] [XCrawl] xcrawl_platform_regulation: 搜索异常 '外卖平台 入网 资质 审核': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,602 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '闪电仓 许可证 消防 合规 2026年4月29日'
+2026-04-30 23:44:47,599 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '叮咚买菜 美团 闪电仓 收购 2026年4月29日'
+2026-04-30 23:44:47,604 [WARNING] [XCrawl] xcrawl_competitor_moves: 搜索异常 'WOW COLOUR THE COLORIST 即时零售': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,605 [INFO] [XCrawl] xcrawl_competitor_moves: 共采集 0 篇文章 (0 成功, 5 失败)
+2026-04-30 23:44:47,605 [WARNING] [XCrawl] xcrawl_platform_regulation: 搜索异常 '闪电仓 许可证 消防 合规': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,605 [INFO] 完成采集: [xcrawl] xcrawl_competitor_moves — 成功 0, 失败 5, 耗时 0.14s
+2026-04-30 23:44:47,606 [INFO] [XCrawl] xcrawl_platform_regulation: 共采集 0 篇文章 (0 成功, 5 失败)
+2026-04-30 23:44:47,607 [INFO] 完成采集: [xcrawl] xcrawl_platform_regulation — 成功 0, 失败 5, 耗时 0.15s
+2026-04-30 23:44:47,608 [WARNING] [XCrawl] xcrawl_warehouse: 搜索异常 '叮咚买菜 美团 闪电仓 收购': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,608 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '前置仓 模式 盈利 即时配送 2026年4月29日'
+2026-04-30 23:44:47,609 [WARNING] [XCrawl] xcrawl_warehouse: 搜索异常 '前置仓 模式 盈利 即时配送': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,610 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '社区仓 门店仓 即时零售 履约 2026年4月29日'
+2026-04-30 23:44:47,611 [WARNING] [XCrawl] xcrawl_warehouse: 搜索异常 '社区仓 门店仓 即时零售 履约': [Errno 2] No such file or directory: 'xcrawl'
+2026-04-30 23:44:47,612 [INFO] [XCrawl] xcrawl_warehouse: 共采集 0 篇文章 (0 成功, 4 失败)
+2026-04-30 23:44:47,612 [INFO] 完成采集: [xcrawl] xcrawl_warehouse — 成功 0, 失败 4, 耗时 0.03s
+2026-04-30 23:44:47,613 [INFO] 并行采集 [tavily] 组: 3 个源, max_workers=3
+2026-04-30 23:44:47,614 [INFO] [Tavily] tavily_instant_retail: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:44:47,614 [INFO] [Tavily] tavily_beauty_retail: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:44:47,614 [INFO] [Tavily tavily_instant_retail] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:44:47,615 [INFO] [Tavily tavily_beauty_retail] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:44:47,615 [INFO] [Tavily] tavily_regulation: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:44:47,619 [INFO] [Tavily tavily_regulation] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:44:48,956 [INFO] [Tavily tavily_instant_retail] 完成: 2/2 成功, 0 失败, 耗时 1.3s
+2026-04-30 23:44:48,956 [INFO] [Tavily] tavily_instant_retail: query 0 返回 10 条结果
+2026-04-30 23:44:48,956 [INFO] [Tavily] tavily_instant_retail: query 1 返回 10 条结果
+2026-04-30 23:44:48,957 [INFO] [Tavily] tavily_instant_retail: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:44:48,957 [INFO] 完成采集: [tavily] tavily_instant_retail — 成功 20, 失败 0, 耗时 1.34s
+2026-04-30 23:44:49,063 [INFO] [Tavily tavily_beauty_retail] 完成: 2/2 成功, 0 失败, 耗时 1.4s
+2026-04-30 23:44:49,063 [INFO] [Tavily] tavily_beauty_retail: query 0 返回 10 条结果
+2026-04-30 23:44:49,063 [INFO] [Tavily] tavily_beauty_retail: query 1 返回 10 条结果
+2026-04-30 23:44:49,063 [INFO] [Tavily] tavily_beauty_retail: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:44:49,063 [INFO] 完成采集: [tavily] tavily_beauty_retail — 成功 20, 失败 0, 耗时 1.45s
+2026-04-30 23:44:49,107 [INFO] [Tavily tavily_regulation] 完成: 2/2 成功, 0 失败, 耗时 1.5s
+2026-04-30 23:44:49,107 [INFO] [Tavily] tavily_regulation: query 0 返回 10 条结果
+2026-04-30 23:44:49,108 [INFO] [Tavily] tavily_regulation: query 1 返回 10 条结果
+2026-04-30 23:44:49,108 [INFO] [Tavily] tavily_regulation: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:44:49,108 [INFO] 完成采集: [tavily] tavily_regulation — 成功 20, 失败 0, 耗时 1.49s
+2026-04-30 23:44:49,109 [INFO] 总采集数: 100
+2026-04-30 23:44:49,112 [INFO] 去重后数量: 100
+2026-04-30 23:44:49,113 [INFO] allow_old 过滤: 丢弃 40 条 old 文章 (allow_old=false 的源不允许 old)
+2026-04-30 23:44:49,113 [INFO] allow_old 过滤后数量: 60 (过滤前 100, 丢弃 40)
+2026-04-30 23:44:49,113 [INFO] 时间窗口内: 0, 近窗口: 0, 早于窗口: 0, 无法识别: 60
+2026-04-30 23:44:49,140 [INFO] 输出文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json
+2026-04-30 23:44:49,140 [INFO] ============================================================
+2026-04-30 23:44:49,140 [INFO] 采集完成汇总:
+2026-04-30 23:44:49,141 [INFO]   总采集数: 100
+2026-04-30 23:44:49,141 [INFO]   去重后数量: 60
+2026-04-30 23:44:49,141 [INFO]   in_window: 0
+2026-04-30 23:44:49,141 [INFO]   near_window: 0
+2026-04-30 23:44:49,141 [INFO]   old: 0
+2026-04-30 23:44:49,141 [INFO]   unknown_time: 60
+2026-04-30 23:44:49,141 [INFO]   rsshub: 40
+2026-04-30 23:44:49,142 [INFO]   web: 0
+2026-04-30 23:44:49,142 [INFO]   xcrawl: 0
+2026-04-30 23:44:49,142 [INFO]   tavily: 60
+2026-04-30 23:44:49,142 [INFO]   Tavily Key 状态:
+2026-04-30 23:44:49,142 [INFO]     key_0_tavily_key: calls=3, remaining=997, exhausted=False
+2026-04-30 23:44:49,142 [INFO]     key_1_tavily_key1: calls=3, remaining=997, exhausted=False
+2026-04-30 23:44:49,142 [INFO]     key_2_tavily_key2: calls=0, remaining=1000, exhausted=False
+2026-04-30 23:44:49,143 [INFO]   源 [rsshub_huxiu_instant_retail]: 成功 10, 失败 0, 耗时 0.07s, 错误: None
+2026-04-30 23:44:49,143 [INFO]   源 [rsshub_huxiu_beauty]: 成功 10, 失败 0, 耗时 0.1s, 错误: None
+2026-04-30 23:44:49,143 [INFO]   源 [rsshub_huxiu_meituan_flash]: 成功 10, 失败 0, 耗时 0.16s, 错误: None
+2026-04-30 23:44:49,143 [INFO]   源 [rsshub_huxiu_watsons]: 成功 10, 失败 0, 耗时 0.16s, 错误: None
+2026-04-30 23:44:49,143 [INFO]   源 [web_sephora_cn]: 成功 0, 失败 0, 耗时 0.27s, 错误: Failed to fetch index: https://www.sephora.cn/news
+2026-04-30 23:44:49,143 [INFO]   源 [web_jd_daojia]: 成功 0, 失败 0, 耗时 0.34s, 错误: None
+2026-04-30 23:44:49,144 [INFO]   源 [xcrawl_beauty_retail]: 成功 0, 失败 5, 耗时 0.1s, 错误: None
+2026-04-30 23:44:49,144 [INFO]   源 [xcrawl_instant_retail_core]: 成功 0, 失败 6, 耗时 0.13s, 错误: None
+2026-04-30 23:44:49,144 [INFO]   源 [xcrawl_competitor_moves]: 成功 0, 失败 5, 耗时 0.14s, 错误: None
+2026-04-30 23:44:49,144 [INFO]   源 [xcrawl_platform_regulation]: 成功 0, 失败 5, 耗时 0.15s, 错误: None
+2026-04-30 23:44:49,144 [INFO]   源 [xcrawl_warehouse]: 成功 0, 失败 4, 耗时 0.03s, 错误: None
+2026-04-30 23:44:49,144 [INFO]   源 [tavily_instant_retail]: 成功 20, 失败 0, 耗时 1.34s, 错误: None
+2026-04-30 23:44:49,144 [INFO]   源 [tavily_beauty_retail]: 成功 20, 失败 0, 耗时 1.45s, 错误: None
+2026-04-30 23:44:49,145 [INFO]   源 [tavily_regulation]: 成功 20, 失败 0, 耗时 1.49s, 错误: None
+2026-04-30 23:44:49,145 [INFO] ============================================================
+2026-04-30 23:52:07,605 [INFO] ============================================================
+2026-04-30 23:52:07,605 [INFO] 开始采集 (V2): date=2026-04-29
+2026-04-30 23:52:07,606 [INFO] 时间窗口: 2026-04-28 07:00:00+08:00 ~ 2026-04-29 07:00:00+08:00
+2026-04-30 23:52:07,606 [INFO] 项目根目录: /app/working/projects/watsons-retail-intel
+2026-04-30 23:52:07,606 [INFO] ============================================================
+2026-04-30 23:52:07,661 [INFO] 加载 98 个关键词
+2026-04-30 23:52:07,661 [INFO] RSSHub 基础地址: http://192.168.2.100:1200
+2026-04-30 23:52:07,662 [INFO] Tavily: 3 个 Key 已加载，轮换策略: round_robin
+2026-04-30 23:52:07,662 [INFO] XCrawl: 3 个 Key 已加载
+2026-04-30 23:52:07,662 [INFO] 启用源数量: 14 (rsshub: 0, other: 14, legacy: 0)
+2026-04-30 23:52:07,662 [INFO] RSSHub filterout_days 全局默认: 1 天
+2026-04-30 23:52:07,686 [INFO] 源级并行采集已启用, workers: {'rsshub': 6, 'rss': 4, 'web': 2, 'tavily': 6, 'xcrawl': 4}
+2026-04-30 23:52:07,687 [INFO] 并行采集 [rsshub] 组: 4 个源, max_workers=4
+2026-04-30 23:52:07,688 [INFO] [RSSHub] rsshub_huxiu_instant_retail: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:52:07,688 [INFO] [RSSHub] rsshub_huxiu_instant_retail: 请求 http://192.168.2.100:1200/huxiu/search/即时零售?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:52:07,689 [INFO] [RSSHub] rsshub_huxiu_beauty: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:52:07,690 [INFO] [RSSHub] rsshub_huxiu_beauty: 请求 http://192.168.2.100:1200/huxiu/search/美妆 零售?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:52:07,690 [INFO] [RSSHub] rsshub_huxiu_watsons: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:52:07,691 [INFO] [RSSHub] rsshub_huxiu_watsons: 请求 http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:52:07,692 [INFO] [RSSHub] rsshub_huxiu_meituan_flash: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:52:07,693 [INFO] [RSSHub] rsshub_huxiu_meituan_flash: 请求 http://192.168.2.100:1200/huxiu/search/美团闪购?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:52:08,413 [INFO] 完成采集: [rsshub] rsshub_huxiu_watsons — 成功 10, 失败 0, 耗时 0.72s
+2026-04-30 23:52:08,502 [INFO] 完成采集: [rsshub] rsshub_huxiu_meituan_flash — 成功 10, 失败 0, 耗时 0.81s
+2026-04-30 23:52:08,551 [INFO] 完成采集: [rsshub] rsshub_huxiu_beauty — 成功 10, 失败 0, 耗时 0.86s
+2026-04-30 23:52:08,623 [INFO] 完成采集: [rsshub] rsshub_huxiu_instant_retail — 成功 10, 失败 0, 耗时 0.94s
+2026-04-30 23:52:08,624 [INFO] 并行采集 [web] 组: 2 个源, max_workers=2
+2026-04-30 23:52:08,625 [INFO] [Web] web_jd_daojia: 抓取首页 https://daojia.jd.com
+2026-04-30 23:52:08,627 [INFO] [Web] web_sephora_cn: 抓取首页 https://www.sephora.cn/news
+2026-04-30 23:52:08,893 [WARNING] HTTP GET 失败: https://www.sephora.cn/news — 404 Client Error: Not Found for url: https://www.sephora.cn/news
+2026-04-30 23:52:08,895 [INFO] 完成采集: [web] web_sephora_cn — 成功 0, 失败 0, 耗时 0.27s
+2026-04-30 23:52:08,966 [INFO] [Web] web_jd_daojia: 提取到 0 个候选链接
+2026-04-30 23:52:08,966 [INFO] 完成采集: [web] web_jd_daojia — 成功 0, 失败 0, 耗时 0.34s
+2026-04-30 23:52:08,967 [INFO] 并行采集 [xcrawl] 组: 5 个源, max_workers=4
+2026-04-30 23:52:08,991 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 最新 新闻 2026 2026年4月29日'
+2026-04-30 23:52:09,013 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '美妆 个护 即时零售 品牌 入驻 2026年4月29日'
+2026-04-30 23:52:09,027 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '即时零售 监管 政策 合规 2026 2026年4月29日'
+2026-04-30 23:52:09,037 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '屈臣氏 即时零售 门店 会员 2026年4月29日'
+2026-04-30 23:52:11,248 [INFO] [XCrawl] xcrawl_platform_regulation: '即时零售 监管 政策 合规 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:52:11,255 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '美团 淘宝闪购 京东 自查 整改 2026年4月29日'
+2026-04-30 23:52:11,282 [INFO] [XCrawl] xcrawl_beauty_retail: '美妆 个护 即时零售 品牌 入驻 2026年4月29日' 返回 10 条
+2026-04-30 23:52:11,284 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '贝泰妮 珀莱雅 即时零售 OMO 2026年4月29日'
+2026-04-30 23:52:12,308 [INFO] [XCrawl] xcrawl_competitor_moves: '屈臣氏 即时零售 门店 会员 2026年4月29日' 返回 10 条
+2026-04-30 23:52:12,312 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '丝芙兰 中国 即时零售 经营 2026年4月29日'
+2026-04-30 23:52:13,201 [INFO] [XCrawl] xcrawl_platform_regulation: '美团 淘宝闪购 京东 自查 整改 2026年4月29日' 返回 10 条
+2026-04-30 23:52:13,206 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '化妆品 备案 新规 2026 2026年4月29日'
+2026-04-30 23:52:13,746 [INFO] [XCrawl] xcrawl_instant_retail_core: '即时零售 最新 新闻 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:52:13,750 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 市场规模 增长 2026年4月29日'
+2026-04-30 23:52:13,973 [INFO] [XCrawl] xcrawl_beauty_retail: '贝泰妮 珀莱雅 即时零售 OMO 2026年4月29日' 返回 10 条
+2026-04-30 23:52:13,977 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '完美日记 花西子 即时零售 渠道 2026年4月29日'
+2026-04-30 23:52:14,655 [INFO] [XCrawl] xcrawl_competitor_moves: '丝芙兰 中国 即时零售 经营 2026年4月29日' 返回 10 条
+2026-04-30 23:52:14,659 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '名创优品 美团 闪购 即时零售 2026年4月29日'
+2026-04-30 23:52:15,373 [INFO] [XCrawl] xcrawl_platform_regulation: '化妆品 备案 新规 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:52:15,379 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '外卖平台 入网 资质 审核 2026年4月29日'
+2026-04-30 23:52:15,835 [INFO] [XCrawl] xcrawl_instant_retail_core: '即时零售 市场规模 增长 2026年4月29日' 返回 10 条
+2026-04-30 23:52:15,838 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 万亿 行业报告 2026年4月29日'
+2026-04-30 23:52:16,116 [INFO] [XCrawl] xcrawl_beauty_retail: '完美日记 花西子 即时零售 渠道 2026年4月29日' 返回 10 条
+2026-04-30 23:52:16,121 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '国货美妆 即时零售 线下 线上 2026年4月29日'
+2026-04-30 23:52:16,737 [INFO] [XCrawl] xcrawl_competitor_moves: '名创优品 美团 闪购 即时零售 2026年4月29日' 返回 10 条
+2026-04-30 23:52:16,742 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '万宁 关店 即时零售 2026 2026年4月29日'
+2026-04-30 23:52:17,493 [INFO] [XCrawl] xcrawl_platform_regulation: '外卖平台 入网 资质 审核 2026年4月29日' 返回 10 条
+2026-04-30 23:52:17,496 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '闪电仓 许可证 消防 合规 2026年4月29日'
+2026-04-30 23:52:18,340 [INFO] [XCrawl] xcrawl_beauty_retail: '国货美妆 即时零售 线下 线上 2026年4月29日' 返回 10 条
+2026-04-30 23:52:18,343 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '美妆品牌 闪购 到家 2026 2026年4月29日'
+2026-04-30 23:52:19,088 [INFO] [XCrawl] xcrawl_competitor_moves: '万宁 关店 即时零售 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:52:19,094 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 'WOW COLOUR THE COLORIST 即时零售 2026年4月29日'
+2026-04-30 23:52:19,327 [INFO] [XCrawl] xcrawl_instant_retail_core: '即时零售 万亿 行业报告 2026年4月29日' 返回 10 条
+2026-04-30 23:52:19,331 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '美团闪购 即时零售 2026 2026年4月29日'
+2026-04-30 23:52:19,621 [INFO] [XCrawl] xcrawl_platform_regulation: '闪电仓 许可证 消防 合规 2026年4月29日' 返回 10 条
+2026-04-30 23:52:19,625 [INFO] [XCrawl] xcrawl_platform_regulation: 共采集 50 篇文章 (50 成功, 0 失败)
+2026-04-30 23:52:19,627 [INFO] 完成采集: [xcrawl] xcrawl_platform_regulation — 成功 50, 失败 0, 耗时 10.66s
+2026-04-30 23:52:19,643 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '前置仓 闪电仓 即时零售 2026 2026年4月29日'
+2026-04-30 23:52:20,583 [INFO] [XCrawl] xcrawl_beauty_retail: '美妆品牌 闪购 到家 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:52:20,587 [INFO] [XCrawl] xcrawl_beauty_retail: 共采集 47 篇文章 (50 成功, 0 失败)
+2026-04-30 23:52:20,590 [INFO] 完成采集: [xcrawl] xcrawl_beauty_retail — 成功 50, 失败 0, 耗时 11.6s
+2026-04-30 23:52:21,329 [INFO] [XCrawl] xcrawl_instant_retail_core: '美团闪购 即时零售 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:52:21,332 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '京东秒送 京东到家 即时零售 2026年4月29日'
+2026-04-30 23:52:22,015 [INFO] [XCrawl] xcrawl_warehouse: '前置仓 闪电仓 即时零售 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:52:22,019 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '叮咚买菜 美团 闪电仓 收购 2026年4月29日'
+2026-04-30 23:52:23,151 [INFO] [XCrawl] xcrawl_competitor_moves: 'WOW COLOUR THE COLORIST 即时零售 2026年4月29日' 返回 10 条
+2026-04-30 23:52:23,156 [INFO] [XCrawl] xcrawl_competitor_moves: 共采集 50 篇文章 (50 成功, 0 失败)
+2026-04-30 23:52:23,158 [INFO] 完成采集: [xcrawl] xcrawl_competitor_moves — 成功 50, 失败 0, 耗时 14.17s
+2026-04-30 23:52:23,704 [INFO] [XCrawl] xcrawl_instant_retail_core: '京东秒送 京东到家 即时零售 2026年4月29日' 返回 10 条
+2026-04-30 23:52:23,707 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '淘宝闪购 饿了么 即时零售 2026年4月29日'
+2026-04-30 23:52:24,156 [INFO] [XCrawl] xcrawl_warehouse: '叮咚买菜 美团 闪电仓 收购 2026年4月29日' 返回 10 条
+2026-04-30 23:52:24,161 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '前置仓 模式 盈利 即时配送 2026年4月29日'
+2026-04-30 23:52:25,727 [INFO] [XCrawl] xcrawl_instant_retail_core: '淘宝闪购 饿了么 即时零售 2026年4月29日' 返回 10 条
+2026-04-30 23:52:25,731 [INFO] [XCrawl] xcrawl_instant_retail_core: 共采集 48 篇文章 (60 成功, 0 失败)
+2026-04-30 23:52:25,733 [INFO] 完成采集: [xcrawl] xcrawl_instant_retail_core — 成功 60, 失败 0, 耗时 16.77s
+2026-04-30 23:52:26,322 [INFO] [XCrawl] xcrawl_warehouse: '前置仓 模式 盈利 即时配送 2026年4月29日' 返回 10 条
+2026-04-30 23:52:26,324 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '社区仓 门店仓 即时零售 履约 2026年4月29日'
+2026-04-30 23:52:28,277 [INFO] [XCrawl] xcrawl_warehouse: '社区仓 门店仓 即时零售 履约 2026年4月29日' 返回 10 条
+2026-04-30 23:52:28,279 [INFO] [XCrawl] xcrawl_warehouse: 共采集 37 篇文章 (40 成功, 0 失败)
+2026-04-30 23:52:28,281 [INFO] 完成采集: [xcrawl] xcrawl_warehouse — 成功 40, 失败 0, 耗时 8.65s
+2026-04-30 23:52:28,283 [INFO] 并行采集 [tavily] 组: 3 个源, max_workers=3
+2026-04-30 23:52:28,284 [INFO] [Tavily] tavily_instant_retail: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:52:28,285 [INFO] [Tavily tavily_instant_retail] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:52:28,285 [INFO] [Tavily] tavily_beauty_retail: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:52:28,286 [INFO] [Tavily] tavily_regulation: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:52:28,286 [INFO] [Tavily tavily_beauty_retail] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:52:28,287 [INFO] [Tavily tavily_regulation] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:52:29,654 [INFO] [Tavily tavily_regulation] 完成: 2/2 成功, 0 失败, 耗时 1.4s
+2026-04-30 23:52:29,655 [INFO] [Tavily] tavily_regulation: query 0 返回 10 条结果
+2026-04-30 23:52:29,655 [INFO] [Tavily] tavily_regulation: query 1 返回 10 条结果
+2026-04-30 23:52:29,655 [INFO] [Tavily] tavily_regulation: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:52:29,655 [INFO] 完成采集: [tavily] tavily_regulation — 成功 20, 失败 0, 耗时 1.37s
+2026-04-30 23:52:29,677 [INFO] [Tavily tavily_instant_retail] 完成: 2/2 成功, 0 失败, 耗时 1.4s
+2026-04-30 23:52:29,678 [INFO] [Tavily] tavily_instant_retail: query 0 返回 10 条结果
+2026-04-30 23:52:29,678 [INFO] [Tavily] tavily_instant_retail: query 1 返回 10 条结果
+2026-04-30 23:52:29,678 [INFO] [Tavily] tavily_instant_retail: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:52:29,678 [INFO] 完成采集: [tavily] tavily_instant_retail — 成功 20, 失败 0, 耗时 1.39s
+2026-04-30 23:52:29,688 [INFO] [Tavily tavily_beauty_retail] 完成: 2/2 成功, 0 失败, 耗时 1.4s
+2026-04-30 23:52:29,688 [INFO] [Tavily] tavily_beauty_retail: query 0 返回 10 条结果
+2026-04-30 23:52:29,689 [INFO] [Tavily] tavily_beauty_retail: query 1 返回 10 条结果
+2026-04-30 23:52:29,689 [INFO] [Tavily] tavily_beauty_retail: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:52:29,689 [INFO] 完成采集: [tavily] tavily_beauty_retail — 成功 20, 失败 0, 耗时 1.4s
+2026-04-30 23:52:29,690 [INFO] 总采集数: 332
+2026-04-30 23:52:29,701 [INFO] 去重后数量: 304
+2026-04-30 23:52:29,702 [INFO] allow_old 过滤: 丢弃 157 条 old 文章 (allow_old=false 的源不允许 old)
+2026-04-30 23:52:29,702 [INFO] allow_old 过滤后数量: 147 (过滤前 304, 丢弃 157)
+2026-04-30 23:52:29,702 [INFO] 时间窗口内: 9, 近窗口: 1, 早于窗口: 0, 无法识别: 137
+2026-04-30 23:52:29,735 [INFO] 输出文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json
+2026-04-30 23:52:29,735 [INFO] ============================================================
+2026-04-30 23:52:29,735 [INFO] 采集完成汇总:
+2026-04-30 23:52:29,735 [INFO]   总采集数: 332
+2026-04-30 23:52:29,735 [INFO]   去重后数量: 147
+2026-04-30 23:52:29,735 [INFO]   in_window: 9
+2026-04-30 23:52:29,736 [INFO]   near_window: 1
+2026-04-30 23:52:29,736 [INFO]   old: 0
+2026-04-30 23:52:29,736 [INFO]   unknown_time: 137
+2026-04-30 23:52:29,736 [INFO]   rsshub: 40
+2026-04-30 23:52:29,736 [INFO]   web: 0
+2026-04-30 23:52:29,736 [INFO]   xcrawl: 232
+2026-04-30 23:52:29,736 [INFO]   tavily: 60
+2026-04-30 23:52:29,737 [INFO]   Tavily Key 状态:
+2026-04-30 23:52:29,737 [INFO]     key_0_tavily_key: calls=3, remaining=997, exhausted=False
+2026-04-30 23:52:29,737 [INFO]     key_1_tavily_key1: calls=3, remaining=997, exhausted=False
+2026-04-30 23:52:29,737 [INFO]     key_2_tavily_key2: calls=0, remaining=1000, exhausted=False
+2026-04-30 23:52:29,737 [INFO]   源 [rsshub_huxiu_watsons]: 成功 10, 失败 0, 耗时 0.72s, 错误: None
+2026-04-30 23:52:29,737 [INFO]   源 [rsshub_huxiu_meituan_flash]: 成功 10, 失败 0, 耗时 0.81s, 错误: None
+2026-04-30 23:52:29,738 [INFO]   源 [rsshub_huxiu_beauty]: 成功 10, 失败 0, 耗时 0.86s, 错误: None
+2026-04-30 23:52:29,738 [INFO]   源 [rsshub_huxiu_instant_retail]: 成功 10, 失败 0, 耗时 0.94s, 错误: None
+2026-04-30 23:52:29,738 [INFO]   源 [web_sephora_cn]: 成功 0, 失败 0, 耗时 0.27s, 错误: Failed to fetch index: https://www.sephora.cn/news
+2026-04-30 23:52:29,738 [INFO]   源 [web_jd_daojia]: 成功 0, 失败 0, 耗时 0.34s, 错误: None
+2026-04-30 23:52:29,738 [INFO]   源 [xcrawl_platform_regulation]: 成功 50, 失败 0, 耗时 10.66s, 错误: None
+2026-04-30 23:52:29,738 [INFO]   源 [xcrawl_beauty_retail]: 成功 50, 失败 0, 耗时 11.6s, 错误: None
+2026-04-30 23:52:29,739 [INFO]   源 [xcrawl_competitor_moves]: 成功 50, 失败 0, 耗时 14.17s, 错误: None
+2026-04-30 23:52:29,739 [INFO]   源 [xcrawl_instant_retail_core]: 成功 60, 失败 0, 耗时 16.77s, 错误: None
+2026-04-30 23:52:29,739 [INFO]   源 [xcrawl_warehouse]: 成功 40, 失败 0, 耗时 8.65s, 错误: None
+2026-04-30 23:52:29,739 [INFO]   源 [tavily_regulation]: 成功 20, 失败 0, 耗时 1.37s, 错误: None
+2026-04-30 23:52:29,739 [INFO]   源 [tavily_instant_retail]: 成功 20, 失败 0, 耗时 1.39s, 错误: None
+2026-04-30 23:52:29,739 [INFO]   源 [tavily_beauty_retail]: 成功 20, 失败 0, 耗时 1.4s, 错误: None
+2026-04-30 23:52:29,740 [INFO] ============================================================
+2026-04-30 23:55:06,687 [INFO] ============================================================
+2026-04-30 23:55:06,688 [INFO] 开始采集 (V2): date=2026-04-29
+2026-04-30 23:55:06,688 [INFO] 时间窗口: 2026-04-28 07:00:00+08:00 ~ 2026-04-29 07:00:00+08:00
+2026-04-30 23:55:06,688 [INFO] 项目根目录: /app/working/projects/watsons-retail-intel
+2026-04-30 23:55:06,688 [INFO] ============================================================
+2026-04-30 23:55:06,743 [INFO] 加载 98 个关键词
+2026-04-30 23:55:06,744 [INFO] RSSHub 基础地址: http://192.168.2.100:1200
+2026-04-30 23:55:06,744 [INFO] Tavily: 3 个 Key 已加载，轮换策略: round_robin
+2026-04-30 23:55:06,744 [INFO] XCrawl: 3 个 Key 已加载
+2026-04-30 23:55:06,745 [INFO] 启用源数量: 14 (rsshub: 0, other: 14, legacy: 0)
+2026-04-30 23:55:06,745 [INFO] RSSHub filterout_days 全局默认: 1 天
+2026-04-30 23:55:06,770 [INFO] 源级并行采集已启用, workers: {'rsshub': 6, 'rss': 4, 'web': 2, 'tavily': 6, 'xcrawl': 4}
+2026-04-30 23:55:06,770 [INFO] 并行采集 [rsshub] 组: 4 个源, max_workers=4
+2026-04-30 23:55:06,771 [INFO] [RSSHub] rsshub_huxiu_instant_retail: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:55:06,772 [INFO] [RSSHub] rsshub_huxiu_instant_retail: 请求 http://192.168.2.100:1200/huxiu/search/即时零售?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:55:06,777 [INFO] [RSSHub] rsshub_huxiu_beauty: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:55:06,777 [INFO] [RSSHub] rsshub_huxiu_watsons: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:55:06,778 [INFO] [RSSHub] rsshub_huxiu_beauty: 请求 http://192.168.2.100:1200/huxiu/search/美妆 零售?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:55:06,779 [INFO] [RSSHub] rsshub_huxiu_meituan_flash: filterout_time=86400s (排除 >1天的旧文章)
+2026-04-30 23:55:06,780 [INFO] [RSSHub] rsshub_huxiu_watsons: 请求 http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:55:06,783 [INFO] [RSSHub] rsshub_huxiu_meituan_flash: 请求 http://192.168.2.100:1200/huxiu/search/美团闪购?limit=10&sorted=true&filterout_time=86400
+2026-04-30 23:55:06,838 [INFO] 完成采集: [rsshub] rsshub_huxiu_instant_retail — 成功 10, 失败 0, 耗时 0.07s
+2026-04-30 23:55:06,870 [INFO] 完成采集: [rsshub] rsshub_huxiu_beauty — 成功 10, 失败 0, 耗时 0.09s
+2026-04-30 23:55:06,920 [INFO] 完成采集: [rsshub] rsshub_huxiu_watsons — 成功 10, 失败 0, 耗时 0.14s
+2026-04-30 23:55:06,920 [INFO] 完成采集: [rsshub] rsshub_huxiu_meituan_flash — 成功 10, 失败 0, 耗时 0.14s
+2026-04-30 23:55:06,922 [INFO] 并行采集 [web] 组: 2 个源, max_workers=2
+2026-04-30 23:55:06,923 [INFO] [Web] web_jd_daojia: 抓取首页 https://daojia.jd.com
+2026-04-30 23:55:06,923 [INFO] [Web] web_sephora_cn: 抓取首页 https://www.sephora.cn/news
+2026-04-30 23:55:07,190 [WARNING] HTTP GET 失败: https://www.sephora.cn/news — 404 Client Error: Not Found for url: https://www.sephora.cn/news
+2026-04-30 23:55:07,193 [INFO] 完成采集: [web] web_sephora_cn — 成功 0, 失败 0, 耗时 0.27s
+2026-04-30 23:55:07,426 [INFO] [Web] web_jd_daojia: 提取到 0 个候选链接
+2026-04-30 23:55:07,428 [INFO] 完成采集: [web] web_jd_daojia — 成功 0, 失败 0, 耗时 0.51s
+2026-04-30 23:55:07,429 [INFO] 并行采集 [xcrawl] 组: 5 个源, max_workers=4
+2026-04-30 23:55:07,451 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 最新 新闻 2026 2026年4月29日'
+2026-04-30 23:55:07,479 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '屈臣氏 即时零售 门店 会员 2026年4月29日'
+2026-04-30 23:55:07,483 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '即时零售 监管 政策 合规 2026 2026年4月29日'
+2026-04-30 23:55:07,499 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '美妆 个护 即时零售 品牌 入驻 2026年4月29日'
+2026-04-30 23:55:09,722 [INFO] [XCrawl] xcrawl_instant_retail_core: '即时零售 最新 新闻 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:55:09,729 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 市场规模 增长 2026年4月29日'
+2026-04-30 23:55:10,139 [INFO] [XCrawl] xcrawl_platform_regulation: '即时零售 监管 政策 合规 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:55:10,145 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '美团 淘宝闪购 京东 自查 整改 2026年4月29日'
+2026-04-30 23:55:10,197 [INFO] [XCrawl] xcrawl_competitor_moves: '屈臣氏 即时零售 门店 会员 2026年4月29日' 返回 10 条
+2026-04-30 23:55:10,204 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '丝芙兰 中国 即时零售 经营 2026年4月29日'
+2026-04-30 23:55:10,275 [INFO] [XCrawl] xcrawl_beauty_retail: '美妆 个护 即时零售 品牌 入驻 2026年4月29日' 返回 10 条
+2026-04-30 23:55:10,279 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '贝泰妮 珀莱雅 即时零售 OMO 2026年4月29日'
+2026-04-30 23:55:11,635 [INFO] [XCrawl] xcrawl_instant_retail_core: '即时零售 市场规模 增长 2026年4月29日' 返回 10 条
+2026-04-30 23:55:11,638 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '即时零售 万亿 行业报告 2026年4月29日'
+2026-04-30 23:55:12,648 [INFO] [XCrawl] xcrawl_beauty_retail: '贝泰妮 珀莱雅 即时零售 OMO 2026年4月29日' 返回 10 条
+2026-04-30 23:55:12,654 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '完美日记 花西子 即时零售 渠道 2026年4月29日'
+2026-04-30 23:55:12,732 [INFO] [XCrawl] xcrawl_platform_regulation: '美团 淘宝闪购 京东 自查 整改 2026年4月29日' 返回 10 条
+2026-04-30 23:55:12,738 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '化妆品 备案 新规 2026 2026年4月29日'
+2026-04-30 23:55:12,791 [INFO] [XCrawl] xcrawl_competitor_moves: '丝芙兰 中国 即时零售 经营 2026年4月29日' 返回 10 条
+2026-04-30 23:55:12,795 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '名创优品 美团 闪购 即时零售 2026年4月29日'
+2026-04-30 23:55:13,977 [INFO] [XCrawl] xcrawl_instant_retail_core: '即时零售 万亿 行业报告 2026年4月29日' 返回 10 条
+2026-04-30 23:55:13,981 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '美团闪购 即时零售 2026 2026年4月29日'
+2026-04-30 23:55:14,727 [INFO] [XCrawl] xcrawl_beauty_retail: '完美日记 花西子 即时零售 渠道 2026年4月29日' 返回 10 条
+2026-04-30 23:55:14,732 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '国货美妆 即时零售 线下 线上 2026年4月29日'
+2026-04-30 23:55:15,040 [INFO] [XCrawl] xcrawl_competitor_moves: '名创优品 美团 闪购 即时零售 2026年4月29日' 返回 10 条
+2026-04-30 23:55:15,046 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 '万宁 关店 即时零售 2026 2026年4月29日'
+2026-04-30 23:55:15,628 [INFO] [XCrawl] xcrawl_platform_regulation: '化妆品 备案 新规 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:55:15,634 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '外卖平台 入网 资质 审核 2026年4月29日'
+2026-04-30 23:55:15,947 [INFO] [XCrawl] xcrawl_instant_retail_core: '美团闪购 即时零售 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:55:15,951 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '京东秒送 京东到家 即时零售 2026年4月29日'
+2026-04-30 23:55:16,721 [INFO] [XCrawl] xcrawl_beauty_retail: '国货美妆 即时零售 线下 线上 2026年4月29日' 返回 10 条
+2026-04-30 23:55:16,725 [INFO] [XCrawl] xcrawl_beauty_retail: 搜索 '美妆品牌 闪购 到家 2026 2026年4月29日'
+2026-04-30 23:55:17,204 [INFO] [XCrawl] xcrawl_competitor_moves: '万宁 关店 即时零售 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:55:17,210 [INFO] [XCrawl] xcrawl_competitor_moves: 搜索 'WOW COLOUR THE COLORIST 即时零售 2026年4月29日'
+2026-04-30 23:55:17,478 [INFO] [XCrawl] xcrawl_platform_regulation: '外卖平台 入网 资质 审核 2026年4月29日' 返回 10 条
+2026-04-30 23:55:17,483 [INFO] [XCrawl] xcrawl_platform_regulation: 搜索 '闪电仓 许可证 消防 合规 2026年4月29日'
+2026-04-30 23:55:18,544 [INFO] [XCrawl] xcrawl_instant_retail_core: '京东秒送 京东到家 即时零售 2026年4月29日' 返回 10 条
+2026-04-30 23:55:18,548 [INFO] [XCrawl] xcrawl_instant_retail_core: 搜索 '淘宝闪购 饿了么 即时零售 2026年4月29日'
+2026-04-30 23:55:19,586 [INFO] [XCrawl] xcrawl_platform_regulation: '闪电仓 许可证 消防 合规 2026年4月29日' 返回 10 条
+2026-04-30 23:55:19,591 [INFO] [XCrawl] xcrawl_platform_regulation: 共采集 50 篇文章 (50 成功, 0 失败)
+2026-04-30 23:55:19,593 [INFO] 完成采集: [xcrawl] xcrawl_platform_regulation — 成功 50, 失败 0, 耗时 12.16s
+2026-04-30 23:55:19,609 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '前置仓 闪电仓 即时零售 2026 2026年4月29日'
+2026-04-30 23:55:19,657 [INFO] [XCrawl] xcrawl_beauty_retail: '美妆品牌 闪购 到家 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:55:19,664 [INFO] [XCrawl] xcrawl_beauty_retail: 共采集 46 篇文章 (50 成功, 0 失败)
+2026-04-30 23:55:19,666 [INFO] 完成采集: [xcrawl] xcrawl_beauty_retail — 成功 50, 失败 0, 耗时 12.2s
+2026-04-30 23:55:20,806 [INFO] [XCrawl] xcrawl_instant_retail_core: '淘宝闪购 饿了么 即时零售 2026年4月29日' 返回 10 条
+2026-04-30 23:55:20,811 [INFO] [XCrawl] xcrawl_instant_retail_core: 共采集 47 篇文章 (60 成功, 0 失败)
+2026-04-30 23:55:20,813 [INFO] 完成采集: [xcrawl] xcrawl_instant_retail_core — 成功 60, 失败 0, 耗时 13.38s
+2026-04-30 23:55:20,871 [INFO] [XCrawl] xcrawl_competitor_moves: 'WOW COLOUR THE COLORIST 即时零售 2026年4月29日' 返回 10 条
+2026-04-30 23:55:20,876 [INFO] [XCrawl] xcrawl_competitor_moves: 共采集 50 篇文章 (50 成功, 0 失败)
+2026-04-30 23:55:20,878 [INFO] 完成采集: [xcrawl] xcrawl_competitor_moves — 成功 50, 失败 0, 耗时 13.44s
+2026-04-30 23:55:21,768 [INFO] [XCrawl] xcrawl_warehouse: '前置仓 闪电仓 即时零售 2026 2026年4月29日' 返回 10 条
+2026-04-30 23:55:21,773 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '叮咚买菜 美团 闪电仓 收购 2026年4月29日'
+2026-04-30 23:55:23,920 [INFO] [XCrawl] xcrawl_warehouse: '叮咚买菜 美团 闪电仓 收购 2026年4月29日' 返回 10 条
+2026-04-30 23:55:23,926 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '前置仓 模式 盈利 即时配送 2026年4月29日'
+2026-04-30 23:55:26,273 [INFO] [XCrawl] xcrawl_warehouse: '前置仓 模式 盈利 即时配送 2026年4月29日' 返回 10 条
+2026-04-30 23:55:26,278 [INFO] [XCrawl] xcrawl_warehouse: 搜索 '社区仓 门店仓 即时零售 履约 2026年4月29日'
+2026-04-30 23:55:28,631 [INFO] [XCrawl] xcrawl_warehouse: '社区仓 门店仓 即时零售 履约 2026年4月29日' 返回 10 条
+2026-04-30 23:55:28,635 [INFO] [XCrawl] xcrawl_warehouse: 共采集 37 篇文章 (40 成功, 0 失败)
+2026-04-30 23:55:28,637 [INFO] 完成采集: [xcrawl] xcrawl_warehouse — 成功 40, 失败 0, 耗时 9.04s
+2026-04-30 23:55:28,639 [INFO] 并行采集 [tavily] 组: 3 个源, max_workers=3
+2026-04-30 23:55:28,640 [INFO] [Tavily] tavily_instant_retail: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:55:28,640 [INFO] [Tavily] tavily_beauty_retail: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:55:28,641 [INFO] [Tavily tavily_beauty_retail] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:55:28,640 [INFO] [Tavily tavily_instant_retail] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:55:28,641 [INFO] [Tavily] tavily_regulation: 并行搜索 2 查询, keys=3, per_key_limit=1
+2026-04-30 23:55:28,642 [INFO] [Tavily tavily_regulation] 并行处理 2 项, max_workers=2, per_key_limit=1, keys=2
+2026-04-30 23:55:30,028 [INFO] [Tavily tavily_instant_retail] 完成: 2/2 成功, 0 失败, 耗时 1.4s
+2026-04-30 23:55:30,028 [INFO] [Tavily] tavily_instant_retail: query 0 返回 10 条结果
+2026-04-30 23:55:30,028 [INFO] [Tavily] tavily_instant_retail: query 1 返回 10 条结果
+2026-04-30 23:55:30,029 [INFO] [Tavily] tavily_instant_retail: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:55:30,029 [INFO] 完成采集: [tavily] tavily_instant_retail — 成功 20, 失败 0, 耗时 1.39s
+2026-04-30 23:55:30,140 [INFO] [Tavily tavily_regulation] 完成: 2/2 成功, 0 失败, 耗时 1.5s
+2026-04-30 23:55:30,140 [INFO] [Tavily] tavily_regulation: query 0 返回 10 条结果
+2026-04-30 23:55:30,141 [INFO] [Tavily] tavily_regulation: query 1 返回 10 条结果
+2026-04-30 23:55:30,141 [INFO] [Tavily] tavily_regulation: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:55:30,141 [INFO] 完成采集: [tavily] tavily_regulation — 成功 20, 失败 0, 耗时 1.5s
+2026-04-30 23:55:30,157 [INFO] [Tavily tavily_beauty_retail] 完成: 2/2 成功, 0 失败, 耗时 1.5s
+2026-04-30 23:55:30,157 [INFO] [Tavily] tavily_beauty_retail: query 0 返回 10 条结果
+2026-04-30 23:55:30,158 [INFO] [Tavily] tavily_beauty_retail: query 1 返回 10 条结果
+2026-04-30 23:55:30,158 [INFO] [Tavily] tavily_beauty_retail: 总计 20 条, 成功 20, 失败 0
+2026-04-30 23:55:30,158 [INFO] 完成采集: [tavily] tavily_beauty_retail — 成功 20, 失败 0, 耗时 1.52s
+2026-04-30 23:55:30,159 [INFO] 总采集数: 330
+2026-04-30 23:55:30,170 [INFO] 去重后数量: 298
+2026-04-30 23:55:30,170 [INFO] allow_old 过滤: 丢弃 170 条 old 文章 (allow_old=false 的源不允许 old)
+2026-04-30 23:55:30,171 [INFO] allow_old 过滤后数量: 128 (过滤前 298, 丢弃 170)
+2026-04-30 23:55:30,171 [INFO] 时间窗口内: 7, 近窗口: 16, 早于窗口: 0, 无法识别: 105
+2026-04-30 23:55:30,202 [INFO] 输出文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json
+2026-04-30 23:55:30,202 [INFO] ============================================================
+2026-04-30 23:55:30,202 [INFO] 采集完成汇总:
+2026-04-30 23:55:30,202 [INFO]   总采集数: 330
+2026-04-30 23:55:30,202 [INFO]   去重后数量: 128
+2026-04-30 23:55:30,202 [INFO]   in_window: 7
+2026-04-30 23:55:30,203 [INFO]   near_window: 16
+2026-04-30 23:55:30,203 [INFO]   old: 0
+2026-04-30 23:55:30,203 [INFO]   unknown_time: 105
+2026-04-30 23:55:30,203 [INFO]   rsshub: 40
+2026-04-30 23:55:30,203 [INFO]   web: 0
+2026-04-30 23:55:30,203 [INFO]   xcrawl: 230
+2026-04-30 23:55:30,204 [INFO]   tavily: 60
+2026-04-30 23:55:30,204 [INFO]   Tavily Key 状态:
+2026-04-30 23:55:30,204 [INFO]     key_0_tavily_key: calls=3, remaining=997, exhausted=False
+2026-04-30 23:55:30,204 [INFO]     key_1_tavily_key1: calls=3, remaining=997, exhausted=False
+2026-04-30 23:55:30,204 [INFO]     key_2_tavily_key2: calls=0, remaining=1000, exhausted=False
+2026-04-30 23:55:30,204 [INFO]   源 [rsshub_huxiu_instant_retail]: 成功 10, 失败 0, 耗时 0.07s, 错误: None
+2026-04-30 23:55:30,205 [INFO]   源 [rsshub_huxiu_beauty]: 成功 10, 失败 0, 耗时 0.09s, 错误: None
+2026-04-30 23:55:30,205 [INFO]   源 [rsshub_huxiu_watsons]: 成功 10, 失败 0, 耗时 0.14s, 错误: None
+2026-04-30 23:55:30,205 [INFO]   源 [rsshub_huxiu_meituan_flash]: 成功 10, 失败 0, 耗时 0.14s, 错误: None
+2026-04-30 23:55:30,205 [INFO]   源 [web_sephora_cn]: 成功 0, 失败 0, 耗时 0.27s, 错误: Failed to fetch index: https://www.sephora.cn/news
+2026-04-30 23:55:30,205 [INFO]   源 [web_jd_daojia]: 成功 0, 失败 0, 耗时 0.51s, 错误: None
+2026-04-30 23:55:30,205 [INFO]   源 [xcrawl_platform_regulation]: 成功 50, 失败 0, 耗时 12.16s, 错误: None
+2026-04-30 23:55:30,205 [INFO]   源 [xcrawl_beauty_retail]: 成功 50, 失败 0, 耗时 12.2s, 错误: None
+2026-04-30 23:55:30,206 [INFO]   源 [xcrawl_instant_retail_core]: 成功 60, 失败 0, 耗时 13.38s, 错误: None
+2026-04-30 23:55:30,206 [INFO]   源 [xcrawl_competitor_moves]: 成功 50, 失败 0, 耗时 13.44s, 错误: None
+2026-04-30 23:55:30,206 [INFO]   源 [xcrawl_warehouse]: 成功 40, 失败 0, 耗时 9.04s, 错误: None
+2026-04-30 23:55:30,206 [INFO]   源 [tavily_instant_retail]: 成功 20, 失败 0, 耗时 1.39s, 错误: None
+2026-04-30 23:55:30,206 [INFO]   源 [tavily_regulation]: 成功 20, 失败 0, 耗时 1.5s, 错误: None
+2026-04-30 23:55:30,206 [INFO]   源 [tavily_beauty_retail]: 成功 20, 失败 0, 耗时 1.52s, 错误: None
+2026-04-30 23:55:30,206 [INFO] ============================================================

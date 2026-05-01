@@ -1,0 +1,1146 @@
+rsshub_base: http://192.168.2.100:1200
+defaults:
+  timeout_seconds: 20
+  max_items_per_route: 20
+  request_interval_seconds: 0.5
+  allow_unknown_time: true
+  allow_old: false
+  filterout_days: 90
+collection_limits:
+  max_total_items_before_dedup: 1200
+  max_items_after_dedup: 600
+  max_items_for_fulltext: 200
+  max_items_for_filter_skill: 600
+tavily:
+  rotation: round_robin
+  keys_env_vars:
+  - tavily_key
+  - tavily_key1
+  - tavily_key2
+  monthly_limit_per_key: 1000
+  timeout_seconds: 30
+  max_results_per_query: 10
+  search_depth: advanced
+xcrawl:
+  keys_env_vars:
+  - xcrawl_key
+  - xcrawl_key1
+  - xcrawl_key2
+  monthly_limit_per_key: 1000
+other_sources:
+# ═══════════════════════════════════════════
+# V2: 新闻频道 + 直接搜索源
+# ═══════════════════════════════════════════
+- id: web_baidu_news_instant_retail
+  name: 百度资讯-即时零售
+  method: baidu_news
+  search_queries:
+  - 即时零售
+  - 即时零售 美妆
+  - 美团闪购
+  - 闪电仓 前置仓
+  description: 百度资讯搜索：即时零售最新新闻（按时间排序）— 注意：目前反爬限制，暂禁用
+  source_tier: 1
+  role: direct_signal
+  category: 即时零售
+  enabled: false
+  fetch:
+    interval_minutes: 120
+    timeout_seconds: 30
+- id: web_baidu_news_beauty
+  name: 百度资讯-美妆个护
+  method: baidu_news
+  search_queries:
+  - 美妆 个护 即时零售
+  - 屈臣氏 最新
+  - 丝芙兰 即时零售
+  description: 百度资讯搜索：美妆个护最新新闻（按时间排序）— 注意：目前反爬限制，暂禁用
+  source_tier: 1
+  role: direct_signal
+  category: 个护美妆
+  enabled: false
+  fetch:
+    interval_minutes: 120
+    timeout_seconds: 30
+- id: web_baidu_news_meituan_flash
+  name: 百度资讯-美团闪购
+  method: web
+  url: https://www.baidu.com/s?rtt=4&rn=20&ie=utf-8&tn=news&word=%E7%BE%8E%E5%9B%A2%E9%97%AA%E8%B4%AD+%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE
+  description: 百度资讯搜索：美团闪购即时零售最新新闻
+  source_tier: 1
+  role: direct_signal
+  category: 美团闪购
+  enabled: true
+  fetch:
+    interval_minutes: 120
+    timeout_seconds: 30
+- id: rss_cbndata_beauty
+  name: CBNData 个护美妆
+  method: rss
+  url: https://www.cbndata.com/rss/beauty
+  description: CBNData 个护美妆行业洞察与数据报告
+  source_tier: 2
+  role: analysis_signal
+  category: 行业研究
+  enabled: true
+  fetch:
+    interval_minutes: 180
+    timeout_seconds: 30
+- id: web_nmpa_cosmetic
+  name: 国家药监局化妆品监管
+  method: web
+  url: https://www.nmpa.gov.cn/WS04/CL2044/
+  description: 国家药监局化妆品监管法规与通告
+  source_tier: 3
+  role: compliance_signal
+  category: 政策合规
+- id: web_eleoda_rules
+  name: 饿了么商家规则中心
+  method: web
+  url: https://www.ele.me/rulecenter
+  description: 饿了么/蜂鸟即配商家规则中心更新
+  source_tier: 2
+  role: platform_signal
+  category: 即时零售
+  enabled: true
+  fetch:
+    interval_minutes: 120
+    timeout_seconds: 30
+- id: web_jd_daojia
+  name: 京东到家公告
+  method: web
+  url: https://daoja.jd.com/notice
+  description: 京东到家商家公告与运营活动
+  source_tier: 2
+  role: platform_signal
+  category: 即时零售
+  enabled: true
+  fetch:
+    interval_minutes: 120
+    timeout_seconds: 30
+- id: web_watsons_cn
+  name: 屈臣氏中国官方动态
+  method: web
+  url: https://www.watsons.com.cn/about/news
+  description: 屈臣氏中国官方动态与门店活动
+  source_tier: 3
+  role: competitor_signal
+  category: 竞对
+  enabled: true
+  fetch:
+    interval_minutes: 360
+    timeout_seconds: 30
+- id: web_sephora_cn
+  name: 丝芙兰中国
+  method: web
+  url: https://www.sephora.cn/news
+  description: 丝芙兰中国新品上线与营销活动
+  source_tier: 2
+  role: competitor_signal
+  category: 竞对
+  enabled: true
+  fetch:
+    interval_minutes: 360
+    timeout_seconds: 30
+# ═══════════════════════════════════════════
+# V3: XCrawl 搜索源（中文新闻搜索引擎，时效性最佳）
+# ═══════════════════════════════════════════
+- id: xcrawl_instant_retail_today
+  name: XCrawl搜索-即时零售今日动态
+  method: xcrawl
+  search_queries:
+  - 即时零售 美妆 个护 最新新闻
+  - 美团闪购 即时零售 品牌入驻
+  - 闪电仓 前置仓 即时配送
+  - 小米家电 美团闪购 即时零售
+  - 即时零售 万亿 增长 最新
+  - 叮当健康 即时零售 闪电仓
+  description: XCrawl 搜索：即时零售当天新闻（时效性最佳，50%结果来自当天）
+  source_tier: 1
+  role: direct_signal
+  category: 即时零售
+  enabled: true
+  max_items: 10
+  daily_priority: 100
+- id: xcrawl_beauty_retail_today
+  name: XCrawl搜索-美妆零售今日动态
+  method: xcrawl
+  search_queries:
+  - 美妆 个护 即时零售 今日
+  - 屈臣氏 丝芙兰 即时零售 最新
+  - 参半 WOW COLOUR 线上 线下
+  - 贝泰妮 珀莱雅 即时零售 OMO
+  - 稳健医疗 即时零售 医美 修复
+  - 美妆品牌 入驻 闪购 最新动态
+  description: XCrawl 搜索：美妆个护零售当天动态
+  source_tier: 1
+  role: direct_signal
+  category: 个护美妆
+  enabled: true
+  max_items: 10
+  daily_priority: 95
+- id: xcrawl_regulation_today
+  name: XCrawl搜索-监管合规今日动态
+  method: xcrawl
+  search_queries:
+  - 即时零售 监管 合规 最新 2026
+  - 淘宝闪购 美团 京东 自查整改
+  - 化妆品 备案 新规 监管 处罚
+  - 外卖 平台 入网 资质 审核
+  description: XCrawl 搜索：即时零售与美妆监管合规最新动态
+  source_tier: 1
+  role: compliance_signal
+  category: 政策合规
+  enabled: true
+  max_items: 10
+  daily_priority: 90
+- id: xcrawl_competitor_today
+  name: XCrawl搜索-竞对动态
+  method: xcrawl
+  search_queries:
+  - 屈臣氏 即时零售 门店 会员 最新
+  - 丝芙兰 线上 线下 即时零售 2026
+  - 名创优品 闪购 到家 经营 最新
+  - 花西子 完美日记 抖音电商 最新
+  description: XCrawl 搜索：个护美妆竞品最新动态
+  source_tier: 1
+  role: competitor_signal
+  category: 竞对
+  enabled: true
+  max_items: 10
+  daily_priority: 85
+- id: tavily_instant_retail_beauty
+  name: Tavily搜索-即时零售美妆
+  method: tavily
+  search_queries:
+  - 即时零售 美妆 个护 经营 最新
+  - 即时零售 平台 政策 变化 今日
+  - 美团闪购 美妆 个护 经营 数据
+  - 京东秒送 京东到家 美妆 个护 品牌
+  - 淘宝闪购 饿了么 美妆 即时零售
+  - 即时零售 万亿 增长 趋势 2026
+  - 小米家电 美团闪购 即时零售
+  - 闪电仓 前置仓 即时零售 最新动态
+  description: Tavily 搜索：即时零售×个护美妆经营情报（使用news模式+days=3）
+  source_tier: 1
+  role: direct_signal
+  category: 即时零售
+  enabled: true
+  fetch:
+    interval_minutes: 360
+    timeout_seconds: 30
+- id: tavily_platform_regulation
+  name: Tavily搜索-平台监管合规
+  method: tavily
+  search_queries:
+  - 即时零售 监管 罚单 合规 最新
+  - 化妆品 监管 新规 备案 今日
+  - 食品药品 网络经营 监管 处罚
+  - 平台 入网商家 资质 审核 幽灵外卖
+  - 美妆 个护 广告 虚假宣传 处罚 举报
+  - 消费者权益 个人信息保护 电商 处罚 最新
+  description: Tavily 搜索：即时零售与美妆行业监管合规动态
+  source_tier: 1
+  role: compliance_signal
+  category: 政策合规
+  enabled: true
+  fetch:
+    interval_minutes: 360
+    timeout_seconds: 30
+- id: tavily_competitor_moves
+  name: Tavily搜索-竞对动态
+  method: tavily
+  search_queries:
+  - 名创优品 即时零售 闪购 到家 经营 今日
+  - 丝芙兰 中国 线上 即时零售 最新
+  - 调色师 WOW COLOUR 线下 门店 扩张
+  - 花西子 完美日记 抖音 小时达 电商
+  - 屈臣氏 即时零售 闪购 门店 会员 最新消息
+  - 小象超市 门店 开业 即时零售
+  description: Tavily 搜索：个护美妆竞对动态
+  source_tier: 1
+  role: competitor_signal
+  category: 竞对
+  enabled: true
+  fetch:
+    interval_minutes: 360
+    timeout_seconds: 30
+- id: tavily_industry_data
+  name: Tavily搜索-行业数据趋势
+  method: tavily
+  search_queries:
+  - 即时零售 市场规模 GMV 数据 最新报告
+  - 美妆 个护 线上销售 增长 数据 报告 2026
+  - 闪电仓 前置仓 即时配送 模式 数据 最新
+  - 抖音 电商 直播 带货 美妆 数据 今日
+  - 即时零售 用户 规模 渗透率 增长 最新
+  - 稳健医疗 即时零售 医美 修复 最新消息
+  - 吉得利 美团闪购 调味品 即时零售
+  description: Tavily 搜索：即时零售与美妆行业数据趋势
+  source_tier: 1
+  role: data_signal
+  category: 行业数据
+  enabled: true
+  fetch:
+    interval_minutes: 360
+    timeout_seconds: 30
+- id: tavily_category_trends
+  name: Tavily搜索-品类与场景趋势
+  method: tavily
+  search_queries:
+  - 美妆 个护 即时零售 爆款 品类 趋势 今日
+  - 面膜 护肤 即时零售 消费 场景 最新
+  - 即时零售 夜间 消费 美妆 护肤 最新动态
+  - 个护 面部护理 身体护理 即时零售 消费
+  - 冰品冰饮 即时零售 夏季 消费 630亿 最新
+  - 大家电 即时零售 美团闪购 小米 最新
+  description: Tavily 搜索：个护美妆品类与消费场景趋势
+  source_tier: 1
+  role: category_signal
+  category: 政策合规
+  enabled: true
+  fetch:
+    interval_minutes: 360
+    timeout_seconds: 30
+# ═══════════════════════════════════════════
+# V2: Tavily 即时新闻搜索源（高频搜索当天的新闻）
+# ═══════════════════════════════════════════
+- id: tavily_today_instant_retail
+  name: Tavily搜索-今日即时零售动态
+  method: tavily
+  search_queries:
+  - 即时零售 2026年4月 最新新闻 今日
+  - 小米家电 美团闪购 即时零售 2026年4月
+  - 即时零售 叮当健康 万亿 最新消息 2026
+  - 闪电仓 前置仓 即时配送 最新动态 2026年
+  - site:sina.cn OR site:163.com 即时零售 美妆 今日 2026
+  - 美团闪购 品牌入驻 即时零售 最新 2026年
+  - 即时零售 监管 自查整改 美团 京东 淘宝
+  description: Tavily 搜索：当天即时零售最新动态（侧重时效性新闻）
+  source_tier: 1
+  role: direct_signal
+  category: 即时零售
+  enabled: true
+  fetch:
+    interval_minutes: 180
+    timeout_seconds: 30
+- id: tavily_today_beauty_retail
+  name: Tavily搜索-今日美妆零售动态
+  method: tavily
+  search_queries:
+  - 美妆 个护 即时零售 2026年4月 最新新闻
+  - 参半 WOW COLOUR 入驻 即时零售 最新
+  - 屈臣氏 丝芙兰 即时零售 最新动态 2026年
+  - 贝泰妮 珀莱雅 即时零售 OMO 最新 2026
+  - 稳健医疗 即时零售 医美 修复 2026年4月
+  - 美妆品牌 闪电仓 闪购 即时配送 最新消息
+  - site:ebrun.com OR site:163.com 美妆 即时零售 今日
+  description: Tavily 搜索：当天美妆个护零售最新动态
+  source_tier: 1
+  role: direct_signal
+  category: 个护美妆
+  enabled: true
+  fetch:
+    interval_minutes: 180
+    timeout_seconds: 30
+rsshub_sources:
+- id: rsshub_36kr_newsflashes
+  name: 36kr快讯
+  enabled: true
+  method: rsshub
+  route: /36kr/newsflashes?limit=30&sorted=true
+  role: clue_discovery
+  tier: tier3_anchor
+  source_type: rsshub_feed
+  category: 综合快讯
+  daily_priority: 60
+  max_items: 30
+  allow_old: false
+  keywords:
+  - 即时零售
+  - 美团闪购
+  - 京东秒送
+  - 淘宝闪购
+  - 抖音小时达
+  - 电商
+  - 美妆
+  - 个护
+  - 屈臣氏
+  filterout_days: 60
+# ═══════════════════════════════════════════
+# V2: 新闻频道源（按时间排序的最新文章）
+# 注：百度资讯直接爬取会被反爬机制阻止，改用Tavily搜索
+# ═══════════════════════════════════════════
+- id: rsshub_huxiu_retail_channel
+  name: 虎嗅零售频道
+  enabled: true
+  method: rsshub
+  route: /huxiu/channel/115?limit=30&sorted=true
+  role: analysis_signal
+  tier: tier2_analysis
+  source_type: rsshub_feed
+  category: 零售
+  daily_priority: 70
+  max_items: 30
+  allow_old: false
+  keywords:
+  - 即时零售
+  - 闪购
+  - 美团
+  - 电商
+  - 零售
+  - 消费
+  filterout_days: 30
+- id: rsshub_huxiu_consumer_channel
+  name: 虎嗅消费频道
+  enabled: true
+  method: rsshub
+  route: /huxiu/channel/107?limit=30&sorted=true
+  role: analysis_signal
+  tier: tier2_analysis
+  source_type: rsshub_feed
+  category: 消费
+  daily_priority: 65
+  max_items: 30
+  allow_old: false
+  keywords:
+  - 消费
+  - 零售
+  - 美妆
+  - 个护
+  - 电商
+  filterout_days: 30
+- id: rsshub_cls_telegraph
+  name: 财联社电报
+  enabled: true
+  method: rsshub
+  route: /cls/telegraph?limit=30
+  role: direct_signal
+  tier: tier2_analysis
+  source_type: rsshub_feed
+  category: 财经快讯
+  daily_priority: 75
+  max_items: 30
+  allow_old: false
+  keywords:
+  - 即时零售
+  - 美团
+  - 京东
+  - 淘宝
+  - 饿了么
+  - 美妆
+  - 个护
+  - 零售
+  - 电商
+  - 消费
+  filterout_days: 7
+- id: rsshub_cls_depth
+  name: 财联社深度
+  enabled: true
+  method: rsshub
+  route: /cls/depth?limit=30
+  role: analysis_signal
+  tier: tier2_analysis
+  source_type: rsshub_feed
+  category: 财经深度
+  daily_priority: 70
+  max_items: 30
+  allow_old: false
+  keywords:
+  - 即时零售
+  - 美团
+  - 京东
+  - 零售
+  - 电商
+  - 消费
+  - 美妆
+  filterout_days: 7
+- id: rsshub_wallstreetcn
+  name: 华尔街见闻
+  enabled: true
+  method: rsshub
+  route: /wallstreetcn/news?limit=30
+  role: analysis_signal
+  tier: tier3_anchor
+  source_type: rsshub_feed
+  category: 财经
+  daily_priority: 55
+  max_items: 30
+  allow_old: false
+  keywords:
+  - 即时零售
+  - 零售
+  - 电商
+  - 消费
+  - 美团
+  filterout_days: 7
+- id: rsshub_yicai
+  name: 第一财经
+  enabled: true
+  method: rsshub
+  route: /yicai/brief?limit=30
+  role: analysis_signal
+  tier: tier3_anchor
+  source_type: rsshub_feed
+  category: 财经
+  daily_priority: 55
+  max_items: 30
+  allow_old: false
+  keywords:
+  - 即时零售
+  - 零售
+  - 电商
+  - 消费
+  - 美妆
+  filterout_days: 7
+- id: rsshub_caixin
+  name: 财新网
+  enabled: true
+  method: rsshub
+  route: /caixin/latest?limit=20
+  role: analysis_signal
+  tier: tier3_anchor
+  source_type: rsshub_feed
+  category: 财经
+  daily_priority: 55
+  max_items: 20
+  allow_old: false
+  keywords:
+  - 即时零售
+  - 零售
+  - 电商
+  - 消费
+  filterout_days: 7
+- id: rsshub_ifeng
+  name: 凤凰网资讯
+  enabled: true
+  method: rsshub
+  route: /ifeng?limit=30
+  role: clue_discovery
+  tier: tier4_clue
+  source_type: rsshub_feed
+  category: 综合
+  daily_priority: 45
+  max_items: 30
+  allow_old: false
+  keywords:
+  - 即时零售
+  - 美团
+  - 京东
+  - 零售
+  - 电商
+  filterout_days: 3
+- id: rsshub_guancha
+  name: 观察者网头条
+  enabled: true
+  method: rsshub
+  route: /guancha/headline?limit=20
+  role: clue_discovery
+  tier: tier4_clue
+  source_type: rsshub_feed
+  category: 综合
+  daily_priority: 45
+  max_items: 20
+  allow_old: false
+  keywords:
+  - 即时零售
+  - 零售
+  - 电商
+  filterout_days: 3
+- id: rsshub_latepost
+  name: 晚点LatePost
+  enabled: true
+  method: rsshub
+  route: /latepost?limit=10&sorted=true
+  role: analysis_signal
+  tier: tier2_analysis
+  source_type: rsshub_feed
+  category: 商业深度
+  daily_priority: 80
+  max_items: 10
+  allow_old: true
+  keywords:
+  - 零售
+  - 电商
+  - 本地生活
+  - 阿里
+  - 京东
+  - 美团
+  - 抖音
+  - 消费
+- id: rsshub_huxiu_article
+  name: 虎嗅文章列表
+  enabled: true
+  method: rsshub
+  route: /huxiu/article?limit=30&sorted=true
+  role: analysis_signal
+  tier: tier2_analysis
+  source_type: rsshub_feed
+  category: 综合商业
+  daily_priority: 70
+  max_items: 30
+  allow_old: false
+  keywords:
+  - 即时零售
+  - 零售
+  - 电商
+  - 消费
+  - 美妆
+  - 个护
+  - 本地生活
+  filterout_days: 60
+- id: rsshub_huxiu_consumer_channel_21
+  name: 虎嗅消费频道-21
+  enabled: false
+  method: rsshub
+  route: /huxiu/channel/21?limit=30&sorted=true
+  role: analysis_signal
+  tier: tier2_analysis
+  source_type: rsshub_feed
+  category: 消费
+  daily_priority: 75
+  max_items: 30
+  allow_old: false
+  keywords:
+  - 消费
+  - 美妆
+  - 个护
+  - 零售
+  - 电商
+  - 即时零售
+- id: rsshub_huxiu_business_channel
+  name: 虎嗅商业频道
+  enabled: false
+  method: rsshub
+  route: /huxiu/channel/106?limit=30&sorted=true
+  role: analysis_signal
+  tier: tier2_analysis
+  source_type: rsshub_feed
+  category: 商业
+  daily_priority: 65
+  max_items: 30
+  allow_old: false
+  keywords:
+  - 美团
+  - 京东
+  - 阿里
+  - 抖音
+  - 电商
+  - 零售
+- id: rsshub_huxiu_search_instant_retail
+  name: 虎嗅搜索-即时零售
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/即时零售?limit=20&sorted=true
+  role: direct_signal
+  tier: tier2_analysis
+  source_type: rsshub_search
+  category: 即时零售
+  daily_priority: 95
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 即时零售
+  - 闪购
+  - 小时达
+  - 前置仓
+  - 门店履约
+  filterout_days: 90
+- id: rsshub_huxiu_search_meituan_flash
+  name: 虎嗅搜索-美团闪购
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/美团闪购?limit=20&sorted=true
+  role: direct_signal
+  tier: tier2_analysis
+  source_type: rsshub_search
+  category: 美团闪购
+  daily_priority: 100
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 美团闪购
+  - 美团
+  - 即时零售
+  - 万物到家
+  filterout_days: 90
+- id: rsshub_huxiu_search_jd_instant
+  name: 虎嗅搜索-京东秒送
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/京东秒送?limit=20&sorted=true
+  role: direct_signal
+  tier: tier2_analysis
+  source_type: rsshub_search
+  category: 京东秒送
+  daily_priority: 100
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 京东秒送
+  - 京东到家
+  - 小时达
+  - 即时零售
+  filterout_days: 90
+- id: rsshub_huxiu_search_taobao_flash
+  name: 虎嗅搜索-淘宝闪购
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/淘宝闪购?limit=20&sorted=true
+  role: direct_signal
+  tier: tier2_analysis
+  source_type: rsshub_search
+  category: 淘宝闪购
+  daily_priority: 100
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 淘宝闪购
+  - 饿了么
+  - 小时达
+  - 天猫
+  - 即时零售
+  filterout_days: 90
+- id: rsshub_huxiu_search_douyin_hour
+  name: 虎嗅搜索-抖音小时达
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/抖音小时达?limit=20&sorted=true
+  role: direct_signal
+  tier: tier2_analysis
+  source_type: rsshub_search
+  category: 抖音小时达
+  daily_priority: 100
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 抖音小时达
+  - 抖音电商
+  - 即时零售
+  - 美妆日百
+  filterout_days: 90
+- id: rsshub_huxiu_search_flash
+  name: 虎嗅搜索-闪购
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/闪购?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier3_anchor
+  source_type: rsshub_search
+  category: 即时零售
+  daily_priority: 85
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 闪购
+  - 小时达
+  - 即时零售
+  filterout_days: 90
+- id: rsshub_huxiu_search_front_warehouse
+  name: 虎嗅搜索-前置仓
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/前置仓?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier3_anchor
+  source_type: rsshub_search
+  category: 履约供给
+  daily_priority: 80
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 前置仓
+  - 闪电仓
+  - 门店履约
+  - 即时零售
+  filterout_days: 90
+- id: rsshub_huxiu_search_tmall
+  name: 虎嗅搜索-天猫
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/天猫?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier3_anchor
+  source_type: rsshub_search
+  category: B2C电商
+  daily_priority: 75
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 天猫
+  - 天猫超市
+  - 天猫官旗
+  - 淘宝闪购
+  filterout_days: 90
+- id: rsshub_huxiu_search_jd
+  name: 虎嗅搜索-京东
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/京东?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier3_anchor
+  source_type: rsshub_search
+  category: B2C电商
+  daily_priority: 75
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 京东
+  - 京东自营
+  - 京东POP
+  - 京东秒送
+  - 京东到家
+  filterout_days: 90
+- id: rsshub_huxiu_search_douyin_ecom
+  name: 虎嗅搜索-抖音电商
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/抖音电商?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier3_anchor
+  source_type: rsshub_search
+  category: 内容电商
+  daily_priority: 75
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 抖音电商
+  - 抖音小时达
+  - 内容电商
+  - 美妆日百
+  filterout_days: 90
+- id: rsshub_huxiu_search_xiaohongshu
+  name: 虎嗅搜索-小红书
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/小红书?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier4_clue
+  source_type: rsshub_search
+  category: 内容种草
+  daily_priority: 55
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 小红书
+  - 美妆
+  - 种草
+  - 本地生活
+  filterout_days: 90
+- id: rsshub_huxiu_search_beauty
+  name: 虎嗅搜索-美妆
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/美妆?limit=20&sorted=true
+  role: analysis_signal
+  tier: tier2_analysis
+  source_type: rsshub_search
+  category: 个护美妆
+  daily_priority: 80
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 美妆
+  - 护肤
+  - 彩妆
+  - 个护
+  filterout_days: 90
+- id: rsshub_huxiu_search_personal_care
+  name: 虎嗅搜索-个护
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/个护?limit=20&sorted=true
+  role: analysis_signal
+  tier: tier2_analysis
+  source_type: rsshub_search
+  category: 个护美妆
+  daily_priority: 85
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 个护
+  - 洗护
+  - 口腔护理
+  - 女性护理
+  - 男士护理
+  filterout_days: 90
+- id: rsshub_huxiu_search_sunscreen
+  name: 虎嗅搜索-防晒
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/防晒?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier4_clue
+  source_type: rsshub_search
+  category: 品类机会
+  daily_priority: 65
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 防晒
+  - 护肤
+  - 夏季
+  - 即时零售
+  filterout_days: 90
+- id: rsshub_huxiu_search_skincare
+  name: 虎嗅搜索-护肤品
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/护肤品?limit=20&sorted=true
+  role: analysis_signal
+  tier: tier3_anchor
+  source_type: rsshub_search
+  category: 个护美妆
+  daily_priority: 70
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 护肤品
+  - 护肤
+  - 面膜
+  - 功效护肤
+  filterout_days: 90
+- id: rsshub_huxiu_search_watsons
+  name: 虎嗅搜索-屈臣氏
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/屈臣氏?limit=20&sorted=true
+  role: direct_signal
+  tier: tier2_analysis
+  source_type: rsshub_search
+  category: 屈臣氏
+  daily_priority: 100
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 屈臣氏
+  - Watsons
+  - 即时零售
+  - 电商
+  filterout_days: 90
+- id: rsshub_huxiu_search_sephora
+  name: 虎嗅搜索-丝芙兰
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/丝芙兰?limit=20&sorted=true
+  role: competitor_signal
+  tier: tier3_anchor
+  source_type: rsshub_search
+  category: 竞对
+  daily_priority: 80
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 丝芙兰
+  - Sephora
+  - 美妆零售
+  - 即时零售
+  filterout_days: 90
+- id: rsshub_huxiu_search_miniso
+  name: 虎嗅搜索-名创优品
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/名创优品?limit=20&sorted=true
+  role: competitor_signal
+  tier: tier3_anchor
+  source_type: rsshub_search
+  category: 竞对
+  daily_priority: 75
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 名创优品
+  - MINISO
+  - 兴趣消费
+  - 即时零售
+  filterout_days: 90
+- id: rsshub_huxiu_search_wow_colour
+  name: 虎嗅搜索-WOW COLOUR
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/WOW%20COLOUR?limit=20&sorted=true
+  role: competitor_signal
+  tier: tier4_clue
+  source_type: rsshub_search
+  category: 竞对
+  daily_priority: 60
+  max_items: 20
+  allow_old: true
+  keywords:
+  - WOW COLOUR
+  - 美妆集合店
+  - 彩妆
+  filterout_days: 90
+- id: rsshub_huxiu_search_loreal
+  name: 虎嗅搜索-欧莱雅
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/欧莱雅?limit=20&sorted=true
+  role: brand_signal
+  tier: tier3_anchor
+  source_type: rsshub_search
+  category: 品牌
+  daily_priority: 70
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 欧莱雅
+  - 美妆
+  - 护肤
+  - 电商
+  filterout_days: 90
+- id: rsshub_huxiu_search_proya
+  name: 虎嗅搜索-珀莱雅
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/珀莱雅?limit=20&sorted=true
+  role: brand_signal
+  tier: tier3_anchor
+  source_type: rsshub_search
+  category: 品牌
+  daily_priority: 65
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 珀莱雅
+  - 国货美妆
+  - 护肤
+  - 电商
+  filterout_days: 90
+- id: rsshub_huxiu_search_winona
+  name: 虎嗅搜索-薇诺娜
+  enabled: true
+  method: rsshub
+  route: /huxiu/search/薇诺娜?limit=20&sorted=true
+  role: brand_signal
+  tier: tier3_anchor
+  source_type: rsshub_search
+  category: 品牌
+  daily_priority: 65
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 薇诺娜
+  - 敏感肌
+  - 功效护肤
+  - 电商
+  filterout_days: 90
+- id: rsshub_36kr_search_instant_retail
+  name: 36kr搜索-即时零售
+  enabled: true
+  method: rsshub
+  route: /36kr/search/articles/即时零售?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier4_clue
+  source_type: rsshub_search
+  category: 即时零售
+  daily_priority: 55
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 即时零售
+  - 闪购
+  - 小时达
+  filterout_days: 90
+- id: rsshub_36kr_search_beauty
+  name: 36kr搜索-美妆
+  enabled: true
+  method: rsshub
+  route: /36kr/search/articles/美妆?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier4_clue
+  source_type: rsshub_search
+  category: 个护美妆
+  daily_priority: 50
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 美妆
+  - 护肤
+  - 彩妆
+  - 个护
+  filterout_days: 90
+- id: rsshub_36kr_search_watsons
+  name: 36kr搜索-屈臣氏
+  enabled: true
+  method: rsshub
+  route: /36kr/search/articles/屈臣氏?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier4_clue
+  source_type: rsshub_search
+  category: 屈臣氏
+  daily_priority: 70
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 屈臣氏
+  - Watsons
+  filterout_days: 90
+- id: rsshub_36kr_search_meituan_flash
+  name: 36kr搜索-美团闪购
+  enabled: true
+  method: rsshub
+  route: /36kr/search/articles/美团闪购?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier4_clue
+  source_type: rsshub_search
+  category: 美团闪购
+  daily_priority: 60
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 美团闪购
+  - 美团
+  - 即时零售
+  filterout_days: 90
+- id: rsshub_36kr_search_taobao_flash
+  name: 36kr搜索-淘宝闪购
+  enabled: true
+  method: rsshub
+  route: /36kr/search/articles/淘宝闪购?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier4_clue
+  source_type: rsshub_search
+  category: 淘宝闪购
+  daily_priority: 60
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 淘宝闪购
+  - 饿了么
+  - 即时零售
+  filterout_days: 90
+- id: rsshub_36kr_search_jd_instant
+  name: 36kr搜索-京东秒送
+  enabled: true
+  method: rsshub
+  route: /36kr/search/articles/京东秒送?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier4_clue
+  source_type: rsshub_search
+  category: 京东秒送
+  daily_priority: 60
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 京东秒送
+  - 京东到家
+  - 即时零售
+  filterout_days: 90
+- id: rsshub_36kr_search_douyin_hour
+  name: 36kr搜索-抖音小时达
+  enabled: true
+  method: rsshub
+  route: /36kr/search/articles/抖音小时达?limit=20&sorted=true
+  role: clue_discovery
+  tier: tier4_clue
+  source_type: rsshub_search
+  category: 抖音小时达
+  daily_priority: 60
+  max_items: 20
+  allow_old: true
+  keywords:
+  - 抖音小时达
+  - 抖音电商
+  - 即时零售
+  filterout_days: 90

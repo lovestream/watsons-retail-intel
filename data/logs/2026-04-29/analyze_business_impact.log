@@ -1518,3 +1518,232 @@
   "llm_failed_count": 0,
   "errors": []
 }
+2026-05-01 00:04:07,583 [INFO]   ============================================================
+2026-05-01 00:04:07,583 [INFO]   开始经营分析: date=2026-04-29
+2026-05-01 00:04:07,583 [INFO]     events_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_scored.json
+2026-05-01 00:04:07,584 [INFO]     output_file: /app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json
+2026-05-01 00:04:07,584 [INFO]     use_llm: True
+2026-05-01 00:04:07,591 [INFO]   加载 155 条事件
+2026-05-01 00:04:07,591 [INFO]   LLM 可用: keys=6, model=LongCat-Flash-Thinking
+2026-05-01 00:04:07,592 [INFO]   模型路由: analyze priority=P0 → LongCat-Flash-Thinking, fallback=['LongCat-Flash-Thinking']
+2026-05-01 00:04:07,592 [INFO]   模型路由: analyze priority=P1 → LongCat-Flash-Chat, fallback=['LongCat-Flash-Thinking']
+2026-05-01 00:04:07,592 [INFO]   模型路由: analyze priority=P2 → LongCat-Flash-Lite, fallback=['LongCat-Flash-Thinking']
+2026-05-01 00:04:07,610 [INFO]   事件分流: ARCHIVE=96, P0=0, P1=0, P2=59, other(rule)=0
+2026-05-01 00:04:07,611 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,611 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,611 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,612 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,612 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,612 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,612 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,612 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,613 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,613 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,613 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,613 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,614 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,614 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,614 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,614 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,614 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,615 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,615 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-05-01 00:04:07,615 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,615 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,615 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,616 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,616 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,616 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,616 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,617 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,617 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,617 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,617 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,617 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,618 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,618 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-05-01 00:04:07,618 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,618 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,618 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,618 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,619 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,619 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-05-01 00:04:07,619 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-05-01 00:04:07,619 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,619 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,620 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,620 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,620 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-05-01 00:04:07,620 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,620 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-05-01 00:04:07,621 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,621 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,621 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,621 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,621 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,622 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,622 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,622 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,622 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,622 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-05-01 00:04:07,622 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,623 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,623 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,623 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,623 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,623 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,624 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-05-01 00:04:07,624 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,624 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,624 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,624 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,625 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,625 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,625 [INFO]     规则分析 [ARCHIVE]: impact=risk action=archive
+2026-05-01 00:04:07,625 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,625 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,626 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,626 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,626 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,626 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,626 [INFO]     规则分析 [ARCHIVE]: impact=opportunity action=archive
+2026-05-01 00:04:07,626 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,627 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,627 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,627 [INFO]     规则分析 [ARCHIVE]: impact=watch action=archive
+2026-05-01 00:04:07,627 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,627 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,628 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,628 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,628 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,628 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,628 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,629 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,629 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,629 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,629 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,629 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,630 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,630 [INFO]     规则分析 [ARCHIVE]: impact=noise action=archive
+2026-05-01 00:04:07,630 [INFO]   并行 LLM 分析: P2=59, P1=0, P0=0, models={'P2': 'LongCat-Flash-Lite', 'P1': 'LongCat-Flash-Chat', 'P0': 'LongCat-Flash-Chat'}
+2026-05-01 00:04:09,805 [INFO]   事件 E20260429_0037 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:10,146 [INFO]   事件 E20260429_0048 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:10,153 [INFO]   事件 E20260429_0101 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:10,278 [INFO]   事件 E20260429_0038 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:11,635 [INFO]   事件 E20260429_0054 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:11,650 [INFO]   事件 E20260429_0005 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:12,977 [INFO]   事件 E20260429_0016 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:13,097 [INFO]   事件 E20260429_0102 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:13,123 [INFO]   事件 E20260429_0103 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:13,178 [INFO]   事件 E20260429_0012 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:13,183 [INFO]   事件 E20260429_0047 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:14,831 [INFO]   事件 E20260429_0105 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:15,274 [INFO]   事件 E20260429_0014 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:15,673 [INFO]   事件 E20260429_0082 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:16,152 [INFO]   事件 E20260429_0107 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:16,785 [INFO]   事件 E20260429_0080 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:17,074 [INFO]   事件 E20260429_0022 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:18,456 [INFO]   事件 E20260429_0060 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:18,671 [INFO]   事件 E20260429_0035 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:18,830 [INFO]   事件 E20260429_0111 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:19,116 [INFO]   事件 E20260429_0050 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:19,581 [INFO]   事件 E20260429_0036 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:20,317 [INFO]   事件 E20260429_0013 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:20,993 [INFO]   事件 E20260429_0056 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:21,016 [INFO]   事件 E20260429_0100 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:22,207 [INFO]   事件 E20260429_0068 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:22,773 [INFO]   事件 E20260429_0051 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:22,895 [INFO]   事件 E20260429_0024 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:24,229 [INFO]   事件 E20260429_0070 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:26,363 [INFO]   事件 E20260429_0071 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:26,376 [INFO]   事件 E20260429_0065 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:27,635 [INFO]   事件 E20260429_0018 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:28,172 [INFO]   事件 E20260429_0023 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:28,547 [INFO]   事件 E20260429_0095 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:30,182 [INFO]   事件 E20260429_0055 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:36,348 [INFO]   事件 E20260429_0011 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:36,446 [INFO]   事件 E20260429_0020 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:37,528 [INFO]   事件 E20260429_0106 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:39,705 [INFO]   事件 E20260429_0044 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:41,160 [INFO]   事件 E20260429_0052 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:41,367 [INFO]   事件 E20260429_0096 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:42,693 [INFO]   事件 E20260429_0053 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:42,726 [INFO]   事件 E20260429_0007 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:44,301 [INFO]   事件 E20260429_0119 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:45,569 [INFO]   事件 E20260429_0079 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:46,562 [INFO]   事件 E20260429_0025 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:46,686 [INFO]   事件 E20260429_0026 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:46,727 [INFO]   事件 E20260429_0010 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:47,810 [INFO]   事件 E20260429_0021 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:47,902 [INFO]   事件 E20260429_0019 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:49,228 [INFO]   事件 E20260429_0006 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:49,390 [INFO]   事件 E20260429_0083 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:51,355 [INFO]   事件 E20260429_0098 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:51,915 [INFO]   事件 E20260429_0059 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:52,142 [INFO]   事件 E20260429_0057 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:52,172 [INFO]   事件 E20260429_0058 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:54,536 [INFO]   事件 E20260429_0136 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:04:56,003 [INFO]   事件 E20260429_0078 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:05:13,789 [INFO]   事件 E20260429_0072 LLM分析使用模型: LongCat-Flash-Lite
+2026-05-01 00:05:13,792 [INFO]   并行分析统计: {'total': 59, 'success': 59, 'failed': 0, 'elapsed_seconds': 66.16, 'by_batch': {'P2': {'total': 59, 'success': 59, 'failed': 0}}}
+2026-05-01 00:05:13,792 [INFO]     ⬇️ 硬降级: source_credibility=1<2 → action_level不可为immediate
+2026-05-01 00:05:13,793 [INFO]     ⬇️ 硬降级: source_credibility=1<2 → action_level不可为immediate
+2026-05-01 00:05:13,793 [INFO]     ⬇️ 硬降级: source_credibility=1<2 → action_level不可为immediate
+2026-05-01 00:05:13,793 [INFO]     ⬇️ 硬降级: source_credibility=1<2 → action_level不可为immediate
+2026-05-01 00:05:13,793 [INFO]     ⬇️ 硬降级: source_credibility=1<2 → action_level不可为immediate
+2026-05-01 00:05:13,793 [INFO]     ⬇️ 硬降级: source_credibility=1<2 → action_level不可为immediate
+2026-05-01 00:05:13,794 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,794 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,794 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,794 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,795 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,795 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,795 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,795 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,795 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,796 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,796 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,796 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,796 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,796 [INFO]     ⬇️ 注意: tracking_metrics不明确，已补充follow_up_questions
+2026-05-01 00:05:13,837 [INFO]   经营分析完成: 155 条事件
+2026-05-01 00:05:13,837 [INFO]     LLM成功=59, LLM失败=0
+2026-05-01 00:05:13,837 [INFO]     immediate=0 test=22 watch=35 archive=98
+2026-05-01 00:05:13,837 [INFO]     by_impact_type: {'watch': 34, 'opportunity': 39, 'risk': 27, 'noise': 55}
+2026-05-01 00:05:13,837 [INFO]     by_action_level: {'test': 22, 'watch': 35, 'archive': 98}
+2026-05-01 00:05:13,837 [INFO]     by_owner_hint: {'平台BD': 7, '即时零售运营': 69, '数据分析': 6, '商品/货盘团队': 10, '天猫运营': 2, '京东运营': 5, '暂不分派': 56}
+2026-05-01 00:05:13,838 [INFO]     downgrade_stats: {'硬降级: source_credibility=1<2 → action_level不可为immediate': 6, '注意: tracking_metrics不明确，已补充follow_up_questions': 14}
+2026-05-01 00:05:13,838 [INFO]     ACTION: [test] 平台BD — 评估屈臣氏现有门店与京东秒送合作网络的匹配度，测试接入秒送平台的可行性，并监控竞品动态。
+2026-05-01 00:05:13,838 [INFO]     ACTION: [test] 即时零售运营 — 立即评估屈臣氏在美团闪购、京东秒送等即时零售渠道的补贴策略与竞品差距，优化自身促销节奏并加强差异化服务（如配送时效、商品丰富度）以应对价格战。
+2026-05-01 00:05:13,838 [INFO]     ACTION: [test] 即时零售运营 — 联合平台方策划‘小时达专属爆品’活动，针对高增长区域门店优化选品与履约时效，提升即时零售GMV占比。
+2026-05-01 00:05:13,838 [INFO]     ACTION: [test] 即时零售运营 — 主动对接美团闪购CRM系统接口，测试会员数据打通与权益同步功能，优先在试点门店验证会员提频效果。
+2026-05-01 00:05:13,838 [INFO]     ACTION: [test] 即时零售运营 — 小范围测试抖音直播与小时达的协同转化率，重点监测直播间下单至履约完成的订单占比及客单价变化。
+2026-05-01 00:05:13,839 [INFO]     ACTION: [test] 平台BD — 立即与淘宝平台BD团队沟通，争取在淘宝闪购频道获得优质资源位展示，并推动屈臣氏商品进入推荐列表或活动专区。
+2026-05-01 00:05:13,839 [INFO]     ACTION: [test] 京东运营 — 立即评估京东外卖对屈臣氏在京东秒送和京东到家订单量的潜在分流影响，并与京东平台BD协商专属资源位或流量扶持以对冲风险。
+2026-05-01 00:05:13,839 [INFO]     ACTION: [test] 即时零售运营 — 立即梳理屈臣氏在即时零售渠道的美妆、酒水、宠物、成人用品等高潜力品类SKU结构，优先优化高毛利或高复购商品组合，并主动向平台BD申请核心品类扶持坑位与流量资源。
+2026-05-01 00:05:13,839 [INFO]     ACTION: [test] 即时零售运营 — 主动对接美团闪购品牌合作团队，评估‘官旗闪电仓’接入可行性，并试点部分高周转商品共建仓配体系，优化本地履约时效。
+2026-05-01 00:05:13,839 [INFO]     ACTION: [test] 即时零售运营 — 立即评估屈臣氏在美团闪购上的商品结构与曝光表现，重点优化高毛利美妆个护商品的货盘匹配与促销资源位投放。
+2026-05-01 00:05:13,839 [INFO]     ACTION: [test] 即时零售运营 — 评估屈臣氏在京东到家平台的前置仓覆盖密度与履约时效表现，优先在高潜力区域申请优质仓位并优化库存配置。
+2026-05-01 00:05:13,840 [INFO]     ACTION: [test] 即时零售运营 — 评估莎莎国际关店区域的市场潜力，优先在有协同效应的城市试点新店或体验店，并同步优化线上履约效率以承接潜在转移客流。
+2026-05-01 00:05:13,840 [INFO]     ACTION: [test] 平台BD — 立即评估淘宝便利店在重点城市的覆盖节奏，并与淘宝闪购平台BD沟通竞品动态，争取优先活动资源或搜索排序支持。
+2026-05-01 00:05:13,840 [INFO]     ACTION: [test] 即时零售运营 — 验证该专区对GMV和订单量的实际贡献，并评估是否可复制到其他即时零售平台（如美团闪购、抖音小时达）的对应栏目中。
+2026-05-01 00:05:13,840 [INFO]     ACTION: [test] 天猫运营 — 评估天猫淘宝闪购业务对接可行性，测试部分高周转商品接入小时达履约，优化货盘配置以提升时效与转化率。
+2026-05-01 00:05:13,840 [INFO]     ACTION: [test] 即时零售运营 — 立即与淘宝平台BD团队沟通，确认屈臣氏是否已入驻淘宝闪购，并争取首页一级入口的优质资源位展示；若无入驻，评估快速接入的可行性。
+2026-05-01 00:05:13,840 [INFO]     ACTION: [test] 京东运营 — 立即评估屈臣氏在京东平台的美妆个护商品缺货率与履约时效，并与京东秒送覆盖门店进行交叉比对，识别潜在订单流失风险点。
+2026-05-01 00:05:13,840 [INFO]     ACTION: [test] 即时零售运营 — 在美团闪购平台加大屈臣氏美妆个护商品的曝光与库存保障，优化履约时效至30分钟内，并针对七夕等高峰节点策划闪购专属活动。
+2026-05-01 00:05:13,841 [INFO]     ACTION: [test] 即时零售运营 — 基于小规格爆品组合在即时零售中的良好表现，建议优化现有货盘结构，增加高频出行场景SKU（如旅行装、便携装），并在后续节假日或出行高峰时段复制该合作模式，联合头部
+2026-05-01 00:05:13,841 [INFO]     ACTION: [test] 暂不分派 — 在天猫旗舰店、京东旗舰店及即时零售平台（如美团闪购、抖音小时达）上线针对高参与度会员的专属促销活动，例如满减券、积分翻倍或限时闪购，以提升复购频次。
+2026-05-01 00:05:13,841 [INFO]     ACTION: [test] 即时零售运营 — 在美团闪购、京东到家等平台试点上线鲜花、数码配件等新品类，结合屈臣氏现有美妆产品打造‘一站式生活美学’场景，并通过会员权益引导复购。
+2026-05-01 00:05:13,841 [INFO]     ACTION: [test] 即时零售运营 — 评估现有门店作为‘幕后店’的适配性与改造成本，优先在履约时效要求高的区域试点，并优化拣货流程与库存协同机制。
+2026-05-01 00:05:13,841 [INFO]   {
+  "ok": true,
+  "date": "2026-04-29",
+  "input_file": "/app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_scored.json",
+  "output_file": "/app/working/projects/watsons-retail-intel/data/events/2026-04-29/events_analyzed.json",
+  "log_file": "/app/working/projects/watsons-retail-intel/data/logs/2026-04-29/analyze_business_impact.log",
+  "event_count": 155,
+  "analyzed_count": 155,
+  "llm_success_count": 59,
+  "llm_failed_count": 0,
+  "errors": []
+}

@@ -3,16 +3,16 @@
     "status": "skipped",
     "duration_seconds": 0,
     "stats": {
-      "raw_count": 557
+      "raw_count": 128
     }
   },
   "filter": {
     "status": "skipped",
     "duration_seconds": 0,
     "stats": {
-      "cleaned_count": 184,
-      "reference_count": 211,
-      "rejected_count": 162
+      "cleaned_count": 47,
+      "reference_count": 35,
+      "rejected_count": 46
     }
   },
   "source_health_report": {
@@ -29,34 +29,34 @@
     "status": "skipped",
     "duration_seconds": 0,
     "stats": {
-      "cleaned_count": 184,
-      "reference_count": 211,
-      "rejected_count": 162
+      "cleaned_count": 47,
+      "reference_count": 35,
+      "rejected_count": 46
     }
   },
   "extract": {
     "status": "skipped",
     "duration_seconds": 0,
     "stats": {
-      "event_count": 446
+      "event_count": 155
     }
   },
   "score": {
     "status": "skipped",
     "duration_seconds": 0,
     "stats": {
-      "scored_count": 446,
+      "scored_count": 155,
       "p0_count": 0,
-      "p1_count": 2,
-      "p2_count": 168,
-      "archive_count": 276
+      "p1_count": 0,
+      "p2_count": 59,
+      "archive_count": 96
     }
   },
   "analyze": {
     "status": "skipped",
     "duration_seconds": 0,
     "stats": {
-      "analyzed_count": 446
+      "analyzed_count": 155
     }
   },
   "generate_report": {

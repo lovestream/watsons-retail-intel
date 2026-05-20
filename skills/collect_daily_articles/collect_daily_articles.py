@@ -28,6 +28,11 @@ import re
 import sys
 import time as time_mod
 from collections import OrderedDict
+
+# 确保项目根目录在 sys.path 中，支持 from skills.xxx 导入
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -430,6 +435,16 @@ def collect_rsshub(
     V2.1: 支持 filterout_time 参数 — 自动在 RSSHub URL 中添加
     filterout_time=<seconds>，排除超过 N 天的旧文章。
     源的 filterout_days 配置可覆盖全局默认值；设为 0 则不加此参数。
+    
+    V2.3: 客户端日期过滤 — RSSHub 的 filterout_time 对部分路由（如 huxiu/search）
+    不生效，因此在此处增加客户端二次校验。若 pub_date 早于 filterout_days 
+    天前，直接跳过。特别处理：对搜索路由（route 含 "search"），若 pub_date 
+    无法解析（uncertain_date/unknown_time），也直接跳过（搜索路由不应返回
+    无日期条目，说明 RSSHub 已不稳定或路由本身有问题）。
+    
+    V2.2: 支持 collection_keywords 参数 — 在采集时就过滤文章。
+    如果源配置了 collection_keywords，只有标题或摘要中包含至少一个关键词的文章才会被保留。
+    用于全站文章路由等返回大量文章但只需要特定主题的场景。
     """
     articles: List[dict] = []
     stats = {
@@ -516,6 +531,31 @@ def collect_rsshub(
                         "entry_id": getattr(entry, "id", ""),
                     },
                 }
+                
+                # V2.2: 采集时关键词过滤 — 如果源配置了 collection_keywords，
+                # 只保留标题或摘要中包含至少一个关键词的文章
+                collection_kws = source.get("collection_keywords", [])
+                if collection_kws:
+                    text_to_check = (title + " " + (summary or "")).lower()
+                    if not any(kw.lower() in text_to_check for kw in collection_kws):
+                        continue  # 不匹配任何关键词，跳过
+                
+                # V2.3 客户端日期过滤: RSSHub 的 filterout_time 对 huxiu/search 
+                # 等路由不生效，在此二次校验
+                if source_filterout_days and source_filterout_days > 0:
+                    cutoff_dt = window_start - timedelta(days=source_filterout_days)
+                    try:
+                        pub_dt = dateutil_parser.parse(pub_date) if pub_date else None
+                    except Exception:
+                        pub_dt = None
+                    is_search_route = "search" in route.lower()
+                    if pub_dt is not None:
+                        if pub_dt < cutoff_dt:
+                            continue  # 超过 filterout_days，丢弃
+                    elif is_search_route:
+                        # 搜索路由不应返回无日期条目 → 跳过
+                        continue
+                
                 articles.append(article)
                 stats["success"] += 1
             except Exception as e:
@@ -1089,6 +1129,12 @@ class XCrawlKeyRotator:
     def record_call(self, key: str, count: int = 1):
         self.call_counts[key] = self.call_counts.get(key, 0) + count
 
+    def mark_dead(self, key: str):
+        """标记 key 已永久失效（如 auth_failed 401）"""
+        with self.lock:
+            self.exhausted_keys.add(key)
+            logging.warning(f"[XCrawl] Key {_mask_key(key)} 已永久失效，标记跳过")
+
     def status(self) -> dict:
         return {
             "total_keys": len(self.keys),
@@ -1105,73 +1151,180 @@ def _mask_key(key: str) -> str:
     return key[:8] + "..." + key[-4:]
 
 
-def _extract_date_from_snippet(snippet: str) -> str:
-    """从 XCrawl snippet 中提取发布日期。
+def _extract_date_from_url(url: str) -> Optional[str]:
+    """从 URL 路径中提取发布日期。
+
+    常见模式：
+    - /2026/05/01/ 或 /2026/05/01
+    - /20260501/ 或 /20260501
+    - /2026-05-01 或 -2026-05-01-
+    - /doc-inxxxyyyzzz (sina style, embedded timestamp)
+    """
+    import re as _re
+    cst = __import__('datetime').timezone(__import__('datetime').timedelta(hours=8))
+    dt_mod = __import__('datetime')
+
+    def _fmt(dt):
+        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
+
+    if not url:
+        return None
+
+    # /YYYY/MM/DD/ or /YYYY/MM/DD
+    m = _re.search(r'/(\d{4})/(\d{1,2})/(\d{1,2})(?:/|$)', url)
+    if m:
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if 2020 <= y <= 2027 and 1 <= mo <= 12 and 1 <= d <= 31:
+            try:
+                return _fmt(dt_mod.datetime(y, mo, d, tzinfo=cst))
+            except ValueError:
+                pass
+
+    # /YYYYMMDD/ or /YYYYMMDD (6 consecutive digits that form valid date)
+    m = _re.search(r'/(\d{4})(\d{2})(\d{2})(?:/|$|-)', url)
+    if m:
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if 2020 <= y <= 2027 and 1 <= mo <= 12 and 1 <= d <= 31:
+            try:
+                return _fmt(dt_mod.datetime(y, mo, d, tzinfo=cst))
+            except ValueError:
+                pass
+
+    # -YYYY-MM-DD- or /YYYY-MM-DD (hyphen-separated date)
+    m = _re.search(r'[/-](\d{4})-(\d{1,2})-(\d{1,2})(?:[/-]|$)', url)
+    if m:
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if 2020 <= y <= 2027 and 1 <= mo <= 12 and 1 <= d <= 31:
+            try:
+                return _fmt(dt_mod.datetime(y, mo, d, tzinfo=cst))
+            except ValueError:
+                pass
+
+    return None
+
+
+def _extract_date_from_snippet(snippet: str, default_dt: Optional[datetime] = None) -> str:
+    """从 XCrawl snippet / description 中提取发布日期。
 
     XCrawl 不返回标准的 publishedDate 字段，
     但 snippet 开头通常包含 "X hours ago — ..." 或 "X天前 — ..." 或 "2026年4月29日 — ..."。
+    若无法提取且提供了 default_dt，则使用默认时间。
     """
     import re
-    if not snippet:
-        return ""
     cst = __import__('datetime').timezone(__import__('datetime').timedelta(hours=8))
     now = __import__('datetime').datetime.now(cst)
     dt_mod = __import__('datetime')
 
+    def _fmt(dt):
+        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
+
+    if not snippet:
+        return _fmt(default_dt) if default_dt else ""
+
     # ── 英文相对时间 ──
-    # Pattern 1: "X hours ago — ..." / "X minutes ago — ..." / "X days ago"
     m = re.match(r"(\d+)\s*hours?\s*ago", snippet, re.IGNORECASE)
     if m:
         hours = int(m.group(1))
-        dt = now - dt_mod.timedelta(hours=hours)
-        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
+        return _fmt(now - dt_mod.timedelta(hours=hours))
     m = re.match(r"(\d+)\s*minutes?\s*ago", snippet, re.IGNORECASE)
     if m:
         minutes = int(m.group(1))
-        dt = now - dt_mod.timedelta(minutes=minutes)
-        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
+        return _fmt(now - dt_mod.timedelta(minutes=minutes))
     m = re.match(r"(\d+)\s*days?\s*ago", snippet, re.IGNORECASE)
     if m:
         days = int(m.group(1))
-        dt = now - dt_mod.timedelta(days=days)
-        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
+        return _fmt(now - dt_mod.timedelta(days=days))
 
     # ── 中文相对时间 ──
     m = re.search(r"(\d+)\s*天前", snippet)
     if m:
         days = int(m.group(1))
-        dt = now - dt_mod.timedelta(days=days)
-        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
+        return _fmt(now - dt_mod.timedelta(days=days))
     m = re.search(r"(\d+)\s*小时前", snippet)
     if m:
         hours = int(m.group(1))
-        dt = now - dt_mod.timedelta(hours=hours)
-        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
+        return _fmt(now - dt_mod.timedelta(hours=hours))
     m = re.search(r"(\d+)\s*分钟前", snippet)
     if m:
         minutes = int(m.group(1))
-        dt = now - dt_mod.timedelta(minutes=minutes)
-        return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
+        return _fmt(now - dt_mod.timedelta(minutes=minutes))
 
     # ── 绝对日期 ──
-    # Pattern 2: "2026年4月29日 — ..." / "2026-04-29 — ..."
-    m = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日", snippet)
+    # "2026年4月29日 — ..." / "2026年4月 — ..." / "4月29日 — ..."
+    m = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})[日号]", snippet)
     if m:
         y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
         try:
-            dt = __import__('datetime').datetime(y, mo, d, tzinfo=cst)
-            return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
+            return _fmt(dt_mod.datetime(y, mo, d, tzinfo=cst))
         except ValueError:
             pass
+    # "2026年4月" (无日，默认1号)
+    m = re.search(r"(\d{4})年(\d{1,2})月(?!\d)", snippet)
+    if m:
+        y, mo = int(m.group(1)), int(m.group(2))
+        try:
+            return _fmt(dt_mod.datetime(y, mo, 1, tzinfo=cst))
+        except ValueError:
+            pass
+    # "2024年" (无月，默认1月1号) — 用于抓取如"2024年上半年营收下滑"等旧年数据
+    m = re.search(r"(\d{4})年(?!\d)", snippet)
+    if m:
+        y = int(m.group(1))
+        if 2020 <= y <= 2026:
+            try:
+                return _fmt(dt_mod.datetime(y, 1, 1, tzinfo=cst))
+            except ValueError:
+                pass
+    # "4月29日" / "4月29号" (无年，用今年)
+    m = re.search(r"(?:^|[^\d])(\d{1,2})月(\d{1,2})[日号]", snippet)
+    if m:
+        mo, d = int(m.group(1)), int(m.group(2))
+        try:
+            return _fmt(dt_mod.datetime(now.year, mo, d, tzinfo=cst))
+        except ValueError:
+            pass
+    # "2026-04-29"
     m = re.search(r"(\d{4})-(\d{2})-(\d{2})", snippet)
     if m:
         y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
         try:
-            dt = __import__('datetime').datetime(y, mo, d, tzinfo=cst)
-            return dt.strftime("%a, %d %b %Y %H:%M:%S %z")
+            return _fmt(dt_mod.datetime(y, mo, d, tzinfo=cst))
         except ValueError:
             pass
 
+    # ── 英文日期格式 ──
+    # "April 29, 2026" / "Apr 29, 2026" / "29 April 2026"
+    en_months = {
+        'january':1,'february':2,'march':3,'april':4,'may':5,'june':6,
+        'july':7,'august':8,'september':9,'october':10,'november':11,'december':12,
+        'jan':1,'feb':2,'mar':3,'apr':4,'jun':6,'jul':7,'aug':8,
+        'sep':9,'oct':10,'nov':11,'dec':12
+    }
+    # "Month DD, YYYY" or "Month DD YYYY"
+    m = re.search(r'(' + '|'.join(en_months.keys()) + r')\s+(\d{1,2}),?\s+(\d{4})', snippet, re.IGNORECASE)
+    if m:
+        mon = en_months.get(m.group(1).lower())
+        d, y = int(m.group(2)), int(m.group(3))
+        if mon:
+            try:
+                return _fmt(dt_mod.datetime(y, mon, d, tzinfo=cst))
+            except ValueError:
+                pass
+    # "DD Month YYYY"
+    m = re.search(r'(\d{1,2})\s+(' + '|'.join(en_months.keys()) + r')\s+(\d{4})', snippet, re.IGNORECASE)
+    if m:
+        d = int(m.group(1))
+        mon = en_months.get(m.group(2).lower())
+        y = int(m.group(3))
+        if mon:
+            try:
+                return _fmt(dt_mod.datetime(y, mon, d, tzinfo=cst))
+            except ValueError:
+                pass
+
+    # ── 兜底：无日期信息 → 使用默认时间 ──
+    if default_dt:
+        return _fmt(default_dt)
     return ""
 
 
@@ -1208,6 +1361,9 @@ def collect_xcrawl(
         return articles, stats
 
     search_queries = source.get("search_queries", [])
+    # 兼容单个 query 字段
+    if not search_queries and source.get("query"):
+        search_queries = [source["query"]]
     if not search_queries:
         stats["error"] = "no search_queries defined"
         return articles, stats
@@ -1225,21 +1381,23 @@ def collect_xcrawl(
             stats["error"] = "All XCrawl API Keys exhausted"
             break
 
-        # ── 日期限定的搜索关键词 ──
-        today_str = window_end.strftime("%Y年%-m月%-d日")
-        enhanced_query = f"{query} {today_str}" if today_str not in query else query
+        # ── 搜索关键词：不再追加日期后缀 ──
+        # XCrawl 作为搜索引擎，短查询 + 不带日期更能命中当天热点新闻
+        # 之前把 "2026年5月2日" 追加到 query 会导致搜索结果变窄，反而搜不到当天突发新闻
+        enhanced_query = query
 
         logging.info(f"[XCrawl] {source_id}: 搜索 '{enhanced_query}'")
 
         try:
             from xcrawl import XcrawlClient
+            from xcrawl.types import SearchOptions
 
             client = XcrawlClient(api_key=api_key, timeout=timeout)
-            response = client.search({
-                "query": enhanced_query,
-                "limit": max_results,
-                "language": "zh",
-            })
+            response = client.search(SearchOptions(
+                query=enhanced_query,
+                limit=max_results,
+                language="zh",
+            ))
 
             key_rotator.record_call(api_key)
 
@@ -1257,8 +1415,16 @@ def collect_xcrawl(
                 if not title or not link:
                     continue
 
-                # 从 description 提取发布日期
-                pub_date = _extract_date_from_snippet(snippet)
+                # ── 日期提取策略：优先从 description 提取，回退到 URL ──
+                # XCrawl 的 description 开头常有 "2026年4月29日 — ..." 或 "3天前 — ..."
+                # URL 中也经常包含日期如 /2026/05/01/ 或 /20260501/
+                # 不使用 window_end 兜底：搜索返回大量旧文，兜底会让旧文冒充今日新闻
+                pub_date = _extract_date_from_snippet(snippet, default_dt=None)
+                if not pub_date:
+                    pub_date_from_url = _extract_date_from_url(link)
+                    if pub_date_from_url:
+                        pub_date = pub_date_from_url
+                        logging.debug(f"[XCrawl] {source_id}: snippet无日期, 从URL提取: {pub_date[:30]} url={link[:60]}")
 
                 # 去重
                 norm = normalize_url(link)
@@ -1296,7 +1462,12 @@ def collect_xcrawl(
             stats["success"] += len(results)
 
         except Exception as e:
-            logging.warning(f"[XCrawl] {source_id}: 搜索异常 '{query}': {e}")
+            err_str = str(e).lower()
+            if "401" in err_str or "auth" in err_str or "invalid credentials" in err_str:
+                key_rotator.mark_dead(api_key)
+                logging.warning(f"[XCrawl] {source_id}: Key 已失效 (auth_failed)，标记跳过")
+            else:
+                logging.warning(f"[XCrawl] {source_id}: 搜索异常 '{query}': {e}")
             stats["failed"] += 1
             continue
 
@@ -1304,7 +1475,7 @@ def collect_xcrawl(
     return articles, stats
 
 def _try_load_keywords() -> Optional[List[str]]:
-    """尝试加载关键词配置。"""
+    """尝试加载关键词配置。支持嵌套结构（platforms/categories/competitors等）。"""
     try:
         import yaml, os as _os
         config_dir = _os.path.join(
@@ -1315,13 +1486,53 @@ def _try_load_keywords() -> Optional[List[str]]:
         if _os.path.exists(kw_file):
             with open(kw_file, "r", encoding="utf-8") as f:
                 kw_config = yaml.safe_load(f)
-            return [k for k in kw_config.get("keywords", []) if isinstance(k, str)]
+            
+            # 递归提取所有关键词
+            def _flatten(obj):
+                if isinstance(obj, str):
+                    return [obj]
+                if isinstance(obj, list):
+                    result = []
+                    for item in obj:
+                        result.extend(_flatten(item))
+                    return result
+                if isinstance(obj, dict):
+                    result = []
+                    for v in obj.values():
+                        result.extend(_flatten(v))
+                    return result
+                return []
+            
+            all_kw = _flatten(kw_config)
+            # 去重并保留顺序
+            seen = set()
+            unique = []
+            for k in all_kw:
+                if k not in seen:
+                    seen.add(k)
+                    unique.append(k)
+            return unique
     except Exception:
         pass
     return None
 
 
-# ===================== 采集器：Tavily 搜索（Key 轮换） =====================
+# ===================== 采集器：Tavily 搜索（Key 轮换 + 两级时间范围） =====================
+
+# Tavily 垂直站点映射 — domain-specific query 用
+TAVILY_VERTICAL_DOMAINS = {
+    "retail": ["36kr.com", "huxiu.com", "jiemian.com", "ebrun.com", "latepost.com",
+               "dx.diit.cn", "www.dsb.cn", "www.ls watchdog.com"],
+    "beauty": ["ebrun.com", "36kr.com", "huxiu.com", "jiemian.com"],
+    "platform": ["36kr.com", "jiemian.com", "ebrun.com"],
+}
+
+# 默认 include_domains / exclude_domains
+TAVILY_DEFAULT_INCLUDE_DOMAINS = []
+TAVILY_DEFAULT_EXCLUDE_DOMAINS = [
+    "zhihu.com", "baidu.com", "weibo.com", "douban.com",
+    "taobao.com", "jd.com", "tmall.com", "pinduoduo.com",
+]
 
 
 def collect_tavily(
@@ -1331,10 +1542,26 @@ def collect_tavily(
     window_end: datetime,
     timeout: int = 30,
 ) -> Tuple[List[dict], dict]:
-    """通过 Tavily 搜索 API 采集文章，支持 Key 轮换（并行版）。
-    
-    使用 keyed_parallel_map 保证同一 Key 同时只有 1 个请求，
-    不同 Key 之间可并行，输出按 query 顺序稳定排序。
+    """通过 Tavily 搜索 API 采集文章，支持 Key 轮换 + 两级时间范围。
+
+    搜索策略:
+      1. 首先以 time_range="day" 搜索（默认）
+      2. 如果 day 结果不足 min_day_results，再以 time_range="week" 补搜
+      3. week 补搜结果标记为 freshness_status="week_fallback"，
+         进入 reference 或待验证，不作为今日强信号。
+
+    每条搜索结果都会写入:
+      - search_query: 使用的查询词
+      - time_range: "day" 或 "week"
+      - include_domains / exclude_domains: 使用的域名过滤
+      - freshness_status: "day_primary" | "week_fallback"
+
+    Args:
+        source: 来源配置字典，需含 search_queries
+        key_rotator: Tavily Key 轮换器
+        window_start: 时间窗口起始
+        window_end: 时间窗口终止
+        timeout: 单次请求超时秒数
     """
     from skills.utils.parallel_runner import keyed_parallel_map
 
@@ -1344,6 +1571,10 @@ def collect_tavily(
         "collector": "tavily",
         "success": 0,
         "failed": 0,
+        "day_queries": 0,
+        "week_queries": 0,
+        "day_results": 0,
+        "week_results": 0,
         "error": None,
     }
 
@@ -1353,12 +1584,24 @@ def collect_tavily(
         return articles, stats
 
     search_queries = source.get("search_queries", [])
+    # 兼容单个 query 字段
+    if not search_queries and source.get("query"):
+        search_queries = [source["query"]]
     if not search_queries:
         stats["error"] = "no search_queries defined"
         logging.warning(f"[Tavily] {source.get('id', '?')}: 无 search_queries 配置")
         return articles, stats
 
-    # 预分配 key: 轮转分配给各 query
+    # ── 搜索参数 ──
+    min_day_results = source.get("min_day_results", 3)  # day 不足此数才降级到 week
+    include_domains = source.get("include_domains", TAVILY_DEFAULT_INCLUDE_DOMAINS)
+    exclude_domains = source.get("exclude_domains", TAVILY_DEFAULT_EXCLUDE_DOMAINS)
+    # 支持 domain_scope 关键词映射到 include_domains
+    domain_scope = source.get("domain_scope", "")
+    if domain_scope and domain_scope in TAVILY_VERTICAL_DOMAINS and not include_domains:
+        include_domains = TAVILY_VERTICAL_DOMAINS[domain_scope]
+
+    # 预分配 key
     tavily_keys = key_rotator.keys if key_rotator.keys else []
     key_list: List[str] = []
     if tavily_keys:
@@ -1369,7 +1612,24 @@ def collect_tavily(
 
     source_id = source.get("id", source.get("name", ""))
 
-    def _search_one(item, idx, api_key):
+    def _build_tavily_payload(query: str, api_key: str, time_range: str = "day") -> dict:
+        """构建 Tavily API 请求体"""
+        payload = {
+            "api_key": api_key,
+            "query": query,
+            "search_depth": key_rotator.search_depth,
+            "include_raw_content": "text",   # 使用 "text" 获取纯文本正文
+            "include_images": False,
+            "max_results": key_rotator.max_results,
+            "time_range": time_range,        # "day" | "week" | "month" | "year"
+        }
+        if include_domains:
+            payload["include_domains"] = include_domains
+        if exclude_domains:
+            payload["exclude_domains"] = exclude_domains
+        return payload
+
+    def _search_one(item, idx, api_key, time_range="day"):
         """单条 Tavily 搜索，用于 keyed_parallel_map"""
         query = item
         if not api_key or api_key == "_no_key_":
@@ -1378,15 +1638,10 @@ def collect_tavily(
             return {"articles": [], "count": 0, "error": "All Tavily API Keys exhausted"}
 
         try:
+            payload = _build_tavily_payload(query, api_key, time_range=time_range)
             resp = requests.post(
                 "https://api.tavily.com/search",
-                json={
-                    "api_key": api_key,
-                    "query": query,
-                    "search_depth": key_rotator.search_depth,
-                    "include_raw_content": False,
-                    "max_results": key_rotator.max_results,
-                },
+                json=payload,
                 timeout=timeout,
             )
             resp.raise_for_status()
@@ -1400,7 +1655,19 @@ def collect_tavily(
                     title = result.get("title", "")
                     link = result.get("url", "")
                     content = result.get("content", "")
+                    raw_content = result.get("raw_content", "")
                     pub_date = result.get("published_date", "")
+
+                    # 日期提取：raw_content → content → URL
+                    if not pub_date:
+                        pub_date = _extract_date_from_snippet(raw_content or content, default_dt=None)
+                    if not pub_date:
+                        pub_date_from_url = _extract_date_from_url(link)
+                        if pub_date_from_url:
+                            pub_date = pub_date_from_url
+
+                    # freshness_status 标记
+                    freshness = "day_primary" if time_range == "day" else "week_fallback"
 
                     article = {
                         "article_id": generate_article_id(link, source_id, r_idx),
@@ -1413,11 +1680,16 @@ def collect_tavily(
                         "published_at": pub_date,
                         "collected_at": datetime.now(CST).isoformat(),
                         "time_status": classify_time_status(pub_date, window_start, window_end),
+                        "freshness_status": freshness,
                         "summary": content[:500] if content else "",
-                        "content": content[:50000] if content else "",
+                        "content": (raw_content or content)[:50000] if (raw_content or content) else "",
                         "matched_keywords": [],
                         "raw": {
                             "query": query,
+                            "time_range": time_range,
+                            "search_query": query,
+                            "include_domains": include_domains,
+                            "exclude_domains": exclude_domains,
                             "tavily_score": result.get("score", 0),
                             "tavily_key_used": f"{api_key[:8]}...",
                         },
@@ -1436,47 +1708,117 @@ def collect_tavily(
         except Exception as e:
             return {"articles": [], "count": 0, "error": str(e)}
 
-    # 并行执行: 同 Key 串行, 不同 Key 可并行
-    if tavily_keys and len(search_queries) > 1:
-        logging.info(f"[Tavily] {source_id}: 并行搜索 {len(search_queries)} 查询, "
-                     f"keys={len(tavily_keys)}, per_key_limit=1")
+    # ── 第一轮: time_range="day" ──
+    logging.info(f"[Tavily] {source_id}: 第一轮搜索 (time_range=day), "
+                f"{len(search_queries)} 条查询")
 
-        results, p_stats = keyed_parallel_map(
+    if tavily_keys and len(search_queries) > 1:
+        day_results, _ = keyed_parallel_map(
             items=search_queries,
-            process_fn=_search_one,
+            process_fn=lambda item, idx, key: _search_one(item, idx, key, time_range="day"),
             key_list=key_list,
             max_workers=min(6, len(search_queries)),
             max_concurrent_per_key=1,
             timeout=timeout + 15,
-            desc=f"Tavily {source_id}",
+            desc=f"Tavily-day {source_id}",
         )
     else:
-        # 串行 fallback
-        results = []
+        day_results = []
         for i, query in enumerate(search_queries):
-            r = _search_one(query, i, key_list[i] if i < len(key_list) else "")
-            results.append(r)
-        p_stats = {"total": len(search_queries), "success": 0, "failed": 0, "elapsed_seconds": 0}
+            r = _search_one(query, i, key_list[i] if i < len(key_list) else "", time_range="day")
+            day_results.append(r)
 
-    # 汇总结果（按 query 顺序保序）
-    for i, result in enumerate(results):
+    # 汇总 day 结果
+    day_article_count = 0
+    for i, result in enumerate(day_results):
         if result is None:
-            stats["failed"] += len(search_queries) // max(1, len(results))
+            stats["failed"] += 1
             continue
         query_articles = result.get("articles", [])
         error = result.get("error")
         if error:
             stats["failed"] += 1
-            if "exhausted" in error.lower():
-                stats["error"] = error
-            logging.warning(f"[Tavily] {source_id}: query {i} 失败 — {error}")
+            logging.warning(f"[Tavily] {source_id}: day query {i} 失败 — {error}")
         else:
             articles.extend(query_articles)
+            day_article_count += len(query_articles)
+            stats["day_results"] += len(query_articles)
             stats["success"] += result.get("count", len(query_articles))
-            logging.info(f"[Tavily] {source_id}: query {i} 返回 {len(query_articles)} 条结果")
+
+    stats["day_queries"] = len(search_queries)
+    logging.info(f"[Tavily] {source_id}: day 轮完成, 获得 {day_article_count} 条结果")
+
+    # ── 第二轮: 如果 day 不足, 降级到 time_range="week" ──
+    if day_article_count < min_day_results and len(search_queries) > 0:
+        logging.info(f"[Tavily] {source_id}: day 仅 {day_article_count} 条 "
+                    f"(不足 {min_day_results}), 降级到 week 补搜")
+
+        # 为 week 补搜重新分配 keys
+        week_key_list = []
+        if tavily_keys:
+            for i in range(len(search_queries)):
+                key_idx = (len(search_queries) + i) % len(tavily_keys)
+                week_key_list.append(tavily_keys[key_idx])
+        else:
+            week_key_list = ["_no_key_"] * len(search_queries)
+
+        if tavily_keys and len(search_queries) > 1:
+            week_results, _ = keyed_parallel_map(
+                items=search_queries,
+                process_fn=lambda item, idx, key: _search_one(item, idx, key, time_range="week"),
+                key_list=week_key_list,
+                max_workers=min(6, len(search_queries)),
+                max_concurrent_per_key=1,
+                timeout=timeout + 15,
+                desc=f"Tavily-week {source_id}",
+            )
+        else:
+            week_results = []
+            for i, query in enumerate(search_queries):
+                r = _search_one(query, i, week_key_list[i] if i < len(week_key_list) else "", time_range="week")
+                week_results.append(r)
+
+        # 汇总 week 结果 — 去重 (URL 不能与 day 重复)
+        day_urls = {a["url"] for a in articles}
+        week_article_count = 0
+        for i, result in enumerate(week_results):
+            if result is None:
+                stats["failed"] += 1
+                continue
+            query_articles = result.get("articles", [])
+            error = result.get("error")
+            if error:
+                stats["failed"] += 1
+                logging.warning(f"[Tavily] {source_id}: week query {i} 失败 — {error}")
+            else:
+                # 去重: 跳过 day 轮已有的 URL
+                new_articles = [a for a in query_articles if a["url"] not in day_urls]
+                deduped = len(query_articles) - len(new_articles)
+                if deduped > 0:
+                    logging.debug(f"[Tavily] {source_id}: week query {i} 去重 {deduped} 条 (day 已有)")
+                articles.extend(new_articles)
+                week_article_count += len(new_articles)
+                stats["week_results"] += len(new_articles)
+                stats["success"] += len(new_articles)
+                # 将去重后的 URL 加入 day_urls 防止 week 内部也重复
+                for a in new_articles:
+                    day_urls.add(a["url"])
+
+        stats["week_queries"] = len(search_queries)
+        logging.info(f"[Tavily] {source_id}: week 轮完成, 补充 {week_article_count} 条新结果")
+    else:
+        logging.info(f"[Tavily] {source_id}: day 轮已满足最低要求 ({day_article_count} >= {min_day_results}), 无需 week 补搜")
 
     logging.info(f"[Tavily] {source_id}: 总计 {len(articles)} 条, "
+                f"day={stats['day_results']}, week={stats['week_results']}, "
                 f"成功 {stats['success']}, 失败 {stats['failed']}")
+
+    # ── 关键词匹配 ──
+    all_keywords = _try_load_keywords()
+    if all_keywords:
+        for a in articles:
+            a["matched_keywords"] = match_keywords(a, all_keywords)
+
     return articles, stats
 
 
@@ -1708,13 +2050,13 @@ def collect_daily_articles(
     # ---- XCrawl Key 轮换器 ----
     xcrawl_config = sources_config.get("xcrawl", {})
     xcrawl_keys = []
-    for env_name in xcrawl_config.get("keys_env_vars", ["xcrawl_key", "xcrawl_key1", "xcrawl_key2"]):
+    for env_name in xcrawl_config.get("keys_env_vars", ["xcrawl_key", "xcrawl_key1", "xcrawl_key2", "xcrawl_key3", "xcrawl_key4", "xcrawl_key5", "xcrawl_key6"]):
         k = os.environ.get(env_name, "")
         if k:
             xcrawl_keys.append(k)
     if not xcrawl_keys:
         # 兼容直接从环境变量读取
-        for env_name in ["xcrawl_key", "xcrawl_key1", "xcrawl_key2"]:
+        for env_name in ["xcrawl_key", "xcrawl_key1", "xcrawl_key2", "xcrawl_key3", "xcrawl_key4", "xcrawl_key5", "xcrawl_key6"]:
             k = os.environ.get(env_name, "")
             if k:
                 xcrawl_keys.append(k)
@@ -1733,7 +2075,12 @@ def collect_daily_articles(
 
     all_sources = []
     for s in rsshub_sources:
-        s["_method_resolved"] = "rsshub"
+        # 根据源的 method 字段决定采集方式，而不是硬编码为 rsshub
+        src_method = s.get("method", "")
+        if src_method in ("xcrawl", "tavily", "rss", "web"):
+            s["_method_resolved"] = src_method
+        else:
+            s["_method_resolved"] = "rsshub"
         all_sources.append(s)
     for s in other_sources:
         s["_method_resolved"] = normalize_method(s.get("method", ""))
@@ -1787,7 +2134,7 @@ def collect_daily_articles(
         _method_groups[method].append((_idx, source))
 
     # 按 method 组顺序采集（保持 source 配置顺序），组内并行
-    _method_order = ["rsshub", "rss", "web", "baidu_news", "xcrawl", "tavily"]
+    _method_order = ["xcrawl", "tavily", "rsshub", "rss", "web", "baidu_news"]
     # 保留不在预期顺序中的 method
     for m in _method_groups:
         if m not in _method_order:
@@ -1945,34 +2292,13 @@ def collect_daily_articles(
     total_saved = len(deduped_articles)
     logging.info(f"去重后数量: {total_saved}")
 
-    # ── 根据 allow_old 配置丢弃 old 文章 ──
-    # 构建 source_name → allow_old 映射
-    source_allow_old: Dict[str, bool] = {}
-    global_defaults = sources_config.get("defaults", {})
-    default_allow_old = global_defaults.get("allow_old", False)   # 全局默认不允许 old
-    for s in all_sources:
-        sid = s.get("id", s.get("name", ""))
-        source_allow_old[sid] = s.get("allow_old", default_allow_old)
-
-    before_filter_old = len(deduped_articles)
-    kept_articles: List[dict] = []
+    # ── allow_old 过滤：采集阶段不再丢弃 old 文章 ──
+    # 旧逻辑：allow_old=false 的源在采集阶段就丢弃 old 文章
+    # 新逻辑：所有文章都传给后续 filter 阶段处理，filter 有完善的 time_status 逻辑
+    # （搜索源 old → reference/reference，非搜索源 old → reject）
+    # 这样搜索源（XCrawl/Tavily/RSSHub搜索）的旧文章可以进入 reference 池作为背景资料
     old_discarded = 0
-    for article in deduped_articles:
-        ts = article.get("time_status", "unknown_time")
-        src_name = article.get("source_name", "")
-        allow_old = source_allow_old.get(src_name, default_allow_old)
-        if ts == "old" and not allow_old:
-            old_discarded += 1
-            continue
-        kept_articles.append(article)
-    deduped_articles = kept_articles
     total_saved = len(deduped_articles)
-
-    if old_discarded > 0:
-        logging.info(f"allow_old 过滤: 丢弃 {old_discarded} 条 old 文章 "
-                     f"(allow_old=false 的源不允许 old)")
-    logging.info(f"allow_old 过滤后数量: {total_saved} "
-                 f"(过滤前 {before_filter_old}, 丢弃 {old_discarded})")
 
     # ---- 时间状态汇总（新增 near_window）----
     time_summary = {"in_window": 0, "near_window": 0, "old": 0, "unknown_time": 0}

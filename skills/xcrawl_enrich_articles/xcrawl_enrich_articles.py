@@ -712,6 +712,10 @@ def xcrawl_enrich_articles(
             # TopHub 线索最高优先级（已经过搜索筛选）
             if "tophub" in src_file:
                 score += 100
+            # broad_search（Tavily/XCrawl搜索）高优先级
+            # 这些文章最终进入 cleaned 的概率最高
+            elif "broad_search" in src_file:
+                score += 80
             # raw_articles (RSSHub) 次高优先级
             elif "raw_articles" in src_file:
                 score += 50

@@ -88,10 +88,10 @@ STEP_ORDER = [
     "analyze",                      # 经营分析
     "novelty_check",                # 新颖性检查
     "evergreen_candidates",         # 常青知识库
-    "generate_podcast",             # 播客（先生成，日报从播客转化）
-    "podcast_review",               # 播客审稿
-    "generate_report",              # 日报生成（从播客脚本转化）
+    "generate_report",              # 日报生成
     "editor_review",                # 审稿
+    "generate_podcast",             # 播客（从终稿转化为口播稿）
+    "podcast_review",               # 播客审稿
     "send_daily_report_email",      # 邮件
     "pipeline_alert",               # 告警
 ]

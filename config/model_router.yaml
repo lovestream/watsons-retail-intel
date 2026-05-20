@@ -58,12 +58,19 @@ routing:
     params:
       max_tokens: 4096
       temperature: 0.3
-    # Thinking 模型用于可选的深度润色，不作为默认生产流程依赖
     optional_deep_review: LongCat-Flash-Thinking
   generate_podcast:
+    default: LongCat-Flash-Thinking
+    fallback:
+    - LongCat-Flash-Chat
+    - LongCat-Flash-Lite
+    params:
+      max_tokens: 8192
+      temperature: 0.3
+  podcast_review:
     default: LongCat-Flash-Chat
     fallback:
     - LongCat-Flash-Lite
     params:
-      max_tokens: 4096
-      temperature: 0.3
+      max_tokens: 2048
+      temperature: 0.2

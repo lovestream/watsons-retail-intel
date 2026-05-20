@@ -328,27 +328,39 @@ def rule_generate_podcast_script(
 
 # ===================== LLM 口播稿生成 =====================
 
-LLM_SYSTEM_PROMPT = """你是一位专业的财经播客主播，擅长将经营日报转化为适合通勤收听的口播稿。
+LLM_SYSTEM_PROMPT = """你是一位专业的财经播客主播，擅长将经营日报转化为适合通勤收听的口播稿。你的风格是业务顾问式的深度解读，不是新闻播报。
 
 ## 核心规则
 1. **不新增日报以外的任何事实或数据**——所有内容必须来自原始日报
-2. **不直接朗读日报**——要转化为口语化的表达
-3. **保留经营判断**——日报中的分析、建议、警示都要保留
+2. **不直接朗读日报**——要转化为口语化的、有分析深度的表达
+3. **保留经营判断**——日报中的分析、建议、警示都要保留并展开
 4. **弱化技术标注**——event_id、置信度标签、Markdown符号一律去掉
-5. **控制在1800-2500中文字符之间**
-6. **自然口语**——像播客主播在说话，不是在朗读报告
+5. **严格控制在1800-2500中文字符之间**——这是硬性要求，低于1800字不合格
+6. **自然口语**——像一位资深零售顾问在跟你聊天，有观点、有判断、有建议
 7. **开头格式**：「早安，这里是即时零售×个护美妆经营日报，{date}。」
 8. **结束格式**：「以上就是今天的日报，明天见。」
 
-## 口播稿结构（正常日报）
-1. 一句话结论（来自章节01）
-2. 今日重点信号（来自章节02，最多3条核心信号）
-3. 平台动态解读（来自章节03，简明扼要）
-4. 竞对与品牌动作（来自章节04，简明扼要）
-5. 品类与场景机会（来自章节05，如有）
-6. 对屈臣氏的经营提示（来自章节06，简明扼要）
-7. 今日唯一建议动作（来自章节07，一条核心建议）
-8. 明日追踪清单（来自章节08，3-5条）
+## 口播稿结构（正常日报）——每个部分都要充分展开
+
+### 第一段：核心判断（约100字）
+- 今天最重要的一个结论是什么？为什么重要？
+
+### 第二段~第四段：重点信号深度解读（每条约300-400字，共3条）
+对日报中最重要的2-3条信号，逐条做5维度分析：
+- 发生了什么（事实）
+- 为什么重要（行业意义）
+- 对屈臣氏意味着什么（经营影响）
+- 值得学习或警惕什么（启示/风险）
+- 今天要盯什么指标（可执行）
+
+### 第五段：平台与竞对动态速览（约200字）
+- 其他平台的关键变化，简明扼要
+
+### 第六段：机会点与建议动作（约200字）
+- 对屈臣氏的具体建议，可执行
+
+### 第七段：风险提示与明日追踪（约100字）
+- 需要警惕的风险 + 明天要追踪什么
 
 ## 口播稿结构（无信号日报）
 1. 一句话结论：今天无高质量新增信号
@@ -360,11 +372,14 @@ LLM_SYSTEM_PROMPT = """你是一位专业的财经播客主播，擅长将经营
 - 禁止添加日报中没有的数据、数字、事件
 - 禁止使用 event_id 如 E20260426_0001
 - 禁止使用 Markdown 格式符号（如 **、###、- 等）
-- 禁止使用"据报道"等新闻式用语——你是经营情报播客，不是新闻播报"""
+- 禁止使用"据报道"等新闻式用语——你是经营情报播客，不是新闻播报
+- 禁止生成少于1800中文字符的口播稿（正常日报）"""
 
 LLM_USER_TEMPLATE = """请将以下日报转为口播稿。
 
 {char_hint}
+
+重要：口播稿必须达到{char_range}中文字符。对核心信号要做深度解读（发生了什么、为什么重要、对屈臣氏意味着什么、值得学习或警惕什么、今天盯什么指标），每条信号至少300字展开分析。不要只是概括，要像业务顾问一样给出有深度的判断和建议。
 
 日报内容：
 ---
@@ -372,10 +387,11 @@ LLM_USER_TEMPLATE = """请将以下日报转为口播稿。
 ---
 
 要求：
-1. {char_range}中文字符
-2. 自然口语化
+1. 严格{char_range}中文字符（低于下限不合格，请充分展开分析）
+2. 自然口语化，业务顾问风格
 3. 不新增日报外事实
-4. 去掉 event_id 和 Markdown 符号"""
+4. 去掉 event_id 和 Markdown 符号
+5. 对2-3条核心信号做5维度深度分析"""
 
 
 def llm_generate_podcast_script(
@@ -412,6 +428,7 @@ def llm_generate_podcast_script(
     # 尝试主模型
     models_to_try = [default_model] + fallbacks
     last_error = ""
+    min_chars_required = 200 if is_no_signal else 1800  # 重试阈值
 
     for model in models_to_try:
         try:
@@ -427,25 +444,44 @@ def llm_generate_podcast_script(
                 char_range=char_range,
             )
 
-            result = client.chat(
-                messages=[{"role": "user", "content": user_content}],
-                system_prompt=system_prompt,
-                model=model,
-                temperature=0.3,
-                max_tokens=4096,
-            )
+            # 最多尝试 2 次（首次 + 1 次重试）
+            for attempt in range(2):
+                result = client.chat(
+                    messages=[{"role": "user", "content": user_content}],
+                    system_prompt=system_prompt,
+                    model=model,
+                    temperature=0.3 if attempt == 0 else 0.5,
+                    max_tokens=6000,
+                )
 
-            if result.get("ok") and result.get("content", "").strip():
-                script = result["content"].strip()
-                # 去掉可能的 markdown 代码块标记
-                script = re.sub(r'^```(?:markdown|md)?\s*\n?', '', script)
-                script = re.sub(r'\n?```\s*$', '', script)
-                logger.info(f"{LOG_PREFIX} LLM 生成成功，模型: {model}，"
-                            f"中文字符数: {count_chinese_chars(script)}")
-                return script, True
-            else:
-                last_error = result.get("error", "unknown")
-                logger.warning(f"{LOG_PREFIX} 模型 {model} 调用失败: {last_error}")
+                if result.get("ok") and result.get("content", "").strip():
+                    script = result["content"].strip()
+                    # 去掉可能的 markdown 代码块标记
+                    script = re.sub(r'^```(?:markdown|md)?\s*\n?', '', script)
+                    script = re.sub(r'\n?```\s*$', '', script)
+                    cn_chars = count_chinese_chars(script)
+                    logger.info(f"{LOG_PREFIX} LLM 生成成功，模型: {model}，"
+                                f"中文字符数: {cn_chars} (attempt {attempt+1})")
+
+                    # 长度检查：如果太短且还有重试机会，重新生成
+                    if cn_chars < min_chars_required and attempt == 0 and not is_no_signal:
+                        logger.warning(
+                            f"{LOG_PREFIX} 口播稿过短({cn_chars}<{min_chars_required})，"
+                            f"重试并提高 temperature...")
+                        # 修改 user_content 强调长度
+                        user_content = (
+                            f"上次生成的口播稿只有{cn_chars}字，严重不足。"
+                            f"请重新生成，必须达到1800-2500中文字符。"
+                            f"对每条核心信号要做300-400字的深度分析。\n\n"
+                            + user_content
+                        )
+                        continue  # 重试
+
+                    return script, True
+                else:
+                    last_error = result.get("error", "unknown")
+                    logger.warning(f"{LOG_PREFIX} 模型 {model} 调用失败: {last_error}")
+                    break  # 这个模型失败了，试下一个
 
         except Exception as e:
             last_error = str(e)

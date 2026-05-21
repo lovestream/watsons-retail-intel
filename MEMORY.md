@@ -5,16 +5,27 @@
 - **Root**: `/app/working/projects/watsons-retail-intel`
 - **Purpose**: Daily intelligence pipeline for Watsons retail — collect → filter → extract events → score → report
 
-## Architecture & Data Flow
+## Architecture & Data Flow (V4 Pipeline — 方案C: 播客独立于日报)
 ```
-collect → filter → extract_events → score_events → analyze_business_impact → generate_daily_report
-data/raw/  data/cleaned/  data/events/  data/events/  data/events/           data/drafts/
+collect → source_url_monitor → broad_search_discovery → xcrawl_enrich
+  → cloakbrowser_enrich → merge_raw_articles → cloakbrowser_date_verify
+  → filter → quality_funnel → source_health → tavily_gap_search
+  → filter_merged → enrich_cleaned_fulltext → extract → score → analyze → novelty_check
+  → evergreen_candidates
+  → generate_podcast (从事件池直接生成，不依赖日报)
+  → podcast_review
+  → generate_report → editor_review
+  → send_daily_report_email → pipeline_alert
+
+播客数据源: events_scored_novelty.json (含business_analysis)
+日报数据源: events_scored_novelty.json
+两者独立生成，互不阻塞。
 ```
 
 ## Config & Secrets
 - **LLM**: Longcat API (`https://api.longcat.chat/openai`), 3 models available
 - **LLM Keys**: 6 keys (`longcat`–`longcat5`) round-robin, 5M tokens/day each
-- **Tavily**: 3 accounts, 1000 searches/month each, round-robin
+- **Tavily**: 6 keys (`tavily_key`–`tavily_key5`), 1000 searches/month each, round-robin; **two-stage time_range** (day→week fallback)
 - **RSSHub**: `http://192.168.2.100:1200`
 - **Daily window**: (date-1) 07:00 ~ max(date 07:00, now) (Asia/Shanghai) — 晚间运行自动扩展到当前时刻
 - **Pipeline默认date**: today（非yesterday）
@@ -27,15 +38,20 @@ data/raw/  data/cleaned/  data/events/  data/events/  data/events/           dat
   - filter_relevant_articles: Lite → Chat fallback
   - extract_events: Lite(默认) → Chat(二次重试fallback); 高价值不用Thinking，二次失败走 rule_fallback + needs_verification=True
   - analyze_business_impact: P0→Thinking, P1→Chat, P2→Lite, ARCHIVE→rule_only
-  - generate_daily_report: Thinking → Chat fallback
-  - generate_daily_report: Chat(默认) → Lite(fallback); Thinking仅optional_deep_review
-  - editor_review: Chat(默认) → Lite(fallback); Thinking仅optional_deep_review
+  - generate_daily_report: Thinking(默认) → Chat → Lite; max_tokens=8192
+  - generate_podcast: Thinking(默认) → Chat → Lite; max_tokens=8192
+  - editor_review: Chat(默认) → Lite(fallback)
 - **Backward compat**: model_router.yaml 不存在时使用默认模型 (LongCat-Flash-Thinking)
 - **llm_client.chat()** 新增 `model` 参数，可覆盖 `self.model`
 
 ## Search Policy (新!)
 - **Config**: `config/search_policy.yaml`
 - **Tavily**: enabled, daily_budget=80, reserve_budget=20
+- **Tavily two-stage search**: default `time_range="day"`, fallback to `"week"` if day results < `min_day_results` (default 3)
+- **Tavily domain filtering**: `include_domains` / `exclude_domains` per source; global exclude (zhihu, baidu, weibo, etc.)
+- **Tavily `domain_scope`**: maps keywords ("retail", "beauty", "platform") to vertical domain lists
+- **`freshness_status`**: `day_primary` (Tavily day search) | `week_fallback` (Tavily week fallback) | `newly_discovered` (web_monitor) | `enriched` (xcrawl_enrich)
+- **Week fallback articles**: never enter `main` pool; `reference` if score ≥ 3, else `reject`
 - **Fixed queries**: 4 categories (platform/competitors/categories/channels)
 - **Gap search**: 当某平台当天无有效事件时自动补搜
 - **Verify search**: 高 watsons_relevance(≥4) + low/medium confidence 事件反查验证
@@ -92,7 +108,12 @@ data/raw/  data/cleaned/  data/events/  data/events/  data/events/           dat
 | Skill | Status | Key Files |
 |-------|--------|-----------|
 | collect_daily_articles | ✅ V2 tested | `skills/collect_daily_articles/` |
-| filter_relevant_articles | ✅ V2 tested | `skills/filter_relevant_articles/` |
+| source_url_monitor | ✅ V2 tested | `skills/source_url_monitor/` |
+| broad_search_discovery | ✅ V1 tested | `skills/broad_search_discovery/` |
+| xcrawl_enrich_articles | ✅ V2 multi-input | `skills/xcrawl_enrich_articles/` |
+| merge_raw_articles | ✅ V1 tested | `skills/merge_raw_articles/` |
+| filter_relevant_articles | ✅ V4 noise tested | `skills/filter_relevant_articles/` |
+| quality_funnel_report | ✅ V1 created | `skills/quality_funnel_report/` |
 | source_health_report | ✅ tested | `skills/source_health_report/` |
 | tavily_gap_search | ✅ tested | `skills/tavily_gap_search/` |
 | extract_events | ✅ V2 parallel (Lite→Chat retry+checkpoint) | `skills/extract_events/` |
@@ -100,9 +121,10 @@ data/raw/  data/cleaned/  data/events/  data/events/  data/events/           dat
 | analyze_business_impact | ✅ parallel (batch ARCHIVE/P2/P1/P0+checkpoint) | `skills/analyze_business_impact/` |
 | generate_daily_report | ✅ V2 three-draft tested | `skills/generate_daily_report/` |
 | generate_no_signal_report | ✅ V1 tested | `skills/generate_no_signal_report/` |
-| generate_podcast | 🔧 WIP (模板字数不足) | `skills/generate_podcast/` |
+| generate_podcast | ✅ V3 podcast-first (2026-05-17 rewrite) | `skills/generate_podcast/` |
+| podcast_review | ✅ V1 created (2026-05-17) | `skills/podcast_review/` |
 | editor_review | ✅ V2 dual-draft tested | `skills/editor_review/` |
-| run_daily_pipeline | ✅ V2 tested (10步+no_signal分支) | `skills/run_daily_pipeline/` |
+| run_daily_pipeline | ✅ V3 19-step (podcast_review integrated) | `skills/run_daily_pipeline/` |
 
 ## Key Decisions
 - **LLM client**: `requests.post` over OpenAI SDK (compatibility)
@@ -115,6 +137,12 @@ data/raw/  data/cleaned/  data/events/  data/events/  data/events/           dat
 - **硬降级9条规则**: confidence=low, rule_fallback, source_cred<2, wr<3, background_only, unclear → P2封顶; source_url缺失/fact空 → ARCHIVE; evidence_text空 → P2
 - **经营分析模块**: 规则分析+LLM辅助双模式; 7条硬降级规则; impact_type=opportunity/risk/watch/noise; action_level=immediate/test/watch/archive
 - **editor_review 审稿模块**: 三步审稿(Step1规则校验→Step2 LLM审稿→Step3终稿校验); 标记独立性(low=⚠️待验证, rf=🔄规则兜底, 互不替代); sendable只看Step3终稿复检; final_validate返回结构化issues
+- **source_url_monitor bootstrap模式**: 第一次运行时ledger为空→所有URL标记`bootstrap_seen`(非`newly_discovered`); bootstrap_seen绝不进cleaned, 最高reference; 第二次及以后→新URL才标`newly_discovered`; `load_seen_urls()`返回`(seen_dict, is_bootstrap)`元组
+- **filter `bootstrap_seen`处理**: compute_rule_score -2分; decide_final_pool 绝不进cleaned(最高reference)
+- **搜索 Query A/B/C 分层**: A类(必跑,竞对×平台+核心趋势,~28条,time_range=day); B类(按预算,平台×品类×动作,~34条,time_range=day→week); C类(动态,site:domain搜索,~46条,time_range=week); A类不受总预算限制
+- **垂类媒体双轨**: web_monitor栏监控 + broad_search C类site:搜索; 综合门户只靠site:搜索(163/sina/qq/sohu/ifeng)
+- **evergreen_candidates**: 从reference+rejected提取rule_score≥8且old/unknown_time的高价值旧文; 存入data/evergreen/YYYY-MM-DD/; 非阻塞步骤; 用于知识库/周报/经营分析补充
+- **动态模板变量名**: 配置用复数(platforms/categories/competitors/keywords), 模板花括号也用复数({platforms}); domains_from特殊处理转domain
 
 ## Test Results (2026-04-26)
 - **collect**: 60 raw articles ✅
@@ -142,15 +170,70 @@ data/raw/  data/cleaned/  data/events/  data/events/  data/events/           dat
   - **两稿比较**: P1遗漏、事件池外事实、唯一动作合规
   - 合规事件筛选: P0/P1 + confidence≠low + method≠rule_fallback + action_level=immediate|test
 
-## Pipeline V2 (2026-04-28)
+## Pipeline V3 (2026-05-02)
 
-### 新流水线架构（10步+动态分支）
+### 新流水线架构（17步+分支）
 ```
-collect → filter → source_health_report → tavily_gap_search
-  → filter_merged → [no_signal 或 normal分支]
-    normal:  extract → score → analyze → generate_report → editor_review
-    no_signal: generate_no_signal_report → editor_review
+collect → source_url_monitor → broad_search_discovery → xcrawl_enrich_articles
+  → merge_raw_articles → filter → quality_funnel_report → source_health_report
+  → tavily_gap_search → filter_merged
+  → branch:
+    有信号: extract → score → analyze → generate_report → editor_review → generate_podcast → send_email
+    无信号: generate_no_signal_report → editor_review → generate_podcast → send_email
 ```
+
+### 新增步骤
+- **source_url_monitor**: Web Monitor发现新URL → `newly_discovered_urls.json`
+- **broad_search_discovery**: 多搜索源×多关键词矩阵发现 → `broad_search_urls.json`
+- **xcrawl_enrich_articles**: 为搜索发现的URL抓取正文 → `xcrawl_enriched_articles.json`
+- **merge_raw_articles**: 合并所有采集来源到 `raw_articles_all.json`
+- **quality_funnel_report**: 漏斗诊断报告, 19维度拆解, 自动诊断建议
+
+### 关键设计
+- **filter** 必须针对 `raw_articles_all.json`（合并后的全集）
+- **broad_search_discovery** 默认 `skip_merge=True`，合并由 `merge_raw_articles` 统一处理
+- **xcrawl_enrich_articles** 支持多个输入源自动去重
+- **所有搜索结果必须先抓正文或至少保留摘要，再进入filter**
+- 不改变 sendable 安全门
+
+### 来源统计（日志输出）
+- rsshub_count, rss_count, web_count
+- source_url_monitor_count
+- broad_search_count
+- xcrawl_enriched_count
+- tavily_gap_count
+
+### merge_raw_articles 合并优先级
+1. `raw_articles.json` — 主采集
+2. `newly_discovered_urls.json` — Web Monitor
+3. `broad_search_urls.json` — 广泛搜索
+4. `xcrawl_enriched_articles.json` — XCrawl抓取
+5. `tavily_gap_articles.json` — Tavily补搜
+
+### broad_search_discovery 模块
+- **路径**: `skills/broad_search_discovery/broad_search_discovery.py`
+- **配置**: `config/source_packs.yaml`
+- **搜索矩阵**: platforms(6) × categories(8) × actions(9) = 多组合
+- **搜索源**: Tavily(6 key round-robin) + XCrawl(7 key)
+- **两级搜索**: Tavily day→week fallback
+- **输出**: `broad_search_urls.json` (每条含source_type, discovery_type, matched_keywords)
+- **Bug修复**: Tavily key 从 `tavily_key`/`tavily_key1-6` 读取; budget配置从顶层继承了
+- **测试结果**: 4 query → 39 articles (20 Tavily + 19 XCrawl + 1 dedup); HK/TW噪音6篇被V4过滤拦下
+
+### xcrawl_enrich_articles V2 升级
+- **多输入源**: newly_discovered_urls.json + broad_search_urls.json + tavily_gap_articles.json
+- **URL级去重**: 对 raw_articles.json/raw_articles_all.json 已有URL去重
+- **URL级并行**: 逐URL抓取, 1-2s延迟
+- **统计**: by_key, by_domain, by_source
+- **保留collector来源**: 传入文章的collector/source_type字段原样保留
+- **兼容raw_articles.json格式**: 输出结构包含metadata和articles
+
+### 测试结果 (2026-05-02 合并)
+- raw_articles: 279 → merged total: 449 articles
+- 来源分布: rsshub=107, source_url_monitor=131, broad_search=39, xcrawl_enriched=154, tavily_gap=18
+- xcrawl_enriched 10条全部与已有数据去重
+
+## Pipeline V2 (2026-04-28) [旧版，参考]
 
 ### 无信号日报分支
 - 触发条件: filter_merged 后 cleaned_count == 0
@@ -262,4 +345,177 @@ analyze_business_impact:
 - **model_router.py**: 新工具模块
 - **4 modules modified**: filter, extract_events, analyze_business_impact, generate_daily_report
 - **Backward compatible**: model_router.yaml 不存在 ⟹ 使用默认模型
-- **extract_events 路由变更**: 移除 Thinking 直接抽取高价值事件逻辑; 改为 Lite→Chat 二次重试→rule_fallback+needs_verification
+
+## V4 采集筛选优化 (2026-05-02)
+
+### 已修复
+1. `is_search_source` 改为 `source_type` 精确匹配 → `real_search_types = {"xcrawl", "tavily", "search", "gap"}`
+2. XCrawl/Tavily 日期提取: 去掉 `default_dt=window_end` 兜底，加了 `_extract_date_from_url()` 从URL提取日期
+3. `unknown_time` 处理: 搜索源+高关键词→reference, 其余→reject
+4. `old` 搜索源文章: 不进main，最高进reference（背景资料）
+5. 采集阶段 `allow_old` 过滤: 移除，所有文章传给filter阶段处理
+6. XCrawl queries: 从28个死板行业术语→28个热点追踪型查询
+7. 去掉了query后面追加日期后缀（之前追加"2026年5月2日"缩窄结果）
+8. `old` 搜索源评分: -3（之前-1）; `old` 非搜索源: -4（之前-2）
+9. Main池门槛: `review` + `in_window` + `score>=5` → main（之前review→reference）
+10. RSSHub超时: 20s→30s; XCrawl max_results: 10→20
+
+### 当前状况 (V4, 2026-05-02)
+- 采集: 505篇 (XCrawl 251, RSSHub 246, Tavily 8)
+- XCrawl日期提取率: 70% (之前7%)
+- Main: 4篇 | Reference: 176篇 | Rejected: 325篇
+
+### 仍需优化
+- RSSHub 36kr_newsflashes 返回68篇无关通用新闻（需要精简或替换）
+- RSSHub 虎嗅/晚点全部超时失败
+- Tavily 结果被XCrawl大量重叠去重
+- XCrawl 30%仍为unknown_time（静态页面/百科无日期）
+- 36kr 反爬: 多次请求触发验证码，考虑仅首次运行用web_monitor
+
+### Tavily 两级时间范围升级 (2026-05-02)
+- **改动文件**: `collect_daily_articles.py`, `filter_relevant_articles.py`, `config/search_policy.yaml`
+- **两级搜索**: 默认 `time_range="day"` → 不足 `min_day_results`(默认3) → 降级 `time_range="week"`
+- **freshness_status 新字段**: `day_primary` / `week_fallback` (Tavily); `newly_discovered` (web_monitor)
+- **week_fallback 结果去重**: day 轮已存在的URL不会在week轮重复出现
+- **域名过滤**: `include_domains` / `exclude_domains` 支持; `domain_scope` 映射垂直站点列表
+- **include_raw_content="text"**: 替代旧布尔值 True，返回纯文本正文
+
+### Cleaned 准入规则 V4 — 噪音过滤 (2026-05-02)
+- **改动文件**: `filter_relevant_articles.py`
+- **新增3个分类器**:
+  - `classify_page_type()`: news/article/report/official_notice/product_page/homepage/social_post/promotion/job/unknown
+  - `classify_region_tag()`: mainland/hk/tw/overseas/unknown
+  - `compute_noise_flags()`: 噪音标记列表
+- **噪音硬拦截规则**:
+  - product_page, homepage, social_post, promotion, job, unknown 不得进入 cleaned（降级为 reference 或 reject）
+  - social_post 和 homepage 直接 reject（降级也 reject）
+  - hk/tw 地区屈臣氏促销页直接 reject
+  - hk/tw + promotion/homepage/product_page 直接 reject
+- **噪音降级机制 `_noise_downgrade()`**:
+  - main → reference（保留但不在报告中使用）
+  - reference → 可能 reject（social_post/homepage/job 直接 reject）
+  - 所有 `decide_final_pool()` 返回点都经过 `_noise_downgrade()`
+- **输出新增字段**: `filter.page_type`, `filter.region_tag`, `filter.noise_flags`
+- **元数据新增**: `by_page_type`, `by_region`, `by_noise`
+- **分类依据**:
+  - page_type: URL模式(/product/,/item/等)、社媒域名、品牌官网首页、促销关键词
+  - region_tag: 域名(.hk/.tw/.com.hk/.com.tw)、繁体字、HK/TW关键词
+  - noise_flags: page_type阻断、region标记、official_site_title、promo_title、social_content、thin_content、hk_tw_watsons_promo
+- **V4 测试结果** (2026-05-02 五一数据):
+  - 279篇输入, cleaned=0, reference=147, reject=132
+  - 所有噪音（香港屈臣氏促销、Instagram帖子、官网首页、产品页）均被正确拦截
+  - page_type统计: news=155, article=60, report=3, unknown=28, product_page=16, social_post=11, promotion=1, homepage=1, job=4
+  - region统计: mainland=265, hk=9, tw=5
+  - 香港屈臣氏促销4篇被hk_tw_watsons_promo标签直接reject
+
+### 之前的准入规则 (V3 保留用于参考)
+- **核心命中快通道 `has_core_hit()`**: 4类核心关键词
+- **freshness_status路径**: newly_discovered/day_primary/week_fallback 各有不同准入条件
+
+### 重点监控源精简 (2026-05-02)
+- **精简到约30个源** (9 RSS + 17 XCrawl + 4 web_monitor)
+- **禁用的噪音源**: 虎嗅消费频道、36kr搜索系列、小红书搜索等7个RSS源
+- **禁用的XCrawl查询**: 11个低质量/重叠查询（万亿、淘宝闪购、外卖大战等）
+- **4类源结构**:
+  1. 平台官方/规则: 6个 (XCrawl 01/02/04/05 + web_36kr*2)
+  2. 即时零售/零售媒体: 5个 (RSS晚点/虎嗅*2/屈臣氏搜索 + web界面)
+  3. 美妆个护垂类: 6个 (XCrawl 15-17/21-23)
+  4. 竞对/品牌官方: 3+4个 (XCrawl 18-20竞对 + 11-14屈臣氏)
+
+## Source URL Monitor + XCrawl Enrich (2026-05-02)
+
+### 架构
+```
+source_url_monitor.py → newly_discovered_urls.json → xcrawl_enrich_articles.py → xcrawl_enriched_articles.json
+```
+
+### source_url_monitor
+- **路径**: `skills/source_url_monitor/source_url_monitor.py`
+- **功能**: 对 config/sources.yaml 中 monitor.enabled=true 的来源，抓取列表页提取文章URL
+- **输出**: `data/raw/{date}/newly_discovered_urls.json`, `data/source_ledger/seen_urls.jsonl`
+- **站点适配器**: Kr36Parser(SSR), LatepostParser, JiemianParser, EbrunParser, GenericParser
+- **测试结果**: 125 newly_discovered (36kr 50 + 界面 61 + 晚点 14)
+- **去重**: 第二次运行 seen=78, new=0 ✅
+- **已知问题**: 36kr触发反爬(返回验证码页面)；虎嗅/亿邦有WAF无法抓取
+- **反检测**: 随机延迟2-5s(来源间)、1.5-3s(列表页间)、验证码检测、最多2次重试
+
+### xcrawl_enrich_articles
+- **路径**: `skills/xcrawl_enrich_articles/xcrawl_enrich_articles.py`
+- **功能**: 读取 newly_discovered_urls.json，调用 XCrawl scrape API 获取正文
+- **输出**: `data/raw/{date}/xcrawl_enriched_articles.json`, `xcrawl_enrich_stats.json`
+- **关键**: 必须指定 `OutputConfig(formats=["markdown","html"])`，否则只返回metadata
+- **XCrawl SDK返回dict而非对象**: 用 `resp["data"]["markdown"]` 而非 `resp.data.markdown`
+- **7 key轮换**: round-robin，每key ~1000 credits/month
+- **测试结果**: 10/10 成功，内容6K-20K字符/篇
+- **信用消耗**: 1 credit/URL
+
+### config/sources.yaml web_monitor_sources (4个)
+1. **web_36kr_newsflashes**: 快讯+科技 (Kr36Parser, SSR数据)
+2. **web_latepost**: 晚点LatePost (LatepostParser, /news/dj_detail)
+3. **web_jiemian_business**: 界面新闻首页 (JiemianParser, /article/)
+4. **web_36kr_more**: 36kr金融板 (Kr36Parser, 可能限流)
+
+## Persistent Package Management (2026-05-10)
+
+### 问题
+`/app/venv/` 是 QwenPaw 系统级虚拟环境，`pyvenv.cfg` 中 `include-system-site-packages = false`，
+且每次服务重启/会话重建时 `venv` 会从零重建（参考 `.lock` 文件时间戳），
+导致 `pip install xcrawl edge-tts` 等在下次会话丢失。
+
+### 方案：项目本地持久安装
+- **安装目录**: `${PROJECT_ROOT}/.venv_packages/`（不受 venv 重建影响）
+- **安装命令**: `pip install --target .venv_packages xcrawl edge-tts`
+- **路径注入**: 所有入口脚本在最顶部 `sys.path.insert(0, ".venv_packages")`
+
+### 自愈机制（三层防护）
+1. **cron 启动前**: `pip_ensure.py --project-root . --quiet` — 检查+补装
+2. **health_check 运行时**: `python_packages` 类别设为 `auto_fix: true`，缺包自动调用 pip_ensure
+3. **pipeline 入口**: `run_daily_pipeline.py` 顶部注入 `.venv_packages`
+
+### pip_ensure.py
+- **位置**: `skills/health_check/pip_ensure.py`
+- **用法**: `python3 skills/health_check/pip_ensure.py --project-root .`
+- **检查 8 个关键包**: xcrawl, edge-tts, pyyaml, markdown-it-py, beautifulsoup4, jinja2, aiohttp, requests
+- **缺包时**: `pip install --target .venv_packages <missing>` → 复检
+
+### XCrawl Key 状态 (2026-05-12)
+- **`xcrawl_key`**: 当前额度耗尽 (401 auth_failed)，**轮换自动跳过，下月恢复**
+- **`xcrawl_key1`~`xcrawl_key6`**: 6 个正常
+- **轮换机制**: `XCrawlSearchEngine._dead_keys` + `XCrawlKeyRotator.mark_dead()` — 首次失败后自动标记跳过
+- **健康检查**: `auth_failed` / `quota_exceeded` / `rate_limited` 归类为"软失败"
+  - 软失败 + 至少一个 key 正常 → `healthy`（不报警）
+  - 全部软失败 → `degraded`（不报 down）
+  - 硬失败（timeout/connection/sdk）→ 按严重级别正常报警
+- **设计意图**: 任何 key 额度用完都会自动跳过，下月恢复，无需人工干预。硬故障才报警。
+
+### Cron Job
+- **ID**: `873a2bd1-691f-4ae2-b8ad-6ef9d3745467`
+- **名称**: watsons-daily-0700
+- **调度**: 每日 07:00 Asia/Shanghai, timeout 7200s
+- **命令**: Step 0 → pip_ensure.py --project-root . --quiet; Step 1 → run_daily_pipeline.py
+
+## Session 7 优化 (2026-05-21)
+
+### 完成的优化
+1. **podcast_review 适配方案C** — action_items 正则支持"第一，"格式；outline 不存在时不阻塞
+2. **Pipeline 非关键步骤容错** — NON_CRITICAL_STEPS (14个) 失败时自动跳过
+3. **日报禁用播客转化路径** — 方案C下日报独立从事件池生成
+4. **日报 select_top_signals 实体多样性** — 同一主实体不重复出现在 top 3
+5. **日报+播客都做同日事件去重** — deduplicate_events(threshold=0.50)
+6. **日报 tracking 事件传入 LLM** — 用于第11节"近期延续观察"
+7. **日报模型升级 Chat→Thinking** — max_tokens 8192，解决截断
+8. **enrich_cleaned_fulltext 增加 requests+BS4** — CloakBrowser → requests → XCrawl
+9. **禁用虎嗅3个全频道源** — 0%通过率纯噪音
+10. **启用36kr快讯+3个平台搜索源** — strict_keywords + filterout_days
+11. **broad_search 排除港台域名** — 减少21篇/天非大陆内容
+
+### 实测结果
+- 日报: 10135字节/10章节/3信号/40标签（完整无截断）
+- 播客: 2796中文字符/TTS成功/sendable=True
+- 事件去重: 77→61（-21%）
+- top 3 信号多样性: 阿里/苏宁/杭州低空
+
+### Git commits
+- 9edeb5b: 播客方案C重构 + 事件去重 + 跨日去重修复
+- 6d68218: pipeline 鲁棒性 + 去重扩展 + 源优化 + 全文补抓增强
+- 9b9c497: 日报生成质量提升 + 模型升级

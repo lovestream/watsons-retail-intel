@@ -378,6 +378,7 @@ rsshub_sources:
   daily_priority: 60
   enabled: true
   strict_keywords: true
+  filterout_days: 1
   id: rsshub_36kr_newsflashes
   keywords:
   - 即时零售

@@ -52,11 +52,12 @@ routing:
       max_tokens: 2048
       temperature: 0.1
   generate_daily_report:
-    default: LongCat-Flash-Chat
+    default: LongCat-Flash-Thinking
     fallback:
+    - LongCat-Flash-Chat
     - LongCat-Flash-Lite
     params:
-      max_tokens: 4096
+      max_tokens: 8192
       temperature: 0.3
     optional_deep_review: LongCat-Flash-Thinking
   generate_podcast:

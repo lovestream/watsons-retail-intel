@@ -1433,11 +1433,10 @@ def refine_v2_with_llm(
     """
     # 构建事件池摘要（排除 ARCHIVE 和 tracking 事件）
     events_lines = []
+    tracking_lines = []
     for ev in events:
         if ev.get("priority") == "ARCHIVE":
             continue
-        if ev.get("report_eligibility") == "tracking":
-            continue  # tracking事件仅用于11节近期延续观察，不入LLM事件池
         ba = ev.get("business_analysis", {})
         ev_line = (
             f"[{ev.get('priority','')}] {ev.get('event_id','')} "
@@ -1450,8 +1449,14 @@ def refine_v2_with_llm(
             f"建议：{ba.get('recommended_action','')[:80]} | "
             f"指标：{'、'.join(ba.get('tracking_metrics',[])[:3])}"
         )
-        events_lines.append(ev_line)
+        if ev.get("report_eligibility") == "tracking":
+            tracking_lines.append(ev_line)
+        else:
+            events_lines.append(ev_line)
     events_summary = "\n".join(events_lines[:20])
+    if tracking_lines:
+        events_summary += "\n\n--- 近期延续观察（tracking，仅用于第11节）---\n"
+        events_summary += "\n".join(tracking_lines[:8])
 
     # 构建唯一建议动作候选
     if unique_action_event:
@@ -1478,7 +1483,7 @@ def refine_v2_with_llm(
             system_prompt=formatted_system,
             response_format="text",
             temperature=0.3,
-            max_tokens=4096,
+            max_tokens=8192,
             model=model,
         )
 
@@ -1522,7 +1527,7 @@ def refine_with_llm(draft: str, date_str: str, llm_client,
             system_prompt=formatted_system,
             response_format="text",
             temperature=0.3,
-            max_tokens=4096,
+            max_tokens=8192,
             model=model,
         )
 

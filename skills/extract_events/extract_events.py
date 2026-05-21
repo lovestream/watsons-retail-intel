@@ -93,6 +93,11 @@ LLM_SYSTEM_PROMPT = (
     "2. 没有新增事实 → article_reject=true\n"
     "3. 每个事件必须有 fact 和 evidence_text\n"
     "4. 事件服务于屈臣氏电商经营分析\n\n"
+    "confidence评定标准（重要）：\n"
+    "- high: 事实明确、有具体数据或官方来源、时新性强（今天/昨天发生或明确标注日期）\n"
+    "- medium: 事实较明确但缺少关键数据细节，或时效为近期但非当天\n"
+    "- low: 事实模糊、无法验证、或仅为趋势/观点而非具体事件\n"
+    "注意：不要默认打low！如果文章明确报道了某个事件且有具体信息，就打high或medium。\n\n"
     "事件类型枚举：\n"
     + ", ".join(EVENT_TYPES) + "\n\n"
     "业务变量枚举：\n"
@@ -139,6 +144,7 @@ SIMPLIFIED_SYSTEM_PROMPT = (
     "事件类型枚举: " + ", ".join(EVENT_TYPES) + "。"
     "业务变量枚举: " + ", ".join(BUSINESS_VARIABLES) + "。"
     "最多抽取3个事件。"
+    "confidence: high=事实明确+有数据/官方来源; medium=事实较明确但少数据; low=模糊/无法验证。不要默认打low。"
 )
 
 SIMPLIFIED_USER_TEMPLATE = """请只从文章中抽取明确事实事件，不要解释，不要建议。
@@ -172,6 +178,121 @@ SIMPLIFIED_USER_TEMPLATE = """请只从文章中抽取明确事实事件，不�
 
 
 # ===================== 工具函数 =====================
+
+
+def _title_char_set(title: str) -> set:
+    """提取标题中的中文字符集合（用于 Jaccard 相似度）。"""
+    return set(c for c in title if '\u4e00' <= c <= '\u9fff')
+
+
+def _jaccard_similarity(s1: set, s2: set) -> float:
+    """计算两个集合的 Jaccard 相似度。"""
+    if not s1 or not s2:
+        return 0.0
+    return len(s1 & s2) / len(s1 | s2)
+
+
+def _event_richness_score(event: dict) -> float:
+    """评估事件信息丰富度（用于去重时选择保留哪个）。"""
+    score = 0.0
+    # 有 summary 且较长
+    summary = event.get("summary", "")
+    score += min(len(summary) / 200, 2.0)
+    # 有 business_analysis
+    ba = event.get("business_analysis", {})
+    if ba:
+        score += 1.0
+        if ba.get("watson_impact"):
+            score += 0.5
+        if ba.get("action_level") == "immediate":
+            score += 0.5
+    # 有 entities
+    entities = event.get("entities", {})
+    if entities:
+        score += 0.3 * min(len(str(entities)), 5)
+    # confidence
+    if event.get("confidence") == "high":
+        score += 1.0
+    elif event.get("confidence") == "medium":
+        score += 0.5
+    # source_articles 数量
+    score += 0.2 * len(event.get("source_articles", []))
+    return score
+
+
+def deduplicate_events(events: list, similarity_threshold: float = 0.55) -> tuple:
+    """对事件列表进行去重。
+
+    策略：
+    1. 基于标题中文字符的 Jaccard 相似度
+    2. 相似度 > threshold 且主体实体有交集 → 视为重复
+    3. 保留信息最丰富的版本，合并 source_articles
+
+    Returns:
+        (deduplicated_events, merge_log)
+    """
+    if not events:
+        return events, []
+
+    # 预计算标题字符集
+    char_sets = [_title_char_set(e.get("event_title", "")) for e in events]
+
+    # 标记哪些事件被合并掉了
+    merged_into = {}  # index → merged_into_index
+    merge_log = []
+
+    for i in range(len(events)):
+        if i in merged_into:
+            continue
+        for j in range(i + 1, len(events)):
+            if j in merged_into:
+                continue
+
+            sim = _jaccard_similarity(char_sets[i], char_sets[j])
+            if sim < similarity_threshold:
+                continue
+
+            # 检查主体实体是否有交集
+            ent_i = set()
+            ent_j = set()
+            for key in ("companies", "brands", "platforms"):
+                ent_i.update(events[i].get("entities", {}).get(key, []))
+                ent_j.update(events[j].get("entities", {}).get(key, []))
+
+            # 如果两个都有实体但无交集，不合并
+            if ent_i and ent_j and not (ent_i & ent_j):
+                continue
+
+            # 决定保留哪个
+            score_i = _event_richness_score(events[i])
+            score_j = _event_richness_score(events[j])
+
+            if score_j > score_i:
+                # j 更丰富，合并 i 到 j
+                keeper, absorbed = j, i
+            else:
+                keeper, absorbed = i, j
+
+            merged_into[absorbed] = keeper
+
+            # 合并 source_articles
+            keeper_sources = events[keeper].get("source_articles", [])
+            absorbed_sources = events[absorbed].get("source_articles", [])
+            existing_urls = {s.get("url") for s in keeper_sources}
+            for src in absorbed_sources:
+                if src.get("url") not in existing_urls:
+                    keeper_sources.append(src)
+            events[keeper]["source_articles"] = keeper_sources
+
+            merge_log.append({
+                "kept": events[keeper].get("event_title", "")[:60],
+                "absorbed": events[absorbed].get("event_title", "")[:60],
+                "similarity": round(sim, 3),
+            })
+
+    # 构建去重后的列表
+    deduped = [e for idx, e in enumerate(events) if idx not in merged_into]
+    return deduped, merge_log
 
 
 def load_yaml(filepath: str) -> dict:
@@ -745,22 +866,44 @@ def extract_events(
     articles = cleaned_data.get("articles", [])
     article_count = len(articles)
 
-    # ── V2: 同时加载 reference 池文章 ──
+    # ── V2: 同时加载 reference 池文章（仅 in_window / near_window）──
     # reference 池的文章虽然不在时间窗口内或分数较低，但可能包含有价值的行业分析
     # 标记为 reference=True，便于后续区分优先级
+    # ⚠️ 重要：只纳入 in_window / near_window 的 reference 文章，
+    #          排除 old / unknown_time 以防止旧闻（如去年双11）污染日报
     reference_file = resolve_path(project_root, f"data/cleaned/{date}/reference_articles.json")
     ref_count = 0
+    ref_skipped_count = 0
     try:
         if os.path.exists(reference_file):
             with open(reference_file, "r", encoding="utf-8") as f:
                 ref_data = json.load(f)
-            ref_articles = ref_data if isinstance(ref_data, list) else ref_data.get("articles", [])
+            all_ref_articles = ref_data if isinstance(ref_data, list) else ref_data.get("articles", [])
+            # 仅保留时效性合适的 reference 文章：
+            #   - in_window / near_window (时间窗口内)
+            #   - uncertain_date (CloakBrowser/XCrawl 搜索采集，日期不精确但内容为近期)
+            #   - unknown_time 但 campaign_temporality 为 current/upcoming (当年大促内容)
+            ref_articles = []
+            for a in all_ref_articles:
+                ts = a.get("time_status", "")
+                ct = (a.get("filter") or {}).get("campaign_temporality", "not_campaign")
+                collector = a.get("collector", "") or a.get("source_type", "")
+                if ts in ("in_window", "near_window"):
+                    a["is_reference"] = True
+                    ref_articles.append(a)
+                elif ts == "uncertain_date":
+                    # CloakBrowser/XCrawl 搜索采集的近期内容，日期提取失败但值得纳入
+                    a["is_reference"] = True
+                    ref_articles.append(a)
+                elif ts in ("unknown_time", "old") and ct in ("current_campaign", "upcoming_campaign"):
+                    # 当年大促内容即使 time_status 不明也纳入
+                    a["is_reference"] = True
+                    ref_articles.append(a)
+                else:
+                    ref_skipped_count += 1
             ref_count = len(ref_articles)
-            # 标记 reference 文章
-            for a in ref_articles:
-                a["is_reference"] = True
             articles.extend(ref_articles)
-            logger.info(f"加载 reference 文章: {ref_count} 篇")
+            logger.info(f"加载 reference 文章: {ref_count} 篇 (跳过 {ref_skipped_count} 篇 old/unknown_time)")
     except Exception as e:
         logger.warning(f"加载 reference 文章失败（非阻塞）: {e}")
 
@@ -1132,6 +1275,17 @@ def extract_events(
             source_name = article.get("source_name", "unknown")
             article_id = article.get("article_id", f"art_{i+1:04d}")
             by_source[source_name] += 1
+
+    # ── 事件去重 ──
+    pre_dedup_count = len(all_events)
+    all_events, dedup_log = deduplicate_events(all_events, similarity_threshold=0.50)
+    dedup_count = pre_dedup_count - len(all_events)
+    if dedup_count > 0:
+        logger.info(f"  事件去重: {pre_dedup_count} → {len(all_events)} (合并 {dedup_count} 个重复事件)")
+        for entry in dedup_log[:10]:
+            logger.info(f"    合并: '{entry['absorbed']}' → '{entry['kept']}' (sim={entry['similarity']})")
+    else:
+        logger.info(f"  事件去重: 无重复事件")
 
     # ── 保存输出 ──
     events_data = {

@@ -83,15 +83,16 @@ STEP_ORDER = [
     "source_health_report",         # 源健康
     "tavily_gap_search",            # Tavily 补搜
     "filter_merged",                # 补搜后重过滤
+    "enrich_cleaned_fulltext",      # cleaned 全文补抓
     "extract",                      # 事件提取
     "score",                        # 事件评分
     "analyze",                      # 经营分析
     "novelty_check",                # 新颖性检查
     "evergreen_candidates",         # 常青知识库
+    "generate_podcast",             # 播客（从事件池直接生成，独立于日报）
+    "podcast_review",               # 播客审稿
     "generate_report",              # 日报生成
     "editor_review",                # 审稿
-    "generate_podcast",             # 播客（从终稿转化为口播稿）
-    "podcast_review",               # 播客审稿
     "send_daily_report_email",      # 邮件
     "pipeline_alert",               # 告警
 ]
@@ -152,6 +153,11 @@ STEP_DEFS = {
         "module": "skills.filter_relevant_articles.filter_relevant_articles",
         "function": "filter_relevant_articles",
         "cli": "skills/filter_relevant_articles/filter_relevant_articles.py",
+    },
+    "enrich_cleaned_fulltext": {
+        "module": "skills.enrich_cleaned_fulltext.enrich_cleaned_fulltext",
+        "function": "enrich_cleaned_fulltext",
+        "cli": "skills/enrich_cleaned_fulltext/enrich_cleaned_fulltext.py",
     },
     "extract": {
         "module": "skills.extract_events.extract_events",
@@ -444,6 +450,8 @@ def build_step_args(step: str, project_root: str, date: str,
         base["raw_file"] = resolve_path(
             project_root, f"data/raw/{date}/raw_articles_merged.json")
         base["date"] = date
+    elif step == "enrich_cleaned_fulltext":
+        pass  # 只需 project_root 和 date
     elif step == "extract":
         base["use_llm"] = use_llm
     elif step == "score":

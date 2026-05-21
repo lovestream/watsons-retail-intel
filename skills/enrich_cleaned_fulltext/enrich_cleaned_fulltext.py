@@ -98,6 +98,61 @@ def _fetch_with_cloakbrowser(url: str, timeout: int = 30) -> Optional[str]:
         return None
 
 
+def _fetch_with_requests(url: str, timeout: int = 15) -> Optional[str]:
+    """用 requests + BeautifulSoup 抓取正文（轻量 fallback）。"""
+    try:
+        import requests
+        from bs4 import BeautifulSoup
+
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                          "AppleWebKit/537.36 (KHTML, like Gecko) "
+                          "Chrome/120.0.0.0 Safari/537.36",
+            "Accept": "text/html,application/xhtml+xml",
+            "Accept-Language": "zh-CN,zh;q=0.9",
+        }
+        resp = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
+        if resp.status_code != 200:
+            return None
+
+        # 自动检测编码
+        resp.encoding = resp.apparent_encoding or "utf-8"
+        soup = BeautifulSoup(resp.text, "lxml")
+
+        # 移除无关标签
+        for tag in soup.find_all(["script", "style", "nav", "header", "footer", "aside"]):
+            tag.decompose()
+
+        # 尝试常见正文容器
+        selectors = [
+            "article", ".article-content", ".post-content",
+            ".entry-content", "#article-content", ".content-article",
+            ".article-body", ".news-content", ".detail-content",
+            "main .content", ".main-content",
+        ]
+        for sel in selectors:
+            el = soup.select_one(sel)
+            if el:
+                text = el.get_text(separator="\n", strip=True)
+                if _count_chinese_chars(text) >= MIN_CONTENT_LENGTH:
+                    return text
+
+        # fallback: 最长的 <p> 集合
+        paragraphs = soup.find_all("p")
+        if paragraphs:
+            text = "\n".join(p.get_text(strip=True) for p in paragraphs if len(p.get_text(strip=True)) > 20)
+            if _count_chinese_chars(text) >= MIN_CONTENT_LENGTH:
+                return text
+
+        return None
+    except ImportError:
+        logger.debug("requests/bs4 未安装，跳过 requests 抓取")
+        return None
+    except Exception as e:
+        logger.debug(f"requests 抓取失败 {url}: {e}")
+        return None
+
+
 def enrich_cleaned_fulltext(
     project_root: str,
     date: str,
@@ -172,10 +227,14 @@ def enrich_cleaned_fulltext(
     for idx, url, title in to_process:
         logger.info(f"  [{enriched_count+1}/{len(to_process)}] {title} | {url[:60]}")
 
-        # 先试 CloakBrowser
+        # 先试 CloakBrowser（最强，能处理 JS 渲染）
         content = _fetch_with_cloakbrowser(url)
 
-        # 再试 XCrawl
+        # 再试 requests+BS4（轻量，适合静态页面）
+        if not content:
+            content = _fetch_with_requests(url)
+
+        # 最后试 XCrawl scrape API
         if not content and xcrawl_keys:
             content = _fetch_with_xcrawl(url, xcrawl_keys)
 
@@ -325,10 +384,14 @@ def enrich_cleaned_fulltext(
     for idx, url, title in to_process:
         logger.info(f"  [{enriched_count+1}/{len(to_process)}] {title} | {url[:60]}")
 
-        # 先试 CloakBrowser
+        # 先试 CloakBrowser（最强，能处理 JS 渲染）
         content = _fetch_with_cloakbrowser(url)
 
-        # 再试 XCrawl
+        # 再试 requests+BS4（轻量，适合静态页面）
+        if not content:
+            content = _fetch_with_requests(url)
+
+        # 最后试 XCrawl scrape API
         if not content and xcrawl_keys:
             content = _fetch_with_xcrawl(url, xcrawl_keys)
 

@@ -511,6 +511,16 @@ def generate_podcast(
             except Exception as e:
                 log(f"  ⚠️ 合并 business_analysis 失败: {e}")
 
+    # ── 事件去重（避免重复事件干扰 LLM）──
+    try:
+        from skills.extract_events.extract_events import deduplicate_events
+        pre_count = len(all_events)
+        all_events, _ = deduplicate_events(all_events, similarity_threshold=0.50)
+        if len(all_events) < pre_count:
+            log(f"  事件去重: {pre_count} → {len(all_events)}")
+    except Exception as e:
+        log(f"  ⚠️ 事件去重跳过: {e}")
+
     # ── 判断是否无信号 ──
     core_events = [e for e in all_events
                    if e.get("report_eligibility") == "core"

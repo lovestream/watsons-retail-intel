@@ -85,6 +85,12 @@ DEFAULT_EXCLUDE_DOMAINS = [
     "apps.apple.com", "play.google.com",
     # 优惠券/比价聚合 — 非原创内容
     "smzdm.com", "manmanbuy.com", "gwdang.com",
+    # 港台/海外 — 非大陆内容
+    "watsons.com.hk", "watsons.com.tw",
+    "hk01.com", "cna.com.tw", "storm.mg",
+    "tw.news.yahoo.com", "today.line.me",
+    "tvbs.com.tw", "udn.com", "skm.com.tw",
+    "youtube.com", "wikipedia.org",
 ]
 
 # ===================== 配置加载 =====================

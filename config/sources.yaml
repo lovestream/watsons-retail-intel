@@ -376,7 +376,8 @@ rsshub_sources:
 - allow_old: false
   category: 综合快讯
   daily_priority: 60
-  enabled: false
+  enabled: true
+  strict_keywords: true
   id: rsshub_36kr_newsflashes
   keywords:
   - 即时零售
@@ -419,7 +420,7 @@ rsshub_sources:
 - allow_old: false
   category: 综合商业
   daily_priority: 70
-  enabled: true
+  enabled: false
   filterout_days: 1
   id: rsshub_huxiu_article
   keywords:
@@ -440,7 +441,7 @@ rsshub_sources:
 - allow_old: false
   category: 消费
   daily_priority: 75
-  enabled: true
+  enabled: false
   filterout_days: 1
   id: rsshub_huxiu_consumer_channel
   keywords:
@@ -460,7 +461,7 @@ rsshub_sources:
 - allow_old: false
   category: 商业
   daily_priority: 65
-  enabled: true
+  enabled: false
   filterout_days: 1
   id: rsshub_huxiu_business_channel
   keywords:
@@ -984,7 +985,8 @@ rsshub_sources:
 - allow_old: false
   category: 淘宝闪购
   daily_priority: 60
-  enabled: false
+  enabled: true
+  filterout_days: 14
   id: rsshub_36kr_search_taobao_flash
   keywords:
   - 淘宝闪购
@@ -1000,7 +1002,8 @@ rsshub_sources:
 - allow_old: false
   category: 京东秒送
   daily_priority: 60
-  enabled: false
+  enabled: true
+  filterout_days: 14
   id: rsshub_36kr_search_jd_instant
   keywords:
   - 京东秒送
@@ -1016,7 +1019,8 @@ rsshub_sources:
 - allow_old: false
   category: 抖音小时达
   daily_priority: 60
-  enabled: false
+  enabled: true
+  filterout_days: 14
   id: rsshub_36kr_search_douyin_hour
   keywords:
   - 抖音小时达

@@ -97,6 +97,25 @@ STEP_ORDER = [
     "pipeline_alert",               # 告警
 ]
 
+# 非关键步骤：失败时记录错误但不阻止后续步骤
+# 这些步骤是"增强型"的，失败不影响核心数据流
+NON_CRITICAL_STEPS = {
+    "health_check",              # 健康检查失败不影响采集
+    "source_url_monitor",        # Web Monitor 失败不影响主采集
+    "cloakbrowser_collect",      # CloakBrowser 失败有其他源兜底
+    "cloakbrowser_content_fetch",
+    "cloakbrowser_enrich",
+    "cloakbrowser_date_verify",
+    "tophub_collect",            # TopHub 失败有其他源兜底
+    "quality_funnel_report",     # 报告类步骤
+    "source_health_report",
+    "tavily_gap_search",         # Tavily 已限流，失败正常
+    "enrich_cleaned_fulltext",   # 全文补抓失败不影响事件提取
+    "evergreen_candidates",      # 常青库是增强功能
+    "podcast_review",            # 播客审稿失败不影响日报
+    "pipeline_alert",            # 告警失败不影响产出
+}
+
 # 步骤 → (模块路径, 函数名, CLI脚本路径)
 STEP_DEFS = {
     "health_check": {
@@ -1877,6 +1896,13 @@ def run_daily_pipeline(
                 step_info["errors"] = step_errors if isinstance(step_errors, list) else [str(step_errors)]
                 logger.error(f"  ❌ 步骤 {step} 失败: {step_info['errors']}")
                 pipeline_ok = False
+                # 非关键步骤失败时继续执行后续步骤
+                if step in NON_CRITICAL_STEPS:
+                    logger.warning(f"  ⚠️ 非关键步骤 {step} 失败，继续执行...")
+                    step_info["finished_at"] = datetime.now(CST).isoformat()
+                    step_info["duration_seconds"] = time.time() - step_start
+                    step_results.append(step_info)
+                    continue
                 if not continue_on_error:
                     step_info["finished_at"] = datetime.now(CST).isoformat()
                     step_info["duration_seconds"] = time.time() - step_start
@@ -1944,6 +1970,13 @@ def run_daily_pipeline(
             logger.error(f"  ❌ 步骤 {step} 异常: {e}")
             logger.error(traceback.format_exc())
             pipeline_ok = False
+            # 非关键步骤异常时继续执行
+            if step in NON_CRITICAL_STEPS:
+                logger.warning(f"  ⚠️ 非关键步骤 {step} 异常，继续执行...")
+                step_info["finished_at"] = datetime.now(CST).isoformat()
+                step_info["duration_seconds"] = time.time() - step_start
+                step_results.append(step_info)
+                continue
             if not continue_on_error:
                 step_info["finished_at"] = datetime.now(CST).isoformat()
                 step_info["duration_seconds"] = time.time() - step_start

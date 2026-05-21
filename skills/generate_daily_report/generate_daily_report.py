@@ -418,7 +418,36 @@ def select_top_signals(events: List[dict], max_signals: int = 3) -> List[dict]:
         return (eligibility_score, novelty_score, p, al_score, conf, ws)
 
     signal_candidates.sort(key=signal_priority)
-    return signal_candidates[:max_signals]
+
+    # ── 去重：同一主实体不重复出现在 top signals ──
+    selected = []
+    seen_primary_entities = set()
+    for ev in signal_candidates:
+        # 提取主实体（标题前缀中的公司/平台名）
+        title = ev.get("event_title", "")
+        entities = ev.get("entities", {})
+        primary = set()
+        for key in ("companies", "platforms"):
+            for ent in (entities.get(key, []) if isinstance(entities, dict) else []):
+                if ent and len(ent) >= 2:
+                    primary.add(ent)
+        # 如果主实体已出现过，跳过（除非还没选够）
+        if primary and primary & seen_primary_entities:
+            continue
+        selected.append(ev)
+        seen_primary_entities.update(primary)
+        if len(selected) >= max_signals:
+            break
+
+    # 如果去重后不够，从剩余中补充
+    if len(selected) < max_signals:
+        for ev in signal_candidates:
+            if ev not in selected:
+                selected.append(ev)
+                if len(selected) >= max_signals:
+                    break
+
+    return selected
 
 
 def select_unique_action(events: List[dict]) -> Optional[dict]:
@@ -1830,18 +1859,8 @@ def generate_daily_report(
         logger.info(f"开始生成日报: date={date}")
 
         # ═══════════════════════════════════════════
-        # 快速路径: 播客脚本已存在 → 转化为结构化日报
-        # ═══════════════════════════════════════════
-        podcast_script_path = resolve_path(project_root, f"podcasts/scripts/{date}.md")
-        if os.path.exists(podcast_script_path):
-            logger.info(f"  检测到播客脚本: {podcast_script_path}")
-            result = _generate_report_from_podcast(
-                project_root, date, podcast_script_path, output_file, use_llm, errors
-            )
-            if result is not None:
-                return result
-            logger.warning("  播客转日报失败，回退到事件池模式")
-
+        # 方案C架构：日报独立从事件池生成，不再从播客转化
+        # 播客只覆盖5个事件，日报需要覆盖全部渠道和更多事件
         logger.info(f"  events_file: {events_file}")
         logger.info(f"  output_file: {output_file}")
 
@@ -1868,6 +1887,16 @@ def generate_daily_report(
 
         # ── 跨日话题去重 ──
         all_events = _deduplicate_against_previous_day(all_events, project_root, date)
+
+        # ── 同日事件去重（标题相似度合并）──
+        try:
+            from skills.extract_events.extract_events import deduplicate_events
+            pre_count = len(all_events)
+            all_events, _ = deduplicate_events(all_events, similarity_threshold=0.50)
+            if len(all_events) < pre_count:
+                logger.info(f"  同日去重: {pre_count} → {len(all_events)}")
+        except Exception as e:
+            logger.warning(f"  同日去重跳过: {e}")
 
         # ── 加载参考文章（可选） ──
         reference_articles = []

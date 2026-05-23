@@ -57,14 +57,16 @@ except ImportError:
 # ===================== 常量 =====================
 
 VALID_SECTIONS = [
-    "01 今日一句话判断",
-    "02 今日最值得关注的3个信号",
-    "03 平台变化解读",
-    "04 竞对与品牌动作",
-    "05 品类与场景机会",
-    "06 对屈臣氏的经营提示",
-    "07 今日唯一建议动作",
-    "08 明日追踪清单",
+    "01 今日一句话结论",
+    "02 今日三条必听",
+    "03 即时零售重点变化",
+    "04 本地生活重点变化", 
+    "05 竞对观察",
+    "06 对屈臣氏的机会点",
+    "07 风险预警",
+    "08 今日建议动作",
+    "09 每日八问",
+    "11 近期延续观察",
 ]
 
 VAGUE_PHRASES = [
@@ -73,7 +75,7 @@ VAGUE_PHRASES = [
 ]
 
 # ── 标记词：低置信度专用，不含规则兜底标记 ──
-MARK_WORDS_LOW = ["待验证", "⚠️", "需验证", "低置信", "低置信度"]
+MARK_WORDS_LOW = ["待验证", "⚠️", "需验证", "低置信", "低置信度", "🔍"]
 
 # ── 标记词：规则兜底专用，不含低置信度标记 ──
 MARK_WORDS_RF = ["规则兜底", "🔄", "规则提取"]
@@ -118,11 +120,13 @@ def find_valid_unique_action_events(events: List[dict]) -> List[dict]:
     """找到所有合规的今日唯一建议动作事件。
 
     合规条件: priority=P1或更高, confidence≠low, extraction_method≠rule_fallback,
-              action_level=immediate或test
+              action_level=immediate或test, report_eligibility≠archive
     """
     candidates = []
     for ev in events:
         if ev.get("priority") == "ARCHIVE":
+            continue
+        if ev.get("report_eligibility") == "archive":
             continue
         ba = ev.get("business_analysis", {})
         if ev.get("priority") not in ("P0", "P1"):
@@ -155,11 +159,26 @@ def rule_validate(
 
     event_id_pattern = re.compile(r'E\d{8}_\d{4}')
 
-    # ── 1. 是否包含8个固定章节 ──
+    # ── 1. 是否包含固定章节 ──
+    # 11 近期延续观察: 只有存在 ongoing/tracking 事件时才必须
+    has_ongoing_or_tracking = any(
+        ev.get("novelty_status") == "ongoing"
+        or ev.get("report_eligibility") == "tracking"
+        for ev in events
+        if ev.get("priority") != "ARCHIVE"
+    )
+    required_sections = list(VALID_SECTIONS)
+    if not has_ongoing_or_tracking:
+        # No ongoing events → 11 近期延续观察 is optional
+        required_sections = [s for s in required_sections if not s.startswith("09")]
     missing_sections = []
-    for section in VALID_SECTIONS:
-        if section not in draft:
+    for section in required_sections:
+        section_num = section.split()[0]  # "01", "02", ...
+        if section not in draft and f"## {section_num} " not in draft and f"## {section_num}\n" not in draft:
             missing_sections.append(section)
+    # 11 近期延续观察 if present but empty is also OK
+    if "11 近期延续观察" not in draft and "## 11 " not in draft and "## 11\n" not in draft and has_ongoing_or_tracking:
+        missing_sections.append("11 近期延续观察")
     if missing_sections:
         issues.append({
             "type": "missing_section",
@@ -209,7 +228,7 @@ def rule_validate(
         })
 
     # ── 5. 今日唯一建议动作是否只有一条 ──
-    section_07_start = draft.find("07 今日唯一建议动作")
+    section_07_start = draft.find("08 今日建议动作")
     if section_07_start >= 0:
         section_07_end = draft.find("---", section_07_start + 1)
         if section_07_end < 0:
@@ -263,12 +282,17 @@ def rule_validate(
                     break
 
             if not has_mark:
-                issues.append({
-                    "type": "low_confidence_strong_claim",
-                    "severity": "medium",
-                    "description": f"低置信度事件 {eid} 缺少'⚠️待验证'标记",
-                    "fix": f"在 {eid} 附近添加'⚠️待验证'标记",
-                })
+                    is_p1_or_high = (
+                        ev.get("priority") == "P1"
+                        or (ev.get("weighted_score", 0) >= 3.5
+                        and ev.get("scores", {}).get("source_credibility", 0) >= 3)
+                    )
+                    issues.append({
+                        "type": "low_confidence_strong_claim",
+                        "severity": "low" if is_p1_or_high else "medium",
+                        "description": f"低置信度事件 {eid} 缺少标记({'🔍' if is_p1_or_high else '⚠️待验证'})",
+                        "fix": f"在 {eid} 附近添加{'🔍' if is_p1_or_high else '⚠️待验证'}标记",
+                    })
 
     # ── 8. rule_fallback 事件标记（独立检查，只用规则兜底标记词） ──
     rf_events = [ev for ev in events if ev.get("extraction_method") == "rule_fallback"]
@@ -295,18 +319,23 @@ def rule_validate(
                     "fix": f"在 {eid} 附近添加'🔄规则兜底'标记",
                 })
 
-    # ── 9. 全文字数（以中文字符数为准） ──
-    char_count = count_all_chars_no_space(draft)
-    chinese_count = count_chinese_chars(draft)
-    stats["char_count"] = char_count
-    stats["chinese_char_count"] = chinese_count
-    if chinese_count > 3000:
-        issues.append({
-            "type": "too_long",
-            "severity": "medium",
-            "description": f"日报中文字符数{chinese_count}超过3000(总字符{char_count})",
-            "fix": "压缩至3000中文字符以内",
-        })
+    # ── 8.5 tracking事件不得出现在02-05正文节 ──
+    sec_body = re.search(r'## 02.*?(?=## 06|\Z)', draft, re.DOTALL)
+    sec_body_c = sec_body.group(0) if sec_body else ""
+    tracking_evs = [ev for ev in events
+                    if ev.get("report_eligibility") == "tracking"
+                    and ev.get("priority") != "ARCHIVE"]
+    for ev in tracking_evs:
+        eid = ev.get("event_id", "")
+        if eid and eid in sec_body_c:
+            issues.append({
+                "type": "tracking_in_core_signal",
+                    "severity": "medium",
+                "description": f"tracking事件 {eid} 出现在02-05正文节，应仅在11节",
+                "fix": f"将 {eid} 从02-05节移除，仅保留在11节（若是背景引用则不阻断发送）",
+            })
+
+    # ── 9. 全文字数统计（仅信息，不约束） ──
 
     # ── 10. 空话检查 ──
     vague_found = []
@@ -334,6 +363,59 @@ def rule_validate(
             "fix": "替换为具体行动或删除",
         })
 
+    # ── 11. 新颖性规则检查 ──
+    # repeated 事件不得出现在核心信号中
+    # background 事件不得出现在核心正文中
+    section_02_start = draft.find("02 今日三条必听")
+    if section_02_start >= 0:
+        section_02_end = draft.find("---", section_02_start + 1)
+        if section_02_end < 0:
+            section_02_end = draft.find("## 03", section_02_start + 1)
+        if section_02_end < 0:
+            section_02_end = len(draft)
+        section_02_text = draft[section_02_start:section_02_end]
+        # 检查 repeated 事件不得在核心信号中
+        repeated_in_signal = []
+        for ev in events:
+            if ev.get("novelty_status") == "repeated":
+                ev_id = ev.get("event_id", "")
+                if ev_id and ev_id in section_02_text:
+                    repeated_in_signal.append(f"{ev_id}: {ev.get('event_title', '')[:40]}")
+        if repeated_in_signal:
+            issues.append({
+                "type": "repeated_in_core_signal",
+                "severity": "high",
+                "description": f"repeated事件出现在核心信号中: {', '.join(repeated_in_signal[:3])}",
+                "fix": "将repeated事件移至追踪清单或延续观察区域",
+            })
+        # 检查 background 事件不得在核心信号中
+        background_in_signal = []
+        for ev in events:
+            if ev.get("report_eligibility") == "archive":
+                ev_id = ev.get("event_id", "")
+                if ev_id and ev_id in section_02_text:
+                    background_in_signal.append(f"{ev_id}: {ev.get('event_title', '')[:40]}")
+        if background_in_signal:
+            issues.append({
+                "type": "background_in_core_signal",
+                "severity": "medium",
+                "description": f"background事件出现在核心信号中: {', '.join(background_in_signal[:3])}",
+                "fix": "删除background事件引用，或移至追踪清单",
+            })
+
+    # ── 12. 新颖性统计 ──
+    novelty_stats = {
+        "core_count": sum(1 for ev in events if ev.get("report_eligibility") == "core"),
+        "tracking_count": sum(1 for ev in events if ev.get("report_eligibility") == "tracking"),
+        "reference_count": sum(1 for ev in events if ev.get("report_eligibility") == "reference"),
+        "archive_count": sum(1 for ev in events if ev.get("report_eligibility") == "archive"),
+        "new_today_count": sum(1 for ev in events if ev.get("novelty_status") == "new_today"),
+        "updated_today_count": sum(1 for ev in events if ev.get("novelty_status") == "updated_today"),
+        "ongoing_count": sum(1 for ev in events if ev.get("novelty_status") == "ongoing"),
+        "repeated_count": sum(1 for ev in events if ev.get("novelty_status") == "repeated"),
+    }
+    stats["novelty_stats"] = novelty_stats
+
     # ── 统计 ──
     stats["date"] = ""
     stats["event_id_count"] = len(found_ids)
@@ -352,6 +434,13 @@ LLM_SYSTEM_PROMPT = """你是"即时零售 × 个护美妆经营日报"的总编
 
 你的任务是审查日报初稿，并基于事件池修订为可发送终稿。
 
+## 内容质量标准
+每条核心信号必须包含（按此顺序）：
+- **事实**：客观准确的事件描述，引用具体数据
+- **解释**：为什么发生、背后的驱动因素
+- **判断**：对竞争格局/市场趋势的影响
+- **对屈臣氏的意义**：为什么屈臣氏电商负责人要在意
+
 你必须遵守：
 1. 不得新增事件池外事实。
 2. 不得新增事件池外数据。
@@ -361,26 +450,36 @@ LLM_SYSTEM_PROMPT = """你是"即时零售 × 个护美妆经营日报"的总编
 6. 强化屈臣氏电商负责人视角。
 7. 每个核心判断必须保留 event_id。
 8. 今日唯一建议动作只能有一条。
-9. 终稿必须保留8个固定章节。
-10. 终稿控制在1800—3000中文字符。
-11. 输出严格JSON，不输出解释性闲聊。
+9. 终稿必须严格保留以下9个固定章节结构（09为每日八问），章节名不能改动，不能增删：
+   - 01 今日一句话结论
+   - 02 今日三条必听
+   - 03 即时零售重点变化
+   - 04 本地生活重点变化
+   - 05 竞对观察
+   - 06 对屈臣氏的机会点
+   - 07 风险预警
+   - 08 今日建议动作
+   - 09 每日八问
+   （如有ongoing事件，可追加11 近期延续观察）
+10. report_eligibility=tracking 的事件只能出现在11 近期延续观察节（如有），严禁移入02-05节正文。
+11. 不得新增事件池外的事件ID。
+12. 篇幅自然：事件多信息量大自然写长，事件少精简写短。不设固定字数上下限，宁长勿短——宁可多写有价值的分析和建议，不要为了"短"砍掉洞察。
+13. 06经营提示按动作类型分类（商品动作/平台动作/营销动作/试点动作），每个分类：立即可做→建议试点→需要总部支持→持续观察，建议必须是"可以立刻做的事"，不能是"分析""评估""跟踪"这类观察性动词。
+14. 输出严格JSON。
+15. 表格用GFM格式（|---|---|），###和---前后留空行。
+16. 04竞争格局建议用表格，05品类机会建议用表格。
+17. 每条事件分析必须包含"经营启示"或"对屈臣氏的意义"，不能只描述事实。
 
-重要标记规则：
-- confidence=low 的事件，必须在事件ID附近添加"⚠️待验证"标记。
-- extraction_method=rule_fallback 的事件，必须在事件ID附近添加"🔄规则兜底"标记。
-- 如果一个事件两者兼具，必须同时添加"⚠️待验证"和"🔄规则兜底"两个标记，缺一不可。
+重要标记规则（仅对confidence=low的事件）：
+- confidence=low 且 P1/高加权分(ws>=3.5+source_cred>=3) → 标🔍
+- confidence=low 且不满足上述 → 标⚠️待验证
+- confidence=medium 或 high → 不需要任何标记
+- extraction_method=rule_fallback → 标🔄规则兜底（与confidence标记可叠加）
 
 输出JSON格式：
 {
   "review": {
-    "issues": [
-      {
-        "type": "unsupported_claim|overstatement|low_confidence_strong_claim|rule_fallback_strong_claim|vague_action|too_long|missing_section|invalid_unique_action|style_issue",
-        "severity": "high|medium|low",
-        "description": "问题描述",
-        "fix": "修复建议"
-      }
-    ],
+    "issues": [...],
     "sendable": true/false,
     "summary": "审稿摘要"
   },
@@ -398,17 +497,23 @@ LLM_USER_TEMPLATE = """请审稿并修订以下日报初稿，生成可发送终
 --- 日报初稿 ---
 {draft}
 
---- 要求 ---
+--- 内容要求 ---
 1. 不得新增事件池外事实和数据
-2. confidence=low 的事件，必须标注 ⚠️待验证
-3. extraction_method=rule_fallback 的事件，必须标注 🔄规则兜底
-4. 如果事件同时是 low 和 rule_fallback，必须同时标注 ⚠️待验证 和 🔄规则兜底
-5. 删除空话套话，保留具体行动
-6. 今日唯一建议动作只保留1条
-7. 终稿1800—3000中文字符
-8. 保留所有 event_id 引用
-9. 保留8个固定章节结构
-10. 输出严格JSON"""
+2. 每条核心信号包含：事实、解释、判断、对屈臣氏的意义
+3. 06经营提示按动作类型分类（商品动作/平台动作/营销动作/试点动作），每个分类：立即可做→建议试点→需要总部支持→持续观察，建议具体可执行
+4. confidence=low 的事件才需要标记：P1/高加权分(ws>=3.5+source_cred>=3)→🔍，其余→⚠️待验证
+5. extraction_method=rule_fallback→🔄规则兜底（可与置信度标记叠加）
+6. 删除空话套话，保留具体行动建议
+7. 今日唯一建议动作只保留1条，含负责人方向和时间节点
+8. 04竞争格局用表格呈现，05品类机会用表格呈现
+9. 篇幅由信息量决定：事件多就多写、把分析和建议写透；事件少就精简。不设固定字数限制。每一条建议必须是"可以立刻做的事"，不能是"分析""评估""跟踪""监测"这类空洞的观察性动词。
+10. 保留所有 event_id 引用
+11. 严格保留9个固定章节（01-09），章节名不可改动：
+    01 今日一句话结论、02 今日三条必听、03 即时零售重点变化、04 本地生活重点变化、05 竞对观察、06 对屈臣氏的机会点、07 风险预警、08 今日建议动作、09 每日八问。如有ongoing事件加追11 近期延续观察。
+12. 每个事件标注判断标签（A-必须关注/B-本周跟进/C-趋势观察/R-风险预警/K-竞对可借鉴/X-需跨部门）
+13. 09 每日八问必须完整回答8个问题
+12. ###和---前后留空行，表格用GFM格式
+13. 输出严格JSON"""
 
 
 def llm_review(
@@ -514,9 +619,20 @@ def final_validate(
     """
     final_issues = []
 
-    # 1. 8个固定章节
-    for section in VALID_SECTIONS:
-        if section not in final_md:
+    # 1. 固定章节（11 近期延续观察: 如无 ongoing/tracking 事件则可选）
+    has_ongoing_or_tracking = any(
+        ev.get("novelty_status") == "ongoing"
+        or ev.get("report_eligibility") == "tracking"
+        for ev in events
+        if ev.get("priority") != "ARCHIVE"
+    )
+    required_sections_final = list(VALID_SECTIONS)
+    if not has_ongoing_or_tracking:
+        required_sections_final = [s for s in required_sections_final if not s.startswith("09")]
+    for section in required_sections_final:
+        # 宽容匹配：精确匹配 或 数字前缀匹配（LLM 可能简化标题文字）
+        section_num = section.split()[0]  # "01", "02", ...
+        if section not in final_md and f"## {section_num} " not in final_md and f"## {section_num}\n" not in final_md:
             final_issues.append({
                 "type": "missing_section",
                 "severity": "high",
@@ -545,7 +661,7 @@ def final_validate(
         })
 
     # 4. 唯一建议动作只有1条
-    section_07_start = final_md.find("07 今日唯一建议动作")
+    section_07_start = final_md.find("08 今日建议动作")
     section_07_text = ""
     if section_07_start >= 0:
         section_07_end = final_md.find("---", section_07_start + 1)
@@ -577,23 +693,7 @@ def final_validate(
                 "stage": "final",
             })
 
-    # 6. 字数（以中文字符数为准，1800-3000）
-    chinese_count = count_chinese_chars(final_md)
-    total_count = count_all_chars_no_space(final_md)
-    if chinese_count > 3000:
-        final_issues.append({
-            "type": "too_long",
-            "severity": "medium",
-            "description": f"终稿中文字符数{chinese_count}超过3000上限(总字符{total_count})",
-            "stage": "final",
-        })
-    if chinese_count < 1800 and total_count > 100:
-        final_issues.append({
-            "type": "too_short",
-            "severity": "low",
-            "description": f"终稿中文字符数{chinese_count}低于1800下限(总字符{total_count})",
-            "stage": "final",
-        })
+    # 6. 字数（仅做信息性统计，不强制约束）
 
     # 7. low confidence 标记（独立检查，只用低置信度专用标记词）
     low_events = [ev for ev in events if ev.get("confidence") == "low"]
@@ -601,11 +701,16 @@ def final_validate(
         eid = ev.get("event_id", "")
         if eid and eid in final_md:
             if not _check_mark_near(final_md, eid, MARK_WORDS_LOW):
+                is_p1_or_high = (
+                    ev.get("priority") == "P1"
+                    or (ev.get("weighted_score", 0) >= 3.5
+                        and ev.get("scores", {}).get("source_credibility", 0) >= 3)
+                )
                 final_issues.append({
                     "type": "low_confidence_strong_claim",
-                    "severity": "medium",
-                    "description": f"低置信度事件 {eid} 缺少'⚠️待验证'标记",
-                    "fix": f"在 {eid} 附近添加'⚠️待验证'标记",
+                    "severity": "low" if is_p1_or_high else "medium",
+                    "description": f"低置信度事件 {eid} 缺少标记({'🔍' if is_p1_or_high else '⚠️待验证'})",
+                    "fix": f"在 {eid} 附近添加{'🔍' if is_p1_or_high else '⚠️待验证'}标记",
                     "stage": "final",
                 })
 
@@ -623,6 +728,24 @@ def final_validate(
                     "stage": "final",
                 })
 
+    # ── 9. tracking事件不得出现在02-05正文节 ──
+    # Sections 02-05 are the main body where tracking events don't belong
+    sec_body_md = re.search(r'## 02.*?(?=## 06|\Z)', final_md, re.DOTALL)
+    sec_body_final = sec_body_md.group(0) if sec_body_md else ""
+    tracking_events_f = [ev for ev in events
+                       if ev.get("report_eligibility") == "tracking"
+                       and ev.get("priority") != "ARCHIVE"]
+    for ev in tracking_events_f:
+        eid = ev.get("event_id", "")
+        if eid and eid in sec_body_final:
+            final_issues.append({
+                "type": "tracking_in_core_signal",
+                    "severity": "medium",
+                "description": f"tracking事件 {eid}（{ev.get('event_title','')[:30]}）出现在02-05正文节，应仅在11节出现",
+                "fix": f"将 {eid} 从02-05节移除，仅保留在11节（若是背景引用则不阻断发送）",
+                "stage": "final",
+            })
+
     # ── 计算 passed ──
     # passed=True 意味着没有任何 high severity 终稿问题
     # (缺章节、无event_id、无效ID、多条建议动作 都会阻碍发送)
@@ -633,6 +756,49 @@ def final_validate(
 
 
 # ===================== 规则压缩 =====================
+
+def _clean_report_for_display(md_text: str) -> str:
+    """清理日报文本，移除内部标记供展示用。"""
+    # 1. 方括号内的 event_id: [`E20260504_0028`]
+    md_text = re.sub(r'\[`E\d{8}_\d{4}`\]', '', md_text)
+    # 2. 裸的 backtick event_id
+    md_text = re.sub(r'`E\d{8}_\d{4}`', '', md_text)
+    # 3. 清理遗留的空方括号 [] 和空中文括号（）
+    md_text = re.sub(r'\[\]', '', md_text)
+    md_text = re.sub(r'（）', '', md_text)
+    # 4. 清理行内多余空白（不跨行！仅空格/tab）
+    md_text = re.sub(r'[ \t]+，', '，', md_text)
+    md_text = re.sub(r'，[ \t]+', '，', md_text)
+    md_text = re.sub(r'[ \t]+。', '。', md_text)
+    md_text = re.sub(r'。[ \t]+', '。', md_text)
+    # 5. 修复 markdown 格式：确保 ### --- 独立成行
+    md_text = _fix_markdown_inline(md_text)
+    # 6. 移除"证据事件"整行
+    md_text = re.sub(r'^- \*\*证据事件\*\*[：:]\s*.*\n?', '', md_text, flags=re.MULTILINE)
+    # 7. 移除"置信度"整行
+    md_text = re.sub(r'^- \*\*置信度\*\*[：:].*\n?', '', md_text, flags=re.MULTILINE)
+    # 8. 连续空行压成2个
+    md_text = re.sub(r'\n{3,}', '\n\n', md_text)
+    # 9. 行尾空白
+    md_text = re.sub(r'[ \t]+$', '', md_text, flags=re.MULTILINE)
+    return md_text
+
+
+def _fix_markdown_inline(md_text: str) -> str:
+    """修复被挤到同一行的 markdown 标记。
+
+    当事件ID被清理后，原本靠事件ID分隔的标题/分隔线可能
+    粘在前一行文本末尾，需要把它们分开。
+    """
+    # ### 标题前补空行
+    md_text = re.sub(r'([^\n])(### )', r'\1\n\n\2', md_text)
+    # --- 分隔线前补空行
+    md_text = re.sub(r'([^\n])(---\s*\n)', r'\1\n\n\2', md_text)
+    md_text = re.sub(r'([^\n])(---)$', r'\1\n\n\2', md_text, flags=re.MULTILINE)
+    # > 引用前补空行
+    md_text = re.sub(r'([^\n])(> )', r'\1\n\n\2', md_text)
+    return md_text
+
 
 def rule_compress(draft: str, events: List[dict]) -> str:
     """规则压缩：删除空话、添加缺失标记、确保唯一建议动作。
@@ -657,7 +823,7 @@ def rule_compress(draft: str, events: List[dict]) -> str:
     result = "\n".join(compressed_lines)
 
     # ── 确保唯一建议动作只有1条 ──
-    section_07_start = result.find("## 07 今日唯一建议动作")
+    section_07_start = result.find("## 08 今日建议动作")
     if section_07_start >= 0:
         valid_actions = find_valid_unique_action_events(events)
         section_07_end = result.find("## 08", section_07_start + 1)
@@ -669,7 +835,7 @@ def rule_compress(draft: str, events: List[dict]) -> str:
         if valid_actions:
             va = valid_actions[0]
             ba = va.get("business_analysis", {})
-            new_section = f"""## 07 今日唯一建议动作
+            new_section = f"""## 08 今日建议动作
 
 - **建议动作**：{ba.get('recommended_action', '待确认')}
 - **对应事件**：`{va.get('event_id', '')}` — {va.get('event_title', '')}
@@ -679,7 +845,7 @@ def rule_compress(draft: str, events: List[dict]) -> str:
 """
             result = result[:section_07_start] + new_section + result[section_07_end:]
         else:
-            new_section = """## 07 今日唯一建议动作
+            new_section = """## 08 今日建议动作
 
 今日不建议贸然推动新增动作，建议以复核高价值线索和追踪平台变化为主。
 """
@@ -691,8 +857,13 @@ def rule_compress(draft: str, events: List[dict]) -> str:
         eid = ev.get("event_id", "")
         if eid and eid in result:
             if not _check_mark_near(result, eid, MARK_WORDS_LOW):
-                # 在 event_id 首次出现处后面紧跟插入标记
-                result = result.replace(eid, f"{eid}⚠️待验证", 1)
+                is_p1_or_high = (
+                    ev.get("priority") == "P1"
+                    or (ev.get("weighted_score", 0) >= 3.5
+                        and ev.get("scores", {}).get("source_credibility", 0) >= 3)
+                )
+                tag = "🔍" if is_p1_or_high else "⚠️待验证"
+                result = result.replace(eid, f"{eid}{tag}", 1)
 
     # ── 添加缺失的 rule_fallback 标记（独立于 low confidence） ──
     rf_events = [ev for ev in events if ev.get("extraction_method") == "rule_fallback"]
@@ -736,7 +907,7 @@ def check_v2_restraint(
         })
 
     # ── 2. 唯一建议动作只有1条 ──
-    s07_start = draft_v2.find("07 今日唯一建议动作")
+    s07_start = draft_v2.find("08 今日建议动作")
     if s07_start >= 0:
         s07_end = draft_v2.find("## 08", s07_start + 1)
         if s07_end < 0:
@@ -752,23 +923,7 @@ def check_v2_restraint(
                 "fix": "只保留1条",
             })
 
-    # ── 3. 字数1600-2400中文字符 ──
-    chinese_count = count_chinese_chars(draft_v2)
-    stats["v2_chinese_chars"] = chinese_count
-    if chinese_count > 2400:
-        issues.append({
-            "type": "too_long",
-            "severity": "medium",
-            "description": f"V2中文字符{chinese_count}超2400",
-            "fix": "压缩至1600-2400",
-        })
-    if chinese_count < 1600:
-        issues.append({
-            "type": "too_short",
-            "severity": "low",
-            "description": f"V2中文字符{chinese_count}低于1600",
-            "fix": "补充至1600以上",
-        })
+    # ── 3. 字数统计（仅信息，不约束） ──
 
     # ── 4. low confidence 只能作为线索 ──
     low_events = [ev for ev in events if ev.get("confidence") == "low"]
@@ -777,13 +932,18 @@ def check_v2_restraint(
         if eid and eid in draft_v2:
             pos = draft_v2.find(eid)
             ctx = draft_v2[max(0, pos - 200):min(len(draft_v2), pos + 150)]
-            # 必须有⚠️待验证标记
+            # 必须有标记（🔍 或 ⚠️待验证）
             if not any(w in ctx for w in MARK_WORDS_LOW):
+                is_p1_or_high = (
+                    ev.get("priority") == "P1"
+                    or (ev.get("weighted_score", 0) >= 3.5
+                        and ev.get("scores", {}).get("source_credibility", 0) >= 3)
+                )
                 issues.append({
                     "type": "low_confidence_strong_claim",
-                    "severity": "medium",
-                    "description": f"V2低置信度事件 {eid} 缺少⚠️待验证标记",
-                    "fix": f"在 {eid} 附近添加⚠️待验证",
+                    "severity": "low" if is_p1_or_high else "medium",
+                    "description": f"V2低置信度事件 {eid} 缺少{'🔍' if is_p1_or_high else '⚠️待验证'}标记",
+                    "fix": f"在 {eid} 附近添加{'🔍' if is_p1_or_high else '⚠️待验证'}",
                 })
 
     # ── 5. rule_fallback 只能作为线索 ──
@@ -801,8 +961,33 @@ def check_v2_restraint(
                     "fix": f"在 {eid} 附近添加🔄规则兜底",
                 })
 
-    # ── 6. 8个固定章节 ──
-    for section in VALID_SECTIONS:
+    # ── 5.5 tracking事件不得进入V2的02-05正文节 ──
+    sec_body_v2 = re.search(r'## 02.*?(?=## 06|\Z)', draft_v2, re.DOTALL)
+    sec_body_v2c = sec_body_v2.group(0) if sec_body_v2 else ""
+    tracking_evs_v2 = [ev for ev in events
+                       if ev.get("report_eligibility") == "tracking"
+                       and ev.get("priority") != "ARCHIVE"]
+    for ev in tracking_evs_v2:
+        eid = ev.get("event_id", "")
+        if eid and eid in sec_body_v2c:
+            issues.append({
+                "type": "tracking_in_core_signal",
+                    "severity": "medium",
+                "description": f"V2 tracking事件 {eid} 出现在02-05正文节，应仅限11节",
+                "fix": f"将 {eid} 从02-05节移除（若是背景引用则不阻断发送）",
+            })
+
+    # ── 6. 固定章节 ──
+    has_ongoing = any(
+        ev.get("novelty_status") == "ongoing"
+        or ev.get("report_eligibility") == "tracking"
+        for ev in events
+        if ev.get("priority") != "ARCHIVE"
+    )
+    v2_required = list(VALID_SECTIONS)
+    if not has_ongoing:
+        v2_required = [s for s in v2_required if not s.startswith("09")]
+    for section in v2_required:
         if section not in draft_v2:
             issues.append({
                 "type": "missing_section",
@@ -873,7 +1058,7 @@ def compare_drafts(
 
     # ── 3. V2唯一建议动作是否合规 ──
     valid_actions = find_valid_unique_action_events(events)
-    s07_start = draft_v2.find("07 今日唯一建议动作")
+    s07_start = draft_v2.find("08 今日建议动作")
     if valid_actions and s07_start >= 0:
         s07_end = draft_v2.find("## 08", s07_start + 1)
         if s07_end < 0:
@@ -1109,6 +1294,50 @@ def generate_review_report(
     return "\n".join(lines)
 
 
+# ===================== 自动补全 11 节 =====================
+
+def _build_tracking_section_items(events: List[dict]) -> str:
+    """从事件池中提取 tracking/ongoing 事件，构建 11 节条目。
+
+    每个条目格式：
+    - **标题** [event_id]\\n  事实摘要。持续关注xxx。
+    """
+    items = []
+    seen = set()
+    for ev in events:
+        eid = ev.get("event_id", "")
+        if eid in seen:
+            continue
+        novelty = ev.get("novelty_status", "")
+        eligibility = ev.get("report_eligibility", "")
+        if novelty != "ongoing" and eligibility != "tracking":
+            continue
+        seen.add(eid)
+
+        title = ev.get("event_title", ev.get("title", ""))
+        fact = ev.get("fact", ev.get("raw_fact", ""))
+        if len(fact) > 120:
+            fact = fact[:120] + "..."
+
+        # 基于事实推断关注方向
+        follow_up = "持续关注最新进展"
+        fact_lower = fact.lower()
+        if "骑手" in fact_lower or "接单" in fact_lower:
+            follow_up = "持续关注各平台履约时效变化及对美妆品类的实际影响"
+        elif "场景" in fact_lower or "闪购" in fact_lower:
+            follow_up = "跟踪美妆个护品类在场景化运营中的资源位和转化表现"
+        elif "抖音" in fact_lower or "小时达" in fact_lower or "涨粉" in fact_lower or "vlog" in fact_lower:
+            follow_up = "持续观察内容电商流量变化对即时零售的影响"
+
+        item = f"- **{title}** [{eid}]\n  {fact}。{follow_up}。"
+        items.append(item)
+
+    if not items:
+        return "暂无近期延续观察事件。"
+
+    return "\n\n".join(items)
+
+
 # ===================== 主函数 =====================
 
 def editor_review(
@@ -1137,7 +1366,12 @@ def editor_review(
     if not draft_v2_file:
         draft_v2_file = resolve_path(project_root, f"data/drafts/{date}/daily_report_draft_v2.md")
     if not events_file:
-        events_file = resolve_path(project_root, f"data/events/{date}/events_analyzed.json")
+        # 优先使用 novelty 版本 (含 report_eligibility + novelty_status)
+        novelty_path = resolve_path(project_root, f"data/events/{date}/events_scored_novelty.json")
+        if os.path.exists(novelty_path):
+            events_file = novelty_path
+        else:
+            events_file = resolve_path(project_root, f"data/events/{date}/events_analyzed.json")
     if not review_file:
         review_file = resolve_path(project_root, f"data/reviews/{date}/editor_review.md")
     if not final_file:
@@ -1295,8 +1529,11 @@ def editor_review(
             if llm_review_data:
                 llm_issues = llm_review_data.get("issues", [])
                 for li in llm_issues:
+                    # 兼容 LLM 返回字符串或 dict 两种格式
+                    if isinstance(li, str):
+                        li = {"type": "style_issue", "severity": "low", "description": li}
                     if not any(
-                        i.get("description", "").startswith(li.get("description", "")[:30])
+                        i.get("description", "")[:40] == li.get("description", "")[:40]
                         for i in issues
                     ):
                         issues.append(li)
@@ -1362,6 +1599,31 @@ def editor_review(
             logger.info(f"规则修复后再校验: passed={validation_passed}, "
                         f"高={final_high}, 中={final_medium}, 低={final_low}")
 
+        # ── 自动修复：tracking 事件存在但终稿缺少 11 节时，自动追加 ──
+        has_ongoing_or_tracking_final = any(
+            ev.get("novelty_status") == "ongoing"
+            or ev.get("report_eligibility") == "tracking"
+            for ev in all_events
+        )
+        if has_ongoing_or_tracking_final and "11 近期延续观察" not in final_md:
+            logger.info("检测到 tracking 事件但终稿缺少 11 节，自动追加...")
+            tracking_items = _build_tracking_section_items(all_events)
+            section_11 = (
+                "\n\n---\n\n"
+                "## 11 近期延续观察\n\n"
+                "以下事件在此前日期已出现，持续跟踪中：\n\n"
+                + tracking_items
+            )
+            final_md = final_md.rstrip() + section_11
+            # 复检
+            validation_passed, final_issues = final_validate(
+                final_md, all_events, event_ids)
+            final_high = sum(1 for i in final_issues if i.get("severity") == "high")
+            final_medium = sum(1 for i in final_issues if i.get("severity") == "medium")
+            final_low = sum(1 for i in final_issues if i.get("severity") == "low")
+            logger.info(f"追加 11 节后复检: passed={validation_passed}, "
+                        f"高={final_high}, 中={final_medium}, 低={final_low}")
+
         # ═══════════════════════════════════════════
         # 判断是否可发送
         # 只看终稿复检(final_issues)的结果，不看初稿问题(issues)
@@ -1386,10 +1648,12 @@ def editor_review(
         stats["final_medium_severity_count"] = final_medium
         stats["final_low_severity_count"] = final_low
 
-        # ── 写出终稿 ──
+        # ── 写出终稿（清理展示版本） ──
+        # 保留 event_id 统计后再清理
+        display_md = _clean_report_for_display(final_md)
         with open(final_file, "w", encoding="utf-8") as f:
-            f.write(final_md)
-        logger.info(f"终稿已写入: {final_file}")
+            f.write(display_md)
+        logger.info(f"终稿已写入（已清理内部标记）: {final_file}")
 
         # ── 生成审稿报告 ──
         review_md = generate_review_report(

@@ -437,7 +437,7 @@ def check_commute_fitness(script: str) -> Tuple[bool, Dict[str, Any]]:
     # 段落数量（过多段落=信息密度过大）
     paragraphs = [p.strip() for p in script.split('\n\n') if len(p.strip()) > 20]
     stats["paragraphs"] = len(paragraphs)
-    if len(paragraphs) > 30:
+    if len(paragraphs) > 45:
         issues.append(f"段落过多({len(paragraphs)})，通勤中难以跟随")
 
     # 暂停/节奏标记 — 中文口播依赖。！？和段落自然断句，不强制要求 …~—

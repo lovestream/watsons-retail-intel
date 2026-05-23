@@ -171,11 +171,23 @@ def _extract_date_from_article(article: dict, logger=None) -> Optional[str]:
     
     # 2. 合并可能包含日期的文本
     desc = (article.get("summary", "") or article.get("description", "") or "")
+    if isinstance(desc, list):
+        desc = " ".join(str(d) for d in desc if d)
+    if not isinstance(desc, str):
+        desc = str(desc) if desc else ""
     if isinstance(raw, dict):
         desc_raw = raw.get("description", "")
+        if isinstance(desc_raw, list):
+            desc_raw = " ".join(str(d) for d in desc_raw if d)
+        if not isinstance(desc_raw, str):
+            desc_raw = ""
         if desc_raw and len(desc_raw) > len(desc):
             desc = desc_raw
     content = article.get("content", "")
+    if isinstance(content, list):
+        content = " ".join(str(c) for c in content if c)
+    if not isinstance(content, str):
+        content = str(content) if content else ""
     combined = (desc + " " + content[:200]) if content else desc
     
     # 3. 中文日期: "2026年4月12日 — ..."
@@ -448,6 +460,14 @@ def merge_raw_articles(
         for article in articles:
             if not isinstance(article, dict):
                 continue
+
+            # ── 字段类型标准化：防御 list/非str 类型 ──
+            for _field in ("title", "summary", "description", "content"):
+                _val = article.get(_field)
+                if isinstance(_val, list):
+                    article[_field] = " ".join(str(v) for v in _val if v)
+                elif _val is not None and not isinstance(_val, str):
+                    article[_field] = str(_val)
 
             url = article.get("url", "").strip()
             if not url:

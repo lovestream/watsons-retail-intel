@@ -910,11 +910,16 @@ def compute_rule_score(
     score = 0
     reasons: List[str] = []
 
-    # 合并判断文本
+    # 合并判断文本（防御 list 类型字段）
+    def _to_str(val):
+        if isinstance(val, list):
+            return " ".join(str(v) for v in val if v)
+        return str(val) if val else ""
+
     combined = " ".join([
-        article.get("title", "") or "",
-        article.get("summary", "") or "",
-        (article.get("content", "") or "")[:2000],  # 只取前2000字符避免过长
+        _to_str(article.get("title", "")),
+        _to_str(article.get("summary", "")),
+        _to_str(article.get("content", ""))[:2000],
     ]).lower()
 
     # ── 加分 ──
@@ -1670,6 +1675,14 @@ def filter_relevant_articles(
     llm_failed_count = 0
 
     for i, article in enumerate(articles):
+        # ── 字段类型标准化：防御 list/非str 类型 ──
+        for _field in ("title", "summary", "description", "content"):
+            _val = article.get(_field)
+            if isinstance(_val, list):
+                article[_field] = " ".join(str(v) for v in _val if v)
+            elif _val is not None and not isinstance(_val, str):
+                article[_field] = str(_val)
+
         source_name = article.get("source_name", "unknown")
         time_status = article.get("time_status", "unknown_time")
         by_time_status[time_status] += 1

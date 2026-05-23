@@ -68,6 +68,31 @@ def count_chinese_chars(text: str) -> int:
     return len(CJK_RANGE.findall(text))
 
 
+def _strip_markdown(text: str) -> str:
+    """去除口播稿中不应出现的 Markdown 格式符号。"""
+    # 去除加粗 **text** → text
+    text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)
+    # 去除斜体 *text* → text (单星号)
+    text = re.sub(r'\*([^*]+)\*', r'\1', text)
+    # 去除标题 ### / ## / #
+    text = re.sub(r'^#{1,6}\s*', '', text, flags=re.MULTILINE)
+    # 去除分隔线 ---
+    text = re.sub(r'^\s*[-]{3,}\s*$', '', text, flags=re.MULTILINE)
+    # 去除链接 [text](url) → text
+    text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+    # 去除行内代码 `text` → text
+    text = re.sub(r'`([^`]+)`', r'\1', text)
+    # 去除删除线 ~~text~~ → text
+    text = re.sub(r'~~([^~]+)~~', r'\1', text)
+    # 去除无序列表符号 - / * 开头
+    text = re.sub(r'^\s*[-*+]\s+', '', text, flags=re.MULTILINE)
+    # 去除有序列表符号 1. 2. 等（但保留正文中的数字序号如"第一，"）
+    text = re.sub(r'^\s*\d+\.\s+', '', text, flags=re.MULTILINE)
+    # 压缩连续空行为单个空行
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    return text.strip()
+
+
 # ===================== 事件选择 =====================
 
 def select_podcast_events(events: List[dict], max_signals: int = 5) -> List[dict]:
@@ -207,7 +232,8 @@ LLM_SYSTEM_PROMPT = """你是一位专业的零售行业播客主播，擅长将
 ## 禁止事项
 - 禁止添加事件数据中没有的数据、数字、事件
 - 禁止使用"据报道""有消息称"等模糊来源
-- 禁止出现 event_id、Markdown 符号
+- 禁止出现任何 Markdown 格式符号：不要用 **加粗**、不要用 # 标题、不要用 --- 分隔线、不要用 - 列表符号。这是纯文本口播稿，直接用文字表达重点
+- 禁止出现 event_id
 - 禁止空洞的套话（"值得关注""需要重视"必须跟具体内容）"""
 
 
@@ -331,6 +357,8 @@ def llm_generate_podcast_script(
                     script = result["content"].strip()
                     script = re.sub(r'^```(?:markdown|md)?\s*\n?', '', script)
                     script = re.sub(r'\n?```\s*$', '', script)
+                    # ── 清除所有 Markdown 格式符号（口播稿不应有） ──
+                    script = _strip_markdown(script)
                     cn_chars = count_chinese_chars(script)
                     logger.info(f"{LOG_PREFIX} LLM 生成成功，模型: {model}，"
                                 f"中文字符数: {cn_chars} (attempt {attempt+1})")

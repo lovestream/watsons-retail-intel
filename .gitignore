@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv_packages/
+
+# Data (generated daily, not version controlled)
+data/raw/
+data/cleaned/
+data/events/
+data/rejected/
+data/drafts/
+data/reviews/
+data/runs/
+data/logs/
+data/enriched/
+
+# Reports (generated output)
+reports/daily/
+reports/weekly/
+reports/monthly/
+reports/yearly/
+
+# Podcasts (generated output)
+podcasts/audio/
+podcasts/scripts/
+
+# Temp files
+*.tmp
+*.bak
+.email_sent
+
+# Dev scripts
+check_*.py
+batch_*.py
+test_*.py

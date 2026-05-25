@@ -437,30 +437,26 @@ def _send_report_email(report_type, period_label, final_result, recipient,
                        project_root):
     try:
         from skills.send_daily_report_email.send_daily_report_email import (
-            send_email_with_attachments)
+            send_periodic_report_email)
     except ImportError:
         logger.warning(f"{LOG_PREFIX} \u90ae\u4ef6\u6a21\u5757\u5bfc\u5165\u5931\u8d25")
         return
 
-    subject = f"\u5373\u65f6\u96f6\u552e \u00d7 \u4e2a\u62a4\u7f8e\u5986\u7ecf\u8425{_TYPE_NAMES[report_type]}\uff5c{period_label}"
-    attachments = []
-    if final_result.get("report_path") and os.path.exists(final_result["report_path"]):
-        attachments.append(final_result["report_path"])
-    if final_result.get("audio_path") and os.path.exists(final_result["audio_path"]):
-        attachments.append(final_result["audio_path"])
-
-    try:
-        send_email_with_attachments(
-            to=recipient, subject=subject,
-            body=f"\u8bf7\u67e5\u6536{_TYPE_NAMES[report_type]}\uff08{period_label}\uff09\u3002",
-            attachments=attachments,
-        )
+    result = send_periodic_report_email(
+        report_type=report_type,
+        period_label=period_label,
+        report_path=final_result.get("report_path", ""),
+        audio_path=final_result.get("audio_path", ""),
+        recipient=recipient,
+        project_root=project_root,
+        dry_run=False,
+    )
+    if result.get("ok"):
         logger.info(f"{LOG_PREFIX} \u90ae\u4ef6\u5df2\u53d1\u9001 \u2192 {recipient}")
-    except Exception as e:
-        logger.error(f"{LOG_PREFIX} \u90ae\u4ef6\u53d1\u9001\u5931\u8d25: {e}")
+    else:
+        logger.error(f"{LOG_PREFIX} \u90ae\u4ef6\u53d1\u9001\u5931\u8d25: {result.get('error', result.get('message', ''))}")
 
 
-# __MARKER_PART7__
 
 
 def generate_periodic_report(report_type, period_info, project_root=".",

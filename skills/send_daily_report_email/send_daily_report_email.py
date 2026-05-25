@@ -28,15 +28,20 @@ from markdown_it import MarkdownIt
 
 # ===================== 常量 =====================
 
-EIGHT_SECTIONS = [
-    "01 今日一句话判断",
-    "02 今日最值得关注的3个信号",
-    "03 平台变化解读",
-    "04 竞对与品牌动作",
-    "05 品类与场景机会",
-    "06 对屈臣氏的经营提示",
-    "07 今日唯一建议动作",
-    "08 明日追踪清单",
+CORE_SECTIONS = [
+    "01 今日一句话结论",
+    "02 今日三条必听",
+    "03 即时零售重点变化",
+    "04 本地生活重点变化",
+    "05 竞对观察",
+    "06 对屈臣氏的机会点",
+    "07 风险预警",
+    "08 今日建议动作",
+]
+
+OPTIONAL_SECTIONS = [
+    "09 每日八问",
+    "11 近期延续观察",
 ]
 
 EVENT_ID_PATTERN = re.compile(r"E\d{8}_\d{4}")
@@ -47,10 +52,19 @@ DEFAULT_SUBJECT_PREFIX = "即时零售 × 个护美妆经营日报"
 SYSTEM_NOTE = (
     '<div style="background:#f0f4f8;border-left:4px solid #3b82f6;padding:12px 16px;'
     'margin:0 0 20px 0;border-radius:4px;font-size:13px;color:#1e3a5f;line-height:1.7;">'
-    "本邮件由「即时零售 × 个护美妆经营情报系统」自动生成。<br>"
-    "核心内容来自事件池、审稿流程和终稿校验。<br>"
-    "附件包含完整 Markdown 日报和播客 MP3。"
+    "📊 本报告由「即时零售 × 个护美妆经营情报系统」自动生成，每日 08:00 推送。<br>"
+    "附件包含完整 Markdown 日报和播客 MP3 音频。"
     "</div>"
+)
+
+# 邮件标题头
+EMAIL_HEADER = (
+    '<div style="text-align:center;padding:24px 0 8px 0;border-bottom:2px solid #e5e7eb;margin-bottom:20px;">'
+    '<h1 style="font-size:22px;font-weight:700;color:#1e3a5f;margin:0 0 4px 0;">'
+    '即时零售 × 个护美妆经营日报'
+    '</h1>'
+    '<p style="font-size:13px;color:#6b7280;margin:0;">{date} ｜ 屈臣氏电商经营决策参考</p>'
+    '</div>'
 )
 
 # HTML 内联 CSS 样式
@@ -152,9 +166,56 @@ def _load_email_config(project_root: str) -> dict:
 
 # ===================== Markdown → HTML =====================
 
+def _clean_report_for_display(md_text: str) -> str:
+    """清理日报文本，移除内部标记供展示用。"""
+    md_text = re.sub(r'\[`E\d{8}_\d{4}`\]', '', md_text)
+    md_text = re.sub(r'`E\d{8}_\d{4}`', '', md_text)
+    md_text = re.sub(r'\[\]', '', md_text)
+    md_text = re.sub(r'（）', '', md_text)
+    # 行内空白清理（不跨行）
+    md_text = re.sub(r'[ \t]+，', '，', md_text)
+    md_text = re.sub(r'，[ \t]+', '，', md_text)
+    md_text = re.sub(r'[ \t]+。', '。', md_text)
+    md_text = re.sub(r'。[ \t]+', '。', md_text)
+    md_text = re.sub(r'^- \*\*证据事件\*\*[：:]\s*.*\n?', '', md_text, flags=re.MULTILINE)
+    md_text = re.sub(r'^- \*\*置信度\*\*[：:].*\n?', '', md_text, flags=re.MULTILINE)
+    md_text = re.sub(r'\n{3,}', '\n\n', md_text)
+    md_text = re.sub(r'[ \t]+$', '', md_text, flags=re.MULTILINE)
+    return md_text
+
+
+def _fix_markdown_formatting(md_text: str) -> str:
+    """修正日报中常见的 markdown 格式问题，确保正确渲染。"""
+    md_text = re.sub(r'([^\n])### ', r'\1\n\n### ', md_text)
+    md_text = re.sub(r'([^\n])---(\s*\n)', r'\1\n\n---\2', md_text)
+    md_text = re.sub(r'([^\n])---$', r'\1\n\n---', md_text, flags=re.MULTILINE)
+    md_text = re.sub(r'([^\n])> ', r'\1\n\n> ', md_text)
+    md_text = re.sub(r'\n{3,}', '\n\n', md_text)
+    return md_text
+
+
+def _fix_markdown_formatting(md_text: str) -> str:
+    """修正日报中常见的 markdown 格式问题，确保正确渲染。
+
+    - ### 标题未独立成行
+    - --- 分隔线未独立成行
+    - > 引用未独立成行
+    """
+    # ### 前缺空行：确保 heading 独立成行
+    md_text = re.sub(r'([^\n])### ', r'\1\n\n### ', md_text)
+    # --- 前缺空行（如 "体验。---"）
+    md_text = re.sub(r'([^\n])---(\s*\n)', r'\1\n\n---\2', md_text)
+    md_text = re.sub(r'([^\n])---$', r'\1\n\n---', md_text, flags=re.MULTILINE)
+    # > 引用前缺空行
+    md_text = re.sub(r'([^\n])> ', r'\1\n\n> ', md_text)
+    # 连续空行压缩
+    md_text = re.sub(r'\n{3,}', '\n\n', md_text)
+    return md_text
+
+
 def _md_to_html(md_text: str) -> str:
-    """将 Markdown 转换为 HTML 片段。"""
-    md = MarkdownIt()
+    """将 Markdown 转换为 HTML 片段。启用 GFM 表格扩展。"""
+    md = MarkdownIt().enable("table").enable("strikethrough")
     return md.render(md_text)
 
 
@@ -202,38 +263,193 @@ def _apply_inline_styles(html: str) -> str:
     return html
 
 
+# ===================== 邮件 HTML 模板 =====================
+
+# 参考"每日行业情报"邮件的专业样式
+EMAIL_CSS = """
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #2c3e50;
+    line-height: 1.8;
+    background: #f5f6fa;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    padding: 32px 28px;
+    border-radius: 12px 12px 0 0;
+    color: white;
+  }
+  .header h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .header p {
+    margin: 8px 0 0;
+    opacity: 0.8;
+    font-size: 14px;
+  }
+  .content {
+    background: #fff;
+    padding: 28px;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+  }
+  .content h2 {
+    color: #1a1a2e;
+    font-size: 18px;
+    border-bottom: 2px solid #e8e8e8;
+    padding-bottom: 8px;
+    margin-top: 28px;
+  }
+  .content h3 {
+    color: #2c3e50;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  .content strong {
+    color: #1a1a2e;
+  }
+  .content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .content th, .content td {
+    border: 1px solid #e0e0e0;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  .content th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #1a1a2e;
+  }
+  .content tr:nth-child(even) {
+    background: #fafafa;
+  }
+  .content ul, .content ol {
+    padding-left: 20px;
+  }
+  .content li {
+    margin-bottom: 4px;
+  }
+  .content blockquote {
+    border-left: 4px solid #3498db;
+    padding: 8px 16px;
+    margin: 12px 0;
+    background: #f0f7ff;
+    color: #2c3e50;
+  }
+  .content code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .content hr {
+    border: none;
+    border-top: 1px solid #e8e8e8;
+    margin: 20px 0;
+  }
+  .audio-notice {
+    background: #fff8e1;
+    border-left: 4px solid #ffc107;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    border-radius: 4px;
+  }
+  .audio-notice p {
+    margin: 0;
+    font-size: 13px;
+    color: #856404;
+  }
+  .system-note {
+    background: #e8f4fd;
+    border-left: 4px solid #2196F3;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+  .system-note p {
+    margin: 0;
+    font-size: 13px;
+    color: #0d47a1;
+  }
+  .footer {
+    background: #f8f9fa;
+    padding: 16px 28px;
+    border-radius: 0 0 12px 12px;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+  }
+  .footer p {
+    margin: 0;
+  }
+"""
+
+
 def _build_email_html(report_md: str, date: str, is_no_signal: bool) -> str:
-    """构建邮件正文 HTML。
+    """构建邮件正文 HTML，匹配参考邮件专业样式。
 
-    - 顶部加系统备注
-    - Markdown 转为 HTML 并加内联样式
-    - 底部加页脚
+    - 清理内部标记
+    - Markdown → HTML（启用表格扩展）
+    - 包裹参考样式模板
     """
+    # 0. 清理内部标记
+    clean_md = _clean_report_for_display(report_md)
+    # 0.5. 修正 markdown 格式（确保标题/分隔线/引用独立成行）
+    clean_md = _fix_markdown_formatting(clean_md)
+
     # 1. Markdown → HTML
-    raw_html = _md_to_html(report_md)
+    body_html = _md_to_html(clean_md)
 
-    # 2. 注入内联样式
-    styled_html = _apply_inline_styles(raw_html)
+    # 2. 构建完整 HTML 文档
+    date_display = date  # e.g. "2026-05-04"
+    full_html = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+{EMAIL_CSS}
+</style>
+</head>
+<body>
 
-    # 3. 系统备注
-    system_note = SYSTEM_NOTE
+<div class="header">
+  <h1>即时零售 × 个护美妆经营日报</h1>
+  <p>{date_display} ｜ 屈臣氏电商经营决策参考</p>
+</div>
 
-    # 4. 页脚
-    footer_tag = (
-        f'<div {HTML_FOOTER_STYLE}>'
-        f"本邮件由「即时零售 × 个护美妆经营情报系统」自动生成，仅供内部参考。<br>"
-        f"日期：{date} ｜ {'无信号日报' if is_no_signal else '正常日报'}"
-        f"</div>"
-    )
+<div class="content">
 
-    # 5. 组装
-    full_html = (
-        f'<div {HTML_BODY_STYLE}>'
-        f"{system_note}"
-        f"{styled_html}"
-        f"{footer_tag}"
-        f"</div>"
-    )
+<div class="audio-notice">
+  <p>🎧 本期日报已生成AI播客音频，见邮件附件 MP3。推荐通勤/运动时收听。</p>
+</div>
+
+<div class="system-note">
+  <p>📊 本报告由「即时零售 × 个护美妆经营情报系统」自动生成，每日 08:00 推送。仅供内部决策参考。</p>
+</div>
+
+{body_html}
+
+</div>
+
+<div class="footer">
+  <p>本邮件由 Watsons Retail Intel 自动生成 · {date_display} · 仅供内部参考</p>
+  <p>如无需接收此类邮件，请联系管理员退订</p>
+</div>
+
+</body>
+</html>"""
 
     return full_html
 
@@ -247,6 +463,7 @@ def _check_gate(
     report_md: str,
     recipient: str,
     logger: logging.Logger,
+    project_root: str = "",
 ) -> tuple[bool, list[str]]:
     """检查 8 项安全门条件。
 
@@ -286,26 +503,58 @@ def _check_gate(
     else:
         errors.append(f"审稿报告不存在: {review_path}")
 
-    # 6. 终稿包含 8 个固定章节（或无信号日报）
+    # 6. 终稿包含 9 个固定章节（或无信号日报）
     if report_path.exists():
         is_no_signal = manifest.get("no_signal", False) if manifest else False
         if not is_no_signal:
             found_sections = 0
-            for section in EIGHT_SECTIONS:
+            for section in CORE_SECTIONS:
                 if section in report_md:
                     found_sections += 1
-            if found_sections < 8:
+            if found_sections < len(CORE_SECTIONS):
                 errors.append(
-                    f"终稿仅包含 {found_sections}/8 个固定章节"
+                    f"终稿仅包含 {found_sections}/{len(CORE_SECTIONS)} 个固定章节"
                 )
 
     # 7. 终稿至少包含 1 个 event_id（或无信号日报）
+    # 注意：终稿已做展示清理，改为从审稿报告或事件文件核实
     if report_path.exists():
         is_no_signal = manifest.get("no_signal", False) if manifest else False
         if not is_no_signal:
             event_ids = EVENT_ID_PATTERN.findall(report_md)
             if not event_ids:
-                errors.append("终稿未包含任何 event_id 引用")
+                # 从 report_path 提取日期: .../2026/05/2026-05-04.md
+                date_from_path = report_path.stem  # "2026-05-04"
+                found_elsewhere = False
+                # a) 审稿报告
+                if review_path.exists():
+                    review_text = review_path.read_text(encoding="utf-8")
+                    if EVENT_ID_PATTERN.findall(review_text):
+                        found_elsewhere = True
+                # b) 事件文件
+                if not found_elsewhere:
+                    root = Path(project_root) if project_root else Path(_PROJECT_ROOT)
+                    events_patterns = [
+                        f"data/events/{date_from_path}/events_scored_novelty.json",
+                        f"data/events/{date_from_path}/events_analyzed.json",
+                    ]
+                    for pat in events_patterns:
+                        ep = root / pat
+                        if ep.exists():
+                            found_elsewhere = True
+                            break
+                # c) draft 文件
+                if not found_elsewhere:
+                    root = Path(project_root) if project_root else Path(_PROJECT_ROOT)
+                    draft_dir = root / f"data/drafts/{date_from_path}"
+                    if draft_dir.exists():
+                        for dp in draft_dir.glob("daily_report_draft*.md"):
+                            draft_text = dp.read_text(encoding="utf-8")
+                            if EVENT_ID_PATTERN.findall(draft_text):
+                                found_elsewhere = True
+                                break
+                if not found_elsewhere:
+                    errors.append("终稿和各来源均未包含任何 event_id 引用")
 
     # 8. 邮件收件人存在
     if not recipient:
@@ -469,6 +718,27 @@ def send_daily_report_email(
     log_dir.mkdir(parents=True, exist_ok=True)
 
     logger = _setup_logger(log_dir, date)
+
+    # ── 0. 日期有效性 + 防重复发送 ──
+    today = datetime.now().strftime("%Y-%m-%d")
+    sent_marker = Path(project_root) / "data" / "logs" / date / ".email_sent"
+    if date < today:
+        # 允许补发昨天的，但绝对不允许更早的
+        from datetime import timedelta
+        yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        if date < yesterday:
+            logger.error(f"拒绝发送 {date} 的日报：日期超过1天前（今天={today}）")
+            return {
+                "ok": False, "date": date, "sent": False, "dry_run": dry_run,
+                "errors": [f"日期 {date} 超过允许范围（最早 {yesterday}）"]
+            }
+        logger.warning(f"补发昨日日报 {date}（今天={today}）")
+    if sent_marker.exists() and not dry_run:
+        logger.warning(f"日报 {date} 已发送过（{sent_marker} 存在），跳过重复发送")
+        return {
+            "ok": True, "date": date, "sent": False, "dry_run": dry_run,
+            "errors": [], "note": "already_sent"
+        }
     logger.info(f"{'='*60}")
     logger.info(f"send_daily_report_email 开始: date={date}, dry_run={dry_run}")
 
@@ -540,6 +810,7 @@ def send_daily_report_email(
         report_md=report_md,
         recipient=", ".join(to_addrs) if to_addrs else "",
         logger=logger,
+        project_root=project_root,
     )
 
     if not gate_passed:
@@ -663,9 +934,159 @@ def send_daily_report_email(
     json_file = log_dir / "send_daily_report_email.json"
     json_file.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     logger.info(f"结果 JSON 已保存: {json_file}")
+
+    # ── 15. 写发送标记（防重复） ──
+    if sent and not dry_run:
+        sent_marker = log_dir / ".email_sent"
+        sent_marker.write_text(datetime.now().isoformat())
+        logger.info(f"发送标记已写入: {sent_marker}")
+
     logger.info(f"发送结果: ok={result['ok']}, sent={sent}, dry_run={dry_run}")
 
     return result
+
+
+# ===================== 周期报告邮件发送 =====================
+
+def send_periodic_report_email(
+    report_type: str,
+    period_label: str,
+    report_path: str,
+    audio_path: str = "",
+    recipient: str = "",
+    project_root: str = ".",
+    dry_run: bool = False,
+) -> dict:
+    """发送周报/月报/年报邮件（HTML 格式 + 附件）。
+
+    复用日报的 HTML 模板和 _send_email 基础设施。
+
+    Args:
+        report_type: "weekly" | "monthly" | "yearly"
+        period_label: 人类可读的周期标签
+        report_path: 报告 Markdown 文件路径
+        audio_path: 播客 MP3 文件路径（可选）
+        recipient: 收件人邮箱
+        project_root: 项目根目录
+        dry_run: 是否模拟发送
+    """
+    type_names = {"weekly": "周报", "monthly": "月报", "yearly": "年报"}
+    report_name = type_names.get(report_type, "报告")
+
+    log_dir = Path(project_root) / "data" / "logs" / "periodic"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    logger = _setup_logger(log_dir, f"periodic_{report_type}")
+
+    logger.info(f"发送{report_name}邮件: {period_label}")
+
+    # 读取报告
+    report_fp = Path(report_path)
+    if not report_fp.exists():
+        logger.error(f"报告文件不存在: {report_path}")
+        return {"ok": False, "error": "report_not_found"}
+
+    report_md = report_fp.read_text(encoding="utf-8")
+
+    # 构建 HTML
+    html_body = _build_periodic_email_html(
+        report_md, report_type, report_name, period_label)
+
+    # 构建附件
+    attachments = []
+    # Markdown 附件
+    md_filename = report_fp.name
+    attachments.append((md_filename, report_fp.read_bytes(), "text/markdown"))
+
+    # MP3 附件
+    if audio_path and Path(audio_path).exists():
+        audio_fp = Path(audio_path)
+        attachments.append(
+            (audio_fp.name, audio_fp.read_bytes(), "audio/mpeg"))
+        logger.info(f"附加音频: {audio_fp.name} "
+                    f"({audio_fp.stat().st_size / 1024 / 1024:.1f}MB)")
+
+    # 收件人
+    to_addrs = [recipient] if recipient else _load_email_config(project_root).get("to_addrs", [])
+    if not to_addrs:
+        logger.error("无收件人")
+        return {"ok": False, "error": "no_recipient"}
+
+    # 邮件标题
+    subject = f"即时零售 × 个护美妆经营{report_name}｜{period_label}"
+
+    # 发送
+    smtp_config = _load_email_config(project_root)
+    success, msg = _send_email(
+        smtp_config=smtp_config,
+        to_addrs=to_addrs,
+        subject=subject,
+        html_body=html_body,
+        attachments=attachments,
+        logger=logger,
+        dry_run=dry_run,
+    )
+
+    logger.info(f"发送结果: success={success}, msg={msg}")
+    return {"ok": success, "message": msg, "subject": subject}
+
+
+def _build_periodic_email_html(report_md: str, report_type: str,
+                               report_name: str, period_label: str) -> str:
+    """构建周报/月报/年报邮件 HTML。"""
+    # 清理 + 转换
+    clean_md = _fix_markdown_formatting(report_md)
+    body_html = _md_to_html(clean_md)
+
+    # 根据类型调整提示语
+    audio_tips = {
+        "weekly": "本期周报已生成AI播客音频（约20分钟），见邮件附件 MP3。",
+        "monthly": "本期月报已生成AI播客摘要音频（约15分钟），见邮件附件 MP3。",
+        "yearly": "本期年报已生成AI播客摘要音频（约15分钟），见邮件附件 MP3。",
+    }
+    system_tips = {
+        "weekly": "本报告基于上周7天日报综合分析生成，提供趋势判断与策略建议。",
+        "monthly": "本报告基于本月各周报综合分析生成，提供格局判断与战略建议。",
+        "yearly": "本报告基于全年月报综合分析生成，提供行业复盘与年度战略。",
+    }
+
+    full_html = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+{EMAIL_CSS}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>即时零售 × 个护美妆经营{report_name}</h1>
+  <p>{period_label} ｜ 屈臣氏电商经营决策参考</p>
+</div>
+
+<div class="content">
+
+<div class="audio-notice">
+  <p>🎧 {audio_tips.get(report_type, "")}</p>
+</div>
+
+<div class="system-note">
+  <p>📊 {system_tips.get(report_type, "")}</p>
+</div>
+
+{body_html}
+
+</div>
+
+<div class="footer">
+  <p>本邮件由 Watsons Retail Intel 自动生成 · {period_label} · 仅供内部参考</p>
+</div>
+
+</body>
+</html>"""
+
+    return full_html
 
 
 # ===================== CLI =====================

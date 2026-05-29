@@ -364,8 +364,9 @@ class LLMClient:
 
     @property
     def available(self) -> bool:
-        """是否有可用的 Key。"""
-        return bool(self.keys) and len(self.keys) > len(self.exhausted_keys)
+        """是否有可用的 Key（含备用 Provider）。"""
+        primary_ok = bool(self.keys) and len(self.keys) > len(self.exhausted_keys)
+        return primary_ok or bool(self._fallback_key)
 
     @property
     def available_keys(self) -> int:
@@ -511,8 +512,8 @@ class LLMClient:
         for attempt in range(max_attempts):
             key = self._get_next_key()
             if key is None:
-                result_base["error"] = f"所有 Key 已耗尽。最后错误: {last_error}"
-                return result_base
+                last_error = f"所有 Key 已耗尽。最后错误: {last_error}"
+                break  # 跳出循环，走 fallback 逻辑
 
             with self._lock:
                 self.total_calls += 1
@@ -557,6 +558,10 @@ class LLMClient:
                     error_msg = f"HTTP {resp.status_code}: {resp.text[:200]}"
                     logger.warning(f"Key {_mask_key(key)} 请求失败: {error_msg}")
                     last_error = error_msg
+                    # "Unsupported model" 说明模型名有误，所有 Key 都会遇到
+                    if "unsupported model" in resp.text.lower():
+                        logger.warning("模型不支持，跳过所有主 Key")
+                        break
                     continue
 
                 # ── 成功响应 ──

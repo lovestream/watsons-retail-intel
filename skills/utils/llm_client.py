@@ -52,6 +52,11 @@ DEFAULT_TIMEOUT = 180  # 秒（thinking 模型需要更长等待）
 DEFAULT_RETRIES = 2
 DAILY_TOKEN_LIMIT_PER_KEY = 5_000_000
 
+# ── 备用 Provider 配置 ──
+FALLBACK_KEY_ENV = "rightcode_key"
+FALLBACK_BASE_URL = "https://right.codes/codex/v1"
+FALLBACK_MODEL = "gpt-5.4-xhigh"
+
 
 # ===================== 环境变量加载 =====================
 
@@ -349,6 +354,11 @@ class LLMClient:
         # 线程安全
         self._lock = threading.Lock()
 
+        # 备用 Provider（所有主 Key 失败时兜底）
+        self._fallback_key = os.environ.get(FALLBACK_KEY_ENV, "").strip()
+        self._fallback_url = FALLBACK_BASE_URL
+        self._fallback_model = FALLBACK_MODEL
+
         if requests is None:
             logger.error("requests 库未安装，LLM 调用不可用")
 
@@ -453,7 +463,19 @@ class LLMClient:
             return result_base
 
         if not self.available:
-            result_base["error"] = "无可用 API Key"
+            # 主 Key 全部耗尽，尝试备用
+            if self._fallback_key:
+                logger.info("主 Key 全部不可用，直接使用备用 Provider")
+                # 需要先构建 messages
+                fb_messages = []
+                if system_prompt:
+                    fb_messages.append({"role": "system", "content": system_prompt})
+                fb_messages.extend(messages)
+                fallback_result = self._call_fallback(
+                    fb_messages, temperature, max_tokens, response_format)
+                if fallback_result["ok"]:
+                    return fallback_result
+            result_base["error"] = "无可用 API Key（含备用）"
             return result_base
 
         # 构建 messages
@@ -604,9 +626,83 @@ class LLMClient:
                 logger.warning(f"Key {_mask_key(key)} 未知错误: {e}")
                 continue
 
-        # 所有 Key 都失败
+        # 所有 Key 都失败 — 尝试备用 Provider
+        if self._fallback_key:
+            logger.info(f"主 Provider 全部失败，尝试备用 Provider: {FALLBACK_BASE_URL}")
+            fallback_result = self._call_fallback(
+                full_messages, temperature, max_tokens, response_format)
+            if fallback_result["ok"]:
+                return fallback_result
+            last_error = f"备用也失败: {fallback_result.get('error', '')}"
+
         result_base["error"] = f"所有 Key 尝试完毕。最后错误: {last_error}"
         return result_base
+
+    def _call_fallback(self, messages, temperature, max_tokens,
+                       response_format) -> Dict[str, Any]:
+        """调用备用 Provider（rightcode）。"""
+        result = {
+            "ok": False, "content": "", "parsed": None,
+            "model": self._fallback_model, "usage": {},
+            "key_used": f"fallback:{_mask_key(self._fallback_key)}",
+            "error": "",
+        }
+        base = self._fallback_url.rstrip("/")
+        if base.endswith("/v1"):
+            endpoint = f"{base}/chat/completions"
+        else:
+            endpoint = f"{base}/v1/chat/completions"
+
+        payload = {
+            "model": self._fallback_model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+        }
+
+        try:
+            resp = requests.post(
+                endpoint,
+                headers={
+                    "Authorization": f"Bearer {self._fallback_key}",
+                    "Content-Type": "application/json",
+                },
+                json=payload,
+                timeout=self.timeout,
+            )
+            if resp.status_code != 200:
+                result["error"] = f"Fallback HTTP {resp.status_code}: {resp.text[:200]}"
+                return result
+
+            resp_json = resp.json()
+            choices = resp_json.get("choices", [])
+            if choices:
+                msg = choices[0].get("message", {})
+                content = msg.get("content", "") or ""
+                # fallback 模型可能也有 reasoning
+                if not content:
+                    content = msg.get("reasoning_content", "") or ""
+            else:
+                content = ""
+
+            usage = resp_json.get("usage", {})
+            parsed = None
+            if response_format == "json" and content:
+                parsed = robust_json_extract(content)
+
+            result.update({
+                "ok": bool(content.strip()),
+                "content": content,
+                "parsed": parsed,
+                "usage": usage,
+            })
+            if content.strip():
+                logger.info(f"备用 Provider 调用成功: {len(content)} 字符")
+            return result
+
+        except Exception as e:
+            result["error"] = f"Fallback 异常: {str(e)[:200]}"
+            return result
 
     def get_status(self) -> Dict[str, Any]:
         """返回客户端状态。"""

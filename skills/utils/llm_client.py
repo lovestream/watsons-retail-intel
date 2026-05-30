@@ -600,13 +600,18 @@ class LLMClient:
                         )
 
                 result_base.update({
-                    "ok": True,
+                    "ok": bool(content.strip()),
                     "content": content,
                     "parsed": parsed,
                     "usage": usage,
                     "key_used": _mask_key(key),
-                    "error": "",
+                    "error": "" if content.strip() else "LLM 返回内容为空",
                 })
+                # 内容为空时尝试下一个 key 或 fallback
+                if not content.strip():
+                    last_error = "LLM 返回内容为空"
+                    logger.warning(f"Key {_mask_key(key)} 返回内容为空，尝试下一个")
+                    continue
                 return result_base
 
             except requests.exceptions.Timeout:

@@ -1477,6 +1477,9 @@ def editor_review(
         from concurrent.futures import ThreadPoolExecutor, as_completed
 
         final_md = draft
+        # dual_mode 下优先用 V2 作为基础（更完整）
+        if dual_mode and v2_text:
+            final_md = v2_text
         llm_review_data = None
         model_used = "rule_compress"
         fallback_used = False
@@ -1589,7 +1592,9 @@ def editor_review(
 
             if llm_client and not llm_client.available:
                 logger.warning("LLM 不可用，使用规则压缩")
-            final_md = rule_compress(draft, all_events)
+            # dual_mode 下优先用 V2（更完整），否则用 V1
+            base_draft = v2_text if dual_mode and v2_text else draft
+            final_md = rule_compress(base_draft, all_events)
             model_used = "rule_compress"
 
         # ═══════════════════════════════════════════

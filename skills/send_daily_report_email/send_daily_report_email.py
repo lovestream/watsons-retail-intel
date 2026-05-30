@@ -717,7 +717,7 @@ def send_daily_report_email(
     date: Optional[str] = None,
     recipient: Optional[str] = None,
     subject_prefix: str = DEFAULT_SUBJECT_PREFIX,
-    attach_markdown: bool = True,
+    attach_markdown: bool = False,
     attach_podcast: bool = True,
     attach_script: bool = False,
     dry_run: bool = True,

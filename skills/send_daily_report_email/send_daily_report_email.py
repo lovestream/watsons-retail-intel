@@ -168,20 +168,53 @@ def _load_email_config(project_root: str) -> dict:
 
 def _clean_report_for_display(md_text: str) -> str:
     """清理日报文本，移除内部标记供展示用。"""
-    md_text = re.sub(r'\[`E\d{8}_\d{4}`\]', '', md_text)
+    # ── 0. 移除 LLM 思考泄露（开头非标题文字） ──
+    md_text = re.sub(r'^[^#\n].*?(?=## 01|# )', '', md_text, count=1, flags=re.DOTALL)
+
+    # ── 1. 移除事件 ID（各种格式） ──
+    # （`E20260530_0037`，A） 或 （`E20260530_0037`、`E20260530_0003`，K）
+    md_text = re.sub(r'（[`E\d_、，\s]*?[，,]\s*[A-Z]）', '', md_text)
+    # （`E20260530_0037`） 不带标签
+    md_text = re.sub(r'（[`E\d_、\s]+）', '', md_text)
+    # `E20260530_0037`
     md_text = re.sub(r'`E\d{8}_\d{4}`', '', md_text)
+    # 裸 E20260530_0037
+    md_text = re.sub(r'E\d{8}_\d{4}', '', md_text)
+    # [E20260530_0037] 方括号格式
+    md_text = re.sub(r'\[E\d{8}_\d{4}\]', '', md_text)
+
+    # ── 2. 移除判断标签行 ──
+    md_text = re.sub(r'^\*?\*?判断标签[：:]\s*`?[A-Z]`?\*?\*?\s*$',
+                     '', md_text, flags=re.MULTILINE)
+    md_text = re.sub(r'^\*?\*?涉及事件[：:].*$',
+                     '', md_text, flags=re.MULTILINE)
+
+    # ── 3. 移除证据事件/置信度行 ──
+    md_text = re.sub(r'^-\s*\*\*证据事件\*\*[：:]\s*.*$',
+                     '', md_text, flags=re.MULTILINE)
+    md_text = re.sub(r'^-\s*\*\*置信度\*\*[：:].*$',
+                     '', md_text, flags=re.MULTILINE)
+
+    # ── 4. 清理残留标点 ──
+    md_text = re.sub(r'（\s*[，、]\s*）', '', md_text)  # （，） 残留
+    md_text = re.sub(r'（\s*）', '', md_text)  # 空括号
     md_text = re.sub(r'\[\]', '', md_text)
-    md_text = re.sub(r'（）', '', md_text)
-    # 行内空白清理（不跨行）
+    md_text = re.sub(r'对应事件[：:]\s*[、，\s]*。', '', md_text)  # 对应事件：、。
+    md_text = re.sub(r'围绕\s*[，,]\s*由', '由', md_text)  # 围绕，由
     md_text = re.sub(r'[ \t]+，', '，', md_text)
     md_text = re.sub(r'，[ \t]+', '，', md_text)
     md_text = re.sub(r'[ \t]+。', '。', md_text)
     md_text = re.sub(r'。[ \t]+', '。', md_text)
-    md_text = re.sub(r'^- \*\*证据事件\*\*[：:]\s*.*\n?', '', md_text, flags=re.MULTILINE)
-    md_text = re.sub(r'^- \*\*置信度\*\*[：:].*\n?', '', md_text, flags=re.MULTILINE)
+    md_text = re.sub(r'，，+', '，', md_text)  # 连续逗号
+    md_text = re.sub(r'、、+', '、', md_text)  # 连续顿号
+    md_text = re.sub(r'\*\*event_id\*\*[：:]\s*', '', md_text)  # **event_id**:
+    md_text = re.sub(r'event_id[：:]\s*', '', md_text)
+
+    # ── 5. 清理多余空行 ──
     md_text = re.sub(r'\n{3,}', '\n\n', md_text)
     md_text = re.sub(r'[ \t]+$', '', md_text, flags=re.MULTILINE)
-    return md_text
+    return md_text.strip()
+
 
 
 def _fix_markdown_formatting(md_text: str) -> str:

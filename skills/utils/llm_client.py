@@ -57,6 +57,14 @@ FALLBACK_KEY_ENV = "rightcode_key"
 FALLBACK_BASE_URL = "https://right.codes/codex/v1"
 FALLBACK_MODEL = "gpt-5.4-xhigh"
 
+# ── 强制兜底开关 ──
+# LongCat 当前不稳定（间歇 400 / 残缺响应），强制所有调用直接走备用
+# Provider（gpt-5.4-xhigh），完全跳过 LongCat。
+# 等 LongCat 恢复后，设环境变量 FORCE_FALLBACK_LLM=0 即可切回正常路由。
+def _load_force_fallback() -> bool:
+    val = os.environ.get("FORCE_FALLBACK_LLM", "1").strip().lower()
+    return val not in ("0", "false", "no", "off", "")
+
 
 # ===================== 环境变量加载 =====================
 
@@ -359,6 +367,17 @@ class LLMClient:
         self._fallback_url = FALLBACK_BASE_URL
         self._fallback_model = FALLBACK_MODEL
 
+        # 强制兜底：直接走备用 Provider，跳过 LongCat
+        self._force_fallback = _load_force_fallback()
+        if self._force_fallback and self._fallback_key:
+            logger.info(
+                f"FORCE_FALLBACK_LLM 已开启 → 所有调用直接使用 {self._fallback_model}"
+                f"（跳过 LongCat）")
+        elif self._force_fallback and not self._fallback_key:
+            logger.warning(
+                "FORCE_FALLBACK_LLM 已开启但缺少备用 Key，回退到正常路由")
+            self._force_fallback = False
+
         if requests is None:
             logger.error("requests 库未安装，LLM 调用不可用")
 
@@ -462,6 +481,26 @@ class LLMClient:
         if requests is None:
             result_base["error"] = "requests 库未安装"
             return result_base
+
+        # ── 强制兜底：直接走备用 Provider，完全跳过 LongCat ──
+        if self._force_fallback and self._fallback_key:
+            fb_messages = []
+            if system_prompt:
+                fb_messages.append({"role": "system", "content": system_prompt})
+            fb_messages.extend(messages)
+            fallback_result = self._call_fallback(
+                fb_messages, temperature, max_tokens, response_format)
+            if fallback_result["ok"]:
+                return fallback_result
+            # 备用失败时，若主 Key 可用则继续尝试主路由（韧性兜底）
+            logger.warning(
+                f"强制兜底调用失败: {fallback_result.get('error','')[:120]}，"
+                f"尝试主 Provider")
+            if not (bool(self.keys) and len(self.keys) > len(self.exhausted_keys)):
+                result_base["error"] = (
+                    f"强制兜底失败且无可用主 Key: "
+                    f"{fallback_result.get('error','')}")
+                return result_base
 
         if not self.available:
             # 主 Key 全部耗尽，尝试备用

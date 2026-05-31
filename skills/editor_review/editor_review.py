@@ -170,7 +170,7 @@ def rule_validate(
     required_sections = list(VALID_SECTIONS)
     if not has_ongoing_or_tracking:
         # No ongoing events → 11 近期延续观察 is optional
-        required_sections = [s for s in required_sections if not s.startswith("09")]
+        required_sections = [s for s in required_sections if not s.startswith("11")]
     missing_sections = []
     for section in required_sections:
         section_num = section.split()[0]  # "01", "02", ...
@@ -628,7 +628,7 @@ def final_validate(
     )
     required_sections_final = list(VALID_SECTIONS)
     if not has_ongoing_or_tracking:
-        required_sections_final = [s for s in required_sections_final if not s.startswith("09")]
+        required_sections_final = [s for s in required_sections_final if not s.startswith("11")]
     for section in required_sections_final:
         # 宽容匹配：精确匹配 或 数字前缀匹配（LLM 可能简化标题文字）
         section_num = section.split()[0]  # "01", "02", ...
@@ -779,6 +779,8 @@ def _clean_report_for_display(md_text: str) -> str:
                      '', md_text, flags=re.MULTILINE)
     md_text = re.sub(r'^\*?\*?涉及事件[：:].*$',
                      '', md_text, flags=re.MULTILINE)
+    # 移除内联判断标签：标题/正文末尾的【A】【B】【C】【R】【K】【X】等
+    md_text = re.sub(r'【[ABCRKX]】', '', md_text)
 
     # ── 3. 移除证据事件/置信度行 ──
     md_text = re.sub(r'^-\s*\*\*证据事件\*\*[：:]\s*.*$',
@@ -1492,7 +1494,14 @@ def editor_review(
             except Exception as e:
                 logger.warning(f"LLM 客户端初始化失败: {e}")
 
-        if llm_client and llm_client.available:
+        # dual_mode 下 V2 已是 LLM 生成的完整重构稿，
+        # 无需再让 LLM 把整篇报告作为 JSON 重吐一遍（该调用慢且易丢章节/超时），
+        # 直接走规则校验 + rule_compress(V2)，快速且确定。
+        _skip_llm_rewrite = bool(dual_mode and v2_text)
+        if _skip_llm_rewrite:
+            logger.info("dual_mode + V2 可用：跳过 LLM 整篇重写，直接用 V2 + 规则校验")
+
+        if llm_client and llm_client.available and not _skip_llm_rewrite:
             # ── 模型路由 ──
             _review_model = None
             _review_fallback = None

@@ -188,6 +188,8 @@ def _clean_report_for_display(md_text: str) -> str:
                      '', md_text, flags=re.MULTILINE)
     md_text = re.sub(r'^\*?\*?涉及事件[：:].*$',
                      '', md_text, flags=re.MULTILINE)
+    # 移除内联判断标签：标题/正文末尾的【A】【B】【C】【R】【K】【X】等
+    md_text = re.sub(r'【[ABCRKX]】', '', md_text)
 
     # ── 3. 移除证据事件/置信度行 ──
     md_text = re.sub(r'^-\s*\*\*证据事件\*\*[：:]\s*.*$',

@@ -44,7 +44,7 @@ logger = logging.getLogger(__name__)
 
 # ===================== 默认配置 =====================
 
-DEFAULT_MODEL = "LongCat-Flash-Thinking"
+DEFAULT_MODEL = "LongCat-2.0-Preview"
 DEFAULT_BASE_URL = "https://api.longcat.chat/openai"
 DEFAULT_MAX_TOKENS = 4096
 DEFAULT_TEMPERATURE = 0.3
@@ -58,12 +58,12 @@ FALLBACK_BASE_URL = "https://right.codes/codex/v1"
 FALLBACK_MODEL = "gpt-5.4-xhigh"
 
 # ── 强制兜底开关 ──
-# LongCat 当前不稳定（间歇 400 / 残缺响应），强制所有调用直接走备用
-# Provider（gpt-5.4-xhigh），完全跳过 LongCat。
-# 等 LongCat 恢复后，设环境变量 FORCE_FALLBACK_LLM=0 即可切回正常路由。
+# 历史背景：LongCat-Flash-* 系列曾全部故障，临时用此开关强制走备用 gpt。
+# 2026-06 LongCat 恢复并换用 LongCat-2.0-Preview，默认关闭(0)，走正常路由，
+# gpt-5.4-xhigh 仅作为最后兜底。若 LongCat 再次故障，设 FORCE_FALLBACK_LLM=1 即可。
 def _load_force_fallback() -> bool:
-    val = os.environ.get("FORCE_FALLBACK_LLM", "1").strip().lower()
-    return val not in ("0", "false", "no", "off", "")
+    val = os.environ.get("FORCE_FALLBACK_LLM", "0").strip().lower()
+    return val in ("1", "true", "yes", "on")
 
 
 # ===================== 环境变量加载 =====================

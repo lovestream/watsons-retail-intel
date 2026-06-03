@@ -1,77 +1,64 @@
-default_model: LongCat-Flash-Lite
+default_model: LongCat-2.0-Preview
 global_fallback:
-- LongCat-Flash-Chat
-- LongCat-Flash-Thinking
+- LongCat-2.0-Preview
 models:
-  LongCat-Flash-Chat:
-    description: 中等复杂度分析和JSON失败重试模型
-    max_tokens: 4096
-    temperature: 0.3
-    timeout: 150
-  LongCat-Flash-Lite:
-    description: 批量结构化任务默认模型
-    max_tokens: 2048
-    temperature: 0.1
-    timeout: 120
-  LongCat-Flash-Thinking:
-    description: 高复杂度推理模型（复杂经营判断，可选深度润色）
+  LongCat-2.0-Preview:
+    description: LongCat 当前唯一可用模型（2026-06 恢复），全任务通用
     max_tokens: 8192
     temperature: 0.3
     timeout: 240
 routing:
   analyze_business_impact:
     fallback:
-    - LongCat-Flash-Thinking
+    - LongCat-2.0-Preview
     params:
       max_tokens: 4096
       temperature: 0.3
     priority_routing:
       ARCHIVE: rule_only
-      P0: LongCat-Flash-Thinking
-      P1: LongCat-Flash-Chat
-      P2: LongCat-Flash-Lite
+      P0: LongCat-2.0-Preview
+      P1: LongCat-2.0-Preview
+      P2: LongCat-2.0-Preview
   editor_review:
-    default: LongCat-Flash-Chat
+    default: LongCat-2.0-Preview
     fallback:
-    - LongCat-Flash-Lite
+    - LongCat-2.0-Preview
     params:
       max_tokens: 4096
       temperature: 0.3
   extract_events:
-    default: LongCat-Flash-Lite
+    default: LongCat-2.0-Preview
     fallback:
-    - LongCat-Flash-Chat
+    - LongCat-2.0-Preview
     params:
       max_tokens: 4096
       temperature: 0.2
   filter_relevant_articles:
-    default: LongCat-Flash-Lite
+    default: LongCat-2.0-Preview
     fallback:
-    - LongCat-Flash-Chat
+    - LongCat-2.0-Preview
     params:
       max_tokens: 2048
       temperature: 0.1
   generate_daily_report:
-    default: LongCat-Flash-Thinking
+    default: LongCat-2.0-Preview
     fallback:
-    - LongCat-Flash-Chat
-    - LongCat-Flash-Lite
+    - LongCat-2.0-Preview
     params:
       max_tokens: 8192
       temperature: 0.3
-    optional_deep_review: LongCat-Flash-Thinking
+    optional_deep_review: LongCat-2.0-Preview
   generate_podcast:
-    default: LongCat-Flash-Thinking
+    default: LongCat-2.0-Preview
     fallback:
-    - LongCat-Flash-Chat
-    - LongCat-Flash-Lite
+    - LongCat-2.0-Preview
     params:
       max_tokens: 8192
       temperature: 0.3
   podcast_review:
-    default: LongCat-Flash-Chat
+    default: LongCat-2.0-Preview
     fallback:
-    - LongCat-Flash-Lite
+    - LongCat-2.0-Preview
     params:
       max_tokens: 2048
       temperature: 0.2

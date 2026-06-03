@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 LOG_PREFIX = "[PeriodicReport]"
 
 MAX_REVISION_ROUNDS = 2
-LLM_MODEL = "LongCat-Flash-Thinking"
+LLM_MODEL = "LongCat-2.0-Preview"
 MAX_TOKENS_CHAPTER = 8192
 MAX_TOKENS_REVIEW = 4096
 MAX_TOKENS_PODCAST = 8192

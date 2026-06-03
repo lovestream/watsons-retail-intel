@@ -76,9 +76,11 @@ DEFAULT_SOURCE_TIER_MAP = {
     "company_earnings": 5, "company_announcement": 5,
     "latepost": 4, "36kr": 4, "36kr_newsflashes": 4,
     "caixin": 4, "wallstreetcn": 4, "jiemian": 4, "huxiu": 4,
+    "cls": 4, "sina": 4, "sohu": 4, "163": 4,
     "cbndata": 3, "cosmetic_observation": 3, "beauty_evolution": 3,
     "retail_observation": 3, "instant_retail_watch": 3,
-    "sohu": 2, "sina": 2, "toutiao": 2, "baijiahao": 2,
+    "pinguan": 3, "ebrun": 3, "nbd": 3, "readhub": 3,
+    "toutiao": 2, "baijiahao": 2,
     "wechat_article": 2,
     "_unknown": 1,
 }
@@ -324,6 +326,12 @@ def score_source_credibility(event: dict, source_tier_map: dict) -> Tuple[float,
 
     规则8: source_url 缺失 → 直接 ARCHIVE（硬降级在 apply_hard_downgrade 处理）
     规则3: source_credibility < 2 → 最高 P2（硬降级在 apply_hard_downgrade 处理）
+
+    匹配顺序:
+    1. source_name 精确匹配
+    2. source_name 模糊匹配
+    3. source_url 域名匹配 → 域名层级映射
+    4. 兜底: Tier 1
     """
     source_name = event.get("source_name", "") or ""
     source_url = event.get("source_url", "") or ""
@@ -334,14 +342,14 @@ def score_source_credibility(event: dict, source_tier_map: dict) -> Tuple[float,
         reasons.append("source_url 缺失")
         return 0, reasons
 
-    # 直接匹配
+    # 直接匹配 source_name
     if source_name in source_tier_map:
         tier = source_tier_map[source_name]
         tier_labels = {5: "官方/监管", 4: "头部权威媒体", 3: "行业/垂类媒体", 2: "聚合/自媒体", 1: "未知来源"}
         reasons.append(f"来源={source_name} → {tier_labels.get(tier, '未知')} (Tier {tier})")
         return float(tier), reasons
 
-    # 模糊匹配
+    # 模糊匹配 source_name
     for key, tier in source_tier_map.items():
         if key == "_unknown":
             continue
@@ -349,8 +357,59 @@ def score_source_credibility(event: dict, source_tier_map: dict) -> Tuple[float,
             reasons.append(f"来源≈{key} → Tier {tier}")
             return float(tier), reasons
 
+    # 域名匹配: 从 source_url 解析域名，映射到对应层级
+    try:
+        from urllib.parse import urlparse
+        domain = urlparse(source_url).netloc.replace("www.", "").lower()
+        # 去除 m. 前缀（移动版）
+        if domain.startswith("m."):
+            domain = domain[2:]
+
+        # 域名 → 层级映射
+        DOMAIN_TIER_MAP = {
+            # Tier 5: 官方/监管
+            "meituan.com": 5, "dianping.com": 5, "jd.com": 5, "taobao.com": 5,
+            "tmall.com": 5, "ele.me": 5, "alibaba.com": 5, "aswatson.com": 5,
+            "watsons.com.cn": 5, "nmpa.gov.cn": 5, "samr.gov.cn": 5,
+            # Tier 4: 头部权威媒体
+            "36kr.com": 4, "latepost.com": 4, "huxiu.com": 4, "caixin.com": 4,
+            "jiemian.com": 4, "wallstreetcn.com": 4, "wallstreetcn.com": 4,
+            "sina.com.cn": 4, "sina.cn": 4, "finance.sina.com.cn": 4,
+            "finance.sina.cn": 4, "eastmoney.com": 4, "caifuhao.eastmoney.com": 4,
+            "wap.eastmoney.com": 4, "163.com": 4, "sohu.com": 4, "qq.com": 4,
+            "news.qq.com": 4, "ifeng.com": 4, "cls.cn": 4, "cj.sina.cn": 4,
+            # Tier 3: 行业/垂类媒体
+            "cbndata.com": 3, "ebrun.com": 3, "j1.com": 3, "chandong.com": 3,
+            "cosmetic.observation": 3, "beauty.nbd.com.cn": 3,
+            "retail.orzcloud.com": 3, "instant.retail": 3,
+            "chwang.com": 3, "m.chwang.com": 3,
+            "pinguan.com": 3, "china.com": 3, "mingpao.com": 3,
+            "nbd.com.cn": 3, "readhub.cn": 3, "bjd.com.cn": 3,
+            # Tier 2: 聚合/自媒体
+            "baijiahao.baidu.com": 2, "toutiao.com": 2, "toutiao.cn": 2,
+            "weixin.qq.com": 2, "mp.weixin.qq.com": 2,
+            "zhihu.com": 2, "xhslink.com": 2, "xiaohongshu.com": 2,
+            "bilibili.com": 2, "douyin.com": 2,
+        }
+
+        # 尝试精确匹配和子域匹配
+        if domain in DOMAIN_TIER_MAP:
+            tier = DOMAIN_TIER_MAP[domain]
+            tier_labels = {5: "官方/监管", 4: "头部权威媒体", 3: "行业/垂类媒体", 2: "聚合/自媒体", 1: "未知来源"}
+            reasons.append(f"域名={domain} → {tier_labels.get(tier, '未知')} (Tier {tier})")
+            return float(tier), reasons
+
+        # 子域匹配: 如 finance.sina.com.cn → sina.com.cn
+        for key_domain, tier in DOMAIN_TIER_MAP.items():
+            if domain.endswith("." + key_domain):
+                tier_labels = {5: "官方/监管", 4: "头部权威媒体", 3: "行业/垂类媒体", 2: "聚合/自媒体", 1: "未知来源"}
+                reasons.append(f"域名≈{key_domain} → Tier {tier}")
+                return float(tier), reasons
+    except Exception:
+        pass
+
     # 未知来源
-    reasons.append(f"未知来源: {source_name} → Tier 1")
+    reasons.append(f"未知来源: {source_name}/{source_url[:50]} → Tier 1")
     return 1, reasons
 
 
@@ -614,8 +673,46 @@ def classify_priority(weighted_score: float, thresholds: dict) -> str:
         return "ARCHIVE"
 
 
+def _is_stock_market_event(event: dict) -> bool:
+    """判断事件是否为纯资本市场/证券行情内容。
+
+    这类事件（股价涨跌、个股异动、市值变化）与即时零售×个护美妆"经营"无关，
+    应直接 ARCHIVE，不进报告。
+    判定：fact/title/evidence 中出现≥1个强股市信号词，且不含明确的经营动作词。
+    """
+    text = (
+        (event.get("event_title", "") or "")
+        + (event.get("fact", "") or "")
+        + (event.get("evidence_text", "") or "")
+    )
+    if not text:
+        return False
+
+    # 强股市信号词（出现即高度怀疑）
+    STOCK_SIGNALS = [
+        "涨停", "跌停", "涨超", "跌超", "续创历史新高", "续创新高",
+        "板块异动", "个股", "股价", "市值蒸发", "盘中", "收盘价",
+        "二级市场", "券商研报", "主力资金", "北向资金", "涨幅居前",
+    ]
+    # 经营动作词（出现则可能是真经营事件，放行交由常规打分）
+    BIZ_SIGNALS = [
+        "即时零售", "闪购", "小时达", "前置仓", "门店", "履约", "配送",
+        "上架", "上新", "补货", "促销", "券", "会员", "私域", "直播带货",
+        "供应链", "渠道", "经销", "加盟", "开店", "客单", "复购", "GMV",
+    ]
+
+    stock_hits = sum(1 for k in STOCK_SIGNALS if k in text)
+    biz_hits = sum(1 for k in BIZ_SIGNALS if k in text)
+
+    # 出现股市信号 且 经营信号明显更弱 → 判定为纯股市事件
+    if stock_hits >= 1 and stock_hits > biz_hits:
+        return True
+    return False
+
+
 def apply_hard_downgrade(
-    event: dict, scores: dict, priority: str, reasons: List[str]
+    event: dict, scores: dict, priority: str, reasons: List[str],
+    weighted_score: float = 0.0
 ) -> Tuple[str, List[str]]:
     """应用硬降级规则。
 
@@ -651,11 +748,23 @@ def apply_hard_downgrade(
         reasons.append("硬降级: fact为空 → ARCHIVE")
         return "ARCHIVE", reasons
 
-    # 规则1: confidence=low → 最高 P2
+    # 规则0(新): 纯资本市场/证券行情事件 → ARCHIVE
+    # 股价涨跌、个股异动等与即时零售×个护美妆"经营"无关，不应进报告。
+    if _is_stock_market_event(event):
+        reasons.append("硬降级: 纯资本市场/证券行情内容 → ARCHIVE")
+        return "ARCHIVE", reasons
+
+    # 规则1: confidence=low → 最高 P2 (但如果加权分>=3.5且source_credibility>=3，允许升到P1)
     if confidence == "low":
-        if current_rank < PRIORITY_ORDER["P2"]:
-            reasons.append("硬降级: confidence=low → 最高P2")
-            priority = "P2"
+        if weighted_score >= 3.5 and source_cred >= 3:
+            # 高分+权威来源的low confidence事件，允许P1
+            if current_rank < PRIORITY_ORDER["P1"]:
+                reasons.append(f"confidence=low但加权分={weighted_score:.2f}+source_cred={source_cred}≥3 → 允许P1")
+                # 不降级，保持原priority
+        else:
+            if current_rank < PRIORITY_ORDER["P2"]:
+                reasons.append("硬降级: confidence=low → 最高P2")
+                priority = "P2"
 
     # 规则2: extraction_method=rule_fallback → 最高 P2
     if extraction_method == "rule_fallback":
@@ -856,7 +965,8 @@ def score_events(
             # 硬降级
             downgrade_reasons: List[str] = []
             priority_after, downgrade_reasons = apply_hard_downgrade(
-                event, scores, priority, downgrade_reasons
+                event, scores, priority, downgrade_reasons,
+                weighted_score=weighted_score
             )
 
             if priority_after != priority:

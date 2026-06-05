@@ -166,10 +166,40 @@ def _load_email_config(project_root: str) -> dict:
 
 # ===================== Markdown → HTML =====================
 
-def _clean_report_for_display(md_text: str) -> str:
-    """清理日报文本，移除内部标记供展示用。"""
+def _keep_canonical_sections(md_text: str) -> str:
+    """仅保留标准章节集(01-09, 11)，移除多余/重复章节。"""
+    CANON = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "11"}
+    parts = re.split(r'(?m)(^##\s+\d{2}\b.*$)', md_text)
+    if len(parts) <= 1:
+        return md_text
+    preamble = parts[0]
+    seen = set()
+    kept = [preamble.rstrip()]
+    i = 1
+    while i < len(parts):
+        heading = parts[i]
+        body = parts[i + 1] if i + 1 < len(parts) else ""
+        m = re.match(r'^##\s+(\d{2})\b', heading)
+        num = m.group(1) if m else None
+        if num in CANON and num not in seen:
+            seen.add(num)
+            kept.append(heading.rstrip() + "\n" + body.rstrip())
+        i += 2
+    result = "\n\n".join(s for s in kept if s.strip())
+    return result + "\n"
+
+
+def _clean_report_for_display(md_text: str, keep_canonical: bool = True) -> str:
+    """清理日报文本，移除内部标记供展示用。
+
+    keep_canonical: 仅日报适用（章节集 01-09,11）。周报/月报章节不同，传 False。
+    """
     # ── 0. 移除 LLM 思考泄露（开头非标题文字） ──
     md_text = re.sub(r'^[^#\n].*?(?=## 01|# )', '', md_text, count=1, flags=re.DOTALL)
+
+    # ── 0.5. 移除非法/重复章节（仅日报） ──
+    if keep_canonical:
+        md_text = _keep_canonical_sections(md_text)
 
     # ── 1. 移除事件 ID（各种格式） ──
     # （`E20260530_0037`，A） 或 （`E20260530_0037`、`E20260530_0003`，K）
@@ -1028,9 +1058,7 @@ def send_periodic_report_email(
 
     # 构建附件
     attachments = []
-    # Markdown 附件
-    md_filename = report_fp.name
-    attachments.append((md_filename, report_fp.read_bytes(), "text/markdown"))
+    # 不附加 .md 原文：报告正文已在 HTML 邮件正文中呈现，避免用户看到原始 Markdown 符号。
 
     # MP3 附件
     if audio_path and Path(audio_path).exists():
@@ -1068,8 +1096,10 @@ def send_periodic_report_email(
 def _build_periodic_email_html(report_md: str, report_type: str,
                                report_name: str, period_label: str) -> str:
     """构建周报/月报/年报邮件 HTML。"""
-    # 清理 + 转换
-    clean_md = _fix_markdown_formatting(report_md)
+    # 清理内部标记（事件ID/判断标签/思考泄露）+ 格式修正 + 转换
+    # 周报/月报章节集与日报不同，关闭 canonical 章节过滤避免误删。
+    clean_md = _clean_report_for_display(report_md, keep_canonical=False)
+    clean_md = _fix_markdown_formatting(clean_md)
     body_html = _md_to_html(clean_md)
 
     # 根据类型调整提示语

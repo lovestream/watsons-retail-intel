@@ -1431,6 +1431,49 @@ def generate_v2_by_rules(
     return "\n".join(lines)
 
 
+def _repair_char_split(text: str) -> str:
+    """修复 LLM 输出中"每字符一行"的损坏（某节被逐字打散）。
+
+    检测连续的单字符行 run（>=5 个单字符行视为打散），将其重新拼回
+    段落：单字符直接相连，遇到 1 个空行也视为同段，遇到 >=2 个空行才
+    切段。标题行/多字符行原样保留。
+    """
+    if not text:
+        return text
+    lines = text.split('\n')
+    out = []
+    i, n = 0, len(lines)
+    while i < n:
+        s = lines[i].strip()
+        if s.startswith('#') or len(s) > 1:
+            out.append(lines[i]); i += 1; continue
+        # 收集一段「单字符 / 空行」run
+        j = i
+        run = []
+        while j < n:
+            sj = lines[j].strip()
+            if sj.startswith('#') or len(sj) > 1:
+                break
+            run.append(lines[j]); j += 1
+        single = [l for l in run if len(l.strip()) == 1]
+        if len(single) >= 5:  # 判定为打散，重新拼接
+            paras, buf, blanks = [], [], 0
+            for l in run:
+                sl = l.strip()
+                if len(sl) == 1:
+                    if blanks >= 2 and buf:
+                        paras.append(''.join(buf)); buf = []
+                    blanks = 0; buf.append(sl)
+                else:
+                    blanks += 1
+            if buf:
+                paras.append(''.join(buf))
+            out.append('\n\n'.join(paras)); i = j
+        else:
+            out.extend(run); i = j if run else i + 1
+    return '\n'.join(out)
+
+
 def refine_v2_with_llm(
     events: List[dict],
     date_str: str,
@@ -1508,6 +1551,8 @@ def refine_v2_with_llm(
                 content = reasoning
 
         if content.strip():
+            # 修复 LLM 偶发的"逐字换行"损坏（如 09 每日八问被打散）
+            content = _repair_char_split(content)
             # V2 是独立重构，不从 V1 draft 回补 tracking 节（V2 无 draft 引用）
             return content.strip()
 
@@ -1555,6 +1600,8 @@ def refine_with_llm(draft: str, date_str: str, llm_client,
                 content = reasoning
 
         if content.strip():
+            # 修复 LLM 偶发的"逐字换行"损坏
+            content = _repair_char_split(content)
             # V2 是独立重构，不从 V1 draft 回补 tracking 节（V2 无 draft 引用）
             return content.strip()
 

@@ -757,10 +757,83 @@ def final_validate(
 
 # ===================== 规则压缩 =====================
 
+def _keep_canonical_sections(md_text: str) -> str:
+    """仅保留标准章节集(01-09, 11)，移除多余/重复章节。
+
+    LLM 偶尔会在结尾附加编号重复或非标准的 ## 章节（如再来一个 ## 06），
+    这里按 ## NN 切分，每个合法编号只保留首次出现，丢弃其余。
+    保留章节前的前言(如 # 大标题)。
+    """
+    CANON = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "11"}
+    # 按 ## NN 标题切分，保留分隔符
+    parts = re.split(r'(?m)(^##\s+\d{2}\b.*$)', md_text)
+    if len(parts) <= 1:
+        return md_text
+    preamble = parts[0]
+    seen = set()
+    kept = [preamble.rstrip()]
+    i = 1
+    while i < len(parts):
+        heading = parts[i]
+        body = parts[i + 1] if i + 1 < len(parts) else ""
+        m = re.match(r'^##\s+(\d{2})\b', heading)
+        num = m.group(1) if m else None
+        if num in CANON and num not in seen:
+            seen.add(num)
+            kept.append(heading.rstrip() + "\n" + body.rstrip())
+        # 非标准编号或重复 → 丢弃该章节及其正文
+        i += 2
+    result = "\n\n".join(s for s in kept if s.strip())
+    return result + "\n"
+
+
+def _repair_char_split(text: str) -> str:
+    """修复 LLM 输出中"每字符一行"的损坏（某节被逐字打散）。"""
+    if not text:
+        return text
+    lines = text.split('\n')
+    out = []
+    i, n = 0, len(lines)
+    while i < n:
+        s = lines[i].strip()
+        if s.startswith('#') or len(s) > 1:
+            out.append(lines[i]); i += 1; continue
+        j = i
+        run = []
+        while j < n:
+            sj = lines[j].strip()
+            if sj.startswith('#') or len(sj) > 1:
+                break
+            run.append(lines[j]); j += 1
+        single = [l for l in run if len(l.strip()) == 1]
+        if len(single) >= 5:
+            paras, buf, blanks = [], [], 0
+            for l in run:
+                sl = l.strip()
+                if len(sl) == 1:
+                    if blanks >= 2 and buf:
+                        paras.append(''.join(buf)); buf = []
+                    blanks = 0; buf.append(sl)
+                else:
+                    blanks += 1
+            if buf:
+                paras.append(''.join(buf))
+            out.append('\n\n'.join(paras)); i = j
+        else:
+            out.extend(run); i = j if run else i + 1
+    return '\n'.join(out)
+
+
 def _clean_report_for_display(md_text: str) -> str:
     """清理日报文本，移除内部标记供展示用。"""
     # ── 0. 移除 LLM 思考泄露（开头非标题文字） ──
     md_text = re.sub(r'^[^#\n].*?(?=## 01|# )', '', md_text, count=1, flags=re.DOTALL)
+
+    # ── 0.1. 修复 LLM "逐字换行" 损坏（如 09 每日八问被打散） ──
+    md_text = _repair_char_split(md_text)
+
+    # ── 0.5. 移除非法/重复章节（仅保留标准章节集 01-09, 11，各取首次出现） ──
+    md_text = _keep_canonical_sections(md_text)
 
     # ── 1. 移除事件 ID（各种格式） ──
     # （`E20260530_0037`，A） 或 （`E20260530_0037`、`E20260530_0003`，K）
@@ -781,6 +854,11 @@ def _clean_report_for_display(md_text: str) -> str:
                      '', md_text, flags=re.MULTILINE)
     # 移除内联判断标签：标题/正文末尾的【A】【B】【C】【R】【K】【X】等
     md_text = re.sub(r'【[ABCRKX]】', '', md_text)
+    # 移除 Python list 形式的判断标签：['A'] ["A"] 以及前导空格
+    md_text = re.sub(r"\s*\[\s*['\"]?[ABCRKX]['\"]?\s*\]", '', md_text)
+    # 移除"空"占位残留（事件正文被截断后遗留的 "，空" / " 空" 在行尾或标签前）
+    md_text = re.sub(r'[，,]\s*空(?=\s*$)', '。', md_text, flags=re.MULTILINE)
+    md_text = re.sub(r'[，,]?\s*空\s+(?=\[)', '', md_text)
 
     # ── 3. 移除证据事件/置信度行 ──
     md_text = re.sub(r'^-\s*\*\*证据事件\*\*[：:]\s*.*$',

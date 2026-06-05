@@ -220,6 +220,11 @@ def _clean_report_for_display(md_text: str, keep_canonical: bool = True) -> str:
                      '', md_text, flags=re.MULTILINE)
     # 移除内联判断标签：标题/正文末尾的【A】【B】【C】【R】【K】【X】等
     md_text = re.sub(r'【[ABCRKX]】', '', md_text)
+    # 移除 Python list 形式的判断标签：['A'] ["A"] 以及前导空格
+    md_text = re.sub(r"\s*\[\s*['\"]?[ABCRKX]['\"]?\s*\]", '', md_text)
+    # 移除"空"占位残留
+    md_text = re.sub(r'[，,]\s*空(?=\s*$)', '。', md_text, flags=re.MULTILINE)
+    md_text = re.sub(r'[，,]?\s*空\s+(?=\[)', '', md_text)
 
     # ── 3. 移除证据事件/置信度行 ──
     md_text = re.sub(r'^-\s*\*\*证据事件\*\*[：:]\s*.*$',
@@ -1168,8 +1173,8 @@ def main():
     )
     parser.add_argument(
         "--attach-markdown",
-        default="true",
-        help="是否附加日报 Markdown (true/false)",
+        default="false",
+        help="是否附加日报 Markdown (true/false)，默认 false（正文已含报告）",
     )
     parser.add_argument(
         "--attach-podcast",

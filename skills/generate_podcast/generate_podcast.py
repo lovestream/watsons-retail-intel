@@ -295,8 +295,8 @@ def llm_generate_podcast_script(
             config_path=str(root / "config" / "model_router.yaml"),
         )
     except Exception:
-        default_model = "LongCat-Flash-Thinking"
-        fallbacks = ["LongCat-Flash-Chat", "LongCat-Flash-Lite"]
+        default_model = "LongCat-2.0-Preview"
+        fallbacks = ["LongCat-2.0-Preview"]
 
     if default_model == "rule_only":
         logger.info(f"{LOG_PREFIX} 模型路由返回 rule_only，跳过 LLM")
@@ -550,11 +550,19 @@ def generate_podcast(
         log(f"  ⚠️ 事件去重跳过: {e}")
 
     # ── 判断是否无信号 ──
-    core_events = [e for e in all_events
-                   if e.get("report_eligibility") == "core"
-                   and e.get("novelty_status") in ("new_today", "updated_today")]
-    is_no_signal = len(core_events) == 0
-    log(f"事件类型: {'无信号' if is_no_signal else f'正常({len(core_events)}条core+new_today)'}")
+    # 与 select_podcast_events 的选材逻辑保持一致：
+    # 只要存在可播报的 core 事件（new_today/updated_today 或可补充的 tracking），
+    # 就不是无信号。避免重跑或全为延续事件时误判为"今天没信号"。
+    selected = select_podcast_events(all_events)
+    core_new = [e for e in all_events
+                if e.get("report_eligibility") == "core"
+                and e.get("novelty_status") in ("new_today", "updated_today")]
+    # 有 P1/P2 级别的可播报事件即视为有信号
+    has_priority_signal = any(
+        e.get("priority") in ("P0", "P1", "P2") for e in selected)
+    is_no_signal = (len(selected) == 0) or (
+        len(core_new) == 0 and not has_priority_signal)
+    log(f"事件类型: {'无信号' if is_no_signal else f'正常(选材{len(selected)}条, core+new={len(core_new)}条)'}")
 
     # ── 生成口播稿 ──
     script = ""

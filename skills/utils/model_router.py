@@ -68,7 +68,7 @@ def reload_config(config_path: Optional[str] = None):
 def get_default_model() -> str:
     """获取全局默认模型。"""
     config = _load_config()
-    return config.get("default_model", "LongCat-Flash-Thinking")
+    return config.get("default_model", "LongCat-2.0-Preview")
 
 
 def get_models_config() -> Dict[str, Any]:
@@ -100,8 +100,8 @@ def get_model_for_skill(
 
     config = _load_config(config_path)
     routing = config.get("routing", {})
-    global_fallback = config.get("global_fallback", ["LongCat-Flash-Chat", "LongCat-Flash-Thinking"])
-    default_model = config.get("default_model", "LongCat-Flash-Thinking")
+    global_fallback = config.get("global_fallback", ["LongCat-2.0-Preview"])
+    default_model = config.get("default_model", "LongCat-2.0-Preview")
 
     if skill_name not in routing:
         logger.info(f"技能 '{skill_name}' 未在路由配置中，使用全局默认模型: {default_model}")

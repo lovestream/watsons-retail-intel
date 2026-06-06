@@ -112,6 +112,7 @@ NON_CRITICAL_STEPS = {
     "tavily_gap_search",         # Tavily 已限流，失败正常
     "enrich_cleaned_fulltext",   # 全文补抓失败不影响事件提取
     "evergreen_candidates",      # 常青库是增强功能
+    "generate_podcast",          # 播客生成失败不影响日报（仅缺 MP3 附件）
     "podcast_review",            # 播客审稿失败不影响日报
     "pipeline_alert",            # 告警失败不影响产出
 }

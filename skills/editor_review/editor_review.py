@@ -824,6 +824,76 @@ def _repair_char_split(text: str) -> str:
     return '\n'.join(out)
 
 
+_EVENT_ID_COL_NAMES = {"事件依据", "事件id", "对应事件", "event_id", "eventid", "事件编号"}
+
+
+def _drop_event_id_table_columns(md_text: str) -> str:
+    """删除 markdown 表格中专门承载事件ID、且已被清空的列。
+
+    事件ID 在展示清理时被移除，留下空单元格（如"事件依据"列全空）。
+    本函数检测表头名称属于事件ID类、且该列内容基本为空的列，整列删除
+    （表头+分隔行+所有数据行对应单元格）。非事件ID列或仍有内容的列保留。
+    """
+    lines = md_text.split("\n")
+    out = []
+    i, n = 0, len(lines)
+    while i < n:
+        line = lines[i]
+        # 表格起始：当前行是表头(含|)，下一行是分隔行(|---|)
+        if (line.lstrip().startswith("|") and i + 1 < n
+                and re.match(r'^\s*\|[\s:\-|]+\|\s*$', lines[i + 1])):
+            # 收集整张表
+            tbl = [line, lines[i + 1]]
+            k = i + 2
+            while k < n and lines[k].lstrip().startswith("|"):
+                tbl.append(lines[k]); k += 1
+            out.extend(_strip_empty_id_columns(tbl))
+            i = k
+        else:
+            out.append(line); i += 1
+    return "\n".join(out)
+
+
+def _split_row(row: str) -> list:
+    """拆分 markdown 表格行为单元格列表（去掉首尾空串）。"""
+    s = row.strip()
+    if s.startswith("|"):
+        s = s[1:]
+    if s.endswith("|"):
+        s = s[:-1]
+    return [c.strip() for c in s.split("|")]
+
+
+def _strip_empty_id_columns(tbl: list) -> list:
+    """对单张表格，删除"事件ID类且全空"的列。返回新表格行列表。"""
+    if len(tbl) < 2:
+        return tbl
+    header = _split_row(tbl[0])
+    rows = [_split_row(r) for r in tbl[2:]]
+    ncol = len(header)
+    # 找出需删除的列索引
+    drop = set()
+    for ci, name in enumerate(header):
+        key = name.replace(" ", "").lower()
+        if key in _EVENT_ID_COL_NAMES:
+            # 该列数据是否基本为空
+            vals = [r[ci].strip() for r in rows if ci < len(r)]
+            if all(v == "" for v in vals):
+                drop.add(ci)
+    if not drop:
+        return tbl
+    keep = [ci for ci in range(ncol) if ci not in drop]
+
+    def _rebuild(cells):
+        picked = [cells[ci] if ci < len(cells) else "" for ci in keep]
+        return "| " + " | ".join(picked) + " |"
+
+    new_tbl = [_rebuild(header), "|" + "---|" * len(keep)]
+    for r in rows:
+        new_tbl.append(_rebuild(r))
+    return new_tbl
+
+
 def _clean_report_for_display(md_text: str) -> str:
     """清理日报文本，移除内部标记供展示用。"""
     # ── 0. 移除 LLM 思考泄露（开头非标题文字） ──
@@ -880,6 +950,13 @@ def _clean_report_for_display(md_text: str) -> str:
     md_text = re.sub(r'、、+', '、', md_text)
     md_text = re.sub(r'\*\*event_id\*\*[：:]\s*', '', md_text)
     md_text = re.sub(r'event_id[：:]\s*', '', md_text)
+    # "**对应事件**： — 标题" 事件ID被清空后留下孤立破折号，改为直接接标题
+    md_text = re.sub(r'(\*\*对应事件\*\*[：:])\s*[—\-–]\s*', r'\1', md_text)
+    # 表格单元格内事件ID被清空后留下的前导冒号："| ：描述" → "| 描述"
+    md_text = re.sub(r'(\|\s*)[：:]\s*', r'\1', md_text)
+
+    # ── 4.5. 删除因事件ID清理而变空的表格列（如"事件依据""事件ID"列） ──
+    md_text = _drop_event_id_table_columns(md_text)
 
     # ── 5. 修复 markdown 格式 ──
     md_text = _fix_markdown_inline(md_text)
@@ -933,9 +1010,13 @@ def rule_compress(draft: str, events: List[dict]) -> str:
     section_07_start = result.find("## 08 今日建议动作")
     if section_07_start >= 0:
         valid_actions = find_valid_unique_action_events(events)
-        section_07_end = result.find("## 08", section_07_start + 1)
+        # 查找下一节标题作为本节结束位置。
+        # 注意：不能用裸 "---" 定位，否则会误命中表格分隔行 |---|---|，
+        # 导致截断时丢掉表头。优先用 "\n## "，再退而求其次用行首 "---" 分隔线。
+        section_07_end = result.find("\n## ", section_07_start + 1)
         if section_07_end < 0:
-            section_07_end = result.find("---", section_07_start + 1)
+            m = re.search(r'\n---\s*\n', result[section_07_start + 1:])
+            section_07_end = (section_07_start + 1 + m.start()) if m else -1
         if section_07_end < 0:
             section_07_end = len(result)
 

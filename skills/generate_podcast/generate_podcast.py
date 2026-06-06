@@ -585,7 +585,7 @@ def generate_podcast(
         log("LLM 失败，使用规则模板...")
         selected = select_podcast_events(all_events, 3)
         parts = [f"早安，这里是即时零售×个护美妆经营日报，{date}。\n"]
-        parts.append(f"今天有{len(core_events)}条核心事件值得关注。\n")
+        parts.append(f"今天有{len(core_new)}条核心事件值得关注。\n")
         for i, ev in enumerate(selected):
             parts.append(f"第{i+1}条：{ev.get('event_title', '')}。")
             if ev.get("fact"):
@@ -654,7 +654,7 @@ def generate_podcast(
         "llm_used": llm_used,
         "tts_success": tts_success,
         "voice": voice,
-        "core_event_count": len(core_events),
+        "core_event_count": len(core_new),
         "selected_event_count": len(select_podcast_events(all_events, 5)),
         "errors": [],
     }

@@ -166,6 +166,104 @@ def _load_email_config(project_root: str) -> dict:
 
 # ===================== Markdown → HTML =====================
 
+def _repair_char_split(text: str) -> str:
+    """修复 LLM 输出中"每字符一行"的损坏（某节被逐字打散）。"""
+    if not text:
+        return text
+    lines = text.split('\n')
+    out = []
+    i, n = 0, len(lines)
+    while i < n:
+        s = lines[i].strip()
+        if s.startswith('#') or len(s) > 1:
+            out.append(lines[i]); i += 1; continue
+        j = i
+        run = []
+        while j < n:
+            sj = lines[j].strip()
+            if sj.startswith('#') or len(sj) > 1:
+                break
+            run.append(lines[j]); j += 1
+        single = [l for l in run if len(l.strip()) == 1]
+        if len(single) >= 5:
+            paras, buf, blanks = [], [], 0
+            for l in run:
+                sl = l.strip()
+                if len(sl) == 1:
+                    if blanks >= 2 and buf:
+                        paras.append(''.join(buf)); buf = []
+                    blanks = 0; buf.append(sl)
+                else:
+                    blanks += 1
+            if buf:
+                paras.append(''.join(buf))
+            out.append('\n\n'.join(paras)); i = j
+        else:
+            out.extend(run); i = j if run else i + 1
+    return '\n'.join(out)
+
+
+_EVENT_ID_COL_NAMES = {"事件依据", "事件id", "对应事件", "event_id", "eventid", "事件编号"}
+
+
+def _split_row(row: str) -> list:
+    """拆分 markdown 表格行为单元格列表。"""
+    s = row.strip()
+    if s.startswith("|"):
+        s = s[1:]
+    if s.endswith("|"):
+        s = s[:-1]
+    return [c.strip() for c in s.split("|")]
+
+
+def _strip_empty_id_columns(tbl: list) -> list:
+    """对单张表格，删除"事件ID类且全空"的列。"""
+    if len(tbl) < 2:
+        return tbl
+    header = _split_row(tbl[0])
+    rows = [_split_row(r) for r in tbl[2:]]
+    ncol = len(header)
+    drop = set()
+    for ci, name in enumerate(header):
+        key = name.replace(" ", "").lower()
+        if key in _EVENT_ID_COL_NAMES:
+            vals = [r[ci].strip() for r in rows if ci < len(r)]
+            if all(v == "" for v in vals):
+                drop.add(ci)
+    if not drop:
+        return tbl
+    keep = [ci for ci in range(ncol) if ci not in drop]
+
+    def _rebuild(cells):
+        picked = [cells[ci] if ci < len(cells) else "" for ci in keep]
+        return "| " + " | ".join(picked) + " |"
+
+    new_tbl = [_rebuild(header), "|" + "---|" * len(keep)]
+    for r in rows:
+        new_tbl.append(_rebuild(r))
+    return new_tbl
+
+
+def _drop_event_id_table_columns(md_text: str) -> str:
+    """删除 markdown 表格中专门承载事件ID、且已被清空的列。"""
+    lines = md_text.split("\n")
+    out = []
+    i, n = 0, len(lines)
+    while i < n:
+        line = lines[i]
+        if (line.lstrip().startswith("|") and i + 1 < n
+                and re.match(r'^\s*\|[\s:\-|]+\|\s*$', lines[i + 1])):
+            tbl = [line, lines[i + 1]]
+            k = i + 2
+            while k < n and lines[k].lstrip().startswith("|"):
+                tbl.append(lines[k]); k += 1
+            out.extend(_strip_empty_id_columns(tbl))
+            i = k
+        else:
+            out.append(line); i += 1
+    return "\n".join(out)
+
+
 def _keep_canonical_sections(md_text: str) -> str:
     """仅保留标准章节集(01-09, 11)，移除多余/重复章节。"""
     CANON = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "11"}
@@ -196,6 +294,9 @@ def _clean_report_for_display(md_text: str, keep_canonical: bool = True) -> str:
     """
     # ── 0. 移除 LLM 思考泄露（开头非标题文字） ──
     md_text = re.sub(r'^[^#\n].*?(?=## 01|# )', '', md_text, count=1, flags=re.DOTALL)
+
+    # ── 0.1. 修复 LLM "逐字换行" 损坏 ──
+    md_text = _repair_char_split(md_text)
 
     # ── 0.5. 移除非法/重复章节（仅日报） ──
     if keep_canonical:
@@ -246,6 +347,13 @@ def _clean_report_for_display(md_text: str, keep_canonical: bool = True) -> str:
     md_text = re.sub(r'、、+', '、', md_text)  # 连续顿号
     md_text = re.sub(r'\*\*event_id\*\*[：:]\s*', '', md_text)  # **event_id**:
     md_text = re.sub(r'event_id[：:]\s*', '', md_text)
+    # "**对应事件**： — 标题" 事件ID被清空后留下孤立破折号
+    md_text = re.sub(r'(\*\*对应事件\*\*[：:])\s*[—\-–]\s*', r'\1', md_text)
+    # 表格单元格内事件ID被清空后留下的前导冒号
+    md_text = re.sub(r'(\|\s*)[：:]\s*', r'\1', md_text)
+
+    # ── 4.5. 删除因事件ID清理而变空的表格列 ──
+    md_text = _drop_event_id_table_columns(md_text)
 
     # ── 5. 清理多余空行 ──
     md_text = re.sub(r'\n{3,}', '\n\n', md_text)

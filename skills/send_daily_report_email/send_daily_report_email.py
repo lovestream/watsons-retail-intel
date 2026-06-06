@@ -15,7 +15,7 @@ import re
 import subprocess
 import sys
 import tempfile
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Optional
 
@@ -27,6 +27,15 @@ if _PROJECT_ROOT not in sys.path:
 from markdown_it import MarkdownIt
 
 # ===================== 常量 =====================
+
+# 容器系统时钟为 UTC，但业务日期一律按北京时间（CST）计算。
+# 用裸 datetime.now() 会在 CST 0-8 点窗口算成前一天，导致默认日期/防重发判断差一天。
+CST = timezone(timedelta(hours=8))
+
+
+def _now_cst() -> datetime:
+    """返回当前北京时间。"""
+    return datetime.now(CST)
 
 CORE_SECTIONS = [
     "01 今日一句话结论",
@@ -323,6 +332,10 @@ def _clean_report_for_display(md_text: str, keep_canonical: bool = True) -> str:
     md_text = re.sub(r'【[ABCRKX]】', '', md_text)
     # 移除 Python list 形式的判断标签：['A'] ["A"] 以及前导空格
     md_text = re.sub(r"\s*\[\s*['\"]?[ABCRKX]['\"]?\s*\]", '', md_text)
+    # 移除规则模板的描述式判断标签：[A-必须关注]、[A-必须关注 B-本周跟进] 等
+    md_text = re.sub(
+        r'\s*\[\s*(?:[ABCRKX]-[\u4e00-\u9fff]{2,6})(?:\s+[ABCRKX]-[\u4e00-\u9fff]{2,6})*\s*\]',
+        '', md_text)
     # 移除"空"占位残留
     md_text = re.sub(r'[，,]\s*空(?=\s*$)', '。', md_text, flags=re.MULTILINE)
     md_text = re.sub(r'[，,]?\s*空\s+(?=\[)', '', md_text)
@@ -886,7 +899,7 @@ def send_daily_report_email(
 
     # ── 日期 ──
     if not date:
-        date = datetime.now().strftime("%Y-%m-%d")
+        date = _now_cst().strftime("%Y-%m-%d")
 
     year, month = date[:4], date[5:7]
 
@@ -898,12 +911,11 @@ def send_daily_report_email(
     logger = _setup_logger(log_dir, date)
 
     # ── 0. 日期有效性 + 防重复发送 ──
-    today = datetime.now().strftime("%Y-%m-%d")
+    today = _now_cst().strftime("%Y-%m-%d")
     sent_marker = Path(project_root) / "data" / "logs" / date / ".email_sent"
     if date < today:
         # 允许补发昨天的，但绝对不允许更早的
-        from datetime import timedelta
-        yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        yesterday = (_now_cst() - timedelta(days=1)).strftime("%Y-%m-%d")
         if date < yesterday:
             logger.error(f"拒绝发送 {date} 的日报：日期超过1天前（今天={today}）")
             return {
@@ -1116,7 +1128,7 @@ def send_daily_report_email(
     # ── 15. 写发送标记（防重复） ──
     if sent and not dry_run:
         sent_marker = log_dir / ".email_sent"
-        sent_marker.write_text(datetime.now().isoformat())
+        sent_marker.write_text(_now_cst().isoformat())
         logger.info(f"发送标记已写入: {sent_marker}")
 
     logger.info(f"发送结果: ok={result['ok']}, sent={sent}, dry_run={dry_run}")

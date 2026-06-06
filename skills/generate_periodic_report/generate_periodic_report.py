@@ -41,6 +41,11 @@ TTS_RATE = "+5%"
 
 _TYPE_NAMES = {"weekly": "\u5468\u62a5", "monthly": "\u6708\u62a5", "yearly": "\u5e74\u62a5"}
 
+# \u7ae0\u8282\u751f\u6210\u91cd\u8bd5\u8017\u5c3d\u4ecd\u5931\u8d25\u65f6\u7684\u5185\u90e8\u6807\u8bb0\u3002
+# \u7edd\u4e0d\u8fdb\u5165\u7ec8\u7a3f\uff1afinalize \u4f1a\u8fc7\u6ee4\u6389\uff0c\u9632\u6b62\u201c\u751f\u6210\u5931\u8d25\u201d\u5b57\u6837\u53d1\u7ed9\u51b3\u7b56\u8005\u3002
+_FAILED_CHAPTER_MARKER = "__CHAPTER_GENERATION_FAILED__"
+
+
 # __MARKER_APPEND_HERE__
 
 
@@ -98,7 +103,26 @@ def _strip_markdown(text):
     return text.strip()
 
 
+def _strip_internal_markers(text):
+    """\u79fb\u9664\u4ea4\u4ed8\u7269\u4e2d\u7684\u5185\u90e8\u6807\u8bb0\uff08\u4e8b\u4ef6\u7f16\u53f7 / \u5224\u65ad\u6807\u7b7e\uff09\u3002
+
+    \u5468/\u6708/\u5e74\u62a5\u7684\u7ec8\u7a3f .md \u4e0e\u53e3\u64ad\u7a3f\u90fd\u5e94\u8d70\u8fd9\u4e00\u6b65\uff0c
+    \u907f\u514d event_id \u88ab TTS \u9010\u5b57\u8bfb\u51fa\u3001\u6216\u51fa\u73b0\u5728\u90ae\u4ef6\u6b63\u6587\u3002
+    """
+    if not text:
+        return text
+    # \u4e8b\u4ef6\u7f16\u53f7 E20260606_0017\uff08\u53ef\u80fd\u5e26\u53cd\u5f15\u53f7/\u62ec\u53f7/\u4e2d\u6587\u5192\u53f7\uff09
+    text = re.sub(r'[（(\[【`]?\s*E\d{8}_\d{4}\s*[)\]】`]?\s*[：:、，,]?', '', text)
+    # \u72ec\u7acb\u7684\u5224\u65ad\u6807\u7b7e \u3010A\u3011/['A']/(A) \u7b49
+    text = re.sub(r'\s*【\s*[ABCRKX]\s*】', '', text)
+    text = re.sub(r"\s*\[\s*['\"]?[ABCRKX]['\"]?\s*\]", '', text)
+    # \u6e05\u7406\u56e0\u79fb\u9664\u7559\u4e0b\u7684\u5b64\u7acb\u5192\u53f7/\u7a7a\u8868\u683c\u5217
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    return text
+
+
 # __MARKER_PART2__
+
 
 
 def _load_source_reports(report_type, period_info, project_root):
@@ -178,26 +202,42 @@ def phase1_generate_chapters(report_type, source_text, period_label):
         )
 
         logger.info(f"{LOG_PREFIX} Phase1: \u751f\u6210\u7ae0\u8282 {ch_id} {ch_title}")
-        result = client.chat(
-            messages=[{"role": "user", "content": user_msg}],
-            system_prompt=system,
-            max_tokens=MAX_TOKENS_CHAPTER,
-            model=LLM_MODEL,
-        )
 
-        if result["ok"] and result["content"].strip():
-            results[ch_id] = result["content"].strip()
+        # \u91cd\u8bd5\u591a\u6b21\uff08client.chat \u5185\u90e8\u5df2\u542b LongCat\u2192GPT \u5151\u5e95\uff09\uff0c
+        # \u907f\u514d\u5355\u6b21\u62b5\u52a8\u5931\u8d25\u5c31\u843d\u5165"\u751f\u6210\u5931\u8d25"\u5360\u4f4d\u7b26\u3002
+        content = ""
+        for attempt in range(1, 4):
+            result = client.chat(
+                messages=[{"role": "user", "content": user_msg}],
+                system_prompt=system,
+                max_tokens=MAX_TOKENS_CHAPTER,
+                model=LLM_MODEL,
+            )
+            if result["ok"] and result["content"].strip():
+                content = result["content"].strip()
+                break
+            logger.warning(
+                f"{LOG_PREFIX}   \u2717 {ch_id} \u7b2c{attempt}\u6b21\u5931\u8d25: "
+                f"{result.get('error', 'empty')}"
+            )
+
+        if content:
+            results[ch_id] = content
             logger.info(f"{LOG_PREFIX}   \u2713 {ch_id}: {len(results[ch_id])} \u5b57\u7b26")
         else:
-            logger.warning(f"{LOG_PREFIX}   \u2717 {ch_id} \u5931\u8d25: {result.get('error', 'empty')}")
-            results[ch_id] = f"## {ch_id} {ch_title}\n\n\uff08\u751f\u6210\u5931\u8d25\uff0c\u5f85\u8865\u5145\uff09"
+            # \u91cd\u8bd5\u8017\u5c3d\u4ecd\u5931\u8d25 \u2192 \u6807\u8bb0\u4e3a\u5931\u8d25\uff0c\u7edd\u4e0d\u5c06\u5360\u4f4d\u7b26\u53d1\u7ed9\u51b3\u7b56\u8005\u3002
+            logger.error(f"{LOG_PREFIX}   \u2717\u2717 {ch_id} \u91cd\u8bd5\u8017\u5c3d\u4ecd\u5931\u8d25\uff0c\u6807\u8bb0\u4e3a\u7f3a\u5931")
+            results[ch_id] = _FAILED_CHAPTER_MARKER
 
     return results
 
 
 def phase2_review(chapters, report_type):
     """Phase 2: \u6c47\u603b\u5ba1\u89c6\u3002"""
-    full_text = "\n\n".join(chapters[k] for k in sorted(chapters.keys()))
+    full_text = "\n\n".join(
+        chapters[k] for k in sorted(chapters.keys())
+        if chapters[k] != _FAILED_CHAPTER_MARKER
+    )
     client = get_llm_client()
 
     user_msg = (
@@ -299,13 +339,27 @@ def phase3_revise(chapters, review, report_type, source_text, period_label):
 def phase4_finalize(chapters, report_type, period_label, period_info,
                     project_root):
     """Phase 4: \u7ec8\u7a3f\u5408\u5e76 + \u53e3\u64ad\u7a3f + TTS\u3002"""
-    result_dict = {"report_path": "", "podcast_script": "", "audio_path": ""}
+    result_dict = {"report_path": "", "podcast_script": "", "audio_path": "",
+                   "failed_chapters": []}
 
-    # \u5408\u5e76\u7ec8\u7a3f
+    # \u5408\u5e76\u7ec8\u7a3f\uff08\u8df3\u8fc7\u751f\u6210\u5931\u8d25\u7684\u7ae0\u8282\uff0c\u7edd\u4e0d\u53d1\u51fa\u5360\u4f4d\u7b26\uff09
     title = f"\u5373\u65f6\u96f6\u552e \u00d7 \u4e2a\u62a4\u7f8e\u5986\u7ecf\u8425{_TYPE_NAMES[report_type]}\uff5c{period_label}"
     full_report = f"# {title}\n\n"
+    failed_chapters = []
     for ch_id in sorted(chapters.keys()):
+        if chapters[ch_id] == _FAILED_CHAPTER_MARKER:
+            failed_chapters.append(ch_id)
+            continue
         full_report += chapters[ch_id] + "\n\n"
+    result_dict["failed_chapters"] = failed_chapters
+    if failed_chapters:
+        logger.error(
+            f"{LOG_PREFIX} Phase4: {len(failed_chapters)} \u4e2a\u7ae0\u8282\u751f\u6210\u5931\u8d25\u5df2\u8df3\u8fc7: "
+            f"{failed_chapters}"
+        )
+
+    # \u79fb\u9664\u5185\u90e8\u6807\u8bb0\uff08\u4e8b\u4ef6\u7f16\u53f7/\u5224\u65ad\u6807\u7b7e\uff09\u540e\u518d\u843d\u76d8
+    full_report = _strip_internal_markers(full_report)
 
     # \u4fdd\u5b58\u62a5\u544a
     report_path = _get_report_path(report_type, period_info, project_root)

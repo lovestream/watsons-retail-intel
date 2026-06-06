@@ -375,6 +375,38 @@ def classify_article(article: dict, file_source: str) -> str:
 # 主函数
 # ═══════════════════════════════════════════
 
+# 显式的时效分层名称（源可在 article 上声明 date_tier 直接指定，最稳妥）
+_DATE_TIER_CHANNEL = "channel"   # RSSHub 频道源：严格 1 天
+_DATE_TIER_SEARCH = "search"     # RSSHub 搜索源：放宽 3 天
+_DATE_TIER_BROAD = "broad"       # XCrawl/CloakBrowser/tophub：放宽 7 天
+
+
+def classify_date_tier(article: dict, broad_sources: set) -> str:
+    """判定文章的时效分层 channel|search|broad。
+
+    优先用源显式声明的 date_tier 字段；否则按多字段稳健推断，
+    不再仅靠 source_name 是否含 'search' 这一脆弱子串。
+    """
+    explicit = (article.get("date_tier") or "").strip().lower()
+    if explicit in (_DATE_TIER_CHANNEL, _DATE_TIER_SEARCH, _DATE_TIER_BROAD):
+        return explicit
+
+    collector = (article.get("collector") or "").lower()
+    source_type = (article.get("source_type") or "").lower()
+    source_name = (article.get("source_name") or "").lower()
+    src_file = (article.get("_source_file") or "").lower()
+    route = (article.get("route") or "").lower()
+    haystack = " ".join([collector, source_type, source_name, src_file, route])
+
+    # broad 源
+    if any(bs in haystack for bs in broad_sources):
+        return _DATE_TIER_BROAD
+    # 搜索路由：source_name/route 任一含 search 即判 search
+    if "search" in source_name or "search" in route or "_search_" in haystack:
+        return _DATE_TIER_SEARCH
+    return _DATE_TIER_CHANNEL
+
+
 def merge_raw_articles(
     project_root: str,
     date: str,
@@ -588,13 +620,12 @@ def merge_raw_articles(
         
         # ═══ URL 日期二次校验 ═══
         url_date = _extract_url_date(a.get("url", ""))
+        tier = classify_date_tier(a, BROAD_SOURCES)
         if pub_dt and url_date:
             url_dt = _parse_date_str(url_date)
             if url_dt:
                 diff_days = abs((pub_dt - url_dt).days)
-                src_file = a.get("_source_file", "")
-                is_broad = any(bs in src_file or bs in collector or bs in source_type for bs in BROAD_SOURCES)
-                cutoff = date_cutoff_loose if is_broad else date_cutoff_strict
+                cutoff = date_cutoff_loose if tier == _DATE_TIER_BROAD else date_cutoff_strict
                 if diff_days > 7 and url_dt < cutoff:
                     logger.warning(
                         f"  🚫 硬日期门: URL日期={url_date} 与 published_at={pub_str[:10]} "
@@ -604,17 +635,10 @@ def merge_raw_articles(
                     continue
         
         if pub_dt is not None:
-            # Choose cutoff based on source
-            src_file = a.get("_source_file", "")
-            source_name = a.get("source_name", "")
-            is_broad = any(bs in src_file or bs in collector or bs in source_type for bs in BROAD_SOURCES)
-            # RSSHub 搜索源使用中间 cutoff（3天）：
-            # - 比频道源宽松（允许前天的重要新闻被补充采集）
-            # - 比 broad 严格（不让一周前的旧分析混入日报）
-            is_search_source = "search" in source_name.lower()
-            if is_broad:
+            # 按时效分层选择 cutoff：channel 1天 / search 3天 / broad 7天
+            if tier == _DATE_TIER_BROAD:
                 cutoff = date_cutoff_loose       # 7天
-            elif is_search_source:
+            elif tier == _DATE_TIER_SEARCH:
                 cutoff = date_cutoff_search      # 3天
             else:
                 cutoff = date_cutoff_strict      # 1天
@@ -627,13 +651,11 @@ def merge_raw_articles(
                 rejected_old += 1
         else:
             # 无日期文章处理：
-            # - BROAD_SOURCES (xcrawl/cloakbrowser/tophub/broad_search) 来源的保留
+            # - broad 源 (xcrawl/cloakbrowser/tophub/broad_search) 保留
             #   因为搜索引擎/采集端已做时效筛选
             # - RSSHub 搜索源的无日期文章拒绝（collect 阶段已过滤，漏网说明有问题）
             # - 其他来源的拒绝
-            src_file = a.get("_source_file", "")
-            is_broad = any(bs in src_file or bs in collector or bs in source_type for bs in BROAD_SOURCES)
-            if is_broad:
+            if tier == _DATE_TIER_BROAD:
                 kept_articles.append(a)
             else:
                 rejected_no_date += 1

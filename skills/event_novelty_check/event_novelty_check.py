@@ -175,13 +175,13 @@ def determine_novelty(
     existing = ledger.get(cluster_key)
 
     if existing is None:
-        # 从未出现过
+        # 从未出现过 → 今天首次，进正文核心，并记为已报告
         return {
             "novelty_status": "new_today",
             "first_seen_at": date,
             "last_seen_at": date,
-            "last_reported_at": None,
-            "report_count": 0,
+            "last_reported_at": date,
+            "report_count": 1,
             "report_eligibility": "core",
         }
 
@@ -192,21 +192,46 @@ def determine_novelty(
     last_reported = existing.get("last_reported_at")
     report_count = existing.get("report_count", 0)
 
+    # ── 同日重跑保护 ──
+    # 若该事件 first_seen 就是今天，说明它本来就是"今天首次出现"的事件，
+    # 账本里的记录是同一天里前一次运行（cron 重试/手动补跑/resume）写入的。
+    # 此时必须保持当天新事件状态，否则重跑会把当天所有真实新闻误判为
+    # ongoing/tracking 而被踢出正文，导致报告被掏空。
+    if first_seen == date:
+        if fact_hash != prev_fact_hash:
+            novelty, eligibility = "updated_today", "core"
+        else:
+            novelty, eligibility = "new_today", "core"
+        return {
+            "novelty_status": novelty,
+            "first_seen_at": first_seen,
+            "last_seen_at": date,
+            "last_reported_at": date,
+            "report_count": max(report_count, 1),
+            "report_eligibility": eligibility,
+        }
+
     date_dt = datetime.strptime(date, "%Y-%m-%d")
     last_seen_dt = datetime.strptime(last_seen, "%Y-%m-%d") if last_seen else date_dt
 
     days_since_seen = (date_dt - last_seen_dt).days
 
+    # 默认沿用历史的报告记录
+    new_last_reported = last_reported
+    new_report_count = report_count
+
     if fact_hash != prev_fact_hash:
-        # 事实有更新
+        # 事实有实质更新 → 进正文核心，记为今天已报告
         novelty = "updated_today"
         eligibility = "core"
+        new_last_reported = date
+        new_report_count = report_count + 1
     elif last_reported and days_since_seen < 3:
-        # 近3天已报告且事实未变
+        # 近3天已报告且事实未变 → 重复，只作延续观察引用，不再进正文
         novelty = "repeated"
         eligibility = "reference"
     elif days_since_seen < 3:
-        # 近3天见过但未报告
+        # 近3天见过但从未报告过 → 延续跟踪
         novelty = "ongoing"
         eligibility = "tracking"
     elif days_since_seen < 7:
@@ -222,8 +247,8 @@ def determine_novelty(
         "novelty_status": novelty,
         "first_seen_at": first_seen,
         "last_seen_at": date,
-        "last_reported_at": last_reported,
-        "report_count": report_count,
+        "last_reported_at": new_last_reported,
+        "report_count": new_report_count,
         "report_eligibility": eligibility,
     }
 
@@ -334,6 +359,8 @@ def event_novelty_check(
                 existing_entry = ledger[cluster_key]
                 existing_entry["last_seen_at"] = date
                 existing_entry["fact_hash"] = fact_hash
+                existing_entry["last_reported_at"] = novelty_info.get("last_reported_at")
+                existing_entry["report_count"] = novelty_info.get("report_count", 0)
                 # 不更新 first_seen_at
             else:
                 # 新事件 → 追加

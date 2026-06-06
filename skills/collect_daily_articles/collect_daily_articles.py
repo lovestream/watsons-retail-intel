@@ -303,8 +303,11 @@ def classify_time_status(
     window_end: datetime,
 ) -> str:
     """判断文章发布时间相对于采集窗口的状态。
-    
-    新增 near_window 状态：窗口前后12小时内。
+
+    口径与 merge_raw_articles / broad_search_discovery 统一：
+    以距 window_end 的天数为准——
+      窗口内或近2天 → in_window；3-7天 → near_window；>7天 → old。
+    避免同一篇文章在不同采集器拿到不同 time_status 而扰乱下游评分。
     """
     if not published_at:
         return "unknown_time"
@@ -312,17 +315,20 @@ def classify_time_status(
         dt = dateutil_parser.parse(published_at)
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=CST)
-        if dt < window_start:
-            # 窗口前12小时内 → near_window，否则 → old
-            if dt >= window_start - timedelta(hours=12):
-                return "near_window"
-            return "old"
-        elif dt <= window_end:
-            return "in_window"
+        # 统一以"距窗口结束的天数"为判定基准
+        if window_end.tzinfo is None:
+            we = window_end.replace(tzinfo=CST)
         else:
-            # 窗口后12小时内 → near_window
-            if dt <= window_end + timedelta(hours=12):
-                return "near_window"
+            we = window_end
+        diff_days = (we - dt).days
+        if dt > we:
+            # 发布时间在窗口结束之后（未来/极近）→ 视为窗口内
+            return "in_window"
+        if 0 <= diff_days <= 2:
+            return "in_window"
+        elif 3 <= diff_days <= 7:
+            return "near_window"
+        else:
             return "old"
     except (ValueError, TypeError, OverflowError):
         return "unknown_time"

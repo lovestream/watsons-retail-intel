@@ -466,17 +466,27 @@ def classify_region_tag(article: dict) -> str:
     ]
     # 标题出现繁体/港台词
     import re as _re
-    # 常见繁体字（与简体不同的高频字）
+    # 常见繁体字（与简体不同的高频字，去重后的精简集）。
+    # 注意：妝/優/質/業/場/價/額 等也可能出现在大陆美妆稿引用港台品牌slogan时，
+    # 因此繁体字只是弱信号，必须配合"无大陆强指标"才判 HK/TW（见下）。
     _TRADITIONAL_CHARS = (
-        r'[購換檔銅價額幣廠業場際藥妝龍豐過訊僅萬寧贏經濟報證審億據營較競轉導選環優質'
-        r'設備圖處點網這裡來開區東實產開關門問題學習機構體驗廳廣場運動員會議論壇發佈會'
-        r'觀點評論記錄視頻節課題組織機構體係統計劃項對話題組織機構體係統計劃項對話題'
-        r'聯繫電話號碼認證書籍雜誌報紙網絡電視臺廣播電臺節課題組織機構體係統計劃項'
-        r'藥妝龍豐過訊僅萬寧贏經濟報證審億據營較競轉導選環優質設備圖處點網這裡來開區]'
+        r'[購換檔銅幣廠際龍豐過訊贏證審據較競轉導環設備圖處網裡開區東實產關門題學習構驗'
+        r'廳廣運動員議論壇發佈觀評錄視頻課組織係統劃項話聯繫號碼籍雜誌紙絡臺播優質業場價額'
+        r'藥妝萬寧營選]'
     )
+    # 大陆强指标：命中任意一个，几乎可确定是大陆内容，繁体字判定一律让位。
+    _MAINLAND_STRONG = (
+        "中国大陆", "内地", "全国", "国内", "人民币", "工信部", "国家市场监管",
+        "即时零售", "美团闪购", "京东到家", "京东秒送", "京东秒达",
+        "淘宝闪购", "饿了么", "抖音小时达", "前置仓", "小时达", "分钟达",
+        "天猫", "拼多多", "唯品会", "得物", "小红书",
+    )
+    has_mainland_strong = any(mi in combined for mi in _MAINLAND_STRONG)
+
     traditional_chinese = _re.findall(_TRADITIONAL_CHARS, title + summary[:200])
-    if len(traditional_chinese) >= 3:
-        return REGION_HK  # 繁体字居多 → HK/TW
+    # 繁体字达阈值且无大陆强指标 → 判 HK/TW；阈值提到5降低误杀
+    if len(set(traditional_chinese)) >= 5 and not has_mainland_strong:
+        return REGION_HK  # 繁体字居多且无大陆特征 → HK/TW
     
     for kw in hk_tw_strong:
         if kw.lower() in combined:
@@ -493,9 +503,9 @@ def classify_region_tag(article: dict) -> str:
     if "台灣" in title or "台湾" in title or "tw" in title.split():
         return REGION_TW
     
-    # 内容包含大量繁体字 → HK/TW
+    # 内容包含大量繁体字（去重计数）且无大陆强指标 → HK/TW
     traditional_chars = _re.findall(_TRADITIONAL_CHARS, title + summary[:300])
-    if len(traditional_chars) >= 4:
+    if len(set(traditional_chars)) >= 6 and not has_mainland_strong:
         return REGION_HK
     
     # 5. 大陆特征

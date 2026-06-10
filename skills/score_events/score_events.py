@@ -723,6 +723,80 @@ def _is_stock_market_event(event: dict) -> bool:
     return False
 
 
+def _is_corporate_finance_event(event: dict) -> bool:
+    """判断事件是否为竞对/第三方公司的财报·IPO·招股·募资类财经资讯。
+
+    这类内容（某公司上市、招股书披露营收/毛利率/SKU规模、融资轮次等）
+    数据丰富、看似"战略重要"，但对屈臣氏电商负责人没有可执行性，
+    属于纯财经资讯，不应进日报正文。
+    判定：命中≥1个财报/IPO信号，且不含明确的"对屈臣氏可执行的经营动作"信号。
+    """
+    text = (
+        (event.get("event_title", "") or "")
+        + (event.get("fact", "") or "")
+        + (event.get("evidence_text", "") or "")
+    )
+    if not text:
+        return False
+
+    FINANCE_SIGNALS = [
+        "上市", "IPO", "招股", "招股书", "挂牌", "港交所", "上交所", "深交所",
+        "纳斯达克", "纽交所", "敲钟", "募资", "募集资金", "融资", "A轮", "B轮",
+        "C轮", "Pre-IPO", "递交招股", "聆讯", "首日跌", "首日涨", "发行价",
+        "总市值", "市值", "财政年度零售销售额", "财年营收", "招股价",
+    ]
+    # 屈臣氏可执行的经营动作信号（命中则可能是真经营事件）
+    ACTION_SIGNALS = [
+        "即时零售", "闪购", "小时达", "前置仓", "上架", "上新", "补货",
+        "促销", "满减", "券", "会员", "私域", "直播带货", "门店接入",
+        "入驻", "开通", "降价", "调价", "补贴", "履约", "配送时效",
+    ]
+
+    fin_hits = sum(1 for k in FINANCE_SIGNALS if k in text)
+    action_hits = sum(1 for k in ACTION_SIGNALS if k in text)
+
+    # 财报/IPO 信号占主导 → 判定为纯财经资讯
+    if fin_hits >= 1 and fin_hits >= action_hits:
+        return True
+    return False
+
+
+def _is_non_mainland_subject_event(event: dict) -> bool:
+    """判断事件主体/市场是否为香港·台湾·海外（非中国大陆）。
+
+    只关注中国大陆市场。即便由大陆媒体报道，若事件本身讲的是港/台/海外
+    公司或市场（如龙丰集团的香港门店、港元营收、台湾市场），也应排除。
+    判定：命中≥2个非大陆地域信号，且不含明确的大陆地域信号。
+    （阈值设为2，避免一篇大陆文章顺带提一句"香港"就被误杀。）
+    """
+    text = (
+        (event.get("event_title", "") or "")
+        + (event.get("fact", "") or "")
+        + (event.get("evidence_text", "") or "")
+    )
+    if not text:
+        return False
+
+    NON_MAINLAND_SIGNALS = [
+        "香港", "港交所", "港元", "港币", "HK$", "HKD", "联交所", "恒生",
+        "台湾", "台北", "新台币", "台股", "澳门",
+        "新加坡", "马来西亚", "日本市场", "韩国市场", "美国市场",
+    ]
+    MAINLAND_SIGNALS = [
+        "中国大陆", "内地", "大陆市场", "人民币", "A股", "沪", "深圳",
+        "北京", "上海", "广州", "成都", "杭州", "南京", "武汉", "西安",
+        "天猫", "京东", "拼多多", "美团", "抖音", "淘宝", "饿了么",
+    ]
+
+    non_hits = sum(1 for k in NON_MAINLAND_SIGNALS if k in text)
+    mainland_hits = sum(1 for k in MAINLAND_SIGNALS if k in text)
+
+    # 非大陆信号明显占主导 → 判定为港台海外事件
+    if non_hits >= 2 and non_hits > mainland_hits:
+        return True
+    return False
+
+
 def apply_hard_downgrade(
     event: dict, scores: dict, priority: str, reasons: List[str],
     weighted_score: float = 0.0
@@ -765,6 +839,26 @@ def apply_hard_downgrade(
     # 股价涨跌、个股异动等与即时零售×个护美妆"经营"无关，不应进报告。
     if _is_stock_market_event(event):
         reasons.append("硬降级: 纯资本市场/证券行情内容 → ARCHIVE")
+        return "ARCHIVE", reasons
+
+    # 规则0b(新): 竞对/第三方公司的财报/IPO/招股/募资类内容 → ARCHIVE
+    # 这类内容数据丰富(data_richness高)、看似"战略重要"，但对屈臣氏电商负责人
+    # 没有可执行性，属于纯财经资讯，不应挤占日报正文（如"龙丰集团香港IPO财报"）。
+    if _is_corporate_finance_event(event):
+        reasons.append("硬降级: 竞对/第三方财报·IPO·募资类内容 → ARCHIVE")
+        return "ARCHIVE", reasons
+
+    # 规则0c(新): watsons_relevance 极低(≤1) → ARCHIVE
+    # 与屈臣氏几乎无关的事件，无论数据多丰富/看似多重要，都不进报告正文。
+    if watsons_rel <= 1:
+        reasons.append(f"硬降级: watsons_relevance={watsons_rel}≤1 几乎无关 → ARCHIVE")
+        return "ARCHIVE", reasons
+
+    # 规则0d(新): 事件主体/市场为香港·台湾·海外 → ARCHIVE
+    # 只关注中国大陆市场；即便由大陆媒体报道，若事件本身讲的是港/台/海外
+    # 公司或市场(如"龙丰集团香港门店"、"港元营收")，也不进报告正文。
+    if _is_non_mainland_subject_event(event):
+        reasons.append("硬降级: 事件主体/市场为港台海外 → ARCHIVE")
         return "ARCHIVE", reasons
 
     # 规则1: confidence=low → 最高 P2 (但如果加权分>=3.5且source_credibility>=3，允许升到P1)

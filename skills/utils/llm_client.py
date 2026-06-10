@@ -50,6 +50,12 @@ DEFAULT_MAX_TOKENS = 4096
 DEFAULT_TEMPERATURE = 0.3
 DEFAULT_TIMEOUT = 180  # 秒（thinking 模型需要更长等待）
 DEFAULT_RETRIES = 2
+# 瞬时错误(连接中断/超时/空响应)对每个 Key 的重试轮数。
+# LongCat 偶发 RemoteDisconnected 时，多轮重试+退避通常能成功，
+# 避免动辄放弃主模型转 GPT 兜底（会丢失 V2 动态八问等增强）。
+TRANSIENT_ROUNDS = 3
+TRANSIENT_BACKOFF_BASE = 1.5  # 秒，指数退避基数
+TRANSIENT_BACKOFF_MAX = 15.0  # 秒，单次退避上限
 DAILY_TOKEN_LIMIT_PER_KEY = 5_000_000
 
 # ── 备用 Provider 配置 ──
@@ -433,6 +439,20 @@ class LLMClient:
                     logger.warning(f"Key {_mask_key(key)} 已标记为耗尽: {reason}")
                     break
 
+    def _transient_backoff(self, failure_count: int):
+        """瞬时错误后的指数退避。
+
+        failure_count 为累计连续瞬时失败次数，退避时间随之指数增长（带上限）。
+        让 LongCat 偶发的网络抖动有时间恢复，而不是连续猛打后直接放弃。
+        """
+        if failure_count <= 0:
+            return
+        delay = min(
+            TRANSIENT_BACKOFF_BASE * (2 ** (failure_count - 1)),
+            TRANSIENT_BACKOFF_MAX,
+        )
+        time_mod.sleep(delay)
+
     def chat(
         self,
         messages: List[Dict[str, str]],
@@ -545,9 +565,14 @@ class LLMClient:
         endpoint = self._get_endpoint()
 
         # 尝试调用 (round-robin 重试)
+        # 瞬时错误(连接中断/超时/空响应)会在同一轮换 Key 后，多轮重试，
+        # 并配合指数退避——LongCat 偶发 RemoteDisconnected 时不应直接放弃转兜底。
         last_error = ""
-        max_attempts = len(self.keys) + 1  # 最多试所有 Key 各一次
-        
+        num_keys = max(1, len(self.keys))
+        # 总轮数：每个 Key 至少试 TRANSIENT_ROUNDS 轮
+        max_attempts = num_keys * TRANSIENT_ROUNDS + 1
+        transient_failures = 0  # 连续瞬时错误计数，用于退避
+
         for attempt in range(max_attempts):
             key = self._get_next_key()
             if key is None:
@@ -649,30 +674,43 @@ class LLMClient:
                 # 内容为空时尝试下一个 key 或 fallback
                 if not content.strip():
                     last_error = "LLM 返回内容为空"
+                    transient_failures += 1
                     logger.warning(f"Key {_mask_key(key)} 返回内容为空，尝试下一个")
+                    self._transient_backoff(transient_failures)
                     continue
                 return result_base
 
             except requests.exceptions.Timeout:
                 last_error = f"请求超时({self.timeout}s)"
-                logger.warning(f"Key {_mask_key(key)} 请求超时")
+                transient_failures += 1
+                logger.warning(
+                    f"Key {_mask_key(key)} 请求超时 "
+                    f"(瞬时错误 {transient_failures}/{max_attempts})")
+                self._transient_backoff(transient_failures)
                 continue
 
             except requests.exceptions.ConnectionError as e:
                 last_error = f"连接错误: {str(e)[:200]}"
-                logger.warning(f"Key {_mask_key(key)} 连接错误: {e}")
-                # 连接错误可能是 endpoint 不可达，所有 Key 都会失败
-                # 但还是试下一个 Key 以防万一
+                transient_failures += 1
+                logger.warning(
+                    f"Key {_mask_key(key)} 连接错误 "
+                    f"(瞬时错误 {transient_failures}/{max_attempts}): {str(e)[:120]}")
+                # RemoteDisconnected 等多为瞬时网络抖动，退避后重试（含换Key+多轮）
+                self._transient_backoff(transient_failures)
                 continue
 
             except json.JSONDecodeError as e:
                 last_error = f"响应 JSON 解析失败: {str(e)[:100]}"
+                transient_failures += 1
                 logger.warning(f"Key {_mask_key(key)} 响应 JSON 解析失败: {e}")
+                self._transient_backoff(transient_failures)
                 continue
 
             except Exception as e:
                 last_error = f"未知错误: {str(e)[:200]}"
+                transient_failures += 1
                 logger.warning(f"Key {_mask_key(key)} 未知错误: {e}")
+                self._transient_backoff(transient_failures)
                 continue
 
         # 所有 Key 都失败 — 尝试备用 Provider

@@ -330,8 +330,10 @@ def _clean_report_for_display(md_text: str, keep_canonical: bool = True) -> str:
                      '', md_text, flags=re.MULTILINE)
     # 移除内联判断标签：标题/正文末尾的【A】【B】【C】【R】【K】【X】等
     md_text = re.sub(r'【[ABCRKX]】', '', md_text)
-    # 移除 Python list 形式的判断标签：['A'] ["A"] 以及前导空格
-    md_text = re.sub(r"\s*\[\s*['\"]?[ABCRKX]['\"]?\s*\]", '', md_text)
+    # 移除 Python list 形式的判断标签：['A'] ["A"] ['K','X'] 等（含多元素）
+    md_text = re.sub(
+        r"""\s*\[\s*['"]?[ABCRKX]['"]?(?:\s*,\s*['"]?[ABCRKX]['"]?)*\s*\]""",
+        '', md_text)
     # 移除规则模板的描述式判断标签：[A-必须关注]、[A-必须关注 B-本周跟进] 等
     md_text = re.sub(
         r'\s*\[\s*(?:[ABCRKX]-[\u4e00-\u9fff]{2,6})(?:\s+[ABCRKX]-[\u4e00-\u9fff]{2,6})*\s*\]',

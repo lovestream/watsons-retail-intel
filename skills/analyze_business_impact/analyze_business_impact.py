@@ -73,11 +73,15 @@ CHANNEL_KEYWORDS = {
     "淘宝闪购": ["淘宝闪购", "淘宝即时"],
     "抖音小时达": ["抖音小时达", "抖音即时"],
     "饿了么": ["饿了么", "蜂鸟即配"],
+    "大众点评": ["大众点评", "点评"],
+    "抖音本地生活": ["抖音本地生活", "抖音本服", "抖音来客", "抖音团购"],
+    "本地生活": ["本地生活", "到店", "团购", "O2O"],
     "天猫官方旗舰店": ["天猫旗舰店"],
     "京东旗舰店": ["京东旗舰店"],
     "天猫超市": ["天猫超市"],
     "京东自营": ["京东自营"],
     "经销商分销": ["分销", "经销商"],
+    "便利店": ["便利店", "便利蜂", "全家", "711", "罗森", "美宜佳"],
     "即时零售(泛)": ["即时零售", "即时电商", "闪购", "到家业务"],
     "B2C电商(泛)": ["电商", "线上渠道"],
 }
@@ -1065,47 +1069,34 @@ def analyze_business_impact(
             # batch_results 是与 items_by_batch 展开顺序对应的列表，
             # 但 batch_parallel_map 返回的是 total_items 长度的列表，
             # 其中每个位置对应 (original_index, item) 中的 original_index
-            # 我们需要把它映射回原索引
-            # 实际上 batch_parallel_map 返回的是按 total_items 长度排的 results
-            # 我们需要遍历所有 batches 的 items 来重建 index 映射
-            _all_llm_items = []
-            for batch_name in ["P2", "P1", "P0"]:
-                if batch_name in items_by_batch:
-                    _all_llm_items.extend(items_by_batch[batch_name])
-
-            for _bi, (orig_idx, _event) in enumerate(_all_llm_items):
-                # 查找结果 — batch_parallel_map 按 total_items 排列
-                # 我们需要从 batch_results 中找 orig_idx 对应的位置
-                pass
-
-            # 实际上 batch_parallel_map 返回的是按 original_index 排列的结果
-            # 我们需要遍历所有 batch 的 items 来找到 batch_results 的位置
-            _result_idx = 0
+            # batch_parallel_map 返回的 _batch_results 是长度 = total_llm_items 的列表，
+            # 且【按 orig_idx 下标定位】结果（见 parallel_runner.batch_parallel_map：
+            # results = [None]*total_items; results[orig_idx] = result）。
+            # 因此必须用 orig_idx 直接索引，绝不能用顺序自增的 _result_idx，
+            # 否则 business_analysis 会与事件错位（导致"分析张冠李戴"）。
             for batch_name in ["P2", "P1", "P0"]:
                 if batch_name not in items_by_batch:
                     continue
                 for orig_idx, event in items_by_batch[batch_name]:
-                    if _result_idx < len(_batch_results):
-                        _r = _batch_results[_result_idx]
-                        _result_idx += 1
-                        if _r is not None:
-                            ba = _r.get("ba")
-                            success = _r.get("success", False)
-                            if success:
-                                llm_success_count += 1
-                            else:
-                                llm_failed_count += 1
-                            if ba is None:
-                                ba = rule_analyze_event(event)
-                                logger.info(f"  兜底规则分析: impact={ba.get('impact_type')} "
-                                            f"action={ba.get('action_level')}")
-                            llm_results[orig_idx] = (event, ba)
+                    _r = _batch_results[orig_idx] if orig_idx < len(_batch_results) else None
+                    if _r is not None:
+                        ba = _r.get("ba")
+                        success = _r.get("success", False)
+                        if success:
+                            llm_success_count += 1
                         else:
-                            # batch_parallel_map 返回 None（超时/异常）
                             llm_failed_count += 1
+                        if ba is None:
                             ba = rule_analyze_event(event)
-                            logger.info(f"  超时兜底规则分析: impact={ba.get('impact_type')}")
-                            llm_results[orig_idx] = (event, ba)
+                            logger.info(f"  兜底规则分析: impact={ba.get('impact_type')} "
+                                        f"action={ba.get('action_level')}")
+                        llm_results[orig_idx] = (event, ba)
+                    else:
+                        # batch_parallel_map 返回 None（超时/异常）
+                        llm_failed_count += 1
+                        ba = rule_analyze_event(event)
+                        logger.info(f"  超时兜底规则分析: impact={ba.get('impact_type')}")
+                        llm_results[orig_idx] = (event, ba)
         else:
             # 串行模式
             logger.info("串行 LLM 分析模式")

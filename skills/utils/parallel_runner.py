@@ -247,7 +247,17 @@ def batch_parallel_map(
     """
     batch_timeouts = batch_timeouts or {}
     total_items = sum(len(v) for v in items_by_batch.values())
-    results: List[Optional[Any]] = [None] * total_items
+    # results 按 orig_idx 下标定位（results[orig_idx] = result），
+    # 而 orig_idx 是「完整事件列表」中的索引，可能远大于 total_items
+    # （例如只有部分事件走 LLM 时）。必须按 max(orig_idx)+1 分配，
+    # 否则会 IndexError 或静默丢结果，调用方按 orig_idx 取回时错位。
+    _max_idx = -1
+    for _bi in items_by_batch.values():
+        for _t in _bi:
+            if _t and _t[0] > _max_idx:
+                _max_idx = _t[0]
+    _alloc = max(total_items, _max_idx + 1)
+    results: List[Optional[Any]] = [None] * _alloc
     stats_by_batch: Dict[str, Dict[str, int]] = {}
     success_total = 0
     failed_total = 0

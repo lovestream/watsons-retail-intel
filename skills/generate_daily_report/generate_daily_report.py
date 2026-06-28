@@ -1147,7 +1147,7 @@ V2_USER_TEMPLATE = """请基于以下事件池独立重构一份经营日报，�
 6. 05竞对观察建议用表格呈现（竞对 | 动作 | 影响 | 建议动作）
 7. 06对屈臣氏的机会点建议用表格呈现（机会点 | 关联变量 | 事件依据），事件依据写事件简述，不写事件编号
 8. 篇幅由信息量决定，把每条分析和建议写透，不设固定字数限制
-9. 不要给事件标注 A/B/C/R/K/X 判断标签；event_id 用 `E2026...` 标注供内部溯源（展示时自动移除）
+9. 【强制】每个核心判断/信号/事件后必须用 `E2026...` 格式标注来源事件编号（系统内部校验用，展示时自动移除，绝不能省略，否则报告无法通过校验发送）；不要给事件标注 A/B/C/R/K/X 判断标签
 10. 保留固定章节结构（01-09 + 11近期延续观察），tracking事件只能放在11节
 11. 表格用GFM格式，###和---前后留空行
 12. 输出完整 Markdown"""
@@ -2005,7 +2005,11 @@ def generate_daily_report(
         # Phase 1: V1 + V2 规则稿 并行生成
         # ═══════════════════════════════════════════
         logger.info("Phase 1: 并行生成 V1/V2 规则稿...")
-        from concurrent.futures import ThreadPoolExecutor, as_completed
+        import time
+        from concurrent.futures import (
+            ThreadPoolExecutor, as_completed,
+            TimeoutError as FuturesTimeoutError,
+        )
 
         _gen_futures = {}
         with ThreadPoolExecutor(max_workers=2) as _gen_executor:
@@ -2056,9 +2060,14 @@ def generate_daily_report(
                         logger.warning(f"模型路由加载失败: {e}，使用默认模型")
 
                     # ── 并行 LLM 润色 V1 + V2 ──
+                    # 整体墙钟上限：V2 是 thinking 模型独立重构，偶发耗时 30+ 分钟，
+                    # as_completed 不带超时会一直等 → 报告凌晨才产出。设硬上限，
+                    # 超时的未完成稿回退规则稿，保证 07:00 cron 当天产出可发送报告。
+                    _PHASE2_DEADLINE = 420  # 秒（7分钟），V1 通常~90s，V2 给足余量
                     logger.info("Phase 2: 并行 LLM 润色 V1 + V2...")
                     _refine_futures = {}
-                    with ThreadPoolExecutor(max_workers=2) as _refine_executor:
+                    _refine_executor = ThreadPoolExecutor(max_workers=2)
+                    try:
                         _refine_futures[_refine_executor.submit(
                             refine_with_llm, draft_v1, date, llm_client, model=_report_model
                         )] = "v1"
@@ -2067,23 +2076,53 @@ def generate_daily_report(
                             llm_client, model=_report_model
                         )] = "v2"
 
-                        for _future in as_completed(_refine_futures):
-                            _label = _refine_futures[_future]
-                            try:
-                                _result = _future.result(timeout=180)
-                                if _result and len(_result) > 200:
-                                    if _label == "v1":
-                                        draft_v1 = _result
-                                        llm_refined_v1 = True
-                                        logger.info("V1 LLM 润色成功")
+                        _phase2_start = time.time()
+                        _done_labels = set()
+                        try:
+                            for _future in as_completed(
+                                    _refine_futures, timeout=_PHASE2_DEADLINE):
+                                _label = _refine_futures[_future]
+                                try:
+                                    _result = _future.result(timeout=1)
+                                    if _result and len(_result) > 200:
+                                        if _label == "v1":
+                                            draft_v1 = _result
+                                            llm_refined_v1 = True
+                                            logger.info("V1 LLM 润色成功")
+                                        else:
+                                            # 防御：V2 LLM 偶发丢弃全部 event_id（无视提示），
+                                            # 而 editor_review.rule_validate 要求终稿含>=1个
+                                            # event_id 做防幻觉校验，丢光会导致不可发送。
+                                            # 若规则稿本有 event_id 而 LLM 稿全丢，弃用 LLM 稿。
+                                            _rule_ids = len(re.findall(
+                                                r"E\d{8}_\d+", draft_v2))
+                                            _llm_ids = len(re.findall(
+                                                r"E\d{8}_\d+", _result))
+                                            if _rule_ids > 0 and _llm_ids == 0:
+                                                logger.warning(
+                                                    f"V2 LLM 稿丢失全部 event_id"
+                                                    f"(规则稿{_rule_ids}个→LLM稿0个)，"
+                                                    f"弃用 LLM 稿、保留规则稿以通过校验")
+                                            else:
+                                                draft_v2 = _result
+                                                llm_refined_v2 = True
+                                                logger.info("V2 LLM 重构成功")
                                     else:
-                                        draft_v2 = _result
-                                        llm_refined_v2 = True
-                                        logger.info("V2 LLM 重构成功")
-                                else:
-                                    logger.warning(f"{_label.upper()} LLM 润色返回为空或过短，使用规则稿")
-                            except Exception as e:
-                                logger.warning(f"{_label.upper()} LLM 润色失败: {e}，使用规则稿")
+                                        logger.warning(f"{_label.upper()} LLM 润色返回为空或过短，使用规则稿")
+                                    _done_labels.add(_label)
+                                except Exception as e:
+                                    logger.warning(f"{_label.upper()} LLM 润色失败: {e}，使用规则稿")
+                                    _done_labels.add(_label)
+                        except FuturesTimeoutError:
+                            _pending = [lb for lb in _refine_futures.values()
+                                        if lb not in _done_labels]
+                            logger.warning(
+                                f"Phase 2 超过墙钟上限 {_PHASE2_DEADLINE}s，"
+                                f"未完成稿 {_pending} 回退规则稿（耗时"
+                                f"{time.time()-_phase2_start:.0f}s）")
+                    finally:
+                        # 不等待挂起的 V2 线程，立即放行，保证当天产出
+                        _refine_executor.shutdown(wait=False)
                 else:
                     logger.warning("LLM 不可用，使用规则初稿")
             except Exception as e:

@@ -649,7 +649,7 @@ def run_health_check(project_root: str = ".", logger: logging.Logger = None) -> 
             else:
                 for key_name, key_val in keys:
                     if svc_id == "longcat_llm":
-                        r = test_longcat_key(key_name, key_val, svc_cfg.get("test_model", "LongCat-Flash-Lite"))
+                        r = test_longcat_key(key_name, key_val, svc_cfg.get("test_model", "LongCat-2.0-Preview"))
                     elif svc_id == "tavily_search":
                         r = test_tavily_key(key_name, key_val)
                     elif svc_id == "xcrawl":

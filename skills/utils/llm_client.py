@@ -53,9 +53,12 @@ DEFAULT_RETRIES = 2
 # 瞬时错误(连接中断/超时/空响应)对每个 Key 的重试轮数。
 # LongCat 偶发 RemoteDisconnected 时，多轮重试+退避通常能成功，
 # 避免动辄放弃主模型转 GPT 兜底（会丢失 V2 动态八问等增强）。
-TRANSIENT_ROUNDS = 3
+TRANSIENT_ROUNDS = 2
 TRANSIENT_BACKOFF_BASE = 1.5  # 秒，指数退避基数
-TRANSIENT_BACKOFF_MAX = 15.0  # 秒，单次退避上限
+TRANSIENT_BACKOFF_MAX = 10.0  # 秒，单次退避上限
+# 主 Provider 重试的墙钟硬上限：超过后停止重试、直接走 fallback。
+# 防止多 Key 反复 180s 超时+退避累积成数十分钟卡死单次调用。
+MAX_RETRY_WALL_SECONDS = 300  # 5 分钟
 DAILY_TOKEN_LIMIT_PER_KEY = 5_000_000
 
 # ── 备用 Provider 配置 ──
@@ -572,12 +575,22 @@ class LLMClient:
         # 总轮数：每个 Key 至少试 TRANSIENT_ROUNDS 轮
         max_attempts = num_keys * TRANSIENT_ROUNDS + 1
         transient_failures = 0  # 连续瞬时错误计数，用于退避
+        # 墙钟硬上限：避免多 Key 反复超时+退避累积成数十分钟。
+        # 超过后停止重试主 Provider，直接走 fallback。
+        _retry_deadline = time_mod.monotonic() + MAX_RETRY_WALL_SECONDS
 
         for attempt in range(max_attempts):
+            if time_mod.monotonic() > _retry_deadline:
+                last_error = (f"主 Provider 重试超过墙钟上限 "
+                              f"{MAX_RETRY_WALL_SECONDS}s，转 fallback。"
+                              f"最后错误: {last_error}")
+                logger.warning(last_error)
+                break
             key = self._get_next_key()
             if key is None:
                 last_error = f"所有 Key 已耗尽。最后错误: {last_error}"
                 break  # 跳出循环，走 fallback 逻辑
+
 
             with self._lock:
                 self.total_calls += 1
@@ -616,6 +629,14 @@ class LLMClient:
                     # 429 不标记 Key 为耗尽，等一会重试
                     last_error = error_msg
                     time_mod.sleep(2)  # 简单退避
+                    continue
+
+                if resp.status_code == 402:
+                    # 402 = Token 额度不足，本轮内不会恢复，标记耗尽避免反复重试
+                    error_msg = f"额度不足(402): {resp.text[:150]}"
+                    logger.warning(f"Key {_mask_key(key)} 额度不足(402)，标记耗尽")
+                    self._mark_key_exhausted(key, error_msg)
+                    last_error = error_msg
                     continue
 
                 if resp.status_code >= 400:

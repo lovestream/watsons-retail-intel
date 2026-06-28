@@ -1760,8 +1760,6 @@ def filter_relevant_articles(
                     "temperature": 0.2,
                     "max_tokens": 2048,
                 }
-            if _model_strategy.get("skip_thinking") and _MODEL_FOR_FILTER == "LongCat-Flash-Thinking":
-                _MODEL_FOR_FILTER = "LongCat-Flash-Lite"
     except Exception:
         pass
 

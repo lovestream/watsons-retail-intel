@@ -18,6 +18,7 @@ collect_daily_articles:
     rss_workers: 4             # RSS 源并发
     web_workers: 2             # Web 源低并发（防反爬）
     tavily_workers: 6          # Tavily 源 query 并发（受 key 数限制）
+    xcrawl_workers: 6         # XCrawl 源 query 并发
     # 混合源总并发上限（0 = 不限制，各方式独立计算）
     total_workers_cap: 0
     # 单源超时
@@ -61,14 +62,14 @@ extract_events:
     # 模型策略
     model_strategy:
       # 默认模型（批量 JSON 抽取）
-      default: LongCat-Flash-Lite
+      default: LongCat-2.0-Preview
       # 失败重试模型
-      fallback: LongCat-Flash-Chat
+      fallback: LongCat-2.0-Preview
       # 不使用 Thinking 模型做 JSON 抽取
       skip_thinking: true
     # 失败重试
     retry_on_failure: true
-    retry_model: LongCat-Flash-Chat
+    retry_model: LongCat-2.0-Preview
     retry_timeout: 120
 
 # ── filter_relevant_articles ──
@@ -83,8 +84,8 @@ filter_relevant_articles:
     single_timeout: 90
     # 模型策略：只用 Lite/Chat，不用 Thinking（审核分类不需要深度推理）
     model_strategy:
-      default: LongCat-Flash-Lite
-      fallback: LongCat-Flash-Chat
+      default: LongCat-2.0-Preview
+      fallback: LongCat-2.0-Preview
       skip_thinking: true
 
 # ── generate_daily_report ──
@@ -118,19 +119,19 @@ analyze_business_impact:
       # P2: 使用 Lite 快速批量
       P2:
         use_llm: true
-        model: LongCat-Flash-Lite
+        model: LongCat-2.0-Preview
         max_workers: 6
         timeout: 60
       # P1: 使用 Chat 稳定
       P1:
         use_llm: true
-        model: LongCat-Flash-Chat
+        model: LongCat-2.0-Preview
         max_workers: 4
         timeout: 120
       # P0: 低并发，使用 Chat 稳妥处理
       P0:
         use_llm: true
-        model: LongCat-Flash-Chat
+        model: LongCat-2.0-Preview
         max_workers: 2
         timeout: 150
     # 总超时

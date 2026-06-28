@@ -990,14 +990,14 @@ def extract_events(
         _max_workers = _ee_cfg.get("max_workers", 4)
         _article_timeout = _ee_cfg.get("article_timeout", 180)
         _retry_on_failure = _ee_cfg.get("retry_on_failure", True)
-        _retry_model_name = _ee_cfg.get("retry_model", "LongCat-Flash-Chat")
+        _retry_model_name = _ee_cfg.get("retry_model", "LongCat-2.0-Preview")
         _checkpoint_filename = _ee_cfg.get("checkpoint_file", "extract_events_checkpoint.jsonl")
         _checkpoint_path = os.path.join(events_dir, _checkpoint_filename)
 
         # 模型策略: Lite 默认, Chat 重试
         _model_strategy = _ee_cfg.get("model_strategy", {})
-        _default_model = _model_strategy.get("default", _extract_default_model or "LongCat-Flash-Lite")
-        _fallback_model = _model_strategy.get("fallback", "LongCat-Flash-Chat")
+        _default_model = _model_strategy.get("default", _extract_default_model or "LongCat-2.0-Preview")
+        _fallback_model = _model_strategy.get("fallback", "LongCat-2.0-Preview")
         _skip_thinking = _model_strategy.get("skip_thinking", True)
 
         # 清除旧 checkpoint

@@ -1,0 +1,37 @@
+{
+  "name": "watsons-periodic-0900",
+  "schedule": {
+    "type": "cron",
+    "cron": "0 9 * * *",
+    "timezone": "Asia/Shanghai"
+  },
+  "task_type": "agent",
+  "request": {
+    "input": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": [
+          {
+            "type": "text",
+            "text": "执行 Watsons 周期报告定时任务。只做一件事，不要调查、不要长篇汇报：\n\n后台启动周期报告脚本（脚本自身负责自愈装包、判定是否需要生成、跑流程、发邮件、写日志），然后立即回复一行\"已启动 YYYY-MM-DD\"即可：\n\ncd /app/working/projects/watsons-retail-intel && setsid sh scripts/run_periodic.sh > /dev/null 2>&1 < /dev/null &\n\n要求：\n- 启动后立即返回，不要等待脚本跑完（脚本会自己跑并发邮件）\n- 不要 tail 日志、不要逐步检查、不要写多行总结\n- 回复只需一句：\"已启动 <今天日期>，脚本后台运行中\"\n- 如需排查，日志在 data/logs/<date>/_run_periodic.out"
+          }
+        ]
+      }
+    ],
+    "session_id": "default",
+    "user_id": "default"
+  },
+  "dispatch": {
+    "type": "channel",
+    "channel": "console",
+    "target": {
+      "user_id": "default",
+      "session_id": "default"
+    },
+    "mode": "final",
+    "meta": {}
+  },
+  "save_result_to_inbox": true,
+  "enabled": true
+}

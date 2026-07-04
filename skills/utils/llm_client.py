@@ -66,10 +66,22 @@ FALLBACK_KEY_ENV = "rightcode_key"
 FALLBACK_BASE_URL = "https://right.codes/codex/v1"
 FALLBACK_MODEL = "gpt-5.4-xhigh"
 
+# ── 付费兜底总开关 ──
+# 默认彻底禁用付费兜底(gpt-5.4-xhigh 烧钱)。仅当 LongCat 全部不可用且你明确
+# 同意花钱时，临时设 ALLOW_PAID_FALLBACK=1 启用。正常情况绝不走付费。
+ALLOW_PAID_FALLBACK_ENV = "ALLOW_PAID_FALLBACK"
+
+
+def _load_allow_paid_fallback() -> bool:
+    """是否允许在 LongCat 全灭时走付费兜底。默认 False(禁用)。"""
+    val = os.environ.get(ALLOW_PAID_FALLBACK_ENV, "0").strip().lower()
+    return val in ("1", "true", "yes", "on")
+
+
 # ── 强制兜底开关 ──
 # 历史背景：LongCat-Flash-* 系列曾全部故障，临时用此开关强制走备用 gpt。
-# 2026-06 LongCat 恢复并换用 LongCat-2.0-Preview，默认关闭(0)，走正常路由，
-# gpt-5.4-xhigh 仅作为最后兜底。若 LongCat 再次故障，设 FORCE_FALLBACK_LLM=1 即可。
+# 2026-06 LongCat 恢复并换用 LongCat-2.0-Preview，默认关闭(0)，走正常路由。
+# 若 LongCat 再次故障且你同意花钱，设 FORCE_FALLBACK_LLM=1 + ALLOW_PAID_FALLBACK=1。
 def _load_force_fallback() -> bool:
     val = os.environ.get("FORCE_FALLBACK_LLM", "0").strip().lower()
     return val in ("1", "true", "yes", "on")
@@ -376,15 +388,25 @@ class LLMClient:
         self._fallback_url = FALLBACK_BASE_URL
         self._fallback_model = FALLBACK_MODEL
 
+        # 付费兜底总开关：默认彻底禁用。仅当 LongCat 全灭且你明确同意花钱时
+        # 设 ALLOW_PAID_FALLBACK=1 才启用付费兜底(gpt-5.4-xhigh 烧钱)。
+        self._allow_paid = _load_allow_paid_fallback()
+
         # 强制兜底：直接走备用 Provider，跳过 LongCat
         self._force_fallback = _load_force_fallback()
-        if self._force_fallback and self._fallback_key:
-            logger.info(
-                f"FORCE_FALLBACK_LLM 已开启 → 所有调用直接使用 {self._fallback_model}"
-                f"（跳过 LongCat）")
+        if self._force_fallback and (not self._allow_paid):
+            # 付费总开关未开 —— 强制兜底也不能走付费，回退正常路由
+            logger.warning(
+                "FORCE_FALLBACK_LLM=1 但 ALLOW_PAID_FALLBACK 未开启，"
+                "禁用付费强制兜底，回退 LongCat 正常路由")
+            self._force_fallback = False
+        elif self._force_fallback and self._fallback_key:
+            logger.warning(
+                f"付费强制兜底已开启(ALLOW_PAID_FALLBACK=1) → "
+                f"所有调用直接使用 {self._fallback_model}（跳过 LongCat）")
         elif self._force_fallback and not self._fallback_key:
             logger.warning(
-                "FORCE_FALLBACK_LLM 已开启但缺少备用 Key，回退到正常路由")
+                "FORCE_FALLBACK_LLM=1 但缺少备用 Key，回退到正常路由")
             self._force_fallback = False
 
         if requests is None:
@@ -392,9 +414,9 @@ class LLMClient:
 
     @property
     def available(self) -> bool:
-        """是否有可用的 Key（含备用 Provider）。"""
+        """是否有可用的主 Key。付费备用 Provider 不计入可用性(走消费需显式允许)。"""
         primary_ok = bool(self.keys) and len(self.keys) > len(self.exhausted_keys)
-        return primary_ok or bool(self._fallback_key)
+        return primary_ok
 
     @property
     def available_keys(self) -> int:
@@ -526,10 +548,10 @@ class LLMClient:
                 return result_base
 
         if not self.available:
-            # 主 Key 全部耗尽，尝试备用
-            if self._fallback_key:
-                logger.info("主 Key 全部不可用，直接使用备用 Provider")
-                # 需要先构建 messages
+            # 主 Key 全部耗尽 —— 仅当明确允许付费兜底时才走 gpt-5.4-xhigh，
+            # 否则直接报错(绝不悄悄烧钱)。
+            if self._fallback_key and self._allow_paid:
+                logger.warning("主 Key 全部不可用，使用付费备用 Provider(ALLOW_PAID_FALLBACK=1)")
                 fb_messages = []
                 if system_prompt:
                     fb_messages.append({"role": "system", "content": system_prompt})
@@ -538,7 +560,7 @@ class LLMClient:
                     fb_messages, temperature, max_tokens, response_format)
                 if fallback_result["ok"]:
                     return fallback_result
-            result_base["error"] = "无可用 API Key（含备用）"
+            result_base["error"] = "无可用 API Key（付费兜底未开启，设 ALLOW_PAID_FALLBACK=1 启用）"
             return result_base
 
         # 构建 messages
@@ -734,14 +756,17 @@ class LLMClient:
                 self._transient_backoff(transient_failures)
                 continue
 
-        # 所有 Key 都失败 — 尝试备用 Provider
-        if self._fallback_key:
-            logger.info(f"主 Provider 全部失败，尝试备用 Provider: {FALLBACK_BASE_URL}")
+        # 所有 Key 都失败 —— 仅当明确允许付费兜底时才走 gpt-5.4-xhigh，
+        # 否则直接报错(绝不悄悄烧钱)。
+        if self._fallback_key and self._allow_paid:
+            logger.warning(f"主 Provider 全部失败，使用付费备用 Provider(ALLOW_PAID_FALLBACK=1): {FALLBACK_BASE_URL}")
             fallback_result = self._call_fallback(
                 full_messages, temperature, max_tokens, response_format)
             if fallback_result["ok"]:
                 return fallback_result
-            last_error = f"备用也失败: {fallback_result.get('error', '')}"
+            last_error = f"备用也失败(付费): {fallback_result.get('error', '')}"
+        elif self._fallback_key:
+            last_error = "主 Provider 全部失败，付费兜底未开启(设 ALLOW_PAID_FALLBACK=1 启用)"
 
         result_base["error"] = f"所有 Key 尝试完毕。最后错误: {last_error}"
         return result_base

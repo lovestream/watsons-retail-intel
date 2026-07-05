@@ -53,7 +53,7 @@ SERVICES = {
         "critical": True,
         "key_prefixes": ["longcat"],
         "key_count": 6,
-        "test_model": "LongCat-2.0-Preview",
+        "test_model": "LongCat-2.0",
         "test_type": "api_key",
     },
     "tavily_search": {
@@ -649,7 +649,7 @@ def run_health_check(project_root: str = ".", logger: logging.Logger = None) -> 
             else:
                 for key_name, key_val in keys:
                     if svc_id == "longcat_llm":
-                        r = test_longcat_key(key_name, key_val, svc_cfg.get("test_model", "LongCat-2.0-Preview"))
+                        r = test_longcat_key(key_name, key_val, svc_cfg.get("test_model", "LongCat-2.0"))
                     elif svc_id == "tavily_search":
                         r = test_tavily_key(key_name, key_val)
                     elif svc_id == "xcrawl":

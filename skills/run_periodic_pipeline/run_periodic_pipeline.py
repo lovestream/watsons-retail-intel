@@ -19,6 +19,11 @@ _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__))))
 sys.path.insert(0, _PROJECT_ROOT)
 
+# ── 自愈：优先从项目持久 .venv_packages 加载包（如 edge-tts） ──
+_VENV_PACKAGES = os.path.join(_PROJECT_ROOT, ".venv_packages")
+if os.path.isdir(_VENV_PACKAGES) and _VENV_PACKAGES not in sys.path:
+    sys.path.insert(0, _VENV_PACKAGES)
+
 from skills.generate_periodic_report.generate_periodic_report import (
     generate_periodic_report,
 )

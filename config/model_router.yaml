@@ -1,8 +1,8 @@
-default_model: LongCat-2.0-Preview
+default_model: LongCat-2.0
 global_fallback:
-- LongCat-2.0-Preview
+- LongCat-2.0
 models:
-  LongCat-2.0-Preview:
+  LongCat-2.0:
     description: LongCat 当前唯一可用模型（2026-06 恢复），全任务通用
     max_tokens: 8192
     temperature: 0.3
@@ -10,55 +10,55 @@ models:
 routing:
   analyze_business_impact:
     fallback:
-    - LongCat-2.0-Preview
+    - LongCat-2.0
     params:
       max_tokens: 4096
       temperature: 0.3
     priority_routing:
       ARCHIVE: rule_only
-      P0: LongCat-2.0-Preview
-      P1: LongCat-2.0-Preview
-      P2: LongCat-2.0-Preview
+      P0: LongCat-2.0
+      P1: LongCat-2.0
+      P2: LongCat-2.0
   editor_review:
-    default: LongCat-2.0-Preview
+    default: LongCat-2.0
     fallback:
-    - LongCat-2.0-Preview
+    - LongCat-2.0
     params:
       max_tokens: 4096
       temperature: 0.3
   extract_events:
-    default: LongCat-2.0-Preview
+    default: LongCat-2.0
     fallback:
-    - LongCat-2.0-Preview
+    - LongCat-2.0
     params:
       max_tokens: 4096
       temperature: 0.2
   filter_relevant_articles:
-    default: LongCat-2.0-Preview
+    default: LongCat-2.0
     fallback:
-    - LongCat-2.0-Preview
+    - LongCat-2.0
     params:
       max_tokens: 2048
       temperature: 0.1
   generate_daily_report:
-    default: LongCat-2.0-Preview
+    default: LongCat-2.0
     fallback:
-    - LongCat-2.0-Preview
+    - LongCat-2.0
     params:
       max_tokens: 8192
       temperature: 0.3
-    optional_deep_review: LongCat-2.0-Preview
+    optional_deep_review: LongCat-2.0
   generate_podcast:
-    default: LongCat-2.0-Preview
+    default: LongCat-2.0
     fallback:
-    - LongCat-2.0-Preview
+    - LongCat-2.0
     params:
       max_tokens: 8192
       temperature: 0.3
   podcast_review:
-    default: LongCat-2.0-Preview
+    default: LongCat-2.0
     fallback:
-    - LongCat-2.0-Preview
+    - LongCat-2.0
     params:
       max_tokens: 2048
       temperature: 0.2

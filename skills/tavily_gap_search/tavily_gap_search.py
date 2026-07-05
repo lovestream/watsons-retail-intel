@@ -648,6 +648,33 @@ def tavily_gap_search(
 
     if not triggered:
         logger.info("未触发 Tavily gap search，数据充足")
+        # 即使未触发补搜，也需生成 raw_articles_merged.json 供下游 filter_merged 使用
+        # 回退策略：直接复制 raw_articles_all.json（无补搜增量）
+        merged_file = root / f"data/raw/{date}/raw_articles_merged.json"
+        merged_written = None
+        try:
+            all_raw_file = root / f"data/raw/{date}/raw_articles_all.json"
+            source_file = all_raw_file if all_raw_file.exists() else raw_file
+            if source_file.exists():
+                with open(source_file, "r", encoding="utf-8") as f:
+                    src_data = json.load(f)
+                if isinstance(src_data, list):
+                    src_data = {"metadata": {}, "articles": src_data}
+                src_data.setdefault("metadata", {})
+                src_data["metadata"]["gap_search_added"] = 0
+                src_data["metadata"]["gap_search_triggered"] = False
+                src_data["metadata"]["merged_at"] = datetime.now(CST).isoformat()
+                with open(merged_file, "w", encoding="utf-8") as f:
+                    json.dump(src_data, f, ensure_ascii=False, indent=2)
+                merged_written = str(merged_file)
+                logger.info(
+                    f"已写入 raw_articles_merged.json "
+                    f"({len(src_data.get('articles', []))} 条, 来源={source_file.name})"
+                )
+            else:
+                logger.warning("raw_articles_all.json / raw_articles.json 均不存在，无法生成 merged 文件")
+        except Exception as e:
+            logger.error(f"生成 raw_articles_merged.json 失败: {e}")
         logging.getLogger().removeHandler(file_handler)
         file_handler.close()
         return {
@@ -658,7 +685,7 @@ def tavily_gap_search(
             "queries": 0,
             "gap_count": 0,
             "unique_count": 0,
-            "merged_file": None,
+            "merged_file": merged_written,
         }
 
     logger.info(f"触发 Tavily gap search，原因: {reasons}")
@@ -769,14 +796,25 @@ def tavily_gap_search(
             "time_distribution": dict(time_dist),
         }
 
-    # ── 合并到 raw_articles ──
-    merged_articles = merge_with_existing(raw_articles, unique_articles)
+    # ── 合并到 raw_articles_all（而非 raw_articles，保留完整集合）──
+    all_raw_file = root / f"data/raw/{date}/raw_articles_all.json"
+    if all_raw_file.exists():
+        with open(all_raw_file, "r", encoding="utf-8") as f:
+            all_data = json.load(f)
+        base_articles = all_data.get("articles", []) if isinstance(all_data, dict) else all_data
+        logger.info(f"使用 raw_articles_all.json ({len(base_articles)} 条) 作为合并基础")
+    else:
+        base_articles = raw_articles
+        logger.info(f"raw_articles_all.json 不存在，使用 raw_articles.json ({len(base_articles)} 条)")
+
+    merged_articles = merge_with_existing(base_articles, unique_articles)
     merged_file = root / f"data/raw/{date}/raw_articles_merged.json"
 
     # 保留原始 metadata 并更新
     merged_metadata = {}
-    if raw_file.exists():
-        with open(raw_file, "r", encoding="utf-8") as f:
+    source_for_meta = all_raw_file if all_raw_file.exists() else raw_file
+    if source_for_meta.exists():
+        with open(source_for_meta, "r", encoding="utf-8") as f:
             orig_data = json.load(f)
         merged_metadata = orig_data.get("metadata", {})
     merged_metadata["gap_search_added"] = len(unique_articles)
@@ -853,7 +891,7 @@ def tavily_gap_search(
 def merge_with_existing(
     existing_articles: List[dict],
     gap_articles: List[dict],
-    max_total: int = 800,
+    max_total: int = 2000,
 ) -> List[dict]:
     """合并已有文章和补搜文章，并去重。"""
     # 去重

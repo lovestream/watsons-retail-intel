@@ -22,6 +22,11 @@ _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__))))
 sys.path.insert(0, _PROJECT_ROOT)
 
+# ── 自愈：优先从项目持久 .venv_packages 加载包（如 edge-tts） ──
+_VENV_PACKAGES = os.path.join(_PROJECT_ROOT, ".venv_packages")
+if os.path.isdir(_VENV_PACKAGES) and _VENV_PACKAGES not in sys.path:
+    sys.path.insert(0, _VENV_PACKAGES)
+
 from skills.utils.llm_client import get_llm_client
 from skills.generate_periodic_report.prompts import (
     WEEKLY_CHAPTERS, MONTHLY_CHAPTERS, YEARLY_CHAPTERS,
@@ -32,7 +37,7 @@ logger = logging.getLogger(__name__)
 LOG_PREFIX = "[PeriodicReport]"
 
 MAX_REVISION_ROUNDS = 2
-LLM_MODEL = "LongCat-2.0-Preview"
+LLM_MODEL = "LongCat-2.0"
 MAX_TOKENS_CHAPTER = 8192
 MAX_TOKENS_REVIEW = 4096
 MAX_TOKENS_PODCAST = 8192

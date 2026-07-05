@@ -44,7 +44,7 @@ logger = logging.getLogger(__name__)
 
 # ===================== 默认配置 =====================
 
-DEFAULT_MODEL = "LongCat-2.0-Preview"
+DEFAULT_MODEL = "LongCat-2.0"
 DEFAULT_BASE_URL = "https://api.longcat.chat/openai"
 DEFAULT_MAX_TOKENS = 4096
 DEFAULT_TEMPERATURE = 0.3
@@ -80,7 +80,7 @@ def _load_allow_paid_fallback() -> bool:
 
 # ── 强制兜底开关 ──
 # 历史背景：LongCat-Flash-* 系列曾全部故障，临时用此开关强制走备用 gpt。
-# 2026-06 LongCat 恢复并换用 LongCat-2.0-Preview，默认关闭(0)，走正常路由。
+# 2026-06 LongCat 恢复并换用 LongCat-2.0，默认关闭(0)，走正常路由。
 # 若 LongCat 再次故障且你同意花钱，设 FORCE_FALLBACK_LLM=1 + ALLOW_PAID_FALLBACK=1。
 def _load_force_fallback() -> bool:
     val = os.environ.get("FORCE_FALLBACK_LLM", "0").strip().lower()

@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "date": "2026-05-13",
+    "window_start": "2026-05-13T07:00:00+08:00",
+    "window_end": "2026-05-13T07:09:06.553523+08:00",
+    "total_candidates": 1,
+    "from_reference": 1,
+    "from_rejected": 0,
+    "total_reference_input": 92,
+    "total_rejected_input": 25,
+    "rejection_stats": {
+      "not_old": 104,
+      "low_score": 11,
+      "invalid_page_type": 1,
+      "noise": 0
+    },
+    "selection_criteria": {
+      "min_rule_score": 8,
+      "time_statuses": [
+        "old",
+        "week_fallback",
+        "unknown_time"
+      ],
+      "valid_page_types": [
+        "article",
+        "news",
+        "report",
+        "unknown"
+      ]
+    },
+    "created_at": "2026-05-13T07:09:06.553546+08:00"
+  },
+  "articles": [
+    {
+      "article_id": "5dd46b3b128474fc",
+      "title": "抖音小时达加速，即时零售涌现新变量-36氪",
+      "url": "https://m.36kr.com/p/2985414619766406",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "",
+      "summary": "随着抖音外卖转回抖音生活服务，抖音小时达也于9月24日全国开放，并在国庆前进行服务商招商。在对服务商的招募上，抖音即时零售非常看重服务商的内容能力和流量能力，比如其中一项要求就是：所服务商家累计开播时长达到100小时。\n\n另外据说，现在入驻小时达的商家享受配送费高额补贴，「5公里内一单3.5元，比一些同行便宜40%」。\n\n抖音小时达正在成为重新活跃的即时零售市场的又一个变量。\n\n## 02 抖音怎",
+      "published_at": "",
+      "collected_at": "2026-05-13T07:07:36.066618+08:00",
+      "reason": "",
+      "selected_at": "2026-05-13T07:09:06.553381+08:00"
+    }
+  ]
+}

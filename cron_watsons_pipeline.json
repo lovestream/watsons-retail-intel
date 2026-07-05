@@ -1,0 +1,40 @@
+{
+  "name": "watsons-daily-pipeline",
+  "enabled": true,
+  "schedule": {
+    "type": "cron",
+    "cron": "30 0 * * *",
+    "timezone": "Asia/Shanghai"
+  },
+  "task_type": "agent",
+  "text": "运行 Watsons 零售情报每日流水线。进入项目目录并执行: cd /app/working/projects/watsons-retail-intel && python3 -m skills.run_daily_pipeline.run_daily_pipeline --project-root . --use-llm true。监控执行过程，汇报结果摘要。如果LLM调用失败，尝试用 --use-llm false 重跑。",
+  "request": {
+    "input": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": [
+          {
+            "type": "text",
+            "text": "运行 Watsons 零售情报每日流水线。进入项目目录并执行: cd /app/working/projects/watsons-retail-intel && python3 -m skills.run_daily_pipeline.run_daily_pipeline --project-root . --use-llm true。监控执行过程，汇报结果摘要。如果LLM调用失败，尝试用 --use-llm false 重跑。"
+        ]
+      }
+    ],
+    "session_id": "default",
+    "user_id": "default"
+  },
+  "dispatch": {
+    "type": "channel",
+    "channel": "console",
+    "target": {
+      "user_id": "default",
+      "session_id": "default"
+    },
+    "mode": "final"
+  },
+  "runtime": {
+    "max_concurrency": 1,
+    "timeout_seconds": 600,
+    "misfire_grace_seconds": 120
+  }
+}

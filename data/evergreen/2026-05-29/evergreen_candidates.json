@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "date": "2026-05-29",
+    "window_start": "2026-05-29T07:00:00+08:00",
+    "window_end": "2026-05-29T07:22:56.930857+08:00",
+    "total_candidates": 2,
+    "from_reference": 2,
+    "from_rejected": 0,
+    "total_reference_input": 63,
+    "total_rejected_input": 97,
+    "rejection_stats": {
+      "not_old": 82,
+      "low_score": 72,
+      "invalid_page_type": 4,
+      "noise": 0
+    },
+    "selection_criteria": {
+      "min_rule_score": 8,
+      "time_statuses": [
+        "unknown_time",
+        "week_fallback",
+        "old"
+      ],
+      "valid_page_types": [
+        "report",
+        "article",
+        "news",
+        "unknown"
+      ]
+    },
+    "created_at": "2026-05-29T07:22:56.930880+08:00"
+  },
+  "articles": [
+    {
+      "article_id": "fa6ae512e385db6e",
+      "title": "还爱逛吗？屈臣氏因虚假广告被罚8万元【附美妆新零售行业 ...",
+      "url": "https://ecoapp.qianzhan.com/detials/230907-de7b000d.html",
+      "source_name": "xcrawl_14",
+      "source_type": "xcrawl",
+      "source_tier": "tier3_anchor",
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "屈臣氏",
+      "summary": "近日，上海屈臣氏日用品有限公司因虚假宣传普通化妆品具有美白功效和普通食品具有保健功能，被上海市杨浦区市场监督管理局罚款8万元。",
+      "published_at": "",
+      "collected_at": "2026-05-29T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-05-29T07:22:56.930365+08:00"
+    },
+    {
+      "article_id": "e1b58b18bd4201bd",
+      "title": "卖一单赔一单，即时零售卷哭闪电仓",
+      "url": "https://www.woshipm.com/it/6155432.html",
+      "source_name": "xcrawl_17",
+      "source_type": "xcrawl",
+      "source_tier": "tier3_anchor",
+      "page_type": "unknown",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "美妆个护",
+      "summary": "目前，闪电仓的SKU大多在5000～10000个，从日用百货、鲜花、美妆、酒水饮料到数码配件基本都覆盖，面向用户的即时性消费需求。 闪电仓背后是平台、实体商超、零售品牌都在争抢 ...",
+      "published_at": "",
+      "collected_at": "2026-05-29T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-05-29T07:22:56.930457+08:00"
+    }
+  ]
+}

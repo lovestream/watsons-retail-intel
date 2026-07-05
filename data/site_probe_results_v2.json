@@ -1,0 +1,209 @@
+{
+  "accessible": [
+    {
+      "name": "美妆网",
+      "url": "https://www.mztoutiao.com/",
+      "links": 80,
+      "title": "首页"
+    },
+    {
+      "name": "美妆网-alt",
+      "url": "https://www.chinabeauty.cn/",
+      "links": 196,
+      "title": "美妆网-美妆新零售资讯平台"
+    },
+    {
+      "name": "化妆品报",
+      "url": "https://www.hzpb.com.cn/",
+      "links": 50,
+      "title": "化妆品报"
+    },
+    {
+      "name": "美丽修行",
+      "url": "https://www.bevol.cn/",
+      "links": 32,
+      "title": "美丽修行"
+    },
+    {
+      "name": "C2CC传媒",
+      "url": "https://www.c2cc.cn/",
+      "links": 160,
+      "title": "丽声网络-在C2CC，读懂美妆行业-C2CC.CN"
+    },
+    {
+      "name": "零售圈",
+      "url": "https://www.retailcircle.cn/",
+      "links": 52,
+      "title": "Retailment - 零售，顶级国际域名"
+    },
+    {
+      "name": "中国电子商务研究中心",
+      "url": "https://www.100ec.cn/",
+      "links": 737,
+      "title": "网经社 数字经济门户 电子商务研究中心 一带一路TOP10影响力社会智库"
+    },
+    {
+      "name": "亿欧网",
+      "url": "https://www.iyiou.com/",
+      "links": 688,
+      "title": "亿欧-科技+产业+投资信息平台和智库"
+    },
+    {
+      "name": "创业邦",
+      "url": "https://www.cyzone.cn/",
+      "links": 449,
+      "title": "创业邦 - 关注创新经济及其推动者"
+    },
+    {
+      "name": "DoNews",
+      "url": "https://www.donews.com/",
+      "links": 908,
+      "title": "DoNews-创新无边界"
+    },
+    {
+      "name": "品玩",
+      "url": "https://www.pingwest.com/",
+      "links": 145,
+      "title": "品玩-有品好玩的科技，一切与你有关"
+    },
+    {
+      "name": "极客公园",
+      "url": "https://www.geekpark.net/",
+      "links": 151,
+      "title": "极客公园-Geek Things Up!"
+    },
+    {
+      "name": "投资界",
+      "url": "https://www.pedaily.cn/",
+      "links": 297,
+      "title": "投资界_创业与投资资讯平台"
+    },
+    {
+      "name": "Campaign中国",
+      "url": "https://www.campaignchina.com/",
+      "links": 268,
+      "title": "Campaign 中国 - 广告服务, 营销, 媒体, 数字/科技, 公关新闻 和更多"
+    },
+    {
+      "name": "华尔街见闻",
+      "url": "https://wallstreetcn.com/",
+      "links": 95,
+      "title": "华尔街见闻"
+    },
+    {
+      "name": "经济观察报",
+      "url": "https://www.eeo.com.cn/",
+      "links": 268,
+      "title": "经济观察网-首页"
+    },
+    {
+      "name": "每日经济新闻",
+      "url": "https://www.nbd.com.cn/",
+      "links": 340,
+      "title": "每经网 | 新闻决定影响力 |《每日经济新闻》报社旗下网站"
+    },
+    {
+      "name": "第一财经",
+      "url": "https://www.yicai.com/",
+      "links": 292,
+      "title": "第一财经_专业创造价值"
+    },
+    {
+      "name": "21世纪经济报道",
+      "url": "https://www.21jingji.com/",
+      "links": 171,
+      "title": "21经济网 - 21世纪经济报道官方网站"
+    },
+    {
+      "name": "中国连锁经营协会",
+      "url": "https://www.ccfa.org.cn/",
+      "links": 129,
+      "title": "中国连锁经营协会"
+    },
+    {
+      "name": "亿邦动力搜索页",
+      "url": "https://www.ebrun.com/search?keyword=美妆",
+      "links": 171,
+      "title": "美妆 - 电商搜索 - 亿邦动力网"
+    }
+  ],
+  "blocked": [
+    {
+      "name": "中国美妆网",
+      "url": "https://www.cnbeauty.com/",
+      "reason": "Page.goto: net::ERR_CERT_AUTHORITY_INVALID at http"
+    },
+    {
+      "name": "化妆品观察",
+      "url": "https://www.hzpinguan.com/",
+      "reason": "Page.goto: net::ERR_CONNECTION_CLOSED at https://w"
+    },
+    {
+      "name": "美业新纬度",
+      "url": "https://www.meiyexinweidu.com/",
+      "reason": "Page.goto: net::ERR_CONNECTION_CLOSED at https://w"
+    },
+    {
+      "name": "美妆心得",
+      "url": "https://www.5mzt.com/",
+      "reason": "Page.goto: net::ERR_CONNECTION_CLOSED at https://w"
+    },
+    {
+      "name": "中国零售网",
+      "url": "https://www.cnretail.com.cn/",
+      "reason": "Page.goto: net::ERR_CONNECTION_CLOSED at https://w"
+    },
+    {
+      "name": "电商网",
+      "url": "https://www.ebwang.com/",
+      "reason": "Page.goto: net::ERR_CONNECTION_CLOSED at https://w"
+    },
+    {
+      "name": "快速消费品网",
+      "url": "https://www.fmcg.com.cn/",
+      "reason": "Page.goto: net::ERR_NAME_NOT_RESOLVED at https://w"
+    },
+    {
+      "name": "新经销",
+      "url": "https://www.newdistribution.com/",
+      "reason": "Page.goto: net::ERR_CERT_COMMON_NAME_INVALID at ht"
+    },
+    {
+      "name": "食品板",
+      "url": "https://www.foodpanel.cn/",
+      "reason": "Page.goto: net::ERR_NAME_NOT_RESOLVED at https://w"
+    },
+    {
+      "name": "中国经营报",
+      "url": "https://www.cb.com.cn/",
+      "reason": "Page.goto: net::ERR_CERT_AUTHORITY_INVALID at http"
+    },
+    {
+      "name": "特许经营网",
+      "url": "https://www.texu.com/",
+      "reason": "Page.goto: net::ERR_CERT_COMMON_NAME_INVALID at ht"
+    }
+  ],
+  "timeout": [
+    {
+      "name": "财经网",
+      "url": "https://www.caijing.com.cn/"
+    },
+    {
+      "name": "联商网-alt",
+      "url": "https://www.linkshop.com/news/"
+    }
+  ],
+  "error": [
+    {
+      "name": "快消品网",
+      "url": "https://www.kuaixiaopin.com/",
+      "reason": "empty page (0 links)"
+    },
+    {
+      "name": "中国食品网",
+      "url": "https://www.cnfood.cn/",
+      "reason": "empty page (0 links)"
+    }
+  ]
+}

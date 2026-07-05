@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "date": "2026-06-01",
+    "window_start": "2026-06-01T07:00:00+08:00",
+    "window_end": "2026-06-01T07:28:54.614573+08:00",
+    "total_candidates": 4,
+    "from_reference": 4,
+    "from_rejected": 0,
+    "total_reference_input": 45,
+    "total_rejected_input": 67,
+    "rejection_stats": {
+      "not_old": 36,
+      "low_score": 69,
+      "invalid_page_type": 3,
+      "noise": 0
+    },
+    "selection_criteria": {
+      "min_rule_score": 8,
+      "time_statuses": [
+        "unknown_time",
+        "week_fallback",
+        "old"
+      ],
+      "valid_page_types": [
+        "report",
+        "article",
+        "unknown",
+        "news"
+      ]
+    },
+    "created_at": "2026-06-01T07:28:54.614597+08:00"
+  },
+  "articles": [
+    {
+      "article_id": "f972d62f4517c17b",
+      "title": "Watsons: Kozmetik ve Alışveriş - Google Play 上的应用",
+      "url": "https://play.google.com/store/apps/details?id=com.mobular.watsons&hl=zh",
+      "source_name": "xcrawl_14",
+      "source_type": "xcrawl",
+      "source_tier": "tier3_anchor",
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 9,
+      "evergreen_score": 8.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "屈臣氏",
+      "summary": "通过更新的屈臣氏移动应用程序体验独特的购物体验作为世界化妆品、护发、护肤和个人护理趋势的先驱，屈臣氏将最新的在线购物技术与移动生活相结合。通过最新的活动和特定于 ...",
+      "published_at": "",
+      "collected_at": "2026-06-01T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-06-01T07:28:54.614205+08:00"
+    },
+    {
+      "article_id": "6f3c83c65bc0772d",
+      "title": "入驻京东十天已圈粉11.5万，被嘲总是“迟到”的Costco能赶上山姆吗？",
+      "url": "https://time-weekly.com/post/329922",
+      "source_name": "tavily_broad",
+      "source_type": "tavily_broad",
+      "source_tier": "",
+      "page_type": "news",
+      "time_status": "unknown_time",
+      "rule_score": 9,
+      "evergreen_score": 8,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "",
+      "summary": "入驻京东十天已圈粉11.5万，被嘲总是“迟到”的Costco能赶上山姆吗？\n电商销售额同比增长近 22%，网站和App流量增长 37%——美东时间5月28日，美国仓储式零售巨头开市客（Costco）公布的2026财年第三季度财报显示，其线上业务呈加速增长态势。\n将视线转向中国市场，Costco的线上布局也迈出关键一步：Costco京东官方旗舰店在5月22日正式上线，目前上架商品包括休闲零食、粮油调",
+      "published_at": "",
+      "collected_at": "2026-06-01T07:12:45.186204+08:00",
+      "reason": "",
+      "selected_at": "2026-06-01T07:28:54.614345+08:00"
+    },
+    {
+      "article_id": "d5f3924ebaf75927",
+      "title": "美妆外卖闪电仓究竟要革谁的命？",
+      "url": "https://zhuanlan.zhihu.com/p/636436617",
+      "source_name": "xcrawl_17",
+      "source_type": "xcrawl",
+      "source_tier": 3,
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "美妆个护",
+      "summary": "闪电仓大家可能早有耳闻，不同于以往生鲜的重货、重资产模式，通过便宜的价格，低廉的成本，迅速占领了消费者市场。 其实闪电仓也就是我们常说的便利店前置仓，提供30分钟内 ...",
+      "published_at": "",
+      "collected_at": "2026-06-01T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-06-01T07:28:54.614263+08:00"
+    },
+    {
+      "article_id": "7a997aa934ea99c0",
+      "title": "美妆外卖这个事，京东到家也掺和进来了",
+      "url": "https://m.ikanchai.com/pcarticle/441599",
+      "source_name": "xcrawl_16",
+      "source_type": "xcrawl",
+      "source_tier": "tier3_anchor",
+      "page_type": "unknown",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "美妆个护",
+      "summary": "对于美妆品牌们来说，疫情导致的停工停产对到店客人数量影响很大，与外卖平台合作，可以共享平台的流量，从而帮助清理门店积压的库存，提升在门店未覆盖区域的渗透率。",
+      "published_at": "",
+      "collected_at": "2026-06-01T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-06-01T07:28:54.614104+08:00"
+    }
+  ]
+}

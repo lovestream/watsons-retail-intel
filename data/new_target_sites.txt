@@ -1,0 +1,55 @@
+
+
+    # ═══════════════ 第二轮探测新解锁（2026-05-15 补丁版） ═══════════════
+    
+    # ── 华尔街见闻（搜索页直出文章链接，22篇/搜索）──
+    {
+        "name": "wallstreetcn_instant",
+        "description": "华尔街见闻-即时零售",
+        "url": "https://wallstreetcn.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+        "link_selector": "a[href*='/articles/']",
+        "date_from": "parent_text",
+        "date_pattern": r'(\d{4}[-/]\d{2}[-/]\d{2})',
+        "max_articles": 10,
+        "category": "finance_tech",
+        "wait_until": "networkidle",
+    },
+    {
+        "name": "wallstreetcn_beauty",
+        "description": "华尔街见闻-美妆个护",
+        "url": "https://wallstreetcn.com/search?q=%E7%BE%8E%E5%A6%86+%E4%B8%AA%E6%8A%A4",
+        "link_selector": "a[href*='/articles/']",
+        "date_from": "parent_text",
+        "date_pattern": r'(\d{4}[-/]\d{2}[-/]\d{2})',
+        "max_articles": 5,
+        "category": "finance_tech",
+        "wait_until": "networkidle",
+    },
+
+    # ── 品玩（快讯页，16篇/页）──
+    {
+        "name": "pingwest_status",
+        "description": "品玩-科技快讯",
+        "url": "https://www.pingwest.com/status",
+        "link_selector": "a[href*='/a/']",
+        "date_from": "parent_text",
+        "date_pattern": r'(\d{4}[-/]\d{2}[-/]\d{2})',
+        "max_articles": 8,
+        "category": "tech_media",
+        "wait_until": "networkidle",
+        "note": "科技快讯，可能含零售/消费话题",
+    },
+
+    # ── 每日经济新闻（要闻专栏，文章URL含日期，很容易提取）──
+    {
+        "name": "nbd_topnews",
+        "description": "每日经济新闻-要闻",
+        "url": "https://www.nbd.com.cn/columns/3/",
+        "link_selector": "a[href*='/articles/']",
+        "date_from": "url",
+        "date_pattern": r'/articles/(\d{4}-\d{2}-\d{2})/',
+        "max_articles": 8,
+        "category": "finance_tech",
+        "wait_until": "networkidle",
+        "note": "URL含日期如/articles/2026-05-15/xxx.html，100%准确",
+    },

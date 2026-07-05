@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "date": "2026-06-15",
+    "window_start": "2026-06-15T07:00:00+08:00",
+    "window_end": "2026-06-15T07:20:48.458659+08:00",
+    "total_candidates": 4,
+    "from_reference": 4,
+    "from_rejected": 0,
+    "total_reference_input": 45,
+    "total_rejected_input": 105,
+    "rejection_stats": {
+      "not_old": 46,
+      "low_score": 100,
+      "invalid_page_type": 0,
+      "noise": 0
+    },
+    "selection_criteria": {
+      "min_rule_score": 8,
+      "time_statuses": [
+        "week_fallback",
+        "old",
+        "unknown_time"
+      ],
+      "valid_page_types": [
+        "unknown",
+        "news",
+        "article",
+        "report"
+      ]
+    },
+    "created_at": "2026-06-15T07:20:48.458682+08:00"
+  },
+  "articles": [
+    {
+      "article_id": "a7fb496dddab13ca",
+      "title": "当保湿遇上东方草本智慧：屈臣氏柿叶膏的温柔力量_乳液_淘宝美妆网",
+      "url": "https://beaut.taobao.com/topic/ruye_13/7974c38804c2742b97ff6c9717bb3d95",
+      "source_name": "tavily_broad",
+      "source_type": "tavily_broad",
+      "source_tier": "",
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 9,
+      "evergreen_score": 8.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "",
+      "summary": "使用场景：一场属于你的私密仪式\n无论是清晨沐浴后，还是睡前卸妆后的护理时刻，猪油柿叶膏都可以成为你肌肤护理中不可或缺的一环。它的存在不只是为了保湿，更像是一个提醒——提醒你在繁忙的日子里，别忘了对自己温柔一点。当你将它轻轻涂抹在脸上，那一刻，世界仿佛只剩下肌肤与自然的共鸣。\n结语：一瓶膏体，一段肌肤的温柔旅程\n在这个追求高效的时代，很多人选择了刺激型护肤品，却忽略了肌肤最原始的渴望——一种温和、稳",
+      "published_at": "",
+      "collected_at": "2026-06-15T07:10:10.961478+08:00",
+      "reason": "",
+      "selected_at": "2026-06-15T07:20:48.458145+08:00"
+    },
+    {
+      "article_id": "d570ff182ab8b254",
+      "title": "蓝鲨消费——深度研究消费产业，记录陪伴新消费品牌成长",
+      "url": "https://lanshaxiaofei.com",
+      "source_name": "tavily_broad",
+      "source_type": "tavily_broad",
+      "source_tier": "",
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "",
+      "summary": "零售百货\n:   河南逆天！胖东来、锅圈如何改写中国消费版图？\n零售百货\n:   胖东来没有神话\n鞋服饰品\n:   中国为什么没有世界级服装品牌？｜蓝鲨杭州沙龙\n跨境出海\n:   2024，“不出海，就出局”？\n美妆个护\n:   女人的钱越来越不好“骗了”\n食品饮料\n:   基础食品突围：简单的渠道和价格竞争已经OUT了！｜蓝鲨杭州沙龙\n鞋服饰品\n:   走进洪陵羊绒|我在抖音卖羊绒，年营收15亿",
+      "published_at": "",
+      "collected_at": "2026-06-15T07:10:10.961192+08:00",
+      "reason": "",
+      "selected_at": "2026-06-15T07:20:48.458072+08:00"
+    },
+    {
+      "article_id": "1318e14827f5ec94",
+      "title": "15亿美元求购朴朴超市？阿里要补前置仓缺的课__财经头条__新浪财经",
+      "url": "https://t.cj.sina.cn/articles/view/5828676220/15b6a8a7c02701eo9a",
+      "source_name": "tavily_broad",
+      "source_type": "tavily_broad",
+      "source_tier": "",
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "",
+      "summary": "不同于每日优鲜、盒马，以及叮咚买菜，同为前置仓赛道的参与者，成立于2016年的朴朴超市从一开始就走了一条差异化路线，不仅选择在区域深耕，并且摒弃了行业内普遍的小仓模式，而是采用800-1000平方米的大型前置仓。\n朴朴超市将前置仓定位为\"小型区域零售中心\"，而非单纯作为毛细血管般的终端配送节点，其包含的SKU数量达到了6000-8000个，远超行业平均水平。通过区域高密度布仓拉升订单量，来实现摊薄",
+      "published_at": "",
+      "collected_at": "2026-06-15T07:10:10.963532+08:00",
+      "reason": "",
+      "selected_at": "2026-06-15T07:20:48.458256+08:00"
+    },
+    {
+      "article_id": "2e83e0b84bc6c0a8",
+      "title": "15亿美元求购朴朴超市？阿里要补前置仓缺的课|美团|广州|京东|零售|电商平台|知名企业|阿里巴巴集团_网易订阅",
+      "url": "https://www.163.com/dy/article/KVDEK9V50511BE1V.html",
+      "source_name": "tavily_broad",
+      "source_type": "tavily_broad",
+      "source_tier": "",
+      "page_type": "news",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "",
+      "summary": "除此之外，朴朴超市运营前置仓的经验，对于阿里的即时零售战略同样有着很大的意义，因为他们是当下屈指可数将这一模式跑通的企业。但前置仓自诞生以来，便一直围绕着诸多的争议。在此前以盒马小站为载体对前置仓模式进行尝试后，盒马创始人侯毅曾断言这个模式不可能盈利，是个toVC（面向投资人）的伪命题。\n此前每日优鲜的爆雷，更是为前置仓模式蒙上了一层阴影。而作为对比，《深圳商报》的相关报道显示，朴朴超市在2024",
+      "published_at": "",
+      "collected_at": "2026-06-15T07:10:10.963448+08:00",
+      "reason": "",
+      "selected_at": "2026-06-15T07:20:48.458215+08:00"
+    }
+  ]
+}

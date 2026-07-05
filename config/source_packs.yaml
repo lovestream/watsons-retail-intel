@@ -1,0 +1,348 @@
+# source_packs.yaml — 广泛搜索发现模块配置 V2
+# 搜索 query 分层: A类(必跑) / B类(按预算) / C类(按source_health动态)
+# 信息源: 综合门户(只靠site搜索) + 垂类媒体(栏目监控+site搜索)
+
+# ══════════════════════════════════════════════════════════════
+# 站内搜索域名列表 (site:domain 查询)
+# ══════════════════════════════════════════════════════════════
+site_domains:
+
+  # ── 即时零售平台官方 (C类必跑) ──
+  platform_official:
+    - domain: meituan.com
+      name: 美团
+    - domain: jddj.com
+      name: 京东到家
+    - domain: ele.me
+      name: 饿了么
+    - domain: doudian.com
+      name: 抖店
+
+  # ── 垂类媒体 (C类优先) ──
+  # 两轨: web_monitor 站点监控 + site: 搜索
+  vertical_media:
+    - domain: ebrun.com
+      name: 亿邦动力
+    - domain: linkshop.com
+      name: 联商网
+    - domain: winshang.com
+      name: 赢商网
+    - domain: pinguan.com
+      name: 品观
+    - domain: jumeili.cn
+      name: 聚美丽
+    - domain: qingyan001.com
+      name: 青眼
+    - domain: c2cc.cn
+      name: C2CC
+    - domain: 36kr.com
+      name: 36氪
+    - domain: huxiu.com
+      name: 虎嗅
+    - domain: jiemian.com
+      name: 界面新闻
+    - domain: latepost.com
+      name: 晚点LatePost
+    - domain: thepaper.cn
+      name: 澎湃新闻
+    - domain: yicai.com
+      name: 第一财经
+    - domain: cbnweek.com
+      name: 商业周刊
+    - domain: cyzone.cn
+      name: 创业邦
+
+  # ── 综合门户 (C类必跑，只靠site搜索) ──
+  general_portal:
+    - domain: 163.com
+      name: 网易
+    - domain: sina.com.cn
+      name: 新浪
+    - domain: qq.com
+      name: 腾讯
+    - domain: sohu.com
+      name: 搜狐
+    - domain: ifeng.com
+      name: 凤凰网
+
+  # ── 美妆个护垂类 (C类) ──
+  beauty_vertical:
+    - domain: cosmetic-back-stage.com
+      name: 化妆品幕后
+    - domain: beautyinfrance.com
+      name: 美妆资讯
+    - domain: chbd.org.cn
+      name: 中国美妆博览会
+
+  # ── 竞对品牌官方 (C类) ──
+  competitor_brand:
+    - domain: watsons.com.cn
+      name: 屈臣氏中国
+    - domain: watsons.com.tw
+      name: 屈臣氏台湾
+    - domain: sephora.cn
+      name: 丝芙兰中国
+    - domain: mint.cn
+      name: 名创优品
+
+  # ── 通用资讯 (C类低优) ──
+  general_news:
+    - domain: news.cn
+      name: 新华网
+    - domain: people.com.cn
+      name: 人民网
+    - domain: stcn.com
+      name: 证券时报
+
+# ══════════════════════════════════════════════════════════════
+# 搜索矩阵维度
+# ══════════════════════════════════════════════════════════════
+search_matrix:
+  platforms:
+    - 美团闪购
+    - 京东到家
+    - 京东秒送
+    - 淘宝闪购
+    - 饿了么
+    - 抖音小时达
+
+  categories:
+    - 美妆
+    - 个护
+    - 护肤
+    - 彩妆
+    - 洗护
+    - 防晒
+    - 女性护理
+    - 日化
+
+  actions:
+    - 最新
+    - 上线
+    - 加码
+    - 合作
+    - 补贴
+    - 招商
+    - 规则
+    - 小时达
+    - 即时零售
+
+  competitors:
+    - 屈臣氏
+    - 丝芙兰
+    - 万宁
+    - 妍丽
+    - WOW COLOUR
+    - 调色师
+    - 话梅
+    - 名创优品
+
+# ══════════════════════════════════════════════════════════════
+# 搜索 query 分层 (A/B/C 三级)
+# ══════════════════════════════════════════════════════════════
+#
+# A类: 强相关必跑 — 每天都执行
+# B类: 平台+动作 — 按预算执行
+# C类: site:domain 搜索 — 按 source_health 动态决定
+#
+# 优先级: A > B > C; 同级按顺序执行; 预算耗尽停止后续
+
+query_tiers:
+
+  # ── A类: 强相关必跑 (~16 条) ──
+  # 每天100%执行，不限预算
+  tier_a:
+    priority: 0
+    description: "强相关必跑: 竞对×平台 + 平台×品类核心词"
+    max_per_run: 20
+    queries:
+      # A1: 竞对 × 平台 (最直接情报)
+      - "屈臣氏 美团闪购 最新"
+      - "屈臣氏 京东到家 最新"
+      - "屈臣氏 淘宝闪购 最新"
+      - "屈臣氏 抖音小时达 最新"
+      # A2: 平台 × 核心品类
+      - "美团闪购 美妆 个护 最新"
+      - "京东到家 美妆 个护 最新"
+      - "淘宝闪购 美妆 个护 最新"
+      - "抖音小时达 美妆日百 最新"
+      # A3: 即时零售核心趋势
+      - "即时零售 美妆 最新"
+      - "即时零售 个护 最新"
+      - "即时零售 行业趋势"
+      - "即时零售 前置仓"
+      - "即时零售 闪电仓"
+      # A4: 屈臣氏核心
+      - "屈臣氏 即时零售 最新"
+      - "屈臣氏 数字化"
+      - "屈臣氏 门店 最新"
+      - "屈臣氏 O2O"
+      # A5: 平台动态
+      - "美团闪购 最新动态"
+      - "京东到家 最新动态"
+      - "淘宝闪购 最新动态"
+    dynamic_templates:
+      # 动态生成: 竞对 × 平台 (其余竞对)
+      - template: "{competitors} {platforms} 最新"
+        platforms: ["美团闪购", "京东到家", "淘宝闪购", "抖音小时达"]
+        competitors: ["丝芙兰", "万宁", "名创优品"]
+        max: 8
+
+  # ── B类: 平台 + 动作 (~30 条) ──
+  # 按预算执行，Tavily优先
+  tier_b:
+    priority: 1
+    description: "平台×品类×动作组合，按预算执行"
+    max_per_run: 20  # was 35, reduced to conserve XCrawl credits
+    queries:
+      # B1: 平台 × 品类 × 动作 (关键组合)
+      - "美团闪购 美妆 上线"
+      - "美团闪购 个护 补贴"
+      - "京东到家 美妆 招商"
+      - "京东到家 个护 合作"
+      - "淘宝闪购 天猫 官旗 美妆"
+      - "抖音小时达 美妆日百 招商"
+      - "即时零售 美妆 品牌 合作"
+      - "即时零售 个护 履约"
+      - "即时零售 市场规模"
+      - "即时零售 配送"
+    dynamic_templates:
+      # 动态生成: 平台 × 品类(核心) × 动作(核心)
+      - template: "{platforms} {categories} {actions}"
+        platforms: ["美团闪购", "京东到家", "淘宝闪购"]
+        categories: ["美妆", "个护", "护肤", "彩妆"]
+        actions: ["最新", "上线", "加码", "合作", "补贴"]
+        max: 15   # was 25, reduced; capped by tier_b max_per_run=20
+
+  # ── C类: site:domain 搜索 (~40 条) ──
+  # 按 source_health 动态决定，低信号日多跑
+  tier_c:
+    priority: 2
+    description: "site:domain 搜索，垂类+综合门户"
+    max_per_run: 20  # was 50, reduced; XCrawl now skips Tier C entirely
+    queries:
+      # C1: 垂类媒体 site: 搜索 (高价值)
+      - "site:ebrun.com 即时零售 美妆"
+      - "site:linkshop.com 即时零售 美妆"
+      - "site:winshang.com 即时零售 美妆"
+      - "site:pinguan.com 屈臣氏 即时零售"
+      - "site:c2cc.cn 美妆 即时零售"
+      # C2: 综合门户 site: 搜索
+      - "site:163.com 即时零售 美妆"
+      - "site:sina.com.cn 京东到家 屈臣氏 最新"
+      - "site:qq.com 淘宝闪购 美妆 最新"
+      # C3: 商业媒体 site: 搜索
+      - "site:36kr.com 即时零售 美妆"
+      - "site:huxiu.com 即时零售 美妆"
+      - "site:thepaper.cn 即时零售 美妆"
+      - "site:yicai.com 即时零售 美妆"
+      # C4: 竞对/品牌 site: 搜索
+      - "site:watsons.com.cn 最新"
+      - "site:meituan.com 闪购 美妆"
+      - "site:jddj.com 美妆"
+    dynamic_templates:
+      # 动态生成: site: + 垂类域名 + 核心词
+      - template: "site:{domain} {keywords}"
+        domains_from: "vertical_media"  # 引用 site_domains 中的分组
+        keywords: ["即时零售", "美妆 即时零售"]
+        max: 8   # was 20, reduced
+
+# ══════════════════════════════════════════════════════════════
+# 搜索引擎参数
+# ══════════════════════════════════════════════════════════════
+search_sources:
+  tavily:
+    enabled: true
+    max_results_per_query: 5
+    time_range: "day"           # day → week 两级搜索
+    exclude_domains:
+      - zhihu.com
+      - baidu.com
+      - weibo.com
+      - douban.com
+      - taobao.com
+      - jd.com
+      - tmall.com
+      - pinduoduo.com
+      - instagram.com          # 社媒噪音
+      - threads.com             # 社媒噪音
+      - tiktok.com              # 社媒噪音
+      - facebook.com            # 社媒噪音
+      - twitter.com             # 社媒噪音
+      - toutiao.com             # 低信噪比
+      - douyin.com              # 抖音主站(非抖店)
+      - kuaishou.com            # 快手
+      - xiaohongshu.com         # 小红书(信息噪声大)
+    include_raw_content: "text"
+    # Tavily 特定: A/B/C tier 搜索策略
+    # A类: time_range=day (只要当天)
+    # B类: time_range=day → week 两级
+    # C类: time_range=week (可能包含较老文章)
+
+  xcrawl_search:
+    enabled: true
+    max_results_per_query: 5
+    language: "zh"
+
+# ══════════════════════════════════════════════════════════════
+# 预算控制（V4: CloakBrowser 四级接入后大幅削减 API 预算）
+# ══════════════════════════════════════════════════════════════
+budget:
+  max_queries_per_run: 60       # 从 120 削减（CloakBrowser 接管大部分发现）
+  max_results_per_query: 5
+  # A类必跑不计入上限
+  tavily_daily_limit: 50       # 从 160 削减（CloakBrowser 覆盖垂直媒体）
+  xcrawl_daily_limit: 10       # 从 500 大幅削减（仅保留 A-tier 核心查询）
+  
+  # 分级预算 (V4: 大幅精简)
+  tier_budget:
+    tier_a:
+      min_queries: 10
+      max_queries: 15
+      min_results: 50
+    tier_b:
+      min_queries: 5
+      max_queries: 10
+      min_results: 25
+    tier_c:
+      enabled: false            # C-tier 完全禁用（CloakBrowser 替代）
+      min_queries: 0
+      max_queries: 0
+      min_results: 0
+
+# ══════════════════════════════════════════════════════════════
+# 去重
+# ══════════════════════════════════════════════════════════════
+dedup:
+  check_against:
+    - raw_articles.json
+    - tavily_gap_articles.json
+    - xcrawl_enriched_articles.json
+    - newly_discovered_urls.json
+  
+  # URL 模式过滤 (噪音域 + 无效页)
+  url_filter:
+    exclude_patterns:
+      # 社媒噪音
+      - "instagram.com"
+      - "threads.com"
+      - "facebook.com"
+      - "twitter.com"
+      - "tiktok.com"
+      # 商品/促销页
+      - "/product/"
+      - "/item/"
+      - "/buy/"
+      - "/cart/"
+      - "/order/"
+      # 登录/注册
+      - "/login"
+      - "/register"
+      - "/signup"
+      # 投诉/黑猫
+      - "tousu.sina.cn"
+      - "tousu.ebrun.com"
+      # 旅行/无关
+      - "trip.com"
+      - "ctrip.com"
+      - "booking.com"

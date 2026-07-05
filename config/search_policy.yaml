@@ -1,10 +1,10 @@
 # search_policy.yaml — 搜索策略配置
-# 定义 Tavily 搜索预算、固定 query、缺口补搜、验证搜搜策略
+# 定义 Tavily 搜索预算、两级时间范围、固定 query、缺口补搜、验证搜搜策略
 
 tavily:
   enabled: true
-  daily_budget: 80        # 每日总搜索次数上限
-  reserve_budget: 20      # 预留给缺口补搜和验证搜搜的次数
+  daily_budget: 40        # 从 80 削减（CloakBrowser 接管垂直媒体发现）
+  reserve_budget: 10      # 预留给缺口补搜和验证搜搜的次数
 
   # Tavily Key 从环境变量读取，支持多 Key 轮换
   keys_env:
@@ -14,9 +14,27 @@ tavily:
 
   # 搜索参数
   search_depth: "advanced"     # basic | advanced
-  include_raw_content: true
+  include_raw_content: "text"  # "text" 返回纯文本正文（替代旧布尔值 True）
   max_results_per_query: 5
   timeout_seconds: 30
+
+  # 两级时间范围策略
+  time_range:
+    default: "day"            # 首选: 当日结果
+    fallback: "week"          # day 结果不足时降级到周
+    min_day_results: 3        # day 轮结果少于此数才降级
+
+  # 域名过滤
+  exclude_domains:            # 全局排除域名（降低噪音）
+    - zhihu.com
+    - baidu.com
+    - weibo.com
+    - douban.com
+    - taobao.com
+    - jd.com
+    - tmall.com
+    - pinduoduo.com
+  include_domains: []         # 全局包含域名（空=不限）
 
 # ── 固定搜索 query ──
 # 每日必搜的主题分类

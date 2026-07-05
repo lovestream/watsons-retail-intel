@@ -216,3 +216,29 @@
 2026-05-01 00:00:07,510 [INFO]   reject_reasons: {'reject': 46, 'reference': 35, 'main': 47}
 2026-05-01 00:00:07,511 [INFO]   LLM status: available_keys=6, calls=56, failures=0
 2026-05-01 00:00:07,511 [INFO] ============================================================
+2026-05-01 01:39:05,254 [INFO] ============================================================
+2026-05-01 01:39:05,254 [INFO] 开始过滤: date=2026-04-29
+2026-05-01 01:39:05,254 [INFO] use_llm=True, llm_mode=borderline_only
+2026-05-01 01:39:05,254 [INFO] 输入文件: /app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json
+2026-05-01 01:39:05,255 [INFO] ============================================================
+2026-05-01 01:39:05,256 [INFO] 加载原始文章: 48 条
+2026-05-01 01:39:05,544 [INFO] LLM 客户端就绪: 6 个 Key 可用, 模型=LongCat-Flash-Thinking
+2026-05-01 01:39:05,548 [INFO] Phase1 完成: 48 篇规则评分, 需要LLM复核: 10 篇
+2026-05-01 01:39:05,579 [INFO] filter_relevant_articles 使用模型: LongCat-Flash-Lite
+2026-05-01 01:39:05,579 [INFO]   Phase2 LLM 批量: 1-5/10
+2026-05-01 01:39:06,959 [INFO]   Phase2 LLM 批量: 6-10/10
+2026-05-01 01:39:55,863 [INFO] Phase2 完成: 10 成功, 0 失败
+2026-05-01 01:39:55,871 [INFO] ============================================================
+2026-05-01 01:39:55,871 [INFO] 过滤完成汇总:
+2026-05-01 01:39:55,871 [INFO]   raw_count: 48
+2026-05-01 01:39:55,871 [INFO]   cleaned_count: 21
+2026-05-01 01:39:55,871 [INFO]   reference_count: 11
+2026-05-01 01:39:55,871 [INFO]   rejected_count: 16
+2026-05-01 01:39:55,871 [INFO]   llm_reviewed_count: 10
+2026-05-01 01:39:55,872 [INFO]   llm_failed_count: 0
+2026-05-01 01:39:55,872 [INFO]   by_time_status: {'old': 40, 'near_window': 2, 'in_window': 6}
+2026-05-01 01:39:55,872 [INFO]   by_source: {'rsshub_huxiu_search_watsons': 20, 'rsshub_huxiu_search_douyin_hour': 1, 'rsshub_36kr_search_watsons': 20, 'rsshub_36kr_search_meituan_flash': 1, 'rsshub_36kr_search_taobao_flash': 4, 'rsshub_36kr_search_instant_retail': 2}
+2026-05-01 01:39:55,872 [INFO]   top_matched_keywords: {'屈臣氏': 21, '美妆': 6, '流量': 3, '供应链': 2, '闭店': 2, '丝芙兰': 1, '护肤': 1, '个护': 1, '直播': 1, '开业': 1}
+2026-05-01 01:39:55,872 [INFO]   reject_reasons: {'main': 21, 'reference': 11, 'reject': 16}
+2026-05-01 01:39:55,872 [INFO]   LLM status: available_keys=6, calls=10, failures=0
+2026-05-01 01:39:55,873 [INFO] ============================================================

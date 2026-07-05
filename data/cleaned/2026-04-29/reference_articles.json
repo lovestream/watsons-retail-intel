@@ -3,1788 +3,394 @@
     "version": "2.0",
     "date": "2026-04-29",
     "source_file": "/app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json",
-    "created_at": "2026-05-01T00:00:07.471697",
-    "total_raw": 128,
-    "total_reference": 35
+    "created_at": "2026-05-01T01:39:55.864053",
+    "total_raw": 48,
+    "total_reference": 11
   },
   "articles": [
     {
-      "article_id": "a85132e7ff46df5b",
-      "title": "跨境电商强监管时代！最低千分之二税负，你选对路了吗？",
-      "url": "https://m.cifnews.com/article/185588",
-      "content": "2天前 — 这意味着，跨境电商全面进入税务强监管时代，合规已是迫在眉睫。 【面对税务强监管，还在纠结如何破局？5.14日，深圳福田会展中心2号馆——2026税务合规 ...",
-      "summary": "2天前 — 这意味着，跨境电商全面进入税务强监管时代，合规已是迫在眉睫。 【面对税务强监管，还在纠结如何破局？5.14日，深圳福田会展中心2号馆——2026税务合规 ...",
-      "published_at": "Wed, 29 Apr 2026 07:55:10 +0800",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
+      "article_id": "55e9ecbf0e415f2d",
+      "title": "【视频】屈臣氏IPO：一场传统零售的“求生之战”",
+      "url": "https://www.huxiu.com/article/4820641.html",
+      "source_name": "rsshub_huxiu_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Fri, 26 Dec 2025 07:00:00 GMT",
+      "collected_at": "2026-05-01T09:35:55.386055+08:00",
+      "time_status": "old",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202512/25/120906676089.jpg\" /></figure>一边是中国市场营收下滑、模式老化，一边是欧洲贡献超六成收入且增速显著。屈臣氏的IPO，本质是一场以空间换时间的传统零售转型豪赌。",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/article/cover/202512/25/120906676089.jpg\" /></figure>一边是中国市场营收下滑、模式老化，一边是欧洲贡献超六成收入且增速显著。屈臣氏的IPO，本质是一场以空间换时间的传统零售转型豪赌。",
+      "matched_keywords": [
+        "屈臣氏"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4820641"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+5 命中屈臣氏: 屈臣氏",
+          "+1 source_tier=2",
+          "-1 time_status=old(搜索源/allow_old)",
+          "-3 泛领域: IPO"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "time_status=old(搜索源/allow_old) score=2→reference"
+      }
+    },
+    {
+      "article_id": "12a33b96f8c0deda",
+      "title": "马拉松纪录破2小时大关，15年前神预言成真后，人类极限在哪里？",
+      "url": "https://www.huxiu.com/article/4854623.html",
+      "source_name": "rsshub_huxiu_search_douyin_hour",
+      "source_type": "rsshub",
+      "source_tier": 2,
+      "collector": "rsshub",
+      "published_at": "Wed, 29 Apr 2026 00:57:37 GMT",
+      "collected_at": "2026-05-01T09:35:55.789015+08:00",
       "time_status": "near_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
+      "summary": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/29/18996-prod-db-general-1-1777424214549.png\" /></figure>本文来自微信公众号： 一个生物狗的科普小园 ，作者：Y博的科普园2026年伦敦马拉松，来自肯尼亚的Sabastian Sawe跑出了1小时59分30秒的成绩，不仅刷新世界纪录，还正式把马拉松推进了2小",
+      "content": "<figure><img src=\"https://img.huxiucdn.com/ai/ai-general-cover/202604/29/18996-prod-db-general-1-1777424214549.png\" /></figure>本文来自微信公众号： 一个生物狗的科普小园 ，作者：Y博的科普园2026年伦敦马拉松，来自肯尼亚的Sabastian Sawe跑出了1小时59分30秒的成绩，不仅刷新世界纪录，还正式把马拉松推进了2小",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/huxiu/search/抖音小时达?limit=20&sorted=true&filterout_time=86400",
+        "route": "/huxiu/search/抖音小时达?limit=20&sorted=true",
+        "entry_id": "huxiu-article-4854623"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+1 source_tier=2",
+          "+1 time_status=near_window"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule=reject但time=near_window→reference(降级保留)"
+      }
+    },
+    {
+      "article_id": "b89f7166aba8f957",
+      "title": "2026年：传统美妆零售败了？",
+      "url": "https://www.36kr.com/p/3714186707349891",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 09 Mar 2026 05:00:57 GMT",
+      "collected_at": "2026-05-01T09:36:41.502537+08:00",
+      "time_status": "old",
+      "summary": "多重考验下，传统美妆零售商何去何从？",
+      "content": "多重考验下，传统美妆零售商何去何从？",
+      "matched_keywords": [
+        "美妆"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3714186707349891"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆",
+          "-1 time_status=old(搜索源/allow_old)"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "time_status=old(搜索源/allow_old) score=2→reference"
+      }
+    },
+    {
+      "article_id": "d90d38d36e38920d",
+      "title": "一年吸金224亿，被全球女生追着买，这个海外巨头卖疯了",
+      "url": "https://www.36kr.com/p/3708640900264070",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Mar 2026 03:29:56 GMT",
+      "collected_at": "2026-05-01T09:36:41.503005+08:00",
+      "time_status": "old",
+      "summary": "韩国美妆零售之王是怎样炼成的？",
+      "content": "韩国美妆零售之王是怎样炼成的？",
+      "matched_keywords": [
+        "美妆"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3708640900264070"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 美妆",
+          "-1 time_status=old(搜索源/allow_old)"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "time_status=old(搜索源/allow_old) score=2→reference"
+      }
+    },
+    {
+      "article_id": "2996c3f961f88d88",
+      "title": "日本平价彩妆销冠王闭店",
+      "url": "https://www.36kr.com/p/3709236654780801",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Mar 2026 02:49:22 GMT",
+      "collected_at": "2026-05-01T09:36:41.503475+08:00",
+      "time_status": "old",
+      "summary": "靠经典三色眉粉立足大中华区的TA，17年后突然宣布闭店。",
+      "content": "靠经典三色眉粉立足大中华区的TA，17年后突然宣布闭店。",
+      "matched_keywords": [
+        "彩妆",
+        "闭店"
+      ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3709236654780801"
+      },
+      "filter": {
+        "rule_score": 2,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+3 命中美妆个护: 彩妆",
+          "-1 time_status=old(搜索源/allow_old)"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "time_status=old(搜索源/allow_old) score=2→reference"
+      }
+    },
+    {
+      "article_id": "78e43888dacd976e",
+      "title": "4.4亿AI 用户驱动下，GEO行业如何从狂热走向合规重建？",
+      "url": "https://www.36kr.com/p/3786268268475137",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 10:53:09 GMT",
+      "collected_at": "2026-05-01T09:37:02.367081+08:00",
+      "time_status": "in_window",
+      "summary": "正确的GEO应该长什么样？",
+      "content": "正确的GEO应该长什么样？",
       "matched_keywords": [
         "合规"
       ],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3786268268475137"
+      },
       "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
+        "rule_score": 2,
+        "rule_decision": "reject",
         "rule_reasons": [
-          "+2 source_tier=1",
-          "+1 time_status=near_window"
+          "+2 time_status=in_window"
         ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "background",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章聚焦跨境电商税务监管政策，未提及屈臣氏或即时零售×个护美妆相关业务。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
+        "llm_reviewed": false,
+        "llm_result": null,
         "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
+        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       }
     },
     {
-      "article_id": "0292a56a059bc744",
-      "title": "2025年度化妆品审评报告发布——注册备案新原料171个",
-      "url": "https://www.cnpharm.com/c/2026-04-29/1096325.shtml",
-      "content": "2天前 — 《报告》显示，2025年，国家药监局受理特殊化妆品注册申请共20155件，按照产品类型区分，数量排名前三位的为染发类、祛斑美白类、祛斑美白类（仅具物理遮盖）。",
-      "summary": "2天前 — 《报告》显示，2025年，国家药监局受理特殊化妆品注册申请共20155件，按照产品类型区分，数量排名前三位的为染发类、祛斑美白类、祛斑美白类（仅具物理遮盖）。",
-      "published_at": "Wed, 29 Apr 2026 07:55:15 +0800",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "near_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "备案"
-      ],
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "+1 time_status=near_window"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "化妆品"
-          ],
-          "business_variables": [
-            "产品注册",
-            "新原料备案"
-          ],
-          "reason": "报告涉及化妆品行业监管动态和新原料备案，间接影响个护美妆品类供给与合规趋势，但未直接关联屈臣氏即时零售经营。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "59b2976aa3fa3d49",
-      "title": "零售商扎堆入驻TikTok小店，开拓新客群",
-      "url": "https://finance.sina.com.cn/stock/usstock/c/2026-04-29/doc-inhwenax0904909.shtml?cre=tianyi&mod=pchp&loc=28&r=0&rfunc=85&tj=cxvertical_pc_hp&tr=12",
-      "content": "2023 年TikTok 小店正式在美国上线，人气飙升。今年第一季度美国销售额达49 亿美元，同比近乎翻倍。拉夫劳伦、奥拉普莱克斯、优塔美妆等纷纷入驻。",
-      "summary": "2023 年TikTok 小店正式在美国上线，人气飙升。今年第一季度美国销售额达49 亿美元，同比近乎翻倍。拉夫劳伦、奥拉普莱克斯、优塔美妆等纷纷入驻。",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "美妆"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [
-            "TikTok"
-          ],
-          "related_categories": [
-            "美妆"
-          ],
-          "business_variables": [
-            "新兴电商平台增长",
-            "国际美妆品牌入驻趋势"
-          ],
-          "reason": "文章提及TikTok小店在美上线及美妆品牌入驻，反映新兴渠道对美妆零售的影响，间接关联屈臣氏即时零售×个护美妆的经营策略。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "47b2a39d2621782e",
-      "title": "美妆头条",
-      "url": "https://www.mztoutiao.com/",
-      "content": "04月. 已结束. 2026中国化妆品开品大会. 时间：04月23日. 地点：广州花都皇冠假日酒店 · 12月. 已结束. 2025第二届GBC全球美妆大会. 时间：12月26日. 地点：广州白云国际会议 ...",
-      "summary": "04月. 已结束. 2026中国化妆品开品大会. 时间：04月23日. 地点：广州花都皇冠假日酒店 · 12月. 已结束. 2025第二届GBC全球美妆大会. 时间：12月26日. 地点：广州白云国际会议 ...",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "美妆"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆"
-          ],
-          "business_variables": [],
-          "reason": "文章提及美妆行业大会，属于个护美妆领域活动，间接反映行业趋势，但不直接涉及屈臣氏即时零售经营。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "4a62e91dd33d36f6",
-      "title": "赛道景气度探底回升，国货彩妆品牌加速崛起",
-      "url": "https://pdf.dfcfw.com/pdf/H3_AP202305041586267156_1.pdf",
-      "content": "从抖音渠道头部品牌排名. 看，花西子单月销售额可达到接近1 亿元，而彩棠、恋火单月销售额也超过2500w，新锐国. 货品牌表现突出。 建议关注疫后复苏带来的线 ...",
-      "summary": "从抖音渠道头部品牌排名. 看，花西子单月销售额可达到接近1 亿元，而彩棠、恋火单月销售额也超过2500w，新锐国. 货品牌表现突出。 建议关注疫后复苏带来的线 ...",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "彩妆",
-        "国货"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 彩妆",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "彩妆"
-          ],
-          "business_variables": [],
-          "reason": "文章聚焦国货彩妆品牌在抖音渠道的销售表现，属于个护美妆品类趋势分析，虽未直接涉及屈臣氏即时零售业务，但反映了彩妆品类的市场热度与竞争格局，间接影响屈臣氏相关品类经营策略。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "a2f8f625eb03a16e",
-      "title": "创新案例｜新DTC美妆品牌花西子和小奥汀对标研究",
-      "url": "https://runwise.co/dtc/84358/",
-      "content": "他们不再盲目追求国际大牌，国产美妆崛起——完美日记、花西子、小奥汀、坷垃奇……其中，花西子和小奥汀可以说是在后完美日记平价美妆时代新崛起的，两股不一样的势力（严格来讲小 ...",
-      "summary": "他们不再盲目追求国际大牌，国产美妆崛起——完美日记、花西子、小奥汀、坷垃奇……其中，花西子和小奥汀可以说是在后完美日记平价美妆时代新崛起的，两股不一样的势力（严格来讲小 ...",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "美妆"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆"
-          ],
-          "business_variables": [],
-          "reason": "文章聚焦国产美妆品牌花西子和小奥汀的DTC模式研究，属于竞对动态分析，间接影响屈臣氏在即时零售×个护美妆领域的竞争策略。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      }
-    },
-    {
-      "article_id": "0a29139c4f41ddc4",
-      "title": "完美日记新零售模式分析",
-      "url": "https://www.youzan.com/search/topics/314bedbc67400000",
-      "content": "实体零售升级社交电商的开店经营系统，帮助商家管理消费者、商品、门店、进销存，聚集到店、到家、离店三大场景，提供收银软件、分销裂变、会员储值、卡券核销、导购管理、 ...",
-      "summary": "实体零售升级社交电商的开店经营系统，帮助商家管理消费者、商品、门店、进销存，聚集到店、到家、离店三大场景，提供收银软件、分销裂变、会员储值、卡券核销、导购管理、 ...",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
+      "article_id": "1abc9505dd5ee68e",
+      "title": "2026年的零售业：谁在崛起，谁在崩塌",
+      "url": "https://www.36kr.com/p/3785706391165953",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 02:54:56 GMT",
+      "collected_at": "2026-05-01T09:37:02.367520+08:00",
+      "time_status": "in_window",
+      "summary": "喊了十年的零售变革，有了新信号。",
+      "content": "喊了十年的零售变革，有了新信号。",
       "matched_keywords": [],
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 会员",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆零售",
-            "社交电商"
-          ],
-          "business_variables": [
-            "新零售模式",
-            "到店到家离店场景",
-            "会员管理",
-            "导购管理"
-          ],
-          "reason": "文章讨论的是完美日记的新零售模式，虽非屈臣氏直接经营内容，但涉及美妆零售与社交电商趋势，对屈臣氏即时零售战略有间接参考价值。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "c355e679818766a8",
-      "title": "美妆行业加速洗牌，传奇今生的变与不变",
-      "url": "http://www.ce.cn/cysc/newmain/yc/jsxw/202604/t20260429_2938295.shtml",
-      "content": "根据麦肯锡的行业趋势评估，2022年至2024年，全球美妆行业年均增速保持在7%；而自2025年起，未来五年（至2030年）的市场增速预计将放缓至5%左右。高速增长的红利 ...",
-      "summary": "根据麦肯锡的行业趋势评估，2022年至2024年，全球美妆行业年均增速保持在7%；而自2025年起，未来五年（至2030年）的市场增速预计将放缓至5%左右。高速增长的红利 ...",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "美妆"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆"
-          ],
-          "business_variables": [
-            "行业增速",
-            "市场趋势"
-          ],
-          "reason": "文章讨论全球美妆行业整体增速变化，属于间接影响屈臣氏经营的市场环境背景信息。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      }
-    },
-    {
-      "article_id": "b179f04325772713",
-      "title": "张兵武| 穿越窄门：从1亿到100亿，国货美妆从被碾压到逆袭",
-      "url": "https://cj.sina.com.cn/articles/view/5964181722/1637e30da00101feeg?froms=ggmp",
-      "content": "珀莱雅曾经也是线下渠道一面重要的旗帜，近几年成功向线上转型，电商渠道业绩剧增，整体营收跃居本土护肤阵营榜首，2024年成为中国美妆产业首个“解锁”100亿营 ...",
-      "summary": "珀莱雅曾经也是线下渠道一面重要的旗帜，近几年成功向线上转型，电商渠道业绩剧增，整体营收跃居本土护肤阵营榜首，2024年成为中国美妆产业首个“解锁”100亿营 ...",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "美妆",
-        "护肤",
-        "国货"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆, 护肤",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆",
-            "护肤"
-          ],
-          "business_variables": [
-            "国货美妆增长",
-            "线上渠道转型"
-          ],
-          "reason": "文章聚焦珀莱雅从线下到线上的成功转型，反映国货美妆整体趋势，间接影响屈臣氏在即时零售×个护美妆领域的竞争格局。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "0548b51c31f93a7b",
-      "title": "出海2026：当国货美妆开始争夺全球市场“定义权”",
-      "url": "https://www.jiemian.com/article/14038376.html",
-      "content": "一位北美零售观察人士指出，品牌通常需先通过DTC官网及TikTok Shop等社交渠道验证产品匹配度、积累用户反馈与数据，才能具备说服线下渠道买手的“入场券”。 false. 在东南亚 ...",
-      "summary": "一位北美零售观察人士指出，品牌通常需先通过DTC官网及TikTok Shop等社交渠道验证产品匹配度、积累用户反馈与数据，才能具备说服线下渠道买手的“入场券”。 false. 在东南亚 ...",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "美妆",
-        "国货"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆"
-          ],
-          "business_variables": [],
-          "reason": "文章讨论国货美妆出海策略及DTC渠道验证，虽涉及美妆品类，但未直接关联屈臣氏即时零售业务或个护美妆经营。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "2b67e78c75ce5a1a",
-      "title": "国货美妆品牌抢占线下折扣店-腾讯新闻 - QQ",
-      "url": "https://view.inews.qq.com/a/20260422A05D2200",
-      "content": "在这家好特卖门店内，巨子生物旗下可复美品牌也有多款产品上架，如可复美透明质酸钠修护贴（25g*5片）售价46.6元/盒（经销商指导价149元/盒），也打了三折，可复美 ...",
-      "summary": "在这家好特卖门店内，巨子生物旗下可复美品牌也有多款产品上架，如可复美透明质酸钠修护贴（25g*5片）售价46.6元/盒（经销商指导价149元/盒），也打了三折，可复美 ...",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "美妆",
-        "折扣",
-        "上架",
-        "国货"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆",
-            "折扣"
-          ],
-          "business_variables": [
-            "价格促销",
-            "渠道拓展"
-          ],
-          "reason": "文章讨论国货美妆品牌在折扣店的低价上架情况，属于个护美妆品类在即时零售渠道的竞争动态，间接影响屈臣氏经营策略。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "50dc1bbc531b6727",
-      "title": "丝芙兰- 维基百科，自由的百科全书",
-      "url": "https://zh.wikipedia.org/zh-cn/%E4%B8%9D%E8%8A%99%E5%85%B0",
-      "content": "丝芙兰（SEPHORA）于1970年在法国巴黎成立，主营连锁化妆品店铺，1997年并入酩悦·轩尼诗－路易·威登集团（LVMH - Moët Hennessy · Louis Vuitton S.A.）。",
-      "summary": "丝芙兰（SEPHORA）于1970年在法国巴黎成立，主营连锁化妆品店铺，1997年并入酩悦·轩尼诗－路易·威登集团（LVMH - Moët Hennessy · Louis Vuitton S.A.）。",
-      "published_at": "",
-      "source_name": "xcrawl_competitor_moves",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "competitor_signal",
-      "category": "竞对",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "丝芙兰"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中竞对: 丝芙兰",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "个护美妆"
-          ],
-          "business_variables": [],
-          "reason": "丝芙兰作为国际知名个护美妆连锁品牌，其动态属于竞对情报，间接影响屈臣氏在即时零售×个护美妆领域的竞争环境。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      }
-    },
-    {
-      "article_id": "6b7eafdc02f3b0aa",
-      "title": "匹配不确定下AI虚拟展厅对零售商定价策略与利润的影响研究",
-      "url": "https://pdf.hanspub.org/ecl_2318539.pdf",
-      "content": "",
-      "summary": "",
-      "published_at": "",
-      "source_name": "xcrawl_competitor_moves",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "competitor_signal",
-      "category": "竞对",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3785706391165953",
+        "duplicate_sources": [
+          "rsshub_36kr_search_instant_retail"
+        ]
+      },
       "filter": {
         "rule_score": 0,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+2 source_tier=1",
+          "+2 time_status=in_window",
           "-2 内容极短且无关键词"
         ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "研究聚焦AI虚拟展厅对零售商定价与利润的影响，虽涉及零售技术趋势，但未直接关联屈臣氏即时零售或个护美妆业务。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
+        "llm_reviewed": false,
+        "llm_result": null,
         "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
+        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       }
     },
     {
-      "article_id": "068c299697c24530",
-      "title": "互联网电商美团闪电仓：即时零售新业态",
-      "url": "https://pdf.dfcfw.com/pdf/H3_AP202208091577021848_1.pdf",
-      "content": "",
-      "summary": "",
-      "published_at": "",
-      "source_name": "xcrawl_warehouse",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 2,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "即时零售"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 即时零售",
-          "+1 source_tier=2"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章讨论美团闪电仓作为即时零售新业态，虽涉及即时零售但未聚焦屈臣氏或个护美妆，属于竞对动态和行业趋势范畴。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "2a9e84d0e9e19a8b",
-      "title": "巨头即时零售阴影下",
-      "url": "https://h5.ifeng.com/c/vivoArticle/v002R--x--DULzLN46CHYnpUuTJTOSA2mGNggCzkgpkDEantY__?vivoBusiness=hiboardnews",
-      "content": "即时零售的爆发式增长，与2025年2月开始京东、阿里、美团三大平台掀起 ... 在叮咚买菜被美团收购之后，从福州起家的朴朴超市，成为国内前置仓赛道硕果仅存的创业公司。",
-      "summary": "即时零售的爆发式增长，与2025年2月开始京东、阿里、美团三大平台掀起 ... 在叮咚买菜被美团收购之后，从福州起家的朴朴超市，成为国内前置仓赛道硕果仅存的创业公司。",
-      "published_at": "",
-      "source_name": "xcrawl_warehouse",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 2,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
+      "article_id": "701d48d7acb8138e",
+      "title": "QuestMobile2026 中国移动互联网春季大报告：结构性大变局来临，用户跨行业、跨终端迁移，部分行业黏性飙涨，如何适应新常态？",
+      "url": "https://www.36kr.com/p/3785860816395529",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 02:43:27 GMT",
+      "collected_at": "2026-05-01T09:37:02.368020+08:00",
+      "time_status": "in_window",
+      "summary": "全网用户月人均使用时长达192.2小时，同比增长9.3%，增长动能持续增强。",
+      "content": "全网用户月人均使用时长达192.2小时，同比增长9.3%，增长动能持续增强。",
+      "matched_keywords": [],
       "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3785860816395529",
         "duplicate_sources": [
-          "xcrawl_warehouse"
+          "rsshub_36kr_search_instant_retail",
+          "rsshub_36kr_search_beauty"
         ]
       },
-      "matched_keywords": [
-        "即时零售"
-      ],
       "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 即时零售",
-          "+1 source_tier=2"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章聚焦即时零售行业格局变化，提及京东、阿里、美团等巨头及朴朴超市，虽未直接涉及屈臣氏，但即时零售对个护美妆渠道竞争有间接影响。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "0ef47e175727a799",
-      "title": "BossMind - 隨著商務部預計2026年中國即時零售規模 ...",
-      "url": "https://www.facebook.com/photo.php?fbid=974738194902707&set=a.187177836992084&type=3",
-      "content": "隨著商務部預計2026年中國即時零售規模突破1萬億元 ，配送行業尤其是即時配送，已從餐飲外賣的進化為支 撐全社會「萬物到家」的關鍵基礎設施。",
-      "summary": "隨著商務部預計2026年中國即時零售規模突破1萬億元 ，配送行業尤其是即時配送，已從餐飲外賣的進化為支 撐全社會「萬物到家」的關鍵基礎設施。",
-      "published_at": "",
-      "source_name": "xcrawl_warehouse",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 2,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 1,
+        "rule_score": 0,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+1 source_tier=2"
+          "+2 time_status=in_window",
+          "-2 内容极短且无关键词"
         ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "即时零售",
-            "个护美妆"
-          ],
-          "business_variables": [
-            "市场规模",
-            "配送基础设施"
-          ],
-          "reason": "文章提及中国即时零售市场规模及配送行业发展，虽未直接涉及屈臣氏，但个护美妆属于即时零售的重要品类，且行业趋势可能影响其经营策略。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
+        "llm_reviewed": false,
+        "llm_result": null,
         "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
+        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       }
     },
     {
-      "article_id": "1ba1102d9d10ae9d",
-      "title": "即时零售行业趋势分析：2026年市场规模突破1.2万亿",
-      "url": "https://ec-solution.bxtdata.com/insights/6882/%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE%E8%A1%8C%E4%B8%9A%E8%B6%8B%E5%8A%BF%E5%88%86%E6%9E%90%EF%BC%9A2026%E5%B9%B4%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1%E7%AA%81%E7%A0%B41.2%E4%B8%87%E4%BA%BF%EF%BC%8C%E5%89%8D%E7%BD%AE%E4%BB%93%E6%A8%A1%E5%BC%8F%E9%A9%B1%E5%8A%A8%E5%BF%AB%E6%B6%88%E5%93%81%E7%89%8C%E6%96%B0%E5%A2%9E%E9%87%8F",
-      "content": "前置仓模式成为即时零售平台角逐的关键战场。截至2026年初，美团已在全国部署超过3.8万个前置仓节点，京东到家合作前置仓数量突破2.5万个，淘宝小时达依托 ...",
-      "summary": "前置仓模式成为即时零售平台角逐的关键战场。截至2026年初，美团已在全国部署超过3.8万个前置仓节点，京东到家合作前置仓数量突破2.5万个，淘宝小时达依托 ...",
-      "published_at": "",
-      "source_name": "xcrawl_warehouse",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 2,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
+      "article_id": "b984f744f6f2e9ff",
+      "title": "团购“无限战争”：美团、抖音、京东的流量分配权暗战",
+      "url": "https://www.36kr.com/p/3784949011985158",
+      "source_name": "rsshub_36kr_search_taobao_flash",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 27 Apr 2026 12:28:27 GMT",
+      "collected_at": "2026-05-01T09:37:02.368633+08:00",
+      "time_status": "near_window",
+      "summary": "2026年了，这帮互联网老炮儿突然发现，外卖罚单吃到饱，还是骗你下楼吃火锅最赚钱。",
+      "content": "2026年了，这帮互联网老炮儿突然发现，外卖罚单吃到饱，还是骗你下楼吃火锅最赚钱。",
       "matched_keywords": [
-        "即时零售",
-        "京东到家"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 京东到家",
-          "+1 source_tier=2"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章讨论即时零售行业趋势及主要平台的前置仓布局，虽未直接提及屈臣氏，但作为个护美妆零售商，其即时零售业务受整体行业发展和竞对策略影响。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "a1d281933030bb12",
-      "title": "2026年中国即时零售行业市场前景预测研究报告 - AgeClub",
-      "url": "https://www.ageclub.net/article-detail/8779",
-      "source_name": "tavily_instant_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.025852+08:00",
-      "time_status": "unknown_time",
-      "summary": "AgeTravel 银发文旅\n\nAgeTech 银发科技\n\nAgeShow 银发新商机\n\nAgeCare 养老服务\n\nAgeCapital 银创资本\n\nAgeGoods 银发新消费\n\n新老年洞察\n\n视频号矩阵\n\nAgeClub\n\n银财新商业\n\nAI银发科技\n\nAgeShow 银发新商机\n\n网站logo\n\n首页品牌矩阵研究报告产业活动合作对接会员专区\n\n发布商机\n\nicon\n\n搜索\n\n登录\n\nicon\n\nicon\n\n二维码微信扫码分享\n\nicon\n\nicon\n\n# 2026年中国即时零售行业市场前景预测研究报告\n\n中商产业研究院\n\n2026-04-03\n\n报告显示，2026年即时零售市场规模将超1.2万亿元，用户达8.1亿。聚焦政策红利、产业链格局与四大趋势，为零售企业布局提供数据洞察。\n\n本文来源“ 中商产业研究院 ”，AgeClub经授权发布。AgeClub尊重各行各业原创创作，如申请文章转载、或涉及图片正文内容侵权需删除，请联系18162510291（电话微信同号）。\n\n二维码微信扫码分享\n\n用户头像\n\n中商产业研究院\n\n发表文章6篇\n\niconicon\n\n用户头像\n\n中商产业研究",
-      "content": "AgeTravel 银发文旅\n\nAgeTech 银发科技\n\nAgeShow 银发新商机\n\nAgeCare 养老服务\n\nAgeCapital 银创资本\n\nAgeGoods 银发新消费\n\n新老年洞察\n\n视频号矩阵\n\nAgeClub\n\n银财新商业\n\nAI银发科技\n\nAgeShow 银发新商机\n\n网站logo\n\n首页品牌矩阵研究报告产业活动合作对接会员专区\n\n发布商机\n\nicon\n\n搜索\n\n登录\n\nicon\n\nicon\n\n二维码微信扫码分享\n\nicon\n\nicon\n\n# 2026年中国即时零售行业市场前景预测研究报告\n\n中商产业研究院\n\n2026-04-03\n\n报告显示，2026年即时零售市场规模将超1.2万亿元，用户达8.1亿。聚焦政策红利、产业链格局与四大趋势，为零售企业布局提供数据洞察。\n\n本文来源“ 中商产业研究院 ”，AgeClub经授权发布。AgeClub尊重各行各业原创创作，如申请文章转载、或涉及图片正文内容侵权需删除，请联系18162510291（电话微信同号）。\n\n二维码微信扫码分享\n\n用户头像\n\n中商产业研究院\n\n发表文章6篇\n\niconicon\n\n用户头像\n\n中商产业研究院\n\n发表文章6篇\n\n中商产业研究院是中国产业咨询上市机构，研究院专注于围绕构建”产业研究、产业规划、园区规划、产业战略、产业招商“等“五位一体”的产业咨询体系。\n\n最近文章\n\n2026年中国智能眼镜行业市场前景预测研究报告\n\n2026-04-20\n\n2026年中国智能家电行业市场前景预测研究报告\n\n2026-04-08\n\n2026年中国即时零售行业市场前景预测研究报告\n\n2026-04-03\n\n2025年中国智慧养老行业市场前景预测研究报告\n\n2025-12-02\n\n2025年中国数字医疗行业市场前景预测研究报告\n\n2025-10-11\n\n更多文章",
-      "matched_keywords": [
-        "即时零售",
-        "政策"
-      ],
-      "raw": {
-        "query": "即时零售 最新 动态 2026年4月",
-        "tavily_score": 0.7489592,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 即时零售",
-          "+1 命中经营变量: 会员, 活动"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "即时零售"
-          ],
-          "business_variables": [
-            "市场规模",
-            "用户规模",
-            "政策红利"
-          ],
-          "reason": "文章聚焦中国即时零售行业整体市场预测，虽未直接提及屈臣氏或个护美妆，但即时零售是屈臣氏核心业务模式之一，该报告提供的市场规模和趋势数据可间接支持其经营策略制定。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      }
-    },
-    {
-      "article_id": "35d5082c62a0f475",
-      "title": "商务部研究院：2026年我国即时零售规模将破万亿-新华网",
-      "url": "http://www.news.cn/fortune/20251126/007e0fab2ad24c2eb3f8de74e30c09b6/c.html",
-      "source_name": "tavily_instant_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.025938+08:00",
-      "time_status": "unknown_time",
-      "summary": "商务部研究院：2026年我国即时零售规模将破万亿-新华网 \n\n新华网 >  > 正文\n\n2025 11/26 10:39:21\n\n# 商务部研究院：2026年我国即时零售规模将破万亿\n\n字体： 小 中 大\n\n分享到：\n\n# 商务部研究院：2026年我国即时零售规模将破万亿\n\n2025-11-26 10:39:21  来源：经济参考报\n\n11月25日，商务部研究院发布的《即时零售行业发展报告（2025）》（下称《报告》）指出，目前，我国即时零售正处于迈向万亿级规模的关键节点。据课题组测算，2026年我国即时零售规模将突破1万亿元，预计到2030年，将达到2万亿元，“十五五”期间年均增速将达12.6%。构建良好生态，推动高质量发展将是即时零售行业的重要议题。\n\n  《报告》界定，即时零售是通过线上即时下单，线下即时履约，依托本地零售供给，满足本地即时需求的零售业态。其中包括消费者、平台、骑手、商超、物流仓储、中小企业商家等多个利益主体。\n\n  《报告》进一步分析，近年来，我国即时零售规模持续扩张。2024年我国即时零售规模达7810亿元，同比增长20.15%，比同期全国网络零售增速高出12",
-      "content": "商务部研究院：2026年我国即时零售规模将破万亿-新华网 \n\n新华网 >  > 正文\n\n2025 11/26 10:39:21\n\n# 商务部研究院：2026年我国即时零售规模将破万亿\n\n字体： 小 中 大\n\n分享到：\n\n# 商务部研究院：2026年我国即时零售规模将破万亿\n\n2025-11-26 10:39:21  来源：经济参考报\n\n11月25日，商务部研究院发布的《即时零售行业发展报告（2025）》（下称《报告》）指出，目前，我国即时零售正处于迈向万亿级规模的关键节点。据课题组测算，2026年我国即时零售规模将突破1万亿元，预计到2030年，将达到2万亿元，“十五五”期间年均增速将达12.6%。构建良好生态，推动高质量发展将是即时零售行业的重要议题。\n\n  《报告》界定，即时零售是通过线上即时下单，线下即时履约，依托本地零售供给，满足本地即时需求的零售业态。其中包括消费者、平台、骑手、商超、物流仓储、中小企业商家等多个利益主体。\n\n  《报告》进一步分析，近年来，我国即时零售规模持续扩张。2024年我国即时零售规模达7810亿元，同比增长20.15%，比同期全国网络零售增速高出12.95个百分点，比同期社会消费品零售总额增速高出16.65个百分点，即时零售已成为我国零售业增长的新动能。\n\n  商务部研究院电子商务研究所所长杜国臣在发布《报告》时表示，近年来，我国即时零售规模与业态都实现新突破。随着即时零售对本地零售供给体系的持续渗透，居民对即时零售的认可度不断提升，已经从满足应急需求演变为日常生活方式，用户规模扩大，消费场景增多，供给品质提升，进一步释放消费潜力。 [...] 《报告》提出，我国即时零售行业正处于迈向万亿级规模的关键节点。构建良好健康生态成为即时零售高质量发展的重要衡量标准。主流即时零售平台追求品质，正在构建以“安心”为核心的高标准服务体系，引领行业生态健康发展。\n\n  从客户群体来看，《报告》分析认为，年轻群体是即时零售的主要客群。据第三方机构调研，2024年，我国即时零售31岁至45岁消费群体占比达55%，比2023年增加5个百分点。从平台数据来看，青年消费者占主导，美团闪购数据显示，截至2025年3月，平台上90后占比超过三分之二。\n\n  从市场来看，《报告》显示，即时零售平台加快拓展县域市场，成为即时零售增长的重点领域。如美团闪购已覆盖了全国2800个县市，截至2025年9月在下沉市场闪电仓布局超过一万家，下沉市场用户数、订单量及交易额增长率均超过高线城市。未来县域市场仍有较大潜力，一方面，农村网民用户体量大为即时零售在县域快速渗透创造了有利条件；另一方面，农村消费支出提速将扩大即时零售县域市场规模。\n\n  展望即时零售行业未来发展趋势，《报告》指出，即时零售正在从单纯的商品交易向全链路生活服务升级，其发展已不仅仅依赖价格竞争和品类丰富度，而是围绕速度、确定性、场景适配、绿色和供应链协同等多维能力展开。未来，即时零售将呈现全域下沉、多场景覆盖、AI驱动履约、“商品+服务”、绿色低碳和网状融合的发展格局。\n\n  对于进一步推动即时零售高质量发展，杜国臣提出，随着消费者对购物便捷性、时效性和体验感的需求不断提升，行业未来的竞争将不仅限于价格和产品，更在于配送效率、服务质量、数字化能力及供应链管理的综合实力。为推动行业高质量、可持续发展，应在配送体系、服务标准、数字化转型、供应链管理以及绿色可持续发展五个方面协同推进。（记者 王文博）\n\n【纠错】;)  【责任编辑:薛涛】\n\n阅读下一篇：\n\n深度观察\n\n []( [...] 【纠错】;)  【责任编辑:薛涛】\n\n阅读下一篇：\n\n深度观察\n\n [](\n\n  新华全媒头条丨从高交会看中国式现代化的创新注脚\n\n 科学与健康丨再探宇宙奥秘！我国将发射四大科学卫星\n 新华全媒+丨一个“窗口”里的营商服务\n 文化新观察丨不止是打卡！从展览读懂故宫博物院百年新篇\n 追光丨今非昔比的冬奥雪季，来啦！\n 焦点丨“蜂拥而上”的虎头蜂产业，是商机还是骗局？\n 国际观察丨“世界不会再等美国” 两场国际会议折射共同趋势\n\n [](\n [](",
-      "matched_keywords": [
-        "即时零售",
-        "闪购",
-        "美团闪购",
-        "供应链",
-        "仓储",
-        "数字化"
-      ],
-      "raw": {
-        "query": "即时零售 最新 动态 2026年4月",
-        "tavily_score": 0.72629017,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 美团闪购",
-          "+1 命中经营变量: 价格, 履约"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章聚焦即时零售行业整体发展趋势，虽未直接提及屈臣氏，但作为个护美妆零售商，其即时零售业务受行业规模扩张和履约能力升级影响。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "30b40bfe9c6a3087",
-      "title": "美团、京东竞争升级：美团闪购给流量  京东外卖招5万骑手",
-      "url": "https://m.caixin.com/m/2025-04-15/102309652.html",
-      "source_name": "tavily_instant_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.932580+08:00",
-      "time_status": "unknown_time",
-      "summary": "财新传媒\n财新传媒\n手机碎片接口\n1111111\n\n# 美团、京东竞争升级：美团闪购给流量 京东外卖招5万骑手\n\nnews\n\n【财新网】美团与京东在即时零售、外卖业务上较量再升级，美团上线“美团闪购”品牌，京东再招募新秒送骑手。\n\n　　4月15日，美团发布即时零售品牌“美团闪购”。即日起，全国消费者可在美团App首页进入“闪购”，选购蔬菜水果、酒水饮料、休闲食品、数码家电、美妆护肤、潮流玩具等品类，下单后平均30分钟送达。\n\n　　美团闪购业务最早于2018年在美团内部上线，原为非餐饮品类即时零售的内部称呼，这是第一次面向消费者正式推出品牌。据了解，美团闪购合作了全国近3000个县市区旗的零售商、品牌商与本地中小商家；当前，美团非餐饮品类即时零售日单量已突破1800万单。\n\n责任编辑：屈运栩 |\n版面编辑：鲍琦\n\n财新周刊｜美团出海主打补贴式价格战 中东闪电开城\n\n财新周刊｜京东、阿里沽售商超 永辉、大润发能否复制胖东来式神话？\n\n美团外卖未来三年投入1000亿元补贴商家和消费者\n\n京东将采购至少2000亿元出口转内销商品 盒马加急吸引外贸企业入驻\n\n美团启动骑手养老保险补贴试点 预计将",
-      "content": "财新传媒\n财新传媒\n手机碎片接口\n1111111\n\n# 美团、京东竞争升级：美团闪购给流量 京东外卖招5万骑手\n\nnews\n\n【财新网】美团与京东在即时零售、外卖业务上较量再升级，美团上线“美团闪购”品牌，京东再招募新秒送骑手。\n\n　　4月15日，美团发布即时零售品牌“美团闪购”。即日起，全国消费者可在美团App首页进入“闪购”，选购蔬菜水果、酒水饮料、休闲食品、数码家电、美妆护肤、潮流玩具等品类，下单后平均30分钟送达。\n\n　　美团闪购业务最早于2018年在美团内部上线，原为非餐饮品类即时零售的内部称呼，这是第一次面向消费者正式推出品牌。据了解，美团闪购合作了全国近3000个县市区旗的零售商、品牌商与本地中小商家；当前，美团非餐饮品类即时零售日单量已突破1800万单。\n\n责任编辑：屈运栩 |\n版面编辑：鲍琦\n\n财新周刊｜美团出海主打补贴式价格战 中东闪电开城\n\n财新周刊｜京东、阿里沽售商超 永辉、大润发能否复制胖东来式神话？\n\n美团外卖未来三年投入1000亿元补贴商家和消费者\n\n京东将采购至少2000亿元出口转内销商品 盒马加急吸引外贸企业入驻\n\n美团启动骑手养老保险补贴试点 预计将覆盖超百万人\n\n财新网所刊载内容之知识产权为财新传媒及/或相关权利人专属所有或持有。未经许可，禁止进行转载、摘编、复制及建立镜像等任何使用。\n\n如有意愿转载，请发邮件至hello@caixin.com，获得书面确认及授权后，方可转载。\n\n免费订阅财新网主编精选版电邮\n\n香港证监会入驻小红书 网友热评：救救恒科\n\n时间线｜美伊战争已逾两月，极限拉扯暂无结果\n\n招行党委书记更迭 王良卸任、王小青接棒\n\n格力电器2025年营收同比下滑近10% 创五年新低\n\n分析｜美联储新主席沃什的通胀新算法，会带来特朗普想要的降息吗？\n\n财新\n\n财新\n\n财新周刊\n\n财新周刊\n\nCaixin\n\nCaixin [...] 财新\n\n财新\n\n财新周刊\n\n财新周刊\n\nCaixin\n\nCaixin\n\n|\n网页版\n|\n订阅电邮\n\nCopyright 财新网 All Rights Reserved\n\n手机碎片接口\n\n确定;) 取消;)\n\n财新网\n\n只给你最有价值的新闻\n\n订阅财新网主编精选版电邮>>",
-      "matched_keywords": [
-        "即时零售",
-        "闪购",
-        "美团闪购",
-        "美妆",
-        "护肤",
-        "价格战",
-        "补贴",
         "流量"
       ],
       "raw": {
-        "query": "美团闪购 京东秒送 即时零售 新闻",
-        "tavily_score": 0.8405867,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/淘宝闪购?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/淘宝闪购?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3784949011985158",
+        "duplicate_sources": [
+          "rsshub_36kr_search_jd_instant",
+          "rsshub_36kr_search_instant_retail"
+        ]
       },
       "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
+        "rule_score": 2,
+        "rule_decision": "reject",
         "rule_reasons": [
-          "+4 命中即时零售: 美团闪购",
-          "+3 命中美妆个护: 美妆, 护肤",
-          "+1 命中经营变量: 流量, 价格, 补贴",
-          "-3 泛领域: 联储"
+          "+1 命中经营变量: 流量",
+          "+1 time_status=near_window"
         ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "即时零售",
-            "美妆护肤"
-          ],
-          "business_variables": [
-            "平台流量分配",
-            "即时配送效率",
-            "价格补贴策略"
-          ],
-          "reason": "文章提及美团闪购上线并涵盖美妆护肤品类，属于即时零售领域竞争动态，间接影响屈臣氏在平台上的曝光与履约能力。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
+        "llm_reviewed": false,
+        "llm_result": null,
         "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
+        "final_reason": "rule=reject但time=near_window→reference(降级保留)"
       }
     },
     {
-      "article_id": "c8d2c3fc9ab33f30",
-      "title": "即时零售大战升级！阿里京东围攻美团，谁主宰“30分钟送达”时代？_腾讯新闻",
-      "url": "https://news.qq.com/rain/a/20250506A031BM00",
-      "source_name": "tavily_instant_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.932848+08:00",
-      "time_status": "unknown_time",
-      "summary": "据埃森哲《聚焦中国95后消费群体》报告显示，超过50%的95后消费者，希望能当天甚至半天就收到商品，7%的消费者希望在两小时内收到商品。对于应急性的需求，如药品、数据线等等，消费者希望几十分钟内送达。\n\n当年轻用户消费习惯慢慢从货架电商、直播电商、社区团购等形态向即时送达迁移时，京东和淘宝才恍然大悟，美团正以另一种方式在侵蚀自身的电商业务。以3C数码为例，公开资料显示，自2020年iPhone 12上市以来，美团闪购每年都会支持苹果的新品预售。\n\n2021年开始，苹果之外，小米、华为、vivo、OPPO等头部手机厂商都和美团闪购展开合作。公开资料显示，截至2024年，入驻美团闪购的各类华为门店数增加至4500余家；入驻美团闪购的Apple授权专营店已近7000家。\n\n在运力方面，除两轮运力外，美团曾在北上广深等一线城市，针对3C数码、大家电等高客单价订单，优先匹配四轮运力（与第三方物流公司合作）。有数据显示，截至2023年年底，补充四轮运力为美团闪购带来了1.4万的新增用户。\n\n为了防御美团即时零售对数码家电业务的侵蚀，京东于2021年6月入局手机即时零售行业，和3C品牌线下门店合作“",
-      "content": "据埃森哲《聚焦中国95后消费群体》报告显示，超过50%的95后消费者，希望能当天甚至半天就收到商品，7%的消费者希望在两小时内收到商品。对于应急性的需求，如药品、数据线等等，消费者希望几十分钟内送达。\n\n当年轻用户消费习惯慢慢从货架电商、直播电商、社区团购等形态向即时送达迁移时，京东和淘宝才恍然大悟，美团正以另一种方式在侵蚀自身的电商业务。以3C数码为例，公开资料显示，自2020年iPhone 12上市以来，美团闪购每年都会支持苹果的新品预售。\n\n2021年开始，苹果之外，小米、华为、vivo、OPPO等头部手机厂商都和美团闪购展开合作。公开资料显示，截至2024年，入驻美团闪购的各类华为门店数增加至4500余家；入驻美团闪购的Apple授权专营店已近7000家。\n\n在运力方面，除两轮运力外，美团曾在北上广深等一线城市，针对3C数码、大家电等高客单价订单，优先匹配四轮运力（与第三方物流公司合作）。有数据显示，截至2023年年底，补充四轮运力为美团闪购带来了1.4万的新增用户。\n\n为了防御美团即时零售对数码家电业务的侵蚀，京东于2021年6月入局手机即时零售行业，和3C品牌线下门店合作“秒送”手机等新品。淘宝小时达则通过与手机品牌合作，切入3C数码即时零售赛道，以弥补传统电商“次日达”或“多日达”模式在新品首发、节日促销等场景的时效短板。\n\n“换个角度看电商的未来竞争格局，用户的消费可以分为近场电商（即时零售）和传统B2C电商。美团不和京东、淘宝在货架电商领域直接拼刺刀，而是利用自身强大的本地化配送能力，做即时零售场景下的‘时效性’产品生意；京东和淘宝加码即时零售，既是寻找新业绩增长，也是在货架电商领域的防御。”点金手创始人丰年分析。 [...] # 即时零售大战升级！阿里京东围攻美团，谁主宰“30分钟送达”时代？\n\n头像\n\n深网\n\n2025-05-06 10:38发布于北京腾讯新闻《深网》栏目官方账号\n\n图片图源：视觉中国\n\n图片\n\n文丨雅萱\n\n编辑丨叶锦言\n\n出品丨深网·腾讯新闻小满工作室\n\n就在京东和美团就争夺外卖骑手和商家打得如火如荼之时，把本地生活作为重要业务板块的阿里巴巴以其特有的方式高调入局。\n\n4月30日，饿了么正式发声，开启“饿补超百亿”大促，用户通过饿了么App搜索“超百亿”关键词即可领取满减、折扣券等优惠。\n\n就在饿了么官宣的同时，其“兄弟部门”——淘宝天猫宣布旗下即时零售业务“小时达”正式升级为“淘宝闪购”，并在淘宝app首页Tab以“闪购”一级流量入口展示，首日上线 50 个城市，后续5月6日推广至全国。\n\n“对阿里而言，它并没有只派出饿了么出战，而是选择同时在淘宝里加大规模补贴，这也意味着，阿里将即时零售视为其整个电商业务的增长点。”有行业人士透露。\n\n5月2日起，用户可通过淘宝闪购入口领取大额红包购买外卖。就在淘宝闪购提前全量开放的同时，美团外卖和闪购也在微信朋友圈推了一波“新人专享1分起”的广告，点进去直接进入美团闪购的页面。\n\n在阿里和美团加码闪购业务的同时，京东在上个月中旬宣布上线“自营秒送”电商业务，全国已有超过十万家京东品牌线下店接入了秒送，平均送达时间快于30分钟。\n\n有行业人士分析，“通过外卖业务完善‘最后一公里’的配送履约体系仅是开始，三巨头看上的是万亿规模的同城即时零售市场。\n\n京东以高频、刚需的外卖业务为切口构筑即时配送基建，阿里借饿了么和淘宝闪购协同优势发起侧面突袭，美团依托本地生活成熟生态加固护城河，三方博弈都指向同一战略靶心——即时零售市场。至此，即时零售“三国杀”全面升级。\n\n“三国杀”升级 [...] 据《即时零售行业发展报告（2024）》显示，过去3年，消费电子品类在即时零售市场获得了高速增长，预计 2021-2026 年，年均复合增长率达 68.5%，2026 年即时零售消费电子行业规模将超千亿。而据国家统计局数据，2024年1月—11月全国网上零售额14万亿元，增长7.4%。\n\n在传统B2C电商增速放缓的背景下，对于京东和阿里来说，高增长的即时零售市场不仅是未来增长的引擎之一，更是二者重构电商“人货场”关系、抵御美团跨界冲击的防线。\n\n不能输的一战\n\n对于京东和淘宝来说，即时零售是其传统B2C电商业务之外的一个增长点，但对于以本地生活为基本盘的美团来说，即时零售相当于“生命线”，是必须拿下的战役。\n\n美团创始人王兴曾多次在内部分享，美团一直在做零售，过去以团购、外卖、酒旅业务为主，做的是服务零售，现在美团还要做更多的实物零售。2021年9月，美团首次把零售和科技提到战略高度，把公司战略从原来的“Food+Platform”升级为“零售+科技”。\n\n美团核心本地商业CEO王莆中曾在“2021美团闪购数字零售大会”上预测，零售市场将从“万货商店”走入“万物到家”时代，即时零售的市场规模有望在5年后达到万亿。\n\n2025年4月15日，“美团闪购”正式成为独立品牌，并在美团APP首页设立一级入口。据美团官方信息，美团闪购强调“闪购一下，30分钟好货到手”的购物体验。\n\n从美团业务分类看，闪购和外卖、到店、酒旅、民宿及交通票务等都属于美团核心本地商业。\n\n从收入构成看，核心本地商业是美团营收和盈利的大头，新业务（包含小象超市、美团优选、快驴、网约车、单车与电单车、充电宝、餐厅管理系统）依然处于亏损状态。",
+      "article_id": "02fff81c70f1728f",
+      "title": "主播接连出走，但东方甄选更能赚钱了？",
+      "url": "https://www.36kr.com/p/3786338199745284",
+      "source_name": "rsshub_36kr_search_instant_retail",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 11:55:10 GMT",
+      "collected_at": "2026-05-01T09:37:04.496599+08:00",
+      "time_status": "in_window",
+      "summary": "卖货的公司不谈理想主义",
+      "content": "卖货的公司不谈理想主义",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/即时零售?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/即时零售?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3786338199745284",
+        "duplicate_sources": [
+          "rsshub_36kr_search_beauty"
+        ]
+      },
+      "filter": {
+        "rule_score": 0,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "+2 time_status=in_window",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reference",
+        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
+      }
+    },
+    {
+      "article_id": "92e32aafea6b637c",
+      "title": "“鼻祖”接连闭店，北京容不下城市奥莱？",
+      "url": "https://www.36kr.com/p/3785894709566729",
+      "source_name": "rsshub_36kr_search_instant_retail",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 28 Apr 2026 03:08:37 GMT",
+      "collected_at": "2026-05-01T09:37:04.497039+08:00",
+      "time_status": "in_window",
+      "summary": "荟品仓、BIGOFFS、好特卖超级折扣厮杀五环外。",
+      "content": "荟品仓、BIGOFFS、好特卖超级折扣厮杀五环外。",
       "matched_keywords": [
-        "即时零售",
-        "即时配送",
-        "闪购",
-        "美团闪购",
-        "美团优选",
-        "饿了么",
-        "促销",
         "折扣",
-        "满减",
-        "补贴",
-        "流量",
-        "大促",
-        "新品首发",
-        "直播"
+        "闭店"
       ],
       "raw": {
-        "query": "美团闪购 京东秒送 即时零售 新闻",
-        "tavily_score": 0.81097376,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/即时零售?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/即时零售?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3785894709566729",
+        "duplicate_sources": [
+          "rsshub_36kr_search_beauty"
+        ]
       },
       "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
+        "rule_score": 2,
+        "rule_decision": "reject",
         "rule_reasons": [
-          "+4 命中即时零售: 美团闪购",
-          "+1 命中经营变量: 流量, 客单价, 补贴"
+          "+2 time_status=in_window"
         ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "即时零售",
-            "3C数码",
-            "电商竞争"
-          ],
-          "business_variables": [
-            "时效性需求",
-            "平台补贴策略",
-            "本地配送能力"
-          ],
-          "reason": "文章聚焦即时零售市场竞争格局，虽未直接提及屈臣氏或个护美妆，但揭示了消费者对快速送达的需求趋势及头部平台（美团、京东、阿里）在即时零售领域的布局，间接影响屈臣氏等品牌在即时零售×个护美妆赛道的战略选择。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
+        "llm_reviewed": false,
+        "llm_result": null,
         "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      }
-    },
-    {
-      "article_id": "b34e38db875e2a3f",
-      "title": "从“分钟级”到“秒送”，京东要和美团比“快” - 维科号V",
-      "url": "https://mp.ofweek.com/digitaleconomy/a256714593597",
-      "source_name": "tavily_instant_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.932914+08:00",
-      "time_status": "unknown_time",
-      "summary": "APP下载 | 关于维科号 | 用户反馈 | OFweek首页\n\n发表\n\n 文章    微头条    视频    提问\n\n\n\n首页 / 数字经济 / 正文\n\n 发文\n 评论\n 微博\n 空间\n 微信\n\n# 从“分钟级”到“秒送”，京东要和美团比“快”\n\n  数科社  2025-04-23 13:34 发文\n\n做外卖，京东是认真了。\n\n据其不久前公布的数据显示，京东外卖订单量将超过500万单，且均为来自品质堂食餐厅的外卖订单。这距离其3月1日外卖业务正式上线，还不到两个月时间。\n\n最近一段时间，围绕京东和美团的话题不断，“口水战”的舆论风波之下，两家巨头都已摆明要攻入对方的战略腹地，一场“争分夺秒”的配送时效大战正愈演愈烈——京东以“秒送”为矛，美团以“闪购”为盾，双方在即时零售赛道的对决，不仅是关乎订单量的数字游戏，更是一场对用户心智与供应链效率的终极考验。\n\n当电商增长进入存量竞争时代，外卖行业在内的即时零售行业已成为本地生活市场的必争之地，也将这一赛道上演的巨头竞赛推至聚光灯下。而随着消费者对“30分钟送达”的阈值不断降低，这场战役的胜负，或将重新定义零售业的游戏规则。\n\n#01时效",
-      "content": "APP下载 | 关于维科号 | 用户反馈 | OFweek首页\n\n发表\n\n 文章    微头条    视频    提问\n\n\n\n首页 / 数字经济 / 正文\n\n 发文\n 评论\n 微博\n 空间\n 微信\n\n# 从“分钟级”到“秒送”，京东要和美团比“快”\n\n  数科社  2025-04-23 13:34 发文\n\n做外卖，京东是认真了。\n\n据其不久前公布的数据显示，京东外卖订单量将超过500万单，且均为来自品质堂食餐厅的外卖订单。这距离其3月1日外卖业务正式上线，还不到两个月时间。\n\n最近一段时间，围绕京东和美团的话题不断，“口水战”的舆论风波之下，两家巨头都已摆明要攻入对方的战略腹地，一场“争分夺秒”的配送时效大战正愈演愈烈——京东以“秒送”为矛，美团以“闪购”为盾，双方在即时零售赛道的对决，不仅是关乎订单量的数字游戏，更是一场对用户心智与供应链效率的终极考验。\n\n当电商增长进入存量竞争时代，外卖行业在内的即时零售行业已成为本地生活市场的必争之地，也将这一赛道上演的巨头竞赛推至聚光灯下。而随着消费者对“30分钟送达”的阈值不断降低，这场战役的胜负，或将重新定义零售业的游戏规则。\n\n#01时效竞赛：“30分钟送达”分水岭\n\n就在京东公布外卖订单量破500万单的同一天，美团发布即时零售品牌“美团闪购”，将蔬菜水果、酒水饮料、数码家电、母婴用品等品类纳入30分钟配送体系。这是一记赤裸裸的反击，闪购业务于2018年就在美团内部上线，此次美团选择将品牌拆分独立，无不体现出对非餐饮品类业务投下的重注与野心。\n\n依照不久前美团核心本地商业CEO王莆中在社交平台的发文来看，中国消费市场已从“次日达”迈入“分钟级”配送的变革，“30分钟送达”或是接下来即时零售履约体验的一道分水岭。闪购上线同日，京东以“自营秒送”10万家门店覆盖、30分钟履约的宣言，拉开了这场时效竞赛的序幕。 [...] 线上零售环节，更快的送达效率显然能带来更佳的用户购物体验，这也是即时零售市场近年来高速增长的动力所在。埃森哲《聚焦中国95后消费群体》报告揭示了一个关键趋势：63%的95后认为\"即时满足\"比价格更重要，82%愿意为30分钟达支付溢价。\n\n这种消费心理的变迁，倒逼平台不断突破履约极限，最终落在一个“快”字上。\n\n在“快”字的比拼上，京东从来不甘于人后，传统电商时代便以自营店的送达体验独树一帜，在即时零售领域同样是最早的入局者——2015年上线了“京东到家”，次年与达达合并为达达-京东到家，以加强自身在同城配送领域的能力。\n\n去年以来，京东在即时零售领域加大马力，在配送网络、履约能力和商家资源上倾注大量资源，同时将“小时达”升级为“秒送”。今年1月，京东以5.2亿美元私有化达达集团，将达达130万骑手大军收入囊中。\n\n尽管有达达这张运力底牌，京东在外卖业务依然不惜重金构建自身的配送网络。截止3月下旬，京东外卖已招揽超10000名全职骑手，未来三个月又将原本计划招收的5万名全职骑手提升一倍，且全额缴纳五险一金。\n\n京东重金“招兵买马”之下，坐拥众包骑手大军的美团也按耐不住，赶忙宣布正在搭建骑手社保相关的信息系统，预计2025年二季度开始实施，逐步为全职及稳定兼职骑手缴纳社保。\n\n骑手无疑是这场时效竞赛的关键着力点，外卖所在的即时零售领域，可以说“得运力者，得天下”。\n\n美团闪购“30分钟送达”的信心，直接依赖于多年积累形成的外卖生态——7.7亿用户基础和700万骑手运力池，这些都是其“基石业务”的“护城河”。而从此前透露的数据来看，美团以闪购为主的非餐饮品类即时零售订单突破了1800万单，可见已然品尝到履约时效提升后的甜头。\n\n#02模式之争：大仓退散，小仓取胜？\n\n 配送网络不单是由人构成，还有大大小小的仓配站点。 [...] 在电商领域，以京东为代表的大仓模式，采用采购仓配一体化模式，在全国范围内建立多个仓储中心，核心竞争力就是配送速度。但这套传统电商的供应链优势挪用至本地生活战场，优势就不再明显。\n\n因此不难看到，去年下半年开始，京东自营品牌七鲜超市也开始加速推进前置仓战略，逐步在京津地区加快开“仓店”的速度。\n\n值得一提的是，京东推进的“仓店”模式并非单纯模仿盒马的“店仓一体”或美团买菜的纯前置仓模式，而是一种“门店 + 前置仓”混合模型。但目前来看，京东仍采用自营模式的重资产投入，这意味着其短时间内依然要面对成本高企的压力。\n\n#03生态对决：巨头再卷本地生活\n\n正如王莆中所言，京东不是第一家想做外卖的公司，也可能不是最后一家。往远了看，阿里七年前就斥巨资收购了饿了么，往近了看，抖音外卖服务刚被划归至抖音电商旗下的即时零售业务“小时达”中。\n\n 巨头之意不在外卖，而在其背后以即时零售为新标的的本地生活这块大蛋糕。当前电商增长趋缓，进入存量竞争阶段，即时零售作为电商在本地化、即时性需求下的创新模式，自然成为巨头争抢的新增量市场。\n\n根据商务部的《即时零售行业发展报告（2024）》预测，2025年即时零售规模将超过万亿元，2030年将超过2万亿元，未来5年CAGR约为15%。万亿市场容量下，送外卖于平台而言，就从一份“苦差事”变成了一日数次的高频消费入口，而当强大的即时城配体系被构建完成，便不难实现“今天送外卖，明天送手机”的商业逻辑转变了。\n\n如此看来，铁了心要做外卖的京东，看似是在进攻餐饮品类，实则是想守住自身非餐饮品类的订单。\n\n在电商巨头加速为本地生活用户配送生鲜及超市产品的这些年，美团也逐渐将触角伸向3C数码、美妆等电商平台的核心品类。根据美团闪购2024年订单数据，其3C家电订单量接近京东全站四成，电脑办公类商品订单量已超过京东全站。",
-      "matched_keywords": [
-        "即时零售",
-        "闪购",
-        "美团闪购",
-        "饿了么",
-        "京东到家",
-        "美妆",
-        "供应链",
-        "仓储"
-      ],
-      "raw": {
-        "query": "美团闪购 京东秒送 即时零售 新闻",
-        "tavily_score": 0.8025714,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 美团闪购",
-          "+2 命中B2C渠道: 京东自营",
-          "+1 命中经营变量: 价格, 履约",
-          "-3 无关主题: 游戏"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "即时零售",
-            "闪购",
-            "外卖",
-            "供应链"
-          ],
-          "business_variables": [
-            "配送时效",
-            "骑手运力",
-            "平台竞争",
-            "用户消费行为"
-          ],
-          "reason": "文章聚焦京东与美团在即时零售领域的配送时效竞争，虽未直接提及屈臣氏或个护美妆，但涉及即时零售赛道整体格局变化，可能间接影响屈臣氏等品牌在平台上的运营策略。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "19aaf1cb813e0b60",
-      "title": "“二选一”点燃美团京东战火，“借”外卖“争”即时零售",
-      "url": "https://www.yicai.com/news/102580852.html",
-      "source_name": "tavily_instant_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.932980+08:00",
-      "time_status": "unknown_time",
-      "summary": "美团宣布正在搭建骑手社保相关的信息系统，预计2025年二季度开始实施，逐步为全职及稳定兼职骑手缴纳社保。\n\n后续京东进一步加码，在2月24日宣布为了薪酬公平性，未来一段时期签约的外卖全职骑手缴纳五险一金的所有成本，包含个人所需缴纳部分，全部由京东承担，确保骑手现金收入绝不会因为缴纳五险一金而减少，此项举措包含现有骑手和新加入的骑手。到3月20日，京东外卖宣布已与超10000名全职骑手签署正式劳动合同。\n\n除了商家和骑手，京东再次将目光瞄准消费者。4月10日，京东宣布在4月11日上线百亿补贴。\n\n进入4月，双方交锋升级。4月15日，美团发布即时零售品牌“美团闪购”。 同一天，京东表示外卖订单量将超过500万单。同时因秒送业务发展迅速，本季度京东将再招收不低于5万名全职外卖员，足额全部缴纳五险一金且所有费用都由公司承担。与此同时，京东创始人刘强东一段去年的内部讲话曝光，他表示外卖平台抽佣过高，京东做外卖利润率不许高于5%，让外卖行业的利润话题受到关注。\n\n到了4月21日，双方因为骑手接单事件冲突升级。本次京东和美团针对外卖骑手接单问题的争议，实际是为了争夺市场。网经社电子商务研究中心数字生",
-      "content": "美团宣布正在搭建骑手社保相关的信息系统，预计2025年二季度开始实施，逐步为全职及稳定兼职骑手缴纳社保。\n\n后续京东进一步加码，在2月24日宣布为了薪酬公平性，未来一段时期签约的外卖全职骑手缴纳五险一金的所有成本，包含个人所需缴纳部分，全部由京东承担，确保骑手现金收入绝不会因为缴纳五险一金而减少，此项举措包含现有骑手和新加入的骑手。到3月20日，京东外卖宣布已与超10000名全职骑手签署正式劳动合同。\n\n除了商家和骑手，京东再次将目光瞄准消费者。4月10日，京东宣布在4月11日上线百亿补贴。\n\n进入4月，双方交锋升级。4月15日，美团发布即时零售品牌“美团闪购”。 同一天，京东表示外卖订单量将超过500万单。同时因秒送业务发展迅速，本季度京东将再招收不低于5万名全职外卖员，足额全部缴纳五险一金且所有费用都由公司承担。与此同时，京东创始人刘强东一段去年的内部讲话曝光，他表示外卖平台抽佣过高，京东做外卖利润率不许高于5%，让外卖行业的利润话题受到关注。\n\n到了4月21日，双方因为骑手接单事件冲突升级。本次京东和美团针对外卖骑手接单问题的争议，实际是为了争夺市场。网经社电子商务研究中心数字生活分析师陈礼腾对第一财经表示，外卖行业本质上是“骑手-商家-用户”三方网络效应的博弈。对于平台来说，骑手和商家规模决定了其市场竞争力和市场吸引力。因此商家和骑手是外卖平台争夺的核心资源。京东作为新进入者，以差异化定位入局外卖市场，为外卖市场再一次激起竞争“水花”。骑手“多平台接单”会稀释平台运力资源，增加调度成本，还可能降低单平台的履约效率。\n\n对于本次骑手接单之争是否涉及“二选一”，工信部信息通信经济专家委员会委员盘和林认为，如果骑手是全职，不是“二选一”的问题，而是可能涉及竞业禁止。如果是骑手属于个体、兼职或者外包，那么个体劳动者对企业不负有忠诚的责任。\n\n意在即时零售蛋糕 [...] 对美团而言，2024年财报显示，除了餐饮外卖，即时零售正在成为美团重要的发力点。去年美团配送服务收入为980.7亿元，同比增长19.3%，主要是由于交易笔数增加。截至2024年末，美团闪购已和超5600家大型连锁零售商、41万本地小商户以及超570家品牌商达成合作。\n\n在去年三季度财报电话会议上，美团创始人王兴谈及美团闪购的发展，曾表示从长远来看，即时零售或将占据电商市场10%以上的份额，目前美团闪购发展超出了此前的预期。美团在提供配送服务的所有城市县城和小镇都看到了美团闪购有巨大的增长机会，后续会考虑如何进一步提升即时零售的渗透率。\n\n由于在即时零售业务上的竞争，庄帅认为京东与美团必有一战。一方面是因为京东与美团都是以物流优势成长起来的电商平台。另一方面，美团闪购的即时零售业务经过短短几年的快速增长，不仅超过了京东秒送，还在这两年开始通过签约各大知名品牌和拓展平台仓（美团闪电仓）的模型快速渗透到京东的3C数码、家电和超市快消品等优势品类，而且美团自营的小象超市的不断壮大同样对京东的自营模式提出了挑战，京东基本盘遭遇美团入侵。京东进军外卖属于以攻为守的最优解，从而减缓美团即时零售业务的发展，为京东的即时零售业务争取时间并抢夺美团的骑手和商家资源。\n\n这也解释了为什么同样为后来者，京东在做外卖时表现与抖音截然不同。庄帅表示，抖音通过内容就已经拥有很高的用户访问频次和很好的在线时长，并不需要依赖外卖业务来提高这两个指标。抖音做外卖时并没有自建团队拓展商家，也没有招募和组织骑手开展即配，而是选择与第三方合作，很明显有借力打力试水的意味。 [...] 京东两个月来在商家、骑手和消费者侧都投入大量资源，但成功在外卖行业站稳脚跟并非易事。庄帅认为，餐饮行业的“有限供给”使得新外卖平台不得不从成熟外卖平台抢夺餐饮商家。此外，外卖平台的“峰值即配”使得技术投入和运营投入达到数以千亿计，需要长期重资产投入。\n\n竞争方面，目前布局即时零售的平台越来越多。除了山姆、盒马、美团的小象超市外，去年12月沃尔玛中国与美团宣布达成战略合作，全国沃尔玛门店已经全面上线美团，并接入美团配送。\n\n#### 文章作者\n\n陆涵之\n\n## 听骑手反馈增设“接力送”站点，美团首期花一亿元补贴末端100米\n\n截至目前，美团已经在深圳、徐州、鞍山、重庆、杭州等10个城市有需求的场景推出了“接力送”服务。\n\n## 美团公布外卖大战后全年业绩，出海和AI“两手抓”\n\n美团CEO王兴将2025年总结为“机遇和挑战共存的一年”。\n\n## 京东调整七鲜小厨扩展模式，计划今年覆盖所有二线城市\n\n轻资产模式有利于门店更快落地。\n\n## 国家开展外卖市场竞争调查评估，美团、淘宝闪购、京东外卖发文表态\n\n国务院双反委员会办公室宣布启动外卖平台服务行业市场竞争状况调查、评估。\n\n## 美团、京东放大招：给骑手快递员“安家”，背后有这些考量\n\n美团、京东提供住房的举措，是平台在激烈竞争中通过“福利创新”稳定核心人力资产、提升履约能力的战略选择。",
-      "matched_keywords": [
-        "即时零售",
-        "即配",
-        "闪购",
-        "美团闪购",
-        "补贴",
-        "曝光"
-      ],
-      "raw": {
-        "query": "美团闪购 京东秒送 即时零售 新闻",
-        "tavily_score": 0.7738498,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 美团闪购",
-          "+1 命中经营变量: 补贴, 履约"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章主要讨论美团与京东在外卖及即时零售领域的竞争，虽涉及即时零售业务，但未聚焦个护美妆品类或屈臣氏相关经营策略。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "db291faeb85b1dce",
-      "title": "[PDF] 即时零售行业发展报告（2023） - 商务部研究院",
-      "url": "https://www.caitec.org.cn/upfiles/file/2023/8/20230920150038131.pdf",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.137729+08:00",
-      "time_status": "unknown_time",
-      "summary": "（二）坚持包容审慎，维护市场秩序 进一步降低即时零售行业的商家准入门槛。 例如可以在 《食品经 营许可和备案管理办法》 基础上， 拓展到医疗器械、 兽药等多种品类， 调整有关许可事项为报告事项、 简化经营许可程序、 压缩经营许可办 理时限等等。 创新即时零售行业的监管方式。 例如构建包容审慎的即时零售监 管沙盒，探索对宠物药品、果切果捞、生鲜熟食等即时零售新品类商 品实施分级分类管理。 简化新模式新业态的监管要求。 例如简化线上售卖资质， 放宽商 场联营式柜台上线即时零售业务的主体资质要求。 对于前置仓可以采 用备案模式，并对仓店一体、前店后仓、纯前置仓等模式放松消防、 环卫等方面的具体要求。 完善知识产权保护机制和即时零售信用体系， 规范职业打假人行 为。 加大对以侵犯知识产权、 销售假冒伪劣商品和虚假宣传等行为的 打击力度。推动建设即时零售供应商、商家、消费者、配送骑手的信 用体系，维护多元主体的安全和利益。完善打假的监管和评估制度， 48 及时公示打假结果和处罚情况， 鼓励社会各界监督打假行动， 设立举 报渠道，有效引导舆论监督。 （三）鼓励数实融合，加快数智改造 鼓励本地零售企",
-      "content": "（二）坚持包容审慎，维护市场秩序 进一步降低即时零售行业的商家准入门槛。 例如可以在 《食品经 营许可和备案管理办法》 基础上， 拓展到医疗器械、 兽药等多种品类， 调整有关许可事项为报告事项、 简化经营许可程序、 压缩经营许可办 理时限等等。 创新即时零售行业的监管方式。 例如构建包容审慎的即时零售监 管沙盒，探索对宠物药品、果切果捞、生鲜熟食等即时零售新品类商 品实施分级分类管理。 简化新模式新业态的监管要求。 例如简化线上售卖资质， 放宽商 场联营式柜台上线即时零售业务的主体资质要求。 对于前置仓可以采 用备案模式，并对仓店一体、前店后仓、纯前置仓等模式放松消防、 环卫等方面的具体要求。 完善知识产权保护机制和即时零售信用体系， 规范职业打假人行 为。 加大对以侵犯知识产权、 销售假冒伪劣商品和虚假宣传等行为的 打击力度。推动建设即时零售供应商、商家、消费者、配送骑手的信 用体系，维护多元主体的安全和利益。完善打假的监管和评估制度， 48 及时公示打假结果和处罚情况， 鼓励社会各界监督打假行动， 设立举 报渠道，有效引导舆论监督。 （三）鼓励数实融合，加快数智改造 鼓励本地零售企业及其生态企业加快推动零售数字化。 鼓励线下 本地零售企业积极应用物联网、 云计算、 大数据等数字技术实现数字 化转型，提升门店管理、仓库管理、履约配送、营销获客等各环节的 经营质效。 支持市场主体参与打造数字化的即时零售供应链生态， 研 发数字化管理系统和数字化解决方案， 开展在线引流、 线下理货等商 户代运营服务， 向线下本地零售商户提供数字化经营管理的培训， 培 养专业型和管理型等多层次数字化人才。 鼓励即时零售平台企业开放平台资源、 创新商业模式、 赋能零售 数字化。鼓励即时零售平台打造本地商品、老字号专区，开展线上线 下融合的促消费活动。 推动即时零售平台通过直播、 短视频等方式创 [...] 即时零售行业发展报告 （2023） 商务部国际贸易经济合作研究院 2023 年9 月 即时零售行业发展报告 （2023） 核心观点 1. 即时零售是通过线上即时下单，线下即时履约，依托本地零售供 给，满足本地即时需求的零售业态。 2. 即时零售是“零售+科技”的产物，实现交易流程线上化、履约配 送便利化，提升本地供给能力，拓展消费需求。 3. 近年来，即时零售一直保持50%以上的年均增速，2022 年市场规 模达到5042.86 亿元。预计2025 年，即时零售市场规模将达到 2022 年的3 倍。 4. 即时配送支撑即时零售“万物皆可外卖”。预计2026 年，即时配 送规模将达到万亿。 5. 即时零售高成长性来自于三大要素：场景、商品、人群。 6. 即时零售平台打破线下零售数据孤岛，通过数据驱动实现本地流 量分发、零售数字化以及服务运营。 7. 即时零售打造“数实融合”的新场景、新模式，为本地零售带来 新增量，是新供给带动新需求的典型模式。 8. 发展即时零售有助于加快传统零售业数字化转型，推动县域经济 发展，促进消费提质扩容，增加就业渠道，加快数实融合。 9. 即时零售发展呈现六大趋势：全天候消费、全场景渗透、全品类 创新、全地域覆盖、全供应链管理以及全流程数字化。 10.即时零售促进夜间经济繁荣，打造“线上线下融合”新场景，助 力“一刻钟便民生活圈”扩围。 目录 引言.................................................... 1 一、即时零售的本质与概念................................. 3 （一）即时零售填补线上线下融合的真空.................. 3 （二）即时零售是本地零售创新的产物.................... 5 [...] 3 （二）即时零售是本地零售创新的产物.................... 5 （三）即时零售全面赋能本地零售业态.................... 7 二、即时零售平台与即时零售商业模式...................... 10 （一）即时零售平台是即时零售的重要枢纽............... 10 （二）即时零售包括卖场模式与自营模式................. 11 （三）即时配送支撑即时零售“万物皆可外卖” ........... 14 三、即时零售的发展空间广阔.............................. 17 （一）即时零售年均增速保持在50%以上..................17 （二）即时零售成长性来自于三大要素................... 19 （三）即时零售将产生万亿级生态规模................... 22 四、即时零售发展的功能和作用............................ 24 （一）推动零售数字化，助力本地零售高质量发展......... 24 （二）满足消费者需求，促进本地消费提质扩容........... 26 （三）加快新业态下沉，提升县域商业能级............... 28 （四）培育新型零售人才，增加就业渠道................. 29 （五）支持平台赋能，实现数实融合..................... 30 五、即时零售发展的政策环境.............................. 31 （一）中央层面：提出大力发展即时零售................. 31 （二）部委层面：支持发展即时零售模式................. 33",
-      "matched_keywords": [
-        "即时零售",
-        "即时配送",
-        "供应链",
-        "备案",
-        "数字化",
-        "直播",
-        "政策"
-      ],
-      "raw": {
-        "query": "即时零售 监管 合规 2026",
-        "tavily_score": 0.99967754,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 即时零售",
-          "+1 命中经营变量: 履约, 活动"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "high",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "即时零售",
-            "个护美妆"
-          ],
-          "business_variables": [
-            "政策监管",
-            "数字化运营",
-            "供应链效率"
-          ],
-          "reason": "文章聚焦即时零售行业政策与数智化趋势，虽未直接提及屈臣氏，但其内容涉及品类拓展、数字化赋能及监管沙盒等方向，间接影响屈臣氏在即时零售×个护美妆领域的经营策略。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "8445143de00c43b0",
-      "title": "《焦点访谈》 20251204 “新国标”给外卖平台立规矩",
-      "url": "https://tv.cctv.com/2025/12/04/VIDEktHTb1Epdbtp2qLddTwA251204.shtml",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.138151+08:00",
-      "time_status": "unknown_time",
-      "summary": "更多\n\n正在加载...\n\n关闭\n\n播放列表 关闭\n\n正在加载...\n\n播放列表 关闭\n\n正在加载...\n\n主要内容\n\n央视网消息（焦点访谈）：现代人的生活已经越来越离不开外卖，也推动了外卖平台行业的快速发展。但与此同时，平台之间非理性竞争也导致了明显负面效应，出现了补贴大战、商户利益受损、“幽灵外卖”、餐品质量降低等一系列问题，引起全社会的广泛关注。外卖行业究竟应该怎么健康发展？12月4日，由市场监管总局组织起草的《外卖平台服务管理基本要求》正式发布，这个外卖行业“新国标”，将给行业、商户、骑手和消费者带来什么变化呢？\n\n　　今年以来，几家外卖平台企业为争夺即时零售流量入口，反复发起“百亿补贴”“大额神券”等外卖大额补贴活动，加剧了餐饮市场“内卷”。市场监管总局会同有关部门多次对几大外卖平台进行集中约谈，明确要求平台企业严格遵守法律法规，维护市场公平竞争秩序。此次“新国标”出台，目的正是要用国家标准引导行业发展。\n\n　　中国标准化研究院评估所政府治理研究室主任、全国平台经济治理标准化技术委员会委员张欣亮：“平台经济本身属于一个新兴领域，新技术、新模式、新应用不断涌现，同时在快速发展过程",
-      "content": "更多\n\n正在加载...\n\n关闭\n\n播放列表 关闭\n\n正在加载...\n\n播放列表 关闭\n\n正在加载...\n\n主要内容\n\n央视网消息（焦点访谈）：现代人的生活已经越来越离不开外卖，也推动了外卖平台行业的快速发展。但与此同时，平台之间非理性竞争也导致了明显负面效应，出现了补贴大战、商户利益受损、“幽灵外卖”、餐品质量降低等一系列问题，引起全社会的广泛关注。外卖行业究竟应该怎么健康发展？12月4日，由市场监管总局组织起草的《外卖平台服务管理基本要求》正式发布，这个外卖行业“新国标”，将给行业、商户、骑手和消费者带来什么变化呢？\n\n　　今年以来，几家外卖平台企业为争夺即时零售流量入口，反复发起“百亿补贴”“大额神券”等外卖大额补贴活动，加剧了餐饮市场“内卷”。市场监管总局会同有关部门多次对几大外卖平台进行集中约谈，明确要求平台企业严格遵守法律法规，维护市场公平竞争秩序。此次“新国标”出台，目的正是要用国家标准引导行业发展。\n\n　　中国标准化研究院评估所政府治理研究室主任、全国平台经济治理标准化技术委员会委员张欣亮：“平台经济本身属于一个新兴领域，新技术、新模式、新应用不断涌现，同时在快速发展过程中出现了一些问题。我们想通过推荐性国家标准的形式，架起一座行业内沟通交流的桥梁，以及不同利益相关者沟通交流不断形成共识，形成行业自律。”\n\n　　标准对外卖平台的服务管理提出了基本要求，以保障商户、配送员和消费者等主体的合法权益。标准分为六部分核心内容，包含总体要求、商户管理、价格行为、配送员权益保障、消费者权益保护、投诉、申诉及处置。 [...] 正在播放\n\n正在播放\n\n正在播放\n\n《焦点访谈》 20251204 “新国标”给外卖平台立规矩\n\n来源 : 央视网 2025-12-04 20:10 内容简介  关注\n\n 视频简介\n\n  本期节目主要内容： 2025年12月4日，由市场监管总局组织起草的《外卖平台服务管理基本要求》正式发布。本期节目围绕该“基本要求”的主要内容，采访业内人士，从规范促销补贴，保障商户、配送员和消费者合法权益等方面，反映“基本要求”对构建外卖行业良好健康生态的重要作用。（《焦点访谈》 20251204 “新国标”给外卖平台立规矩）\n 栏目信息\n\n  栏目名称：\n\n  栏目介绍：\n\n《焦点访谈》 20251204 “新国标”给外卖平台立规矩\n\n简介\n\n来源：央视网 更新时间：2025年12月04日 20:10\n\n 视频简介\n\n  本期节目主要内容： 2025年12月4日，由市场监管总局组织起草的《外卖平台服务管理基本要求》正式发布。本期节目围绕该“基本要求”的主要内容，采访业内人士，从规范促销补贴，保障商户、配送员和消费者合法权益等方面，反映“基本要求”对构建外卖行业良好健康生态的重要作用。（《焦点访谈》 20251204 “新国标”给外卖平台立规矩）\n 栏目信息\n\n播放列表 更多 >\n\n往期查询>\n\n精彩看点 更多 >\n\n往期节目 更多 >\n\n播放列表 关闭\n\n 5月\n 4月\n 3月\n 2月\n\n更多\n\n正在加载...\n\n关闭\n\n播放列表 关闭\n\n正在加载...\n\n播放列表 关闭\n\n正在加载...\n\n主要内容 [...] 刘鹏：“平台经济商业模式是高度依赖算法，这一次条款在具体规定里面把一些安全的因素纳入进去。消费者包括骑手也可以以一定的方式参与到算法过程中。这是一个非常重要的影响，也就是说把原来所理解的算法‘霸权’慢慢打破。”\n\n　　一方面标准引导平台把配送速度降下来，另一方面标准也优化了配送管理制度，提出原则上不应将扣款作为配送超时、消费者差评等情况下的处罚方式，应采用替代性管理方式。\n\n　　让平台管理更有温度，标准还聚焦配送员社会保障、劳动报酬、工作时间、职业发展和关怀等方面，要求平台规范用工关系，保障配送员合理收入与劳动时间，让外卖小哥们在安全的前提下自主决定跑单安排。\n\n　　今年9月标准征求意见稿正式公开后，平台内商家、骑手以及行业协会等，通过多种渠道反映相关意见建议。依照建议，消费者权益保护被单独列为一个章节集中呈现。\n\n　　全面、系统厘定外卖平台对商户、消费者、配送员应尽的义务和责任是这次标准制定的一大目标。在制定过程中，几大外卖平台一直参与其中，这也有利于促进行业沟通交流、不断形成广泛共识。\n\n　　“唯快不破”曾经是外卖行业的单一导向，只有将速度慢下来、品质提上去，才能助推外卖经济从粗放式增长迈向精细化、规范化发展的新阶段，实现多方共赢。\n\n　　推动外卖行业健康发展，政府监管和社会监督必不可少。《外卖平台服务管理基本要求》的制定将督促、引导外卖平台从高额补贴、野蛮生长的非理性竞争转为以提升服务、促进创新为特征的高质量竞争，从而实现平台、商户、骑手和消费者等多方利益的平衡与共赢。共同打造一个健康的市场生态，这个和民生息息相关的行业，才能真正走向可持续发展之路。\n\n编辑：甄涛 责任编辑：刘亮\n\n栏目大全B 收藏\n\n 5月\n 4月\n 3月\n 2月\n\n更多\n\n\n\n正在播放穿越春秋品管仲 8 齐国霸业的艰难开局\n\n精彩看点\n\n 播放列表\n 精彩看点",
-      "matched_keywords": [
-        "即时零售",
-        "促销",
-        "补贴",
-        "流量",
-        "征求意见稿"
-      ],
-      "raw": {
-        "query": "即时零售 监管 合规 2026",
-        "tavily_score": 0.9353465,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 即时零售",
-          "+1 命中经营变量: 流量, 价格, 补贴"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章讨论外卖平台新规及即时零售补贴政策，虽涉及‘即时零售’关键词，但聚焦于餐饮外卖而非个护美妆品类，对屈臣氏经营有间接影响（如平台流量分配、促销成本），但不直接相关。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "3e0bc2c31086f19a",
-      "title": "国家药监局关于深化化妆品监管改革促进产业高质量发展的意见 国药监妆〔2025〕18号-新华网",
-      "url": "http://www.news.cn/fashion/20251118/390e3add17004207832bc500f6072782/c.html",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.936825+08:00",
-      "time_status": "unknown_time",
-      "summary": "三、提升化妆品注册备案管理效能\n\n　　（七）支持化妆品原料技术创新。完善新原料分类管理及技术评价体系，探索建立符合国情且与国际接轨的原料命名规则，聚焦行业使用广、安全风险高及中国特色植物资源原料制定标准。构建研发审评协同机制，对符合条件的新原料设立前置咨询通道，提供早期介入、过程指导、动态优化的全流程服务。\n\n　　（八）优化化妆品注册备案资料。在保障化妆品质量安全和满足监管需求的前提下，允许仅着色剂、香精等成分的种类或者含量上存在差异的配方体系近似的同一品牌产品，注册备案时共用产品安全性技术资料。对因生产场地变化需重新注册备案的化妆品，除微生物和理化检验报告外，允许使用原注册备案技术资料。强化化妆品注册人备案人质量安全主体责任，将化妆品原料安全相关信息调整为企业自行存档备查。\n\n　　（九）提高技术审评质效。探索建立“国家局—省局”联合审评协同机制，委托具备能力的省级药品监管部门承担特殊化妆品部分技术审评工作。对特殊化妆品变更事项分类管理，将高风险、低风险变更事项审评时限从90个工作日分别缩短至60个工作日、45个工作日，不涉及安全性、功效宣称的变更事项允许注册人自行维护产品注册信息。\n",
-      "content": "三、提升化妆品注册备案管理效能\n\n　　（七）支持化妆品原料技术创新。完善新原料分类管理及技术评价体系，探索建立符合国情且与国际接轨的原料命名规则，聚焦行业使用广、安全风险高及中国特色植物资源原料制定标准。构建研发审评协同机制，对符合条件的新原料设立前置咨询通道，提供早期介入、过程指导、动态优化的全流程服务。\n\n　　（八）优化化妆品注册备案资料。在保障化妆品质量安全和满足监管需求的前提下，允许仅着色剂、香精等成分的种类或者含量上存在差异的配方体系近似的同一品牌产品，注册备案时共用产品安全性技术资料。对因生产场地变化需重新注册备案的化妆品，除微生物和理化检验报告外，允许使用原注册备案技术资料。强化化妆品注册人备案人质量安全主体责任，将化妆品原料安全相关信息调整为企业自行存档备查。\n\n　　（九）提高技术审评质效。探索建立“国家局—省局”联合审评协同机制，委托具备能力的省级药品监管部门承担特殊化妆品部分技术审评工作。对特殊化妆品变更事项分类管理，将高风险、低风险变更事项审评时限从90个工作日分别缩短至60个工作日、45个工作日，不涉及安全性、功效宣称的变更事项允许注册人自行维护产品注册信息。\n\n　　（十）优化安全评估制度。加强化妆品安全评估技术研究与创新，推广应用先进评估技术和策略，持续完善化妆品安全评估技术指南，提升评估工作的科学性、精准性和应用性。引导督促化妆品企业强化安全评估理念，落实产品全生命周期管理责任，不断提高产品质量安全保障能力。 [...] （十一）优化功效宣称管理。除祛斑美白、防晒、防脱发功效外，允许化妆品注册人备案人自主选择功效宣称评价试验方法进行功效宣称评价。允许仅着色剂、香精、防腐剂等成分的种类或者含量上存在差异的配方体系近似的同一品牌产品，共享功效宣称评价试验数据。支持化妆品行业协会等社会组织加强行业自律，聚焦行业普遍关注的重点功效类别，研究化妆品功效宣称指引，引导规范标签宣称用语。\n\n　　四、完善化妆品生产经营监管机制\n\n　　（十二）推动企业分级分类监管。鼓励地方各级药品监管部门按照风险管理的原则，建立健全化妆品生产经营主体的分级分类管理机制。依据企业的质量管理体系、风险防控能力等关键要素，科学评估风险等级，合理配置监管资源，有效提升监管效能。\n\n　　（十三）优化生产质量管理。深入开展化妆品企业生产质量管理体系提升行动，探索优化生产管理制度，全面提升企业生产质量管理体系运行效能与产品质量安全保障能力。鼓励省级药品监管部门探索与生产场地执行同一生产质量管理体系外设仓库的产品放行管理要求和适应化妆品智能化生产的质量管理要求，推动建立化妆品研发与生产、检测与分析、安全与功效评价等质量安全专业人才的职称评定体系。\n\n　　（十四）强化网络经营监管。健全“以网管网”监管机制，持续优化国家化妆品网络经营监测平台功能，提高风险识别能力和网络监测效能。压实电商平台对平台内经营者管理责任，持续强化监管协作和风险共治机制，推动行政监管和平台治理协同发力，排查化解化妆品安全风险隐患。对未经注册备案、非法添加禁用物质、经营者自行配制等典型违法行为加强重点监测，提升网络经营化妆品的质量安全水平。 [...] 到2030年，化妆品监管法律制度更加完善，标准体系更加健全，技术支撑更加有力，产业创新活力更加充沛，风险防控能力全面加强，质量安全水平显著提升。到2035年，化妆品质量安全监管体系达到国际先进水平，监管体系、监管机制、监管方式更好适应产业创新与高质量发展的内在要求，产业具有更强的创新创造力和全球竞争力，基本实现监管现代化。\n\n　　二、加大化妆品产业创新支持力度\n\n　　（一）畅通新功效化妆品注册渠道。适应社会消费新需求和行业发展新趋势，支持新功效化妆品注册申报，对申报新功效化妆品即报即审。研究建立新功效化妆品注册申报前置咨询机制，适时调整化妆品分类规则与分类目录。\n\n　　（二）鼓励化妆品新品在中国首发。对标国际高标准经贸规则，培育我国化妆品领域首发经济，对国际化妆品新品在中国首发上市的，参照专为向我国出口生产的相关规定，免于提交在生产国（地区）已上市销售的证明文件。\n\n　　（三）促进化妆品银发经济发展。鼓励企业加强“银发族”化妆品的技术研发，开展皮肤衰老机理等前沿基础研究。支持适合老年群体特点和需求的化妆品开发应用和注册备案，满足老年群体多样化消费需求。\n\n　　（四）创新化妆品标签管理。适应化妆品产业智能化、绿色化发展需求，加快实施化妆品电子标签，制定化妆品电子标签的标注及数据管理要求，实现标签管理的数字化升级、精细化治理和便利化服务。\n\n　　（五）创新个性化服务方式。适应公众个性化、精准化消费需求，坚持需求导向、安全可控、规范有序原则，探索化妆品个性化服务路径，允许化妆品备案人根据消费者需求，在经营场所提供已备案普通化妆品的现场简易调配、分装等服务。\n\n　　（六）加大产业扶持力度。鼓励省级药品监管部门积极争取政府支持，协调相关部门出台化妆品产业扶持政策，营造良好的产业创新环境，支持行业绿色低碳发展，通过政策赋能推动品牌崛起，培育具有国际竞争力的民族品牌化妆品。",
-      "matched_keywords": [
-        "防晒",
-        "备案",
-        "标签",
-        "成分",
-        "数字化",
-        "政策"
-      ],
-      "raw": {
-        "query": "化妆品 备案 监管 新规",
-        "tavily_score": 0.9995345,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 防晒"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "化妆品监管政策"
-          ],
-          "business_variables": [
-            "政策合规性",
-            "产品注册效率"
-          ],
-          "reason": "该文章涉及国家药监局深化化妆品监管改革的政策，虽不直接讨论屈臣氏即时零售或个护美妆经营，但影响整个行业的产品备案、功效宣称及安全监管框架，间接影响屈臣氏等企业的合规运营与新品上市节奏。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      }
-    },
-    {
-      "article_id": "f5954e334aa943dd",
-      "title": "金杜医药观察 | 化妆品监管法规热点解读 - 金杜律师事务所",
-      "url": "https://www.kingandwood.com/cn/zh/insights/latest-thinking/laws-and-regulations-regarding-cosmetics-in-prc.html",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.936968+08:00",
-      "time_status": "unknown_time",
-      "summary": "进一步地，根据《化妆品注册备案资料管理规定》第35条的规定，对于包含两个或两个以上必须配合使用或者包装容器不可拆分的独立配方的化妆品，应当分别填写配方，按一个产品申请注册或者办理备案；而对于以一个产品名称申请注册或进行备案的配合使用产品或组合包装产品，其中任何一剂在境外生产的或任何一剂的最后一道接触内容物的工序在境外完成的，均按照进口产品管理。\n\n### 2. 进口化妆品的注册/备案\n\n如拟进口特殊化妆品，需要先在国家药监局注册；如拟进口普通化妆品，需要先在国家药监局备案，但国家药监局也可以委托具备能力的省级药监局在委托范围内以国家药监局的名义实施进口普通化妆品的备案管理工作。\n\n根据《化妆品注册备案资料管理规定》的相关规定，无论是特殊进口化妆品还是普通进口化妆品，在申请注册或进行备案时，均应提交由注册人/备案人所在国（地区）或者生产国（地区）政府主管部门或行业协会等机构出具的已上市销售证明文件，但境内注册人/备案人委托境外企业生产的和产品配方专为中国市场设计的除外。对于组合包装产品，如果同时存在进口部分和国产部分的，仅提交进口部分的已上市销售证明文件。\n\n已上市销售证明文件应至少载明",
-      "content": "进一步地，根据《化妆品注册备案资料管理规定》第35条的规定，对于包含两个或两个以上必须配合使用或者包装容器不可拆分的独立配方的化妆品，应当分别填写配方，按一个产品申请注册或者办理备案；而对于以一个产品名称申请注册或进行备案的配合使用产品或组合包装产品，其中任何一剂在境外生产的或任何一剂的最后一道接触内容物的工序在境外完成的，均按照进口产品管理。\n\n### 2. 进口化妆品的注册/备案\n\n如拟进口特殊化妆品，需要先在国家药监局注册；如拟进口普通化妆品，需要先在国家药监局备案，但国家药监局也可以委托具备能力的省级药监局在委托范围内以国家药监局的名义实施进口普通化妆品的备案管理工作。\n\n根据《化妆品注册备案资料管理规定》的相关规定，无论是特殊进口化妆品还是普通进口化妆品，在申请注册或进行备案时，均应提交由注册人/备案人所在国（地区）或者生产国（地区）政府主管部门或行业协会等机构出具的已上市销售证明文件，但境内注册人/备案人委托境外企业生产的和产品配方专为中国市场设计的除外。对于组合包装产品，如果同时存在进口部分和国产部分的，仅提交进口部分的已上市销售证明文件。\n\n已上市销售证明文件应至少载明下述信息并由机构签章确认：（1）注册人、备案人或生产企业的名称；（2）产品名称；（3）出具文件的机构名称；以及（4）文件出具日期。\n\n### 3. 进口化妆品的境内责任人\n\n如果进口化妆品的注册人和备案人在境外，则需要指定我国境内的企业法人作为境内责任人。进口化妆品的境外注册/备案人应当向境内责任人出具授权书（同一产品不得授权多个境内责任人），境内责任人授权书应当至少明确体现以下内容：注册人/备案人和境内责任人名称，授权和被授权关系，授权范围，授权期限。 [...] 此外，已取得注册、完成备案的化妆品新原料还需进行为期3年的安全监测，自首次使用该化妆品新原料的化妆品取得注册或者完成备案之日起算。在安全监测期内，对于使用化妆品新原料生产化妆品的产品注册/备案人和新原料注册/备案人，均对化妆品新原料的使用和安全情况负有法定监测和报告义务，例如关联确认、年度报告等。3年监测期满未发生安全问题的化妆品新原料纳入已使用化妆品原料目录。\n\n对于“已使用的化妆品原料”，国家药监局在《已使用化妆品原料目录名称（2015版）》基础上进行了修订并于2021年4月27日发布了《已使用化妆品原料目录（2021年版）》，需要注意的是，其中不仅包括化妆品准用组分，还包括纳入化妆品禁用组分或拟调整为化妆品禁用组分的已使用原料。\n\n## 问题三：注册备案环节有何特殊资料要求？\n\n《化妆品监督管理条例》明确列举了化妆品、化妆品原料注册/备案应当提交的各项资料，其中，申请注册/备案时应当提交的产品检验报告和安全评估资料两项内容值得重点关注。\n\n### 1. 产品检验报告\n\n化妆品的产品检验报告是特殊化妆品注册以及普通化妆品备案时必须提交的资料之一，亦是化妆品注册与备案的重要评审依据。化妆品注册申请人、备案人应当委托取得资质认定、满足化妆品注册和备案检验工作需要的检验机构，按照强制性国家标准、技术规范和注册备案检验规定的要求进行检验。\n\n化妆品产品检验报告分为微生物检验报告（检验项目包括霉菌、金黄色葡萄球菌等）、理化检验报告（检验项目包括汞、铅、砷等）、毒理学试验报告（检验项目包括急性眼刺激性试验、皮肤光毒性试验等）、人体安全性检验报告（检验项目包括人体皮肤斑贴试验等）、人体功效评价检验报告（检验项目包括防晒指数测定、防水性能测定等）等部分，每部分检验报告应当有检验结果，且装订时按上述顺序排列。 [...] 问题五：质量安全主体责任新规有何亮点？\n\n问题六：如何合规地宣称化妆品功效？\n\n## 问题一：化妆品如何分类管理？\n\n化妆品的法律定义是指以涂擦、喷洒或者其他类似方法，施用于皮肤、毛发、指甲、口唇等人体表面，以清洁、保护、美化、修饰为目的的日用化学工业产品。根据《化妆品监督管理条例》的相关规定，我国对化妆品、化妆品原料实施分类注册/备案管理。\n\n从监管角度看，化妆品区分为“特殊化妆品”和“普通化妆品”。\n\n“特殊化妆品”是指用于染发、烫发、祛斑美白、防晒、防脱发的化妆品以及宣称新功效的化妆品。我国对特殊化妆品实行注册管理，特殊化妆品经国家药监局注册后方可生产、进口，并对符合要求的特殊化妆品核发《特殊化妆品注册证》。\n\n“普通化妆品”是指特殊化妆品以外的化妆品。我国对普通化妆品实行备案管理，申请备案的主管机关区分国产和进口两种情形而有所不同：（1）国产普通化妆品应当在上市销售前向备案人所在地省级药监部门备案；（2）进口普通化妆品应当在进口前向国家药监局备案，但国家药监局可以委托具备能力的省级药监部门实施进口普通化妆品备案管理工作。\n\n## 问题二：化妆品原料如何分类管理？\n\n从监管角度看，化妆品原料区分为“化妆品新原料”和“已使用的化妆品原料”。\n\n“化妆品新原料”是指在我国境内首次使用于化妆品的天然或者人工原料。对于化妆品新原料，我国进一步按照风险程度进行分类管理，对风险程度较高的化妆品新原料（即具有防腐、防晒、着色、染发、祛斑美白功能）实行注册管理，对其他化妆品新原料实行备案管理。此外，如果调整已使用化妆品原料的使用目的、安全使用量等的，也应当按照化妆品新原料的注册、备案要求申请注册、进行备案。",
-      "matched_keywords": [
-        "防晒",
-        "合规",
-        "备案",
-        "新规"
-      ],
-      "raw": {
-        "query": "化妆品 备案 监管 新规",
-        "tavily_score": 0.99944717,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 防晒"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "个护美妆"
-          ],
-          "business_variables": [
-            "合规",
-            "备案",
-            "新规"
-          ],
-          "reason": "文章聚焦化妆品监管法规及进口备案要求，虽未直接涉及屈臣氏即时零售运营，但作为个护美妆行业合规背景信息，间接影响其商品准入与供应链管理。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      }
-    },
-    {
-      "article_id": "0d1cfba586d4b487",
-      "title": "中华人民共和国司法部",
-      "url": "https://www.moj.gov.cn/pub/sfbgw/flfggz/flfggzxzfg/202101/t20210101_350678.html",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.937239+08:00",
-      "time_status": "unknown_time",
-      "summary": "(四)新原料安全评估资料。\n\n　　注册申请人、备案人应当对所提交资料的真实性、科学性负责。\n\n第十三条　国务院药品监督管理部门应当自受理化妆品新原料注册申请之日起3个工作日内将申请资料转交技术审评机构。技术审评机构应当自收到申请资料之日起90个工作日内完成技术审评，向国务院药品监督管理部门提交审评意见。国务院药品监督管理部门应当自收到审评意见之日起20个工作日内作出决定。对符合要求的，准予注册并发给化妆品新原料注册证;对不符合要求的，不予注册并书面说明理由。\n\n　　化妆品新原料备案人通过国务院药品监督管理部门在线政务服务平台提交本条例规定的备案资料后即完成备案。\n\n　　国务院药品监督管理部门应当自化妆品新原料准予注册之日起、备案人提交备案资料之日起5个工作日内向社会公布注册、备案有关信息。\n\n第十四条经注册、备案的化妆品新原料投入使用后3年内，新原料注册人、备案人应当每年向国务院药品监督管理部门报告新原料的使用和安全情况。对存在安全问题的化妆品新原料，由国务院药品监督管理部门撤销注册或者取消备案。3年期满未发生安全问题的化妆品新原料，纳入国务院药品监督管理部门制定的已使用的化妆品原料目",
-      "content": "(四)新原料安全评估资料。\n\n　　注册申请人、备案人应当对所提交资料的真实性、科学性负责。\n\n第十三条　国务院药品监督管理部门应当自受理化妆品新原料注册申请之日起3个工作日内将申请资料转交技术审评机构。技术审评机构应当自收到申请资料之日起90个工作日内完成技术审评，向国务院药品监督管理部门提交审评意见。国务院药品监督管理部门应当自收到审评意见之日起20个工作日内作出决定。对符合要求的，准予注册并发给化妆品新原料注册证;对不符合要求的，不予注册并书面说明理由。\n\n　　化妆品新原料备案人通过国务院药品监督管理部门在线政务服务平台提交本条例规定的备案资料后即完成备案。\n\n　　国务院药品监督管理部门应当自化妆品新原料准予注册之日起、备案人提交备案资料之日起5个工作日内向社会公布注册、备案有关信息。\n\n第十四条经注册、备案的化妆品新原料投入使用后3年内，新原料注册人、备案人应当每年向国务院药品监督管理部门报告新原料的使用和安全情况。对存在安全问题的化妆品新原料，由国务院药品监督管理部门撤销注册或者取消备案。3年期满未发生安全问题的化妆品新原料，纳入国务院药品监督管理部门制定的已使用的化妆品原料目录。\n\n　　经注册、备案的化妆品新原料纳入已使用的化妆品原料目录前，仍然按照化妆品新原料进行管理。\n\n第十五条　禁止用于化妆品生产的原料目录由国务院药品监督管理部门制定、公布。\n\n第十六条　用于染发、烫发、祛斑美白、防晒、防脱发的化妆品以及宣称新功效的化妆品为特殊化妆品。特殊化妆品以外的化妆品为普通化妆品。\n\n　　国务院药品监督管理部门根据化妆品的功效宣称、作用部位、产品剂型、使用人群等因素，制定、公布化妆品分类规则和分类目录。 [...] 普通化妆品备案人通过国务院药品监督管理部门在线政务服务平台提交本条例规定的备案资料后即完成备案。\n\n　　省级以上人民政府药品监督管理部门应当自特殊化妆品准予注册之日起、普通化妆品备案人提交备案资料之日起5个工作日内向社会公布注册、备案有关信息。\n\n第二十一条　化妆品新原料和化妆品注册、备案前，注册申请人、备案人应当自行或者委托专业机构开展安全评估。\n\n　　从事安全评估的人员应当具备化妆品质量安全相关专业知识，并具有5年以上相关专业从业经历。\n\n第二十二条化妆品的功效宣称应当有充分的科学依据。化妆品注册人、备案人应当在国务院药品监督管理部门规定的专门网站公布功效宣称所依据的文献资料、研究数据或者产品功效评价资料的摘要，接受社会监督。\n\n第二十三条境外化妆品注册人、备案人应当指定我国境内的企业法人办理化妆品注册、备案，协助开展化妆品不良反应监测、实施产品召回。\n\n第二十四条　特殊化妆品注册证有效期为5年。有效期届满需要延续注册的，应当在有效期届满30个工作日前提出延续注册的申请。除有本条第二款规定情形外，国务院药品监督管理部门应当在特殊化妆品注册证有效期届满前作出准予延续的决定;逾期未作决定的，视为准予延续。\n\n　　有下列情形之一的，不予延续注册：\n\n　　(一)注册人未在规定期限内提出延续注册申请;\n\n　　(二)强制性国家标准、技术规范已经修订，申请延续注册的化妆品不能达到修订后标准、技术规范的要求。\n\n第二十五条国务院药品监督管理部门负责化妆品强制性国家标准的项目提出、组织起草、征求意见和技术审查。国务院标准化行政部门负责化妆品强制性国家标准的立项、编号和对外通报。\n\n　　化妆品国家标准文本应当免费向社会公开。\n\n　　化妆品应当符合强制性国家标准。鼓励企业制定严于强制性国家标准的企业标准。\n\n第三章　生产经营\n\n第二十六条　从事化妆品生产活动，应当具备下列条件： [...] 进口商应当对拟进口的化妆品是否已经注册或者备案以及是否符合本条例和强制性国家标准、技术规范进行审核;审核不合格的，不得进口。进口商应当如实记录进口化妆品的信息，记录保存期限应当符合本条例第三十一条第一款的规定。\n\n　　出口的化妆品应当符合进口国(地区)的标准或者合同要求。\n\n第四章　监督管理\n\n第四十六条负责药品监督管理的部门对化妆品生产经营进行监督检查时，有权采取下列措施：\n\n　　(一)进入生产经营场所实施现场检查;\n\n　　(二)对生产经营的化妆品进行抽样检验;\n\n　　(三)查阅、复制有关合同、票据、账簿以及其他有关资料;\n\n　　(四)查封、扣押不符合强制性国家标准、技术规范或者有证据证明可能危害人体健康的化妆品及其原料、直接接触化妆品的包装材料，以及有证据证明用于违法生产经营的工具、设备;\n\n　　(五)查封违法从事生产经营活动的场所。\n\n第四十七条　负责药品监督管理的部门对化妆品生产经营进行监督检查时，监督检查人员不得少于2人，并应当出示执法证件。监督检查人员对监督检查中知悉的被检查单位的商业秘密，应当依法予以保密。被检查单位对监督检查应当予以配合，不得隐瞒有关情况。\n\n　　负责药品监督管理的部门应当对监督检查情况和处理结果予以记录，由监督检查人员和被检查单位负责人签字;被检查单位负责人拒绝签字的，应当予以注明。\n\n第四十八条　省级以上人民政府药品监督管理部门应当组织对化妆品进行抽样检验;对举报反映或者日常监督检查中发现问题较多的化妆品，负责药品监督管理的部门可以进行专项抽样检验。\n\n　　进行抽样检验，应当支付抽取样品的费用，所需费用纳入本级政府预算。\n\n　　负责药品监督管理的部门应当按照规定及时公布化妆品抽样检验结果。",
-      "matched_keywords": [
-        "防晒",
-        "备案"
-      ],
-      "raw": {
-        "query": "化妆品 备案 监管 新规",
-        "tavily_score": 0.9990746,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 防晒",
-          "+1 命中经营变量: 活动"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "background",
-          "related_channels": [],
-          "related_categories": [
-            "个护美妆"
-          ],
-          "business_variables": [],
-          "reason": "文章涉及化妆品新原料注册备案及监管政策，属于个护美妆行业背景信息，虽不直接关联屈臣氏即时零售经营，但为行业合规基础。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      }
-    },
-    {
-      "article_id": "cc66dca3a976cd71",
-      "title": "2026中国化妆品法规动态：19款新原料完成备案，原料目录三度调整（1月）",
-      "url": "http://www.reach24h.com/cosmetic/industry-news/january-cosmetics-regulation",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.937307+08:00",
-      "time_status": "unknown_time",
-      "summary": "中国化妆品行业法规动态\n\n 获取化妆品合规资讯与解决方案 \n\n查看\n\n精选资讯\n\n《化妆品安全技术规范》（完整整理版）| 更新至2026年1月化妆品原料 | 什么是INCI名称？如何申请INCI名称？INCI的命名规则？欧盟法规新增30种化妆品禁用原料，这6种国内企业务必重点关注！正式实施！欧盟新增56种香精致敏原，提醒化妆品企业关注！化妆品新原料申请必读！新原料备案将于5月1日实施！祛斑美白类化妆品新规重点梳理：类别界定更清晰，合规门槛将更高！化妆品出口欧盟合规要求解析：需要什么认证？流程和资料要求有哪些？最新2025版《已上市产品原料使用信息》正式发布（附官方解答）美国MoCRA法规最新进展：有关“香精致敏原”与“石棉测试方法”计划推迟国内化妆品应如何正确标注产品执行的标准编号？\n\n热门问答\n\n拟备案注册化妆品新原料的安全食用历史证明材料若来源于普通食品原料有哪些要求？化妆品完整版安全评估报告是否可以提交理化稳定性测试、防腐剂挑战测试、包材相容性测试评估结论？对化妆品配方中的 “香精” 使用IFRA证书进行安全评估时，需注意哪些事项？拟备案注册化妆品新原料的安全食用历史证明材料若来",
-      "content": "中国化妆品行业法规动态\n\n 获取化妆品合规资讯与解决方案 \n\n查看\n\n精选资讯\n\n《化妆品安全技术规范》（完整整理版）| 更新至2026年1月化妆品原料 | 什么是INCI名称？如何申请INCI名称？INCI的命名规则？欧盟法规新增30种化妆品禁用原料，这6种国内企业务必重点关注！正式实施！欧盟新增56种香精致敏原，提醒化妆品企业关注！化妆品新原料申请必读！新原料备案将于5月1日实施！祛斑美白类化妆品新规重点梳理：类别界定更清晰，合规门槛将更高！化妆品出口欧盟合规要求解析：需要什么认证？流程和资料要求有哪些？最新2025版《已上市产品原料使用信息》正式发布（附官方解答）美国MoCRA法规最新进展：有关“香精致敏原”与“石棉测试方法”计划推迟国内化妆品应如何正确标注产品执行的标准编号？\n\n热门问答\n\n拟备案注册化妆品新原料的安全食用历史证明材料若来源于普通食品原料有哪些要求？化妆品完整版安全评估报告是否可以提交理化稳定性测试、防腐剂挑战测试、包材相容性测试评估结论？对化妆品配方中的 “香精” 使用IFRA证书进行安全评估时，需注意哪些事项？拟备案注册化妆品新原料的安全食用历史证明材料若来源于保健食品原料有哪些要求？台湾地区化妆品产品信息档案PIF应如何保存？\n\n行业服务\n\n全球化学品合规食品接触材料/再生塑料全球农用化学品合规消杀产品及设备合规全球化妆品合规全球食品合规药品合规绿色低碳可持续EHS与过程安全检验检测及认证\n\n最新发布 [...] 最新发布\n\n   2026全球化妆品法规动态：韩国发布2026年化妆品核心政策举措（3月）21小时前\n   2026中国化妆品法规动态：4个新原料取消备案，注册备案迎“减负”（3月）5天前\n   中检院发布防晒、染发、烫发化妆品等6项技术导则（附相关问答）6天前\n   《已使用化妆品原料目录》第四次动态调整：新增一原料纳入《目录》Ⅱ1周前\n   化妆品标签新规来了！最新通用标签（征求意见稿）新旧标准对比解读1周前\n   国家药监局发布有关化妆品注册备案最新公告！企业减负迎来四重利好2周前\n   强制性国标《化妆品安全通用要求（征求意见稿）》最新修订解读3周前\n   欧盟SCCS发布关于硫柳汞和苯汞盐类的最终安全评估意见3周前\n\n 订阅关注，获取最新行业资讯动态 \n\n邮箱订阅微信订阅\n\n邮箱订阅，获取最新行业资讯动态\n\n请输入您的信息\n\n请选择您关注的行业\n\n全球化学品合规\n\n食品接触材料/再生塑料\n\n全球农用化学品合规\n\n消杀产品及设备合规\n\n全球化妆品合规\n\n全球食品合规\n\n药品合规\n\n绿色低碳可持续\n\nEHS与过程安全\n\n检验检测及认证\n\n订阅\n\n邮箱订阅，获取最新行业资讯动态\n\n订阅\n\n 扫码关注公众号\n\n 获取最新行业管理动态及市场趋势 \n   Image 9 化学品合规 \n   Image 10 化妆品合规 \n   Image 11 检验检测 \n   Image 12 安全管理智能化 \n   Image 13 绿色低碳可持续 \n   Image 14 药品合规 \n   Image 15 食品合规 \n   Image 16 食品接触材料/再生塑料 \n   Image 17 中国农药登记 \n   Image 18 境外农药登记 \n\nImage 19\n\n 浙江省杭州市余杭区龙舟北路76号浙江大学校友企业总部经济园二期 中心智慧楼C1幢10层 （311121） [...] 中检院发布化妆品新原料常见技术问答\n\n2026年1月21日，中国食品药品检定研究院发布《化妆品新原料常见技术问答（四）》，就新原料注册和备案的区别，备案后技术核查涉及的结论，核查意见改正资料等5个相关问题做出解答。\n\n相关内容见：\n\n事关化妆品新原料注册备案技术核查！中检院发布权威详细解答\n\n化妆品注册备案电子标签信息填报操作指南发布\n\n2026年1月29日，为指导试点企业规范开展电子标签信息填报与资料提交工作，明确资料提交要求，国家药监局信息中心发布《化妆品注册备案信息服务平台电子标签信息填报操作指南》。化妆品注册备案信息服务平台电子标签相关功能已于2月1日上线。\n\n网络交易平台规则、直播电商监督办法发布\n\n2026年1月7日，国家市场监督管理总局、国家互联网信息办公室联合印发《网络交易平台规则监督管理办法》与《直播电商监督管理办法》。自2026年2月1日起施行。\n\n## 违法案例\n\n国家药监局通告飞检结果\n\n2026年1月9日，国家药品监督管理局发布关于安徽特仑沙克生物科技研究有限公司飞行检查结果的通告（2026年第1号）。经查，发现该企业违反《化妆品监督管理条例》《化妆品生产质量管理规范》等有关规定，企业生产质量管理体系存在严重缺陷。\n\n国家药监局通告45批次不符合规定化妆品\n\n2026年1月20日，国家药监局通告了45批次不符合规定化妆品。不合格原因涉及：产品检出成分、产品标签应当与该产品注册资料载明的技术要求不一致，限用原料超标，菌落总数超标，霉菌和酵母菌总数超标等。\n\n广东通告化妆品抽样检验信息",
-      "matched_keywords": [
-        "防晒",
-        "合规",
-        "备案",
-        "飞检",
-        "标签",
-        "成分",
-        "直播",
-        "政策",
-        "新规",
-        "通告",
-        "征求意见稿"
-      ],
-      "raw": {
-        "query": "化妆品 备案 监管 新规",
-        "tavily_score": 0.99903786,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 防晒"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "background",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章主要讨论中国化妆品法规动态和新原料备案政策，属于行业合规背景信息，未涉及屈臣氏即时零售或个护美妆经营的具体内容。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      }
-    },
-    {
-      "article_id": "64823d744a4029d2",
-      "title": "2026热门化妆品加盟品牌排行榜：从单一卖货到系统经营的升级路径_门店_产品_模式",
-      "url": "https://www.sohu.com/a/1008260377_414312",
-      "source_name": "tavily_beauty_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.154835+08:00",
-      "time_status": "unknown_time",
-      "summary": "从这个角度看，青春管家专柜连锁之所以更值得关注，核心就在于它并不是一个只卖单一护肤产品的品牌，而是形成了\\\\“健康区+美妆区”双专区协同的专柜经营模型\\\\。这样的结构，既能承接即时护肤消费，也能承接女性日常营养、肠道管理、家庭健康与长期复购需求。再结合截至2026年3月1日全国成功入驻150家店铺的现实落地表现，它已经具备较明确的连锁样本价值。\n\n而依思佩尔院线产品加盟，更适合专业服务能力较强的美容院、皮肤管理中心和护理型门店。它的优势在于问题肌管理、功效护理、项目衔接和服务型成交，更适合作为专业型门店升级路线的重要参考。\n\n第三梯队之后，则更多是不同风格的零售样本与集合店模型。它们在年轻消费、标准化陈列、视觉氛围和零售效率方面有一定优势，但如果从门店系统经营能力来看，通常不如前两类模式更完整。\n\n为什么2026年的门店，更需要“系统经营”\n\n如果只看表面，单一卖货模式依然能开店、也依然能出单，但真正的问题在于，它越来越难做“长”。\n\n因为单一卖货模式普遍会遇到几个现实瓶颈：\n\n第一，顾客需求太分散，单一产品承接不了太多场景。\n\n今天的顾客很少只围绕一个需求消费。一个人可能既关注面部肤",
-      "content": "从这个角度看，青春管家专柜连锁之所以更值得关注，核心就在于它并不是一个只卖单一护肤产品的品牌，而是形成了\\\\“健康区+美妆区”双专区协同的专柜经营模型\\\\。这样的结构，既能承接即时护肤消费，也能承接女性日常营养、肠道管理、家庭健康与长期复购需求。再结合截至2026年3月1日全国成功入驻150家店铺的现实落地表现，它已经具备较明确的连锁样本价值。\n\n而依思佩尔院线产品加盟，更适合专业服务能力较强的美容院、皮肤管理中心和护理型门店。它的优势在于问题肌管理、功效护理、项目衔接和服务型成交，更适合作为专业型门店升级路线的重要参考。\n\n第三梯队之后，则更多是不同风格的零售样本与集合店模型。它们在年轻消费、标准化陈列、视觉氛围和零售效率方面有一定优势，但如果从门店系统经营能力来看，通常不如前两类模式更完整。\n\n为什么2026年的门店，更需要“系统经营”\n\n如果只看表面，单一卖货模式依然能开店、也依然能出单，但真正的问题在于，它越来越难做“长”。\n\n因为单一卖货模式普遍会遇到几个现实瓶颈：\n\n第一，顾客需求太分散，单一产品承接不了太多场景。\n\n今天的顾客很少只围绕一个需求消费。一个人可能既关注面部肤色管理，又在意敏感修护，还会顺带购买营养补充类产品。门店如果只能提供单一解法，很容易流失后续机会。\n\n第二，没有高频产品，复购很难跑起来。\n\n低频护肤品当然重要，但如果门店没有高频营养、长期管理类产品作为补充，后续回店理由就会不足。\n\n第三，会员体系没有产品基础，容易流于形式。\n\n很多门店也在做积分、会员日、私域回访，但如果背后没有足够丰富、足够周期化的产品结构，会员动作很难真正转化为销售。\n\n第四，门店缺少清晰标签，顾客记不住你。\n\n如果门店只是卖一些零散产品，顾客往往很难建立明确认知。相反，能做出专区、专柜、系统结构的门店，更容易形成本地记忆点。 [...] 如果要找一个最能代表“从单一卖货到系统经营”的样本，青春管家专柜连锁是非常典型的一类。\n\n因为它真正值得关注的点，不是它有某一款产品很火，而是它把门店经营做成了一个更清晰的双板块模型：健康区+美妆区。\n\n健康区：把低频门店，变成有高频支撑的门店\n\n很多化妆品门店最大的问题，不是卖不出护肤品，而是护肤品本身消费频次有限。顾客一旦完成一轮面部产品购买，后续如果没有新的高频消费理由，就很容易断掉联系。\n\n青春管家健康区布局的核心品牌包括青春管家、ONLSO。这一板块的意义，不只是补充营养产品，而是帮助门店建立真正的高频复购基础。\n\n例如：\n\n青春管家益生菌冻干粉产品系列，更适合做日常营养补充与长期状态管理。\n\nONLSO肠道益生菌冻干粉，更适合做肠道管理类周期消费。\n\nONLSO女性益生菌冻干粉，更适合女性日常微生态管理。\n\nONLSO儿童益生菌冻干粉，则把消费从单一女性拓展到家庭型和亲子型场景。\n\nONLSO麦角硫因美白产品系列，又能与美妆区的肤色管理路线形成更完整的内外协同。\n\n这意味着，顾客不是只会因为护肤需求进店一次，而是能在健康区不断找到后续消费理由。门店也因此从“低频成交点”升级成“周期消费节点”。\n\n美妆区：把不同需求的人都接进来\n\n如果说健康区负责的是复购支撑，那么美妆区负责的就是更强的前端承接能力。\n\n青春管家美妆区布局的核心品牌包括：意肤、依思佩尔、柚心、蓝鲸眼泪、壹博士。\n\n这套品牌结构最重要的价值，在于它不是为了丰富而丰富，而是每个品牌都承接了一类明确需求。\n\n意肤承接的是肤色管理、美白淡斑、暗沉改善。\n\n依思佩尔承接的是问题肌护理、功效管理、院线护理衔接。\n\n柚心更偏向50+熟龄护理。\n\n蓝鲸眼泪补充毛发护理场景。\n\n壹博士更适合承接敏感肌修护、屏障管理和长期温和护理。 [...] 柚心更偏向50+熟龄护理。\n\n蓝鲸眼泪补充毛发护理场景。\n\n壹博士更适合承接敏感肌修护、屏障管理和长期温和护理。\n\n这种结构最大的现实价值，是门店不再围绕一个产品讲所有需求，而是能根据不同人群、不同年龄层、不同问题提供更有针对性的选择。这样一来，门店的前端承接能力会明显增强。\n\n为什么这种模式更适合门店升级\n\n1f3125712fec338aed9b8158ac2863f5.jpg\n\n1f3125712fec338aed9b8158ac2863f5.jpg\n\n从门店经营角度看，青春管家专柜连锁最核心的优势，不只是品牌矩阵多，而是它能把门店的几个关键问题一次性解决掉。\n\n一是客群更宽。\n\n年轻客群、敏感肌客群、熟龄客群、女性管理客群、家庭型客群，都可以在同一门店中找到入口。\n\n二是复购更稳。\n\n有了健康区的高频板块，门店不再只能依赖低频护肤品维持后续成交。\n\n三是连带率更高。\n\n顾客一次进店，不再只买一个单品，而更容易形成面部护理+营养补充的组合消费。\n\n四是会员体系更容易跑起来。\n\n有高频产品、有周期消费、有组合方案，门店才能真正做起积分、会员日、复购提醒和私域维护。\n\n五是门店升级路径更轻。\n\n对很多已有门店来说，不必重开新店，只需要在原有空间中增加一个更完整的专柜系统，就能形成第二增长板块。\n\n落地表现为什么有说服力\n\n截至2026年3月1日，全国专柜成功入驻150家店铺。\n\n这组数据的意义，不只是“开了多少店”，而在于说明这套模式已经被门店端实际接受，并且具备一定规模的复制基础。\n\n很多项目讲的是未来，青春管家展示的是现实落地。这对准备加盟的经营者来说，价值非常直接。\n\n依思佩尔院线产品加盟：为什么它更适合“把专业做深”\n\n与青春管家这种复合型专柜系统不同，依思佩尔院线产品加盟代表的是另一条路线：不是做全，而是做深。",
-      "matched_keywords": [
-        "美妆",
-        "护肤",
-        "复购",
-        "标签",
-        "敏感肌"
-      ],
-      "raw": {
-        "query": "美妆 个护 即时零售 品牌 2026",
-        "tavily_score": 0.7283819,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆, 护肤",
-          "+1 命中经营变量: 复购, 会员, 私域"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆",
-            "护肤",
-            "复购"
-          ],
-          "business_variables": [
-            "门店系统经营",
-            "健康区+美妆区双专区模型",
-            "高频复购支撑",
-            "会员体系产品基础"
-          ],
-          "reason": "文章讨论的是化妆品加盟品牌的系统经营模式，虽未直接提及屈臣氏，但其提出的‘健康区+美妆区’双专区协同模型与即时零售×个护美妆的经营逻辑高度契合，属于行业趋势层面的间接影响。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      }
-    },
-    {
-      "article_id": "be48980bc209a42d",
-      "title": "尼尔森IQ 中国美妆个护行业趋势与展望报告 - nielseniq-cn",
-      "url": "https://nielseniq.cn/global/zh/insights/report/2024/niq-2024-china-beauty-and-personal-insight/",
-      "source_name": "tavily_beauty_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.154905+08:00",
-      "time_status": "unknown_time",
-      "summary": "从“专精”到“布局”：2026 出海品牌平台迁移白皮书\n\n分析报告 ,    报告\n\n##### 从“专精”到“布局”：2026 出海品牌平台迁移白皮书 [...] 从品牌集中度来看，抖音电商是中小品牌的主要阵地，身体洗护、头发洗护、皮肤护理品类的排名30+中国本土中小品牌市场在抖音电商集中度均超过70%。排名前十的大品牌则主要集中在综合电商：综合电商贡献33.3%的销售额，而在抖音电商仅为18.4%。\n\n23年，均价200元以下的护肤品经济品牌在抖音电商销售贡献占比最高（83%），且保持了56%的高增速。与此同时，全部档次的品牌在23年全年在抖音均保持了正向增速，超高端和经济型增速均超过50%。抖音电商不仅为消费者提供了松弛感和情绪价值，未来兼顾理性消费和精打细算的策略才是产品制胜的关键。\n\n回顾2023年中国美妆个护市场，随着疫情后消费者购物与使用场景的逐渐恢复，2024年美妆个护市场将迎来更多创新和突破。聚焦渠道布局，未来专柜渠道将持续高端化，化妆品店和商超赛道将进一步提振，抖音电商作为2023年护肤品行业爆发新增长点，将继续为本土经济品牌开拓新版图。了解更多抖音电商的品类表现与",
-      "content": "从“专精”到“布局”：2026 出海品牌平台迁移白皮书\n\n分析报告 ,    报告\n\n##### 从“专精”到“布局”：2026 出海品牌平台迁移白皮书 [...] 从品牌集中度来看，抖音电商是中小品牌的主要阵地，身体洗护、头发洗护、皮肤护理品类的排名30+中国本土中小品牌市场在抖音电商集中度均超过70%。排名前十的大品牌则主要集中在综合电商：综合电商贡献33.3%的销售额，而在抖音电商仅为18.4%。\n\n23年，均价200元以下的护肤品经济品牌在抖音电商销售贡献占比最高（83%），且保持了56%的高增速。与此同时，全部档次的品牌在23年全年在抖音均保持了正向增速，超高端和经济型增速均超过50%。抖音电商不仅为消费者提供了松弛感和情绪价值，未来兼顾理性消费和精打细算的策略才是产品制胜的关键。\n\n回顾2023年中国美妆个护市场，随着疫情后消费者购物与使用场景的逐渐恢复，2024年美妆个护市场将迎来更多创新和突破。聚焦渠道布局，未来专柜渠道将持续高端化，化妆品店和商超赛道将进一步提振，抖音电商作为2023年护肤品行业爆发新增长点，将继续为本土经济品牌开拓新版图。了解更多抖音电商的品类表现与品牌格局，进入尼尔森IQ微店，购买《抖音行业趋势纵览报告》！\n\n### 报告购买\n\n《NIQ抖音行业趋势纵览》\n\n立即联系我们\n\n##### 相关阅读\n\nYoung Asian woman taking a break, having a quiet time enjoying a cup of coffee and reading book in cafe\n\n报告\n\n##### 尼尔森IQ 2024中国消费者展望\n\n尼尔森IQ 中国美妆个护行业趋势与展望报告 的主視覺圖片\n\n报告\n\n##### 尼尔森IQ 2024中国饮料行业趋势与展望\n\n如何建立数据驱动的文化\n\n教育\n\n##### 如何建立数据驱动的文化\n\n从“专精”到“布局”：2026 出海品牌平台迁移白皮书\n\n从“专精”到“布局”：2026 出海品牌平台迁移白皮书\n\n分析报告 ,    报告 [...] Featured Insights\n\n  CMO Outlook   消费者生活   Consumer Outlook   State of Tech & Durables\n Key Topics\n\n  Artificial Intelligence   Brand Strategy   Consumer Behavior   数据科学与分析   Health & Wellness  Industry Trends   电子商务   定价与促销   产品创新   Sustainability/ESG\n\n  IQ Brief 简讯： 立即注册\n\n 市场监测   消费者行为与洞察   创新   品牌与媒体   分析咨询与业务激活\n\n Become an NIQ partner\n\n 消费品包装   美容   饮料酒   包装   宠物   数字商务\n 金融服务   零售   本土企业   科技与耐用品\n\n 请联系我们\n\n 解决方案\n 行业\n 合作伙伴网络\n 市场洞察\n 职业生涯\n 关于我们\n\n Featured Insights\n\n  CMO Outlook   消费者生活   Consumer Outlook   State of Tech & Durables\n Key Topics\n\n  Artificial Intelligence   Brand Strategy   Consumer Behavior   数据科学与分析   Health & Wellness  Industry Trends   电子商务   定价与促销   产品创新   Sustainability/ESG\n\n  IQ Brief 简讯： 立即注册\n\n 市场监测   消费者行为与洞察   创新   品牌与媒体   分析咨询与业务激活\n\n Become an NIQ partner",
-      "matched_keywords": [
-        "个护",
-        "洗护",
-        "美妆",
-        "护肤",
-        "促销"
-      ],
-      "raw": {
-        "query": "美妆 个护 即时零售 品牌 2026",
-        "tavily_score": 0.5382315,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆, 个护, 护肤"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "high",
-          "business_relevance_type": "indirect",
-          "related_channels": [
-            "抖音电商",
-            "综合电商"
-          ],
-          "related_categories": [
-            "身体洗护",
-            "头发洗护",
-            "皮肤护理",
-            "护肤品"
-          ],
-          "business_variables": [
-            "品牌集中度",
-            "价格带分布",
-            "渠道销售贡献",
-            "消费者情绪价值",
-            "理性消费策略"
-          ],
-          "reason": "报告聚焦中国美妆个护行业趋势，特别是抖音电商对本土中小品牌的影响及渠道格局变化，虽未直接提及屈臣氏，但涉及即时零售相关平台（抖音电商）和个护美妆品类动态，间接影响屈臣氏经营策略。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "bcac8d3954910b09",
-      "title": "2026美妆行业迎来“妆械联合”新浪潮！",
-      "url": "https://www.hzpchangjia.com/news/484-cn.html",
-      "source_name": "tavily_beauty_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.154975+08:00",
-      "time_status": "unknown_time",
-      "summary": "2026年，中国美妆行业迎来历史性转折点。当产品回归品牌发展要素的C位，“妆械联合” 作为最引人注目的趋势正加速从概念走向落地。据行业统计，已有超过20家国货品牌通过自研、合作或投资方式布局这一赛道，而国际化妆品代工龙头科丝美诗也于今年1月宣布全面进军二类医疗器械领域。这一趋势的蓬勃发展，背后是消费者对护肤品功效要求的不断提升。问题肌肤人群扩大，推动护理意识增强，基础性护理产品已难以满足市场需求。而医美行业的快速增长也为妆械联合提供了肥沃土壤——2025年中国医疗美容市场规模预计达到3816亿元-4108亿元，消费需求的驱动作用不容小觑。  \n一，技术驱动“医研共创”重塑研发范式  \n        妆械联合的深层逻辑是研发范式的变革。它并非简单的化妆品与医疗器械叠加，而是以“医研共创”为基础的系统性研发模式。这种模式要求品牌与医疗机构、科研院所或药企深度协作，将临床需求转化为可量产、可验证的功能性产品。成功案例已纷纷涌现。绽妍品牌从公立医院皮肤科出发，通过医护推荐建立信任，随后将“医研共创”理念延伸至妆字号护肤品。润百颜则依托华熙生物的医美渠道资源，将注射级透明质酸钠凝胶的技术经验迁",
-      "content": "2026年，中国美妆行业迎来历史性转折点。当产品回归品牌发展要素的C位，“妆械联合” 作为最引人注目的趋势正加速从概念走向落地。据行业统计，已有超过20家国货品牌通过自研、合作或投资方式布局这一赛道，而国际化妆品代工龙头科丝美诗也于今年1月宣布全面进军二类医疗器械领域。这一趋势的蓬勃发展，背后是消费者对护肤品功效要求的不断提升。问题肌肤人群扩大，推动护理意识增强，基础性护理产品已难以满足市场需求。而医美行业的快速增长也为妆械联合提供了肥沃土壤——2025年中国医疗美容市场规模预计达到3816亿元-4108亿元，消费需求的驱动作用不容小觑。  \n一，技术驱动“医研共创”重塑研发范式  \n        妆械联合的深层逻辑是研发范式的变革。它并非简单的化妆品与医疗器械叠加，而是以“医研共创”为基础的系统性研发模式。这种模式要求品牌与医疗机构、科研院所或药企深度协作，将临床需求转化为可量产、可验证的功能性产品。成功案例已纷纷涌现。绽妍品牌从公立医院皮肤科出发，通过医护推荐建立信任，随后将“医研共创”理念延伸至妆字号护肤品。润百颜则依托华熙生物的医美渠道资源，将注射级透明质酸钠凝胶的技术经验迁移至次抛精华，实现医疗成分的日常化应用。这种研发模式的关键优势在于其明确的适应症指向。与传统护肤品宽泛的“保湿”“抗老”宣称不同，妆械联合产品精准针对术后修复、屏障受损、痤疮护理等特定场景，大大增强了产品的专业性和可信度。  \n         二，产业变革从“械字号”破局到全链条升级 [...] 三，生态重构渠道融合与政策护航  \n        妆械联合的蓬勃发展正带动整个美妆产业生态的重构。连锁药店成为关键枢纽，一心堂、益丰大药房、漱玉平民等全国性连锁已将妆械产品纳入第二增长曲线。百雀羚医美与益丰大药房共建“医美药房融合体”，将传统药店升级为肌肤问题解决方案中心。政策环境也在持续优化。2025年11月，国家药监局发布《关于深化化妆品监管改革促进产业高质量发展的意见》，提出到2035年建成国际先进监管体系，并设立新功效“快审通道”，鼓励创新产品首发。这些举措虽提高准入门槛，却为真正具备研发与合规能力的企业创造了公平竞争环境。妆械联合还推动了技术创新与原料升级。望莎集团应用PQQ核心成分提升线粒体数量，配合自研微囊锁鲜技术确保活性直达。佰鸿再生通过大分子微球化技术将线性PDRN大分子压缩为纳米球颗粒，实现超强渗透。森野医药的“三重外泌体”结合6S智能温控冻干技术，有效锁鲜植物活性。科丝美诗的弹性液晶FlexMoist TM技术则能促进活性物被肌肤吸收。   \n四，未来趋势科技驱动成为行业主旋律 [...] 标签:   美妆\n\n 上一篇 ：油痘肌怎么改善？油痘肌的改善方法有哪些？\n 下一篇 ：蚕丝面膜的优点和缺点是什么？\n\n## 新闻资讯\n\n 所有文章\n 行业资讯135\n 护肤宝典133\n 加工知识110\n 经营参谋35\n\n### 为您推荐\n\n 护肤品里有香精安全吗？\n PDRN：一场由内而外的肌肤再生革命！\n 为什么春天皮肤容易过敏？春天容易过敏的原因！\n 全球美妆代工厂莹特丽2025年营收下滑利润却提升！\n 刷酸对皮肤的好处和坏处有哪些？\n\n### 热门推荐\n\n烟酰胺原液OEM/ODM代加工  烟酰胺原液OEM/ODM代加工\n\n气垫CC霜OEM/ODM加工  气垫CC霜OEM/ODM加工\n\n腮红OEM/ODM代加工  腮红OEM/ODM代加工\n\n口红OEM/ODM代加工  口红OEM/ODM代加工\n\n唇釉OEM/ODM代加工  唇釉OEM/ODM代加工\n\n眼影OEM/ODM代加工  眼影OEM/ODM代加工\n\n洁面慕斯OEM/ODM代加工  洁面慕斯OEM/ODM代加工\n\n贵妇膏OEM/ODM代加工  贵妇膏OEM/ODM代加工\n\n#### 关于我们\n\n 发展历程\n 企业文化\n 厂区环境\n 资质荣誉\n\n#### OEM/ODM\n\n 研发创新\n 业务流程\n 品质管控\n 营销策划\n\n#### 产品展示\n\n 特色产品\n 护肤系列\n 彩妆加工\n 现货批发\n\n#### 新闻资讯\n\n 行业资讯\n 护肤宝典\n 加工知识\n 经营参谋\n\n18680261275\n\n周一至周六 09:00~18:00",
-      "matched_keywords": [
-        "美妆",
-        "彩妆",
-        "护肤",
-        "精华",
-        "面膜",
-        "代工",
-        "合规",
-        "标签",
-        "成分",
-        "政策",
-        "国货"
-      ],
-      "raw": {
-        "query": "美妆 个护 即时零售 品牌 2026",
-        "tavily_score": 0.47899243,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆, 护肤, 彩妆"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆",
-            "护肤",
-            "医疗器械",
-            "医研共创"
-          ],
-          "business_variables": [
-            "妆械联合趋势",
-            "医美市场增长",
-            "功能性护肤品需求上升",
-            "药企与美妆品牌合作模式"
-          ],
-          "reason": "文章聚焦‘妆械联合’趋势及其对美妆行业研发、渠道和政策的影响，虽未直接提及屈臣氏即时零售业务，但反映了高端个护美妆品类升级和医疗级产品渗透率提升的行业动向，间接影响屈臣氏在即时零售场景下的选品策略与供应链布局。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "c1be522ea1a46536",
-      "title": "美妆个护出海指南_美妆个护选品调研报告_海外美妆个护市场分析-雨果跨境",
-      "url": "https://m.cifnews.com/category/x1dm8",
-      "source_name": "tavily_beauty_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.155126+08:00",
-      "time_status": "unknown_time",
-      "summary": "-柠檬形/梨形/草莓形/桃形/水滴形，非乳胶材质化妆蛋。\n\n面部彩妆以粉底为主，以及修容高光笔、腮红和遮瑕，产品趋势如下：\n\n-防水/防晒/长效持久/保湿；\n\n-无油配方；\n\n-哑光；\n\n-包容性（多肤色可定制）；\n\n-零残忍测试；\n\n-纯素彩妆；\n\n-便携装。\n\n护肤品排名TOP3类目为面部护理、身体护理、护肤套装，其中身体护理类目增长快速，身体乳液、身体磨砂膏、脱毛膏等成为应季热销商品。活跃买家主要分布在欧美、中东、非洲及澳大利亚等国家。\n\n \n\n男士护理品类热销产品主要为剃须刀、剃须护理、剃须刀片、男士护肤套装等，其中须后水、剃须膏增速明显。活跃买家主要分布在欧美、中东、东南亚等国家。\n\n \n\n美甲类热销产品包括美甲凝胶、假指甲、磨甲机、美甲魔镜、贴花贴纸等，活跃卖家主要分布在美国、英国和巴西等国家。\n\n \n\n3.4 TikTok（印尼）：多功能防晒护肤品吃香\n\n \n\n印尼日晒强烈，功能性的防护产品有很好的销量。以防晒产品为例，除了高防护值、具备防水功能，有美白妆效等美颜功能的防晒产品也受到印尼消费者追捧。\n\n \n\n3.5 Lazada：依托国内强大供应链运营垂直化品类\n\n \n\n",
-      "content": "-柠檬形/梨形/草莓形/桃形/水滴形，非乳胶材质化妆蛋。\n\n面部彩妆以粉底为主，以及修容高光笔、腮红和遮瑕，产品趋势如下：\n\n-防水/防晒/长效持久/保湿；\n\n-无油配方；\n\n-哑光；\n\n-包容性（多肤色可定制）；\n\n-零残忍测试；\n\n-纯素彩妆；\n\n-便携装。\n\n护肤品排名TOP3类目为面部护理、身体护理、护肤套装，其中身体护理类目增长快速，身体乳液、身体磨砂膏、脱毛膏等成为应季热销商品。活跃买家主要分布在欧美、中东、非洲及澳大利亚等国家。\n\n \n\n男士护理品类热销产品主要为剃须刀、剃须护理、剃须刀片、男士护肤套装等，其中须后水、剃须膏增速明显。活跃买家主要分布在欧美、中东、东南亚等国家。\n\n \n\n美甲类热销产品包括美甲凝胶、假指甲、磨甲机、美甲魔镜、贴花贴纸等，活跃卖家主要分布在美国、英国和巴西等国家。\n\n \n\n3.4 TikTok（印尼）：多功能防晒护肤品吃香\n\n \n\n印尼日晒强烈，功能性的防护产品有很好的销量。以防晒产品为例，除了高防护值、具备防水功能，有美白妆效等美颜功能的防晒产品也受到印尼消费者追捧。\n\n \n\n3.5 Lazada：依托国内强大供应链运营垂直化品类\n\n \n\n·美发与口腔护理为蓝海市场\n\nLazada平台中的美妆个护类目情况：\n\n \n\n-基石：美妆（唇彩、眼线、眼影和美甲）整体价格偏低，市场容量很大，需要精细化运营；\n\n-重点：护肤类目（精华、保湿乳、面膜）整体市场容量较大，而且更需要品牌心智；\n\n-优势：美容工具（面部仪器、身体仪器及电子按摩）能成为优势类目，主要得益于中国强大的供应链，运营店铺时可以考虑相对垂直化的产品。另外，结合东南亚当地的客群特征，也可以通过强大的供应链优势推出相应的大牌平替；\n\n-蓝海：个护产品（美发护理和口腔护理）因为整体增速非常快，所以非常适合新店前期以低价打爆品。 [...] -差评集中于产品可能含有酒精而导致不适，部分消费者甚至出现更严重的爆痘、皮肤炎症等情况。\n\n \n\n因此，标注清楚过敏源、可能出现的负面情况作为提醒至关重要。\n\n \n\n（图源：亚马逊日本站）\n\n \n\n以けしょうすい（化妆水）作为搜索词，搜索结果页面的4个赞助广告位中，3个产品来自品牌HERBALPLUS，1个来自品牌KHAKI。\n\n \n\n（图源：亚马逊日本站）\n\n \n\n自然搜索结果页面中：\n\n-包装设计以浅亮色系的透明瓶装为主；\n\n-突出产品让皮肤保持清爽透亮的功能；\n\n-小瓶装容量集中于150ml-200ml，中瓶装容量为500ml，大瓶装容量为1000ml。\n\n \n\n（图源：亚马逊日本站）\n\nShopee：各站点消费者购买偏好差异大\n\n2.1 中国台湾站：美妆蛋与化妆刷销量走俏\n\nShopee台湾站的美妆护肤品类中，热销的产品有：\n\n-口红（500新台币以上）、面膜、以及12色眼影盘（650新台币以上）等；\n\n-美妆工具方面，化妆刷、美妆蛋一直是中国台湾市场热销商品。\n\n \n\n随着中国台湾市场消费者对美妆/护肤要求不断增高，产品精细化、种类多样化必将成为大势所趋。\n\n \n\n美妆方面，建议卖家可以上新：\n\n-渐变色腮红；\n\n-液体腮红；\n\n-保湿美白面膜；\n\n-化妆刷具；\n\n-发际线修饰粉；\n\n-保湿化妆水等。\n\n \n\n美妆工具方面，建议卖家关注：\n\n-化妆刷；\n\n-干湿两用美妆蛋；\n\n-美妆蛋收纳架。\n\n \n\n护肤品方面，建议卖家关注：\n\n-面膜；\n\n-精华；\n\n-乳液；\n\n-洗面奶；\n\n-化妆水（含量小于100毫升）。\n\n \n\n2.2 马来西亚站：消费者偏好浓妆妆效\n\n该站消费者在购买美妆工具时追求爆款，看重性价比；在购买化妆品时，则会结合性价比和品牌进行选择，且偏好色彩鲜艳的浓妆妆效。\n\n \n\n在美妆工具方面，值得关注：\n\n-刷子；\n\n-导入仪；\n\n-美妆蛋。 [...] 在美妆工具方面，值得关注：\n\n-刷子；\n\n-导入仪；\n\n-美妆蛋。\n\n \n\n在化妆品方面，眼妆、唇妆及面部彩妆等细分产品是Shopee马来西亚站需求最大的品类之一，且跨境卖家在其中占比较小，卖家进入后打造爆品的潜力大。\n\n \n\n2.3 越南站：韩式淡妆广受追捧\n\n美妆护肤是Shopee越南站当地销量最大、增长最快的一个品类。韩式淡妆风格、具有美白功能的商品受当地消费者追捧。\n\n \n\n护肤产品是当地Top1火爆美妆品类。因国产品牌价格亲民，在越南市场有一定知名度，相关产品主要有：\n\n \n\n-面膜；\n\n-保湿乳液；\n\n-防晒产品；\n\n-精华液；\n\n-美白产品。\n\n \n\n美妆工具是当地Top2火爆美妆品类，主要有：\n\n-美甲；\n\n-面部清洁工具；\n\n-化妆刷。\n\n \n\n另外，唇膏/唇部护理是日单量高的子类目，脸部/眼部美妆SKU出单效率高，增长空间极大，主要有：\n\n \n\n-眼影；\n\n-BB霜；\n\n-眉笔；\n\n-睫毛膏；\n\n-粉底；\n\n-眼线液等日韩系美妆。\n\n \n\n2.4 巴西站：大胆欧美风妆容盛行\n\nShopee巴西站美妆产品的主要消费群体为18岁-34岁的偏年轻人群：\n\n-整体偏好欧美风格，喜欢大胆、夸张、多元化的妆容；\n\n-追求小麦肤色；\n\n-对眼妆的追求高，喜欢烟熏妆、大浓妆，假睫毛和眼线必不可少。\n\n \n\n细分品类方面，美妆、美甲、美发护理及护肤品是重点热销类目。\n\n \n\n巴西市场冬季为6月起，保湿护肤品及配套工具（如精华、洁面仪）畅销；夏季为12月起，防晒霜等产品在此期间热卖。在巴西狂欢节、万圣节、圣诞节等特殊节日与派对场合中，巴西人喜欢极其夸张的妆容。\n\n2.5 泰国站：唇妆、眼妆追求防汗防溶功能\n\n唇妆、眼妆为Shopee泰国站美容产品重点子类目，前者在跨境销售中的增长率和新产品出单率均名列前茅。由于泰国天气炎热，产品的防汗防溶功能十分重要。",
-      "matched_keywords": [
-        "个护",
-        "口腔护理",
-        "美妆",
-        "彩妆",
-        "护肤",
-        "防晒",
-        "精华",
-        "面膜",
-        "男士护理",
-        "男士护肤",
-        "供应链",
-        "选品",
-        "平替"
-      ],
-      "raw": {
-        "query": "美妆 个护 即时零售 品牌 2026",
-        "tavily_score": 0.36398646,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆, 个护, 护肤",
-          "+1 命中经营变量: 价格, SKU"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "high",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆",
-            "彩妆",
-            "护肤",
-            "防晒",
-            "男士护理",
-            "美甲",
-            "个护"
-          ],
-          "business_variables": [
-            "选品",
-            "供应链",
-            "平替",
-            "品类趋势"
-          ],
-          "reason": "文章深入分析了全球主要跨境电商平台（如Lazada、Shopee、TikTok印尼站）的美妆个护热销品类与消费偏好，涵盖防晒、护肤、男士护理等核心个护美妆类目，并提供选品策略建议，虽未直接提及屈臣氏，但其内容对屈臣氏即时零售×个护美妆的品类布局与跨境选品具有显著参考价值。",
-          "recommended_pool": "reference",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=high)"
-      }
-    },
-    {
-      "article_id": "b64b8bc5407f2f1d",
-      "title": "十张图看懂：投资人是如何选择美妆个护的 - 21经济网",
-      "url": "https://www.21jingji.com/article/20221014/herald/158feabef8fa8027b8db3f7060e19f2f.html",
-      "source_name": "tavily_beauty_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.155196+08:00",
-      "time_status": "unknown_time",
-      "summary": "另外，国资背景机构仅有14家参与过美妆个护行业的融资，仅占3%的比重。\n\n另外，至少还有20位具名的个人天使投资者投过国内美妆个护企业，他们主要包括企业家、明星和投资机构合伙人/高管这三类高净值人群：比如佟大为、陈坤、演员车晓和宇传媒联合创始人陈宇凌，原天图资本合伙人王岑、朱拥华等都参与过国内美妆初创企业天使投资。\n\n七、企业战投：腾讯、复星大厂们也频频出手美妆个护\n\n活跃的产业资本有两类，一是以腾讯、小米为代表的互联网大厂；二是以完美日记、HARMAY话梅为代表的美妆产业CVC，围绕自身的主业延伸布局，多元化投资。\n\n腾讯是美妆个护行业出手最活跃的产业资本，投资了国货美瞳品牌MOODY、美妆新零售HAYDON黑洞、妍丽化妆品以及国货护肤品品牌PMPM环球配方、Amiro 。\n\n小米侧重投资个人护理品牌，包括inFace茵菲斯、贝医生、素士科技等。\n\n字节跳动参投口腔护理品牌参半的两轮融资。\n\n完美日记主要进行的是美妆品牌收购行为，包括欧洲高端洁颜霜品牌Eve Lom、Galénic和国产彩妆品牌小奥汀。\n\n话梅在成为独角兽和融资的路上就早早开启了对外投资之路，据IT桔子数据，话梅投资",
-      "content": "另外，国资背景机构仅有14家参与过美妆个护行业的融资，仅占3%的比重。\n\n另外，至少还有20位具名的个人天使投资者投过国内美妆个护企业，他们主要包括企业家、明星和投资机构合伙人/高管这三类高净值人群：比如佟大为、陈坤、演员车晓和宇传媒联合创始人陈宇凌，原天图资本合伙人王岑、朱拥华等都参与过国内美妆初创企业天使投资。\n\n七、企业战投：腾讯、复星大厂们也频频出手美妆个护\n\n活跃的产业资本有两类，一是以腾讯、小米为代表的互联网大厂；二是以完美日记、HARMAY话梅为代表的美妆产业CVC，围绕自身的主业延伸布局，多元化投资。\n\n腾讯是美妆个护行业出手最活跃的产业资本，投资了国货美瞳品牌MOODY、美妆新零售HAYDON黑洞、妍丽化妆品以及国货护肤品品牌PMPM环球配方、Amiro 。\n\n小米侧重投资个人护理品牌，包括inFace茵菲斯、贝医生、素士科技等。\n\n字节跳动参投口腔护理品牌参半的两轮融资。\n\n完美日记主要进行的是美妆品牌收购行为，包括欧洲高端洁颜霜品牌Eve Lom、Galénic和国产彩妆品牌小奥汀。\n\n话梅在成为独角兽和融资的路上就早早开启了对外投资之路，据IT桔子数据，话梅投资了PMPM环球配方和国产香氛品牌宇宙的猜想，收购了海外彩妆品牌Kevyn Aucoin。\n\n复星集团的业务较复杂，在美妆个护领域主要投资布局有植物医生、贝医生、复星津美、母婴功效护肤品牌咿儿润；并收购了海外品牌WEI Beauty、AHAVA。\n\n八、中间方 ：棕榈资本是促成美妆个护投资交易最多的FA\n\n数据显示，至少有42家FA为创业公司提供过美妆行业的财务顾问服务。\n\n成立于2018年的棕榈亚洲资本是新锐的FA机构，在国内美妆投资交易FA中最活跃，主要辅助MOODY、C咖、理然这几家美妆企业完成了融资。 [...] 值得注意的是MOODY从天使轮到C轮共计5轮融资都是由棕榈资本作为财务顾问，使其拿到了近10家知名VC机构的投资。\n\n光源资本成立于2014年，主要帮助C咖、Mistine、头皮护理品牌Spes诗裴丝、大眼睛买买买、林清轩等美妆品牌完成了新融资。\n\n高鹄资本成立于2017年， 由PE投资人创立，以促成并购、大额交易占有优势；在美妆领域，其帮助了美瞳品牌MOODY和溪木源完成10亿元、3亿元C轮融资，并促成了HARMAY话梅的2亿美元C轮及D轮融资， 智能美妆镜品牌Amiro的C轮融资。\n\n九、新机会点：成分党、婴童、男士领域值得挖掘\n\n1. 功效护肤/成分党“大行其道”\n\n在护肤这件事上，新时代的消费者越来越理性，从原先一味相信品牌的背书/某种宣传效果到现在直接关注护肤品的功效成分列表和宣传是否一致，这类所谓的 “成分党”群体正日益壮大。\n\n这一方面是得益于抖音、快手移动传播媒介普及下网红、KOL、美妆博主的科普，消费者关于护肤的知识储备和了解更多；另一方面也反映消费者对于护肤品的功效性这种核心的诉求在不断强化。还有一些新的护肤功效成分也在不断被研究发现。\n\n2. 深挖细分人群的护肤需求\n\n在当前，女性爱美成为了一个“刻板印象”，而绝大多数的美妆护肤产品是为成年女性而研发的，的确，她们是核心购买人群。但仍有一些细分人群的美妆护肤需求没有得到很好地解决或重视，比较典型的是儿童、男士这两大群体。针对男士，护肤需求基本以控油洁面、保湿面霜为主，满足最基础的清洁保湿需求；在彩妆上，产品也非常简化，主要是眉笔、BB霜和润唇膏。\n\n针对儿童，根据最新修订的儿童化妆品监管规定，自2022年5月1日起，申请注册或进行备案的儿童化妆品必须标注“小金盾”（特殊标志，非产品质量认证）。目前国产儿童彩妆产品更多是儿童玩具的形态，因此像凯利达这样的玩具制造商也在涉足儿童彩妆业务。 [...] 国内美妆个护消费品行业私募投资总金额约474亿元，其中，品牌商、零售商和服务商的份额占比约为5:3:2。\n\n在品牌商中，护肤领域投资总额119亿元，占1/4；\n\n彩妆领域投资总额50.6亿元，占比为11%；\n\n身体护理、口腔护理和香氛领域的投资总额为28亿元、16.6亿元、2.6亿元，分别占比6%、3%、1%。\n\n具体来看，是这些头部企业拿走了各自细分领域的多数融资额：\n\n四、历年单笔融资冠军：这十几年中，单笔金额越来越突出\n\n在已透露获投金额的的美妆个护新消费事件中，单笔投资金额持续走高，最近三年更是连续突破10亿元的天花板。\n\n说明，中国美妆行业的投资已有开始向头部集中的趋势。\n\n顺便看下，每年拿钱最多的公司都是谁——\n\n五、独角兽：国内美妆赛道目前跑出三家独角兽\n\n以化妆品小样售卖起家的美妆零售店HARMAY，成立于2013年，在2022年1月成为独角兽，它现在的资方数量超过了27家。\n\n同样为线下美妆零售店的Haydon黑洞成立于2020年，在一年多之后就晋升独角兽，已公布的资方仅有腾讯和高瓴创投。\n\n国货美瞳品牌moody成立于2007年，在融资7次之后，成为独角兽，背后资方数量超过29家，包括高瓴创投、经纬创投、五源资本等等。\n\n六、资方类型：投资美妆个护的多数本土投资人\n\n据IT桔子统计，参与国内美妆个护融资事件的机构有474家，其中94%是本土资本，外资机构仅占比6%，如KKR、KIP韩投伙伴。\n\n从具体角色来看，市场投资机构有326家，占比为64%，是最活跃的投资主体；\n\n产业资本为第二大资方，有114家，占比26%，包括美妆独角兽HARMAY，电商消费行业CVC若羽臣，及腾讯、小米。\n\n另外，国资背景机构仅有14家参与过美妆个护行业的融资，仅占3%的比重。",
-      "matched_keywords": [
-        "个护",
-        "口腔护理",
-        "美妆",
-        "彩妆",
-        "护肤",
-        "香氛",
-        "话梅",
-        "备案",
-        "成分",
-        "成分党",
-        "国货"
-      ],
-      "raw": {
-        "query": "美妆 个护 即时零售 品牌 2026",
-        "tavily_score": 0.21618558,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中美妆个护: 美妆, 个护, 护肤",
-          "+3 命中竞对: 妍丽",
-          "-3 泛领域: 独角兽"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "high",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [
-            "美妆",
-            "个护",
-            "彩妆",
-            "护肤",
-            "香氛"
-          ],
-          "business_variables": [
-            "投资趋势",
-            "品牌布局",
-            "细分市场机会"
-          ],
-          "reason": "文章聚焦美妆个护行业投融资动态及细分赛道机会，虽未直接提及屈臣氏，但涉及即时零售相关品牌（如HAYDON黑洞）、国货美妆趋势及成分党等影响屈臣氏经营的关键背景信息。",
-          "recommended_pool": "reference",
-          "confidence": "medium",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=medium)"
-      }
-    },
-    {
-      "article_id": "cd713ac238034b63",
-      "title": "屈臣氏不想输掉新零售战争- DoNews专栏",
-      "url": "https://www.donews.com/article/detail/5099/89050.html",
-      "source_name": "tavily_beauty_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.912872+08:00",
-      "time_status": "unknown_time",
-      "summary": "logo   logo\n\n\n\n标签: 屈臣氏\n\n关于我们| 电子协议| 合作联系| 蜀ICP备2024059877号-1",
-      "content": "logo   logo\n\n\n\n标签: 屈臣氏\n\n关于我们| 电子协议| 合作联系| 蜀ICP备2024059877号-1",
-      "matched_keywords": [
-        "屈臣氏",
-        "标签"
-      ],
-      "raw": {
-        "query": "屈臣氏 丝芙兰 即时零售 经营",
-        "tavily_score": 0.96909106,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+5 命中屈臣氏: 屈臣氏"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "medium",
-          "business_relevance_type": "indirect",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章标题提及屈臣氏与新零售战争相关，但正文内容缺失且无实质性信息，仅凭标题和标签无法确认是否涉及即时零售×个护美妆的具体经营策略。",
-          "recommended_pool": "reference",
-          "confidence": "low",
-          "llm_reviewed": true
-        },
-        "final_pool": "reference",
-        "final_reason": "LLM推荐reference (confidence=low)"
+        "final_reason": "rule=reject但time=in_window→reference(降级保留)"
       }
     }
   ]

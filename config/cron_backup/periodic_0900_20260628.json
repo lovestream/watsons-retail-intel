@@ -1,0 +1,59 @@
+{
+  "spec": {
+    "id": "8a7bd95a-c17f-40cb-93aa-a88190188f69",
+    "name": "watsons-periodic-0900",
+    "enabled": true,
+    "schedule": {
+      "type": "cron",
+      "cron": "0 9 * * *",
+      "run_at": null,
+      "timezone": "Asia/Shanghai",
+      "repeat_every_days": null,
+      "repeat_end_type": null,
+      "repeat_until": null,
+      "repeat_count": null
+    },
+    "task_type": "agent",
+    "text": null,
+    "request": {
+      "input": [
+        {
+          "content": [
+            {
+              "text": "执行 Watsons 周期报告生成（周报/月报/年报）：\n\ncd /app/working/projects/watsons-retail-intel && python3 -m skills.run_periodic_pipeline.run_periodic_pipeline --project-root . --send-email true --recipient 123399974@qq.com\n\n规则：\n- 周一生成上周周报（上周一~周日的日报汇总）\n- 每月1日生成上月月报（上月所有周报汇总）\n- 1月1日生成上年年报（上年所有月报汇总）\n- 同日冲突时按 周报→月报→年报 顺序串行\n- 非周一/非月初/非元旦则跳过（输出'今天无需生成'）\n- 完成后简洁汇报：生成了什么、报告路径、音频是否成功、邮件是否发送",
+              "type": "text"
+            }
+          ],
+          "role": "user",
+          "type": "message"
+        }
+      ],
+      "session_id": "default",
+      "user_id": "default"
+    },
+    "dispatch": {
+      "type": "channel",
+      "channel": "console",
+      "target": {
+        "user_id": "default",
+        "session_id": "default"
+      },
+      "mode": "final",
+      "meta": {}
+    },
+    "save_result_to_inbox": true,
+    "runtime": {
+      "max_concurrency": 1,
+      "timeout_seconds": 3600,
+      "misfire_grace_seconds": 60,
+      "share_session": true
+    },
+    "meta": {}
+  },
+  "state": {
+    "next_run_at": "2026-06-29T09:00:00+08:00",
+    "last_run_at": "2026-06-28T01:00:14.785548Z",
+    "last_status": "success",
+    "last_error": null
+  }
+}

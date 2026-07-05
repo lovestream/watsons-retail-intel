@@ -1,0 +1,194 @@
+[
+  {
+    "name": "36kr_即时零售",
+    "keyword": "即时零售",
+    "description": "即时零售",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_美妆个护",
+    "keyword": "美妆 个护",
+    "description": "美妆个护",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_新零售美妆",
+    "keyword": "新零售 美妆",
+    "description": "新零售+美妆",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_消费零售屈臣氏",
+    "keyword": "消费 零售 屈臣氏",
+    "description": "消费零售+屈臣氏",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_供应链O2O",
+    "keyword": "供应链 O2O 即时配送",
+    "description": "供应链+O2O+即时配送",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_前置仓",
+    "keyword": "前置仓 即时零售",
+    "description": "前置仓模式",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_闪电仓",
+    "keyword": "闪电仓 美团 京东",
+    "description": "闪电仓/品牌官旗",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_社区团购",
+    "keyword": "社区团购 即时零售",
+    "description": "社区团购",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_到家服务",
+    "keyword": "到家服务 O2O 零售",
+    "description": "到家服务",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_本地生活",
+    "keyword": "本地生活 零售 即时",
+    "description": "本地生活零售",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_屈臣氏",
+    "keyword": "屈臣氏 零售 数字化",
+    "description": "屈臣氏专项",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_万宁",
+    "keyword": "万宁 零售 美妆",
+    "description": "万宁",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_丝芙兰",
+    "keyword": "丝芙兰 美妆 零售",
+    "description": "丝芙兰",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_名创优品",
+    "keyword": "名创优品 零售 美妆",
+    "description": "名创优品",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_美团闪购",
+    "keyword": "美团闪购 即时零售",
+    "description": "美团闪购",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_京东到家",
+    "keyword": "京东到家 即时零售",
+    "description": "京东到家",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_盒马",
+    "keyword": "盒马 即时零售",
+    "description": "盒马",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_酒类即时零售",
+    "keyword": "酒类 即时零售",
+    "description": "酒类即时零售",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_美妆外卖",
+    "keyword": "美妆 外卖 即时配送",
+    "description": "美妆外卖",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_个护到家",
+    "keyword": "个护 到家 即时配送",
+    "description": "个护到家",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_母婴即时零售",
+    "keyword": "母婴 即时零售",
+    "description": "母婴即时零售",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_即时零售配送",
+    "keyword": "即时零售 配送 履约",
+    "description": "即时配送履约",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_零售SaaS",
+    "keyword": "零售 SaaS 数字化",
+    "description": "零售数字化SaaS",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  },
+  {
+    "name": "36kr_私域零售",
+    "keyword": "私域 零售 小程序",
+    "description": "私域零售",
+    "link_count": 0,
+    "sample_titles": [],
+    "status": "empty"
+  }
+]

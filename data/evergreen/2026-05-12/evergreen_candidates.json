@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "date": "2026-05-12",
+    "window_start": "2026-05-12T07:00:00+08:00",
+    "window_end": "2026-05-12T07:12:37.122648+08:00",
+    "total_candidates": 2,
+    "from_reference": 2,
+    "from_rejected": 0,
+    "total_reference_input": 83,
+    "total_rejected_input": 30,
+    "rejection_stats": {
+      "not_old": 97,
+      "low_score": 13,
+      "invalid_page_type": 1,
+      "noise": 0
+    },
+    "selection_criteria": {
+      "min_rule_score": 8,
+      "time_statuses": [
+        "old",
+        "unknown_time",
+        "week_fallback"
+      ],
+      "valid_page_types": [
+        "report",
+        "article",
+        "unknown",
+        "news"
+      ]
+    },
+    "created_at": "2026-05-12T07:12:37.122669+08:00"
+  },
+  "articles": [
+    {
+      "article_id": "cfbcc29f3bd5d31c",
+      "title": "开放达人“小时达”带货：抖音加码即时零售",
+      "url": "https://xinwen.bjd.com.cn/content/s67da89efe4b08edd28f6706a.html",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "",
+      "summary": "北京商报  | 记者 魏蔚 \n\n2025-03-19 17:10 语音播报\n\n热点关注\n\n进入频道\n\n“抖音小时达带货权限面向全量电商达人开放，只要达人拥有完整的电商带货权限，即可自动开通小时达商品带货权限。”3月18日，抖音小时达相关负责人告诉北京商报记者。获得权限后，达人可在小时达获得：发布短视频添加商品、发布图文添加商品、直播间添加商品的权限，商品橱窗权限暂未开通。根据易观分析数据，2024",
+      "published_at": "",
+      "collected_at": "2026-05-12T07:09:27.246396+08:00",
+      "reason": "",
+      "selected_at": "2026-05-12T07:12:37.122438+08:00"
+    },
+    {
+      "article_id": "5dd46b3b128474fc",
+      "title": "抖音小时达加速，即时零售涌现新变量-36氪",
+      "url": "https://m.36kr.com/p/2985414619766406",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "",
+      "summary": "随着抖音外卖转回抖音生活服务，抖音小时达也于9月24日全国开放，并在国庆前进行服务商招商。在对服务商的招募上，抖音即时零售非常看重服务商的内容能力和流量能力，比如其中一项要求就是：所服务商家累计开播时长达到100小时。\n\n另外据说，现在入驻小时达的商家享受配送费高额补贴，「5公里内一单3.5元，比一些同行便宜40%」。\n\n抖音小时达正在成为重新活跃的即时零售市场的又一个变量。\n\n## 02 抖音怎",
+      "published_at": "",
+      "collected_at": "2026-05-12T07:09:25.018991+08:00",
+      "reason": "",
+      "selected_at": "2026-05-12T07:12:37.122546+08:00"
+    }
+  ]
+}

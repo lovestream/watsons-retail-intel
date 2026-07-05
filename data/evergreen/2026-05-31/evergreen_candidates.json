@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "date": "2026-05-31",
+    "window_start": "2026-05-31T07:00:00+08:00",
+    "window_end": "2026-05-31T07:27:09.973286+08:00",
+    "total_candidates": 3,
+    "from_reference": 2,
+    "from_rejected": 1,
+    "total_reference_input": 40,
+    "total_rejected_input": 96,
+    "rejection_stats": {
+      "not_old": 43,
+      "low_score": 84,
+      "invalid_page_type": 6,
+      "noise": 0
+    },
+    "selection_criteria": {
+      "min_rule_score": 8,
+      "time_statuses": [
+        "week_fallback",
+        "old",
+        "unknown_time"
+      ],
+      "valid_page_types": [
+        "unknown",
+        "news",
+        "article",
+        "report"
+      ]
+    },
+    "created_at": "2026-05-31T07:27:09.973307+08:00"
+  },
+  "articles": [
+    {
+      "article_id": "8eb75623bdd97baa",
+      "title": "2万亿开市客，悄然入驻京东",
+      "url": "https://h5.ifeng.com/c/vivo/v002dJ4ctJMeE9Lcs9c0rxHWiYmqf6kHXgkdoOIzKcM5is4__?isNews=1&showComments=0",
+      "source_name": "tavily_broad",
+      "source_type": "tavily_broad",
+      "source_tier": "",
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 11,
+      "evergreen_score": 10.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "rejected",
+      "category": "",
+      "summary": "若能通过京东积累足够线上会员，且验证标品到家需求，开市客后续可能加速布局前置仓，或者深化本土电商合作。\n反之，若整体效果一般，仅作“品宣橱窗”而无实质履约网络跟进，其与山姆在全渠道会员渗透率上的差距仍难缩小。\n“开市客的全球成功，靠极致精选与大店模型，中国市场已被即时零售重新定义。”\n\n上述从业者告诉记者，单纯复制美式大店，已难以满足“今天要、明天到”甚至“一小时达”的城市家庭预期，线上破冰是必要",
+      "published_at": "",
+      "collected_at": "2026-05-31T07:13:06.183621+08:00",
+      "reason": "",
+      "selected_at": "2026-05-31T07:27:09.973222+08:00"
+    },
+    {
+      "article_id": "f8e75859dbf84722",
+      "title": "丝芙兰、屈臣氏、妍丽集体变阵，什么信号？",
+      "url": "https://m.sohu.com/a/1027180064_121353633?scm=10001.325_13-325_13.0.0-0-0-0-0.5_1334",
+      "source_name": "xcrawl_11",
+      "source_type": "xcrawl",
+      "source_tier": "tier3_anchor",
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 9,
+      "evergreen_score": 8.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "屈臣氏",
+      "summary": "6天前 — 屈臣氏的最新调整发生在门店、货盘和服务等多个层面显得更为系统化。 屈臣氏全新概念店「Watsons Studio」全国首店. 去年3月以来，屈臣氏陆续公布多项 ...",
+      "published_at": "Mon, 25 May 2026 07:00:46 +0800",
+      "collected_at": "2026-05-31T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-05-31T07:27:09.972859+08:00"
+    },
+    {
+      "article_id": "e9390a644b36c91f",
+      "title": "美妆外卖闪电仓究竟要革谁的命？",
+      "url": "https://zhuanlan.zhihu.com/p/636436617",
+      "source_name": "xcrawl_17",
+      "source_type": "xcrawl",
+      "source_tier": 3,
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "美妆个护",
+      "summary": "闪电仓大家可能早有耳闻，不同于以往生鲜的重货、重资产模式，通过便宜的价格，低廉的成本，迅速占领了消费者市场。 其实闪电仓也就是我们常说的便利店前置仓，提供30分钟内 ...",
+      "published_at": "",
+      "collected_at": "2026-05-31T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-05-31T07:27:09.972946+08:00"
+    }
+  ]
+}

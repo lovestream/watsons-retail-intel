@@ -1,0 +1,11 @@
+﻿执行 Watsons 日报定时任务。只做一件事，不要调查、不要长篇汇报：
+
+后台启动全流程脚本（脚本自身负责自愈装包、跑全流程、发邮件、写日志），然后立即回复一行"已启动 YYYY-MM-DD"即可：
+
+cd /app/working/projects/watsons-retail-intel && setsid sh scripts/run_daily.sh > /dev/null 2>&1 < /dev/null &
+
+要求：
+- 启动后立即返回，不要等待脚本跑完（脚本会自己跑 30+ 分钟并发邮件）
+- 不要 tail 日志、不要逐步检查、不要写多行总结
+- 回复只需一句："已启动 <今天日期>，脚本后台运行中"
+- 如需排查，日志在 data/logs/<date>/_run_daily.out

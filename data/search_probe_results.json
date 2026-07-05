@@ -1,0 +1,271 @@
+[
+  {
+    "name": "钛媒体-即时零售",
+    "url": "https://www.tmtpost.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "selector": "a[href*='/article/'], .search-result a, .post-title a, h3 a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "钛媒体-美妆",
+    "url": "https://www.tmtpost.com/search?q=%E7%BE%8E%E5%A6%86+%E4%B8%AA%E6%8A%A4",
+    "category": "finance_tech",
+    "selector": "a[href*='/article/'], .search-result a, .post-title a, h3 a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "界面新闻-即时零售",
+    "url": "https://www.jiemian.com/search/%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE.html",
+    "category": "finance_tech",
+    "selector": "a[href*='/article/'], .news-item a, .search-result a, h3 a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "界面新闻-美妆",
+    "url": "https://www.jiemian.com/search/%E7%BE%8E%E5%A6%86.html",
+    "category": "finance_tech",
+    "selector": "a[href*='/article/'], .news-item a, .search-result a, h3 a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "财联社-即时零售",
+    "url": "https://www.cls.cn/search?keyword=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "selector": "a[href*='/detail/'], .search-result a, h3 a, .title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "财联社-美妆消费",
+    "url": "https://www.cls.cn/search?keyword=%E7%BE%8E%E5%A6%86+%E6%B6%88%E8%B4%B9",
+    "category": "finance_tech",
+    "selector": "a[href*='/detail/'], .search-result a, h3 a, .title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "每日经济新闻-即时零售",
+    "url": "https://www.nbd.com.cn/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "status": "error",
+    "error": "Page.goto: net::ERR_TOO_MANY_REDIRECTS at https://www.nbd.com.cn/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B"
+  },
+  {
+    "name": "每日经济新闻-美妆",
+    "url": "https://www.nbd.com.cn/search?q=%E7%BE%8E%E5%A6%86+%E4%B8%AA%E6%8A%A4",
+    "category": "finance_tech",
+    "status": "error",
+    "error": "Page.goto: net::ERR_TOO_MANY_REDIRECTS at https://www.nbd.com.cn/search?q=%E7%BE%8E%E5%A6%86+%E4%B8%"
+  },
+  {
+    "name": "第一财经-即时零售",
+    "url": "https://www.yicai.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "selector": "a[href*='/news/'], .search-list a, h3 a, .title a",
+    "link_count": 61,
+    "samples": [
+      "新闻",
+      "A股",
+      "科创板"
+    ],
+    "status": "ok"
+  },
+  {
+    "name": "第一财经-美妆",
+    "url": "https://www.yicai.com/search?q=%E7%BE%8E%E5%A6%86+%E4%B8%AA%E6%8A%A4",
+    "category": "finance_tech",
+    "selector": "a[href*='/news/'], .search-list a, h3 a, .title a",
+    "link_count": 61,
+    "samples": [
+      "新闻",
+      "A股",
+      "科创板"
+    ],
+    "status": "ok"
+  },
+  {
+    "name": "亿欧-即时零售",
+    "url": "https://www.iyiou.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "selector": "a[href*='/article/'], .search-item a, h3 a, .title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "亿欧-美妆",
+    "url": "https://www.iyiou.com/search?q=%E7%BE%8E%E5%A6%86+%E4%B8%AA%E6%8A%A4",
+    "category": "finance_tech",
+    "selector": "a[href*='/article/'], .search-item a, h3 a, .title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "创业邦-即时零售",
+    "url": "https://www.cyzone.cn/search?keyword=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "selector": "a[href*='/article/'], .search-item a, h3 a, .list-title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "投资界-消费零售",
+    "url": "https://www.pedaily.cn/search?q=%E6%B6%88%E8%B4%B9+%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "selector": "a[href*='/news/'], .search-item a, h3 a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "华尔街见闻-即时零售",
+    "url": "https://wallstreetcn.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "selector": "a[href*='/article/'], .search-item a, h3 a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "经济观察报-新零售",
+    "url": "https://www.eeo.com.cn/search/?keyword=%E6%96%B0%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "selector": "a[href*='/article/'], .search-item a, h3 a",
+    "link_count": 1,
+    "samples": [
+      "免费注册"
+    ],
+    "status": "low"
+  },
+  {
+    "name": "DoNews-即时零售",
+    "url": "https://www.donews.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "selector": "a[href*='/article/'], h3 a, .title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "品玩-即时零售",
+    "url": "https://www.pingwest.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "selector": "a[href*='/a/'], h3 a, .title a",
+    "link_count": 1,
+    "samples": [
+      "品玩"
+    ],
+    "status": "low"
+  },
+  {
+    "name": "极客公园-即时零售",
+    "url": "https://www.geekpark.net/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "finance_tech",
+    "selector": "a[href*='/news/'], h3 a, .title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "美妆头条-搜索",
+    "url": "https://mztoutiao.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "beauty_media",
+    "selector": "a[href*='/article/'], h3 a, .title a, .news-title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "聚美丽-搜索",
+    "url": "https://www.jumeili.cn/search?q=%E7%BE%8E%E5%A6%86+%E9%9B%B6%E5%94%AE",
+    "category": "beauty_media",
+    "selector": "a[href*='/article/'], h3 a, .title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "Foodaily-即时零售",
+    "url": "https://www.foodaily.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "fmcg",
+    "selector": "a[href*='/article/'], h3 a, .title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "网易财经-即时零售",
+    "url": "https://money.163.com/special/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "portal",
+    "status": "error",
+    "error": "Page.goto: net::ERR_ADDRESS_UNREACHABLE at https://money.163.com/special/search?q=%E5%8D%B3%E6%97%B6"
+  },
+  {
+    "name": "凤凰财经-即时零售",
+    "url": "https://search.ifeng.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "portal",
+    "selector": "a[href*='/article/'], h3 a, .title a",
+    "link_count": 10,
+    "samples": [
+      "特朗普称中方同意购买200架波音飞机，外交部回应",
+      "习近平同美国总统特朗普在中南海小范围会晤",
+      "赵本山女儿自曝生活窘迫 父母未提供经济支持"
+    ],
+    "status": "ok"
+  },
+  {
+    "name": "新华网-即时零售",
+    "url": "https://so.xinhuanet.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "portal",
+    "status": "error",
+    "error": "Page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://so.xinhuanet.com/search?q=%E5%8D%B3%E6%97%B6"
+  },
+  {
+    "name": "东方财富-即时零售",
+    "url": "https://so.eastmoney.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "category": "portal",
+    "selector": "a[href*='/news/'], h3 a, .title a, .search-item a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "VOGUE-美妆",
+    "url": "https://www.vogue.com.cn/search?q=%E7%BE%8E%E5%A6%86+%E9%9B%B6%E5%94%AE",
+    "category": "fashion",
+    "selector": "a[href*='/article/'], h3 a, .title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "ELLE-美妆",
+    "url": "https://www.ellechina.com/search?q=%E7%BE%8E%E5%A6%86+%E9%9B%B6%E5%94%AE",
+    "category": "fashion",
+    "selector": "a[href*='/article/'], h3 a, .title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  },
+  {
+    "name": "瑞丽-美妆",
+    "url": "https://www.rayli.com.cn/search?q=%E7%BE%8E%E5%A6%86",
+    "category": "fashion",
+    "selector": "a[href*='/article/'], h3 a, .title a",
+    "link_count": 0,
+    "samples": [],
+    "status": "low"
+  }
+]

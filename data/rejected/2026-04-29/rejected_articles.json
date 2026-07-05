@@ -3,1810 +3,549 @@
     "version": "2.0",
     "date": "2026-04-29",
     "source_file": "/app/working/projects/watsons-retail-intel/data/raw/2026-04-29/raw_articles.json",
-    "created_at": "2026-05-01T00:00:07.471705",
-    "total_raw": 128,
-    "total_rejected": 46,
+    "created_at": "2026-05-01T01:39:55.864061",
+    "total_raw": 48,
+    "total_rejected": 16,
     "reject_reason_distribution": {
-      "reject": 46,
-      "reference": 35,
-      "main": 47
+      "main": 21,
+      "reference": 11,
+      "reject": 16
     }
   },
   "articles": [
     {
-      "article_id": "4cc3519deeaf488c",
-      "title": "央视新闻：医保卡变“购物卡”？揭秘药店串换药品的“两本账”",
-      "url": "https://www.nhsa.gov.cn/art/2026/4/29/art_14_20362.html",
-      "content": "2天前 — 根据国家医保局3号令《零售药店医疗保障定点管理暂行办法》第四十条规定，定点零售药店将非医保药品或其他商品串换成医保药品，倒卖医保药品或套取医疗保障 ...",
-      "summary": "2天前 — 根据国家医保局3号令《零售药店医疗保障定点管理暂行办法》第四十条规定，定点零售药店将非医保药品或其他商品串换成医保药品，倒卖医保药品或套取医疗保障 ...",
-      "published_at": "Wed, 29 Apr 2026 07:55:10 +0800",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "near_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
+      "article_id": "2ce790a47ead9e3e",
+      "title": "为了永生，硅谷富豪想要养“无脑人”？",
+      "url": "https://www.36kr.com/p/3784276861148168",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 27 Apr 2026 00:16:37 GMT",
+      "collected_at": "2026-05-01T09:36:41.496233+08:00",
+      "time_status": "old",
+      "summary": "你想长生不老吗？大多数人当段子听，但硅谷那帮富豪真的开始行动了。",
+      "content": "你想长生不老吗？大多数人当段子听，但硅谷那帮富豪真的开始行动了。",
       "matched_keywords": [],
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "+1 time_status=near_window"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章聚焦医保卡滥用和药店违规操作，未涉及屈臣氏即时零售或个护美妆经营相关内容。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "6a0607b18cab943b",
-      "title": "新浪零售行业热点小时报丨2026年04月29日13时",
-      "url": "https://k.sina.com.cn/article_7857201856_1d45362c001904v0co.html",
-      "content": "2天前 — 关联交易基本情况概述供销大集2026年度日常关联交易预计主要涉及两大关联方类别：一是控股股东北京中合农信企业管理咨询有限公司（以下简称“中合农信”）及其 ...",
-      "summary": "2天前 — 关联交易基本情况概述供销大集2026年度日常关联交易预计主要涉及两大关联方类别：一是控股股东北京中合农信企业管理咨询有限公司（以下简称“中合农信”）及其 ...",
-      "published_at": "Wed, 29 Apr 2026 07:55:10 +0800",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "near_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
       "raw": {
-        "duplicate_sources": [
-          "xcrawl_instant_retail_core"
-        ]
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3784276861148168"
       },
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "+1 time_status=near_window"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "none",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章内容涉及供销大集关联交易，与屈臣氏即时零售×个护美妆经营无直接或间接关联。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "341d7eec89e517fe",
-      "title": "重庆市2026年智能家居产品（含适老化家居产品）购新补贴 ...",
-      "url": "https://sww.cq.gov.cn/zwgk_247/zfxxgkml/qtfdxx/tzgg/202604/t20260429_15643495.html",
-      "content": "2天前 — ... 政策商户/品牌申报”即可进入报名平台，选择“品牌报名”）提交报名相关资料。首次报名截止时间为2026年4月29日18:00，后续持续开放增补申报渠道，每月定期评审。",
-      "summary": "2天前 — ... 政策商户/品牌申报”即可进入报名平台，选择“品牌报名”）提交报名相关资料。首次报名截止时间为2026年4月29日18:00，后续持续开放增补申报渠道，每月定期评审。",
-      "published_at": "Wed, 29 Apr 2026 07:55:10 +0800",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "near_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "补贴",
-        "政策"
-      ],
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 补贴",
-          "+2 source_tier=1",
-          "+1 time_status=near_window"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "none",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章内容聚焦于重庆市智能家居及适老化家居产品的政府补贴政策，与屈臣氏即时零售×个护美妆业务无直接关联。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "a9c23e45b62b76fe",
-      "title": "“全链条一锅端”！市场监管总局，开展半年专项整治！",
-      "url": "https://www.stcn.com/article/detail/3871525.html",
-      "content": "2天前 — 近日，市场监管总局印发《关于开展网络食品销售虚假宣传专项整治行动的通知》，决定从现在起在全国范围内开展为期半年的专项整治行动。4月29日，市场监管 ...",
-      "summary": "2天前 — 近日，市场监管总局印发《关于开展网络食品销售虚假宣传专项整治行动的通知》，决定从现在起在全国范围内开展为期半年的专项整治行动。4月29日，市场监管 ...",
-      "published_at": "Wed, 29 Apr 2026 07:55:10 +0800",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "near_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "+1 time_status=near_window"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章聚焦于网络食品销售虚假宣传整治，未涉及屈臣氏即时零售或个护美妆业务。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "298ea86a9a330752",
-      "title": "企业合规风险提示与预警信息【总第159期】",
-      "url": "https://sf.sz.gov.cn/ztzl/hg/yjxx/zxxx/content/post_12756470.html",
-      "content": "3天前 — 2026年4月1日，国家税务总局发布《关于啤酒计征消费税有关问题的公告》，对啤酒产品的消费税计征方式及相关政策进行了明确。该公告旨在进一步细化和规范啤酒 ...",
-      "summary": "3天前 — 2026年4月1日，国家税务总局发布《关于啤酒计征消费税有关问题的公告》，对啤酒产品的消费税计征方式及相关政策进行了明确。该公告旨在进一步细化和规范啤酒 ...",
-      "published_at": "Tue, 28 Apr 2026 07:55:10 +0800",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "in_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "合规",
-        "政策"
-      ],
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章讨论的是啤酒消费税政策，与屈臣氏即时零售×个护美妆业务无直接关联。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "396b469d59e4d7bf",
-      "title": "兴安盟市场监管局开展网络餐饮平台专项督导，筑牢外卖 ...",
-      "url": "https://www.cfsn.cn/news/detail/737/346879.html?view=pc",
-      "content": "3天前 — 执法人员紧盯平台入网商户资质审核、线上信息公示等关键环节，通过随机抽查入网商户台账资料、逐一核对线上公示信息等方式，严厉排查“一证多用”、虚假上线、 ...",
-      "summary": "3天前 — 执法人员紧盯平台入网商户资质审核、线上信息公示等关键环节，通过随机抽查入网商户台账资料、逐一核对线上公示信息等方式，严厉排查“一证多用”、虚假上线、 ...",
-      "published_at": "Tue, 28 Apr 2026 07:55:17 +0800",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "in_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章聚焦于网络餐饮平台监管，未涉及屈臣氏、即时零售或个护美妆相关内容。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "a6e5c1819f808aad",
-      "title": "广东省市场监督管理局召开网络餐饮平台行政指导会",
-      "url": "https://www.21jingji.com/article/20260425/herald/09ee0d0850cbfc7fd91bbdf1871b8809.html",
-      "content": "要严格入网商家资质审核把关，落实入驻审核首要责任，严格核验餐饮商家营业执照、食品经营许可证等法定资质，健全资质动态核验与常态化排查机制，严禁无证无照 ...",
-      "summary": "要严格入网商家资质审核把关，落实入驻审核首要责任，严格核验餐饮商家营业执照、食品经营许可证等法定资质，健全资质动态核验与常态化排查机制，严禁无证无照 ...",
-      "published_at": "",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
-      }
-    },
-    {
-      "article_id": "0afc758f7c5678b8",
-      "title": "武定县“五举措”推进网络餐饮专项整治走深走实",
-      "url": "https://www.ynwd.gov.cn/info/1041/331761.htm",
-      "content": "强化平台对入网商户的审核和管控，对35家不合规入网的网络餐饮经营主体作下架处理。督促外卖平台严格履行法定义务，坚决杜绝“幽灵外卖”“黑外卖”入驻，从源头 ...",
-      "summary": "强化平台对入网商户的审核和管控，对35家不合规入网的网络餐饮经营主体作下架处理。督促外卖平台严格履行法定义务，坚决杜绝“幽灵外卖”“黑外卖”入驻，从源头 ...",
-      "published_at": "",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "合规"
-      ],
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
-      }
-    },
-    {
-      "article_id": "6a1ab2f0ca7fe40c",
-      "title": "克什克腾旗人民政府网_头条",
-      "url": "http://www.kskt.gov.cn/zzllms/zzllmstt/index_2.html",
-      "content": "《规定》细化了外卖平台对商户资质审核、信息公示、过程管控、问题处置等全链条的管理责任，要求外卖平台做到备案即担责、上线即受管、经营即履责，切实将 ...",
-      "summary": "《规定》细化了外卖平台对商户资质审核、信息公示、过程管控、问题处置等全链条的管理责任，要求外卖平台做到备案即担责、上线即受管、经营即履责，切实将 ...",
-      "published_at": "",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "备案"
-      ],
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
-      }
-    },
-    {
-      "article_id": "5eb6823a3e3d146c",
-      "title": "外卖新规来了！6月1日起实施",
-      "url": "https://finance.sina.cn/2026-02-27/detail-inhpfxrk3700671.d.html?vt=4",
-      "content": "将于6月1日正式实施. 《规定》细化了外卖平台对商户资质审核、信息公示、过程管控、问题处置等全链条的管理责任，要求外卖平台做到备案即担责、上线即受管、经营即履责 ...",
-      "summary": "将于6月1日正式实施. 《规定》细化了外卖平台对商户资质审核、信息公示、过程管控、问题处置等全链条的管理责任，要求外卖平台做到备案即担责、上线即受管、经营即履责 ...",
-      "published_at": "",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "备案",
-        "新规"
-      ],
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
-      }
-    },
-    {
-      "article_id": "fbb6a6dde6c09237",
-      "title": "中国宏观经济、 行业趋势、投资交易及税务快讯",
-      "url": "https://assets.kpmg.com/content/dam/kpmgsites/cn/pdf/zh/2026/03/consumer-and-retail-industry-analysis-2025-h2.pdf.coredownload.inline.pdf",
-      "content": "",
-      "summary": "",
-      "published_at": "",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
       "filter": {
         "rule_score": -3,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+2 source_tier=1",
-          "-3 泛领域: 宏观经济",
+          "-1 time_status=old(搜索源/allow_old)",
           "-2 内容极短且无关键词"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章标题和来源均聚焦宏观经济与税务，未提及屈臣氏、即时零售或个护美妆相关内容。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "0cefa42aba7e51c5",
-      "title": "吉利控股集团2024可持续发展报告.pdf",
-      "url": "http://esg-disclosure.com/%E6%8A%A5%E5%91%8A/%E5%90%89%E5%88%A9%E6%8E%A7%E8%82%A1%E9%9B%86%E5%9B%A22024%E5%8F%AF%E6%8C%81%E7%BB%AD%E5%8F%91%E5%B1%95%E6%8A%A5%E5%91%8A.pdf",
-      "content": "",
-      "summary": "",
-      "published_at": "",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "-2 内容极短且无关键词"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "none",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章内容涉及吉利控股集团的可持续发展报告，与屈臣氏即时零售及个护美妆经营无直接关联。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "7e2d6cc2a730689a",
-      "title": "重庆环保储煤采购信息",
-      "url": "https://www.bidcenter.com.cn/zhaobiao/zbkeyw-95839-500000-5.html",
-      "content": "2天前 — 近期重庆关于环保储煤的采购信息，业主单位分别为：辰致（重庆）轻量化科技有限公司，辰致（重庆）制动系统有限公司，辰致科技有限公司，项目名称分别是：420NM ...",
-      "summary": "2天前 — 近期重庆关于环保储煤的采购信息，业主单位分别为：辰致（重庆）轻量化科技有限公司，辰致（重庆）制动系统有限公司，辰致科技有限公司，项目名称分别是：420NM ...",
-      "published_at": "Wed, 29 Apr 2026 07:55:19 +0800",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "near_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "+1 time_status=near_window"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "none",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章内容涉及重庆环保储煤采购，与屈臣氏即时零售×个护美妆业务无任何关联。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "5affbc6d4cc34fe1",
-      "title": "第一部分2024 年改革创新案例",
-      "url": "https://ghzrzyw.beijing.gov.cn/zhengwuxinxi/zxzt/yhyshjbljzxkzt/wskt/202506/P020250610565693508526.pdf",
-      "content": "",
-      "summary": "",
-      "published_at": "",
-      "source_name": "xcrawl_platform_regulation",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "compliance_signal",
-      "category": "政策合规",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "-2 内容极短且无关键词"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章标题和来源均无明确指向屈臣氏或即时零售×个护美妆相关内容，且摘要与正文信息缺失，无法建立有效关联。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "3ec88a8e6bc90fd3",
-      "title": "2026六大黑马品牌曝光！卖家都在抄它们的打法",
-      "url": "https://www.upkuajing.com/knowledge/zixun/25692",
-      "content": "以肉类海鲜订阅制品牌ButcherBox 为例，该品牌2015 年以线上订阅模式起家，今年年初正式与塔吉特（Target）达成首次重大零售合作，正式切入线下渠道。另有品牌 ...",
-      "summary": "以肉类海鲜订阅制品牌ButcherBox 为例，该品牌2015 年以线上订阅模式起家，今年年初正式与塔吉特（Target）达成首次重大零售合作，正式切入线下渠道。另有品牌 ...",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "曝光"
-      ],
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-3<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-3<2"
       }
     },
     {
-      "article_id": "f7110f28b483c4e7",
-      "title": "贝泰妮股票_数据 - 东方财富",
-      "url": "https://data.eastmoney.com/stockdata/300957.html",
-      "content": "2026年04月29日发布《贝泰妮:关于回购股份事项前十大股东及前十大无限售条件股东持股情况的公告》等2条公告. 2026年04月27日发布《贝泰妮:3、国信证券股份有限公司关于云南 ...",
-      "summary": "2026年04月29日发布《贝泰妮:关于回购股份事项前十大股东及前十大无限售条件股东持股情况的公告》等2条公告. 2026年04月27日发布《贝泰妮:3、国信证券股份有限公司关于云南 ...",
-      "published_at": "Wed, 29 Apr 2026 00:00:00 +0800",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "in_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
+      "article_id": "3195f6c6f122afcc",
+      "title": "300亿蒸发，山西民工首富“破产”",
+      "url": "https://www.36kr.com/p/3764694611001862",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 13 Apr 2026 03:43:10 GMT",
+      "collected_at": "2026-05-01T09:36:41.496958+08:00",
+      "time_status": "old",
+      "summary": "信用破产的杨建新，能否重回巅峰？",
+      "content": "信用破产的杨建新，能否重回巅峰？",
       "matched_keywords": [],
-      "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "+2 time_status=in_window"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章内容仅涉及贝泰妮公司公告及股东持股情况，未提及屈臣氏、即时零售或个护美妆经营相关动态。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "a4d3c7813d61950d",
-      "title": "[民生证券]:零售周观点：春节假期各省市消费回暖明显",
-      "url": "https://www.sdyanbao.com/detail/346513",
-      "content": "SZ 贝泰妮138.99 2.71 3.52 4.52 51 39 31 推荐603605.SH 珀莱雅165.81 ... 国联民生证券：银行业中国货币观察：如何理解近期OMO余额和资金利率双降？ pdf.",
-      "summary": "SZ 贝泰妮138.99 2.71 3.52 4.52 51 39 31 推荐603605.SH 珀莱雅165.81 ... 国联民生证券：银行业中国货币观察：如何理解近期OMO余额和资金利率双降？ pdf.",
-      "published_at": "",
-      "source_name": "xcrawl_beauty_retail",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "个护美妆",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "国货"
-      ],
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
-      }
-    },
-    {
-      "article_id": "9f59d2222cde5582",
-      "title": "2026年的零售业：谁在崛起，谁在崩塌",
-      "url": "https://www.tmtpost.com/7970017.html",
-      "content": "3天前 — 奥乐齐在苏州举办首届中国合作伙伴大会，官宣百店达成，并公布2026年新增超50家门店的计划——自2023年以来，门店数量以年均40%的速度狂奔。 美团快乐猴也在3月 ...",
-      "summary": "3天前 — 奥乐齐在苏州举办首届中国合作伙伴大会，官宣百店达成，并公布2026年新增超50家门店的计划——自2023年以来，门店数量以年均40%的速度狂奔。 美团快乐猴也在3月 ...",
-      "published_at": "Tue, 28 Apr 2026 07:55:09 +0800",
-      "source_name": "xcrawl_instant_retail_core",
-      "source_type": "xcrawl",
-      "time_status": "in_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
       "raw": {
-        "duplicate_sources": [
-          "xcrawl_warehouse",
-          "xcrawl_warehouse"
-        ]
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3764694611001862"
       },
-      "matched_keywords": [],
       "filter": {
-        "rule_score": 4,
-        "rule_decision": "review",
+        "rule_score": -3,
+        "rule_decision": "reject",
         "rule_reasons": [
-          "+2 source_tier=1",
-          "+2 time_status=in_window"
+          "-1 time_status=old(搜索源/allow_old)",
+          "-2 内容极短且无关键词"
         ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章主要讨论奥乐齐和美团快乐猴的扩张动态，未提及屈臣氏或即时零售×个护美妆相关内容。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
+        "llm_reviewed": false,
+        "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-3<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-3<2"
       }
     },
     {
-      "article_id": "72af39f69b4e2b97",
-      "title": "隨著商務部預計2026年中國即時零售規模突破1萬億元",
-      "url": "https://www.facebook.com/bossmindmedia/posts/%E9%9A%A8%E8%91%97%E5%95%86%E5%8B%99%E9%83%A8%E9%A0%90%E8%A8%882026%E5%B9%B4%E4%B8%AD%E5%9C%8B%E5%8D%B3%E6%99%82%E9%9B%B6%E5%94%AE%E8%A6%8F%E6%A8%A1%E7%AA%81%E7%A0%B41%E8%90%AC%E5%84%84%E5%85%83%E9%85%8D%E9%80%81%E8%A1%8C%E6%A5%AD%E5%B0%A4%E5%85%B6%E6%98%AF%E5%8D%B3%E6%99%82%E9%85%8D%E9%80%81%E5%B7%B2%E5%BE%9E%E9%A4%90%E9%A3%B2%E5%A4%96%E8%B3%A3%E7%9A%84%E9%80%B2%E5%8C%96%E7%82%BA%E6%94%AF%E6%92%90%E5%85%A8%E7%A4%BE%E6%9C%83%E8%90%AC%E7%89%A9%E5%88%B0%E5%AE%B6%E7%9A%84%E9%97%9C%E9%8D%B5%E5%9F%BA%E7%A4%8E%E8%A8%AD%E6%96%BD%E7%84%B6%E8%80%8C%E5%9C%A8%E8%90%AC%E5%84%84%E8%A6%8F%E6%A8%A1%E7%9A%84%E8%AA%98%E6%83%91%E4%B8%8B%E5%B9%B3%E5%8F%B0%E4%BB%A5%E8%87%B3%E8%A1%8C%E6%A5%AD/974738224902704/",
-      "content": "隨著商務部預計2026年中國即時零售規模突破1萬億元，配送行業尤其是即時配送，已從餐飲外賣的進化為支撐全社會「萬物到家」的關鍵基礎設施。",
-      "summary": "隨著商務部預計2026年中國即時零售規模突破1萬億元，配送行業尤其是即時配送，已從餐飲外賣的進化為支撐全社會「萬物到家」的關鍵基礎設施。",
-      "published_at": "",
-      "source_name": "xcrawl_instant_retail_core",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
+      "article_id": "4a10b4ed2efba88f",
+      "title": "北冰洋最不该做的就是拿信任换利润",
+      "url": "https://www.36kr.com/p/3759425801912832",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 09 Apr 2026 10:29:22 GMT",
+      "collected_at": "2026-05-01T09:36:41.497513+08:00",
+      "time_status": "old",
+      "summary": "当北冰洋也开始沉迷于包装上的文字游戏，它消耗的就不只是某一款产品的口碑，而是整个品牌最为宝贵的信誉资产。",
+      "content": "当北冰洋也开始沉迷于包装上的文字游戏，它消耗的就不只是某一款产品的口碑，而是整个品牌最为宝贵的信誉资产。",
+      "matched_keywords": [],
       "raw": {
-        "duplicate_sources": [
-          "xcrawl_warehouse"
-        ]
-      },
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
-      }
-    },
-    {
-      "article_id": "3c264eb860830816",
-      "title": "国家数据",
-      "url": "https://data.stats.gov.cn/",
-      "content": "... 增长情况. 社会消费品零售总额. 季度. 分季国内生产总值指数. 地区生产总值. 国内 ... 年资金流量表. 2012年资金流量表. 发布日程. 2026 年 4月. 一, 二, 三, 四, 五, 六, 日.",
-      "summary": "... 增长情况. 社会消费品零售总额. 季度. 分季国内生产总值指数. 地区生产总值. 国内 ... 年资金流量表. 2012年资金流量表. 发布日程. 2026 年 4月. 一, 二, 三, 四, 五, 六, 日.",
-      "published_at": "",
-      "source_name": "xcrawl_instant_retail_core",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "流量"
-      ],
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+1 命中经营变量: 流量",
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章内容为国家宏观经济数据，未涉及屈臣氏即时零售或个护美妆相关业务。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "44f15856d71fed8e",
-      "title": "新浪零售行业热点小时报丨2026年04月29日08时",
-      "url": "https://cj.sina.cn/articles/view/7857201856/1d45362c001904uhng?froms=ggmp",
-      "content": "2天前 — 新浪零售行业热点小时报丨2026年04月29日08时_今日实时零售行业热点速递 · 1、天音控股的前世今生：营收905.7亿行业居首，净利润1112.54万排第五，资产负债率 ...",
-      "summary": "2天前 — 新浪零售行业热点小时报丨2026年04月29日08时_今日实时零售行业热点速递 · 1、天音控股的前世今生：营收905.7亿行业居首，净利润1112.54万排第五，资产负债率 ...",
-      "published_at": "Wed, 29 Apr 2026 07:55:13 +0800",
-      "source_name": "xcrawl_instant_retail_core",
-      "source_type": "xcrawl",
-      "time_status": "near_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "+1 time_status=near_window"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章内容聚焦于天音控股的财务数据，未提及屈臣氏、即时零售或个护美妆相关话题。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "08dc10152e13f04e",
-      "title": "新浪零售行业热点小时报丨2026年04月28日00时",
-      "url": "https://cj.sina.cn/articles/view/7857201856/1d45362c001904sbsm?froms=ggmp",
-      "content": "2天前 — 报告显示，公司一季度营业收入为1.49亿元，同比下降11.65%；归母净利润为-9815.48万元，同比下降285.46%；扣非归母净利润为-4381.39万元，同比增长55.73%；基本每 ...",
-      "summary": "2天前 — 报告显示，公司一季度营业收入为1.49亿元，同比下降11.65%；归母净利润为-9815.48万元，同比下降285.46%；扣非归母净利润为-4381.39万元，同比增长55.73%；基本每 ...",
-      "published_at": "Wed, 29 Apr 2026 07:55:13 +0800",
-      "source_name": "xcrawl_instant_retail_core",
-      "source_type": "xcrawl",
-      "time_status": "near_window",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+2 source_tier=1",
-          "+1 time_status=near_window"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章内容仅提及某公司一季度财务数据，未涉及屈臣氏、即时零售或个护美妆相关经营信息。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "d09ce090a8d920bb",
-      "title": "淘寶閃購- 維基百科，自由的百科全書",
-      "url": "https://zh.wikipedia.org/wiki/%E6%B7%98%E5%AE%9D%E9%97%AA%E8%B4%AD",
-      "content": "淘寶閃購，原名餓了麼，是中國電子商務企業阿里巴巴集團旗下的網際網路O2O生活服務平台，提供線上訂餐、線下團購、同城快送等服務，由拉扎斯網絡科技（上海）有限公司營運， ...",
-      "summary": "淘寶閃購，原名餓了麼，是中國電子商務企業阿里巴巴集團旗下的網際網路O2O生活服務平台，提供線上訂餐、線下團購、同城快送等服務，由拉扎斯網絡科技（上海）有限公司營運， ...",
-      "published_at": "",
-      "source_name": "xcrawl_instant_retail_core",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
-      }
-    },
-    {
-      "article_id": "b24d77a48670411d",
-      "title": "200 个中宝职位",
-      "url": "https://cn.indeed.com/q-%E4%B8%AD%E5%AE%9D-%E8%81%8C%E4%BD%8D.html",
-      "content": "Indeed.com 上提供233 个中宝职位。申请淘宝运营, 销售工程师, 运营专员以及更多职位！",
-      "summary": "Indeed.com 上提供233 个中宝职位。申请淘宝运营, 销售工程师, 运营专员以及更多职位！",
-      "published_at": "",
-      "source_name": "xcrawl_competitor_moves",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 1,
-      "role": "competitor_signal",
-      "category": "竞对",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+2 source_tier=1"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
-      }
-    },
-    {
-      "article_id": "5ea6d20cb9f610e5",
-      "title": "美团为小象进货，50亿拿下叮咚买菜",
-      "url": "https://www.21jingji.com/article/20260209/herald/b3dbeccd74598e930310a9e75ade1c00.html",
-      "content": "传闻数月的叮咚买菜收购案传来确定性消息，买家从京东变成美团。 2月5日，美团一纸公告，官宣收购叮咚买菜中国业务，初始对价约7.17亿美元（约49.8亿元 ...",
-      "summary": "传闻数月的叮咚买菜收购案传来确定性消息，买家从京东变成美团。 2月5日，美团一纸公告，官宣收购叮咚买菜中国业务，初始对价约7.17亿美元（约49.8亿元 ...",
-      "published_at": "",
-      "source_name": "xcrawl_warehouse",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 2,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [],
-      "filter": {
-        "rule_score": 1,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+1 source_tier=2"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章讨论的是美团收购叮咚买菜，属于生鲜电商领域，与屈臣氏即时零售×个护美妆经营无直接关联。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "e9a1c3c3084475db",
-      "title": "1.3万家门店变身“前置仓”！格力的“最后一公里”真打通了吗？",
-      "url": "https://caifuhao.eastmoney.com/news/20260428151449907614210",
-      "content": "格力遍布全国、深入社区的线下网点，将正式褪去“单纯卖货门店”的标签，转化为即时零售的“前置仓”。 这意味着，以往分散在各个城市、社区的格力门店，将不再是“ ...",
-      "summary": "格力遍布全国、深入社区的线下网点，将正式褪去“单纯卖货门店”的标签，转化为即时零售的“前置仓”。 这意味着，以往分散在各个城市、社区的格力门店，将不再是“ ...",
-      "published_at": "",
-      "source_name": "xcrawl_warehouse",
-      "source_type": "xcrawl",
-      "time_status": "unknown_time",
-      "collected_at": "2026-04-29T07:00:00+08:00",
-      "keywords_matched": [],
-      "tier": 2,
-      "role": "direct_signal",
-      "category": "即时零售",
-      "raw_collector": "xcrawl",
-      "matched_keywords": [
-        "即时零售",
-        "标签"
-      ],
-      "filter": {
-        "rule_score": 5,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+4 命中即时零售: 即时零售",
-          "+1 source_tier=2"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章讨论的是格力门店转型为即时零售前置仓，属于家电行业动态，与屈臣氏即时零售×个护美妆经营无直接关联。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "0851598fb3087e43",
-      "title": "新浪零售行业热点小时报丨2026年04月26日10时_今日实时零售行业热点速递|荔枝|html|电子商务|消费税征收|税收_新浪新闻",
-      "url": "https://cj.sina.com.cn/articles/view/7857201856/1d45362c001904q51e?froms=ggmp",
-      "source_name": "tavily_instant_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.025649+08:00",
-      "time_status": "unknown_time",
-      "summary": "## 3、婴幼儿牙刷\n\n## 3、婴幼儿牙刷\n\n价格组成=完税价+跨境电子商务零售进口税       根据关税司2016年3月24日颁布的跨境电子商务零售进口税收政策以及财关税〔2016〕18号文，在限值以内进口的跨境电子商务零售进口商品，关税税率暂设为0%，进口环节增值税、消费税取消免征税额，暂按法定应纳税额的70%征收。       根据财关税〔2018〕49号公告，跨境电子商务零售进口商品的单次交易限额为人民币5000元，个人年度交易限额为人民币26000元。\n\n## 4、2026鄂酒最新价盘总表|白云边、稻花香、劲酒、黄鹤楼全渠道参考价\n\n## 4、2026鄂酒最新价盘总表|白云边、稻花香、劲酒、黄鹤楼全渠道参考价\n\n专注湖北白酒、健康酒真实价盘、动销、渠道、政策，做湖北酒商最实用的行情号。做酒先懂价，今天第一篇，直接上干货——2026年鄂酒主流产品渠道参考价（市场流通版）说明：本文价格为湖北市场渠道参考价，区域、批量、政策不同会有小幅差异，仅供经营参考，不作为交易定价依据。\n\n## 5、从征管实践看消费税征收环节后移\n\n## 5、从征管实践看消费税征收环节后移\n\n《中共中央关",
-      "content": "## 3、婴幼儿牙刷\n\n## 3、婴幼儿牙刷\n\n价格组成=完税价+跨境电子商务零售进口税       根据关税司2016年3月24日颁布的跨境电子商务零售进口税收政策以及财关税〔2016〕18号文，在限值以内进口的跨境电子商务零售进口商品，关税税率暂设为0%，进口环节增值税、消费税取消免征税额，暂按法定应纳税额的70%征收。       根据财关税〔2018〕49号公告，跨境电子商务零售进口商品的单次交易限额为人民币5000元，个人年度交易限额为人民币26000元。\n\n## 4、2026鄂酒最新价盘总表|白云边、稻花香、劲酒、黄鹤楼全渠道参考价\n\n## 4、2026鄂酒最新价盘总表|白云边、稻花香、劲酒、黄鹤楼全渠道参考价\n\n专注湖北白酒、健康酒真实价盘、动销、渠道、政策，做湖北酒商最实用的行情号。做酒先懂价，今天第一篇，直接上干货——2026年鄂酒主流产品渠道参考价（市场流通版）说明：本文价格为湖北市场渠道参考价，区域、批量、政策不同会有小幅差异，仅供经营参考，不作为交易定价依据。\n\n## 5、从征管实践看消费税征收环节后移\n\n## 5、从征管实践看消费税征收环节后移\n\n《中共中央关于进一步全面深化改革、推进中国式现代化的决定》提出，推进消费税征收环节后移并稳步下划地方。消费税改革即将进入实质性阶段，笔者从征管实践的角度，就消费税征收环节后移，税收征管将面临的变化及应对措施进行分析和思考。 征收环节后移对征管提出更高要求 消费税征收环节后移，在税收征管方面将面临技术手段、征管能力、征管可控等方面的挑战。 笔者认为，征收后移，对征管技术提出更高的要求。目前我国税收征管数字化升级和智能化改造正处于建设和完善阶段，税收大数据技术应用还不够成熟，“互联网+监管”手段目前还难以满足消费税征收后移的要求。\n\n赛博对话\n热搜时代\n一天零一页\n无双\n热浪之外\n\n### 图片新闻 [...] 新浪新闻客户端\n新浪新闻客户端\n\n# 新浪看点\n\n新浪新闻客户端\n新浪新闻公众号\n新浪新闻视频号\n新浪新闻抖音\n新浪新闻快手\n新浪新闻小红书\n新浪新闻B站\n热搜时代小宇宙\n\n# 新浪零售行业热点小时报丨2026年04月26日10时\\_今日实时零售行业热点速递\n\navatar\n\n## 1、荔枝预计减产近八成 零售与批发价格同比上涨\n\n## 1、荔枝预计减产近八成 零售与批发价格同比上涨\n\n[title-triangle]荔枝上市价格高企，消费者感叹“太贵”荔枝近期陆续上市，部分消费者已经吃到今年的早熟荔枝。然而，不少网友反映价格高昂，例如有消费者表示“买了9颗荔枝，花了我12元”。4月24日，记者在北京多家超市走访发现，海南产桂花香和妃子笑等品种已经开售，但零售价格不一。例如在京东七鲜超市，桂花香荔枝约合19.8元/斤，枝头熟妃子笑荔枝约合33元/斤；盒马超市的妃子笑荔枝则约合37.4元/斤。对比2025年荔枝价格曾低至几元一斤的情况，今年价格明显上涨。\n\n## 2、今晚!成品油价,预计年内首降!\n\n## 2、今晚!成品油价,预计年内首降!\n\n4月21日24时，新一轮国内成品油零售限价调整窗口将再度开启，分析机构预计，本轮国内成品油将开启下调窗口，这也是2026年首次下调。卓创资讯数据显示，本轮成品油零售调价周期内（4月7日24时—4月21日24时），国际原油价格震荡下跌为主，本期原油变化率持续负值范围内运行。新一轮成品油调价窗口周期内，国际原油高位下行，美伊第二轮和谈仍充满不确定性，霍尔木兹海峡是否重新放开未有进展，但地缘风险溢价消退回吐部分涨幅，两大原油期货价格重回90美元/桶附近波动，本轮原油变化率持续负值范围内运行。\n\n## 3、婴幼儿牙刷\n\n## 3、婴幼儿牙刷 [...] 赛博对话\n热搜时代\n一天零一页\n无双\n热浪之外\n\n### 图片新闻\n\n南京：市民游客畅游玄武湖景区\n海南琼海：农民雨后抢收早稻\n北京：景山公园牡丹盛放\n河南洛阳：龙门石窟夜景流光溢彩\n引爆水雷惊险时刻\n\n俄小伙在三亚下水救落水男子\n\n海边涨潮小猫被困众人救猫\n\n用苏轼诗词打开五指山舰\n\n### 新媒体实验室\n\n朋友圈47%的内容在炫耀\n近300起杀妻案如何判罚\n谈恋爱反降低生活质量？\n全国最能吃的省市竟是它\n性犯罪者再犯几率达12.8%\n\n举报邮箱：jubao@vip.sina.com\n\nCopyright © 1996-2026 SINA Corporation\n\nAll Rights Reserved 新浪公司 版权所有\n\n###",
-      "matched_keywords": [
-        "数字化",
-        "政策"
-      ],
-      "raw": {
-        "query": "即时零售 最新 动态 2026年4月",
-        "tavily_score": 0.8591094,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3759425801912832"
       },
       "filter": {
         "rule_score": -4,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+1 命中经营变量: 价格",
-          "-5 垃圾内容: 版权所有"
+          "-1 time_status=old(搜索源/allow_old)",
+          "-3 无关主题: 游戏"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=-4<3",
-        "reject_reason": "rule_score=-4<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-4<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-4<2"
       }
     },
     {
-      "article_id": "f66448f25d9a828e",
-      "title": "美团、京东同一天公布新动作，即时零售行业硝烟四起",
-      "url": "https://www.stcn.com/article/detail/1663950.html",
-      "source_name": "tavily_instant_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.932270+08:00",
-      "time_status": "unknown_time",
-      "summary": "首页\n 快讯\n 新闻 \n\n  要闻   金融   评论   产经   创投   滚动\n 视频\n 投资 \n\n  A股   公司   新股   基金   港美股\n 数据\n 信披+\n 专题\n 服务 \n\n  人民鉴真   投关服务   投教服务   其他服务\n\n公众号\n\n  电子报   客户端 \n\n您当前的位置：证券时报 > 产经 > 正文\n\n美团、京东同一天公布新动作，即时零售行业硝烟四起\n\n来源：第一财经作者：陆涵之2025-04-15 16:46\n\n字号\n\n超大\n\n大\n\n标准\n\n小\n\n在即时零售领域，美团和京东的火药味日渐加重。4月15日，美团正式发布即时零售品牌“美团闪购”。\n\n点赞\n\n分享\n\n在即时零售领域，美团和京东的火药味日渐加重。\n\n4月15日，美团正式发布即时零售品牌“美团闪购”。美团闪购业务最早于2018年在美团内部上线，目前美团非餐饮品类即时零售日单量已突破1800万单。\n\n美团2024年财报显示，除了餐饮外卖，即时零售正在成为美团重要的发力点。去年美团配送服务收入为980.7亿元，同比增长19.3%，主要是由于交易笔数增加。截至2024年末，美团闪购已和超5600家大型",
-      "content": "首页\n 快讯\n 新闻 \n\n  要闻   金融   评论   产经   创投   滚动\n 视频\n 投资 \n\n  A股   公司   新股   基金   港美股\n 数据\n 信披+\n 专题\n 服务 \n\n  人民鉴真   投关服务   投教服务   其他服务\n\n公众号\n\n  电子报   客户端 \n\n您当前的位置：证券时报 > 产经 > 正文\n\n美团、京东同一天公布新动作，即时零售行业硝烟四起\n\n来源：第一财经作者：陆涵之2025-04-15 16:46\n\n字号\n\n超大\n\n大\n\n标准\n\n小\n\n在即时零售领域，美团和京东的火药味日渐加重。4月15日，美团正式发布即时零售品牌“美团闪购”。\n\n点赞\n\n分享\n\n在即时零售领域，美团和京东的火药味日渐加重。\n\n4月15日，美团正式发布即时零售品牌“美团闪购”。美团闪购业务最早于2018年在美团内部上线，目前美团非餐饮品类即时零售日单量已突破1800万单。\n\n美团2024年财报显示，除了餐饮外卖，即时零售正在成为美团重要的发力点。去年美团配送服务收入为980.7亿元，同比增长19.3%，主要是由于交易笔数增加。截至2024年末，美团闪购已和超5600家大型连锁零售商、41万本地小商户以及超570家品牌商达成合作。\n\n在去年三季度财报电话会议上，美团创始人王兴曾表示从长远来看，即时零售或将占据电商市场10%以上的份额，目前美团闪购发展超出了此前的预期。美团在提供配送服务的所有城市县城和小镇都看到了美团闪购有巨大的增长机会，后续会考虑如何进一步提升即时零售的渗透率。\n\n同一天，京东表示外卖订单量将超过500万单。同时因秒送业务发展迅速，本季度京东将再招收不低于5万名全职外卖员，全额足额全部缴纳五险一金且所有费用都由公司承担。 [...] 对于美团推出“美团闪购”品牌的原因，百联咨询创始人庄帅对第一财经表示，美团此举有三方面的原因。一是加强美团全站的消费者对美团即时零售的认知，推动全品类的扩充和增长。二是应对京东“秒送”的长久竞争。三是提升即时零售在内部的组织地位，预计后续会有相应的组织架构调整。\n\n网经社电子商务研究中心数字生活分析师陈礼腾对第一财经表示，美团闪购的品牌化是美团在即时零售领域的战略升级，其核心在于通过品牌整合提升消费者认知，形成与京东即时零售（如京东到家、小时购）的差异化竞争。品牌化不仅增强了商户合作意愿，优化了供应链协同，还推动了本地零售生态的数字化升级。\n\n2024年5月，京东整合了旗下即时零售品牌“小时达”和“京东到家”等，升级推出“京东秒送”。4月1日，达达发布公告，将并入京东旗下的全资子公司，由京东全资拥有。庄帅认为，京东获得达达100%的股份是为了更好地发力即时零售业务。\n\n商务部国际贸易经济合作研究院发布的《即时电商发展报告（2024）》显示，2023年，我国即时电商市场规模达到2万亿元，同比增长36%。\n\n对于美团和京东，即时零售都是不容有失的业务。陈礼腾表示，对美团而言即时零售是其“零售+科技”战略的核心，与外卖业务形成生态闭环，提升了用户黏性。闪电仓模式通过分布式网络降低了履约成本，覆盖了下沉市场，并抵御了京东等对手的竞争。对京东而言，即时零售是应对电商增速放缓的战略举措，通过“三公里模式”整合线下资源，弥补了远场电商的不足，同时抵御了美团闪购对3C数码等高利润品类的侵蚀。双方竞争的焦点在于本地供给生态、配送效率与用户心智。\n\n由于平台之间相互加码，上述分析师认为今年即时零售行业将迎来改变。陈礼腾认为，美团、京东、抖音小时达等平台竞争加剧，推动了模式创新，例如前置仓优化、多运力协同等。技术升级方面，随着无人机配送、AI调度算法逐步成熟，“半小时达”成为标配。 [...] 责任编辑： 邓卫平\n\n京东\n\n即时零售\n\n美团闪购\n\n声明：证券时报力求信息真实、准确，文章提及内容仅供参考，不构成实质性投资建议，据此操作风险自担\n\n下载\"证券时报\"官方APP，或关注官方微信公众号，即可随时了解股市动态，洞察政策信息，把握财富机会。\n\n用户评论\n\n登录后可以发言\n\n网友评论仅供其表达个人看法，并不表明证券时报立场\n\n发表评论\n\n暂无评论\n\n时报热榜\n\n换一换\n\n  \n\n热点视频\n\n换一换\n\n关于我们|服务条例|联系我们|版权声明|网站地图|线索提交\n\n备案号：粤ICP备09109218号-7|增值电信业务经营许可证：粤B2-20080118|互联网新闻信息服务许可证10120170066|粤公网安备44030002008846号\n\n违法和不良信息举报电话：0755-83514034 邮箱：bwb@stcn.com 中央网信办违法和不良信息举报中心|证券时报网举报中心\n\nCopyright © 2008-2026 Shenzhen Securities Times Co., Ltd. All Rights Reserved",
-      "matched_keywords": [
-        "即时零售",
-        "闪购",
-        "即时电商",
-        "美团闪购",
-        "京东到家",
-        "供应链",
-        "备案",
-        "数字化",
-        "政策"
-      ],
+      "article_id": "c63816246139954f",
+      "title": "635家首店涌入福建，谁是最大赢家？",
+      "url": "https://www.36kr.com/p/3757572944577287",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 08 Apr 2026 02:42:42 GMT",
+      "collected_at": "2026-05-01T09:36:41.497974+08:00",
+      "time_status": "old",
+      "summary": "下沉市场火力全开！",
+      "content": "下沉市场火力全开！",
+      "matched_keywords": [],
       "raw": {
-        "query": "美团闪购 京东秒送 即时零售 新闻",
-        "tavily_score": 0.8987045,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3757572944577287"
       },
       "filter": {
         "rule_score": -3,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+4 命中即时零售: 美团闪购",
-          "+1 命中经营变量: 履约",
-          "-3 泛领域: A股",
-          "-5 垃圾内容: 网站地图"
+          "-1 time_status=old(搜索源/allow_old)",
+          "-2 内容极短且无关键词"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=-3<3",
-        "reject_reason": "rule_score=-3<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-3<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-3<2"
       }
     },
     {
-      "article_id": "0283b8db7a8a08a5",
-      "title": "美团、京东同时发力，即时零售硝烟四起_新浪科技_新浪网",
-      "url": "https://finance.sina.com.cn/tech/roll/2025-04-18/doc-inetqqss1237449.shtml",
-      "source_name": "tavily_instant_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.932422+08:00",
-      "time_status": "unknown_time",
-      "summary": "新浪首页\n 新闻\n 体育\n 财经\n 娱乐\n 科技\n 博客\n 图片\n 专栏\n 更多\n\n 汽车教育时尚女性星座健康\n 房产历史视频收藏育儿读书\n 佛学游戏旅游邮箱导航\n\n 新浪微博\n 新浪新闻\n 新浪财经\n 新浪体育\n 新浪众测\n 新浪博客\n 新浪视频\n 新浪游戏\n 天气通\n\n[](   [](\n\n[](\n\n新浪科技> 滚动新闻 > 正文\n\n# 美团、京东同时发力，即时零售硝烟四起\n\n2025年04月18日 16:32 《财经》杂志\n\n新浪财经APP 缩小字体 放大字体 收藏 微博 微信 分享 \n\n腾讯QQ QQ空间\n\n双方的业务从各自的核心阵地外扩，在即时零售这个“交界区”短兵相接\n\n文｜ 李莹\n\n编辑 | 余乐\n\n4月15日上午，“美团闪购”作为美团的即时零售品牌正式对外发布。该品牌定位为“24小时陪伴消费者的新一代购物平台”，为消费者提供“闪购一下，30分钟好货到手”的购物服务。\n\n同一天中午，京东在官方微信公众号上发文提到：京东已经上线“自营秒送”电商业务，已接入了全国超过十万家京东品牌线下店，平均送达时间快于30分钟。“自营秒送”即京东的即时零售服务。\n\n继上次京东、美团同日宣布",
-      "content": "新浪首页\n 新闻\n 体育\n 财经\n 娱乐\n 科技\n 博客\n 图片\n 专栏\n 更多\n\n 汽车教育时尚女性星座健康\n 房产历史视频收藏育儿读书\n 佛学游戏旅游邮箱导航\n\n 新浪微博\n 新浪新闻\n 新浪财经\n 新浪体育\n 新浪众测\n 新浪博客\n 新浪视频\n 新浪游戏\n 天气通\n\n[](   [](\n\n[](\n\n新浪科技> 滚动新闻 > 正文\n\n# 美团、京东同时发力，即时零售硝烟四起\n\n2025年04月18日 16:32 《财经》杂志\n\n新浪财经APP 缩小字体 放大字体 收藏 微博 微信 分享 \n\n腾讯QQ QQ空间\n\n双方的业务从各自的核心阵地外扩，在即时零售这个“交界区”短兵相接\n\n文｜ 李莹\n\n编辑 | 余乐\n\n4月15日上午，“美团闪购”作为美团的即时零售品牌正式对外发布。该品牌定位为“24小时陪伴消费者的新一代购物平台”，为消费者提供“闪购一下，30分钟好货到手”的购物服务。\n\n同一天中午，京东在官方微信公众号上发文提到：京东已经上线“自营秒送”电商业务，已接入了全国超过十万家京东品牌线下店，平均送达时间快于30分钟。“自营秒送”即京东的即时零售服务。\n\n继上次京东、美团同日宣布为骑手缴纳社保后，双方再次于同日先后公布业务布局和经营状态。这一次，焦点是“即时零售”。\n\n即时零售是以满足消费者即时需求为核心的新型零售模式，通过将线上平台与线下实体店铺相结合，利用高效的物流配送体系，确保消费者能够快速获取所需商品。这种模式通常强调在下单后30分钟到1小时内完成配送，为消费者提供极致的购物便利性和时效性。\n\n简单地说，即时零售就是用外卖的形式送各种商品。\n\n过去一年多的时间里，美团、京东已经在即时零售领域持续发力。美团依托“闪电仓+品牌直营店”的模式快速拓展闪电仓规模，京东则整合内部即时零售资源，推出升级版的“京东秒送”。 [...] 在此时以独立品牌姿态被推向市场的“美团闪购”，承载着美团在即时零售领域更大的雄心。京东也不甘示弱，一方面表示秒送业务发展迅速，“自营品质+秒送服务”，可以确保最好的用户体验，另一方面加紧推动外卖业务，不断扩充全职骑手队伍，还上线外卖的百亿补贴。\n\n外卖是激活即时零售的重要一环，平台可以借助这类“高频刚需”的场景，获取用户的即时消费习惯和更高频次的需求。从履约环节来看，外卖和即时零售都依托线下骑手体系，美团有数百万活跃骑手，京东亦有达达在旁助力。外卖的整套运营机制和人员、能力在相当大程度上都可以复制到即时零售业务上。\n\n美团是外卖行业的头部，京东则在传统电商行业深耕多年。双方的业务从各自的核心阵地外扩，在即时零售这个“交界区”短兵相接。\n\n从送餐到送万物，美团看到更大的机会\n\n“美团闪购”作为即时零售品牌被推出，比闪购事业部成立的时间晚了近七年。\n\n2018 年7月，美团成立闪购事业部，当时的闪购已经是一个日单量超过百万的业务。此前，该业务存在于外卖业务里，名为“速购”。后因体量不断增大，业务的可能性变得更大，闪购成为美团内部一个独立的事业部。此后数年，闪购每年日单量增长率保持在50% 以上，美团管理层曾数次在业绩电话会中用 “增长强劲”形容这个业务。\n\n闪电仓是美团于2020年推出的一种新的仓储解决方案，即在人口密集区布局线下仓储，以便快速响应线上订单。相比传统的大型仓库，闪电仓面积较小，但布局更加紧凑高效。\n\n美团闪购Saas服务商、mini橙负责人唐宁告诉《财经》，2022年他们计划将公司的软件业务独立运营时就发现行业内客户对美团闪购业务的需求很大，大量商超便利的从业者想要入驻闪购，开通线上超市。闪电仓刚推出时，平台还会为商家提供租房补贴等激励。 [...] 相比美团闪购连接大量中小商家的平台模式，京东到家更侧重连锁商超。因此，其商超类SKU（库存单位）较全，但非商超类较少。京东在3C家电等高价值商品领域的竞争力更强。不过，京东即时零售的覆盖范围相对较窄，尤其是在一些三四线城市。\n\n京东的老本行传统电商业务已经进入存量时代，而即时零售市场仍有较大的潜力。根据商务部国际贸易经济合作研究院发布的《即时零售行业发展报告（2023）》，近年来，即时零售一直保持50%以上的年均增速，预计2025年市场规模将达到1.5万亿元。这一增速是传统电商的八倍之多。\n\n在电商领域，京东的核心竞争力之一就是配送速度。京东采用采购仓配一体化模式，在全国乃至全球范围内建立了多个仓储中心，这些仓库分布于靠近消费者的地理位置，以便更快地响应订单。基于此，京东建立起一套高效的物流体系，在其他电商的配送周期在两三天甚至更长时，京东可以实现次日达，这也为其积累了大批追求配送效率的高黏性用户。\n\n但是，这样的速度放到即时零售模式中，优势就不再明显。因此，即时零售是京东当下必须紧紧把握和利用的武器，以此巩固自己在电商和本地生活业务的护城河。\n\n2024年开始，京东在即时零售上的动作多了起来。2024年5月，京东整合了旗下即时零售品牌“小时达”和“京东到家”等，升级推出“京东秒送”。当时，“京东秒送”已经覆盖了全国2300多个县区市，合作门店超50万家，覆盖全品类商品，最快能用九分钟为消费者送货上门。\n\n2024年下半年，京东自营品牌七鲜超市在即时零售市场的布局也开始加速，先是完成前置仓融合，后打出低价牌抢占市场，逐步在京津地区加快开“仓店”的速度。\n\n京东还通过增持达达股份，将达达的运力向京东收拢，使其成为外卖和即时零售的核心配送能力。4月15日京东发文指出，因秒送业务发展迅速，本季度京东将再招收不低于5万名全职外卖员。",
-      "matched_keywords": [
-        "即时零售",
-        "闪购",
-        "美团闪购",
-        "京东到家",
-        "补贴",
-        "仓储"
-      ],
+      "article_id": "53fdcc2932466699",
+      "title": "近300万家餐厅消失了",
+      "url": "https://www.36kr.com/p/3756142399422984",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 07 Apr 2026 02:33:28 GMT",
+      "collected_at": "2026-05-01T09:36:41.498432+08:00",
+      "time_status": "old",
+      "summary": "把招商放到“资产全生命周期”里看，而不是孤立“填铺”",
+      "content": "把招商放到“资产全生命周期”里看，而不是孤立“填铺”",
+      "matched_keywords": [],
       "raw": {
-        "query": "美团闪购 京东秒送 即时零售 新闻",
-        "tavily_score": 0.8742601,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+4 命中即时零售: 美团闪购",
-          "+1 命中经营变量: 补贴, SKU, 履约",
-          "-3 无关主题: 汽车"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
-      }
-    },
-    {
-      "article_id": "e02f4040a11b1c8c",
-      "title": "美团闪购剑指京东 - 21经济网",
-      "url": "https://www.21jingji.com/article/20250416/herald/2f702fe187c46780567960783a3fa8f7.html",
-      "source_name": "tavily_instant_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.932512+08:00",
-      "time_status": "unknown_time",
-      "summary": "从电商业务角度来说，最开始是实体零售走向线上，全面触网，后来电商产业发展成熟，线上线下业务边界逐渐融合，O2O、新零售、即时零售以及现在的美团闪购、京东秒送等，都是电商和实体不断深入融合的一种体现。\n\n当前中国正面临错综复杂的国内外经济环境，电商、外卖和即时零售，也同样跟着经济环境和消费环境而改变及更新迭代，关税战大背景下，外贸企业转内销，京东等电商巨头也将会承接入口。\n\n总而言之，即时零售江湖足够大，容得下美团和京东，外卖市场也足够大，当然也容得下新来的京东。\n\n正如北京商报发表的评论文章观点称，京东美团“互抢饭碗”不是坏事。京东美团不只是刘强东与王兴之间的博弈。“互抢饭碗”“打打杀杀”背后竞争是良药，商业模式的创新与市场竞争格局重构，需要新朋友，更需要老对手。\n\n返回21经济网首页 >>\n\n分享到：\n\n×;)\n\n分享到微信朋友圈\n\n打开微信，点击底部的“发现”，  \n使用“扫一扫”即可将网页分享至朋友圈。\n\n# 相关新闻\n\n# 热文排行\n\n 1突然狂飙！11天大涨100美元！有人利息都不要了，弃存单买黄金\n 2著名投资人段永平，突发宣布暂别雪球，称长时间不想再发言\n 3中国人民银行",
-      "content": "从电商业务角度来说，最开始是实体零售走向线上，全面触网，后来电商产业发展成熟，线上线下业务边界逐渐融合，O2O、新零售、即时零售以及现在的美团闪购、京东秒送等，都是电商和实体不断深入融合的一种体现。\n\n当前中国正面临错综复杂的国内外经济环境，电商、外卖和即时零售，也同样跟着经济环境和消费环境而改变及更新迭代，关税战大背景下，外贸企业转内销，京东等电商巨头也将会承接入口。\n\n总而言之，即时零售江湖足够大，容得下美团和京东，外卖市场也足够大，当然也容得下新来的京东。\n\n正如北京商报发表的评论文章观点称，京东美团“互抢饭碗”不是坏事。京东美团不只是刘强东与王兴之间的博弈。“互抢饭碗”“打打杀杀”背后竞争是良药，商业模式的创新与市场竞争格局重构，需要新朋友，更需要老对手。\n\n返回21经济网首页 >>\n\n分享到：\n\n×;)\n\n分享到微信朋友圈\n\n打开微信，点击底部的“发现”，  \n使用“扫一扫”即可将网页分享至朋友圈。\n\n# 相关新闻\n\n# 热文排行\n\n 1突然狂飙！11天大涨100美元！有人利息都不要了，弃存单买黄金\n 2著名投资人段永平，突发宣布暂别雪球，称长时间不想再发言\n 3中国人民银行原副行长李东荣：发展科技金融需进一步提高直接融资比例，改善融资结构\n 4中欧就电动汽车关税达成突破性共识：以最低价格机制替代贸易壁垒\n 5问界M8爆单，工厂狂招人！赛力斯最新回应\n 6长安汽车总裁辞职，下一站是中国兵器装备集团\n 7青岛啤酒原董事长入职海信，69岁高龄“再战江湖”\n 8支持视频号、公众号文章分享朋友圈，鸿蒙版微信开启新版邀测升级\n 9因涉嫌财报造假，这家A股公司突遭立案！或将触及强制退市情形\n 10辟谣！“成立数字人民币银行、招募数字人民币推广员”系谣言\n\n# 财经日历\n\n今日要点 全球大事 经济数据\n\n查看全部\n\n# 数读 [...] 大湾区 一带一路 文旅 数读 理财 投资通 21视频 直播 品牌活动\n\n首页 > 正文\n\n# 美团闪购剑指京东\n\n###### 2025年04月16日 14:44   新品略财经\n\n01 美团闪购来了，剑指京东\n\n《新品略财经》关注到，美团4月15日官宣正式推出即时零售品牌“美团闪购”，即日起，全国的用户可在美团App首页进入“闪购”，选购蔬菜水果、酒水饮料、休闲食品等，下单后平均30分钟送达。\n\n美团表示，美团闪购是新一代购物平台，诚邀全国10亿消费者，随时来美团闪购逛逛。美团闪购开足马力做营销，准备了开门好礼，每天10万份见面礼免费送。\n\n闪购不是美团的新业务，其实最早于2018年就在美团内部上线了，服务品类逐步也越来越丰富，可以说美团在闪购业务方面探索已久。\n\n当然美团的核心业务还是送外卖，不过美团的非餐饮配送业务也取得了不错的成绩。数据显示，目前美团非餐饮品类即时零售日单量超过1800万单。\n\n美团闪购还表示，将开展多项支持商家举措，对商家推出多种数字化经营助力工具，支持各行业商家拓展闪电仓新型供给业态。\n\n在《新品略财经》看来，整体看，美团闪购已经成为美团的独立即时零售品牌，是一次业务的重大升级，还是有不少的看点和市场期待点。\n\n第一个看点是美团闪购业务正式拓展为全品类业务，消费者可以买蔬菜水果、酒水饮料、休闲食品、数码家电、护肤美妆、潮流玩具、运动用品，还有母婴用品，以及宠物用品等。\n\n美团闪购业务的第二个看点就是快速配送和全时段销售。美团闪购业务主打30分钟送达，而且还是24小时开展业务，主打一个全天候。\n\n美团闪购业务对整个电商市场和即时零售市场还是有明显的影响力，毕竟身为外卖巨头的美团有着强大的快速配送能力，同时美团已经占据了用户心智，前期的业务探索已经十分成熟。 [...] 美团也经历了长期的发展，成长为外卖行业互联网超头部平台，可以说是行业垄断地位，压得饿了么喘不过气。美团正在发力国际市场，没想到京东在国内市场涉足外卖业务，让美团后院失火，很显然美团不得不接招和回应。\n\n京东送外卖，美团做闪购，这是一场互为攻守的互联网巨头之间的商业争夺战。\n\n第二个层面，京东和美团大战是一场即时零售的升级战，两大互联网巨头都不想错过。\n\n即时零售不是新物种，PC电商的发展得益于物流快递配套的同步发展，即时零售业务也更是得益于同城配送、即时快速配送等业务的支持。\n\n在即时零售业务板块，美团的外卖业务是其中的一个代表品类，外卖是高频业务，也是美团的业务基本盘，更是拓展至了酒店、到店等高盈利业务。\n\n京东有电商基本盘，还有遍布全国的京东线下门店，早已经搭建起了配送团队，京东通过外卖的高频业务，能为主站引流，新业务增加新收入。\n\n即时零售是一块超级商业大蛋糕，相关数据显示，即时零售市场规模预计将在2025年突破万亿元。美团和京东都不想错过，各自都有实力、资金和资源去做，而且都迟早会去做。\n\n换句话说，即使京东不做外卖，美团也会做闪购业务，同样，美团也知道，京东迟早会做外卖业务，而且早已试水。\n\n透过京东送外卖，美团做闪购的背后来看，本质上都是各自业务发展所需，都需要新的业务增长点，即时零售的商业争夺战正在全面升级。\n\n第三个层面，京东和美团这场大战的背后，更是一次电商和实体进一步深度融合的产业战，当前国内外经济大环境下，既是机遇，也是挑战。\n\n中国互联网行业发展这么多年，从门户网站、搜索引擎、PC电商，移动互联网电商，到后来的直播带货、兴趣电商，以及外卖，还有就是当下的即时零售等。",
-      "matched_keywords": [
-        "即时零售",
-        "闪购",
-        "美团闪购",
-        "饿了么",
-        "美妆",
-        "护肤",
-        "数字化",
-        "直播"
-      ],
-      "raw": {
-        "query": "美团闪购 京东秒送 即时零售 新闻",
-        "tavily_score": 0.8405867,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+4 命中即时零售: 美团闪购",
-          "+3 命中美妆个护: 美妆, 护肤",
-          "+1 命中经营变量: 价格, 活动",
-          "-3 泛领域: A股",
-          "-3 无关主题: 汽车"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
-      }
-    },
-    {
-      "article_id": "84d3760855cd7871",
-      "title": "订单10年激增60倍！美团冲破1.2亿日单峰值捍卫市场“王座” 阿里、京东厮杀正酣",
-      "url": "https://www.stcn.com/article/detail/2419884.html",
-      "source_name": "tavily_instant_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.932714+08:00",
-      "time_status": "unknown_time",
-      "summary": "一场关乎电商未来十年话语权的生死竞速，正在即时零售的赛道上爆燃。未来战争，谁的胜算更大？\n\n在盘和林看来，未来，这场大战将从“规模化”向“差异化”转变，一开始各个平台都是走补贴路线，但会逐渐地找到自己的长处，去和自己的生态做兼容。比如美团会和线下商超合作，毕竟它过去不是做电商的，而淘宝闪购则会和自己的电商平台进行融合。\n\n同时，各家平台都会走向自营+平台代理的综合模式。盘和林认为，这其实是淘宝闪购和京东已经在做的生态模式，是在生态业务上和竞争对手对标。这说明即时零售的竞争是全方位的，既要争取线下商家，又要以自营打法来做用户分层，提高平台用户粘性。\n\n十年激战，美团以60倍订单增长保住了即时配送老大的王座，但战役远未终结。当京东以“秒送仓”直刺效率腹地，淘宝以500亿元补贴轰炸市场，这场万亿元规模的即时零售大战已进入生态融合与可持续性比拼的新阶段。\n\n图片来源：同花顺\n\n截至7月4日收盘，美团股价报120.8港元/股，市值约为7381亿港元，年内跌20.37%；京东股价报124.2港元/股，市值约3959亿港元，年内跌6.06%。\n\n值得一提的是，自淘宝500亿元补贴计划公布以来，阿里巴",
-      "content": "一场关乎电商未来十年话语权的生死竞速，正在即时零售的赛道上爆燃。未来战争，谁的胜算更大？\n\n在盘和林看来，未来，这场大战将从“规模化”向“差异化”转变，一开始各个平台都是走补贴路线，但会逐渐地找到自己的长处，去和自己的生态做兼容。比如美团会和线下商超合作，毕竟它过去不是做电商的，而淘宝闪购则会和自己的电商平台进行融合。\n\n同时，各家平台都会走向自营+平台代理的综合模式。盘和林认为，这其实是淘宝闪购和京东已经在做的生态模式，是在生态业务上和竞争对手对标。这说明即时零售的竞争是全方位的，既要争取线下商家，又要以自营打法来做用户分层，提高平台用户粘性。\n\n十年激战，美团以60倍订单增长保住了即时配送老大的王座，但战役远未终结。当京东以“秒送仓”直刺效率腹地，淘宝以500亿元补贴轰炸市场，这场万亿元规模的即时零售大战已进入生态融合与可持续性比拼的新阶段。\n\n图片来源：同花顺\n\n截至7月4日收盘，美团股价报120.8港元/股，市值约为7381亿港元，年内跌20.37%；京东股价报124.2港元/股，市值约3959亿港元，年内跌6.06%。\n\n值得一提的是，自淘宝500亿元补贴计划公布以来，阿里巴巴股价已连跌三日。但截至7月4日收盘，阿里股价报105.1港元/股，市值2.01万亿港元，年内涨幅达29.68%。\n\n责任编辑： 李志强\n\n淘宝闪购\n\n京东\n\n即时零售\n\n声明：证券时报力求信息真实、准确，文章提及内容仅供参考，不构成实质性投资建议，据此操作风险自担\n\n下载\"证券时报\"官方APP，或关注官方微信公众号，即可随时了解股市动态，洞察政策信息，把握财富机会。\n\n用户评论\n\n登录后可以发言\n\n网友评论仅供其表达个人看法，并不表明证券时报立场\n\n发表评论\n\n时报热榜\n\n换一换\n\n  \n\n热点视频\n\n换一换\n\n关于我们|服务条例|联系我们|版权声明|网站地图|线索提交 [...] 美团创下的1.2亿单的全球即时零售纪录，也见证了即时零售过去十年的发展路径。《每日经济新闻》记者梳理美团外卖自2013年成立以来的成长之路发现，2014年11月9日，美团外卖日单量突破100万单；2015年5月17日，美团外卖日单量超过200万单。如今10年过去了，美团即时配送峰值增长60倍。\n\n美团的突然出手，或许来自于对淘宝闪购大手笔补贴的反扑。\n\n7月2日，淘宝闪购宣布500亿元补贴计划，当时有市场传闻称，淘宝闪购将7月5日定为“冲单日”，瞄准9000万至1亿单冲刺峰值。此前，6月23日，淘宝闪购联合饿了么宣布，平台日订单数已超6000万单。而另一面，京东外卖也一直虎视眈眈。今年3月1日，京东正式入场外卖行业。4月11日，京东外卖宣布上线百亿补贴。“618”期间，京东外卖日订单量突破2500万单。\n\n图片来源：淘宝公众号\n\n京东官方在6月25日宣布，京东物流推出行业首创的“秒送仓”仓配一体服务。作为全国首个面向全行业开放的即时零售仓配一体化解决方案提供商，其采用“共享前置仓+自营配送”模式，降低商家即时零售入场门槛。\n\n多轮战略调整美团如何反击淘宝、京东？\n\n当巨头目光聚向即时零售，一场围绕“用户钱包份额”与“配送时效定义权”的闪电战已然打响。淘宝闪购与京东外卖的强势进逼，也促使美团加速战略调整，聚焦即时零售核心战场，今年以来，美团已经实施了多轮关键的战略聚焦与业务重组。\n\n4月15日，美团正式发布“美团闪购”作为其即时零售品牌，定位“24小时陪伴消费者的新一代购物平台”。该业务依托全国近3000个县市区的零售商、品牌商及本地中小商家（自2018年内部孵化至今），服务用户日常万物到家需求。 [...] 首页\n 快讯\n 新闻 \n\n  要闻   金融   评论   产经   创投   滚动\n 视频\n 投资 \n\n  A股   公司   新股   基金   港美股\n 数据\n 信披+\n 专题\n 服务 \n\n  人民鉴真   投关服务   投教服务   其他服务\n\n公众号\n\n  电子报   客户端 \n\n您当前的位置：证券时报 > 港美股 > 正文\n\n订单10年激增60倍！美团冲破1.2亿日单峰值捍卫市场“王座” 阿里、京东厮杀正酣\n\n来源：每日经济新闻2025-07-07 07:59\n\n字号\n\n超大\n\n大\n\n标准\n\n小\n\n刚刚过去的周末，你薅到美团的“羊毛”了吗？\n\n点赞\n\n分享\n\n刚刚过去的周末，你薅到美团的“羊毛”了吗？\n\n7月5日，美团App因史无前例的用户下单洪峰而短暂宕机。这场技术性卡顿的幕后推手，是美团以海量优惠券（尤其针对奶茶、咖啡等小额高频订单）为武器，在当日发起的单日“亿级”订单冲击战。\n\n这一天原本是市场传闻中的淘宝闪购“冲单日”，然而美团内网频发战报，短短两小时订单激增2000万单。最终，美团成功创下1.2亿单即时零售新纪录，将去年9000万单的峰值狠狠甩在身后。\n\n回望2015年，美团外卖日单量首破200万单曾令业界侧目；十年间，从200万单到1.2亿单，整整60倍的狂飙突进，不仅是一部企业成长史，更是一部中国即时零售与配送江湖的“血腥”征战录。\n\n如今美团守住了即时零售的王座，硝烟却愈发浓烈：淘宝闪购最新祭出500亿元补贴“核弹”，京东物流“秒送仓”亮出颠覆性利刃直刺配送效率与成本。三大巨头贴身肉搏，一场关乎“万物到家”未来万亿元规模的大战，已无退路。",
-      "matched_keywords": [
-        "即时零售",
-        "即时配送",
-        "闪购",
-        "美团闪购",
-        "饿了么",
-        "补贴",
-        "618",
-        "政策"
-      ],
-      "raw": {
-        "query": "美团闪购 京东秒送 即时零售 新闻",
-        "tavily_score": 0.8194462,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3756142399422984"
       },
       "filter": {
         "rule_score": -3,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+4 命中即时零售: 美团闪购",
-          "+1 命中经营变量: 补贴",
-          "-3 泛领域: A股",
-          "-5 垃圾内容: 网站地图"
+          "-1 time_status=old(搜索源/allow_old)",
+          "-2 内容极短且无关键词"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=-3<3",
-        "reject_reason": "rule_score=-3<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-3<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-3<2"
       }
     },
     {
-      "article_id": "72ba8419b8e143ab",
-      "title": "即时零售之争有望走向有序丨市场监管|外卖_新浪财经_新浪网",
-      "url": "https://finance.sina.com.cn/jjxw/2026-01-14/doc-inhhhahx4158431.shtml",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.137591+08:00",
-      "time_status": "unknown_time",
-      "summary": "淘宝闪购的表态是“坚决维护行业公平有序竞争”。淘宝闪购是战局中最激进的进攻方，此前表态2026年将继续加大资源投入，力求达到即时零售市场绝对第一。所以淘宝闪购的回应没有提行业“内卷”，只说欢迎并配合调查，还强调“公平竞争是市场经济的核心原则”，承诺“始终坚持公平、公正、公开的原则”。言下之意，还要继续竞争，但会合法合规进行。\n\n总结起来就是，淘宝闪购想打，美团想停，京东外卖都行。\n\n这里还要区分一个重要概念——大家习惯说“外卖大战”，但平台争的其实是即时零售市场，包括餐饮在内的送衣服、送手机、送药等万物可送的消费市场。\n\n其实也不是平台要“打仗”，是消费者推着他们上“战场”。现在的消费者越来越不爱出门了，买手机、买家电甚至买汽车都恨不得在手机上完成。随着消费者“万物到家”的习惯加速养成，如果平台不能成为用户即时需求的首选，便很可能错失竞争机会，说这是生死存亡之争也不为过。这样的竞争，不会因为监管调查而停止。调查需要时间，“战场”瞬息万变，谁敢真的停下来呢？\n\n调查的导向是“规范”而非“扼杀”，企业自己也表态，竞争重点将转向供应链效率、商品丰富度、骑手运力调度与保障、商家数字化赋能等长期",
-      "content": "淘宝闪购的表态是“坚决维护行业公平有序竞争”。淘宝闪购是战局中最激进的进攻方，此前表态2026年将继续加大资源投入，力求达到即时零售市场绝对第一。所以淘宝闪购的回应没有提行业“内卷”，只说欢迎并配合调查，还强调“公平竞争是市场经济的核心原则”，承诺“始终坚持公平、公正、公开的原则”。言下之意，还要继续竞争，但会合法合规进行。\n\n总结起来就是，淘宝闪购想打，美团想停，京东外卖都行。\n\n这里还要区分一个重要概念——大家习惯说“外卖大战”，但平台争的其实是即时零售市场，包括餐饮在内的送衣服、送手机、送药等万物可送的消费市场。\n\n其实也不是平台要“打仗”，是消费者推着他们上“战场”。现在的消费者越来越不爱出门了，买手机、买家电甚至买汽车都恨不得在手机上完成。随着消费者“万物到家”的习惯加速养成，如果平台不能成为用户即时需求的首选，便很可能错失竞争机会，说这是生死存亡之争也不为过。这样的竞争，不会因为监管调查而停止。调查需要时间，“战场”瞬息万变，谁敢真的停下来呢？\n\n调查的导向是“规范”而非“扼杀”，企业自己也表态，竞争重点将转向供应链效率、商品丰富度、骑手运力调度与保障、商家数字化赋能等长期能力。此前，平台已经推动骑手社保全国覆盖破冰、取消超时罚款。这或许意味着，简单粗暴的奶茶咖啡“烧钱大战”多半会降温，不健康的部分将被遏制，但围绕即时零售的这场更宏大、更深层次的效率之“战”，可能才刚刚开始。\n\n## VIP课程推荐\n\n## APP专享直播\n\n## 热门推荐\n\n新浪财经公众号\n\n24小时滚动播报最新的财经资讯和视频，更多粉丝福利扫描二维码关注（sinafinance）\n\n## 股市直播\n\n## 7X24小时 [...] # 即时零售之争有望走向有序丨市场监管\n\n（来源：经济日报）\n\n转自：经济日报\n\n近期，国务院反垄断反不正当竞争委员会办公室宣布对外卖平台服务行业市场竞争状况开展调查、评估。\n\n字少事大。消息一出，一些人开始关心平台还会不会有巨额补贴、自己还能不能喝到便宜奶茶。\n\n回答这个问题，先要弄清楚为什么监管外卖平台。消息中的原话是“外卖平台服务行业拼补贴、拼价格、控流量等问题突出，挤压实体经济，加剧行业‘内卷式’竞争”。\n\n从这些话来看，国家出手，针对的不是竞争，而是单纯以补贴、价格和流量操控为核心的恶性竞争。\n\n此外，外卖补贴过高，消费者都在家里点外卖，不出门了，整体消费难上去。要知道，出门吃饭可不仅仅是一顿饭钱，可能还会顺便看个电影、买身衣服。消费者不出门，实体店铺和商场经营也跟着受冲击。所谓的烟火气，从来不只是灶头的煎炒烹炸，还有商业街区的人声鼎沸，这关乎实体经济的活力，不能不管。\n\n那么，“外卖大战”会不会就此熄火？这既取决于监管的态度和力度，也要看企业反应。所以，几家企业的回应很值得琢磨。\n\n美团的回应是“坚决拥护”调查与评估。美团是被动卷入“外卖大战”的，企业多次表态这是恶性竞争。他们当然积极“拥护”国家出手，遏制行业非理性竞争。\n\n京东外卖的表态是“坚决支持”调查与评估。作为外卖“大战”最初的发起方，京东外卖后期已逐渐收缩投入。因此，它用了相对中性的“支持”一词，并顺势强调了自身在供应链模式创新、品质外卖和骑手权益等方面的优势，算是借机进行了一次差异化宣传。 [...] ## 股市直播\n\n## 7X24小时\n\n杨伟民\n董明珠还能为格力奋战多久？|《至少一个小时》\n梁建章：中国人口衰竭的速度前所未有\n冷友斌回应网友质疑：说价格高 对飞鹤不公平！\n王中军：我喜欢比较“江湖”一点的人\n\n新浪财经意见反馈留言板\n\n新浪简介|广告服务|About Sina\n  \n联系我们|招聘信息|通行证注册\n  \n产品答疑|网站律师|SINA English\n\nCopyright © 1996-2026 SINA Corporation\n\nAll Rights Reserved 新浪公司 版权所有",
-      "matched_keywords": [
-        "即时零售",
-        "闪购",
-        "补贴",
-        "供应链",
-        "流量",
-        "合规",
-        "数字化",
-        "直播"
-      ],
+      "article_id": "c5a1a98377b86a1e",
+      "title": "罗技的“雷”，该“炸”醒所有男性品牌了",
+      "url": "https://www.36kr.com/p/3742463052841223",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 30 Mar 2026 01:35:21 GMT",
+      "collected_at": "2026-05-01T09:36:41.498923+08:00",
+      "time_status": "old",
+      "summary": "所有男性品牌都应该“感谢”罗技！！！",
+      "content": "所有男性品牌都应该“感谢”罗技！！！",
+      "matched_keywords": [],
       "raw": {
-        "query": "即时零售 监管 合规 2026",
-        "tavily_score": 0.9998247,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3742463052841223"
       },
       "filter": {
         "rule_score": -3,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+4 命中即时零售: 淘宝闪购",
-          "+1 命中经营变量: 流量, 价格, 补贴",
-          "-3 无关主题: 汽车",
-          "-5 垃圾内容: 招聘"
+          "-1 time_status=old(搜索源/allow_old)",
+          "-2 内容极短且无关键词"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=-3<3",
-        "reject_reason": "rule_score=-3<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-3<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-3<2"
       }
     },
     {
-      "article_id": "7c3fa9199d97caea",
-      "title": "“不想打 停不下”的外卖大战迎来重磅监管，2026年拼什么",
-      "url": "https://www.yicai.com/news/102996992.html",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.137661+08:00",
-      "time_status": "unknown_time",
-      "summary": "淘宝闪购称，欢迎并将积极配合此次行业市场竞争状况调查、评估工作，严格落实合规主体责任，持续与商户、生态合作伙伴等各方携手，提供更多元化、更高质量的服务，共同维护好公平有序的市场环境，合力推动外卖服务行业进一步繁荣发展。\n\n京东表示，坚决支持并欢迎这一决定，高度赞同反内卷、维护市场公平竞争秩序、保障消费者与经营者、骑手合法权益的措施。\n\n无论是过去几个季度补贴带来的巨额亏损，还是监管再度强调公平有序竞争，都让低价不能再成为外卖竞争的重心。低价之后，行业还能拼什么？正在成为抛给即时零售的新问题。\n\n监管层的持续关注，意味着行业的非理性竞争一直存在。\n\n2025年11月，伴随着财报发布，阿里、美团等都透露了将收缩外卖业务投入的信号，但阿里电商事业群CEO蒋凡和美团 CEO 王兴又不约而同留下了“根据竞争态势调整投资和策略方向”的伏笔，双方的你来我往仍在继续。伴随着即时零售的战略重要性被推高，淘宝闪购刚刚确立了2026年的首要目标是份额增长，长期目标要达到市场绝对第一，一个现实是，行业竞争很难熄火。\n\n相比低价，高客单价订单或许才是未来外卖行业竞争的关键。记者关注到，“笔单价”是淘宝和美团在2",
-      "content": "淘宝闪购称，欢迎并将积极配合此次行业市场竞争状况调查、评估工作，严格落实合规主体责任，持续与商户、生态合作伙伴等各方携手，提供更多元化、更高质量的服务，共同维护好公平有序的市场环境，合力推动外卖服务行业进一步繁荣发展。\n\n京东表示，坚决支持并欢迎这一决定，高度赞同反内卷、维护市场公平竞争秩序、保障消费者与经营者、骑手合法权益的措施。\n\n无论是过去几个季度补贴带来的巨额亏损，还是监管再度强调公平有序竞争，都让低价不能再成为外卖竞争的重心。低价之后，行业还能拼什么？正在成为抛给即时零售的新问题。\n\n监管层的持续关注，意味着行业的非理性竞争一直存在。\n\n2025年11月，伴随着财报发布，阿里、美团等都透露了将收缩外卖业务投入的信号，但阿里电商事业群CEO蒋凡和美团 CEO 王兴又不约而同留下了“根据竞争态势调整投资和策略方向”的伏笔，双方的你来我往仍在继续。伴随着即时零售的战略重要性被推高，淘宝闪购刚刚确立了2026年的首要目标是份额增长，长期目标要达到市场绝对第一，一个现实是，行业竞争很难熄火。\n\n相比低价，高客单价订单或许才是未来外卖行业竞争的关键。记者关注到，“笔单价”是淘宝和美团在2025年三季度财报披露同时竞争的一条隐线。王兴在财报电话会中表示，美团在实付超过15元的订单中占有2/3以上的份额，在实付超过30元以上的订单占有70%以上的份额，高客单价领域是美团想要关注的更有价值的因素。\n\n蒋凡则提到，2025年9月、10月平台的高客单价订单占比提升，闪购的最新笔单价环比8月份增长了超过两位数。\n\n在这背后，比起低价压缩盈利成本，行业需要通过“笔单价”指标加深高质量用户的运营，这也意味着，外卖拉动消费新需求的全局运营考验将进一步升级。\n\n网经社电子商务研究中心生活服务电商分析师陈礼腾预计，监管压力将推动平台回归可持续发展轨道。 [...] 网经社电子商务研究中心生活服务电商分析师陈礼腾预计，监管压力将推动平台回归可持续发展轨道。\n\n补贴战再次“急刹车”，商家认为“补贴不如不补”\n\n虽然带来了单量的增长，但是商家普遍不认可这类补贴大战。有商家表示，平台补贴不如不补，一是低价留不住用户，部分爆款产品降低补贴后，直接无人问津。二是正常经营的利润高于补贴后的爆款产品。\n\n第一财经记者从商家处了解到，外卖补贴大战带来的影响仍需要业内多方消化。一是补贴产生了大量的浪费，爆单后因为出单、等单的时间差，很多外卖直接被扔掉。二是低单价也会降低外卖的质量。三是外卖补贴改变了消费习惯，堂食消费减少，商家需要改变经营策略。有商家对第一财经记者表示，希望2026年外卖行业能回归正常，避免出现特别低价的订单。\n\n商务部研究院副研究员洪勇对记者分析，此次对外卖平台服务行业开展市场竞争状况调查评估，核心并非“压平台”，而是为行业高质量发展“立规矩、稳预期”。\n\n去年，淘宝闪购、京东和美团三家平台持续了近半年的超百亿补贴战。在陈礼腾看来，外卖平台持续补贴的核心动因在于争夺市场份额和构建生态协同。平台通过补贴快速获取用户流量，实现“高频带低频”战略。\n\n大战的影响更直观地体现在平台的财报中。美团2025年三季度财报显示，核心本地业务第三季度收入同比减少2.8%至674亿元。受近期市场竞争白热化影响，该业务三季度由盈转亏，经营亏损达141亿元，经营亏损率为20.9%。\n\n阿里巴巴2025年三季度财报显示，三季度即时零售业务（淘宝闪购和饿了么App产生的收入）收入为229亿元，同比增长60%。公司经调整 EBITA（非公认会计准则财务指标）同比下降 78%至90.73 亿元，主要归因于对即时零售、用户体验以及科技的投入。 [...] 京东则在2025年三季度财报中表示，三季度外卖GMV和订单量取得稳步增长，且整体投入环比收窄，这主要得益于京东外卖运营效率的提升。\n\n当前外卖行业在促消费、稳就业中作用突出，但过度补贴、价格战和流量博弈，正在削弱平台服务能力、压缩商户利润空间，也不利于新就业群体的稳定预期。通过系统性调查评估，明确竞争边界和行为底线，有助于遏制“内卷式”竞争，推动平台从单纯拼价格转向拼效率、拼服务、拼创新。\n\n举报\n\n第一财经广告合作，请点击这里\n\n此内容为第一财经原创，著作权归第一财经所有。未经第一财经书面授权，不得以任何方式加以使用，包括转载、摘编、复制或建立镜像。第一财经保留追究侵权者法律责任的权利。  \n如需获得授权请联系第一财经版权部：banquan@yicai.com\n\n#### 文章作者\n\n \n\n  陆涵之  \n\n  陈杨园\n\n相关阅读\n\n## 北京车展请回答：未来五年，谁还能站在这里？\n\n中国汽车产业正告别草莽时代。\n\n7 5187 04-26 17:41 \n\n## 听骑手反馈增设“接力送”站点，美团首期花一亿元补贴末端100米\n\n截至目前，美团已经在深圳、徐州、鞍山、重庆、杭州等10个城市有需求的场景推出了“接力送”服务。\n\n1674 04-18 15:27 \n\n## 外卖“突围”华强北，“接力送”如何跑通最难100米\n\n即时零售走过激烈补贴竞争的阶段，回归到精细化运营和用户体验的长期竞争是行业趋势。\n\n6 3609 04-18 10:55 \n\n## 新地缘格局下的全球价值链竞争：基于效率、安全与规则的三维博弈\n\n10 357 04-07 13:46 \n\n## 即时配送年订单量首超600亿，行业竞争转向何方？\n\n9 1773 03-26 20:03",
-      "matched_keywords": [
-        "即时零售",
-        "即时配送",
-        "闪购",
-        "饿了么",
-        "价格战",
-        "补贴",
-        "流量",
-        "合规"
-      ],
+      "article_id": "36535f35b3a6c5e1",
+      "title": "假如外卖大战不打了",
+      "url": "https://www.36kr.com/p/3739620715020294",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 26 Mar 2026 12:57:50 GMT",
+      "collected_at": "2026-05-01T09:36:41.499352+08:00",
+      "time_status": "old",
+      "summary": "能否从多输到共赢",
+      "content": "能否从多输到共赢",
+      "matched_keywords": [],
       "raw": {
-        "query": "即时零售 监管 合规 2026",
-        "tavily_score": 0.99971086,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 2,
-        "rule_decision": "reject",
-        "rule_reasons": [
-          "+4 命中即时零售: 淘宝闪购",
-          "+1 命中经营变量: 流量, 客单价, 价格",
-          "-3 无关主题: 汽车"
-        ],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
-      }
-    },
-    {
-      "article_id": "6e2b8c76020989f9",
-      "title": "中國監管｜外賣平台遭突擊調查 即時零售行業監管持續升級 約談改為現場駐點",
-      "url": "https://hk.finance.yahoo.com/news/%E4%B8%AD%E5%9C%8B%E7%9B%A3%E7%AE%A1-%E5%A4%96%E8%B3%A3%E5%B9%B3%E5%8F%B0%E9%81%AD%E7%AA%81%E6%93%8A%E8%AA%BF%E6%9F%A5-%E5%8D%B3%E6%99%82%E9%9B%B6%E5%94%AE%E8%A1%8C%E6%A5%AD%E7%9B%A3%E7%AE%A1%E6%8C%81%E7%BA%8C%E5%8D%87%E7%B4%9A-%E7%B4%84%E8%AB%87%E6%94%B9%E7%82%BA%E7%8F%BE%E5%A0%B4%E9%A7%90%E9%BB%9E-063000819.html",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.137805+08:00",
-      "time_status": "unknown_time",
-      "summary": "+ Bloomberg\n  + 信報財經新聞\n  + BossMind\n  + now.com 財經\n  + Fortune Insight\n  + 28Hse.com\n  + AM730\n  + Infocast\n  + 鉅亨網\n  + 詠竹坊\n  + Money Club\n  + investing.com HK\n 新股IPO\n 全球關稅戰 [...] ### \n\n 足球\n NBA\n 網球\n 本地體壇\n\n### \n\n Yahoo自家製\n 新聞\n 財經\n 娛樂\n 生活\n 美食\n 旅遊\n\n### \n\n 天氣\n Yahoo國際\n App下載\n\n© 2026 All rights reserved.\n\n# 雅虎香港財經\n\n 雅虎香港財經\n\nMail\n\n登入\n\nBossMind\n\n# 中國監管｜外賣平台遭突擊調查 即時零售行業監管持續升級 約談改為現場駐點\n\nBossMind\n\nMPNGF\n\n-5.10%\n\nMPNGY\n\n+0.62%\n\nJD\n\n+0.97%\n\nJDCMF\n\n0.00%\n\n9618.HK\n\n-0.17%\n\n中國市場監管總局近期對主要外賣平台展開突擊檢查，包括京東(9618)、",
-      "content": "+ Bloomberg\n  + 信報財經新聞\n  + BossMind\n  + now.com 財經\n  + Fortune Insight\n  + 28Hse.com\n  + AM730\n  + Infocast\n  + 鉅亨網\n  + 詠竹坊\n  + Money Club\n  + investing.com HK\n 新股IPO\n 全球關稅戰 [...] ### \n\n 足球\n NBA\n 網球\n 本地體壇\n\n### \n\n Yahoo自家製\n 新聞\n 財經\n 娛樂\n 生活\n 美食\n 旅遊\n\n### \n\n 天氣\n Yahoo國際\n App下載\n\n© 2026 All rights reserved.\n\n# 雅虎香港財經\n\n 雅虎香港財經\n\nMail\n\n登入\n\nBossMind\n\n# 中國監管｜外賣平台遭突擊調查 即時零售行業監管持續升級 約談改為現場駐點\n\nBossMind\n\nMPNGF\n\n-5.10%\n\nMPNGY\n\n+0.62%\n\nJD\n\n+0.97%\n\nJDCMF\n\n0.00%\n\n9618.HK\n\n-0.17%\n\n中國市場監管總局近期對主要外賣平台展開突擊檢查，包括京東(9618)、美團(3690)、餓了麼及抖音集團均被列入調查名單。據《經濟觀察報》報道，此次調查於10月中旬進行，與以往約談形式不同，監管部門採取現場駐點方式，全程錄影並要求業務負責人立即接受問詢，部分平台甚至被連續調查多日。美團擬發債集資100億元人民幣，今日逆市跌約1%，穿100元。京東同樣微跌不足1%。\n\n調查重點聚焦食品安全與商家資質審核問題。消息人士透露，事件導火線是消費者在外賣平台購買品牌蛋糕時遭遇「貨不對板」，經投訴後發現涉事商家同時在多個平台違規經營。抖音作為即時零售新進入者，其「小時達」服務覆蓋的鮮花、生鮮等品類也被納入審查範圍，反映監管範圍正隨業態創新同步擴大。\n\n這已是年內監管部門第二次出手整頓外賣行業。今年5月及7月，三大平台就因價格戰引發的食品安全和不正當競爭問題被多部委聯合約談。目前調查仍在進行中，各平台正按要求提交材料說明情況，尚未收到具體整改通知。此次高強度執法可能預示著即時零售領域將迎來更嚴格的常態化監管，預期平台對商戶的准入審核與日常管理責任將進一步強化。\n\n條款  及 私隱政策\n\n私隱和 Cookie 設定 [...] 投資組合\n 新聞\n  + 最新新聞\n  + Yahoo財經\n  + Yahoo Money Talk\n  + Tech\n  + AI大時代\n 外幣\n  + 外幣報價\n  + 外幣兌換攻略\n  + 日圓兌港元\n  + 英鎊兌港元\n  + 澳元兌港元\n  + 美元兌港元\n  + 港元兌人民幣\n  + 港元兌台幣\n  + 加元兌港元\n  + 歐元兌港元\n  + 貨幣轉換器\n 港股\n  + 港股首頁\n  + 恒指\n  + 恒生科技指數\n  + 最活躍股票排行\n  + 最大升幅股票排行\n  + 最大跌幅股票排行\n 美股\n  + 美股首頁\n  + 美股日誌\n  + 道指\n  + 標普500\n  + 納指\n 金價\n  + 金價\n  + 金價新聞\n  + 銀價\n  + 銅價\n 油價\n  + 紐約期油價格\n  + 布蘭特原油價格\n  + 油價新聞\n  + 天然氣價格\n 行情\n  + 行情總覽\n  + 國際指數\n  + 期貨\n  + 加密貨幣\n  + 基金\n  + 篩選工具\n 財經日曆\n 地產\n  + 地產首頁\n  + Yahoo地產\n  + Video\n  + 居屋/綠置居\n 理財\n  + 理財首頁\n  + 稅貸\n  + 加密貨幣\n  + 定期存款\n  + 退休攻略\n 專欄\n  + 曾淵滄\n  + 渾水\n  + 高明\n  + 何啟聰\n  + Louise Wong\n  + 唐牛\n  + 青冰\n  + 胡國威\n  + 李聲揚\n  + 泡泡龍\n  + 言平\n  + 黃合秀\n  + 小勇哥\n  + 邱古奇\n  + 割柑人\n  + Benny Yam\n 財經大人物\n  + Rethink HK 2025\n 媒體總覽\n  + Yahoo財經\n  + AASTOCKS\n  + Bloomberg\n  + 信報財經新聞\n  + BossMind\n  + now.com 財經",
-      "matched_keywords": [
-        "618",
-        "政策"
-      ],
-      "raw": {
-        "query": "即时零售 监管 合规 2026",
-        "tavily_score": 0.997851,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3739620715020294",
+        "duplicate_sources": [
+          "rsshub_36kr_search_jd_instant"
+        ]
       },
       "filter": {
         "rule_score": -3,
         "rule_decision": "reject",
         "rule_reasons": [
-          "-3 泛领域: 港股"
+          "-1 time_status=old(搜索源/allow_old)",
+          "-2 内容极短且无关键词"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=-3<3",
-        "reject_reason": "rule_score=-3<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-3<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-3<2"
       }
     },
     {
-      "article_id": "af365c6ba505b861",
-      "title": "外卖大战迎来终局？分析人士：监管传递明确信号 即时零售将从“拼价格”走向“拼生态” _ 东方财富网",
-      "url": "https://finance.eastmoney.com/a/202603263684797292.html",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.137873+08:00",
-      "time_status": "unknown_time",
-      "summary": "财经\n 焦点\n 股票\n 新股\n 期指\n 期权\n 行情\n 数据\n 全球\n 美股\n 港股\n 期货\n 外汇\n 银行\n 基金\n 理财\n 债券\n 直播\n 股吧\n 基金吧\n 博客\n 财富号\n 搜索\n\n指数 期指 期权 个股 板块 排行 新股 基金 港股 美股 期货 外汇 黄金 自选股 自选基金\n\n资金流向 主力排名 板块资金 个股研报 新股申购 转债申购 北交所申购 AH股比价 年报大全 融资融券 龙虎榜 限售解禁 IPO审核 大宗交易 估值分析\n\n首页 > 财经频道 > 正文\n\n外卖大战迎来终局？分析人士：监管传递明确信号 即时零售将从“拼价格”走向“拼生态”\n\n2026年03月26日 07:59\n\n来源： 财联社\n\n小 中 大\n\n东方财富APP\n\n方便，快捷\n\n手机查看财经快讯\n\n专业，丰富\n\n一手掌握市场脉搏\n\n手机上阅读文章\n\n提示：\n\n微信扫一扫\n\n分享到您的\n\n朋友圈\n\n昨日，国家市场监督管理总局转发《经济日报》文章《外卖大战该结束了》，被市场视为监管层叫停平台恶性竞争、引导行业良性发展的明确信号。行业专家对财联社记者表示，即时零售的服务与效率比拼将取代简单的价格战，成为大厂下一阶段的",
-      "content": "财经\n 焦点\n 股票\n 新股\n 期指\n 期权\n 行情\n 数据\n 全球\n 美股\n 港股\n 期货\n 外汇\n 银行\n 基金\n 理财\n 债券\n 直播\n 股吧\n 基金吧\n 博客\n 财富号\n 搜索\n\n指数 期指 期权 个股 板块 排行 新股 基金 港股 美股 期货 外汇 黄金 自选股 自选基金\n\n资金流向 主力排名 板块资金 个股研报 新股申购 转债申购 北交所申购 AH股比价 年报大全 融资融券 龙虎榜 限售解禁 IPO审核 大宗交易 估值分析\n\n首页 > 财经频道 > 正文\n\n外卖大战迎来终局？分析人士：监管传递明确信号 即时零售将从“拼价格”走向“拼生态”\n\n2026年03月26日 07:59\n\n来源： 财联社\n\n小 中 大\n\n东方财富APP\n\n方便，快捷\n\n手机查看财经快讯\n\n专业，丰富\n\n一手掌握市场脉搏\n\n手机上阅读文章\n\n提示：\n\n微信扫一扫\n\n分享到您的\n\n朋友圈\n\n昨日，国家市场监督管理总局转发《经济日报》文章《外卖大战该结束了》，被市场视为监管层叫停平台恶性竞争、引导行业良性发展的明确信号。行业专家对财联社记者表示，即时零售的服务与效率比拼将取代简单的价格战，成为大厂下一阶段的竞争核心。\n\n　　前述文章指出，外卖大战看似惠民，实则内卷。从宏观视角看，外卖大战是对餐饮行业价格体系的猛烈冲击，整个行业陷入赔本赚吆喝的恶性循环，最终拖累了消费回暖的大趋势。这恰恰与中央提振消费的工作部署背道而驰，给宏观调控增添了本不应有的阻力。\n\n图片来源：国家市场监督管理总局官网\n\n　　“国家市场监管总局传递了明确的监管信号，旨在叫停依靠资本堆砌的恶性‘内卷式’竞争，引导行业从烧钱补贴转向技术创新与服务优化的良性发展轨道。”百联咨询创始人、零售电商行业专家庄帅对财联社记者表示。 [...] 在“反内卷”综合整治政策下，各地市场监督管理局已对外卖平台之间的内卷式竞争开展实质行动。本月23日，北京市市场监管局联合市商务局、市文化和旅游局，依法约谈和行政指导京东、淘宝闪购、美团等12家平台企业，集中通报开展平台“内卷式”竞争综合整治以来发现的第一批问题，并提出整改要求。\n\n　　实际上，对于平台本身而言，烧钱的外卖平台大战正在持续蚕食平台利润。本月，京东集团（09618.HK）和阿里巴巴（09988.HK）先后发布最新一季财报，受外卖大战影响，京东2025年新业务分部经营利润大幅亏损466.41亿元，阿里巴巴2026财年第三季度电商集团经调整EBITA为346.13亿元，同比下降43%。\n\n　　市场对外卖平台的关注点，也从单纯的市场份额转向盈利能力。京东CEO许冉在本月召开的业绩会上表示，京东外卖的目标是在规模保持健康发展的同时，取得经营效率的持续改善，公司将通过多项举措提升外卖单位经济效益（UE）。阿里巴巴电商事业群CEO蒋凡也在业绩会上表示，预计将在2029财年实现即时零售业务的整体盈利。\n\n　　在烧钱之外寻找即时零售竞争的新战场，已成为各方关注焦点。庄帅对财联社记者表示，继外卖大战后，头部大厂在即时零售领域的竞争焦点将转向供应链生态整合、履约效率优化、AI技术赋能、向高客单价的非餐品类扩张，从“拼砸钱”转向“拼服务、拼效率、拼生态”。\n\n　　值得一提的是，伴随国家市场监督管理总局转发文章，三大外卖平台股价上涨。昨日收盘，美团（03690.HK）、阿里巴巴以及京东集团股价分别上涨13.92%、4.63%和4.85%。\n\n### 东财图解·加点干货\n\n（文章来源：财联社）\n\n文章来源：财联社 责任编辑：6\n\n原标题：外卖大战迎来终局？分析人士：监管传递明确信号 即时零售将从“拼价格”走向“拼生态” [...] 原标题：外卖大战迎来终局？分析人士：监管传递明确信号 即时零售将从“拼价格”走向“拼生态”\n\n郑重声明：东方财富发布此内容旨在传播更多信息，与本站立场无关，不构成投资建议。据此操作，风险自担。\n\n举报\n\n东方财富网\n\n分享到微信朋友圈\n\n打开微信，\n\n点击底部的“发现”\n\n使用“扫一扫”\n\n即可将网页分享至朋友圈\n\n扫描二维码关注\n\n东方财富官网微信\n\n 沪股通\n\n 深股通\n\n 港股通(沪)\n\n 港股通(深)\n\n热门资讯\n\n 伊朗提出新谈判方案+停战条件\n 基金开始“追光” 基金抱团三问\n 美伊大消息！特朗普最新发声\n 香港年内IPO继续位列全球首位\n\n焦点专题\n\n 2026年全国两会\n 党的二十届四中全会\n 第十二届Choice最佳分析师\n\n OpenClaw刷屏    猪价刷新十余年低点\n\n视频\n\n 一键关注财经大咖\n\n热点推荐\n\n科创50指数收盘大涨近4% 半导体板块爆发\n\n东方财富Choice数据\n\n508 人评论  2026-04-27\n\n东方财富\n\n  \n扫一扫下载APP\n\n东方财富产品\n\n 东方财富免费版\n 东方财富Level-2\n 东方财富策略版\n 妙想投研助理\n Choice金融终端\n\n证券交易\n\n 东方财富证券开户\n 东方财富在线交易\n 东方财富证券交易\n\n 东方财富网微博\n 东方财富网微信\n 意见与建议\n\n扫一扫下载APP\n\n 基金开户\n 基金交易\n 活期宝\n 基金产品\n 稳健理财\n\n 天天基金网微博\n 天天基金网微信\n\n扫一扫下载APP\n\n 期货手机开户\n 期货电脑开户\n 期货官方网站\n\n信息网络传播视听节目许可证：0908328号 经营证券期货业务许可证编号：913101046312860336 违法和不良信息举报:021-61278686 举报邮箱：jubao@eastmoney.com",
+      "article_id": "bce52fda306ddb7c",
+      "title": "云南15个新商场来了，这个项目最抢眼！",
+      "url": "https://www.36kr.com/p/3737738740432905",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 25 Mar 2026 02:28:45 GMT",
+      "collected_at": "2026-05-01T09:36:41.499843+08:00",
+      "time_status": "old",
+      "summary": "龙湖昆明时代天街、3座壹然广场…今年将开业",
+      "content": "龙湖昆明时代天街、3座壹然广场…今年将开业",
       "matched_keywords": [
-        "即时零售",
-        "闪购",
-        "价格战",
-        "补贴",
-        "供应链",
-        "618",
-        "直播",
-        "政策"
+        "开业"
       ],
       "raw": {
-        "query": "即时零售 监管 合规 2026",
-        "tavily_score": 0.997065,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3737738740432905"
       },
       "filter": {
         "rule_score": -1,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+4 命中即时零售: 淘宝闪购",
-          "+1 命中经营变量: 客单价, 价格, 补贴",
-          "-3 泛领域: 港股",
-          "-3 无关主题: 半导体"
+          "-1 time_status=old(搜索源/allow_old)"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=-1<3",
-        "reject_reason": "rule_score=-1<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-1<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-1<2"
       }
     },
     {
-      "article_id": "16981e97b092ac3a",
-      "title": "《互联网平台价格行为规则》今起实施-新华网",
-      "url": "https://www.news.cn/20260410/0db731002a714c02b7de75eeb122354f/c.html",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.137943+08:00",
-      "time_status": "unknown_time",
-      "summary": "随着《规则》的实施，平台企业的价格行为将面临更严格的合规要求。洪勇表示，《规则》的核心价值在于“三个明确”：一是明确了价格行为的合规边界，让平台企业知道什么能做、什么不能做；二是明确了经营者的自主定价权，防止平台利用优势地位进行不合理干预；三是明确了消费者的知情权和选择权，让价格更透明、消费更安心。这对于构建公平、透明、有序的平台经济生态具有重要意义。\n\n  他进一步指出，市场并非没有新增量，关键在于新增量在哪里、如何打开。以即时零售为例，商务部研究院报告显示，该市场仍处于快速扩容期。平台竞争不应只围绕存量商家和价格做文章，更要聚焦新人群、新场景、新需求，真正做大市场规模。（记者 王文博 实习生方淼淼对此文亦有贡献）\n\n【纠错】;)  【责任编辑:胡蓉】\n\n阅读下一篇：\n\n深度观察\n\n [](\n\n  新华全媒头条丨扩能提质并举 促进服务业优质高效发展\n\n 新华视点丨文旅融合消费升级 春日经济活力涌动\n 全球连线丨专家解读美伊再次谈判能否实现突破\n 秀我中国丨“未来之城”的“正确打开方式”\n 追光丨一球连吴越 一城一风华\n 列国鉴丨苏伊士运河：海湾国家原油替代通道的北向出口\n 记者手记丨",
-      "content": "随着《规则》的实施，平台企业的价格行为将面临更严格的合规要求。洪勇表示，《规则》的核心价值在于“三个明确”：一是明确了价格行为的合规边界，让平台企业知道什么能做、什么不能做；二是明确了经营者的自主定价权，防止平台利用优势地位进行不合理干预；三是明确了消费者的知情权和选择权，让价格更透明、消费更安心。这对于构建公平、透明、有序的平台经济生态具有重要意义。\n\n  他进一步指出，市场并非没有新增量，关键在于新增量在哪里、如何打开。以即时零售为例，商务部研究院报告显示，该市场仍处于快速扩容期。平台竞争不应只围绕存量商家和价格做文章，更要聚焦新人群、新场景、新需求，真正做大市场规模。（记者 王文博 实习生方淼淼对此文亦有贡献）\n\n【纠错】;)  【责任编辑:胡蓉】\n\n阅读下一篇：\n\n深度观察\n\n [](\n\n  新华全媒头条丨扩能提质并举 促进服务业优质高效发展\n\n 新华视点丨文旅融合消费升级 春日经济活力涌动\n 全球连线丨专家解读美伊再次谈判能否实现突破\n 秀我中国丨“未来之城”的“正确打开方式”\n 追光丨一球连吴越 一城一风华\n 列国鉴丨苏伊士运河：海湾国家原油替代通道的北向出口\n 记者手记丨中国电动车在德国市场热度攀升\n\n [](\n [](\n\n  公益微视频丨暖心护航 为爱同行\n\n《互联网平台价格行为规则》今起实施 [...] 对此，商务部研究院副研究员洪勇表示，近年来，我国平台经济快速发展，在促进消费、扩大就业、推动创新等方面发挥了重要作用。推动平台经济规范、健康、持续发展，既需要市场这只“看不见的手”发挥资源配置的决定性作用，也需要政府这只“看得见的手”及时纠偏、划定底线。《规则》的出台与实施，正是为平台价格行为划出清晰的红线，既保护了经营者的自主定价权，也守护了消费者的合法权益，是推动平台经济从“野蛮生长”走向“规范发展”的关键一步。\n\n  从市场体量看，市场监管总局此前发布的数据显示，目前，我国平台经济发展涉及数千万网络经营主体、众多灵活就业人员、9亿多网络消费者，赋能实体经济千行百业，成为一个覆盖面广、包容性强、开放度高的生态系统。艾媒咨询发布的《2026-2027年中国平台经济行业发展研究报告》显示，2024年中国平台经济市场规模约为25.2万亿元，预计2029年市场规模将达到37.3万亿元。\n\n  市场监管总局价监竞争局有关负责人表示，平台经济的健康发展，不仅是平台企业的健康发展，更是整个生态的持续繁荣。平台企业在开展经营服务的过程中，会向平台内经营者收取佣金、抽成、会员费、技术服务费、信息服务费、营销推广费等，这些费用构成了平台收入的基本来源。同时，平台商户也反映，平台存在收费名目繁多、计算方法复杂、平台收费不透明等问题。尽管许多平台企业在发展过程中逐步健全了合规管理机制，但在收费行为方面，其内部合规管理制度仍不够完善，导致平台企业收费风险防控不足。 [...] 《互联网平台价格行为规则》今起实施-新华网 \n\n新华网 >  > 正文\n\n2026 04/10 09:21:18\n\n# 《互联网平台价格行为规则》今起实施\n\n字体： 小 中 大\n\n分享到：\n\n# 《互联网平台价格行为规则》今起实施\n\n2026-04-10 09:21:18  来源：经济参考报\n\n切实规范补贴行为，坚决遏制恶性价格竞争\n\n《互联网平台价格行为规则》今起实施\n\n  由国家发展改革委、市场监管总局、国家网信办三部门联合印发的《互联网平台价格行为规则》（下称《规则》）于4月10日正式实施。记者从市场监管总局获悉，日前，上述三部门联合召开互联网平台价格合规指导会，指导互联网平台企业落实《规则》要求，压实主体责任，规范价格竞争行为。\n\n  《规则》共计7章29条，规定了平台经营者、平台内经营者实施价格行为应当遵守的规范。具体来看，一是规范价格竞争秩序；二是保护经营者自主定价权；三是保护消费者合法权益。\n\n  记者注意到，该《规则》于2025年12月正式发布，预留了近4个月的过渡期，供平台经营者对照调整。合规指导会通报了部分平台企业存在的价格合规问题，并要求平台企业立即整改、举一反三，建立健全价格合规机制，自觉维护市场秩序，有效防范价格违法行为的发生。\n\n  三部门进一步强调，平台企业要切实规范补贴行为，坚决遏制恶性价格竞争，不得虚假、夸大宣传补贴金额和力度；要充分尊重平台内经营者自主定价权，严禁干预定价行为，不得强制或变相强制平台内经营者参加促销活动并承担费用；要坚守诚信经营底线，全力维护消费者合法权益，不得收取任何未予标明的费用，不得实施虚假促销、价格欺诈等行为。\n\n  市场监管总局表示，将持续强化价格竞争监管，深入整治“内卷式”竞争，有力维护公平竞争的市场环境，推动形成优质优价、良性竞争的市场秩序。",
-      "matched_keywords": [
-        "即时零售",
-        "促销",
-        "补贴",
-        "合规"
-      ],
+      "article_id": "0766467910444ee6",
+      "title": "半年下滑5个亿，可复美难撑巨子生物的增长神话",
+      "url": "https://www.36kr.com/p/3736527438623233",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Tue, 24 Mar 2026 07:54:39 GMT",
+      "collected_at": "2026-05-01T09:36:41.500276+08:00",
+      "time_status": "old",
+      "summary": "械字号与线下能否突围？",
+      "content": "械字号与线下能否突围？",
+      "matched_keywords": [],
       "raw": {
-        "query": "即时零售 监管 合规 2026",
-        "tavily_score": 0.9882222,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3736527438623233"
       },
       "filter": {
         "rule_score": -3,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+4 命中即时零售: 即时零售",
-          "+1 命中经营变量: 价格, 补贴, 会员",
-          "-3 无关主题: 电动车",
-          "-5 垃圾内容: 公益"
+          "-1 time_status=old(搜索源/allow_old)",
+          "-2 内容极短且无关键词"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=-3<3",
-        "reject_reason": "rule_score=-3<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-3<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-3<2"
       }
     },
     {
-      "article_id": "b5aa011817941b6e",
-      "title": "王云波：2026年将通过立新规、强新序、建新制进一步规范电力零售市场---国家能源局",
-      "url": "https://www.nea.gov.cn/20260130/0f126941f50c4c668ba13773f599d6db/c.html",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.138078+08:00",
-      "time_status": "unknown_time",
-      "summary": "王云波：2026年将通过立新规、强新序、建新制进一步规范电力零售市场---国家能源局 \n\n您当前位置：首页 > 正文\n\n王云波：2026年将通过立新规、强新序、建新制进一步规范电力零售市场\n\n 发布时间：2026-01-30   来源：国家能源局  大中小\n\n国家能源局举行新闻发布会，介绍2025年全国能源形势、迎峰度冬能源保供、新型储能发展、全国电力市场交易等情况，并回答记者提问。\n\n【经济日报记者】我们注意到，2025年多地清退大量售电主体，2026年各地电力交易方案在多个维度上加强了对售电公司的规范与约束。当前我国售电市场发展情况如何？下一步，对售电市场高质量发展有什么新考虑？\n\n【市场监管司副司长王云波】谢谢您的提问，感谢您对我国电力市场建设的关心。自2015年新一轮电力体制改革启动售电侧改革以来，零售市场建设稳步推进，售电公司功能作用持续发挥。售电公司是连接批发市场和零售市场的载体，通俗地讲，成立售电公司，就像开设“电力商店”。这些“商店”从发电厂批量采购电力，再零售给中小工商业用户。因此，零售市场既是终端用户参与市场的“防火墙”和“便利店”，也是引导用户资源响应、提升负荷侧",
-      "content": "王云波：2026年将通过立新规、强新序、建新制进一步规范电力零售市场---国家能源局 \n\n您当前位置：首页 > 正文\n\n王云波：2026年将通过立新规、强新序、建新制进一步规范电力零售市场\n\n 发布时间：2026-01-30   来源：国家能源局  大中小\n\n国家能源局举行新闻发布会，介绍2025年全国能源形势、迎峰度冬能源保供、新型储能发展、全国电力市场交易等情况，并回答记者提问。\n\n【经济日报记者】我们注意到，2025年多地清退大量售电主体，2026年各地电力交易方案在多个维度上加强了对售电公司的规范与约束。当前我国售电市场发展情况如何？下一步，对售电市场高质量发展有什么新考虑？\n\n【市场监管司副司长王云波】谢谢您的提问，感谢您对我国电力市场建设的关心。自2015年新一轮电力体制改革启动售电侧改革以来，零售市场建设稳步推进，售电公司功能作用持续发挥。售电公司是连接批发市场和零售市场的载体，通俗地讲，成立售电公司，就像开设“电力商店”。这些“商店”从发电厂批量采购电力，再零售给中小工商业用户。因此，零售市场既是终端用户参与市场的“防火墙”和“便利店”，也是引导用户资源响应、提升负荷侧用电灵活性的核心环节。\n\n  当前，通过售电公司购买电能已经成为中小用户市场化购电的主要方式。截至2025年底，全国注册售电公司5288家，代理70余万家电力用户参与市场交易，零售交易电量占市场化交易电量达到六成。\n\n  关于“多地清退大量售电主体”，按照《售电公司管理办法》有关规定，“售电公司连续12个月未进行实际交易，暂停其交易资格”，同时也规定“连续3年未在任一行政区域开展售电业务，启动强制退出程序”。因此，各有关单位按照规定需对售电公司是否持续满足注册条件开展动态管理。",
+      "article_id": "77182b52271cd5bd",
+      "title": "挨骂含泪赚3000万，谁在制造二次元IP香水的“暴利神话”？",
+      "url": "https://www.36kr.com/p/3733995733725700",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 23 Mar 2026 03:49:25 GMT",
+      "collected_at": "2026-05-01T09:36:41.500719+08:00",
+      "time_status": "old",
+      "summary": "二次元可以交IP税，但不能交不走心的IP税。",
+      "content": "二次元可以交IP税，但不能交不走心的IP税。",
       "matched_keywords": [
-        "新规"
+        "香水"
       ],
       "raw": {
-        "query": "即时零售 监管 合规 2026",
-        "tavily_score": 0.9518632,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3733995733725700"
       },
       "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=0<3",
-        "reject_reason": "rule_score=0<3"
-      }
-    },
-    {
-      "article_id": "60ac5ecb01d8ab56",
-      "title": "化妆品注册备案管理办法-政策文件",
-      "url": "https://www.ccfdie.org/cn/yjxx/zcwj/webinfo/2024/05/1716631944883632.htm",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.936672+08:00",
-      "time_status": "unknown_time",
-      "summary": "第二条在中华人民共和国境内从事化妆品和化妆品新原料注册、备案及其监督管理活动，适用本办法。\n\n　　第三条化妆品、化妆品新原料注册，是指注册申请人依照法定程序和要求提出注册申请，药品监督管理部门对申请注册的化妆品、化妆品新原料的安全性和质量可控性进行审查，决定是否同意其申请的活动。\n\n　　化妆品、化妆品新原料备案，是指备案人依照法定程序和要求，提交表明化妆品、化妆品新原料安全性和质量可控性的资料，药品监督管理部门对提交的资料存档备查的活动。\n\n　　第四条国家对特殊化妆品和风险程度较高的化妆品新原料实行注册管理，对普通化妆品和其他化妆品新原料实行备案管理。\n\n　　第五条国家药品监督管理局负责特殊化妆品、进口普通化妆品、化妆品新原料的注册和备案管理，并指导监督省、自治区、直辖市药品监督管理部门承担的化妆品备案相关工作。国家药品监督管理局可以委托具备相应能力的省、自治区、直辖市药品监督管理部门实施进口普通化妆品备案管理工作。\n\n　　国家药品监督管理局化妆品技术审评机构(以下简称技术审评机构)负责特殊化妆品、化妆品新原料注册的技术审评工作，进口普通化妆品、化妆品新原料备案后的资料技术核查工作，以",
-      "content": "第二条在中华人民共和国境内从事化妆品和化妆品新原料注册、备案及其监督管理活动，适用本办法。\n\n　　第三条化妆品、化妆品新原料注册，是指注册申请人依照法定程序和要求提出注册申请，药品监督管理部门对申请注册的化妆品、化妆品新原料的安全性和质量可控性进行审查，决定是否同意其申请的活动。\n\n　　化妆品、化妆品新原料备案，是指备案人依照法定程序和要求，提交表明化妆品、化妆品新原料安全性和质量可控性的资料，药品监督管理部门对提交的资料存档备查的活动。\n\n　　第四条国家对特殊化妆品和风险程度较高的化妆品新原料实行注册管理，对普通化妆品和其他化妆品新原料实行备案管理。\n\n　　第五条国家药品监督管理局负责特殊化妆品、进口普通化妆品、化妆品新原料的注册和备案管理，并指导监督省、自治区、直辖市药品监督管理部门承担的化妆品备案相关工作。国家药品监督管理局可以委托具备相应能力的省、自治区、直辖市药品监督管理部门实施进口普通化妆品备案管理工作。\n\n　　国家药品监督管理局化妆品技术审评机构(以下简称技术审评机构)负责特殊化妆品、化妆品新原料注册的技术审评工作，进口普通化妆品、化妆品新原料备案后的资料技术核查工作，以及化妆品新原料使用和安全情况报告的评估工作。\n\n　　国家药品监督管理局行政事项受理服务机构(以下简称受理机构)、审核查验机构、不良反应监测机构、信息管理机构等专业技术机构，承担化妆品注册和备案管理所需的注册受理、现场核查、不良反应监测、信息化建设与管理等工作。\n\n　　第六条省、自治区、直辖市药品监督管理部门负责本行政区域内国产普通化妆品备案管理工作，在委托范围内以国家药品监督管理局的名义实施进口普通化妆品备案管理工作，并协助开展特殊化妆品注册现场核查等工作。\n\n　　第七条化妆品、化妆品新原料注册人、备案人依法履行产品注册、备案义务，对化妆品、化妆品新原料的质量安全负责。 [...] 第五十四条药品监督管理部门、技术审评、现场核查、检验机构及其工作人员应当严格遵守法律、法规、规章和国家药品监督管理局的相关规定，保证相关工作科学、客观和公正。\n\n　　第五十五条未经注册人、备案人同意，药品监督管理部门、专业技术机构及其工作人员、参与审评的人员不得披露注册人、备案人提交的商业秘密、未披露信息或者保密商务信息，法律另有规定或者涉及国家安全、重大社会公共利益的除外。\n\n　　第五章 法律责任\n\n　　第五十六条化妆品、化妆品新原料注册人未按照本办法规定申请特殊化妆品、化妆品新原料变更注册的，由原发证的药品监督管理部门责令改正，给予警告，处1万元以上3万元以下罚款。\n\n　　化妆品、化妆品新原料备案人未按照本办法规定更新普通化妆品、化妆品新原料备案信息的，由承担备案管理工作的药品监督管理部门责令改正，给予警告，处5000元以上3万元以下罚款。\n\n　　化妆品、化妆品新原料注册人未按照本办法的规定重新注册的，依照化妆品监督管理条例第五十九条的规定给予处罚;化妆品、化妆品新原料备案人未按照本办法的规定重新备案的，依照化妆品监督管理条例第六十一条第一款的规定给予处罚。\n\n　　第五十七条化妆品新原料注册人、备案人违反本办法第二十一条规定的，由省、自治区、直辖市药品监督管理部门责令改正;拒不改正的，处5000元以上3万元以下罚款。\n\n　　第五十八条承担备案管理工作的药品监督管理部门发现已备案化妆品、化妆品新原料的备案资料不符合要求的，应当责令限期改正，其中，与化妆品、化妆品新原料安全性有关的备案资料不符合要求的，可以同时责令暂停销售、使用。\n\n　　已进行备案但备案信息尚未向社会公布的化妆品、化妆品新原料，承担备案管理工作的药品监督管理部门发现备案资料不符合要求的，可以责令备案人改正并在符合要求后向社会公布备案信息。 [...] 已经备案的产品不再生产或者进口的，备案人应当及时报告承担备案管理工作的药品监督管理部门取消备案。\n\n　　第三节 注册管理\n\n　　第三十八条特殊化妆品生产或者进口前，注册申请人应当按照国家药品监督管理局的要求提交申请资料。\n\n　　特殊化妆品注册程序和时限未作规定的，适用本办法关于化妆品新原料注册的规定。\n\n　　第三十九条技术审评机构应当自收到申请资料之日起90个工作日内，按照技术审评的要求组织开展技术审评，并根据下列情况分别作出处理：\n\n　　(一)申请资料真实完整，能够证明产品安全性和质量可控性、产品配方和产品执行的标准合理，且符合现行法律、行政法规、强制性国家标准和技术规范要求的，作出技术审评通过的审评结论;\n\n　　(二)申请资料不真实，不能证明产品安全性和质量可控性、产品配方和产品执行的标准不合理，或者不符合现行法律、行政法规、强制性国家标准和技术规范要求的，作出技术审评不通过的审评结论;\n\n　　(三)需要申请人补充资料的，应当一次告知需要补充的全部内容;申请人应当在90个工作日内按照要求一次提供补充资料，技术审评机构收到补充资料后审评时限重新计算;未在规定时限内补充资料的，技术审评机构应当作出技术审评不通过的审评结论。\n\n　　第四十条国家药品监督管理局应当自收到技术审评结论之日起20个工作日内，对技术审评程序和结论的合法性、规范性以及完整性进行审查，并作出是否准予注册的决定。\n\n　　受理机构应当自国家药品监督管理局作出行政审批决定之日起10个工作日内，向申请人发出化妆品注册证或者不予注册决定书。化妆品注册证有效期5年。\n\n　　第四十一条已经注册的特殊化妆品的注册事项发生变化的，国家药品监督管理局根据变化事项对产品安全、功效的影响程度实施分类管理：\n\n　　(一)不涉及安全性、功效宣称的事项发生变化的，注册人应当及时向国家药品监督管理局备案;",
-      "matched_keywords": [
-        "备案",
-        "政策"
-      ],
-      "raw": {
-        "query": "化妆品 备案 监管 新规",
-        "tavily_score": 0.99993074,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 1,
+        "rule_score": -1,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+1 命中经营变量: 活动"
+          "-1 time_status=old(搜索源/allow_old)"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=1<3",
-        "reject_reason": "rule_score=1<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-1<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-1<2"
       }
     },
     {
-      "article_id": "104b54707addb5be",
-      "title": "中检院关于发布《化妆品新原料备案信息更新技术指南》的通知 - 政策法规 - 日化品 - 瑞旭集团",
-      "url": "https://www.cirs-group.com/cn/cosmetics/zhong-jian-yuan-guan-yu-fa-bu-hua-zhuang-pin-xin-yuan-liao-bei-an-xin-xi-geng-xin-ji-shu-zhi-nan-de-tong-zhi",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.936900+08:00",
-      "time_status": "unknown_time",
-      "summary": "扫描下方的二维码订阅“妆合规”！跟踪化妆品最新产品安全与法规监管动态, 深入洞察化妆品研发与上市信息, 集萃行业大咖独家观点，获得最新一手资讯。\n\n妆合规 [...] CIRS [...] logo",
-      "content": "扫描下方的二维码订阅“妆合规”！跟踪化妆品最新产品安全与法规监管动态, 深入洞察化妆品研发与上市信息, 集萃行业大咖独家观点，获得最新一手资讯。\n\n妆合规 [...] CIRS [...] logo",
-      "matched_keywords": [
-        "合规",
-        "备案",
-        "政策"
-      ],
+      "article_id": "cf13d8d154374694",
+      "title": "太难了！180+品牌一年关店超15000家",
+      "url": "https://www.36kr.com/p/3724992064076163",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Mon, 16 Mar 2026 02:20:26 GMT",
+      "collected_at": "2026-05-01T09:36:41.501622+08:00",
+      "time_status": "old",
+      "summary": "昔日的“排队王”，又倒下一批",
+      "content": "昔日的“排队王”，又倒下一批",
+      "matched_keywords": [],
       "raw": {
-        "query": "化妆品 备案 监管 新规",
-        "tavily_score": 0.9995122,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3724992064076163"
       },
       "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=0<3",
-        "reject_reason": "rule_score=0<3"
-      }
-    },
-    {
-      "article_id": "eac55064ffdc9d2b",
-      "title": "中国化妆品注册备案 - 中国化妆品及原料 - 日化品 - CIRS Group",
-      "url": "https://www.cirs-group.com/cn/cosmetics/zhong-guo-hua-zhuang-pin-zhu-ce-bei-an",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.937035+08:00",
-      "time_status": "unknown_time",
-      "summary": "扫描下方的二维码订阅“妆合规”！跟踪化妆品最新产品安全与法规监管动态, 深入洞察化妆品研发与上市信息, 集萃行业大咖独家观点，获得最新一手资讯。\n\n妆合规 [...] 使用期限；\n\n使用方法；\n\n必要的安全警示用语；\n\n法律、行政法规和强制性国家标准规定应当标注的其他内容。\n\n具有包装盒的产品，还应当同时在直接接触内容物的包装容器上标注产品中文名称和使用期限。\n\n### 化妆品上市后监管\n\n普通化妆品:\n\n主管部门对部分已备案的化妆品开展技术审查；\n\n2022年开始，已备案的化妆品需提交年度报告。省级以上人民政府药品监督管理部门应当组织对化妆品进行抽样检验；对举报反映或者日常监督检查中发现问题较多的化妆品，负责药品监督管理的部门可以进行专项抽样检验。\n\n相关推荐： [...] 妆合规",
-      "content": "扫描下方的二维码订阅“妆合规”！跟踪化妆品最新产品安全与法规监管动态, 深入洞察化妆品研发与上市信息, 集萃行业大咖独家观点，获得最新一手资讯。\n\n妆合规 [...] 使用期限；\n\n使用方法；\n\n必要的安全警示用语；\n\n法律、行政法规和强制性国家标准规定应当标注的其他内容。\n\n具有包装盒的产品，还应当同时在直接接触内容物的包装容器上标注产品中文名称和使用期限。\n\n### 化妆品上市后监管\n\n普通化妆品:\n\n主管部门对部分已备案的化妆品开展技术审查；\n\n2022年开始，已备案的化妆品需提交年度报告。省级以上人民政府药品监督管理部门应当组织对化妆品进行抽样检验；对举报反映或者日常监督检查中发现问题较多的化妆品，负责药品监督管理的部门可以进行专项抽样检验。\n\n相关推荐： [...] 妆合规",
-      "matched_keywords": [
-        "合规",
-        "备案"
-      ],
-      "raw": {
-        "query": "化妆品 备案 监管 新规",
-        "tavily_score": 0.9992022,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=0<3",
-        "reject_reason": "rule_score=0<3"
-      }
-    },
-    {
-      "article_id": "92823413c33617e0",
-      "title": "2025中国化妆品法规动态：2款原料取消备案，化妆品技术导则更新（12月）",
-      "url": "http://www.reach24h.com/cosmetic/industry-news/december-cosmetics-regulatory",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.937105+08:00",
-      "time_status": "unknown_time",
-      "summary": "相关内容见：《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》发布\n\n五类原特殊用途化妆品过渡期届满\n\n根据2021年1月1日起施行的《化妆品监督管理条例》（以下简称《条例》）第七十八条，对本条例施行前已经注册的用于育发、脱毛、美乳、健美、除臭的化妆品自本条例施行之日起设置5年的过渡期，过渡期内可以继续生产、进口、销售，过渡期满后不得生产、进口、销售该化妆品。过渡期至2025年12月31日结束。\n\n## 违法案例\n\n国家药监局通告18批次化妆品检出禁用原料\n\n2025年12月12日，国家药监局发布18批次化妆品检出禁用原料的通告。产品涉及辽宁、上海、浙江、山东、湖北、广东等地企业。\n\n广州通告注销一批化妆品生产许可证\n\n2025年12月3日，广州市监局发布关于注销《化妆品生产许可证》的通告（2025年第八批），公示了27家已注销化妆品生产许可证的企业。\n\n浙江通告化妆品监督检查情况\n\n2025年12月7日，浙江省药监局发布2025年第2期化妆品监督检查情况的通告。当局对40家化妆品注册人、备案人及受托生产企业开展了监督检查，发现6家企业生产质量管理体系存在严重缺陷。\n\n广东通告",
-      "content": "相关内容见：《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》发布\n\n五类原特殊用途化妆品过渡期届满\n\n根据2021年1月1日起施行的《化妆品监督管理条例》（以下简称《条例》）第七十八条，对本条例施行前已经注册的用于育发、脱毛、美乳、健美、除臭的化妆品自本条例施行之日起设置5年的过渡期，过渡期内可以继续生产、进口、销售，过渡期满后不得生产、进口、销售该化妆品。过渡期至2025年12月31日结束。\n\n## 违法案例\n\n国家药监局通告18批次化妆品检出禁用原料\n\n2025年12月12日，国家药监局发布18批次化妆品检出禁用原料的通告。产品涉及辽宁、上海、浙江、山东、湖北、广东等地企业。\n\n广州通告注销一批化妆品生产许可证\n\n2025年12月3日，广州市监局发布关于注销《化妆品生产许可证》的通告（2025年第八批），公示了27家已注销化妆品生产许可证的企业。\n\n浙江通告化妆品监督检查情况\n\n2025年12月7日，浙江省药监局发布2025年第2期化妆品监督检查情况的通告。当局对40家化妆品注册人、备案人及受托生产企业开展了监督检查，发现6家企业生产质量管理体系存在严重缺陷。\n\n广东通告化妆品抽样检验信息\n\n2025年12月22日，广东省药监局发布化妆品抽样检验信息的通告（2025年第4期），共抽检750款产品，不合规产品16款。涉及：检出产品标签与注册资料载明的技术要求不一致，菌落总数超标，添加禁用原料等。\n\n广东通告化妆品监督检查结果\n\n2025年12月25日，广东省药监局发布化妆品监督检查的通告（2025年第3期）。当局对106家化妆品生产企业进行现场有因检查，经检查33家生产企业“生产质量管理体系存在严重缺陷”。\n\n2025年11月全国未准入境食品化妆品信息 [...] 浙江取消未提交年报的普通化妆品备案\n\n2025年12月18日，浙江省药监局发布关于取消未提交2025年度报告普通化妆品备案的通告。因相关备案人未按规定提交2025年度报告，且在公告期内未提出有效陈述申辩或申诉未获采纳，依法对一批普通化妆品取消备案。\n\n根据《化妆品注册备案管理办法》和《国家药监局关于实施〈化妆品注册备案资料管理规定〉有关事项的公告》（2021年第35号）要求，备案人应当于每年1月1日至3月31日，通过新注册备案平台提交备案时间满一年的普通化妆品的年度报告。\n\n瑞欧科技提醒企业，请按时提交年度报告，以免影响产品上市。\n\n海南开展化妆品个性化服务试点工作\n\n2025年12月23日，海南省药监局发布关于开展化妆品个性化服务试点工作的公告。涵盖试点内容、试点申请流程及试点工作要求。试点期限为2年。\n\n广东开展化妆品电子标签试点工作\n\n2025年12月24日，广东省药监局发布关于开展化妆品电子标签试点工作的通告。广东省药监局自2026年2月1日起试点通过电子标签方式标注化妆品中文标签，为期3年。本次通告说明了试点企业条件、试点企业申请、试点监管措施等事项。\n\n广州发布普通化妆品备案问答\n\n2025年12月24日，广州市监局发布普通化妆品备案问答（九十四期），就《化妆品监督管理条例》施行前，已经取得注册的育发、脱毛、美乳、健美、除臭的化妆品，是否可以继续生产、进口销售；2025年在普通化妆品备案管理系统已领取或已暂存的预备案号使用是否有时间限制；主动注销不再生产的已备案普通化妆品时，注销申请提交失败，该如何处理等5个问题做出解答。\n\n2025年12月24日，广州市监局发布普通化妆品备案问答（九十六期），就防脱化妆品与防断化妆品的区别，防脱化妆品的标签宣称、功效原料、功效评价、功效宣称等5个问题做出解答。\n\n北京发布普通化妆品备案常见问答 [...] 中国化妆品行业法规动态\n\n 获取化妆品合规资讯与解决方案 \n\n查看\n\n精选资讯\n\n《化妆品安全技术规范》（完整整理版）| 更新至2026年1月化妆品原料 | 什么是INCI名称？如何申请INCI名称？INCI的命名规则？欧盟法规新增30种化妆品禁用原料，这6种国内企业务必重点关注！正式实施！欧盟新增56种香精致敏原，提醒化妆品企业关注！化妆品新原料申请必读！新原料备案将于5月1日实施！祛斑美白类化妆品新规重点梳理：类别界定更清晰，合规门槛将更高！化妆品出口欧盟合规要求解析：需要什么认证？流程和资料要求有哪些？最新2025版《已上市产品原料使用信息》正式发布（附官方解答）美国MoCRA法规最新进展：有关“香精致敏原”与“石棉测试方法”计划推迟国内化妆品应如何正确标注产品执行的标准编号？\n\n热门问答\n\n拟备案注册化妆品新原料的安全食用历史证明材料若来源于普通食品原料有哪些要求？化妆品完整版安全评估报告是否可以提交理化稳定性测试、防腐剂挑战测试、包材相容性测试评估结论？对化妆品配方中的 “香精” 使用IFRA证书进行安全评估时，需注意哪些事项？拟备案注册化妆品新原料的安全食用历史证明材料若来源于保健食品原料有哪些要求？台湾地区化妆品产品信息档案PIF应如何保存？\n\n行业服务\n\n全球化学品合规食品接触材料/再生塑料全球农用化学品合规消杀产品及设备合规全球化妆品合规全球食品合规药品合规绿色低碳可持续EHS与过程安全检验检测及认证\n\n最新发布",
-      "matched_keywords": [
-        "合规",
-        "备案",
-        "标签",
-        "新规",
-        "通告",
-        "征求意见稿"
-      ],
-      "raw": {
-        "query": "化妆品 备案 监管 新规",
-        "tavily_score": 0.99918324,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": -5,
+        "rule_score": -3,
         "rule_decision": "reject",
         "rule_reasons": [
-          "-5 垃圾内容: 备案号"
+          "-1 time_status=old(搜索源/allow_old)",
+          "-2 内容极短且无关键词"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=-5<3",
-        "reject_reason": "rule_score=-5<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-3<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-3<2"
       }
     },
     {
-      "article_id": "90e7573ba6c9c53c",
-      "title": "国家药监局公开征求《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》意见 - 中国食品药品网",
-      "url": "https://m.cnpharm.com/c/2025-12-26/1087546.shtml",
-      "source_name": "tavily_regulation",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.937172+08:00",
-      "time_status": "unknown_time",
-      "summary": "国家药监局公开征求《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》意见\n\n　　12月26日，国家药监局网站公开征求《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》意见，全文如下。\n\n国家药监局综合司公开征求《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》意见\n\n　　为进一步深化监管改革，支持化妆品原料创新，优化新原料注册备案资料要求，根据《化妆品监督管理条例》《化妆品注册备案管理办法》等法规规定，结合行业发展实际，国家药监局组织起草了《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》（见附件1），现向社会公开征求意见。\n\n　　公开征求意见时间为2025年12月26日—2026年1月25日。相关意见建议请填写反馈表（见附件2），反馈至电子邮箱hzpjgyc@nmpa.gov.cn，并在邮件标题注明“化妆品新原料注册备案资料管理规定反馈意见”。\n\n　　附件：1.化妆品新原料注册备案资料管理规定（修订草案征求意见稿）\n\n　　　　　2.意见建议反馈表\n\n　　国家药监局综合司\n\n　　2025年12月24日\n\n附件1.doc\n\n附件2.doc\n\n　　12月26",
-      "content": "国家药监局公开征求《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》意见\n\n　　12月26日，国家药监局网站公开征求《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》意见，全文如下。\n\n国家药监局综合司公开征求《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》意见\n\n　　为进一步深化监管改革，支持化妆品原料创新，优化新原料注册备案资料要求，根据《化妆品监督管理条例》《化妆品注册备案管理办法》等法规规定，结合行业发展实际，国家药监局组织起草了《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》（见附件1），现向社会公开征求意见。\n\n　　公开征求意见时间为2025年12月26日—2026年1月25日。相关意见建议请填写反馈表（见附件2），反馈至电子邮箱hzpjgyc@nmpa.gov.cn，并在邮件标题注明“化妆品新原料注册备案资料管理规定反馈意见”。\n\n　　附件：1.化妆品新原料注册备案资料管理规定（修订草案征求意见稿）\n\n　　　　　2.意见建议反馈表\n\n　　国家药监局综合司\n\n　　2025年12月24日\n\n附件1.doc\n\n附件2.doc\n\n　　12月26日，国家药监局网站公开征求《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》意见，全文如下。\n\n国家药监局综合司公开征求《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》意见\n\n　　为进一步深化监管改革，支持化妆品原料创新，优化新原料注册备案资料要求，根据《化妆品监督管理条例》《化妆品注册备案管理办法》等法规规定，结合行业发展实际，国家药监局组织起草了《化妆品新原料注册备案资料管理规定（修订草案征求意见稿）》（见附件1），现向社会公开征求意见。",
-      "matched_keywords": [
-        "备案",
-        "征求意见稿"
-      ],
+      "article_id": "f00c94b784d2caf2",
+      "title": "龙湖、华润、新城、世纪金源...西南今年49个商业“炸场”！",
+      "url": "https://www.36kr.com/p/3717937495651968",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 11 Mar 2026 02:46:24 GMT",
+      "collected_at": "2026-05-01T09:36:41.502079+08:00",
+      "time_status": "old",
+      "summary": "数量最多的不是川渝！",
+      "content": "数量最多的不是川渝！",
+      "matched_keywords": [],
       "raw": {
-        "query": "化妆品 备案 监管 新规",
-        "tavily_score": 0.9991573,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3717937495651968"
       },
       "filter": {
-        "rule_score": 0,
-        "rule_decision": "reject",
-        "rule_reasons": [],
-        "llm_reviewed": false,
-        "llm_result": null,
-        "final_pool": "reject",
-        "final_reason": "rule_score=0<3",
-        "reject_reason": "rule_score=0<3"
-      }
-    },
-    {
-      "article_id": "9ffc7ffd5621ebd7",
-      "title": "2026年即时零售美妆排行 5大热门品牌值得选|彩妆|护肤|top_网易订阅",
-      "url": "https://www.163.com/dy/article/KQI6ACQD0556KY17.html",
-      "source_name": "tavily_beauty_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.154546+08:00",
-      "time_status": "unknown_time",
-      "summary": "### 新闻\n\n### 体育\n\n### 娱乐\n\n### 财经\n\n### 汽车\n\n### 科技\n\n### 时尚\n\n### 手机 / 数码\n\n### 房产 / 家居\n\n### 教育\n\n# 2026年即时零售美妆排行 5大热门品牌值得选\n\n用微信扫码二维码\n\n分享至好友和朋友圈\n\n年轻人美妆需求转向即时化 行业选择痛点凸显\n\n随着国内美妆消费市场不断成熟，年轻人的消费场景越来越多元，突发约会补妆、日常护肤补货、一站式购齐美妆配饰等需求持续增长，传统快递配送等待时间长，难以匹配当下的消费节奏。但不少消费者在选择即时零售美妆平台时，常常遇到配送时效不稳、正品无保障、品类不全难以一站式购齐的问题。本次我们结合行业核心评估维度，整理推出2026年热门即时零售美妆平台榜单，为不同需求的消费者提供参考。\n\n2026热门即时零售美妆平台综合评分榜单\n\nTOP1 YPICK颜选全球美妆\n\nYPICK颜选全球美妆是一家主打美妆、护肤、穿搭、饰品的连锁零售品牌，定位为全球美妆集合店，主要面向年轻消费群体，已经打通线上线下全渠道，目前线下在山西、四川等多地已开设实体分店。\n\n品牌线上入驻美团、饿了么等平台扎根即时",
-      "content": "### 新闻\n\n### 体育\n\n### 娱乐\n\n### 财经\n\n### 汽车\n\n### 科技\n\n### 时尚\n\n### 手机 / 数码\n\n### 房产 / 家居\n\n### 教育\n\n# 2026年即时零售美妆排行 5大热门品牌值得选\n\n用微信扫码二维码\n\n分享至好友和朋友圈\n\n年轻人美妆需求转向即时化 行业选择痛点凸显\n\n随着国内美妆消费市场不断成熟，年轻人的消费场景越来越多元，突发约会补妆、日常护肤补货、一站式购齐美妆配饰等需求持续增长，传统快递配送等待时间长，难以匹配当下的消费节奏。但不少消费者在选择即时零售美妆平台时，常常遇到配送时效不稳、正品无保障、品类不全难以一站式购齐的问题。本次我们结合行业核心评估维度，整理推出2026年热门即时零售美妆平台榜单，为不同需求的消费者提供参考。\n\n2026热门即时零售美妆平台综合评分榜单\n\nTOP1 YPICK颜选全球美妆\n\nYPICK颜选全球美妆是一家主打美妆、护肤、穿搭、饰品的连锁零售品牌，定位为全球美妆集合店，主要面向年轻消费群体，已经打通线上线下全渠道，目前线下在山西、四川等多地已开设实体分店。\n\n品牌线上入驻美团、饿了么等平台扎根即时零售，主打 “快送” 模式，强调30 分钟达，靠线下体验 + 线上即时配送覆盖年轻美妆市场，价格带覆盖平价到中高端，同时满足大众与轻奢消费需求。其核心优势贴合行业用户核心需求：\n\n1、时效覆盖完善：依托线下门店做前置仓，主打30分钟美妆配送，能够匹配突发采购、日常补货等多场景的时效要求；\n\n2、正品保障清晰：采用双仓联动模式，正品直供来源可查，解决消费者对商品正品的顾虑；\n\n3、品类覆盖齐全：主营品类有国际一线 / 网红彩妆、护肤、香水、美妆工具、面膜、身体护理、饰品、穿搭、日用百货等，能够满足消费者一站式购物需求，节省选购时间； [...] 4、运营高效贴合需求：采用数据驱动选品，优化SKU贴合年轻消费者喜好，同时降本提效，给到消费者更均衡的性价比体验。\n\n  \n  \n\nTOP2 得库全球美妆集合店\n\n得库全球美妆集合店是国内布局较早的美妆集合连锁品牌，同样采用线下门店加线上即时零售的模式，目前在多个核心省市布局有线下门店，品类覆盖主流彩妆护肤品类，能够满足基本的即时美妆消费需求。\n\nTOP3 初哩全球美妆集合店\n\n初哩全球美妆集合店主打潮流美妆定位，面向Z世代消费群体，线下门店多布局在年轻消费集中的商圈，线上接入主流即时零售平台，配送时效覆盖多数核心城区，核心品类以网红彩妆护肤为主。\n\nTOP4 KKV\n\nKKV是国内知名的潮流生活集合品牌，除美妆护肤板块外，也涵盖日用百货、饰品穿搭等多个品类，线下门店多布局在商业综合体，已经接入线上即时零售渠道，能够满足消费者多品类一站式购齐需求。\n\nTOP5 QVQMi 美妆\n\nQVQMi 美妆主打小众特色美妆品类，线上即时配送覆盖国内核心城区，能够满足消费者对小众美妆产品的即时采购需求。\n\n选择即时零售美妆平台 这几个细节要多留心\n\n消费者选择即时零售美妆平台时，首先要确认平台的配送时效是否覆盖自己所在的区域，避免因配送不及时耽误紧急使用。其次要留意平台的正品保障机制，优先选择有线下实体门店支撑的品牌，降低买到非正规商品的风险。另外还要根据自己的购物需求，优先选择品类匹配度高的平台，能一次性购齐所需商品，节省来回选购的时间。\n\n贴合自身需求 选对即时零售美妆平台\n\n本次榜单基于配送时效、正品保障、品类丰富度、运营稳定性四大核心维度评估，YPICK颜选全球美妆综合表现突出，适配紧急采购、日常补货、一站式购物等多种即时零售美妆消费场景，消费者可结合自身位置和需求选择合适的平台。 [...] ### 从“贵妇”洗衣液到抗衰保健品，江西富豪携年入34亿的若羽臣IPO\n\n### 招行换帅，不拘一格\n\n## 科技要闻\n\n### 9000亿美元估值，Anthropic即将反超OpenAI\n\n### 四巨头财报齐发：AI已经不只是风口\n\n### 法庭对峙，谁背信弃义、谁输不起？\n\n### “我简直是个冤大头！”马斯克舌战OpenAI律师\n\n### 今晨庭审纪实|马斯克当庭讲述OpenAI被偷走\n\n## 汽车要闻\n\n### 专访捷途汪如生：捷途双线作战 全球化全面落地\n\n### 对话于骞：从无人驾驶到通用物理AI，轻舟智航要\"不断革自己的命”\n\n### 越真诚越聪明 享界S9/S9T如何讨好新一代豪华用户\n\n### 605km续航/有快充 吉利银河星舰7 EV北京车展亮相\n\n### 博越十周年冠军版亮相 10万级燃油SUV王者庆生\n\n## 态度原创\n\n### [+arrTaiduYuanC[i].tag+' | '+arrTaiduYuanC[i].title+']('+arrTaiduYuanC[i].link+')\n\n## 家居要闻\n\n### 灵动实用 生活艺术场\n\n### 寂然无界 简洁风格\n\n### 江景风格 流动的秩序\n\n### 自然肌理 温润美学\n\n## 房产要闻\n\n### 熬了6年，涨了2亿，三亚核心区这块地再次上架\n\n### CBD+省名校+准现房!国兴绝版地段，惊现爆款新盘!\n\n### 80亿投资！浙商总部基地+海口北站，金沙湾这是要起飞啊！\n\n### 红利爆发！海南，冲到全国人口增量第4省！\n\n### 玩家竟是帮凶？魔兽狩猎的背后，藏着银月城最疯狂的“救世主”\n\n### 死过一次之后，我才看懂这款二游在讲什么\n\n### 《007初露锋芒》试玩：更年轻的经典依然是经典",
-      "matched_keywords": [
-        "即时零售",
-        "即时配送",
-        "饿了么",
-        "美妆",
-        "彩妆",
-        "护肤",
-        "面膜",
-        "香水",
-        "选品",
-        "上架"
-      ],
-      "raw": {
-        "query": "美妆 个护 即时零售 品牌 2026",
-        "tavily_score": 0.89121616,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 2,
+        "rule_score": -3,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+4 命中即时零售: 饿了么",
-          "+3 命中美妆个护: 美妆, 护肤, 彩妆",
-          "+1 命中经营变量: 价格, SKU",
-          "-3 泛领域: IPO",
-          "-3 无关主题: 汽车"
+          "-1 time_status=old(搜索源/allow_old)",
+          "-2 内容极短且无关键词"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=2<3",
-        "reject_reason": "rule_score=2<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-3<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-3<2"
       }
     },
     {
-      "article_id": "c54bc57af567f4ba",
-      "title": "繁荣与崩塌，2026国产美妆站上「十字路口」 - QQ News",
-      "url": "https://news.qq.com/rain/a/20260114A069VQ00",
-      "source_name": "tavily_beauty_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:30.154762+08:00",
-      "time_status": "unknown_time",
-      "summary": "与这相似的一段又一段品牌“试错”经历，促使美妆企业意识到：只有构建不依赖短期流量的内生增长体系，才能穿越“成长”周期。\n\n例如珀莱雅的“大单品策略”，在主品牌基石稳固的同时，以彩棠、Off&Relax为代表的“第二增长曲线”也实现真正驱动增长：\n\n2025年上半年，彩棠收入7.05亿元，同比增长21.1%；Off&Relax收入更同比暴增102.5%至2.79亿元，在个护新锐品牌中表现亮眼，成功从“网红”迈向“长红”。\n\n图片\n\n图片\n\n图源：珀莱雅企业公告截图\n\n自然堂则通过546项专利和自建的生物发酵原料工厂，在核心功效原料上实现“自研自产”，构筑了难以复制的技术壁垒。\n\n最后，品牌需要超越功效与产品，通过文化与价值观的共鸣，来与消费者建立更深厚的情感联结，实现从“交易”到“关系”的跃迁。\n\n“理性悦己”的消费者不仅关注成分，也更看重品牌所代表的生活方式与价值观。\n\n品牌彩棠在2025年七夕推出的「碧落夕岚」限定系列，便是一个典型案例。\n\n该系列以中国传统色为魂，通过水墨动画、节气时令绑定与五感沉浸式体验，将彩妆升华为一种文化表达和情感体验，从而与消费者建立了超越产品功能的情感连接",
-      "content": "与这相似的一段又一段品牌“试错”经历，促使美妆企业意识到：只有构建不依赖短期流量的内生增长体系，才能穿越“成长”周期。\n\n例如珀莱雅的“大单品策略”，在主品牌基石稳固的同时，以彩棠、Off&Relax为代表的“第二增长曲线”也实现真正驱动增长：\n\n2025年上半年，彩棠收入7.05亿元，同比增长21.1%；Off&Relax收入更同比暴增102.5%至2.79亿元，在个护新锐品牌中表现亮眼，成功从“网红”迈向“长红”。\n\n图片\n\n图片\n\n图源：珀莱雅企业公告截图\n\n自然堂则通过546项专利和自建的生物发酵原料工厂，在核心功效原料上实现“自研自产”，构筑了难以复制的技术壁垒。\n\n最后，品牌需要超越功效与产品，通过文化与价值观的共鸣，来与消费者建立更深厚的情感联结，实现从“交易”到“关系”的跃迁。\n\n“理性悦己”的消费者不仅关注成分，也更看重品牌所代表的生活方式与价值观。\n\n品牌彩棠在2025年七夕推出的「碧落夕岚」限定系列，便是一个典型案例。\n\n该系列以中国传统色为魂，通过水墨动画、节气时令绑定与五感沉浸式体验，将彩妆升华为一种文化表达和情感体验，从而与消费者建立了超越产品功能的情感连接。\n\n这意味着，现如今产品力已经成为基础，想要打动新时代消费者，文化内涵与品牌价值观就成为关键软实力。\n\n总而言之，2026年的中国美妆行业，正经历一场从“营销与流量驱动”到“科技与价值驱动”的深刻转型。市场分化的“剩宴”之下，唯有回归产品本质、构建内生增长体系并传递真诚品牌价值的企业，才能驶向下一个黄金十年。 [...] 同样亮眼的还有毛戈平，上半年营收与净利润均实现超过30%的高速增长。\n\n而龙头珀莱雅在成为首个年营收破百亿的国货美妆集团后，2025年增长虽阶段性放缓，但其前三季度营收已达71.0亿元，并通过彩棠、Off&Relax等新品牌构建了坚实的多品牌矩阵，为长期增长奠定了基础。\n\n然而，硬币的另一面是部分品牌深刻的“调整阵痛”。\n\n曾以“功效护肤”称王的贝泰妮，2025年前三季度营业收入同比下降13.78%，归母净利润同比下降34.45%，公司曾坦言正处于主动的战略调整与经营优化期。\n\n图片\n\n图片\n\n图源：贝泰妮2025年三季度报告\n\n同样，功能性护肤业务营收占比超四成的华熙生物也交出了六年来“最差”的半年报，营收同比下降19.57%至22.61亿元，净利润下跌35.38%至2.21亿元，其中护肤品业务收入大幅下滑33.97%。\n\n这背后是流量红利消退后，单纯依赖营销驱动增长的脆弱模式正被市场出清。\n\n这一分化趋势下，消费者的选择也从单纯的品牌崇拜或价格敏感，转变为深度研究产品、为科技与悦己体验付费的“理性悦己”。\n\n毕马威报告指出，58.8%的消费者将产品成分作为购买决策首要因素，“成分党”成为主流。同时，300-500元的中端价格带市场份额提升，显示消费者追求“功效性价比”。\n\n尼尔森IQ报告也表示，体验将成为2026年零售业新的增长动能，消费者已不满足于仅仅“买商品”，而是要“买生活”。\n\n例如奈玑子 (Nono Notes），在激烈的市场竞争中，其未能持续推出满足消费者新需求的产品，最终因经营困境、资金压力及长期亏损，于2025年3月宣布关闭天猫旗舰店。\n\n这都说明，中国美妆行业的竞争核心已经开始转变，如果品牌不能跟上从“量”到“质”的变化，将无法找到自己的立足之地。\n\n## 02 流量可以买来规模，但买不到船票 [...] 完美日记的母公司逸仙电商就是一个典型代表。\n\n2025年第二季度，逸仙电商实现营收10.9亿元，同比增长36.8%。虽然营收时有增长，但高昂的营销费用严重挤压利润空间。\n\n同期，逸仙电商的营销费用为7.22亿元，同比增长32.6%，占营收的比例为66.5%，远超行业45%至55%的平均水平。从全年业绩来看，2020年—2024年，公司累计亏损超60亿元。\n\n图片\n\n图片\n\n资料来源：公司公告 新浪财经上市公司研究院\n\n正在冲刺港股上市的林清轩，其2025年上半年营收与净利润翻倍增长的背后，销售及分销开支同比激增100.2%，占营收比例高达55.2%。这不仅严重挤压了利润空间，更预示着公司在产品研发、供应链等核心竞争力上的投入必然受限。\n\n图片\n\n图片\n\n图源：林清轩招股说明书\n\n与此同时，这种“以营销换增长”的逻辑，还直接催生了行业的畸形循环：企业被迫将大部分收入用于营销和给KOL让利，为了在支付这些费用后仍能获利，就选择极力压缩生产成本，再以高价卖出。\n\n例如毛戈平在2025年上半年的销售及经销开支占集团收入的45.2%，但研发支出仅为1525.7万元，同比微增0.06%，占总营收比例为0.59%。对比之下，毛戈平明显更舍得为“营销”花钱。\n\n图片\n\n图片\n\n图源：毛戈平2025年中期报告\n\n而且，毛戈平的产品主要依赖外包代工生产，但其自身却定位为高端美妆。彩妆类产品平均售价达163.8元，护肤类达346.6元，是市场上客单价最高的国货品牌之一。\n\n其一瓶30克的鱼子酱面膜，售价约350元；一瓶50克的养肤焕颜黑霜，售价500元以上，从而保证其常年维持85%以上的高毛利率。财报显示，2025年上半年毛戈平的毛利率同样实现84.2%，依旧维持较高水平。",
+      "article_id": "d5adb73a34a464c4",
+      "title": "“塌房”的椰子水，失守的if",
+      "url": "https://www.36kr.com/p/3709402330821124",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Mar 2026 02:26:01 GMT",
+      "collected_at": "2026-05-01T09:36:41.503937+08:00",
+      "time_status": "old",
+      "summary": "当“中产饮料”的光环淡去。",
+      "content": "当“中产饮料”的光环淡去。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3709402330821124"
+      },
+      "filter": {
+        "rule_score": -3,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-1 time_status=old(搜索源/allow_old)",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-3<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-3<2"
+      }
+    },
+    {
+      "article_id": "eea36d81b074f07a",
+      "title": "老广最爱的饮料，曾是国货顶流，现在又火了",
+      "url": "https://www.36kr.com/p/3669792022897285",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Thu, 05 Feb 2026 02:52:38 GMT",
+      "collected_at": "2026-05-01T09:36:41.504401+08:00",
+      "time_status": "old",
+      "summary": "中式饮品的鼻祖，老广喝了几十年。",
+      "content": "中式饮品的鼻祖，老广喝了几十年。",
       "matched_keywords": [
-        "个护",
-        "美妆",
-        "彩妆",
-        "护肤",
-        "面膜",
-        "代工",
-        "供应链",
-        "流量",
-        "成分",
-        "成分党",
         "国货"
       ],
       "raw": {
-        "query": "美妆 个护 即时零售 品牌 2026",
-        "tavily_score": 0.74273956,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3669792022897285"
       },
       "filter": {
-        "rule_score": 1,
+        "rule_score": -1,
         "rule_decision": "reject",
         "rule_reasons": [
-          "+3 命中美妆个护: 美妆, 个护, 护肤",
-          "+1 命中经营变量: 流量, 价格",
-          "-3 泛领域: 港股"
+          "-1 time_status=old(搜索源/allow_old)"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=1<3",
-        "reject_reason": "rule_score=1<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-1<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-1<2"
       }
     },
     {
-      "article_id": "92a1f138e767befd",
-      "title": "ǧױгռж_",
-      "url": "http://tech.cnr.cn/techph/20211230/t20211230_525703110.shtml",
-      "source_name": "tavily_beauty_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.913038+08:00",
-      "time_status": "unknown_time",
-      "summary": "һ˵żʱҵʩռﵽңֿɵáһȻơױΪҪƷ࣬Ʒǲ첼֡\n\n༭:\n\nԭȨֹҵת Ȩ>>  \n תԼǷȨΪϵǣ010-56807194\n\nȰ\n\n ά  \nע\n\nѧϰ᳹ʮŽȫᾫ\n\nԶɽĻڶũ˹\n\nѩй\n\nʷ\n\n[](\n\n>>\n\n ### Ͳ˱ þӼҷߵůİ\n ### ɽķ¼½Ʒ˿ Էҹûг\n ۡ м׷ֵ˼\n\n# ǧױгռж\n\nھҪõġģʽȻӲӵʻҽҩ3CֻױƷϡ [...] [](\n\nҳ > ƼƵ > ҵ\n\n# ǧױгռж\n\n2021-12-30 17:28:44Դ\n\nں人һ˿ܽŵĵ곤Ninaױһơڸչȥʥڣŵͽӵ-ӦĽ񶩵Ŀǰ󣬵һNinaҵ10ľ鿴ڼӦһֱڣߡ\n\nƼ֮ĩҵױʱǸα⡣Ͼʱǡ˾áĲױûΪһ¡ĵеϸĳΪױҵ2021꣬Ѿˮ档\n\n01˳ƶΪ¶\n\nڲҵѷǳ졣йϢĽ8·ĵ48Ρй緢չ״ͳƱ桷ʾ20216£ûģﵽ4.69ˡ [...] ¶ߡ򡹣ھױСʱҳ棬һרŵӦرƷƷСװϴװƿ֮ĶˣɱʱȵﻹҪˡ\n\nϸԵͼ۲Ӧ˿ܽļʱػӦ\n\n˿ܽNinaḻ飬ûмʱ֮ǰÿĸִСգСġʿƷ񣬡Ʒļʱ󣬻ڹڼǴƲƷͳȥ϶ᰤճĻжױˮߵһЩ\n\nϡ˿ܽױϵֻ꣬ױҵӵʱ۵һӰ\n\nĿǰױϡ˿ܽȻáռǡʫWOW COLOURT",
-      "content": "һ˵żʱҵʩռﵽңֿɵáһȻơױΪҪƷ࣬Ʒǲ첼֡\n\n༭:\n\nԭȨֹҵת Ȩ>>  \n תԼǷȨΪϵǣ010-56807194\n\nȰ\n\n ά  \nע\n\nѧϰ᳹ʮŽȫᾫ\n\nԶɽĻڶũ˹\n\nѩй\n\nʷ\n\n[](\n\n>>\n\n ### Ͳ˱ þӼҷߵůİ\n ### ɽķ¼½Ʒ˿ Էҹûг\n ۡ м׷ֵ˼\n\n# ǧױгռж\n\nھҪõġģʽȻӲӵʻҽҩ3CֻױƷϡ [...] [](\n\nҳ > ƼƵ > ҵ\n\n# ǧױгռж\n\n2021-12-30 17:28:44Դ\n\nں人һ˿ܽŵĵ곤Ninaױһơڸչȥʥڣŵͽӵ-ӦĽ񶩵Ŀǰ󣬵һNinaҵ10ľ鿴ڼӦһֱڣߡ\n\nƼ֮ĩҵױʱǸα⡣Ͼʱǡ˾áĲױûΪһ¡ĵеϸĳΪױҵ2021꣬Ѿˮ档\n\n01˳ƶΪ¶\n\nڲҵѷǳ졣йϢĽ8·ĵ48Ρй緢չ״ͳƱ桷ʾ20216£ûģﵽ4.69ˡ [...] ¶ߡ򡹣ھױСʱҳ棬һרŵӦرƷƷСװϴװƿ֮ĶˣɱʱȵﻹҪˡ\n\nϸԵͼ۲Ӧ˿ܽļʱػӦ\n\n˿ܽNinaḻ飬ûмʱ֮ǰÿĸִСգСġʿƷ񣬡Ʒļʱ󣬻ڹڼǴƲƷͳȥ϶ᰤճĻжױˮߵһЩ\n\nϡ˿ܽױϵֻ꣬ױҵӵʱ۵һӰ\n\nĿǰױϡ˿ܽȻáռǡʫWOW COLOURTHE COLORISTɫʦˡ㡢ױܵһϵױƷƴȫھƷƵױƷֻҪܱ3-5нŵ꣬ͨŵȷµſʵСʱ",
+      "article_id": "76c141dc59bd3349",
+      "title": "巴黎水和圣培露，在华有了新“操盘手”：捷成饮料成为大陆地区总代理经销商，雀巢年收入超280亿饮用水业务在中国市场想“换档提速”",
+      "url": "https://www.36kr.com/p/3667684256801673",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Wed, 04 Feb 2026 02:25:13 GMT",
+      "collected_at": "2026-05-01T09:36:41.504907+08:00",
+      "time_status": "old",
+      "summary": "雀巢高端水在华转由捷成代理，轻资产运营迈出关键一步。",
+      "content": "雀巢高端水在华转由捷成代理，轻资产运营迈出关键一步。",
       "matched_keywords": [],
       "raw": {
-        "query": "屈臣氏 丝芙兰 即时零售 经营",
-        "tavily_score": 0.026556572,
-        "tavily_key_used": "tvly-dev..."
-      },
-      "filter": {
-        "rule_score": 3,
-        "rule_decision": "review",
-        "rule_reasons": [
-          "+3 命中竞对: WOW COLOUR"
-        ],
-        "llm_reviewed": true,
-        "llm_result": {
-          "llm_relevance": "low",
-          "business_relevance_type": "irrelevant",
-          "related_channels": [],
-          "related_categories": [],
-          "business_variables": [],
-          "reason": "文章内容混杂乱码与无关信息，无法识别出与屈臣氏即时零售或个护美妆相关的实质性内容。",
-          "recommended_pool": "reject",
-          "confidence": "high",
-          "llm_reviewed": true
-        },
-        "final_pool": "reject",
-        "final_reason": "LLM推荐reject (confidence=high)",
-        "reject_reason": "LLM推荐reject (confidence=high)"
-      }
-    },
-    {
-      "article_id": "3d49ffcb5f9727dd",
-      "title": "东方财富资讯",
-      "url": "https://wap.eastmoney.com/a/202510293548202123.html",
-      "source_name": "tavily_beauty_retail",
-      "source_type": "tavily",
-      "source_tier": 3,
-      "collector": "tavily",
-      "published_at": "",
-      "collected_at": "2026-05-01T07:55:29.913125+08:00",
-      "time_status": "unknown_time",
-      "summary": "点击阅读全文\n\n前往东方财富APP阅读全文\n\n取消 前往\n\n分享成功\n\n#### 热门推荐\n\n即将前往东方财富APP查看原文\n\n取消 确定\n\n 分享至：\n 微信\n 朋友圈\n 微博\n\n郑重声明：东方财富发布此内容旨在传播更多信息，与本站立场无关，不构成投资建议。据此操作，风险自担。\n\n热点阅读\n:   国家发改委：禁止外资收购Manus项目 要求撤销交易\n\n    国家发改委：禁止外资收购Manus项目 要求撤销交易\n\n    国家发展改革委 2073评论\n:   穆迪维持中国主权信用评级“A1” 并将展望调升至“稳定” 财政部发声\n\n    穆迪维持中国主权信用评级“A1” 并将展望调升至“稳定” 财政部发声\n\n    财政部网站 280评论\n:   外交部回应美方制裁中国炼油企业：敦促美方停止滥施制裁和“长臂管辖”的错误做法\n\n    外交部回应美方制裁中国炼油企业：敦促美方停止滥施制裁和“长臂管辖”的错误做法\n\n    新华社 185评论\n:   美股三大指数小幅下跌 光通信板块普跌 国际油价上涨\n\n    美股三大指数小幅下跌 光通信板块普跌 国际油价上涨\n\n    东方财富Ch",
-      "content": "点击阅读全文\n\n前往东方财富APP阅读全文\n\n取消 前往\n\n分享成功\n\n#### 热门推荐\n\n即将前往东方财富APP查看原文\n\n取消 确定\n\n 分享至：\n 微信\n 朋友圈\n 微博\n\n郑重声明：东方财富发布此内容旨在传播更多信息，与本站立场无关，不构成投资建议。据此操作，风险自担。\n\n热点阅读\n:   国家发改委：禁止外资收购Manus项目 要求撤销交易\n\n    国家发改委：禁止外资收购Manus项目 要求撤销交易\n\n    国家发展改革委 2073评论\n:   穆迪维持中国主权信用评级“A1” 并将展望调升至“稳定” 财政部发声\n\n    穆迪维持中国主权信用评级“A1” 并将展望调升至“稳定” 财政部发声\n\n    财政部网站 280评论\n:   外交部回应美方制裁中国炼油企业：敦促美方停止滥施制裁和“长臂管辖”的错误做法\n\n    外交部回应美方制裁中国炼油企业：敦促美方停止滥施制裁和“长臂管辖”的错误做法\n\n    新华社 185评论\n:   美股三大指数小幅下跌 光通信板块普跌 国际油价上涨\n\n    美股三大指数小幅下跌 光通信板块普跌 国际油价上涨\n\n    东方财富Choice数据 124评论\n\n打开东方财富APP查看更多内容\n\n24小时点击排行\n:   提醒：科技主线大爆发，顺应趋势才是硬道理！\n:   提醒：你要站在光里，抓稳主线不放手！\n:   当越来越多人在站在光里，五年前一幕又要重演！\n:   场内策略丨尾盘紧急加仓！别怪我没提醒！\n:   明日油运三傻要套人？中远海能三个点被套能解吗？\n\n写评论 ...\n\n 点赞\n 举报\n\n打开APP 读海量资讯",
-      "matched_keywords": [],
-      "raw": {
-        "query": "屈臣氏 丝芙兰 即时零售 经营",
-        "tavily_score": 0.0012196052,
-        "tavily_key_used": "tvly-dev..."
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3667684256801673"
       },
       "filter": {
         "rule_score": -3,
         "rule_decision": "reject",
         "rule_reasons": [
-          "-3 泛领域: 美股"
+          "-1 time_status=old(搜索源/allow_old)",
+          "-2 内容极短且无关键词"
         ],
         "llm_reviewed": false,
         "llm_result": null,
         "final_pool": "reject",
-        "final_reason": "rule_score=-3<3",
-        "reject_reason": "rule_score=-3<3"
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-3<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-3<2"
+      }
+    },
+    {
+      "article_id": "d5b24d1855363c28",
+      "title": "2100亿，一个超级IPO要来了",
+      "url": "https://www.36kr.com/p/3655383042056320",
+      "source_name": "rsshub_36kr_search_watsons",
+      "source_type": "rsshub",
+      "source_tier": 4,
+      "collector": "rsshub",
+      "published_at": "Sun, 25 Jan 2026 23:44:44 GMT",
+      "collected_at": "2026-05-01T09:36:41.505343+08:00",
+      "time_status": "old",
+      "summary": "对于投资者而言，现在或许是10年以来最好的退出时机。",
+      "content": "对于投资者而言，现在或许是10年以来最好的退出时机。",
+      "matched_keywords": [],
+      "raw": {
+        "feed_url": "http://192.168.2.100:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true&filterout_time=86400",
+        "route": "/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "entry_id": "https://www.36kr.com/p/3655383042056320"
+      },
+      "filter": {
+        "rule_score": -6,
+        "rule_decision": "reject",
+        "rule_reasons": [
+          "-1 time_status=old(搜索源/allow_old)",
+          "-3 泛领域: IPO",
+          "-2 内容极短且无关键词"
+        ],
+        "llm_reviewed": false,
+        "llm_result": null,
+        "final_pool": "reject",
+        "final_reason": "time_status=old(搜索源) 且 rule_score=-6<2",
+        "reject_reason": "time_status=old(搜索源) 且 rule_score=-6<2"
       }
     }
   ]

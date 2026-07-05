@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "date": "2026-05-30",
+    "window_start": "2026-05-30T07:00:00+08:00",
+    "window_end": "2026-05-30T07:30:16.625399+08:00",
+    "total_candidates": 2,
+    "from_reference": 2,
+    "from_rejected": 0,
+    "total_reference_input": 64,
+    "total_rejected_input": 108,
+    "rejection_stats": {
+      "not_old": 69,
+      "low_score": 94,
+      "invalid_page_type": 7,
+      "noise": 0
+    },
+    "selection_criteria": {
+      "min_rule_score": 8,
+      "time_statuses": [
+        "old",
+        "week_fallback",
+        "unknown_time"
+      ],
+      "valid_page_types": [
+        "report",
+        "article",
+        "unknown",
+        "news"
+      ]
+    },
+    "created_at": "2026-05-30T07:30:16.625421+08:00"
+  },
+  "articles": [
+    {
+      "article_id": "5e0f015bb1af7362",
+      "title": "美团闪购，万物免单",
+      "url": "https://click.meituan.com/t?t=1&c=2&p=F8hoXLxzWL7B",
+      "source_name": "xcrawl_broad_02",
+      "source_type": "xcrawl_broad",
+      "source_tier": "",
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "",
+      "summary": "00:00. --:--. Disabled. Could not play video. There was a problem trying to load the video. 活动规则. 个护美妆. 家居日用. 数码配件. 宠物生活. 母婴用品. 服饰鞋 ...",
+      "published_at": "",
+      "collected_at": "2026-05-30T07:12:41.136830+08:00",
+      "reason": "",
+      "selected_at": "2026-05-30T07:30:16.625054+08:00"
+    },
+    {
+      "article_id": "01f306f698dd302f",
+      "title": "卖一单赔一单，即时零售卷哭闪电仓",
+      "url": "https://www.woshipm.com/it/6155432.html",
+      "source_name": "xcrawl_17",
+      "source_type": "xcrawl",
+      "source_tier": "tier3_anchor",
+      "page_type": "unknown",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "美妆个护",
+      "summary": "目前，闪电仓的SKU大多在5000～10000个，从日用百货、鲜花、美妆、酒水饮料到数码配件基本都覆盖，面向用户的即时性消费需求。 闪电仓背后是平台、实体商超、零售品牌都在争抢 ...",
+      "published_at": "",
+      "collected_at": "2026-05-30T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-05-30T07:30:16.624903+08:00"
+    }
+  ]
+}

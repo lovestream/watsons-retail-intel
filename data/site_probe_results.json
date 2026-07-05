@@ -1,0 +1,361 @@
+{
+  "accessible": [
+    {
+      "name": "美妆头条",
+      "url": "https://mztoutiao.com/",
+      "category": "beauty_media",
+      "title": "首页",
+      "links": 80
+    },
+    {
+      "name": "聚美丽",
+      "url": "https://www.jumeili.cn/",
+      "category": "beauty_media",
+      "title": "聚美丽—中国领先的化妆品新商业媒体",
+      "links": 222
+    },
+    {
+      "name": "美丽修行",
+      "url": "https://www.bevol.cn/",
+      "category": "beauty_media",
+      "title": "美丽修行",
+      "links": 29
+    },
+    {
+      "name": "亿邦动力",
+      "url": "https://www.ebrun.com/",
+      "category": "retail_media",
+      "title": "403 Forbidden",
+      "links": 0
+    },
+    {
+      "name": "中国连锁经营协会",
+      "url": "https://www.ccfa.org.cn/",
+      "category": "retail_media",
+      "title": "中国连锁经营协会",
+      "links": 129
+    },
+    {
+      "name": "快消品网",
+      "url": "https://www.kuaixiaopin.com/",
+      "category": "fmcg",
+      "title": "KUAIXIAOPIN.COM IS FOR SALE!",
+      "links": 3
+    },
+    {
+      "name": "食品饮料网",
+      "url": "https://www.foodaily.com/",
+      "category": "fmcg",
+      "title": "Foodaily每日食品网_关注食品行业_了解食品资讯_聚焦食品创新 | Foodaily每日食品",
+      "links": 95
+    },
+    {
+      "name": "钛媒体",
+      "url": "https://www.tmtpost.com/",
+      "category": "finance_tech",
+      "title": "钛媒体-打开科技 打开财富",
+      "links": 377
+    },
+    {
+      "name": "界面新闻",
+      "url": "https://www.jiemian.com/",
+      "category": "finance_tech",
+      "title": "界面新闻-只服务于独立思考的人群-Jiemian.com",
+      "links": 388
+    },
+    {
+      "name": "华尔街见闻",
+      "url": "https://wallstreetcn.com/",
+      "category": "finance_tech",
+      "title": "华尔街见闻",
+      "links": 60
+    },
+    {
+      "name": "财联社",
+      "url": "https://www.cls.cn/",
+      "category": "finance_tech",
+      "title": "财联社-主流财经新闻集团和财经通讯社-cls.cn",
+      "links": 281
+    },
+    {
+      "name": "每日经济新闻",
+      "url": "https://www.nbd.com.cn/",
+      "category": "finance_tech",
+      "title": "每经网 | 新闻决定影响力 |《每日经济新闻》报社旗下网站",
+      "links": 339
+    },
+    {
+      "name": "第一财经",
+      "url": "https://www.yicai.com/",
+      "category": "finance_tech",
+      "title": "第一财经_专业创造价值",
+      "links": 288
+    },
+    {
+      "name": "经济观察报",
+      "url": "https://www.eeo.com.cn/",
+      "category": "finance_tech",
+      "title": "经济观察网-首页",
+      "links": 266
+    },
+    {
+      "name": "新浪科技",
+      "url": "https://tech.sina.com.cn/",
+      "category": "finance_tech",
+      "title": "新浪科技_新浪网",
+      "links": 502
+    },
+    {
+      "name": "腾讯科技",
+      "url": "https://tech.qq.com/",
+      "category": "finance_tech",
+      "title": "腾讯网-科技",
+      "links": 85
+    },
+    {
+      "name": "网易科技",
+      "url": "https://tech.163.com/",
+      "category": "finance_tech",
+      "title": "网易科技频道_有态度的科技门户",
+      "links": 635
+    },
+    {
+      "name": "DoNews",
+      "url": "https://www.donews.com/",
+      "category": "finance_tech",
+      "title": "DoNews-创新无边界",
+      "links": 905
+    },
+    {
+      "name": "品玩",
+      "url": "https://www.pingwest.com/",
+      "category": "finance_tech",
+      "title": "品玩-有品好玩的科技，一切与你有关",
+      "links": 210
+    },
+    {
+      "name": "极客公园",
+      "url": "https://www.geekpark.net/",
+      "category": "finance_tech",
+      "title": "极客公园-Geek Things Up!",
+      "links": 147
+    },
+    {
+      "name": "创业邦",
+      "url": "https://www.cyzone.cn/",
+      "category": "finance_tech",
+      "title": "创业邦 - 关注创新经济及其推动者",
+      "links": 451
+    },
+    {
+      "name": "投资界",
+      "url": "https://www.pedaily.cn/",
+      "category": "finance_tech",
+      "title": "投资界_创业与投资资讯平台",
+      "links": 263
+    },
+    {
+      "name": "亿欧",
+      "url": "https://www.iyiou.com/",
+      "category": "finance_tech",
+      "title": "亿欧-科技+产业+投资信息平台和智库",
+      "links": 295
+    },
+    {
+      "name": "新浪财经",
+      "url": "https://finance.sina.com.cn/",
+      "category": "portal",
+      "title": "新浪财经_金融信息服务商",
+      "links": 1400
+    },
+    {
+      "name": "网易财经",
+      "url": "https://money.163.com/",
+      "category": "portal",
+      "title": "网易财经-有态度的财经门户",
+      "links": 889
+    },
+    {
+      "name": "腾讯财经",
+      "url": "https://finance.qq.com/",
+      "category": "portal",
+      "title": "腾讯网-财经",
+      "links": 97
+    },
+    {
+      "name": "凤凰财经",
+      "url": "https://finance.ifeng.com/",
+      "category": "portal",
+      "title": "凤凰网财经-离用户最近的财经媒体-凤凰网",
+      "links": 187
+    },
+    {
+      "name": "搜狐财经",
+      "url": "https://business.sohu.com/",
+      "category": "portal",
+      "title": "财经",
+      "links": 268
+    },
+    {
+      "name": "东方财富",
+      "url": "https://www.eastmoney.com/",
+      "category": "portal",
+      "title": "东方财富网：财经门户，提供专业的财经、股票、行情、证券、基金、理财、银行、保险、信托、期货、黄金、股吧、博客等各类财经资讯及数据",
+      "links": 1410
+    },
+    {
+      "name": "新华网财经",
+      "url": "https://www.xinhuanet.com/fortune/",
+      "category": "portal",
+      "title": "财经_新华网",
+      "links": 281
+    },
+    {
+      "name": "VOGUE中国",
+      "url": "https://www.vogue.com.cn/",
+      "category": "fashion",
+      "title": "VOGUE时尚网_潮流领袖,时尚宝典 | 国际权威时尚媒体《VOGUE服饰与美容》杂志官网",
+      "links": 173
+    },
+    {
+      "name": "ELLE中国",
+      "url": "https://www.ellechina.com/",
+      "category": "fashion",
+      "title": "ELLE中文网 | 全新高端女性门户网站 | ELLE 世界时装之苑杂志官方网站",
+      "links": 62
+    },
+    {
+      "name": "瑞丽网",
+      "url": "https://www.rayli.com.cn/",
+      "category": "fashion",
+      "title": "瑞丽网 – 网聚世界潮流,设计你的时尚|rayli.com.cn",
+      "links": 137
+    },
+    {
+      "name": "海报时尚",
+      "url": "https://www.haibao.com/",
+      "category": "fashion",
+      "title": "首页",
+      "links": 3
+    }
+  ],
+  "blocked": [],
+  "timeout": [
+    {
+      "name": "化妆品报",
+      "url": "https://www.cbocn.com/",
+      "category": "beauty_media",
+      "error": "Page.goto: Timeout 15000ms exceeded.\nCall log:\n  - navigating to \"https://www.cb"
+    },
+    {
+      "name": "联商网",
+      "url": "https://www.linkshop.com/",
+      "category": "retail_media",
+      "error": "Page.goto: Timeout 15000ms exceeded.\nCall log:\n  - navigating to \"https://www.li"
+    },
+    {
+      "name": "联商网资讯",
+      "url": "https://www.linkshop.com/news/",
+      "category": "retail_media",
+      "error": "Page.goto: Timeout 15000ms exceeded.\nCall log:\n  - navigating to \"https://www.li"
+    }
+  ],
+  "error": [
+    {
+      "name": "化妆品观察",
+      "url": "https://www.hzpgc.com/",
+      "category": "beauty_media",
+      "error": "Page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://www.hzpgc.com/\nCall log:"
+    },
+    {
+      "name": "美业新纬度",
+      "url": "https://www.meiyexinweidu.com/",
+      "category": "beauty_media",
+      "error": "Page.goto: net::ERR_CONNECTION_RESET at https://www.meiyexinweidu.com/\nCall log:"
+    },
+    {
+      "name": "美妆心得",
+      "url": "https://www.beautykm.com/",
+      "category": "beauty_media",
+      "error": "Page.goto: net::ERR_CONNECTION_CLOSED at https://www.beautykm.com/\nCall log:\n  -"
+    },
+    {
+      "name": "颜值经济网",
+      "url": "https://www.yanzhi8.com/",
+      "category": "beauty_media",
+      "error": "Page.goto: net::ERR_CONNECTION_CLOSED at https://www.yanzhi8.com/\nCall log:\n  - "
+    },
+    {
+      "name": "零售商业评论",
+      "url": "https://www.lingshoushangye.com/",
+      "category": "retail_media",
+      "error": "Page.goto: net::ERR_CONNECTION_CLOSED at https://www.lingshoushangye.com/\nCall l"
+    },
+    {
+      "name": "第三只眼看零售",
+      "url": "https://www.retailwatch.com.cn/",
+      "category": "retail_media",
+      "error": "Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.retailwatch.com.cn/\nCall lo"
+    },
+    {
+      "name": "灵兽传媒",
+      "url": "https://www.lingshoukeji.com/",
+      "category": "retail_media",
+      "error": "Page.goto: net::ERR_CONNECTION_RESET at https://www.lingshoukeji.com/\nCall log:\n"
+    },
+    {
+      "name": "零售圈",
+      "url": "https://www.retail-circle.com/",
+      "category": "retail_media",
+      "error": "Page.goto: net::ERR_CONNECTION_CLOSED at https://www.retail-circle.com/\nCall log"
+    },
+    {
+      "name": "新消费智库",
+      "url": "https://www.newconsumption.com/",
+      "category": "fmcg",
+      "error": "Page.goto: net::ERR_CONNECTION_RESET at https://www.newconsumption.com/\nCall log"
+    },
+    {
+      "name": "消费品日报",
+      "url": "https://www.xiaofeipin.com/",
+      "category": "fmcg",
+      "error": "Page.goto: net::ERR_SSL_PROTOCOL_ERROR at https://www.xiaofeipin.com/\nCall log:\n"
+    },
+    {
+      "name": "快消品精英",
+      "url": "https://www.fmcg.com.cn/",
+      "category": "fmcg",
+      "error": "Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.fmcg.com.cn/\nCall log:\n  - "
+    },
+    {
+      "name": "虎嗅网",
+      "url": "讯https://www.huxiu.com/",
+      "category": "finance_tech",
+      "error": "Page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL\nCall l"
+    },
+    {
+      "name": "36氪首页",
+      "url": "讯https://36kr.com/",
+      "category": "finance_tech",
+      "error": "Page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL\nCall l"
+    },
+    {
+      "name": "人民网消费",
+      "url": "https://finance.people.com.cn/",
+      "category": "portal",
+      "error": "Page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://finance.people.com.cn/\nC"
+    },
+    {
+      "name": "YOKA时尚",
+      "url": "https://www.yoka.com/",
+      "category": "fashion",
+      "error": "Page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://www.yoka.com/\nCall log:\n"
+    },
+    {
+      "name": "时尚芭莎",
+      "url": "https://www.bazaar.com.cn/",
+      "category": "fashion",
+      "error": "Page.goto: net::ERR_CERT_DATE_INVALID at https://www.bazaar.com.cn/\nCall log:\n  "
+    }
+  ]
+}

@@ -8,5 +8,5 @@
 # - 本文件不存储任何密码
 
 from: "Watsons Retail Intel <watsons@watsons-retail.com>"  # 发件人显示名
-to: []  # 收件人列表，通过 --recipient 或此处配置
+to: ["123399974@qq.com"]  # 收件人列表
         # 例如: ["a@example.com", "b@example.com"]

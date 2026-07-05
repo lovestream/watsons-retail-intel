@@ -1,0 +1,90 @@
+[
+  {
+    "site": "华尔街见闻",
+    "topic": "即时零售",
+    "url": "https://wallstreetcn.com/search?q=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "selector": "a[href*='article']",
+    "count": 22,
+    "sample_urls": [
+      "https://wallstreetcn.com/articles/3772339?keyword=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+      "https://wallstreetcn.com/articles/3769561?keyword=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE"
+    ]
+  },
+  {
+    "site": "华尔街见闻",
+    "topic": "美妆 个护",
+    "url": "https://wallstreetcn.com/search?q=%E7%BE%8E%E5%A6%86%20%E4%B8%AA%E6%8A%A4",
+    "selector": "a[href*='article']",
+    "count": 3,
+    "sample_urls": [
+      "https://wallstreetcn.com/articles/3698299?keyword=%E7%BE%8E%E5%A6%86+%E4%B8%AA%E6%8A%A4",
+      "https://wallstreetcn.com/articles/3639092"
+    ]
+  },
+  {
+    "site": "DoNews",
+    "topic": "即时零售",
+    "url": "https://www.donews.com/search?keyword=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "selector": "a[href*='news']",
+    "count": 30,
+    "sample_urls": [
+      "https://www.donews.com/",
+      "https://www.donews.com/"
+    ]
+  },
+  {
+    "site": "DoNews",
+    "topic": "美妆 个护",
+    "url": "https://www.donews.com/search?keyword=%E7%BE%8E%E5%A6%86%20%E4%B8%AA%E6%8A%A4",
+    "selector": "a[href*='news']",
+    "count": 30,
+    "sample_urls": [
+      "https://www.donews.com/",
+      "https://www.donews.com/"
+    ]
+  },
+  {
+    "site": "第一财经",
+    "topic": "即时零售",
+    "url": "https://www.yicai.com/search?keyword=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "selector": "a[href*='news']",
+    "count": 63,
+    "sample_urls": [
+      "https://www.yicai.com/news/",
+      "https://www.yicai.com/news/gushi/"
+    ]
+  },
+  {
+    "site": "第一财经",
+    "topic": "美妆 个护",
+    "url": "https://www.yicai.com/search?keyword=%E7%BE%8E%E5%A6%86%20%E4%B8%AA%E6%8A%A4",
+    "selector": "a[href*='news']",
+    "count": 63,
+    "sample_urls": [
+      "https://www.yicai.com/news/",
+      "https://www.yicai.com/news/gushi/"
+    ]
+  },
+  {
+    "site": "经济观察报",
+    "topic": "即时零售",
+    "url": "https://www.eeo.com.cn/search?keyword=%E5%8D%B3%E6%97%B6%E9%9B%B6%E5%94%AE",
+    "selector": "a[href*='.html']",
+    "count": 6,
+    "sample_urls": [
+      "https://www.eeo.com.cn/eeo/esg/esg_grade.html",
+      "https://www.eeo.com.cn/jubao.html"
+    ]
+  },
+  {
+    "site": "经济观察报",
+    "topic": "美妆 个护",
+    "url": "https://www.eeo.com.cn/search?keyword=%E7%BE%8E%E5%A6%86%20%E4%B8%AA%E6%8A%A4",
+    "selector": "a[href*='.html']",
+    "count": 6,
+    "sample_urls": [
+      "https://www.eeo.com.cn/eeo/esg/esg_grade.html",
+      "https://www.eeo.com.cn/jubao.html"
+    ]
+  }
+]

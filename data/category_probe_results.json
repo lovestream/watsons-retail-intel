@@ -1,0 +1,50 @@
+[
+  {
+    "name": "品观-文章",
+    "url": "https://www.pinguan.com/article",
+    "selector": "a[href$=\".html\"]",
+    "count": 7
+  },
+  {
+    "name": "亿邦-文章列表",
+    "url": "https://www.ebrun.com/news/",
+    "selector": "a[href$=\".shtml\"]",
+    "count": 59
+  },
+  {
+    "name": "投资界-资讯",
+    "url": "https://www.pedaily.cn/news/",
+    "selector": "a[href*=\"news\"]",
+    "count": 55
+  },
+  {
+    "name": "DoNews-科技",
+    "url": "https://www.donews.com/news",
+    "selector": "a[href*=\"news\"]",
+    "count": 30
+  },
+  {
+    "name": "品玩-快讯",
+    "url": "https://www.pingwest.com/status",
+    "selector": "a[href*=\"/a/\"]",
+    "count": 16
+  },
+  {
+    "name": "每日经济新闻-公司",
+    "url": "https://www.nbd.com.cn/columns/3/",
+    "selector": "a[href$=\".html\"]",
+    "count": 83
+  },
+  {
+    "name": "每日经济新闻-快消",
+    "url": "https://www.nbd.com.cn/columns/275/",
+    "selector": "a[href$=\".html\"]",
+    "count": 83
+  },
+  {
+    "name": "第一财经-消费",
+    "url": "https://www.yicai.com/news/consume/",
+    "selector": "a[href*=\"news\"]",
+    "count": 27
+  }
+]

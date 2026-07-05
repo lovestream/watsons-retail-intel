@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "date": "2026-06-12",
+    "window_start": "2026-06-12T07:00:00+08:00",
+    "window_end": "2026-06-12T07:32:08.808271+08:00",
+    "total_candidates": 4,
+    "from_reference": 4,
+    "from_rejected": 0,
+    "total_reference_input": 44,
+    "total_rejected_input": 73,
+    "rejection_stats": {
+      "not_old": 57,
+      "low_score": 53,
+      "invalid_page_type": 3,
+      "noise": 0
+    },
+    "selection_criteria": {
+      "min_rule_score": 8,
+      "time_statuses": [
+        "unknown_time",
+        "old",
+        "week_fallback"
+      ],
+      "valid_page_types": [
+        "article",
+        "report",
+        "unknown",
+        "news"
+      ]
+    },
+    "created_at": "2026-06-12T07:32:08.808293+08:00"
+  },
+  "articles": [
+    {
+      "article_id": "5238df0b08df34ca",
+      "title": "美妆外卖这个事，京东到家也掺和进来了",
+      "url": "https://m.ikanchai.com/pcarticle/441599",
+      "source_name": "xcrawl_16",
+      "source_type": "xcrawl",
+      "source_tier": "tier3_anchor",
+      "page_type": "unknown",
+      "time_status": "unknown_time",
+      "rule_score": 16,
+      "evergreen_score": 15,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "美妆个护",
+      "summary": "[](https://m.ikanchai.com/)\n砍柴网\n[图片](https://m.ikanchai.com/picture/) [视频](https://m.ikanchai.com/video/) [专题](https://m.ikanchai.com//special/)\n  * [首页](https://m.ikanchai.com/) [观点](https://m.ikanch",
+      "published_at": "",
+      "collected_at": "2026-06-12T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-06-12T07:32:08.807797+08:00"
+    },
+    {
+      "article_id": "82ee54308fb733e6",
+      "title": "美妆零售的变革：即时零售、内容零售、集合零售 | 人人都是产品经理",
+      "url": "https://www.woshipm.com/newretail/4296261.html",
+      "source_name": "xcrawl_15",
+      "source_type": "xcrawl",
+      "source_tier": "tier3_anchor",
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "美妆个护",
+      "summary": "编辑导读：在经济下行的大趋势下，美妆行业规模仍保持稳定増长，线上电商尤其是社交电商渠道快速发展，美妆行业正在进入融合发展的新零售阶段。本文从即时零售、内容零售、集合零售这三个方面对美妆行业进行了分析解读，一起来看看~ 爱美之心，人皆有之，伴随着颜值经济时代的来",
+      "published_at": "",
+      "collected_at": "2026-06-12T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-06-12T07:32:08.807885+08:00"
+    },
+    {
+      "article_id": "642e40cb0531c3a6",
+      "title": "还爱逛吗？屈臣氏因虚假广告被罚8万元【附美妆新零售行业 ...",
+      "url": "https://ecoapp.qianzhan.com/detials/230907-de7b000d.html",
+      "source_name": "xcrawl_14",
+      "source_type": "xcrawl",
+      "source_tier": 3,
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "屈臣氏",
+      "summary": "近日，上海屈臣氏日用品有限公司因虚假宣传普通化妆品具有美白功效和普通食品具有保健功能，被上海市杨浦区市场监督管理局罚款8万元。",
+      "published_at": "",
+      "collected_at": "2026-06-12T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-06-12T07:32:08.807948+08:00"
+    },
+    {
+      "article_id": "bc9427be53737ad0",
+      "title": "美妆外卖闪电仓究竟要革谁的命？",
+      "url": "https://zhuanlan.zhihu.com/p/636436617",
+      "source_name": "xcrawl_17",
+      "source_type": "xcrawl",
+      "source_tier": 3,
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "美妆个护",
+      "summary": "闪电仓大家可能早有耳闻，不同于以往生鲜的重货、重资产模式，通过便宜的价格，低廉的成本，迅速占领了消费者市场。 其实闪电仓也就是我们常说的便利店前置仓，提供30分钟内 ...",
+      "published_at": "",
+      "collected_at": "2026-06-12T07:00:00+08:00",
+      "reason": "",
+      "selected_at": "2026-06-12T07:32:08.807991+08:00"
+    }
+  ]
+}

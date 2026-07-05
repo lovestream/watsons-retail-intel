@@ -1,0 +1,32 @@
+[
+  {
+    "name": "DoNews-搜索",
+    "url": "https://www.donews.com/search?keyword=即时零售",
+    "selector": "a[href*=\"news\"]",
+    "count": 30
+  },
+  {
+    "name": "网经社-搜索",
+    "url": "https://www.100ec.cn/search?keyword=即时零售",
+    "selector": "a[href$=\".html\"]",
+    "count": 134
+  },
+  {
+    "name": "第一财经-搜索",
+    "url": "https://www.yicai.com/search?keyword=即时零售",
+    "selector": "a[href$=\".html\"]",
+    "count": 101
+  },
+  {
+    "name": "华尔街见闻-搜索",
+    "url": "https://wallstreetcn.com/search?q=即时零售",
+    "selector": "a[href*=\"article\"]",
+    "count": 22
+  },
+  {
+    "name": "经济观察报-搜索",
+    "url": "https://www.eeo.com.cn/search?keyword=即时零售",
+    "selector": "a[href$=\".html\"]",
+    "count": 6
+  }
+]

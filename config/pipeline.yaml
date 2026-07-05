@@ -75,6 +75,13 @@ steps:
     cli: skills/generate_podcast/generate_podcast.py
     description: "生成口播稿+音频播客"
 
+  - name: podcast_review
+    module: skills.podcast_review.podcast_review
+    function: podcast_review
+    cli: skills/podcast_review/podcast_review.py
+    description: "播客审稿（口语化/非照读/行动建议/事实准确/通勤适用）"
+    non_blocking: true
+
   - name: send_daily_report_email
     module: skills.send_daily_report_email.send_daily_report_email
     function: send_daily_report_email
@@ -125,3 +132,6 @@ validation:
   generate_podcast:
     min_chinese_chars: 1800
     max_chinese_chars: 2500
+  podcast_review:
+    non_blocking: true
+    min_checks_passed: 3  # 5项中至少3项通过才算可用

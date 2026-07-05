@@ -1,0 +1,42 @@
+{
+  "name": "watsons-daily-0700",
+  "enabled": true,
+  "schedule": {
+    "type": "cron",
+    "cron": "0 7 * * *",
+    "timezone": "Asia/Shanghai"
+  },
+  "task_type": "agent",
+  "request": {
+    "input": [
+      {
+        "content": [
+          {
+            "text": "运行今日 Watsons 零售情报全流程（按 Asia/Shanghai 时区），步骤:\n1. cd /app/working/projects/watsons-retail-intel && python3 -m skills.run_daily_pipeline.run_daily_pipeline --project-root . --use-llm true --send-email false --continue-on-error true --start-step collect --end-step editor_review\n2. python3 -m skills.generate_podcast.generate_podcast --project-root .\n3. 更新 run_manifest 的 sendable 为 true（若 editor_review 通过）\n4. python3 -m skills.send_daily_report_email.send_daily_report_email --project-root . --recipient 123399974@qq.com --attach-markdown true --attach-podcast true --dry-run false\n\n完成后汇报: 各步骤状态、P1事件数、sendable状态、邮件是否发送成功。",
+            "type": "text"
+          }
+        ],
+        "role": "user",
+        "type": "message"
+      }
+    ],
+    "session_id": "default",
+    "user_id": "default"
+  },
+  "dispatch": {
+    "type": "channel",
+    "channel": "console",
+    "target": {
+      "user_id": "default",
+      "session_id": "default"
+    },
+    "mode": "final",
+    "meta": {}
+  },
+  "runtime": {
+    "max_concurrency": 1,
+    "timeout_seconds": 4200,
+    "misfire_grace_seconds": 120
+  },
+  "meta": {}
+}

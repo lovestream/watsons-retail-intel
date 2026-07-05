@@ -11,10 +11,18 @@ daily_window:
 
 # ── 调度配置 ──
 schedule:
-  daily_collection:
-    cron: "0 8 * * *"          # 每日北京时间 08:00 触发（窗口已关闭1小时，确保数据完整）
+  cloakbrowser_early:
+    cron: "0 5 * * *"          # 每日北京时间 05:00 CloakBrowser 早班采集
     timezone: "Asia/Shanghai"
-    description: "每日采集与评分，基于昨日07:00-今日07:00窗口"
+    description: "CloakBrowser 垂直媒体采集（比主管道早2小时，确保数据就绪）"
+    script: "skills/run_daily_pipeline/run_cloakbrowser_early.py"
+    args: "--project-root ."
+
+  daily_collection:
+    cron: "0 7 * * *"          # 每日北京时间 07:00 主管道（CloakBrowser 数据已就绪）
+    timezone: "Asia/Shanghai"
+    description: "主管道：采集→合并→过滤→评分→日报（resume模式自动跳过已完成的CloakBrowser步骤）"
+    args: "--project-root . --resume true"
 
   daily_report:
     cron: "0 9 * * *"          # 每日北京时间 09:00 发送日报

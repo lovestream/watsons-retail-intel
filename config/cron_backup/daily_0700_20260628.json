@@ -1,0 +1,59 @@
+{
+  "spec": {
+    "id": "873a2bd1-691f-4ae2-b8ad-6ef9d3745467",
+    "name": "watsons-daily-0700",
+    "enabled": true,
+    "schedule": {
+      "type": "cron",
+      "cron": "0 7 * * *",
+      "run_at": null,
+      "timezone": "Asia/Shanghai",
+      "repeat_every_days": null,
+      "repeat_end_type": null,
+      "repeat_until": null,
+      "repeat_count": null
+    },
+    "task_type": "agent",
+    "text": null,
+    "request": {
+      "input": [
+        {
+          "content": [
+            {
+              "text": "执行今日 Watsons 零售情报全流程（含自愈启动，包装到项目本地持久目录）：\n\n# Step 0: 自愈检查 - 安装缺包到 .venv_packages/\ncd /app/working/projects/watsons-retail-intel && python3 skills/health_check/pip_ensure.py --project-root . --quiet || { echo \"❌ 自愈失败，中止\"; exit 1; }\n\n# Step 1: 全流程\ncd /app/working/projects/watsons-retail-intel && TODAY=$(date +%Y-%m-%d) && python3 -m skills.run_daily_pipeline.run_daily_pipeline --project-root . --date $TODAY --use-llm true --send-email true --recipient 123399974@qq.com --resume false --continue-on-error true\n\n关键要求：\n- Step 0 必须先跑，缺包自动安装到项目本地 .venv_packages/ 目录（不受 venv 重建影响）\n- --date 必须是今天的日期（$TODAY）\n- --resume false 确保每次都从零开始\n- --send-email true 完成后自动发送邮件\n- 完成后简洁汇报：各步骤状态、P1事件数、sendable状态、邮件是否发送成功",
+              "type": "text"
+            }
+          ],
+          "role": "user",
+          "type": "message"
+        }
+      ],
+      "session_id": "default",
+      "user_id": "default"
+    },
+    "dispatch": {
+      "type": "channel",
+      "channel": "console",
+      "target": {
+        "user_id": "default",
+        "session_id": "default"
+      },
+      "mode": "final",
+      "meta": {}
+    },
+    "save_result_to_inbox": true,
+    "runtime": {
+      "max_concurrency": 1,
+      "timeout_seconds": 7200,
+      "misfire_grace_seconds": 300,
+      "share_session": true
+    },
+    "meta": {}
+  },
+  "state": {
+    "next_run_at": "2026-06-29T07:00:00+08:00",
+    "last_run_at": "2026-06-28T00:30:09.808035Z",
+    "last_status": "success",
+    "last_error": null
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "date": "2026-05-11",
+    "window_start": "2026-05-11T07:00:00+08:00",
+    "window_end": "2026-05-11T07:11:33.882636+08:00",
+    "total_candidates": 2,
+    "from_reference": 2,
+    "from_rejected": 0,
+    "total_reference_input": 84,
+    "total_rejected_input": 18,
+    "rejection_stats": {
+      "not_old": 84,
+      "low_score": 15,
+      "invalid_page_type": 1,
+      "noise": 0
+    },
+    "selection_criteria": {
+      "min_rule_score": 8,
+      "time_statuses": [
+        "week_fallback",
+        "old",
+        "unknown_time"
+      ],
+      "valid_page_types": [
+        "article",
+        "unknown",
+        "report",
+        "news"
+      ]
+    },
+    "created_at": "2026-05-11T07:11:33.882656+08:00"
+  },
+  "articles": [
+    {
+      "article_id": "cfbcc29f3bd5d31c",
+      "title": "开放达人“小时达”带货：抖音加码即时零售",
+      "url": "https://xinwen.bjd.com.cn/content/s67da89efe4b08edd28f6706a.html",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "page_type": "article",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7.5,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "",
+      "summary": "北京商报  | 记者 魏蔚 \n\n2025-03-19 17:10 语音播报\n\n热点关注\n\n进入频道\n\n“抖音小时达带货权限面向全量电商达人开放，只要达人拥有完整的电商带货权限，即可自动开通小时达商品带货权限。”3月18日，抖音小时达相关负责人告诉北京商报记者。获得权限后，达人可在小时达获得：发布短视频添加商品、发布图文添加商品、直播间添加商品的权限，商品橱窗权限暂未开通。根据易观分析数据，2024",
+      "published_at": "",
+      "collected_at": "2026-05-11T07:08:29.729034+08:00",
+      "reason": "",
+      "selected_at": "2026-05-11T07:11:33.882428+08:00"
+    },
+    {
+      "article_id": "88ae54173837f0c4",
+      "title": "一文说清抖音外卖、小时达、随心团的区别 - 睿本云 - 睿本云",
+      "url": "https://www.reabam.com/sys-nd/369.html",
+      "source_name": "tavily_gap_search",
+      "source_type": "search",
+      "source_tier": 3,
+      "page_type": "unknown",
+      "time_status": "unknown_time",
+      "rule_score": 8,
+      "evergreen_score": 7,
+      "watsons_relevance": 0,
+      "core_hit": false,
+      "original_pool": "reference",
+      "category": "",
+      "summary": "抖音小时达的即时性与广泛的商品覆盖，使其成为非餐饮行业的“抖音外卖”，为消费者提供了全新的购物选择。  睿本云与抖音小时达的打通，为品牌商家提供了以下支持：  1、 商品关联：  睿本云商品信息与抖音小时达平台关联，确保库存数据实时同步，避免信息混乱。  2、 库存同步：  通过睿本云系统，商家可以实时更新库存信息，确保订单与库存匹配，避免超卖或缺货。  3、 订单实时：  即时零售订单实时同步至",
+      "published_at": "",
+      "collected_at": "2026-05-11T07:08:31.291196+08:00",
+      "reason": "",
+      "selected_at": "2026-05-11T07:11:33.882552+08:00"
+    }
+  ]
+}

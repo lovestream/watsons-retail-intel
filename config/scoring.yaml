@@ -22,7 +22,7 @@ thresholds:
   # ── 硬降级规则 ──
   # 以下条件触发时，事件最高只能到指定级别
   hard_downgrade:
-    confidence_low_max:         P2    # confidence=low → 最高 P2
+    confidence_low_max:         P2    # confidence=low → 最高 P2（保留，但评分可适当提升）
     rule_fallback_max:          P2    # extraction_method=rule_fallback → 最高 P2
     source_credibility_low_max: P2    # source_credibility < 2 → 最高 P2
     watsons_relevance_low_max:  P2    # watsons_relevance < 3 → 最高 P2

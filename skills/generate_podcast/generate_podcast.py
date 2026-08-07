@@ -295,8 +295,8 @@ def llm_generate_podcast_script(
             config_path=str(root / "config" / "model_router.yaml"),
         )
     except Exception:
-        default_model = "LongCat-2.0"
-        fallbacks = ["LongCat-2.0"]
+        default_model = "deepseek-v4-flash-free"
+        fallbacks = ["deepseek-v4-flash-free"]
 
     if default_model == "rule_only":
         logger.info(f"{LOG_PREFIX} 模型路由返回 rule_only，跳过 LLM")

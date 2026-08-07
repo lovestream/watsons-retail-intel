@@ -1973,7 +1973,7 @@ def run_test_llm():
     from skills.utils.llm_client import check_llm_config, test_llm_connection
 
     print("=" * 60)
-    print("LongCat LLM 连通性测试")
+    print("OpenCode LLM 连通性测试")
     print("=" * 60)
 
     # 1. 配置检查

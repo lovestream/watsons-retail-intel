@@ -48,12 +48,13 @@ CST = timezone(timedelta(hours=8))
 
 SERVICES = {
     # ── 核心外部服务（Key-based） ──
-    "longcat_llm": {
-        "name": "Longcat LLM",
+    "opencode_llm": {
+        "name": "OpenCode LLM (主, 免费)",
         "critical": True,
-        "key_prefixes": ["longcat"],
-        "key_count": 6,
-        "test_model": "LongCat-2.0",
+        "key_source": "file",          # key 从 config/opencode_keys.json 载入
+        "key_count": 4,                 # 3 自定义 Key + 1 内置 keyless
+        "test_model": "deepseek-v4-flash-free",
+        "test_url": "https://opencode.ai/zen/v1",
         "test_type": "api_key",
     },
     "tavily_search": {
@@ -235,6 +236,79 @@ def _error_type_from_exception(e: Exception) -> str:
 # ═══════════════════════════════════════════════════════
 #  各服务测试函数
 # ═══════════════════════════════════════════════════════
+
+_OPENCODE_UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+)
+_OPENCODE_MODEL = "deepseek-v4-flash-free"
+_OPENCODE_URL = "https://opencode.ai/zen/v1"
+
+
+def _load_opencode_keys(project_root: str = ".") -> list:
+    """载入 OpenCode 轮换入口: [(name, key)]。3 自定义 Key + 1 内置 keyless。
+
+    Key 源: <project_root>/config/opencode_keys.json（dict {name: key}）。
+    keyless 入口始终附加（key=""，请求不带 Authorization）。
+    """
+    entries = []
+    candidates = [
+        os.path.join(project_root, "config", "opencode_keys.json"),
+        "config/opencode_keys.json",
+    ]
+    for cand in candidates:
+        if os.path.exists(cand):
+            try:
+                with open(cand, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                if isinstance(data, dict):
+                    for name, key in data.items():
+                        if isinstance(key, str) and key.strip():
+                            entries.append((str(name), key.strip()))
+                elif isinstance(data, list):
+                    for i, key in enumerate(data):
+                        if isinstance(key, str) and key.strip():
+                            entries.append(("key%d" % i, key.strip()))
+            except Exception as e:
+                entries.append(("__load_error__", str(e)[:80]))
+            break
+    # 内置 keyless 入口（无需 API Key）
+    if not any(k == "" for _, k in entries):
+        entries.append(("opencode-keyless", ""))
+    return entries
+
+
+def test_opencode_key(name: str, key: str, model: str, timeout: int = 25) -> dict:
+    """测试单个 OpenCode 入口（带浏览器 User-Agent 绕过 Cloudflare 403 code 1010）。"""
+    try:
+        payload = json.dumps({
+            "model": model or _OPENCODE_MODEL,
+            "messages": [{"role": "user", "content": "ok"}],
+            "max_tokens": 3,
+        }).encode()
+        headers = {
+            "User-Agent": _OPENCODE_UA,
+            "Content-Type": "application/json",
+        }
+        if key:
+            headers["Authorization"] = "Bearer %s" % key
+        req = urllib.request.Request(
+            _OPENCODE_URL + "/chat/completions",
+            data=payload,
+            headers=headers,
+        )
+        resp = urllib.request.urlopen(req, timeout=timeout)
+        data = json.loads(resp.read().decode())
+        tok = data.get("usage", {}).get("completion_tokens", 0)
+        return {"ok": True, "tokens": tok}
+    except urllib.error.HTTPError as e:
+        body = e.read().decode()[:300]
+        return {"ok": False, "status": e.code,
+                "error_type": _error_type_from_exception(e), "body": body}
+    except Exception as e:
+        return {"ok": False, "error": str(e)[:200],
+                "error_type": _error_type_from_exception(e)}
+
 
 def test_longcat_key(name: str, key: str, model: str, timeout: int = 20) -> dict:
     try:
@@ -638,8 +712,11 @@ def run_health_check(project_root: str = ".", logger: logging.Logger = None) -> 
 
         # ── API Key 类服务 ──
         if test_type == "api_key":
-            keys = _load_keys(svc_cfg["key_prefixes"][0], svc_cfg["key_count"],
-                              svc_cfg.get("key_start", 0))
+            if svc_id == "opencode_llm":
+                keys = _load_opencode_keys(str(root_path))
+            else:
+                keys = _load_keys(svc_cfg["key_prefixes"][0], svc_cfg["key_count"],
+                                  svc_cfg.get("key_start", 0))
             svc_result["keys_total"] = len(keys)
 
             if not keys:
@@ -648,7 +725,9 @@ def run_health_check(project_root: str = ".", logger: logging.Logger = None) -> 
                 result["alerts"].append(f"[CRITICAL] {svc_cfg['name']}: no keys configured")
             else:
                 for key_name, key_val in keys:
-                    if svc_id == "longcat_llm":
+                    if svc_id == "opencode_llm":
+                        r = test_opencode_key(key_name, key_val, svc_cfg.get("test_model", _OPENCODE_MODEL))
+                    elif svc_id == "longcat_llm":
                         r = test_longcat_key(key_name, key_val, svc_cfg.get("test_model", "LongCat-2.0"))
                     elif svc_id == "tavily_search":
                         r = test_tavily_key(key_name, key_val)
@@ -864,24 +943,24 @@ def run_health_check(project_root: str = ".", logger: logging.Logger = None) -> 
             else:
                 svc_result["status"] = "healthy"
 
-        # ── LongCat 专属：GPT 兜底可用则不算严重故障 ──
-        # 业务逻辑：所有 LongCat key 不可用时才用付费 GPT 兜底；
+        # ── LLM 专属：GPT 兜底可用则不算严重故障 ──
+        # 业务逻辑：OpenCode 全部入口不可用时才用付费 GPT 兜底；
         # 只要 GPT 兜底正常，LLM 能力即正常，不应刷 CRITICAL 告警。
-        if svc_id == "longcat_llm" and svc_result["status"] in ("down", "degraded"):
+        if svc_id == "opencode_llm" and svc_result["status"] in ("down", "degraded"):
             fb = test_fallback_llm()
             svc_result["fallback_ok"] = fb["ok"]
             if fb["ok"]:
-                # LongCat 挂了但 GPT 兜底正常 → 整体可用，仅信息提示
+                # OpenCode 挂了但 GPT 兜底正常 → 整体可用，仅信息提示
                 svc_result["status"] = "healthy"
                 svc_result["detail"] = (
-                    f"LongCat {ok}/{total} keys ok; "
+                    f"OpenCode {ok}/{total} keys ok; "
                     f"GPT 兜底({fb.get('model','')})正常，LLM 能力可用")
-                svc_result["degraded_reason"] = "longcat_down_fallback_ok"
+                svc_result["degraded_reason"] = "opencode_down_fallback_ok"
             else:
-                # LongCat 和 GPT 兜底都挂了 → 真正的严重故障
+                # OpenCode 和 GPT 兜底都挂了 → 真正的严重故障
                 svc_result["status"] = "down"
                 svc_result["detail"] = (
-                    f"LongCat 全部不可用，且 GPT 兜底也失败"
+                    f"OpenCode 全部不可用，且 GPT 兜底也失败"
                     f"({fb.get('error_type', fb.get('error',''))})")
 
         # 生成告警

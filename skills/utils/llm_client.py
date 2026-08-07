@@ -44,15 +44,33 @@ logger = logging.getLogger(__name__)
 
 # ===================== 默认配置 =====================
 
-DEFAULT_MODEL = "LongCat-2.0"
-DEFAULT_BASE_URL = "https://api.longcat.chat/openai"
+# ── 主 Provider: OpenCode (免费 DeepSeek V4 Flash) ──
+# 2026-08 起用户默认 LLM。4 个轮换入口 = 3 个自定义 Key + 1 个内置 keyless。
+# 注意: opencode.ai 有 Cloudflare 防护，请求必须携带浏览器 User-Agent，
+# 否则返回 HTTP 403 error code 1010（"banned based on browser signature"）。
+OPENCODE_BASE_URL = "https://opencode.ai/zen/v1"
+OPENCODE_MODEL = "deepseek-v4-flash-free"
+OPENCODE_KEYS_FILE = "config/opencode_keys.json"
+LLM_USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+)
+
+# ── 次要免费兜底 Provider: LongCat (免费) ──
+# 仅当 OpenCode 全部入口失败时使用；LongCat 再失败才轮到付费 gpt。
+LONGCAT_BASE_URL = "https://api.longcat.chat/openai"
+LONGCAT_MODEL = "LongCat-2.0"
+
+# ── 默认（主 Provider = OpenCode） ──
+DEFAULT_MODEL = OPENCODE_MODEL
+DEFAULT_BASE_URL = OPENCODE_BASE_URL
 DEFAULT_MAX_TOKENS = 4096
 DEFAULT_TEMPERATURE = 0.3
 DEFAULT_TIMEOUT = 180  # 秒（thinking 模型需要更长等待）
 DEFAULT_RETRIES = 2
 # 瞬时错误(连接中断/超时/空响应)对每个 Key 的重试轮数。
-# LongCat 偶发 RemoteDisconnected 时，多轮重试+退避通常能成功，
-# 避免动辄放弃主模型转 GPT 兜底（会丢失 V2 动态八问等增强）。
+# 偶发 RemoteDisconnected 时，多轮重试+退避通常能成功，
+# 避免动辄放弃主模型转付费兜底。
 TRANSIENT_ROUNDS = 2
 TRANSIENT_BACKOFF_BASE = 1.5  # 秒，指数退避基数
 TRANSIENT_BACKOFF_MAX = 10.0  # 秒，单次退避上限
@@ -61,7 +79,7 @@ TRANSIENT_BACKOFF_MAX = 10.0  # 秒，单次退避上限
 MAX_RETRY_WALL_SECONDS = 300  # 5 分钟
 DAILY_TOKEN_LIMIT_PER_KEY = 5_000_000
 
-# ── 备用 Provider 配置 ──
+# ── 付费兜底 Provider: rightcode gpt (贵，仅在免费池全灭时启用) ──
 FALLBACK_KEY_ENV = "rightcode_key"
 FALLBACK_BASE_URL = "https://right.codes/codex/v1"
 FALLBACK_MODEL = "gpt-5.4-xhigh"
@@ -141,6 +159,59 @@ def _load_keys_from_env() -> List[str]:
         return [fallback]
 
     return []
+
+
+def _load_opencode_keys() -> List[Dict[str, str]]:
+    """加载 OpenCode 轮换入口（主 Provider）。每个元素: {"name":..., "key":...}。
+
+    优先级:
+    1. OPENCODE_API_KEYS 环境变量（JSON dict 或逗号分隔字符串）
+    2. config/opencode_keys.json（dict {name: key} 或 list）
+    3. 空列表（仅保留内置 keyless）
+
+    末尾始终附加内置 keyless 入口（"key": ""，请求不带 Authorization 头），
+    使轮换池始终有兜底入口。总入口 = 3 自定义 Key + 1 内置 keyless。
+    """
+    entries: List[Dict[str, str]] = []
+
+    env_val = os.environ.get("OPENCODE_API_KEYS", "").strip()
+    if env_val:
+        try:
+            parsed = json.loads(env_val)
+            if isinstance(parsed, dict):
+                items = list(parsed.items())
+            else:
+                items = [("env%d" % i, v) for i, v in enumerate(str(parsed).split(","))]
+        except Exception:
+            items = [("env%d" % i, v) for i, v in enumerate(env_val.split(","))]
+        for name, key in items:
+            if isinstance(key, str) and key.strip():
+                entries.append({"name": str(name), "key": key.strip()})
+    else:
+        for candidate in (os.environ.get("OPENCODE_KEYS_FILE", "").strip(),
+                          OPENCODE_KEYS_FILE):
+            if not candidate:
+                continue
+            if os.path.exists(candidate):
+                try:
+                    with open(candidate, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                    if isinstance(data, dict):
+                        for name, key in data.items():
+                            if isinstance(key, str) and key.strip():
+                                entries.append({"name": str(name), "key": key.strip()})
+                    elif isinstance(data, list):
+                        for i, key in enumerate(data):
+                            if isinstance(key, str) and key.strip():
+                                entries.append({"name": "key%d" % i, "key": key})
+                except Exception as e:
+                    logger.warning("OpenCode 配置读取失败 %s: %s" % (candidate, e))
+                break
+
+    # 内置 keyless 入口始终保留，保证轮换池有兜底
+    if not any(e["key"] == "" for e in entries):
+        entries.append({"name": "opencode-keyless", "key": ""})
+    return entries
 
 
 def _load_model_from_env() -> str:
@@ -366,47 +437,47 @@ class LLMClient:
     """基于 requests 的 LongCat LLM 调用客户端。"""
 
     def __init__(self):
-        self.keys: List[str] = _load_keys_from_env()
-        self.model: str = _load_model_from_env()
-        self.base_url: str = _load_base_url_from_env()
-        self.current_index: int = 0
+        # ── 主 Provider: OpenCode 轮换入口（3 Key + 1 keyless） ──
+        self.endpoints: List[Dict[str, str]] = _load_opencode_keys()
+        self.keys: List[str] = [e["key"] for e in self.endpoints]  # 兼容旧字段
+        self.model: str = OPENCODE_MODEL
+        self.base_url: str = OPENCODE_BASE_URL
         self.timeout: int = DEFAULT_TIMEOUT
         self.max_retries: int = DEFAULT_RETRIES
 
-        # 统计
+        # ── 统计 ──
         self.total_calls: int = 0
         self.total_failures: int = 0
         self.token_usage: Dict[str, int] = {}
         self.error_keys: Dict[str, str] = {}  # key_masked -> last_error
-        self.exhausted_keys: set = set()  # indices of exhausted keys
+        self._exhausted: Dict[str, set] = {"primary": set()}  # pool -> {idx}
 
-        # 线程安全
+        # ── 线程安全 ──
         self._lock = threading.Lock()
+        self._pos: Dict[str, int] = {"primary": 0}
 
-        # 备用 Provider（所有主 Key 失败时兜底）
+        # ── 付费兜底 Provider（贵，仅在 OpenCode 全部入口失败时启用） ──
         self._fallback_key = os.environ.get(FALLBACK_KEY_ENV, "").strip()
         self._fallback_url = FALLBACK_BASE_URL
         self._fallback_model = FALLBACK_MODEL
 
-        # 付费兜底总开关：默认彻底禁用。仅当 LongCat 全灭且你明确同意花钱时
+        # 付费兜底总开关：默认彻底禁用。仅当 OpenCode 全灭且你明确同意花钱时
         # 设 ALLOW_PAID_FALLBACK=1 才启用付费兜底(gpt-5.4-xhigh 烧钱)。
         self._allow_paid = _load_allow_paid_fallback()
 
-        # 强制兜底：直接走备用 Provider，跳过 LongCat
+        # 强制兜底：立即走付费兜底，跳过 OpenCode
         self._force_fallback = _load_force_fallback()
         if self._force_fallback and (not self._allow_paid):
-            # 付费总开关未开 —— 强制兜底也不能走付费，回退正常路由
             logger.warning(
                 "FORCE_FALLBACK_LLM=1 但 ALLOW_PAID_FALLBACK 未开启，"
-                "禁用付费强制兜底，回退 LongCat 正常路由")
+                "禁用付费强制兜底，回退正常路由")
             self._force_fallback = False
         elif self._force_fallback and self._fallback_key:
             logger.warning(
                 f"付费强制兜底已开启(ALLOW_PAID_FALLBACK=1) → "
-                f"所有调用直接使用 {self._fallback_model}（跳过 LongCat）")
+                f"所有调用直接使用 {self._fallback_model}（跳过免费池）")
         elif self._force_fallback and not self._fallback_key:
-            logger.warning(
-                "FORCE_FALLBACK_LLM=1 但缺少备用 Key，回退到正常路由")
+            logger.warning("FORCE_FALLBACK_LLM=1 但缺少备用 Key，回退到正常路由")
             self._force_fallback = False
 
         if requests is None:
@@ -414,55 +485,52 @@ class LLMClient:
 
     @property
     def available(self) -> bool:
-        """是否有可用的主 Key。付费备用 Provider 不计入可用性(走消费需显式允许)。"""
-        primary_ok = bool(self.keys) and len(self.keys) > len(self.exhausted_keys)
-        return primary_ok
+        """是否有可用的主(OpenCode) Key。付费备用 Provider 不计入可用性。"""
+        return bool(self.keys) and len(self.keys) > len(self._exhausted["primary"])
 
     @property
     def available_keys(self) -> int:
-        """可用 Key 数量。"""
-        return len(self.keys) - len(self.exhausted_keys)
+        """可用主(OpenCode) Key 数量。"""
+        return max(0, len(self.keys) - len(self._exhausted["primary"]))
 
-    def _get_endpoint(self) -> str:
+    def _build_endpoint(self, base_url: str) -> str:
         """构建完整 API endpoint。"""
-        base = self.base_url.rstrip('/')
-        # 如果已经包含 /v1/chat/completions，不再拼接
+        base = str(base_url).rstrip('/')
         if base.endswith('/v1/chat/completions'):
             return base
-        # 如果以 /v1 结尾，拼接 chat/completions
         if base.endswith('/v1'):
             return f"{base}/chat/completions"
-        # 否则拼接 /v1/chat/completions
         return f"{base}/v1/chat/completions"
 
-    def _get_next_key(self) -> Optional[str]:
-        """Round-robin 获取下一个 Key。"""
-        if not self.keys:
-            return None
-        
-        with self._lock:
-            # 尝试找一个未耗尽的 Key
-            attempts = 0
-            while attempts < len(self.keys):
-                key = self.keys[self.current_index % len(self.keys)]
-                idx = self.current_index % len(self.keys)
-                self.current_index += 1
-                
-                if idx not in self.exhausted_keys:
-                    return key
-                attempts += 1
-            
-            return None  # 所有 Key 都耗尽
+    def _get_endpoint(self) -> str:
+        """构建主 Provider 的完整 API endpoint（兼容旧代码）。"""
+        return self._build_endpoint(self.base_url)
 
-    def _mark_key_exhausted(self, key: str, reason: str = ""):
-        """标记 Key 已耗尽。"""
+    def _next_entry(self, pool: str):
+        """Round-robin 获取下一个入口。返回 (idx, entry) 或 (None, None)。
+        pool 当前固定为 "primary"(OpenCode)。"""
+        entries = self.endpoints
+        exhausted = self._exhausted.setdefault(pool, set())
+        n = len(entries)
+        if n == 0:
+            return None, None
         with self._lock:
-            for i, k in enumerate(self.keys):
-                if k == key:
-                    self.exhausted_keys.add(i)
-                    self.error_keys[_mask_key(key)] = reason
-                    logger.warning(f"Key {_mask_key(key)} 已标记为耗尽: {reason}")
-                    break
+            pos = self._pos.get(pool, 0)
+            for _ in range(n):
+                idx = pos % n
+                pos += 1
+                if idx not in exhausted:
+                    self._pos[pool] = pos
+                    return idx, entries[idx]
+        return None, None
+
+    def _mark_exhausted(self, pool: str, idx: int, key: str, reason: str = ""):
+        """标记某池的某个入口已耗尽（402/鉴权失败等本轮不可恢复）。"""
+        with self._lock:
+            self._exhausted.setdefault(pool, set()).add(idx)
+            self.error_keys[_mask_key(key)] = "%s:%s" % (pool, reason)
+            logger.warning("池 %s 的 Key %s 已标记为耗尽: %s"
+                           % (pool, _mask_key(key), reason))
 
     def _transient_backoff(self, failure_count: int):
         """瞬时错误后的指数退避。
@@ -488,27 +556,32 @@ class LLMClient:
         model: Optional[str] = None,
     ) -> Dict[str, Any]:
         """调用 LLM，返回标准结果 dict。
-        
+
+        路由顺序（免费优先，绝不悄悄烧钱）:
+          1. OpenCode deepseek-v4-flash-free（主池，4 入口轮换: 3 Key + 1 keyless）
+          2. rightcode gpt-5.4-xhigh（付费兜底，仅 ALLOW_PAID_FALLBACK=1 且
+             OpenCode 全部入口失败时启用）
+
         Args:
             messages: OpenAI 格式消息列表
             system_prompt: 系统提示词，会插入到 messages 最前面
             response_format: "json" 或 "text"
             temperature: 温度
             max_tokens: 最大 token 数
-            model: 覆盖默认模型名（None 则使用 self.model）
-            
+            model: 覆盖主 Provider 的模型名（None 则使用 self.model）
+
         Returns:
             {
                 "ok": bool,
-                "content": str,          # 原始返回文本
-                "parsed": dict|None,     # 解析后的 JSON (response_format=json 时)
+                "content": str,
+                "parsed": dict|None,
                 "model": str,
                 "usage": dict,
-                "key_used": str,          # 掩码后的 Key
-                "error": str,             # 错误信息
+                "key_used": str,
+                "error": str,
             }
         """
-        # ── 实际使用模型 ──
+        # ── 实际使用模型（主 Provider） ──
         actual_model = model if model else self.model
         if model and model != self.model:
             logger.info(f"模型覆盖: self.model={self.model} → 实际使用={actual_model}")
@@ -527,7 +600,7 @@ class LLMClient:
             result_base["error"] = "requests 库未安装"
             return result_base
 
-        # ── 强制兜底：直接走备用 Provider，完全跳过 LongCat ──
+        # ── 强制付费兜底（FORCE_FALLBACK_LLM=1 + ALLOW_PAID_FALLBACK=1） ──
         if self._force_fallback and self._fallback_key:
             fb_messages = []
             if system_prompt:
@@ -537,30 +610,8 @@ class LLMClient:
                 fb_messages, temperature, max_tokens, response_format)
             if fallback_result["ok"]:
                 return fallback_result
-            # 备用失败时，若主 Key 可用则继续尝试主路由（韧性兜底）
-            logger.warning(
-                f"强制兜底调用失败: {fallback_result.get('error','')[:120]}，"
-                f"尝试主 Provider")
-            if not (bool(self.keys) and len(self.keys) > len(self.exhausted_keys)):
-                result_base["error"] = (
-                    f"强制兜底失败且无可用主 Key: "
-                    f"{fallback_result.get('error','')}")
-                return result_base
-
-        if not self.available:
-            # 主 Key 全部耗尽 —— 仅当明确允许付费兜底时才走 gpt-5.4-xhigh，
-            # 否则直接报错(绝不悄悄烧钱)。
-            if self._fallback_key and self._allow_paid:
-                logger.warning("主 Key 全部不可用，使用付费备用 Provider(ALLOW_PAID_FALLBACK=1)")
-                fb_messages = []
-                if system_prompt:
-                    fb_messages.append({"role": "system", "content": system_prompt})
-                fb_messages.extend(messages)
-                fallback_result = self._call_fallback(
-                    fb_messages, temperature, max_tokens, response_format)
-                if fallback_result["ok"]:
-                    return fallback_result
-            result_base["error"] = "无可用 API Key（付费兜底未开启，设 ALLOW_PAID_FALLBACK=1 启用）"
+            result_base["error"] = (
+                f"强制兜底失败: {fallback_result.get('error','')}")
             return result_base
 
         # 构建 messages
@@ -568,208 +619,194 @@ class LLMClient:
         if system_prompt:
             full_messages.append({"role": "system", "content": system_prompt})
         full_messages.extend(messages)
-
-        # 如果 response_format=json，在 system_prompt 末尾追加 JSON 提示
-        if response_format == "json" and system_prompt:
-            # 不重复追加，如果 system_prompt 已包含 JSON 提示则跳过
-            pass
-        elif response_format == "json" and not system_prompt:
+        if response_format == "json" and not system_prompt:
             full_messages.insert(0, {
                 "role": "system",
                 "content": "你是严格的JSON分类器，只输出JSON，不要输出任何其他文字。"
             })
 
-        # 构建请求体
-        payload = {
-            "model": actual_model,
-            "messages": full_messages,
-            "temperature": temperature,
-            "max_tokens": max_tokens,
-        }
-
-        endpoint = self._get_endpoint()
-
-        # 尝试调用 (round-robin 重试)
-        # 瞬时错误(连接中断/超时/空响应)会在同一轮换 Key 后，多轮重试，
-        # 并配合指数退避——LongCat 偶发 RemoteDisconnected 时不应直接放弃转兜底。
-        last_error = ""
-        num_keys = max(1, len(self.keys))
-        # 总轮数：每个 Key 至少试 TRANSIENT_ROUNDS 轮
-        max_attempts = num_keys * TRANSIENT_ROUNDS + 1
-        transient_failures = 0  # 连续瞬时错误计数，用于退避
-        # 墙钟硬上限：避免多 Key 反复超时+退避累积成数十分钟。
-        # 超过后停止重试主 Provider，直接走 fallback。
         _retry_deadline = time_mod.monotonic() + MAX_RETRY_WALL_SECONDS
+        last_error = ""
+
+        # ── 阶段 1: OpenCode（主池，免费，4 入口轮换） ──
+        res, err = self._try_pool(
+            full_messages, response_format, temperature, max_tokens,
+            "primary", _retry_deadline, model=actual_model)
+        if res and res.get("ok"):
+            return res
+        if err:
+            last_error = "OpenCode: " + err
+
+        # ── 阶段 2: 付费兜底（仅当明确允许花钱） ──
+        if self._fallback_key and self._allow_paid:
+            logger.warning("OpenCode 全部失败，使用付费备用 Provider(ALLOW_PAID_FALLBACK=1)")
+            fallback_result = self._call_fallback(
+                full_messages, temperature, max_tokens, response_format)
+            if fallback_result.get("ok"):
+                return fallback_result
+            last_error += f" | gpt兜底: {fallback_result.get('error', '')}"
+        elif self._fallback_key:
+            last_error += " | 付费兜底未开启(设 ALLOW_PAID_FALLBACK=1 启用)"
+
+        result_base["error"] = f"所有 Provider 尝试完毕。最后错误: {last_error}"
+        return result_base
+
+    def _try_pool(self, full_messages, response_format, temperature, max_tokens,
+                  pool, deadline, model):
+        """尝试一个 provider 池（round-robin + 瞬时重试 + 墙钟上限）。
+
+        pool 当前固定为 "primary"(OpenCode，4 入口轮换)。
+        Returns: (result_dict_or_None, last_error_str)
+        """
+        entries = self.endpoints
+        base_url = self.base_url
+        pool_model = self.model
+
+        if not entries:
+            return None, "池为空"
+        if len(entries) - len(self._exhausted.get(pool, set())) <= 0:
+            return None, "全部入口已耗尽"
+
+        endpoint = self._build_endpoint(base_url)
+        use_model = model if model else pool_model
+        result = {
+            "ok": False, "content": "", "parsed": None,
+            "model": use_model, "usage": {}, "key_used": "", "error": "",
+        }
+        transient_failures = 0
+        last_error = ""
+        max_attempts = len(entries) * TRANSIENT_ROUNDS + 1
 
         for attempt in range(max_attempts):
-            if time_mod.monotonic() > _retry_deadline:
-                last_error = (f"主 Provider 重试超过墙钟上限 "
-                              f"{MAX_RETRY_WALL_SECONDS}s，转 fallback。"
-                              f"最后错误: {last_error}")
-                logger.warning(last_error)
+            if time_mod.monotonic() > deadline:
+                last_error = (last_error or "") + f"| 重试超过墙钟上限{MAX_RETRY_WALL_SECONDS}s"
+                logger.warning("池 %s: %s", pool, last_error)
                 break
-            key = self._get_next_key()
-            if key is None:
-                last_error = f"所有 Key 已耗尽。最后错误: {last_error}"
-                break  # 跳出循环，走 fallback 逻辑
+            idx, entry = self._next_entry(pool)
+            if entry is None:
+                last_error = (last_error or "") + "| 池入口耗尽"
+                break
 
-
+            key = entry.get("key", "")
+            key_label = entry.get("name") or _mask_key(key)
             with self._lock:
                 self.total_calls += 1
 
+            payload = {
+                "model": use_model,
+                "messages": full_messages,
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+            }
+            headers = {
+                "Content-Type": "application/json",
+                "User-Agent": LLM_USER_AGENT,
+            }
+            if key:
+                headers["Authorization"] = f"Bearer {key}"
+
             try:
-                resp = requests.post(
-                    endpoint,
-                    headers={
-                        "Authorization": f"Bearer {key}",
-                        "Content-Type": "application/json",
-                    },
-                    json=payload,
-                    timeout=self.timeout,
-                )
-
-                # ── HTTP 错误处理 ──
-                if resp.status_code == 401 or resp.status_code == 403:
-                    error_msg = f"鉴权失败({resp.status_code}): {resp.text[:200]}"
-                    logger.warning(f"Key {_mask_key(key)} 鉴权失败: {resp.status_code}")
-                    self._mark_key_exhausted(key, error_msg)
-                    last_error = error_msg
-                    continue  # 换下一个 Key
-
-                if resp.status_code == 404:
-                    error_msg = (f"Endpoint 或模型名错误(404): "
-                                 f"endpoint={endpoint}, model={actual_model}, "
-                                 f"response={resp.text[:200]}")
-                    logger.error(error_msg)
-                    # 404 说明 endpoint 或模型名有误，所有 Key 都会遇到，直接返回
-                    result_base["error"] = error_msg
-                    return result_base
-
-                if resp.status_code == 429:
-                    error_msg = f"速率限制(429): {resp.text[:200]}"
-                    logger.warning(f"Key {_mask_key(key)} 触发速率限制")
-                    # 429 不标记 Key 为耗尽，等一会重试
-                    last_error = error_msg
-                    time_mod.sleep(2)  # 简单退避
-                    continue
-
-                if resp.status_code == 402:
-                    # 402 = Token 额度不足，本轮内不会恢复，标记耗尽避免反复重试
-                    error_msg = f"额度不足(402): {resp.text[:150]}"
-                    logger.warning(f"Key {_mask_key(key)} 额度不足(402)，标记耗尽")
-                    self._mark_key_exhausted(key, error_msg)
-                    last_error = error_msg
-                    continue
-
-                if resp.status_code >= 400:
-                    error_msg = f"HTTP {resp.status_code}: {resp.text[:200]}"
-                    logger.warning(f"Key {_mask_key(key)} 请求失败: {error_msg}")
-                    last_error = error_msg
-                    # "Unsupported model" 说明模型名有误，所有 Key 都会遇到
-                    if "unsupported model" in resp.text.lower():
-                        logger.warning("模型不支持，跳过所有主 Key")
-                        break
-                    continue
-
-                # ── 成功响应 ──
-                resp_json = resp.json()
-                content = ""
-                reasoning_content = ""
-                usage = {}
-
-                # 提取内容 — 支持 thinking 模型
-                # LongCat-Flash-Thinking 等推理模型返回两个字段：
-                #   content: 最终回答（可能为空）
-                #   reasoning_content: 思考过程（含推理步骤，可能包含最终JSON）
-                choices = resp_json.get("choices", [])
-                if choices:
-                    msg = choices[0].get("message", {})
-                    content = msg.get("content", "") or ""
-                    reasoning_content = msg.get("reasoning_content", "") or ""
-
-                # 如果 content 为空但 reasoning_content 有内容，
-                # 尝试从 reasoning_content 中提取 JSON（thinking 模型行为）
-                if not content and reasoning_content:
-                    logger.info("content 为空，尝试从 reasoning_content 提取最终回答")
-                    content = reasoning_content
-
-                # 提取 usage
-                usage = resp_json.get("usage", {})
-
-                # 解析 JSON (如果要求)
-                parsed = None
-                if response_format == "json" and content:
-                    parsed = robust_json_extract(content)
-                    if parsed is None:
-                        logger.warning(
-                            f"LLM 返回 JSON 解析失败, "
-                            f"content_preview={content[:200]}"
-                        )
-
-                result_base.update({
-                    "ok": bool(content.strip()),
-                    "content": content,
-                    "parsed": parsed,
-                    "usage": usage,
-                    "key_used": _mask_key(key),
-                    "error": "" if content.strip() else "LLM 返回内容为空",
-                })
-                # 内容为空时尝试下一个 key 或 fallback
-                if not content.strip():
-                    last_error = "LLM 返回内容为空"
-                    transient_failures += 1
-                    logger.warning(f"Key {_mask_key(key)} 返回内容为空，尝试下一个")
-                    self._transient_backoff(transient_failures)
-                    continue
-                return result_base
-
+                resp = requests.post(endpoint, headers=headers, json=payload,
+                                     timeout=self.timeout)
             except requests.exceptions.Timeout:
                 last_error = f"请求超时({self.timeout}s)"
                 transient_failures += 1
-                logger.warning(
-                    f"Key {_mask_key(key)} 请求超时 "
-                    f"(瞬时错误 {transient_failures}/{max_attempts})")
+                logger.warning("池 %s %s 请求超时 (瞬时 %d/%d)",
+                               pool, key_label, transient_failures, max_attempts)
                 self._transient_backoff(transient_failures)
                 continue
-
             except requests.exceptions.ConnectionError as e:
-                last_error = f"连接错误: {str(e)[:200]}"
+                last_error = f"连接错误: {str(e)[:150]}"
                 transient_failures += 1
-                logger.warning(
-                    f"Key {_mask_key(key)} 连接错误 "
-                    f"(瞬时错误 {transient_failures}/{max_attempts}): {str(e)[:120]}")
-                # RemoteDisconnected 等多为瞬时网络抖动，退避后重试（含换Key+多轮）
+                logger.warning("池 %s %s 连接错误: %s", pool, key_label, str(e)[:100])
                 self._transient_backoff(transient_failures)
                 continue
-
-            except json.JSONDecodeError as e:
-                last_error = f"响应 JSON 解析失败: {str(e)[:100]}"
-                transient_failures += 1
-                logger.warning(f"Key {_mask_key(key)} 响应 JSON 解析失败: {e}")
-                self._transient_backoff(transient_failures)
-                continue
-
             except Exception as e:
-                last_error = f"未知错误: {str(e)[:200]}"
+                last_error = f"未知错误: {str(e)[:150]}"
                 transient_failures += 1
-                logger.warning(f"Key {_mask_key(key)} 未知错误: {e}")
+                logger.warning("池 %s %s 未知错误: %s", pool, key_label, e)
                 self._transient_backoff(transient_failures)
                 continue
 
-        # 所有 Key 都失败 —— 仅当明确允许付费兜底时才走 gpt-5.4-xhigh，
-        # 否则直接报错(绝不悄悄烧钱)。
-        if self._fallback_key and self._allow_paid:
-            logger.warning(f"主 Provider 全部失败，使用付费备用 Provider(ALLOW_PAID_FALLBACK=1): {FALLBACK_BASE_URL}")
-            fallback_result = self._call_fallback(
-                full_messages, temperature, max_tokens, response_format)
-            if fallback_result["ok"]:
-                return fallback_result
-            last_error = f"备用也失败(付费): {fallback_result.get('error', '')}"
-        elif self._fallback_key:
-            last_error = "主 Provider 全部失败，付费兜底未开启(设 ALLOW_PAID_FALLBACK=1 启用)"
+            # ── HTTP 错误处理 ──
+            if resp.status_code == 401 or resp.status_code == 403:
+                error_msg = f"鉴权失败({resp.status_code}): {resp.text[:150]}"
+                logger.warning("池 %s %s 鉴权失败: %s", pool, key_label, resp.status_code)
+                self._mark_exhausted(pool, idx, key, error_msg)
+                last_error = error_msg
+                continue
+            if resp.status_code == 404:
+                error_msg = (f"Endpoint/模型名错误(404): endpoint={endpoint}, "
+                             f"model={use_model}, resp={resp.text[:150]}")
+                logger.error("池 %s: %s", pool, error_msg)
+                result["error"] = error_msg
+                return result, error_msg
+            if resp.status_code == 429:
+                error_msg = f"速率限制(429): {resp.text[:150]}"
+                logger.warning("池 %s %s 触发速率限制", pool, key_label)
+                last_error = error_msg
+                time_mod.sleep(2)
+                continue
+            if resp.status_code == 402:
+                error_msg = f"额度不足(402): {resp.text[:150]}"
+                logger.warning("池 %s %s 额度不足(402)，标记耗尽", pool, key_label)
+                self._mark_exhausted(pool, idx, key, error_msg)
+                last_error = error_msg
+                continue
+            if resp.status_code >= 400:
+                error_msg = f"HTTP {resp.status_code}: {resp.text[:200]}"
+                logger.warning("池 %s %s 请求失败: %s", pool, key_label, error_msg)
+                last_error = error_msg
+                if "unsupported model" in resp.text.lower():
+                    logger.warning("模型不支持，跳过整个池 %s", pool)
+                    break
+                continue
 
-        result_base["error"] = f"所有 Key 尝试完毕。最后错误: {last_error}"
-        return result_base
+            # ── 成功响应 ──
+            try:
+                resp_json = resp.json()
+            except Exception as e:
+                last_error = f"响应 JSON 解析失败: {str(e)[:80]}"
+                transient_failures += 1
+                self._transient_backoff(transient_failures)
+                continue
+            content = ""
+            reasoning_content = ""
+            usage = {}
+            choices = resp_json.get("choices", [])
+            if choices:
+                msg = choices[0].get("message", {})
+                content = msg.get("content", "") or ""
+                reasoning_content = msg.get("reasoning_content", "") or ""
+            if not content and reasoning_content:
+                logger.info("content 为空，尝试从 reasoning_content 提取最终回答")
+                content = reasoning_content
+            usage = resp_json.get("usage", {})
+
+            parsed = None
+            if response_format == "json" and content:
+                parsed = robust_json_extract(content)
+                if parsed is None:
+                    logger.warning("LLM 返回 JSON 解析失败, preview=%s", content[:200])
+
+            result.update({
+                "ok": bool(content.strip()),
+                "content": content,
+                "parsed": parsed,
+                "usage": usage,
+                "key_used": _mask_key(key),
+                "error": "" if content.strip() else "LLM 返回内容为空",
+            })
+            if not content.strip():
+                last_error = "LLM 返回内容为空"
+                transient_failures += 1
+                logger.warning("池 %s %s 返回内容为空", pool, key_label)
+                self._transient_backoff(transient_failures)
+                continue
+            return result, ""
+
+        result["error"] = f"池 {pool} 尝试完毕: {last_error}"
+        return result, last_error
 
     def _call_fallback(self, messages, temperature, max_tokens,
                        response_format) -> Dict[str, Any]:
@@ -843,10 +880,11 @@ class LLMClient:
             "available": self.available,
             "available_keys": self.available_keys,
             "total_keys": len(self.keys),
-            "exhausted_keys": len(self.exhausted_keys),
+            "exhausted_keys": len(self._exhausted.get("primary", set())),
             "model": self.model,
             "base_url": self.base_url,
             "endpoint": self._get_endpoint(),
+            "paid_fallback_allowed": self._allow_paid,
             "total_calls": self.total_calls,
             "total_failures": self.total_failures,
             "token_usage": self.token_usage,

@@ -1,64 +1,64 @@
-default_model: LongCat-2.0
+default_model: deepseek-v4-flash-free
 global_fallback:
-- LongCat-2.0
+- deepseek-v4-flash-free
 models:
-  LongCat-2.0:
-    description: LongCat 当前唯一可用模型（2026-06 恢复），全任务通用
+  deepseek-v4-flash-free:
+    description: OpenCode 免费 DeepSeek V4 Flash（2026-08 起全任务默认），4 入口轮换
     max_tokens: 8192
     temperature: 0.3
     timeout: 240
 routing:
   analyze_business_impact:
     fallback:
-    - LongCat-2.0
+    - deepseek-v4-flash-free
     params:
       max_tokens: 4096
       temperature: 0.3
     priority_routing:
       ARCHIVE: rule_only
-      P0: LongCat-2.0
-      P1: LongCat-2.0
-      P2: LongCat-2.0
+      P0: deepseek-v4-flash-free
+      P1: deepseek-v4-flash-free
+      P2: deepseek-v4-flash-free
   editor_review:
-    default: LongCat-2.0
+    default: deepseek-v4-flash-free
     fallback:
-    - LongCat-2.0
+    - deepseek-v4-flash-free
     params:
       max_tokens: 4096
       temperature: 0.3
   extract_events:
-    default: LongCat-2.0
+    default: deepseek-v4-flash-free
     fallback:
-    - LongCat-2.0
+    - deepseek-v4-flash-free
     params:
       max_tokens: 4096
       temperature: 0.2
   filter_relevant_articles:
-    default: LongCat-2.0
+    default: deepseek-v4-flash-free
     fallback:
-    - LongCat-2.0
+    - deepseek-v4-flash-free
     params:
       max_tokens: 2048
       temperature: 0.1
   generate_daily_report:
-    default: LongCat-2.0
+    default: deepseek-v4-flash-free
     fallback:
-    - LongCat-2.0
+    - deepseek-v4-flash-free
     params:
       max_tokens: 8192
       temperature: 0.3
-    optional_deep_review: LongCat-2.0
+    optional_deep_review: deepseek-v4-flash-free
   generate_podcast:
-    default: LongCat-2.0
+    default: deepseek-v4-flash-free
     fallback:
-    - LongCat-2.0
+    - deepseek-v4-flash-free
     params:
       max_tokens: 8192
       temperature: 0.3
   podcast_review:
-    default: LongCat-2.0
+    default: deepseek-v4-flash-free
     fallback:
-    - LongCat-2.0
+    - deepseek-v4-flash-free
     params:
       max_tokens: 2048
       temperature: 0.2

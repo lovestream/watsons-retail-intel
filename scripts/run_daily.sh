@@ -42,13 +42,15 @@ export PYTHONPATH=".venv_packages:.:$PYTHONPATH"
     exit 1
   fi
 
-  # Step 1: 全流程（含发邮件）。--continue-on-error 保证单步失败不整体崩。
+  # Step 1: 采集/提取/评分/分析/新颖性检查，生成事件池（供周/月/年报使用）。
+  # 2026-08 起不再生成日报/播客/日邮 —— 停在 novelty_check，end at event pool。
   "$PY" -m skills.run_daily_pipeline.run_daily_pipeline \
     --project-root . \
     --date "$TODAY" \
     --use-llm true \
-    --send-email true \
+    --send-email false \
     --recipient "$RECIPIENT" \
+    --end-step novelty_check \
     --resume false \
     --continue-on-error true
 

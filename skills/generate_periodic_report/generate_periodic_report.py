@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 LOG_PREFIX = "[PeriodicReport]"
 
 MAX_REVISION_ROUNDS = 2
-LLM_MODEL = "LongCat-2.0"
+LLM_MODEL = "deepseek-v4-flash-free"
 MAX_TOKENS_CHAPTER = 8192
 MAX_TOKENS_REVIEW = 4096
 MAX_TOKENS_PODCAST = 8192
@@ -176,6 +176,138 @@ def _load_source_reports(report_type, period_info, project_root):
         return ""
     combined = "\n\n".join(contents)
     logger.info(f"{LOG_PREFIX} \u52a0\u8f7d\u6e90\u62a5\u544a: {len(contents)} \u4efd, {len(combined)} \u5b57\u7b26")
+    return combined
+
+
+# ── 事件池作为源材料（2026-08 起日报不再生成，周/月/年报直接用事件池） ──
+
+# 每类报告的事件源上限: (单日事件上限, 总量上限)
+_EVENT_SOURCE_CAPS = {
+    "weekly": (15, 80),
+    "monthly": (20, 150),
+    "yearly": (15, 200),
+}
+
+
+def _events_date_range(report_type, period_info):
+    """返回 (start_date, end_date) datetime 对。"""
+    if report_type == "weekly":
+        start = datetime.strptime(period_info["start"], "%Y-%m-%d")
+        end = datetime.strptime(period_info["end"], "%Y-%m-%d")
+    elif report_type == "monthly":
+        start = datetime(period_info["year"], period_info["month"], 1)
+        if period_info["month"] == 12:
+            end = datetime(period_info["year"] + 1, 1, 1) - timedelta(days=1)
+        else:
+            end = datetime(period_info["year"], period_info["month"] + 1, 1) - timedelta(days=1)
+    elif report_type == "yearly":
+        start = datetime(period_info["year"], 1, 1)
+        end = datetime(period_info["year"], 12, 31)
+    else:
+        raise ValueError("unknown report type: %s" % report_type)
+    return start, end
+
+
+def _load_source_events(report_type, period_info, project_root):
+    """从 data/events/{date}/events_scored_novelty.json 构建周期报告源材料。
+
+    事件已在日报管线中经过相关性过滤 + 股票/竞对IPO/港台海外过滤 + 评分，
+    只取 reject=False 且带 business_analysis 的优质事件，按 weighted_score 排序，
+    跨日按标题去重（保留分数更高者）。源材料不含 event_id，避免输出泄漏。
+    """
+    start, end = _events_date_range(report_type, period_info)
+    per_day_cap, total_cap = _EVENT_SOURCE_CAPS.get(report_type, (15, 80))
+
+    collected = []  # (weighted_score, date_str, event)
+    seen_titles = {}
+    current = start
+    days_with_events = 0
+    while current <= end:
+        date_str = current.strftime("%Y-%m-%d")
+        path = os.path.join(project_root, "data", "events", date_str,
+                            "events_scored_novelty.json")
+        if os.path.exists(path):
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                events = data.get("events", []) if isinstance(data, dict) else []
+            except Exception as e:
+                logger.warning("%s \u4e8b\u4ef6\u6587\u4ef6\u89e3\u6790\u5931\u8d25 %s: %s",
+                               LOG_PREFIX, path, e)
+                events = []
+            valid = []
+            for e in events:
+                if not isinstance(e, dict):
+                    continue
+                if e.get("reject") is True or e.get("rejected") is True:
+                    continue
+                if not e.get("event_title") and not e.get("fact"):
+                    continue
+                valid.append(e)
+            valid.sort(key=lambda x: x.get("weighted_score") or 0, reverse=True)
+            valid = valid[:per_day_cap]
+            if valid:
+                days_with_events += 1
+            for e in valid:
+                collected.append((e.get("weighted_score") or 0, date_str, e))
+        current += timedelta(days=1)
+
+    if not collected:
+        logger.warning("%s \u4e8b\u4ef6\u6c60\u65e0\u6570\u636e: %s %s",
+                       LOG_PREFIX, report_type, period_info)
+        return ""
+
+    # 跨日去重（按标题归一化，保留分数更高者）
+    collected.sort(key=lambda x: x[0], reverse=True)
+    deduped = []
+    for score, date_str, e in collected:
+        title = (e.get("event_title") or e.get("fact") or "").strip()
+        key = "".join(title.split())
+        if not key or key in seen_titles:
+            continue
+        seen_titles[key] = True
+        deduped.append((score, date_str, e))
+        if len(deduped) >= total_cap:
+            break
+
+    by_day = {}
+    for score, date_str, e in deduped:
+        by_day.setdefault(date_str, []).append(e)
+
+    blocks = []
+    for date_str in sorted(by_day):
+        day_events = by_day[date_str]
+        lines = ["### %s\uff08%d \u4e2a\u4e8b\u4ef6\uff09" % (date_str, len(day_events))]
+        for e in day_events:
+            title = (e.get("event_title") or e.get("fact") or "").strip()[:120]
+            etype = (e.get("event_type") or "\u52a8\u6001").strip()
+            fact = (e.get("fact") or "").strip()[:160]
+            ba = e.get("business_analysis") or {}
+            impact = ""
+            rec = ""
+            channels = ""
+            if isinstance(ba, dict):
+                impact = (ba.get("watsons_impact") or "").strip()[:160]
+                rec = (ba.get("recommended_action") or "").strip()[:100]
+                ch = ba.get("affected_channels")
+                if isinstance(ch, list):
+                    channels = "/".join(str(x) for x in ch[:6])
+                elif isinstance(ch, str):
+                    channels = ch[:60]
+            lines.append("- [%s] %s" % (etype, title))
+            if fact:
+                lines.append("  \u4e8b\u5b9e: %s" % fact)
+            if impact:
+                lines.append("  \u5f71\u54cd: %s" % impact)
+            if rec:
+                lines.append("  \u5efa\u8bae: %s" % rec)
+            if channels:
+                lines.append("  \u6e20\u9053: %s" % channels)
+        blocks.append("\n".join(lines))
+
+    combined = "\n\n".join(blocks)
+    logger.info("%s \u52a0\u8f7d\u4e8b\u4ef6\u6e90: %d \u4e2a\u4e8b\u4ef6, %d \u5929\u6709\u6570\u636e, %d \u5b57\u7b26",
+                LOG_PREFIX, len(deduped), days_with_events, len(combined))
     return combined
 
 
@@ -524,7 +656,11 @@ def generate_periodic_report(report_type, period_info, project_root=".",
     period_label = _make_period_label(report_type, period_info)
     logger.info(f"{LOG_PREFIX} === \u5f00\u59cb\u751f\u6210{_TYPE_NAMES[report_type]}: {period_label} ===")
 
-    source_text = _load_source_reports(report_type, period_info, project_root)
+    # 2026-08 起日报不再生成，优先用事件池作为源材料；回退到历史报告
+    source_text = _load_source_events(report_type, period_info, project_root)
+    if not source_text:
+        logger.warning(f"{LOG_PREFIX} 事件池无数据，回退到历史源报告")
+        source_text = _load_source_reports(report_type, period_info, project_root)
     if not source_text:
         logger.error(f"{LOG_PREFIX} \u65e0\u6e90\u6750\u6599")
         return {"success": False, "error": "no_source_reports"}
@@ -590,11 +726,11 @@ def main():
     )
 
     if result.get("success"):
-        print(f"\u2705 \u62a5\u544a: {result.get('report_path', '')}")
+        print(f"OK report: {result.get('report_path', '')}")
         if result.get("audio_path"):
-            print(f"\ud83c\udf99\ufe0f \u97f3\u9891: {result['audio_path']}")
+            print(f"OK audio: {result['audio_path']}")
     else:
-        print(f"\u274c \u5931\u8d25: {result.get('error', 'unknown')}")
+        print(f"FAIL: {result.get('error', 'unknown')}")
         sys.exit(1)
 
 

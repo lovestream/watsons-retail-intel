@@ -34,3 +34,6 @@ podcasts/scripts/
 check_*.py
 batch_*.py
 test_*.py
+
+# OpenCode API keys (secrets — never commit)
+config/opencode_keys.json

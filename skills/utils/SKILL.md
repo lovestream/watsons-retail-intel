@@ -31,25 +31,18 @@ test_result = test_llm_connection()
 # {"llm_config_ok": True, "api_reachable": True, "parsed_json_ok": True, ...}
 ```
 
-## 环境变量优先级
+## 环境变量 / 配置（2026-08 起：OpenCode 唯一 provider）
 
-**Keys:**
-1. `LONGCAT_API_KEYS` — 逗号分隔
-2. `LONGCAT_API_KEY` — 单 Key
-3. `longcat` / `longcat1` ~ `longcat5` — 6 个独立变量
-4. `LLM_API_KEYS` — 逗号分隔
-5. `LLM_API_KEY` — 单 Key
+**Provider（唯一）: OpenCode `https://opencode.ai/zen/v1`, model `deepseek-v4-flash-free`**
+**Keys（4 入口轮换）:**
+1. `OPENCODE_API_KEYS` — JSON dict 或逗号分隔字符串
+2. `config/opencode_keys.json` — dict {name: key}, 已 gitignore 不入库
+3. 末尾始终附内置 keyless 入口（空 key 兜底）→ 共 3 自定义 + 1 keyless = 4 入口
 
-**Base URL:**
-1. `LONGCAT_BASE_URL`
-2. `LLM_BASE_URL`
-3. `LLM_API_URL`
-4. 默认值: `https://api.longcat.chat/openai`
+**Model:** 固定 `deepseek-v4-flash-free`（OPENCODE_MODEL）
 
-**Model:**
-1. `LONGCAT_MODEL`
-2. `LLM_MODEL`
-3. 默认值: `LongCat-Flash-Thinking`
+**付费兜底（默认禁用，绝不烧钱）:**
+- `ALLOW_PAID_FALLBACK=1` + `rightcode_key`（`https://right.codes/codex/v1` `gpt-5.4-xhigh`）才启用。
 
 ## Key 轮换
 

@@ -20,8 +20,8 @@
 
 ## LLM 处理
 
-- 优先: `LongCat-Flash-Chat`
-- Fallback: `LongCat-Flash-Lite`
+- 默认: `deepseek-v4-flash-free`（OpenCode）
+- 可选付费兜底: `gpt-5.4-xhigh`（默认禁用）
 - 最终 Fallback: 规则模板
 - 模型路由: `config/model_router.yaml` 中 `generate_podcast` 条目
 

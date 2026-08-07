@@ -36,8 +36,8 @@
 3. **终稿校验** — 再一次规则检查
 
 ## 模型路由
-- 默认: LongCat-Flash-Chat
-- Fallback: LongCat-Flash-Lite
+- 默认: deepseek-v4-flash-free（OpenCode, 唯一 provider）
+- 付费兜底: gpt-5.4-xhigh (仅 ALLOW_PAID_FALLBACK=1)
 - Thinking 仅作为 optional_deep_review
 
 ## CLI

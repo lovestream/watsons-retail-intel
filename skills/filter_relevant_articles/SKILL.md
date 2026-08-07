@@ -65,7 +65,7 @@
 
 - 仅处理 `rule_decision=review` 的边界文章
 - `source_tier` 高但 `rule_score` 低也可送入
-- 模型：`longcat-flash-thinking`
+- 模型：`deepseek-v4-flash-free`（OpenCode）
 - Key 轮换：6 个 Longcat Key，round-robin
 - LLM 不可用时自动降级为纯规则
 - 单条失败不中断全局

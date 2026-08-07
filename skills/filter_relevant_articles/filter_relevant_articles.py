@@ -1990,7 +1990,7 @@ def run_test_llm():
     if not config["keys_found"]:
         print()
         print("❌ 未找到任何 API Key，无法进行连通性测试。")
-        print("   请设置环境变量: LONGCAT_API_KEYS 或 longcat / longcat1~5")
+        print("   请设置环境变量: OPENCODE_API_KEYS 或 config/opencode_keys.json")
         return
 
     # 2. 连通性测试

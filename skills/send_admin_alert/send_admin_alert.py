@@ -14,8 +14,8 @@ send_admin_alert.py — 发送管理员告警邮件
     或直接传告警文本:
     python3 -m skills.send_admin_alert.send_admin_alert \\
         --project-root . \\
-        --subject "[CRITICAL] Longcat LLM all keys down" \\
-        --body "longcat, longcat1 均返回 401"
+        --subject "[CRITICAL] OpenCode LLM all keys down" \\
+        --body "opencode-custom, opencode-custom-new 均返回 401"
 """
 
 import argparse

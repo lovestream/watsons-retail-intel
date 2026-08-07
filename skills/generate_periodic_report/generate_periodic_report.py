@@ -340,7 +340,7 @@ def phase1_generate_chapters(report_type, source_text, period_label):
 
         logger.info(f"{LOG_PREFIX} Phase1: \u751f\u6210\u7ae0\u8282 {ch_id} {ch_title}")
 
-        # \u91cd\u8bd5\u591a\u6b21\uff08client.chat \u5185\u90e8\u5df2\u542b LongCat\u2192GPT \u5151\u5e95\uff09\uff0c
+        # \u91cd\u8bd5\u591a\u6b21\uff08client.chat \u5185\u90e8\u5df2\u542b OpenCode\u2192\u4ed8\u8d39\u5151\u5e95\uff09\uff0c
         # \u907f\u514d\u5355\u6b21\u62b5\u52a8\u5931\u8d25\u5c31\u843d\u5165"\u751f\u6210\u5931\u8d25"\u5360\u4f4d\u7b26\u3002
         content = ""
         for attempt in range(1, 4):

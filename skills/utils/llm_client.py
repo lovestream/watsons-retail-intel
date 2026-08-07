@@ -11,10 +11,8 @@ llm_client.py — 共享 LLM 调用客户端（requests 实现）
 - 用量统计
 - 安全配置检查（不输出 Key 原文）
 
-环境变量优先级:
-  Keys:   LONGCAT_API_KEYS > LONGCAT_API_KEY > longcat~longcat5 > LLM_API_KEYS > LLM_API_KEY
-  URL:    LONGCAT_BASE_URL > LLM_BASE_URL > LLM_API_URL > 默认 https://api.longcat.chat/openai
-  Model:  LONGCAT_MODEL > LLM_MODEL > 默认 LongCat-Flash-Thinking
+主 Provider: OpenCode deepseek-v4-flash-free（4 入口轮换：3 自定义 Key + 1 内置 keyless）。
+付费兜底 gpt-5.4-xhigh 仅在 ALLOW_PAID_FALLBACK=1 时启用；默认禁用，绝不烧钱。
 
 用法:
     from skills.utils.llm_client import get_llm_client, check_llm_config
@@ -56,10 +54,6 @@ LLM_USER_AGENT = (
     "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 )
 
-# ── 次要免费兜底 Provider: LongCat (免费) ──
-# 仅当 OpenCode 全部入口失败时使用；LongCat 再失败才轮到付费 gpt。
-LONGCAT_BASE_URL = "https://api.longcat.chat/openai"
-LONGCAT_MODEL = "LongCat-2.0"
 
 # ── 默认（主 Provider = OpenCode） ──
 DEFAULT_MODEL = OPENCODE_MODEL
@@ -85,81 +79,26 @@ FALLBACK_BASE_URL = "https://right.codes/codex/v1"
 FALLBACK_MODEL = "gpt-5.4-xhigh"
 
 # ── 付费兜底总开关 ──
-# 默认彻底禁用付费兜底(gpt-5.4-xhigh 烧钱)。仅当 LongCat 全部不可用且你明确
-# 同意花钱时，临时设 ALLOW_PAID_FALLBACK=1 启用。正常情况绝不走付费。
+# 默认彻底禁用付费兜底(gpt-5.4-xhigh 烧钱)。仅当 OpenCode 全部入口不可用且你
+# 明确同意花钱时，临时设 ALLOW_PAID_FALLBACK=1 启用。正常情况绝不走付费。
 ALLOW_PAID_FALLBACK_ENV = "ALLOW_PAID_FALLBACK"
 
 
 def _load_allow_paid_fallback() -> bool:
-    """是否允许在 LongCat 全灭时走付费兜底。默认 False(禁用)。"""
+    """是否允许在 OpenCode 全灭时走付费兜底。默认 False(禁用)。"""
     val = os.environ.get(ALLOW_PAID_FALLBACK_ENV, "0").strip().lower()
     return val in ("1", "true", "yes", "on")
 
 
 # ── 强制兜底开关 ──
-# 历史背景：LongCat-Flash-* 系列曾全部故障，临时用此开关强制走备用 gpt。
-# 2026-06 LongCat 恢复并换用 LongCat-2.0，默认关闭(0)，走正常路由。
-# 若 LongCat 再次故障且你同意花钱，设 FORCE_FALLBACK_LLM=1 + ALLOW_PAID_FALLBACK=1。
+# 仅当 OpenCode 全部入口不可用且你同意花钱时，临时设
+# FORCE_FALLBACK_LLM=1 + ALLOW_PAID_FALLBACK=1 强制走付费 gpt。默认关闭(0)。
 def _load_force_fallback() -> bool:
     val = os.environ.get("FORCE_FALLBACK_LLM", "0").strip().lower()
     return val in ("1", "true", "yes", "on")
 
 
 # ===================== 环境变量加载 =====================
-
-def _load_keys_from_env() -> List[str]:
-    """从环境变量加载 API Key，支持多种格式。
-    
-    优先级:
-    1. LONGCAT_API_KEYS (逗号分隔)
-    2. LONGCAT_API_KEY (单 Key)
-    3. longcat / longcat1 ~ longcat5
-    4. LLM_API_KEYS (逗号分隔)
-    5. LLM_API_KEY (单 Key)
-    """
-    keys: List[str] = []
-
-    # 1. LONGCAT_API_KEYS (逗号分隔)
-    comma_keys = os.environ.get("LONGCAT_API_KEYS", "").strip()
-    if comma_keys:
-        for k in comma_keys.split(","):
-            k = k.strip()
-            if k:
-                keys.append(k)
-        if keys:
-            return keys
-
-    # 2. LONGCAT_API_KEY (单 Key)
-    single_key = os.environ.get("LONGCAT_API_KEY", "").strip()
-    if single_key:
-        return [single_key]
-
-    # 3. longcat / longcat1 ~ longcat5
-    for var in ["longcat", "longcat1", "longcat2", "longcat3", "longcat4", "longcat5"]:
-        val = os.environ.get(var, "").strip()
-        if val:
-            keys.append(val)
-    if keys:
-        return keys
-
-    # 4. LLM_API_KEYS (逗号分隔)
-    llm_keys = os.environ.get("LLM_API_KEYS", "").strip()
-    if llm_keys:
-        result = []
-        for k in llm_keys.split(","):
-            k = k.strip()
-            if k:
-                result.append(k)
-        if result:
-            return result
-
-    # 5. LLM_API_KEY (单 Key)
-    fallback = os.environ.get("LLM_API_KEY", "").strip()
-    if fallback:
-        return [fallback]
-
-    return []
-
 
 def _load_opencode_keys() -> List[Dict[str, str]]:
     """加载 OpenCode 轮换入口（主 Provider）。每个元素: {"name":..., "key":...}。
@@ -212,25 +151,6 @@ def _load_opencode_keys() -> List[Dict[str, str]]:
     if not any(e["key"] == "" for e in entries):
         entries.append({"name": "opencode-keyless", "key": ""})
     return entries
-
-
-def _load_model_from_env() -> str:
-    """优先级: LONGCAT_MODEL > LLM_MODEL > 默认值"""
-    return (
-        os.environ.get("LONGCAT_MODEL", "").strip()
-        or os.environ.get("LLM_MODEL", "").strip()
-        or DEFAULT_MODEL
-    )
-
-
-def _load_base_url_from_env() -> str:
-    """优先级: LONGCAT_BASE_URL > LLM_BASE_URL > LLM_API_URL > 默认值"""
-    url = (
-        os.environ.get("LONGCAT_BASE_URL", "").strip()
-        or os.environ.get("LLM_BASE_URL", "").strip()
-        or os.environ.get("LLM_API_URL", "").strip()
-    )
-    return url if url else DEFAULT_BASE_URL
 
 
 def _mask_key(key: str) -> str:
@@ -434,7 +354,7 @@ def _repair_truncated_json(fragment: str) -> Optional[dict]:
 # ===================== LLM 客户端 =====================
 
 class LLMClient:
-    """基于 requests 的 LongCat LLM 调用客户端。"""
+    """基于 requests 的 OpenCode LLM 调用客户端。"""
 
     def __init__(self):
         # ── 主 Provider: OpenCode 轮换入口（3 Key + 1 keyless） ──
@@ -536,7 +456,7 @@ class LLMClient:
         """瞬时错误后的指数退避。
 
         failure_count 为累计连续瞬时失败次数，退避时间随之指数增长（带上限）。
-        让 LongCat 偶发的网络抖动有时间恢复，而不是连续猛打后直接放弃。
+        让 OpenCode 偶发的网络抖动有时间恢复，而不是连续猛打后直接放弃。
         """
         if failure_count <= 0:
             return

@@ -310,29 +310,6 @@ def test_opencode_key(name: str, key: str, model: str, timeout: int = 25) -> dic
                 "error_type": _error_type_from_exception(e)}
 
 
-def test_longcat_key(name: str, key: str, model: str, timeout: int = 20) -> dict:
-    try:
-        payload = json.dumps({
-            "model": model,
-            "messages": [{"role": "user", "content": "ok"}],
-            "max_tokens": 3,
-        }).encode()
-        req = urllib.request.Request(
-            "https://api.longcat.chat/openai/v1/chat/completions",
-            data=payload,
-            headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-        )
-        resp = urllib.request.urlopen(req, timeout=timeout)
-        data = json.loads(resp.read().decode())
-        tok = data.get("usage", {}).get("completion_tokens", 0)
-        return {"ok": True, "tokens": tok}
-    except urllib.error.HTTPError as e:
-        body = e.read().decode()[:300]
-        return {"ok": False, "status": e.code, "error_type": _error_type_from_exception(e), "body": body}
-    except Exception as e:
-        return {"ok": False, "error": str(e)[:200], "error_type": _error_type_from_exception(e)}
-
-
 def test_fallback_llm(timeout: int = 30) -> dict:
     """测试 GPT 兜底 Provider（付费，应始终可用）。
 
@@ -727,8 +704,6 @@ def run_health_check(project_root: str = ".", logger: logging.Logger = None) -> 
                 for key_name, key_val in keys:
                     if svc_id == "opencode_llm":
                         r = test_opencode_key(key_name, key_val, svc_cfg.get("test_model", _OPENCODE_MODEL))
-                    elif svc_id == "longcat_llm":
-                        r = test_longcat_key(key_name, key_val, svc_cfg.get("test_model", "LongCat-2.0"))
                     elif svc_id == "tavily_search":
                         r = test_tavily_key(key_name, key_val)
                     elif svc_id == "xcrawl":

@@ -27,7 +27,7 @@ _VENV_PACKAGES = os.path.join(_PROJECT_ROOT, ".venv_packages")
 if os.path.isdir(_VENV_PACKAGES) and _VENV_PACKAGES not in sys.path:
     sys.path.insert(0, _VENV_PACKAGES)
 
-from skills.utils.llm_client import get_llm_client
+from skills.utils.llm_client import get_llm_client, robust_json_extract
 from skills.generate_periodic_report.prompts import (
     WEEKLY_CHAPTERS, MONTHLY_CHAPTERS, YEARLY_CHAPTERS,
     SYSTEM_PROMPT_BASE, REVIEW_SYSTEM_PROMPT, PODCAST_SUMMARY_PROMPT,
@@ -39,7 +39,7 @@ LOG_PREFIX = "[PeriodicReport]"
 MAX_REVISION_ROUNDS = 2
 LLM_MODEL = "deepseek-v4-flash-free"
 MAX_TOKENS_CHAPTER = 8192
-MAX_TOKENS_REVIEW = 4096
+MAX_TOKENS_REVIEW = 8192
 MAX_TOKENS_PODCAST = 8192
 TTS_VOICE = "zh-CN-XiaoxiaoNeural"
 TTS_RATE = "+5%"
@@ -391,8 +391,28 @@ def phase2_review(chapters, report_type):
         model=LLM_MODEL,
     )
 
-    if result["ok"] and result.get("parsed"):
-        review = result["parsed"]
+    review = result.get("parsed") if result.get("ok") else None
+    if not review and result.get("ok") and result.get("content"):
+        # content 可能来自 reasoning_content 散文，robust_extract 在 client 内已试过，
+        # 这里再用完整返回值兜底一次。
+        review = robust_json_extract(result.get("content", ""))
+
+    if not review and result.get("ok"):
+        # 一次强制纯 JSON 重试（thinking 模型偶发把所有 token 花在思考上导致内容为空）
+        logger.warning(f"{LOG_PREFIX}   审视 JSON 解析失败，重试一次(强制纯JSON)")
+        result2 = client.chat(
+            messages=[{"role": "user", "content":
+                       user_msg + "\n\n必须只输出一个 JSON 对象，不要任何其他文字、思考或解释。"}],
+            system_prompt=REVIEW_SYSTEM_PROMPT + "\n只输出 JSON 对象.",
+            response_format="json",
+            max_tokens=MAX_TOKENS_REVIEW,
+            model=LLM_MODEL,
+        )
+        review = result2.get("parsed") if result2.get("ok") else None
+        if not review and result2.get("ok") and result2.get("content"):
+            review = robust_json_extract(result2.get("content", ""))
+
+    if review:
         quality = review.get("overall_quality", "unknown")
         revisions = review.get("revisions_needed", [])
         logger.info(f"{LOG_PREFIX}   \u8d28\u91cf={quality}, \u9700\u4fee\u6539={len(revisions)}\u7ae0")
@@ -532,10 +552,8 @@ def phase4_finalize(chapters, report_type, period_label, period_info,
 
 def _generate_podcast_script(full_report, report_type, period_label):
     client = get_llm_client()
-    if report_type == "weekly":
-        target_chars, target_min = "5000-8000", "12-20"
-    else:
-        target_chars, target_min = "4500-6000", "12-15"
+    # 口播稿规格统一: 3000-5000 中文字符, 约 5-8 分钟 (业务顾问风格, 纯文本)
+    target_chars, target_min = "3000-5000", "5-8"
 
     system = (
         PODCAST_SUMMARY_PROMPT +

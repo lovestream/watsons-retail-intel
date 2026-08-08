@@ -572,12 +572,17 @@ def _generate_podcast_script(full_report, report_type, period_label):
     if result["ok"] and result["content"].strip():
         script = _strip_markdown(result["content"].strip())
 
-    # \u8fc7\u77ed\u91cd\u8bd5\u4e00\u6b21\uff08\u76ee\u6807 3000-5000 \u5b57\uff1bthinking \u6a21\u578b\u5076\u53d1\u538b\u7f29\u8fc7\u5934\uff09
-    if len(script) < 3000:
-        logger.warning(f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u8fc7\u77ed({len(script)}\u5b57)\uff0c\u91cd\u8bd5\u4e00\u6b21(\u8981\u6c42\u6269\u5145)")
+    # \u957f\u5ea6\u6821\u9a8c\uff1a\u76ee\u6807 3000-5000 \u5b57\u3002\u8fc7\u77ed\u6216\u8fc7\u957f\u90fd\u91cd\u8bd5\u4e00\u6b21\uff0c
+    # \u5e76\u660e\u786e\u8981\u6c42\u76f4\u63a5\u8f93\u51fa\u53e3\u64ad\u7a3f\u6b63\u6587\u3001\u4e0d\u8981\u590d\u8ff0\u8981\u6c42\u3002
+    if script and not (2900 <= len(script) <= 5600):
+        reason = "\u592a\u77ed\uff0c\u8bf7\u6269\u5145" if len(script) < 2900 else "\u592a\u957f\uff0c\u8bf7\u538b\u7f29"
+        logger.warning(
+            f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u957f\u5ea6\u4e0d\u5408\u89c4({len(script)}\u5b57, {reason})\uff0c\u91cd\u8bd5\u4e00\u6b21")
         result2 = client.chat(
             messages=[{"role": "user", "content":
-                       user_msg + "\n\n\u4e0a\u4e00\u7248\u53e3\u64ad\u7a3f\u592a\u77ed\uff0c\u8bf7\u6269\u5145\u5230 3000-5000 \u4e2d\u6587\u5b57\u7b26\uff1a\u52a0\u5165\u66f4\u591a\u5177\u4f53\u6848\u4f8b\u3001\u6570\u636e\u3001\u5e73\u53f0\u52a8\u4f5c\u4e0e\u5546\u5bb6\u5e94\u5bf9\u7ec6\u8282\u3002"}],
+                       f"\u4ee5\u4e0b\u662f\u5b8c\u6574\u62a5\u544a\uff0c\u8bf7\u8f6c\u5316\u4e3a\u53e3\u64ad\u7a3f\uff1a\n\n{full_report}\n\n"
+                       f"\u4e0a\u4e00\u7248\u53e3\u64ad\u7a3f{reason}（{len(script)}字）\u3002"
+                       f"\u8bf7\u76f4\u63a5\u8f93\u51fa 3000-5000 \u5b57\u7684\u53e3\u64ad\u7a3f\u6b63\u6587\uff0c\u4e0d\u8981\u590d\u8ff0\u8981\u6c42\u3001\u4e0d\u8981\u89e3\u91ca\u3002"}],
             system_prompt=system,
             max_tokens=MAX_TOKENS_PODCAST,
             model=LLM_MODEL,
@@ -586,8 +591,8 @@ def _generate_podcast_script(full_report, report_type, period_label):
             script = _strip_markdown(result2["content"].strip())
 
     if script:
-        if len(script) < 2000:
-            logger.warning(f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u4ecd\u8fc7\u77ed: {len(script)} \u5b57")
+        if len(script) < 2000 or len(script) > 7000:
+            logger.warning(f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u957f\u5ea6\u5f02\u5e38: {len(script)} \u5b57(\u76ee\u6807 3000-5000)")
         return script
     logger.warning(f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u751f\u6210\u5931\u8d25")
     return ""

@@ -28,6 +28,29 @@ if os.path.isdir(_VENV_PACKAGES) and _VENV_PACKAGES not in sys.path:
     sys.path.insert(0, _VENV_PACKAGES)
 
 from skills.utils.llm_client import get_llm_client, robust_json_extract
+
+# 防御性过滤：老数据可能漏标 priority=ARCHIVE（如券商研报类事件），加载时再判一次
+try:
+    from skills.score_events.score_events import (
+        _is_stock_market_event, _is_corporate_finance_event)
+except Exception:
+    _is_stock_market_event = None
+    _is_corporate_finance_event = None
+
+
+def _is_archive_event(e: dict) -> bool:
+    """判断事件是否应排除出报告源材料：ARCHIVE 优先级或券商研报/竞对财报类。"""
+    if not isinstance(e, dict):
+        return True
+    if e.get("reject") is True or e.get("rejected") is True:
+        return True
+    if e.get("priority") == "ARCHIVE":
+        return True
+    if _is_stock_market_event is not None and _is_stock_market_event(e):
+        return True
+    if _is_corporate_finance_event is not None and _is_corporate_finance_event(e):
+        return True
+    return False
 from skills.generate_periodic_report.prompts import (
     WEEKLY_CHAPTERS, MONTHLY_CHAPTERS, YEARLY_CHAPTERS,
     SYSTEM_PROMPT_BASE, REVIEW_SYSTEM_PROMPT, PODCAST_SUMMARY_PROMPT,
@@ -239,7 +262,8 @@ def _load_source_events(report_type, period_info, project_root):
             for e in events:
                 if not isinstance(e, dict):
                     continue
-                if e.get("reject") is True or e.get("rejected") is True:
+                # 硬降级/研报/竞对财报/港台海外/低相关 不进报告源材料
+                if _is_archive_event(e):
                     continue
                 if not e.get("event_title") and not e.get("fact"):
                     continue

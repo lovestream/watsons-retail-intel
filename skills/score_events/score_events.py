@@ -711,6 +711,20 @@ def _is_stock_market_event(event: dict) -> bool:
 
     # 强信号：研报/估值类，命中即判定纯资本市场（不看 biz_hits）
     strong_hits = sum(1 for k in STOCK_STRONG_SIGNALS if k in text)
+    # 券商/投行研报组合信号：同时出现"研报"与 证券/券商/投行/评级/目标价/盈利/EPS/减亏
+    # （覆盖"华泰证券研报指出""银河证券发布…研报""国际投行研报称"等句式；
+    #   艾瑞咨询/尼尔森等咨询机构行业报告不含这些词，不会误杀）
+    if "研报" in text and any(
+            x in text for x in ["证券", "券商", "投行", "评级", "目标价",
+                                "盈利", "EPS", "减亏", "买入", "增持"]):
+        strong_hits += 2
+    # 券商公司点评组合信号："X证券/券商" + 公司分析类动词
+    # （覆盖"国海证券指出阿里巴巴减亏""中金看好美妆赛道"等券商点评）
+    if ("证券" in text or "券商" in text) and any(
+            x in text for x in ["指出", "点评", "看好", "认为", "减亏", "盈利",
+                                "预期", "评级", "目标价", "买入", "增持",
+                                "EPS", "研报", "下调", "上调"]):
+        strong_hits += 2
     if strong_hits >= 2:
         return True
 

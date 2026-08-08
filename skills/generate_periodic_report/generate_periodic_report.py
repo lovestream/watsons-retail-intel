@@ -571,8 +571,23 @@ def _generate_podcast_script(full_report, report_type, period_label):
     )
     if result["ok"] and result["content"].strip():
         script = _strip_markdown(result["content"].strip())
+
+    # \u8fc7\u77ed\u91cd\u8bd5\u4e00\u6b21\uff08\u76ee\u6807 3000-5000 \u5b57\uff1bthinking \u6a21\u578b\u5076\u53d1\u538b\u7f29\u8fc7\u5934\uff09
+    if len(script) < 3000:
+        logger.warning(f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u8fc7\u77ed({len(script)}\u5b57)\uff0c\u91cd\u8bd5\u4e00\u6b21(\u8981\u6c42\u6269\u5145)")
+        result2 = client.chat(
+            messages=[{"role": "user", "content":
+                       user_msg + "\n\n\u4e0a\u4e00\u7248\u53e3\u64ad\u7a3f\u592a\u77ed\uff0c\u8bf7\u6269\u5145\u5230 3000-5000 \u4e2d\u6587\u5b57\u7b26\uff1a\u52a0\u5165\u66f4\u591a\u5177\u4f53\u6848\u4f8b\u3001\u6570\u636e\u3001\u5e73\u53f0\u52a8\u4f5c\u4e0e\u5546\u5bb6\u5e94\u5bf9\u7ec6\u8282\u3002"}],
+            system_prompt=system,
+            max_tokens=MAX_TOKENS_PODCAST,
+            model=LLM_MODEL,
+        )
+        if result2["ok"] and result2["content"].strip():
+            script = _strip_markdown(result2["content"].strip())
+
+    if script:
         if len(script) < 2000:
-            logger.warning(f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u8fc7\u77ed: {len(script)} \u5b57\u7b26")
+            logger.warning(f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u4ecd\u8fc7\u77ed: {len(script)} \u5b57")
         return script
     logger.warning(f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u751f\u6210\u5931\u8d25")
     return ""

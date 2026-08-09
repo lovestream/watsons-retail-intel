@@ -92,6 +92,12 @@ def _write_manifest(report_type: str, period_info: dict, project_root: str,
                             report_type, pid)
         os.makedirs(mdir, exist_ok=True)
         path = os.path.join(mdir, "manifest.json")
+        # §34 日志统一：记录本次运行日志路径，便于事后排查
+        manifest.setdefault("log_paths", {
+            "run_out": os.path.join(project_root, "data", "logs", "periodic",
+                                    f"periodic_{report_type}.log"),
+            "manifest_dir": mdir,
+        })
         with open(path, "w", encoding="utf-8") as f:
             json.dump(manifest, f, ensure_ascii=False, indent=2)
         logger.info("%s manifest → %s", LOG_PREFIX, path)
@@ -222,11 +228,17 @@ def run_periodic_pipeline(
                 task_manifest.update({
                     "status": "success" if result.get("success") else "failed",
                     "sendable": result.get("sendable", False),
+                    "delivery_allowed": result.get("delivery_allowed", False),
                     "report_path": result.get("report_path", ""),
                     "audio_path": result.get("audio_path", ""),
                     "error": result.get("error", ""),
                     "elapsed_seconds": round(elapsed, 1),
                     "coverage": result.get("coverage"),
+                    # §20/§23/§27 状态统一
+                    "tts_success": result.get("tts_success", False),
+                    "tts": result.get("tts"),
+                    "podcast_review": result.get("podcast_review"),
+                    "paid_fallback_calls": result.get("paid_fallback_calls", 0),
                     "finished_at": datetime.now().isoformat(),
                 })
                 if result.get("success"):

@@ -25,6 +25,8 @@ import json
 import logging
 import os
 import re
+import shutil
+import subprocess
 import sys
 import time
 from datetime import datetime, timedelta, date
@@ -385,11 +387,12 @@ def _rule_fallback_chapter(report_type, ch_id, ch_title, synthesis) -> str:
 
 
 def phase1_generate_chapters(report_type, synthesis, period_label,
-                             chapter_source_fn=None):
+                             chapter_source_fn=None, deadline=None):
     """Phase 1: 逐章生成报告内容。
 
     主模型重试 → fallback 模型（client.chat 内部已含 OpenCode→付费兜底）→
     rule-based minimal chapter → 仍失败 = report_not_sendable。
+    §35: deadline 为总运行超时墙钟，超时立即停止并返回已生成章节。
     """
     chapters_def = _get_chapters(report_type)
     client = get_llm_client()
@@ -398,6 +401,10 @@ def phase1_generate_chapters(report_type, synthesis, period_label,
     global_ctx = _build_global_context(report_type, synthesis)
 
     for ch in chapters_def:
+        if deadline is not None and time.time() > deadline:
+            logger.error(f"{LOG_PREFIX} §35 总超时触发，Phase1 提前终止"
+                         f"（已生成 {len(results)} 章）")
+            break
         ch_id = ch["id"]
         ch_title = ch["title"]
         ch_prompt = ch["prompt"]
@@ -544,10 +551,12 @@ def _quick_chapter_score(chapter: str) -> float:
     return score
 
 
-def phase3_revise(chapters, review, report_type, synthesis, period_label):
+def phase3_revise(chapters, review, report_type, synthesis, period_label,
+                  deadline=None):
     """Phase 3: 定向优化。
 
     只有 新版无新增 high issue 且 quality_score >= 原版 才覆盖（审计 §17）。
+    §35: deadline 超时则停止修订，保留当前章节。
     """
     revisions = review.get("revisions_needed", [])
     if not revisions or review.get("_review_failed"):
@@ -566,9 +575,15 @@ def phase3_revise(chapters, review, report_type, synthesis, period_label):
     for round_num in range(max_rounds):
         if not revisions:
             break
+        if deadline is not None and time.time() > deadline:
+            logger.error(f"{LOG_PREFIX} §35 总超时触发，Phase3 提前终止")
+            break
         logger.info(f"{LOG_PREFIX} Phase3 第{round_num+1}轮: 优化 {len(revisions)} 个章节")
 
         for rev in revisions:
+            if deadline is not None and time.time() > deadline:
+                logger.error(f"{LOG_PREFIX} §35 总超时触发，停止修订")
+                return chapters
             ch_id = rev.get("chapter_id", "")
             if ch_id not in ch_map:
                 continue
@@ -715,16 +730,43 @@ def phase4_finalize(chapters, report_type, period_label, period_info,
         result_dict["podcast_script"] = script_path
         logger.info(f"{LOG_PREFIX}   口播稿: {len(podcast_script)} 字符")
 
-        # TTS
+        # 播客规则质检（§24，不烧 LLM token）
+        podcast_review = _review_periodic_podcast(podcast_script, report_type)
+        result_dict["podcast_review"] = podcast_review
+        if not podcast_review["passed"]:
+            logger.warning(
+                f"{LOG_PREFIX}   播客质检未完全通过: "
+                f"{'; '.join(podcast_review['issues'][:3])}")
+
+        # TTS（§23/§26/§27: 分块生成 + duration 验收 + 语速校准）
         audio_path = _get_audio_path(report_type, period_info, project_root)
         os.makedirs(os.path.dirname(audio_path), exist_ok=True)
-        tts_ok = asyncio.run(_generate_tts(podcast_script, audio_path))
-        if tts_ok:
+        _, target_secs = _get_podcast_spec(report_type, project_root)
+        tts_result = _generate_tts(podcast_script, audio_path,
+                                   target_seconds=target_secs,
+                                   project_root=project_root)
+        result_dict["tts"] = tts_result
+        if tts_result.get("ok"):
             result_dict["audio_path"] = audio_path
             size_mb = os.path.getsize(audio_path) / 1024 / 1024
-            logger.info(f"{LOG_PREFIX}   音频: {size_mb:.1f}MB")
+            logger.info(
+                f"{LOG_PREFIX}   音频: {size_mb:.1f}MB, "
+                f"{tts_result.get('duration_seconds', 0):.0f}s, "
+                f"rate={tts_result.get('rate')}")
         else:
-            logger.warning(f"{LOG_PREFIX}   TTS 失败（不阻塞）")
+            logger.warning(
+                f"{LOG_PREFIX}   TTS 失败: {tts_result.get('error')}")
+            result_dict["tts_success"] = False
+    else:
+        result_dict["podcast_review"] = {
+            "passed": False, "issues": ["口播稿生成失败"], "chars": 0}
+        result_dict["tts"] = {"ok": False, "error": "no_script"}
+
+    # §27: 统一状态
+    result_dict["report_success"] = sendable
+    result_dict["podcast_script_success"] = bool(podcast_script)
+    result_dict["tts_success"] = bool(
+        result_dict.get("tts", {}).get("ok", False))
 
     return result_dict
 
@@ -805,33 +847,268 @@ def _generate_podcast_script(clean_report, report_type, period_label,
     if script:
         if len(script) < 2000 or len(script) > 13000:
             logger.warning(f"{LOG_PREFIX} 口播稿长度异常: {len(script)} 字")
-        # 周期化措辞后处理（§25）：周报禁止"今天/昨天"日报腔
+        # 周期化措辞后处理（§25）：周报/月报/年报禁止"今天/昨天"日报腔
         period_word = {"weekly": "本周", "monthly": "本月", "yearly": "今年"}.get(
             report_type, "本期")
-        script = script.replace("今天咱们", f"{period_word}咱们")
-        script = script.replace("今天我们就", f"{period_word}我们就")
-        script = script.replace("今天来聊聊", f"{period_word}来聊聊")
-        script = script.replace("今天不念", f"{period_word}不念")
-        script = script.replace("今天行业", f"{period_word}行业")
-        script = script.replace("咱们今天", f"{period_word}咱们")
+        for w in ("今天", "昨天", "明天"):
+            script = script.replace(w, period_word)
         script = script.replace("下周见", "下期见")
         return script
     logger.warning(f"{LOG_PREFIX} 口播稿生成失败")
     return ""
 
 
-async def _generate_tts(text, output_path):
+# ── TTS：分块生成 + 拼接 + duration 验收（§23/§26/§27） ──
+
+def _split_tts_chunks(text: str, max_chars: int = 800) -> List[str]:
+    """按段落切块，每块不超过 max_chars 字符（§26）。
+
+    保留段落边界；超长段落内部再硬切，避免单块过长导致网络波动整块失败。
+    """
+    paragraphs = [p.strip() for p in re.split(r"\n+", text) if p.strip()]
+    if not paragraphs:
+        return [text[:max_chars]] if text else []
+    chunks: List[str] = []
+    cur = ""
+    for p in paragraphs:
+        while len(p) > max_chars:
+            if cur:
+                chunks.append(cur)
+                cur = ""
+            chunks.append(p[:max_chars])
+            p = p[max_chars:]
+        if cur and len(cur) + len(p) + 1 > max_chars:
+            chunks.append(cur)
+            cur = p
+        else:
+            cur = (cur + "\n" + p) if cur else p
+    if cur:
+        chunks.append(cur)
+    return chunks
+
+
+def _mp3_duration(path: str) -> Optional[float]:
+    """mutagen 读取 MP3 时长（秒）。失败返回 None。"""
+    try:
+        from mutagen.mp3 import MP3
+        info = MP3(path).info
+        return float(info.length) if info and info.length else None
+    except Exception:
+        return None
+
+
+def _estimate_mp3_duration(path: str) -> Optional[float]:
+    """兜底估算时长：CBR MP3 用文件大小/码率。"""
+    try:
+        size = os.path.getsize(path)
+        if size <= 0:
+            return None
+        # edge-tts 输出通常 48kbps ~ 64kbps CBR
+        return size * 8 / (48000.0)
+    except Exception:
+        return None
+
+
+def _concat_mp3(parts: List[str], out_path: str) -> bool:
+    """用 ffmpeg concat demuxer 拼接 MP3（§26）。"""
+    try:
+        import imageio_ffmpeg
+        ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception as e:
+        logger.error(f"{LOG_PREFIX} 未找到 ffmpeg: {e}")
+        return False
+    list_file = out_path + ".concat.txt"
+    try:
+        with open(list_file, "w", encoding="utf-8") as f:
+            for p in parts:
+                # concat demuxer 要求路径转义单引号
+                f.write("file '%s'\n" % p.replace("'", "'\\''"))
+        result = subprocess.run(
+            [ffmpeg, "-y", "-f", "concat", "-safe", "0", "-i", list_file,
+             "-c", "copy", out_path],
+            capture_output=True, timeout=180,
+        )
+        if result.returncode != 0:
+            logger.error(f"{LOG_PREFIX} ffmpeg 拼接失败: "
+                         f"{result.stderr.decode('utf-8', 'ignore')[-300:]}")
+            return False
+        return os.path.exists(out_path) and os.path.getsize(out_path) > 1000
+    except Exception as e:
+        logger.error(f"{LOG_PREFIX} 音频拼接异常: {e}")
+        return False
+    finally:
+        try:
+            if os.path.exists(list_file):
+                os.remove(list_file)
+        except Exception:
+            pass
+
+
+async def _generate_tts_chunk(text: str, voice: str, rate: str,
+                              out_path: str) -> bool:
+    """单块 edge-tts 生成。"""
     try:
         import edge_tts
-        communicate = edge_tts.Communicate(text, TTS_VOICE, rate=TTS_RATE)
-        await communicate.save(output_path)
-        return os.path.exists(output_path) and os.path.getsize(output_path) > 1000
+        communicate = edge_tts.Communicate(text, voice, rate=rate)
+        await communicate.save(out_path)
+        return os.path.exists(out_path) and os.path.getsize(out_path) > 500
     except ImportError:
         logger.warning(f"{LOG_PREFIX} edge-tts 未安装")
         return False
     except Exception as e:
-        logger.error(f"{LOG_PREFIX} TTS 失败: {e}")
+        logger.error(f"{LOG_PREFIX} TTS 分块失败: {e}")
         return False
+
+
+def _generate_tts(text, output_path, target_seconds=None, project_root="."):
+    """§23/§26/§27: 分块生成 + 拼接 + duration 验收 + 自动语速校准。
+
+    Returns:
+        {"ok": bool, "duration_seconds": float|None, "rate": str,
+         "error": str, "out_of_range": bool}
+    """
+    rate_plan = [TTS_RATE, "+25%", "+40%", "-15%"]  # 过长加速，过短减速
+    output_path = os.path.abspath(output_path)
+    tmpdir = os.path.abspath(os.path.join(project_root, "data", "tmp",
+                                          "podcast"))
+    try:
+        os.makedirs(tmpdir, exist_ok=True)
+    except Exception:
+        tmpdir = os.path.dirname(output_path) or "."
+
+    last_dur = None
+    last_ok = False
+    for attempt, cur_rate in enumerate(rate_plan):
+        chunks = _split_tts_chunks(text)
+        if not chunks:
+            return {"ok": False, "duration_seconds": None, "rate": cur_rate,
+                    "error": "empty_text"}
+        parts: List[str] = []
+        all_ok = True
+        for i, chunk in enumerate(chunks):
+            part_path = os.path.join(
+                tmpdir, f"part_{attempt:02d}_{i:03d}.mp3")
+            ok = asyncio.run(_generate_tts_chunk(chunk, TTS_VOICE, cur_rate,
+                                                 part_path))
+            if not ok and i < len(chunks):
+                ok = asyncio.run(_generate_tts_chunk(chunk, TTS_VOICE,
+                                                     cur_rate, part_path))
+            if not ok:
+                all_ok = False
+                break
+            parts.append(part_path)
+        if not all_ok or not parts:
+            logger.warning(f"{LOG_PREFIX} TTS 分块失败 (rate={cur_rate})")
+            continue
+
+        if len(parts) == 1:
+            try:
+                shutil.copyfile(parts[0], output_path)
+            except Exception as e:
+                logger.error(f"{LOG_PREFIX} 复制音频失败: {e}")
+                continue
+        else:
+            if not _concat_mp3(parts, output_path):
+                logger.warning(f"{LOG_PREFIX} TTS 拼接失败 (rate={cur_rate})")
+                continue
+        # 清理本次分块临时文件
+        for p in parts:
+            try:
+                if os.path.exists(p):
+                    os.remove(p)
+            except Exception:
+                pass
+
+        last_ok = True
+        dur = _mp3_duration(output_path) or _estimate_mp3_duration(output_path)
+        last_dur = dur
+        if dur is None or dur <= 0:
+            return {"ok": False, "duration_seconds": None, "rate": cur_rate,
+                    "error": "duration_unreadable"}
+
+        if target_seconds:
+            lo, hi = target_seconds
+            # 宽松 15% 容忍（§23: duration 为验收，但避免误伤）
+            if lo * 0.85 <= dur <= hi * 1.15:
+                logger.info(f"{LOG_PREFIX} 音频时长 {dur:.0f}s 达标 "
+                            f"(rate={cur_rate}, 目标 {lo}-{hi}s)")
+                return {"ok": True, "duration_seconds": dur, "rate": cur_rate,
+                        "error": ""}
+            reason = "过长" if dur > hi else "过短"
+            logger.warning(f"{LOG_PREFIX} 音频时长 {dur:.0f}s ({reason}, "
+                           f"目标 {lo}-{hi}s, rate={cur_rate})，调整语速重试")
+            continue
+
+        return {"ok": True, "duration_seconds": dur, "rate": cur_rate,
+                "error": ""}
+
+    # 全部语速尝试完毕：保留最后成功版本，标记 out_of_range（不阻塞交付）
+    if last_ok and os.path.exists(output_path) and \
+            os.path.getsize(output_path) > 1000:
+        logger.warning(f"{LOG_PREFIX} 音频时长未完全达标，保留最后版本 "
+                       f"({last_dur:.0f}s)")
+        return {"ok": True, "duration_seconds": last_dur,
+                "rate": rate_plan[-1], "error": "duration_out_of_range",
+                "out_of_range": True}
+    return {"ok": False, "duration_seconds": last_dur,
+            "rate": rate_plan[-1], "error": "tts_failed"}
+
+
+# ── 周期播客规则质检（§24，轻量规则版，不烧 LLM token） ──
+
+def _review_periodic_podcast(script: str, report_type: str) -> dict:
+    """规则版口播稿质检。返回 {"passed": bool, "issues": [...], "checks": {...}}"""
+    issues: List[str] = []
+    checks: Dict[str, Any] = {}
+
+    # 1. 基本长度（按类型目标，宽松判断）
+    target_chars = {"weekly": [3000, 5000], "monthly": [4500, 7500],
+                    "yearly": [7000, 12000]}.get(report_type, [3000, 5000])
+    lo, hi = target_chars
+    n = len(script)
+    checks["length"] = n
+    if not (int(lo * 0.8) <= n <= int(hi * 1.2)):
+        issues.append(f"口播稿长度 {n} 不在目标范围 {lo}-{hi}")
+
+    # 2. 行动段（§25 周期化文案）
+    action_map = {
+        "weekly": "本周听完最值得做的三件事",
+        "monthly": "下个月最值得推进的三件事",
+        "yearly": "下一年最值得推进的三件事",
+    }
+    action_phrase = action_map.get(report_type, "三件事")
+    if "三件事" not in script:
+        issues.append("缺少'三件事'行动段")
+    checks["has_action"] = "三件事" in script
+    checks["action_phrase"] = action_phrase
+
+    # 3. 商家动作
+    if "商家动作" not in script:
+        issues.append("缺少'商家动作'")
+    checks["has_merchant_action"] = "商家动作" in script
+
+    # 4. 无 Markdown / 内部标记
+    if re.search(r"(\*\*|##|```|~~|^> |^- |^#)", script, re.M):
+        issues.append("出现 Markdown 符号")
+    if re.search(r"E\d{8}_\d{4}", script):
+        issues.append("泄漏 event_id")
+    if re.search(r"【[ABCRKX]】|\[\s*['\"]?[ABCRKX]", script):
+        issues.append("泄漏判断标签")
+    if "置信度" in script or "涉及事件" in script:
+        issues.append("出现'置信度/涉及事件'")
+    checks["no_markdown"] = True
+    checks["no_internal_markers"] = True
+
+    # 5. 日报腔（§25：周期播客不得用'今天'当时间指代）
+    period_word = {"weekly": "本周", "monthly": "本月", "yearly": "今年"}.get(
+        report_type, "本期")
+    today_hits = re.findall(r"今天[^的]*", script)
+    if today_hits and report_type in ("weekly", "monthly"):
+        issues.append(f"仍含日报腔'今天': {today_hits[:3]}")
+    checks["period_word"] = period_word
+
+    return {"passed": len(issues) == 0, "issues": issues, "checks": checks,
+            "chars": n}
 
 
 # ── 路径工具 ──
@@ -914,13 +1191,27 @@ def generate_periodic_report(report_type, period_info, project_root=".",
     period_label = _make_period_label(report_type, period_info)
     logger.info(f"{LOG_PREFIX} === 开始生成{_TYPE_NAMES[report_type]}: {period_label} ===")
 
-    # 总运行超时（三批整改 §35）
+    # 总运行超时（三批整改 §35）：墙钟 deadline，各 Phase 内检查
     try:
         cfg = _load_periodic_config(project_root)
         timeout_s = cfg.get("llm", {}).get("total_timeout_seconds", {}) \
             .get(report_type, 1800)
     except Exception:
         timeout_s = 1800
+    deadline = started_at + timeout_s
+
+    # §20 fallback 成本限制：本报告最多允许的付费兜底调用数
+    try:
+        paid_limits = cfg.get("llm", {}).get("max_paid_fallback_calls", {})
+        paid_limit = paid_limits.get(report_type, 10)
+    except Exception:
+        paid_limit = 10
+    try:
+        client = get_llm_client()
+        client.reset_paid_fallback_calls()
+        client.set_max_paid_fallback_calls(paid_limit)
+    except Exception:
+        pass
 
     # Step 0: 周期聚合层
     synthesis, coverage, build_ok = _load_or_build_synthesis(
@@ -934,13 +1225,18 @@ def generate_periodic_report(report_type, period_info, project_root=".",
             return {"success": False, "error": "no_synthesis_and_no_source"}
         # 旧路径兜底（不推荐，但保证不崩）
         chapters = phase1_generate_chapters_legacy(
-            report_type, source_text, period_label)
+            report_type, source_text, period_label, deadline=deadline)
         final = phase4_finalize(chapters, report_type, period_label,
                                 period_info, project_root, None, None)
-        return {"success": final.get("sendable", False),
+        legacy_ok = final.get("sendable", False)
+        if legacy_ok and send_email and recipient and final.get("report_path"):
+            _send_report_email(report_type, period_label, final, recipient,
+                               project_root)
+        return {"success": legacy_ok,
                 "report_path": final.get("report_path", ""),
                 "audio_path": final.get("audio_path", ""),
-                "sendable": final.get("sendable", False),
+                "sendable": legacy_ok,
+                "delivery_allowed": legacy_ok,
                 "review": final.get("review_result")}
 
     # coverage 不达标 → 不可发送（审计 §4.3 + §10.6）
@@ -951,45 +1247,83 @@ def generate_periodic_report(report_type, period_info, project_root=".",
                 "coverage": coverage, "sendable": False}
 
     # Phase 1
-    chapters = phase1_generate_chapters(report_type, synthesis, period_label)
+    chapters = phase1_generate_chapters(report_type, synthesis, period_label,
+                                        deadline=deadline)
     # Phase 2
     review = phase2_review(chapters, report_type)
     # Phase 3
     chapters = phase3_revise(chapters, review, report_type, synthesis,
-                             period_label)
+                             period_label, deadline=deadline)
     # Phase 4
+    if time.time() > deadline:
+        logger.error(f"{LOG_PREFIX} §35 总超时触发，中止发送")
+        return {"success": False, "error": "total_timeout",
+                "sendable": False, "coverage": coverage}
     final = phase4_finalize(chapters, report_type, period_label, period_info,
                             project_root, synthesis, coverage)
 
-    # Delivery gate（三批整改 §30）
+    # §27/§30 Delivery gate: sendable + 必需音频
     sendable = final.get("sendable", False)
-    if sendable and send_email and recipient and final.get("report_path"):
+    require_audio = True
+    try:
+        require_audio = bool(cfg.get("delivery", {}).get(
+            "require_audio", True))
+    except Exception:
+        pass
+    tts_ok = final.get("tts_success", False)
+
+    delivery_allowed = sendable
+    if delivery_allowed and require_audio and not tts_ok:
+        logger.error(f"{LOG_PREFIX} delivery gate 拦截：require_audio=true 但 "
+                     f"TTS 失败 → 不发邮件（§27）")
+        delivery_allowed = False
+
+    if delivery_allowed and send_email and recipient and final.get("report_path"):
         _send_report_email(report_type, period_label, final, recipient,
                            project_root)
+    elif sendable and not delivery_allowed:
+        logger.error(f"{LOG_PREFIX} delivery gate 拦截：不发邮件")
     elif not sendable:
         logger.error(f"{LOG_PREFIX} delivery gate 拦截：sendable=false 不发邮件")
 
     elapsed = time.time() - started_at
+    paid_used = 0
+    try:
+        paid_used = client.get_paid_fallback_calls()
+    except Exception:
+        pass
     logger.info(f"{LOG_PREFIX} === {_TYPE_NAMES[report_type]}完成 "
-                f"({elapsed:.0f}s, sendable={sendable}) ===")
+                f"({elapsed:.0f}s, sendable={sendable}, "
+                f"paid_fallback={paid_used}) ===")
     return {
         "success": sendable,
         "report_path": final.get("report_path", ""),
         "audio_path": final.get("audio_path", ""),
         "podcast_script": final.get("podcast_script", ""),
         "sendable": sendable,
+        "delivery_allowed": delivery_allowed,
         "review": final.get("review_result"),
         "coverage": coverage,
+        "tts": final.get("tts"),
+        "podcast_review": final.get("podcast_review"),
+        "podcast_script_success": final.get("podcast_script_success"),
+        "tts_success": tts_ok,
+        "paid_fallback_calls": paid_used,
+        "elapsed_seconds": round(elapsed, 1),
     }
 
 
-def phase1_generate_chapters_legacy(report_type, source_text, period_label):
+def phase1_generate_chapters_legacy(report_type, source_text, period_label,
+                                    deadline=None):
     """旧路径兜底（synthesis 构建失败时）。"""
     chapters_def = _get_chapters(report_type)
     client = get_llm_client()
     results = {}
     report_name = _TYPE_NAMES[report_type]
     for ch in chapters_def:
+        if deadline is not None and time.time() > deadline:
+            logger.error(f"{LOG_PREFIX} §35 总超时触发，legacy Phase1 提前终止")
+            break
         ch_id = ch["id"]
         ch_title = ch["title"]
         ch_prompt = ch["prompt"]

@@ -380,6 +380,10 @@ class LLMClient:
         self._fallback_key = os.environ.get(FALLBACK_KEY_ENV, "").strip()
         self._fallback_url = FALLBACK_BASE_URL
         self._fallback_model = FALLBACK_MODEL
+        # §20 fallback 成本限制：本进程内付费兜底调用计数（调用方可读取并设门禁）
+        self._paid_fallback_calls: int = 0
+        # §20: 付费兜底次数上限（0=不限制，保持旧行为；周期报告生成器会设置）
+        self._max_paid_fallback_calls: int = 0
 
         # 付费兜底总开关：默认彻底禁用。仅当 OpenCode 全灭且你明确同意花钱时
         # 设 ALLOW_PAID_FALLBACK=1 才启用付费兜底(gpt-5.4-xhigh 烧钱)。
@@ -557,14 +561,20 @@ class LLMClient:
         if err:
             last_error = "OpenCode: " + err
 
-        # ── 阶段 2: 付费兜底（仅当明确允许花钱） ──
+        # ── 阶段 2: 付费兜底（仅当明确允许花钱 + 未超 §20 次数上限） ──
         if self._fallback_key and self._allow_paid:
-            logger.warning("OpenCode 全部失败，使用付费备用 Provider(ALLOW_PAID_FALLBACK=1)")
-            fallback_result = self._call_fallback(
-                full_messages, temperature, max_tokens, response_format)
-            if fallback_result.get("ok"):
-                return fallback_result
-            last_error += f" | gpt兜底: {fallback_result.get('error', '')}"
+            if (self._max_paid_fallback_calls > 0 and
+                    self._paid_fallback_calls >= self._max_paid_fallback_calls):
+                last_error += (
+                    f" | gpt兜底达到 §20 上限({self._max_paid_fallback_calls})"
+                    "，停止付费调用")
+            else:
+                logger.warning("OpenCode 全部失败，使用付费备用 Provider(ALLOW_PAID_FALLBACK=1)")
+                fallback_result = self._call_fallback(
+                    full_messages, temperature, max_tokens, response_format)
+                if fallback_result.get("ok"):
+                    return fallback_result
+                last_error += f" | gpt兜底: {fallback_result.get('error', '')}"
         elif self._fallback_key:
             last_error += " | 付费兜底未开启(设 ALLOW_PAID_FALLBACK=1 启用)"
 
@@ -788,6 +798,9 @@ class LLMClient:
             })
             if content.strip():
                 logger.info(f"备用 Provider 调用成功: {len(content)} 字符")
+                # §20 fallback 成本限制：成功付费调用计数（失败不计费）
+                with self._lock:
+                    self._paid_fallback_calls += 1
             return result
 
         except Exception as e:
@@ -805,11 +818,26 @@ class LLMClient:
             "base_url": self.base_url,
             "endpoint": self._get_endpoint(),
             "paid_fallback_allowed": self._allow_paid,
+            "paid_fallback_calls": self._paid_fallback_calls,
             "total_calls": self.total_calls,
             "total_failures": self.total_failures,
             "token_usage": self.token_usage,
             "error_keys": dict(self.error_keys),
         }
+
+    def get_paid_fallback_calls(self) -> int:
+        """§20: 返回本进程内付费兜底成功调用次数。"""
+        return self._paid_fallback_calls
+
+    def reset_paid_fallback_calls(self) -> None:
+        """§20: 重置付费兜底计数（新报告开始时调用）。"""
+        with self._lock:
+            self._paid_fallback_calls = 0
+
+    def set_max_paid_fallback_calls(self, limit: int) -> None:
+        """§20: 设置付费兜底次数上限（0=不限制）。"""
+        with self._lock:
+            self._max_paid_fallback_calls = max(0, int(limit or 0))
 
 
 # ===================== 单例 =====================

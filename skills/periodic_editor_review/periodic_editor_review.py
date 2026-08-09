@@ -183,6 +183,71 @@ def _check_advice_quality(draft: str) -> List[str]:
     return issues  # 详细建议检查由 LLM review 补充
 
 
+# ── §16 claim registry: 数字断言必须有事件证据 ──
+
+# 需要证据支撑的数字断言模式
+_NUMERIC_CLAIM_RE = re.compile(
+    r"(?:增长|下降|提升|达到|突破|超|翻倍|下滑)\s*[0-9]+(?:\.[0-9]+)?\s*(?:%|倍|亿元|万元|单|个|家|座|万)"
+    r"|[0-9]+\s*(?:%|倍|亿元|万元|亿)\s*(?:增长|下降|提升|突破|达到|超)"
+    r"|GMV\s*[0-9]"
+    r"|市占率\s*[0-9]"
+)
+
+def _check_numeric_claims(draft: str, synthesis: Optional[dict]) -> List[str]:
+    """检查数字断言是否有证据支撑。
+
+    规则化实现：抽取 draft 中的数字断言，检查 synthesis.evidence 中是否
+    出现过同样的数字（同一事实），没有 → high issue。
+    """
+    if not synthesis:
+        return []
+    # 从证据中收集已出现的数字短语
+    evidence_text = json.dumps(
+        (synthesis.get("all_clusters") or [])[:30], ensure_ascii=False)
+    issues = []
+    for m in _NUMERIC_CLAIM_RE.finditer(draft):
+        claim = m.group(0)
+        # 提取数字+单位
+        nums = re.findall(r"[0-9]+(?:\.[0-9]+)?\s*(?:%|倍|亿元|万元|单|个|家|座|万|亿)",
+                          claim)
+        if not nums:
+            continue
+        # 检查证据中是否有相同数字
+        found = False
+        for n in nums:
+            base = n.replace(" ", "")
+            # 允许 ±10% 浮动比较
+            if base in evidence_text:
+                found = True
+                break
+            # 尝试数值比较（如 500亿 vs 500.5亿）
+            try:
+                val = float(base.replace("%", "").replace("倍", "")
+                            .replace("亿元", "").replace("万元", "")
+                            .replace("亿", "").replace("万", ""))
+                unit = "".join(c for c in base if c.isalpha())
+                for ev_num in re.findall(
+                        r"[0-9]+(?:\.[0-9]+)?\s*(?:%|倍|亿元|万元|万|亿)",
+                        evidence_text):
+                    try:
+                        ev_val = float(ev_num.replace("%", "").replace("倍", "")
+                                       .replace("亿元", "").replace("万元", "")
+                                       .replace("亿", "").replace("万", ""))
+                        ev_unit = "".join(c for c in ev_num if c.isalpha())
+                        if unit == ev_unit and abs(val - ev_val) / max(val, 1) < 0.1:
+                            found = True
+                            break
+                    except Exception:
+                        continue
+            except Exception:
+                continue
+            if found:
+                break
+        if not found:
+            issues.append("无证据数字断言: %s" % claim)
+    return issues[:5]
+
+
 def rule_validate(report_type: str, final_draft: str,
                   synthesis: Optional[dict] = None,
                   coverage: Optional[dict] = None,
@@ -234,6 +299,9 @@ def rule_validate(report_type: str, final_draft: str,
     for issue in _check_unsupported_claims(final_draft, synthesis):
         high.append(issue)
         failed.append("unsupported_claim")
+    for issue in _check_numeric_claims(final_draft, synthesis):
+        high.append(issue)
+        failed.append("numeric_claim_no_evidence")
 
     # coverage
     if coverage:

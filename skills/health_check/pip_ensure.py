@@ -19,6 +19,8 @@ import argparse
 REQUIRED_PACKAGES = [
     ("xcrawl", "xcrawl"),
     ("edge_tts", "edge-tts"),
+    ("mutagen", "mutagen"),
+    ("imageio_ffmpeg", "imageio-ffmpeg"),
     ("cloakbrowser", "cloakbrowser"),
     ("yaml", "pyyaml"),
     ("markdown_it", "markdown-it-py"),
@@ -59,19 +61,47 @@ def check_packages(quiet: bool = False) -> dict:
     return missing
 
 
-def install_packages(packages: dict, target_dir: str) -> bool:
-    """安装缺失的包到 target_dir。返回 True 表示全部成功。"""
+def install_packages(packages: dict, target_dir: str,
+                     project_root: str = ".") -> bool:
+    """安装缺失的包到 target_dir。返回 True 表示全部成功。
+
+    §36: 若存在 requirements.lock 则优先用锁文件安装（生产可复现）。
+    """
     if not packages:
         return True
 
     pip_names = list(set(packages.values()))
     os.makedirs(target_dir, exist_ok=True)
-    print(f"\n🔧 安装 {len(pip_names)} 个缺失包到 {target_dir}: {' '.join(pip_names)}", file=sys.stderr)
+
+    # 锁文件优先：缺失包必须全部在锁文件覆盖范围内才使用锁文件
+    lock_path = os.path.join(project_root, "requirements.lock")
+    install_spec = None
+    if os.path.exists(lock_path):
+        try:
+            locked_names = set()
+            for line in open(lock_path, encoding="utf-8"):
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                name = line.split("==")[0].split(">=")[0].strip().lower()
+                locked_names.add(name)
+            missing_locked = {n.lower() for n in pip_names}
+            if missing_locked.issubset(locked_names):
+                install_spec = ["-r", lock_path]
+                print(f"🔒 使用 requirements.lock 安装", file=sys.stderr)
+        except Exception as e:
+            print(f"⚠️ 锁文件解析失败，退回按包名安装: {e}", file=sys.stderr)
+    if install_spec is None:
+        install_spec = pip_names
+
+    print(f"\n🔧 安装 {len(pip_names)} 个缺失包到 {target_dir}: "
+          f"{' '.join(pip_names)}", file=sys.stderr)
 
     try:
         result = subprocess.run(
-            [sys.executable, "-m", "pip", "install", "--target", target_dir, "--quiet"] + pip_names,
-            capture_output=True, text=True, timeout=120,
+            [sys.executable, "-m", "pip", "install", "--target", target_dir,
+             "--quiet"] + install_spec,
+            capture_output=True, text=True, timeout=180,
         )
         if result.returncode != 0:
             print(f"❌ pip install 失败:\n{result.stderr[:500]}", file=sys.stderr)
@@ -114,7 +144,7 @@ def ensure(project_root: str = ".", quiet: bool = False, auto_fix: bool = True) 
         return result
 
     # 尝试修复到持久目录
-    ok = install_packages(missing_before, target_dir)
+    ok = install_packages(missing_before, target_dir, project_root=project_root)
     if not ok:
         result["ok"] = False
         result["missing_after"] = list(missing_before.keys())

@@ -149,32 +149,12 @@ def _strip_markdown(text):
 def sanitize_periodic_report(text: str, mode: str = "final") -> str:
     """统一清除周期报告交付物中的内部标记。
 
-    与 skills/utils/report_sanitizer.sanitize_periodic_report 保持一致，
-    此处为本地兜底实现（避免循环依赖）。
+    统一委托 skills/utils/report_sanitizer（单一实现，避免本地副本漂移）。
+    本地不重复实现清洗逻辑 —— 历史教训：本地旧副本缺规则兜底/多元素标签/
+    孤儿表格清理，导致落盘 .md 与邮件 HTML 清洗不一致（审计 §5）。
     """
-    if not text:
-        return text
-    # 事件编号 E20260606_0017（可能带反引号/括号/中文冒号）
-    text = re.sub(r'[（(\[【`]?\s*E\d{8}_\d{4}\s*[)\]】`]?\s*[：:、，,]?', '', text)
-    # 判断标签 【A】 / [A] / ['A'] / ['K','X'] / [A-必须关注]
-    text = re.sub(r'\s*【\s*[ABCRKX]\s*】', '', text)
-    text = re.sub(r"\s*\[\s*['\"]?[ABCRKX]['\"]?\s*\]", '', text)
-    text = re.sub(r"\s*\[\s*['\"][ABCRKX]['\"]\s*,\s*['\"][ABCRKX]['\"]\s*\]", '', text)
-    text = re.sub(r"\s*\[\s*[ABCRKX]\s*-\s*[^\[\]]{1,12}\]", '', text)
-    # 涉及事件 / 置信度 行
-    text = re.sub(r'^.*?涉及事件.*?$', '', text, flags=re.MULTILINE)
-    text = re.sub(r'^.*?置信度.*?$', '', text, flags=re.MULTILINE)
-    # 思考泄漏片段
-    text = re.sub(r'\[?思考[^\]\n]{0,20}\]?', '', text)
-    # 空占位
-    text = text.replace("（空）", "").replace("(空)", "").replace("空", "")
-    # 孤儿表格列（行尾孤立冒号/竖线/破折号）
-    text = re.sub(r'^\s*[|:：\-]+\s*$', '', text, flags=re.MULTILINE)
-    # 清理因移除留下的空行
-    text = re.sub(r'\n{3,}', '\n\n', text)
-    # 清理孤立行尾冒号/破折号（前面无内容的行）
-    text = re.sub(r'^\s*[-–—]\s*$', '', text, flags=re.MULTILINE)
-    return text.strip()
+    from skills.utils.report_sanitizer import sanitize_periodic_report as _impl
+    return _impl(text, mode=mode)
 
 
 # ── 旧版辅助（保留兼容） ──

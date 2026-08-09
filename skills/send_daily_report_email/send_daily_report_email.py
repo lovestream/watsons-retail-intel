@@ -365,6 +365,13 @@ def _clean_report_for_display(md_text: str, keep_canonical: bool = True) -> str:
     # ── 0. 移除 LLM 思考泄露（开头非标题文字） ──
     md_text = re.sub(r'^[^#\n].*?(?=## 01|# )', '', md_text, count=1, flags=re.DOTALL)
 
+    # ── 0.0. 移除规则兜底说明行（周期报告降级章节内部说明） ──
+    md_text = re.sub(r'^>\s*说明[：:].*?(?:规则兜底|generation_method|rule_fallback).*$',
+                     '', md_text, flags=re.MULTILINE)
+    md_text = re.sub(r'[（(]?\s*(?:generation_method|rule_fallback)[=：:][^）)\n]{0,40}[）)]?',
+                     '', md_text)
+    md_text = re.sub(r'（[^）]*规则兜底[^）]*）', '', md_text)
+
     # ── 0.1. 修复 LLM "逐字换行" 损坏 ──
     md_text = _repair_char_split(md_text)
 

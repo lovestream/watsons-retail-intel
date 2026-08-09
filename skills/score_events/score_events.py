@@ -696,9 +696,11 @@ def _is_stock_market_event(event: dict) -> bool:
     ]
     # 强券商/估值信号：研报评级、目标价等纯资本市场内容，
     # 即使文中顺带提到"即时零售"也应 ARCHIVE（用户明确不要资本市场内容）。
+    # 注意：不含"首次覆盖"——该词在政策语境（如"国补首次覆盖Apple新品"）
+    # 是正常经营新闻；券商首次覆盖必然伴随评级/目标价等强词，仍会被拦截。
     STOCK_STRONG_SIGNALS = [
         "买入评级", "增持评级", "维持买入", "维持增持", "维持\"买入\"",
-        "给予买入", "目标价", "上调评级", "下调评级", "首次覆盖",
+        "给予买入", "目标价", "上调评级", "下调评级",
         "盈利预测", "估值", "EPS", "市盈率", "PE估值", "研报称",
         "证券研报", "评级", "归母净利润", "营收预期",
     ]
@@ -710,6 +712,8 @@ def _is_stock_market_event(event: dict) -> bool:
     ]
 
     # 强信号：研报/估值类，命中即判定纯资本市场（不看 biz_hits）
+    # 用户硬性要求：研报/估值内容即使顺带提"即时零售"也要排除。
+    # 故强信号命中 ≥1 即 ARCHIVE（不再要求 ≥2，避免单信号被 biz 抵消漏放）。
     strong_hits = sum(1 for k in STOCK_STRONG_SIGNALS if k in text)
     # 券商/投行研报组合信号：同时出现"研报"与 证券/券商/投行/评级/目标价/盈利/EPS/减亏
     # （覆盖"华泰证券研报指出""银河证券发布…研报""国际投行研报称"等句式；
@@ -725,7 +729,7 @@ def _is_stock_market_event(event: dict) -> bool:
                                 "预期", "评级", "目标价", "买入", "增持",
                                 "EPS", "研报", "下调", "上调"]):
         strong_hits += 2
-    if strong_hits >= 2:
+    if strong_hits >= 1:
         return True
 
     stock_hits = sum(1 for k in STOCK_SIGNALS if k in text) + strong_hits

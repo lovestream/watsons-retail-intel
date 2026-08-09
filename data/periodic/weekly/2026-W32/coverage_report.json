@@ -1,0 +1,13 @@
+{
+  "expected_days": 7,
+  "available_days": 7,
+  "healthy_days": 7,
+  "degraded_days": 0,
+  "coverage_ratio": 1.0,
+  "raw_ratio": 1.0,
+  "missing_dates": [],
+  "degraded_dates": [],
+  "status": "normal",
+  "normal": 0.85,
+  "minimum": 0.7
+}

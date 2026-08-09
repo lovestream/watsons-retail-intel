@@ -1,11 +1,22 @@
 #!/usr/bin/env python3
-"""generate_periodic_report — 周报/月报/年报生成器。
+"""generate_periodic_report — 周报/月报/年报生成器（三批整改后）。
 
-分 4 个 Phase:
-  Phase 1: 分章节生成（每章独立 LLM 调用）
-  Phase 2: 汇总审视（评估质量，输出修改意见）
-  Phase 3: 定向优化（根据审视意见重新生成特定章节，最多 2 轮）
-  Phase 4: 终稿合并 + 口播稿 + TTS 音频
+数据流（第一批核心架构）:
+  每日事件池
+    → periodic_synthesis（聚合层: 覆盖度检查/时间过滤/聚类/趋势/对比/配额/证据包）
+    → periodic_synthesis.json
+    → Phase 1 分章生成（每章只吃本章 evidence pack + 必要全局摘要）
+    → Phase 2 全局审稿（失败 → sendable=false，绝不静默降级）
+    → Phase 3 定向修订（新旧章质量比较后才覆盖）
+    → Phase 4 终稿合并 + editor_review 质量门 + 口播稿 + TTS
+    → delivery gate → HTML 邮件 + MP3
+
+关键原则:
+- 内部保留 event_id（LLM 可用作事实追溯），展示层 sanitize 才清除
+- facts（事实证据）与 analyst_hints（上游 AI 分析）分离，LLM 不得把提示当事实
+- 必需章节缺失不得跳过：主模型重试 → fallback 模型 → rule-based minimal chapter
+  → 仍失败 = report_not_sendable
+- review 失败不得自动判 acceptable
 """
 
 import argparse
@@ -15,6 +26,7 @@ import logging
 import os
 import re
 import sys
+import time
 from datetime import datetime, timedelta, date
 from typing import Any, Dict, List, Optional
 
@@ -28,53 +40,52 @@ if os.path.isdir(_VENV_PACKAGES) and _VENV_PACKAGES not in sys.path:
     sys.path.insert(0, _VENV_PACKAGES)
 
 from skills.utils.llm_client import get_llm_client, robust_json_extract
-
-# 防御性过滤：老数据可能漏标 priority=ARCHIVE（如券商研报类事件），加载时再判一次
-try:
-    from skills.score_events.score_events import (
-        _is_stock_market_event, _is_corporate_finance_event)
-except Exception:
-    _is_stock_market_event = None
-    _is_corporate_finance_event = None
-
-
-def _is_archive_event(e: dict) -> bool:
-    """判断事件是否应排除出报告源材料：ARCHIVE 优先级或券商研报/竞对财报类。"""
-    if not isinstance(e, dict):
-        return True
-    if e.get("reject") is True or e.get("rejected") is True:
-        return True
-    if e.get("priority") == "ARCHIVE":
-        return True
-    if _is_stock_market_event is not None and _is_stock_market_event(e):
-        return True
-    if _is_corporate_finance_event is not None and _is_corporate_finance_event(e):
-        return True
-    return False
 from skills.generate_periodic_report.prompts import (
     WEEKLY_CHAPTERS, MONTHLY_CHAPTERS, YEARLY_CHAPTERS,
     SYSTEM_PROMPT_BASE, REVIEW_SYSTEM_PROMPT, PODCAST_SUMMARY_PROMPT,
 )
 
+# 周期聚合层（三批整改第一批核心）
+from skills.periodic_synthesis.periodic_synthesis import (
+    build_periodic_synthesis, _load_config as _load_periodic_config,
+)
+
+# 终稿质量门
+from skills.periodic_editor_review.periodic_editor_review import (
+    review_final_draft, rule_validate,
+)
+
 logger = logging.getLogger(__name__)
 LOG_PREFIX = "[PeriodicReport]"
 
-MAX_REVISION_ROUNDS = 2
-LLM_MODEL = "deepseek-v4-flash-free"
+# 模型配置单一来源：从 model_router.yaml 读取（三批整改 §19）
+try:
+    from skills.utils.model_router import get_model_for_skill
+    _periodic_model_res = get_model_for_skill("generate_periodic_report")
+    # get_model_for_skill 返回 (model, fallbacks)；取第一个字符串
+    if isinstance(_periodic_model_res, (tuple, list)) and _periodic_model_res:
+        _PERIODIC_MODEL = _periodic_model_res[0]
+    elif isinstance(_periodic_model_res, str):
+        _PERIODIC_MODEL = _periodic_model_res
+    else:
+        _PERIODIC_MODEL = "deepseek-v4-flash-free"
+except Exception:
+    _PERIODIC_MODEL = "deepseek-v4-flash-free"
+
+LLM_MODEL = _PERIODIC_MODEL
 MAX_TOKENS_CHAPTER = 8192
 MAX_TOKENS_REVIEW = 8192
 MAX_TOKENS_PODCAST = 8192
 TTS_VOICE = "zh-CN-XiaoxiaoNeural"
 TTS_RATE = "+5%"
 
-_TYPE_NAMES = {"weekly": "\u5468\u62a5", "monthly": "\u6708\u62a5", "yearly": "\u5e74\u62a5"}
+_TYPE_NAMES = {"weekly": "周报", "monthly": "月报", "yearly": "年报"}
 
-# \u7ae0\u8282\u751f\u6210\u91cd\u8bd5\u8017\u5c3d\u4ecd\u5931\u8d25\u65f6\u7684\u5185\u90e8\u6807\u8bb0\u3002
-# \u7edd\u4e0d\u8fdb\u5165\u7ec8\u7a3f\uff1afinalize \u4f1a\u8fc7\u6ee4\u6389\uff0c\u9632\u6b62\u201c\u751f\u6210\u5931\u8d25\u201d\u5b57\u6837\u53d1\u7ed9\u51b3\u7b56\u8005\u3002
+# 章节生成重试耗尽仍失败时的内部标记。绝不进入终稿。
 _FAILED_CHAPTER_MARKER = "__CHAPTER_GENERATION_FAILED__"
 
-
-# __MARKER_APPEND_HERE__
+# Phase 2 审稿失败 → 不允许静默通过（审计 §10）
+_REVIEW_FAILED = "__REVIEW_FAILED__"
 
 
 def _get_chapters(report_type):
@@ -97,9 +108,9 @@ def _make_period_label(report_type, period_info):
     elif report_type == "monthly":
         y = period_info["year"]
         m = int(period_info["month"])
-        return f"{y}\u5e74{m}\u6708"
+        return f"{y}年{m}月"
     elif report_type == "yearly":
-        return f"{period_info['year']}\u5e74"
+        return f"{period_info['year']}年"
     return ""
 
 
@@ -131,29 +142,48 @@ def _strip_markdown(text):
     return text.strip()
 
 
-def _strip_internal_markers(text):
-    """\u79fb\u9664\u4ea4\u4ed8\u7269\u4e2d\u7684\u5185\u90e8\u6807\u8bb0\uff08\u4e8b\u4ef6\u7f16\u53f7 / \u5224\u65ad\u6807\u7b7e\uff09\u3002
+# ── 统一清洗（三批整改 §18）：落盘 MD / 邮件 HTML / 播客输入共用 ──
 
-    \u5468/\u6708/\u5e74\u62a5\u7684\u7ec8\u7a3f .md \u4e0e\u53e3\u64ad\u7a3f\u90fd\u5e94\u8d70\u8fd9\u4e00\u6b65\uff0c
-    \u907f\u514d event_id \u88ab TTS \u9010\u5b57\u8bfb\u51fa\u3001\u6216\u51fa\u73b0\u5728\u90ae\u4ef6\u6b63\u6587\u3002
+def sanitize_periodic_report(text: str, mode: str = "final") -> str:
+    """统一清除周期报告交付物中的内部标记。
+
+    与 skills/utils/report_sanitizer.sanitize_periodic_report 保持一致，
+    此处为本地兜底实现（避免循环依赖）。
     """
     if not text:
         return text
-    # \u4e8b\u4ef6\u7f16\u53f7 E20260606_0017\uff08\u53ef\u80fd\u5e26\u53cd\u5f15\u53f7/\u62ec\u53f7/\u4e2d\u6587\u5192\u53f7\uff09
+    # 事件编号 E20260606_0017（可能带反引号/括号/中文冒号）
     text = re.sub(r'[（(\[【`]?\s*E\d{8}_\d{4}\s*[)\]】`]?\s*[：:、，,]?', '', text)
-    # \u72ec\u7acb\u7684\u5224\u65ad\u6807\u7b7e \u3010A\u3011/['A']/(A) \u7b49
+    # 判断标签 【A】 / [A] / ['A'] / ['K','X'] / [A-必须关注]
     text = re.sub(r'\s*【\s*[ABCRKX]\s*】', '', text)
     text = re.sub(r"\s*\[\s*['\"]?[ABCRKX]['\"]?\s*\]", '', text)
-    # \u6e05\u7406\u56e0\u79fb\u9664\u7559\u4e0b\u7684\u5b64\u7acb\u5192\u53f7/\u7a7a\u8868\u683c\u5217
+    text = re.sub(r"\s*\[\s*['\"][ABCRKX]['\"]\s*,\s*['\"][ABCRKX]['\"]\s*\]", '', text)
+    text = re.sub(r"\s*\[\s*[ABCRKX]\s*-\s*[^\[\]]{1,12}\]", '', text)
+    # 涉及事件 / 置信度 行
+    text = re.sub(r'^.*?涉及事件.*?$', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^.*?置信度.*?$', '', text, flags=re.MULTILINE)
+    # 思考泄漏片段
+    text = re.sub(r'\[?思考[^\]\n]{0,20}\]?', '', text)
+    # 空占位
+    text = text.replace("（空）", "").replace("(空)", "").replace("空", "")
+    # 孤儿表格列（行尾孤立冒号/竖线/破折号）
+    text = re.sub(r'^\s*[|:：\-]+\s*$', '', text, flags=re.MULTILINE)
+    # 清理因移除留下的空行
     text = re.sub(r'\n{3,}', '\n\n', text)
-    return text
+    # 清理孤立行尾冒号/破折号（前面无内容的行）
+    text = re.sub(r'^\s*[-–—]\s*$', '', text, flags=re.MULTILINE)
+    return text.strip()
 
 
-# __MARKER_PART2__
+# ── 旧版辅助（保留兼容） ──
 
+def _strip_internal_markers(text):
+    """兼容旧调用：委托统一 sanitizer。"""
+    return sanitize_periodic_report(text, mode="final")
 
 
 def _load_source_reports(report_type, period_info, project_root):
+    """回退：从历史报告加载源材料（仅当 synthesis 构建失败时）。"""
     contents = []
     if report_type == "weekly":
         start = datetime.strptime(period_info["start"], "%Y-%m-%d")
@@ -168,7 +198,7 @@ def _load_source_reports(report_type, period_info, project_root):
                 with open(path, "r", encoding="utf-8") as f:
                     c = f.read().strip()
                 if c:
-                    contents.append(f"=== \u65e5\u62a5 {date_str} ===\n{c}")
+                    contents.append(f"=== 日报 {date_str} ===\n{c}")
             current += timedelta(days=1)
     elif report_type == "monthly":
         year_s, month_s = period_info["year"], period_info["month"]
@@ -181,7 +211,7 @@ def _load_source_reports(report_type, period_info, project_root):
                 with open(path, "r", encoding="utf-8") as fh:
                     c = fh.read().strip()
                 if c and _week_belongs_to_month(fname, year_s, month_s):
-                    contents.append(f"=== \u5468\u62a5 {fname} ===\n{c}")
+                    contents.append(f"=== 周报 {fname} ===\n{c}")
     elif report_type == "yearly":
         year_s = period_info["year"]
         monthly_dir = os.path.join(project_root, "reports", "monthly", year_s)
@@ -193,189 +223,210 @@ def _load_source_reports(report_type, period_info, project_root):
                 with open(path, "r", encoding="utf-8") as fh:
                     c = fh.read().strip()
                 if c:
-                    contents.append(f"=== \u6708\u62a5 {fname} ===\n{c}")
+                    contents.append(f"=== 月报 {fname} ===\n{c}")
     if not contents:
-        logger.warning(f"{LOG_PREFIX} \u672a\u627e\u5230\u6e90\u62a5\u544a: {report_type} {period_info}")
+        logger.warning(f"{LOG_PREFIX} 未找到源报告: {report_type} {period_info}")
         return ""
     combined = "\n\n".join(contents)
-    logger.info(f"{LOG_PREFIX} \u52a0\u8f7d\u6e90\u62a5\u544a: {len(contents)} \u4efd, {len(combined)} \u5b57\u7b26")
+    logger.info(f"{LOG_PREFIX} 加载源报告: {len(contents)} 份, {len(combined)} 字符")
     return combined
 
 
-# ── 事件池作为源材料（2026-08 起日报不再生成，周/月/年报直接用事件池） ──
+# ── 周期聚合层接入（第一批核心） ──
 
-# 每类报告的事件源上限: (单日事件上限, 总量上限)
-_EVENT_SOURCE_CAPS = {
-    "weekly": (15, 80),
-    "monthly": (20, 150),
-    "yearly": (15, 200),
-}
+def _load_or_build_synthesis(report_type, period_info, project_root):
+    """优先读已生成的 periodic_synthesis.json；不存在则现场构建。
 
-
-def _events_date_range(report_type, period_info):
-    """返回 (start_date, end_date) datetime 对。"""
-    if report_type == "weekly":
-        start = datetime.strptime(period_info["start"], "%Y-%m-%d")
-        end = datetime.strptime(period_info["end"], "%Y-%m-%d")
-    elif report_type == "monthly":
-        start = datetime(period_info["year"], period_info["month"], 1)
-        if period_info["month"] == 12:
-            end = datetime(period_info["year"] + 1, 1, 1) - timedelta(days=1)
-        else:
-            end = datetime(period_info["year"], period_info["month"] + 1, 1) - timedelta(days=1)
-    elif report_type == "yearly":
-        start = datetime(period_info["year"], 1, 1)
-        end = datetime(period_info["year"], 12, 31)
-    else:
-        raise ValueError("unknown report type: %s" % report_type)
-    return start, end
-
-
-def _load_source_events(report_type, period_info, project_root):
-    """从 data/events/{date}/events_analyzed.json 构建周期报告源材料。
-
-    新链路 extract → temporal → novelty → score → analyze 下，
-    events_analyzed.json 是最终完整文件（含 novelty + temporal +
-    priority + weighted_score + business_analysis）。
-    events_scored_novelty.json 位于 score 之前，不含 weighted_score /
-    business_analysis，仅作旧数据回退。
-
-    事件已在日报管线中经过相关性过滤 + 股票/竞对IPO/港台海外过滤 + 评分，
-    只取 reject=False 且带 business_analysis 的优质事件，按 weighted_score 排序，
-    跨日按标题去重（保留分数更高者）。源材料不含 event_id，避免输出泄漏。
+    Returns:
+        (synthesis_dict, coverage_dict, build_ok)
     """
-    start, end = _events_date_range(report_type, period_info)
-    per_day_cap, total_cap = _EVENT_SOURCE_CAPS.get(report_type, (15, 80))
+    from skills.periodic_synthesis.periodic_synthesis import _period_id
+    pid = _period_id(report_type, period_info)
+    syn_path = os.path.join(project_root, "data", "periodic", report_type,
+                            pid, "periodic_synthesis.json")
+    if os.path.exists(syn_path):
+        try:
+            with open(syn_path, "r", encoding="utf-8") as f:
+                synthesis = json.load(f)
+            logger.info("%s 加载聚合数据: %s", LOG_PREFIX, syn_path)
+            return synthesis, synthesis.get("coverage"), True
+        except Exception as e:
+            logger.warning("%s 聚合数据解析失败 %s: %s", LOG_PREFIX, syn_path, e)
 
-    collected = []  # (weighted_score, date_str, event)
-    seen_titles = {}
-    current = start
-    days_with_events = 0
-    while current <= end:
-        date_str = current.strftime("%Y-%m-%d")
-        path = os.path.join(project_root, "data", "events", date_str,
-                            "events_analyzed.json")
-        if not os.path.exists(path):
-            # 旧数据回退: novelty 版本
-            path = os.path.join(project_root, "data", "events", date_str,
-                                "events_scored_novelty.json")
-        if os.path.exists(path):
-            try:
-                with open(path, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                events = data.get("events", []) if isinstance(data, dict) else []
-            except Exception as e:
-                logger.warning("%s \u4e8b\u4ef6\u6587\u4ef6\u89e3\u6790\u5931\u8d25 %s: %s",
-                               LOG_PREFIX, path, e)
-                events = []
-            valid = []
-            for e in events:
-                if not isinstance(e, dict):
-                    continue
-                # 硬降级/研报/竞对财报/港台海外/低相关 不进报告源材料
-                if _is_archive_event(e):
-                    continue
-                if not e.get("event_title") and not e.get("fact"):
-                    continue
-                valid.append(e)
-            valid.sort(key=lambda x: x.get("weighted_score") or 0, reverse=True)
-            valid = valid[:per_day_cap]
-            if valid:
-                days_with_events += 1
-            for e in valid:
-                collected.append((e.get("weighted_score") or 0, date_str, e))
-        current += timedelta(days=1)
+    # 现场构建
+    logger.info("%s 现场构建聚合数据...", LOG_PREFIX)
+    try:
+        res = build_periodic_synthesis(report_type, period_info, project_root)
+        if res.get("success"):
+            return res["synthesis"], res.get("coverage_report"), True
+        return None, None, False
+    except Exception as e:
+        logger.error("%s 聚合构建失败: %s", LOG_PREFIX, e)
+        return None, None, False
 
-    if not collected:
-        logger.warning("%s \u4e8b\u4ef6\u6c60\u65e0\u6570\u636e: %s %s",
-                       LOG_PREFIX, report_type, period_info)
+
+def _cluster_to_text(cluster: dict, include_event_ids: bool = True) -> str:
+    """将 cluster 转为 LLM 输入文本（内部保留 event_id；facts 与 hints 分离）。"""
+    lines = []
+    cid = cluster.get("cluster_id", "")
+    theme = cluster.get("theme", "") or cluster.get("rep_title", "")
+    lines.append(f"[cluster {cid}] {theme[:120]}")
+    # 事实证据
+    if cluster.get("facts"):
+        lines.append("  事实: %s" % " | ".join(
+            str(x)[:150] for x in cluster["facts"][:5]))
+    # 周期特征
+    lines.append("  周期特征: first=%s last=%s days_active=%s events=%s sources=%s" % (
+        cluster.get("first_seen_at", ""), cluster.get("last_seen_at", ""),
+        cluster.get("days_active", 0), cluster.get("event_count", 0),
+        cluster.get("source_count", 0)))
+    lines.append("  平台: %s" % ",".join(cluster.get("platforms", []) or ["-"]))
+    lines.append("  竞对: %s" % ",".join(cluster.get("competitors", []) or ["-"]))
+    lines.append("  类型: %s" % ",".join(cluster.get("event_types", []) or ["-"]))
+    lines.append("  业务变量: %s" % ",".join(
+        cluster.get("business_variables", []) or ["-"]))
+    lines.append("  趋势方向(规则判定): %s" % cluster.get("trend_direction", "unclear"))
+    # 上游 AI 分析提示（明确标注：只是提示，不是事实）
+    hints = []
+    for eid in cluster.get("representative_event_ids", [])[:5]:
+        hints.append(f"[event {eid}]")
+    if hints:
+        lines.append("  上游事件ID(用于追溯,勿输出): %s" % " ".join(hints))
+    # 来源 URL
+    urls = cluster.get("source_urls", [])[:3]
+    if urls:
+        lines.append("  来源: %s" % " | ".join(urls))
+    return "\n".join(lines)
+
+
+def _build_chapter_source(report_type, synthesis, ch_id):
+    """为该章构建 evidence pack 文本（只传本章证据 + 必要的全局摘要）。"""
+    ch_evidence = (synthesis or {}).get("chapter_evidence", {}).get(ch_id, [])
+    if not ch_evidence:
         return ""
-
-    # 跨日去重（按标题归一化，保留分数更高者）
-    collected.sort(key=lambda x: x[0], reverse=True)
-    deduped = []
-    for score, date_str, e in collected:
-        title = (e.get("event_title") or e.get("fact") or "").strip()
-        key = "".join(title.split())
-        if not key or key in seen_titles:
-            continue
-        seen_titles[key] = True
-        deduped.append((score, date_str, e))
-        if len(deduped) >= total_cap:
-            break
-
-    by_day = {}
-    for score, date_str, e in deduped:
-        by_day.setdefault(date_str, []).append(e)
-
-    blocks = []
-    for date_str in sorted(by_day):
-        day_events = by_day[date_str]
-        lines = ["### %s\uff08%d \u4e2a\u4e8b\u4ef6\uff09" % (date_str, len(day_events))]
-        for e in day_events:
-            title = (e.get("event_title") or e.get("fact") or "").strip()[:120]
-            etype = (e.get("event_type") or "\u52a8\u6001").strip()
-            fact = (e.get("fact") or "").strip()[:160]
-            ba = e.get("business_analysis") or {}
-            impact = ""
-            rec = ""
-            channels = ""
-            if isinstance(ba, dict):
-                impact = (ba.get("watsons_impact") or "").strip()[:160]
-                rec = (ba.get("recommended_action") or "").strip()[:100]
-                ch = ba.get("affected_channels")
-                if isinstance(ch, list):
-                    channels = "/".join(str(x) for x in ch[:6])
-                elif isinstance(ch, str):
-                    channels = ch[:60]
-            lines.append("- [%s] %s" % (etype, title))
-            if fact:
-                lines.append("  \u4e8b\u5b9e: %s" % fact)
-            if impact:
-                lines.append("  \u5f71\u54cd: %s" % impact)
-            if rec:
-                lines.append("  \u5efa\u8bae: %s" % rec)
-            if channels:
-                lines.append("  \u6e20\u9053: %s" % channels)
-        blocks.append("\n".join(lines))
-
-    combined = "\n\n".join(blocks)
-    logger.info("%s \u52a0\u8f7d\u4e8b\u4ef6\u6e90: %d \u4e2a\u4e8b\u4ef6, %d \u5929\u6709\u6570\u636e, %d \u5b57\u7b26",
-                LOG_PREFIX, len(deduped), days_with_events, len(combined))
-    return combined
+    parts = ["【本章证据（内部含事件ID，仅用于追溯，输出时不得出现）】"]
+    for c in ch_evidence[:30]:
+        parts.append(_cluster_to_text(c, include_event_ids=True))
+    return "\n".join(parts)
 
 
-# __MARKER_PART3__
+def _build_global_context(report_type, synthesis) -> str:
+    """全局摘要（每章都附，控制篇幅）：覆盖度 + 上期对比 + 平台/竞对汇总。"""
+    lines = []
+    cov = (synthesis or {}).get("coverage", {})
+    if cov:
+        lines.append("数据覆盖: %s/%s 天, 状态=%s" % (
+            cov.get("available_days", 0), cov.get("expected_days", 0),
+            cov.get("status", "?")))
+    prev = (synthesis or {}).get("previous_period_comparison", {})
+    if prev:
+        lines.append("上一周期: 事件=%s 聚类=%s 高优=%s" % (
+            prev.get("event_count", 0), prev.get("cluster_count", 0),
+            prev.get("high_priority_count", 0)))
+    ps = (synthesis or {}).get("platform_summary", {})
+    if ps:
+        top = sorted(ps.items(), key=lambda x: x[1], reverse=True)[:8]
+        lines.append("平台动作密度: %s" % " ".join(
+            f"{k}x{v}" for k, v in top))
+    return "\n".join(lines)
 
 
-def phase1_generate_chapters(report_type, source_text, period_label):
-    """Phase 1: \u9010\u7ae0\u751f\u6210\u62a5\u544a\u5185\u5bb9\u3002"""
+# ── Phase 1: 分章生成（带规则兜底） ──
+
+def _rule_fallback_chapter(report_type, ch_id, ch_title, synthesis) -> str:
+    """规则兜底章节（审计 §9.3）：LLM 全部失败时自动生成基础版。"""
+    lines = [f"## {ch_id} {ch_title}"]
+    lines.append("")
+    all_clusters = (synthesis or {}).get("all_clusters", []) or []
+    ch_evidence = (synthesis or {}).get("chapter_evidence", {}).get(ch_id, []) \
+        or all_clusters
+    if ch_id == "01":
+        top = all_clusters[:3]
+        if top:
+            lines.append("本周期最值得关注的动态（按事件密度排序）：")
+            for c in top:
+                lines.append("- %s（%d 条相关信号）" % (
+                    (c.get("theme") or "")[:80], c.get("event_count", 0)))
+        else:
+            lines.append("本期事件池信号有限，暂无明显核心动态。")
+    elif ch_id in ("02", "03", "04"):
+        dim = {"02": "platform", "03": "category", "04": "competitor"}
+        for c in ch_evidence[:10]:
+            lines.append("- %s（%s，%d 条信号，趋势:%s）" % (
+                (c.get("theme") or "")[:80],
+                ",".join(c.get("platforms", []) or ["-"]),
+                c.get("event_count", 0), c.get("trend_direction", "unclear")))
+        if len(lines) <= 2:
+            lines.append("本期该维度证据较少，建议结合后续周期观察。")
+    elif ch_id == "05":
+        lines.append("基于本期信号，建议屈臣氏电商关注以下方向：")
+        lines.append("- 即时零售渠道：跟踪平台补贴与履约政策变化，评估合作优先级。")
+        lines.append("- 个护美妆品类：关注品类增长信号，调整货盘与营销资源。")
+        lines.append("- 竞对动态：结合本期竞对动作，保持差异化定位。")
+    elif ch_id == "06":
+        lines.append("建议下期重点跟踪：")
+        lines.append("- 平台战略动作的延续性（补贴、招商、履约）。")
+        lines.append("- 品类与竞对信号的密度变化。")
+        lines.append("- 政策/监管相关动态。")
+    elif ch_id == "07":
+        lines.append("风险与机会观察：")
+        lines.append("- 风险：平台补贴政策调整可能影响流量成本。")
+        lines.append("- 机会：即时零售渗透率提升带来的渠道增量。")
+    elif ch_id == "08":
+        lines.append("长期观察：")
+        lines.append("- 即时零售与个护美妆融合趋势。")
+        lines.append("- 平台生态与履约能力演变。")
+    else:
+        lines.append("（本期证据不足，规则兜底生成，待数据补充后细化。）")
+    lines.append("")
+    lines.append("> 说明：本节为规则兜底生成（generation_method=rule_fallback），"
+                 "LLM 生成失败时的降级版本。")
+    return "\n".join(lines)
+
+
+def phase1_generate_chapters(report_type, synthesis, period_label,
+                             chapter_source_fn=None):
+    """Phase 1: 逐章生成报告内容。
+
+    主模型重试 → fallback 模型（client.chat 内部已含 OpenCode→付费兜底）→
+    rule-based minimal chapter → 仍失败 = report_not_sendable。
+    """
     chapters_def = _get_chapters(report_type)
     client = get_llm_client()
     results = {}
     report_name = _TYPE_NAMES[report_type]
+    global_ctx = _build_global_context(report_type, synthesis)
 
     for ch in chapters_def:
         ch_id = ch["id"]
         ch_title = ch["title"]
         ch_prompt = ch["prompt"]
+        ch_source = chapter_source_fn(report_type, synthesis, ch_id) \
+            if chapter_source_fn else _build_chapter_source(
+                report_type, synthesis, ch_id)
 
         system = (
             SYSTEM_PROMPT_BASE +
-            f"\n\u5f53\u524d\u4efb\u52a1\uff1a\u751f\u6210{report_name}\u7684\u7b2c {ch_id} \u7ae0\u300c{ch_title}\u300d\u3002\n"
-            f"\u62a5\u544a\u5468\u671f\uff1a{period_label}\n"
+            f"\n当前任务：生成{report_name}的第 {ch_id} 章「{ch_title}」。\n"
+            f"\n报告周期：{period_label}\n"
         )
         user_msg = (
-            f"\u4ee5\u4e0b\u662f\u6e90\u6750\u6599\uff1a\n\n{source_text}\n\n---\n\n"
-            f"\u8bf7\u751f\u6210\u7b2c {ch_id} \u7ae0\u300c{ch_title}\u300d\u7684\u5185\u5bb9\u3002\n"
-            f"\u5177\u4f53\u8981\u6c42\uff1a{ch_prompt}\n\n"
-            f"\u8f93\u51fa\u683c\u5f0f\uff1a\u4ee5 ## {ch_id} {ch_title} \u5f00\u5934\uff0c\u7eaf Markdown\u3002"
+            f"\n全局背景：\n{global_ctx}\n\n---\n"
+            f"\n本章证据（内部含事件ID，仅用于追溯事实，正文输出不得出现事件编号）：\n\n"
+            f"{ch_source}\n\n---\n\n"
+            f"请生成第 {ch_id} 章「{ch_title}」的内容。\n"
+            f"具体要求：{ch_prompt}\n\n"
+            f"写作要求：\n"
+            f"1. 区分'事实证据'与'分析提示'：证据中的'事实'是依据，"
+            f"'上游事件ID/趋势方向'只是分析提示，不得视为事实照搬。\n"
+            f"2. 趋势结论（加速/升温/扩大）必须有本章证据中的周期特征或与上一周期比较支撑。\n"
+            f"3. 无真实 GMV/市占率数据时，禁止写'市场份额上升/下降'。\n"
+            f"4. 不得出现事件编号（如 E20260803_0012）、判断标签（A/B/C）、'置信度'字样。\n"
+            f"5. 输出格式：以 ## {ch_id} {ch_title} 开头，纯 Markdown。"
         )
 
-        logger.info(f"{LOG_PREFIX} Phase1: \u751f\u6210\u7ae0\u8282 {ch_id} {ch_title}")
+        logger.info(f"{LOG_PREFIX} Phase1: 生成章节 {ch_id} {ch_title}")
 
-        # \u91cd\u8bd5\u591a\u6b21\uff08client.chat \u5185\u90e8\u5df2\u542b OpenCode\u2192\u4ed8\u8d39\u5151\u5e95\uff09\uff0c
-        # \u907f\u514d\u5355\u6b21\u62b5\u52a8\u5931\u8d25\u5c31\u843d\u5165"\u751f\u6210\u5931\u8d25"\u5360\u4f4d\u7b26\u3002
         content = ""
         for attempt in range(1, 4):
             result = client.chat(
@@ -388,23 +439,26 @@ def phase1_generate_chapters(report_type, source_text, period_label):
                 content = result["content"].strip()
                 break
             logger.warning(
-                f"{LOG_PREFIX}   \u2717 {ch_id} \u7b2c{attempt}\u6b21\u5931\u8d25: "
+                f"{LOG_PREFIX}   ✗ {ch_id} 第{attempt}次失败: "
                 f"{result.get('error', 'empty')}"
             )
 
         if content:
             results[ch_id] = content
-            logger.info(f"{LOG_PREFIX}   \u2713 {ch_id}: {len(results[ch_id])} \u5b57\u7b26")
+            logger.info(f"{LOG_PREFIX}   ✓ {ch_id}: {len(results[ch_id])} 字符")
         else:
-            # \u91cd\u8bd5\u8017\u5c3d\u4ecd\u5931\u8d25 \u2192 \u6807\u8bb0\u4e3a\u5931\u8d25\uff0c\u7edd\u4e0d\u5c06\u5360\u4f4d\u7b26\u53d1\u7ed9\u51b3\u7b56\u8005\u3002
-            logger.error(f"{LOG_PREFIX}   \u2717\u2717 {ch_id} \u91cd\u8bd5\u8017\u5c3d\u4ecd\u5931\u8d25\uff0c\u6807\u8bb0\u4e3a\u7f3a\u5931")
-            results[ch_id] = _FAILED_CHAPTER_MARKER
+            # 重试耗尽 → 规则兜底章节（审计 §9.2: 主模型→fallback→rule→仍失败=不可发送）
+            logger.error(f"{LOG_PREFIX}   ✗✗ {ch_id} 重试耗尽，生成规则兜底章节")
+            results[ch_id] = _rule_fallback_chapter(
+                report_type, ch_id, ch_title, synthesis)
 
     return results
 
 
+# ── Phase 2: 全局审稿 ──
+
 def phase2_review(chapters, report_type):
-    """Phase 2: \u6c47\u603b\u5ba1\u89c6\u3002"""
+    """Phase 2: 汇总审视。失败 → 标记 __REVIEW_FAILED__（不允许静默降级）。"""
     full_text = "\n\n".join(
         chapters[k] for k in sorted(chapters.keys())
         if chapters[k] != _FAILED_CHAPTER_MARKER
@@ -412,11 +466,11 @@ def phase2_review(chapters, report_type):
     client = get_llm_client()
 
     user_msg = (
-        f"\u4ee5\u4e0b\u662f\u4e00\u4efd{_TYPE_NAMES[report_type]}\u7684\u5b8c\u6574\u521d\u7a3f\uff1a\n\n"
-        f"{full_text}\n\n---\n\u8bf7\u6309\u8981\u6c42\u5ba1\u9605\u5e76\u8f93\u51fa JSON \u683c\u5f0f\u7684\u4fee\u6539\u610f\u89c1\u3002"
+        f"以下是一份{_TYPE_NAMES[report_type]}的完整初稿：\n\n"
+        f"{full_text}\n\n---\n请按要求审阅并输出 JSON 格式的修改意见。"
     )
 
-    logger.info(f"{LOG_PREFIX} Phase2: \u5ba1\u89c6\u5168\u6587 ({len(full_text)} \u5b57\u7b26)")
+    logger.info(f"{LOG_PREFIX} Phase2: 审视全文 ({len(full_text)} 字符)")
     result = client.chat(
         messages=[{"role": "user", "content": user_msg}],
         system_prompt=REVIEW_SYSTEM_PROMPT,
@@ -427,12 +481,10 @@ def phase2_review(chapters, report_type):
 
     review = result.get("parsed") if result.get("ok") else None
     if not review and result.get("ok") and result.get("content"):
-        # content 可能来自 reasoning_content 散文，robust_extract 在 client 内已试过，
-        # 这里再用完整返回值兜底一次。
         review = robust_json_extract(result.get("content", ""))
 
     if not review and result.get("ok"):
-        # 一次强制纯 JSON 重试（thinking 模型偶发把所有 token 花在思考上导致内容为空）
+        # 一次强制纯 JSON 重试
         logger.warning(f"{LOG_PREFIX}   审视 JSON 解析失败，重试一次(强制纯JSON)")
         result2 = client.chat(
             messages=[{"role": "user", "content":
@@ -449,32 +501,72 @@ def phase2_review(chapters, report_type):
     if review:
         quality = review.get("overall_quality", "unknown")
         revisions = review.get("revisions_needed", [])
-        logger.info(f"{LOG_PREFIX}   \u8d28\u91cf={quality}, \u9700\u4fee\u6539={len(revisions)}\u7ae0")
+        logger.info(f"{LOG_PREFIX}   质量={quality}, 需修改={len(revisions)}章")
         return review
 
-    logger.warning(f"{LOG_PREFIX}   \u5ba1\u89c6\u5931\u8d25\uff0c\u8df3\u8fc7\u4f18\u5316")
-    return {"overall_quality": "acceptable", "revisions_needed": [],
-            "summary": "\u5ba1\u89c6\u5931\u8d25\uff0c\u4fdd\u7559\u539f\u7a3f"}
+    # 审稿失败：绝不静默降级（审计 §10.1）
+    logger.error(f"{LOG_PREFIX}   审稿失败，标记为不可发送")
+    return {"overall_quality": "review_failed",
+            "revisions_needed": [], "summary": "审稿失败，不可静默通过",
+            "_review_failed": True}
 
 
-# __MARKER_PART4__
+# ── Phase 3: 定向修订（新旧章质量比较） ──
+
+def _quick_chapter_score(chapter: str) -> float:
+    """规则化章节质量分（Phase3 覆盖判断用）。
+
+    评分维度：长度、结构完整、无内部标记、有具体内容。
+    """
+    if not chapter or chapter == _FAILED_CHAPTER_MARKER:
+        return 0.0
+    score = 0.0
+    length = len(chapter)
+    if 300 <= length <= 4000:
+        score += 2.0
+    elif length > 100:
+        score += 1.0
+    # 有章节标题
+    if re.match(r"^##\s+\d{2}", chapter.strip()):
+        score += 1.0
+    # 无内部标记
+    if not re.search(r"E\d{8}_\d{4}", chapter):
+        score += 1.0
+    if not re.search(r"【[ABCRKX]】|\[\s*['\"]?[ABCRKX]", chapter):
+        score += 1.0
+    # 有具体内容（非规则兜底标记）
+    if "rule_fallback" not in chapter and "规则兜底" not in chapter:
+        score += 1.0
+    # 行数（内容密度）
+    line_count = len([l for l in chapter.splitlines() if l.strip()])
+    if line_count >= 5:
+        score += 1.0
+    return score
 
 
-def phase3_revise(chapters, review, report_type, source_text, period_label):
-    """Phase 3: \u5b9a\u5411\u4f18\u5316\u3002"""
+def phase3_revise(chapters, review, report_type, synthesis, period_label):
+    """Phase 3: 定向优化。
+
+    只有 新版无新增 high issue 且 quality_score >= 原版 才覆盖（审计 §17）。
+    """
     revisions = review.get("revisions_needed", [])
-    if not revisions:
-        logger.info(f"{LOG_PREFIX} Phase3: \u65e0\u9700\u4fee\u6539")
+    if not revisions or review.get("_review_failed"):
+        if review.get("_review_failed"):
+            logger.error(f"{LOG_PREFIX} Phase3: 审稿失败，跳过优化（不可发送）")
+        else:
+            logger.info(f"{LOG_PREFIX} Phase3: 无需修改")
         return chapters
 
     client = get_llm_client()
     all_ch = _get_chapters(report_type)
     ch_map = {ch["id"]: ch for ch in all_ch}
+    max_rounds = 2
+    global_ctx = _build_global_context(report_type, synthesis)
 
-    for round_num in range(MAX_REVISION_ROUNDS):
+    for round_num in range(max_rounds):
         if not revisions:
             break
-        logger.info(f"{LOG_PREFIX} Phase3 \u7b2c{round_num+1}\u8f6e: \u4f18\u5316 {len(revisions)} \u4e2a\u7ae0\u8282")
+        logger.info(f"{LOG_PREFIX} Phase3 第{round_num+1}轮: 优化 {len(revisions)} 个章节")
 
         for rev in revisions:
             ch_id = rev.get("chapter_id", "")
@@ -490,15 +582,16 @@ def phase3_revise(chapters, review, report_type, source_text, period_label):
             ch_def = ch_map[ch_id]
             system = (
                 SYSTEM_PROMPT_BASE +
-                f"\n\u4f18\u5316{_TYPE_NAMES[report_type]}\u7b2c {ch_id} \u7ae0\u300c{ch_def['title']}\u300d\u3002\n"
-                f"\u62a5\u544a\u5468\u671f\uff1a{period_label}\n"
+                f"\n优化{_TYPE_NAMES[report_type]}第 {ch_id} 章「{ch_def['title']}」。\n"
+                f"\n报告周期：{period_label}\n"
             )
             user_msg = (
-                f"\u6e90\u6750\u6599\uff1a\n{source_text}\n\n---\n"
-                f"\u5176\u4ed6\u7ae0\u8282\u6458\u8981\uff1a\n{other_summary}\n\n---\n"
-                f"\u5f53\u524d\u7248\u672c\uff1a\n{chapters[ch_id]}\n\n---\n"
-                f"\u5ba1\u9605\u610f\u89c1\uff1a\u95ee\u9898\uff1a{issue}\n\u4f18\u5316\u65b9\u5411\uff1a{direction}\n\n"
-                f"\u8bf7\u91cd\u65b0\u751f\u6210\u3002\u4ee5 ## {ch_id} {ch_def['title']} \u5f00\u5934\u3002"
+                f"\n全局背景：\n{global_ctx}\n\n---\n"
+                f"\n其他章节摘要：\n{other_summary}\n\n---\n"
+                f"\n当前版本：\n{chapters[ch_id]}\n\n---\n"
+                f"\n审阅意见：问题：{issue}\n优化方向：{direction}\n\n"
+                f"请重新生成。以 ## {ch_id} {ch_def['title']} 开头。"
+                f"不得出现事件编号、判断标签、'置信度'字样。"
             )
 
             result = client.chat(
@@ -508,67 +601,119 @@ def phase3_revise(chapters, review, report_type, source_text, period_label):
                 model=LLM_MODEL,
             )
             if result["ok"] and result["content"].strip():
-                chapters[ch_id] = result["content"].strip()
-                logger.info(f"{LOG_PREFIX}     \u2713 {ch_id} \u5df2\u4f18\u5316")
+                revised = result["content"].strip()
+                # 新旧章质量比较（审计 §17）：只有新版 >= 原版才覆盖
+                old_score = _quick_chapter_score(chapters[ch_id])
+                new_score = _quick_chapter_score(revised)
+                old_has_high = _chapter_has_high_issue(chapters[ch_id])
+                new_has_high = _chapter_has_high_issue(revised)
+                if not new_has_high and new_score >= old_score:
+                    chapters[ch_id] = revised
+                    logger.info(
+                        f"{LOG_PREFIX}     ✓ {ch_id} 已优化 (score {old_score:.1f}→{new_score:.1f})")
+                else:
+                    logger.warning(
+                        f"{LOG_PREFIX}     ✗ {ch_id} 新版不优于原版，保留原版 "
+                        f"(score {old_score:.1f}→{new_score:.1f}, "
+                        f"new_high={new_has_high})")
             else:
-                logger.warning(f"{LOG_PREFIX}     \u2717 {ch_id} \u4f18\u5316\u5931\u8d25")
+                logger.warning(f"{LOG_PREFIX}     ✗ {ch_id} 优化失败")
 
-        # \u518d\u6b21\u5ba1\u89c6
-        if round_num < MAX_REVISION_ROUNDS - 1:
+        # 再次审视
+        if round_num < max_rounds - 1:
             re_review = phase2_review(chapters, report_type)
+            if re_review.get("_review_failed"):
+                logger.error(f"{LOG_PREFIX}   复审失败，保留当前章节")
+                break
             revisions = re_review.get("revisions_needed", [])
             if not revisions:
-                logger.info(f"{LOG_PREFIX}   \u7b2c{round_num+1}\u8f6e\u540e\u65e0\u9700\u7ee7\u7eed")
+                logger.info(f"{LOG_PREFIX}   第{round_num+1}轮后无需继续")
                 break
 
     return chapters
 
 
-# __MARKER_PART5__
+def _chapter_has_high_issue(chapter: str) -> bool:
+    """检查章节是否含 high issue（event_id/标签/置信度/思考泄漏）。"""
+    if not chapter:
+        return True
+    if re.search(r"E\d{8}_\d{4}", chapter):
+        return True
+    if re.search(r"【[ABCRKX]】|\[\s*['\"]?[ABCRKX]", chapter):
+        return True
+    if "置信度" in chapter or "涉及事件" in chapter:
+        return True
+    return False
 
+
+# ── Phase 4: 终稿合并 + 质量门 + 口播稿 + TTS ──
 
 def phase4_finalize(chapters, report_type, period_label, period_info,
-                    project_root):
-    """Phase 4: \u7ec8\u7a3f\u5408\u5e76 + \u53e3\u64ad\u7a3f + TTS\u3002"""
+                    project_root, synthesis=None, coverage=None):
+    """Phase 4: 终稿合并 + editor_review 质量门 + 口播稿 + TTS。"""
     result_dict = {"report_path": "", "podcast_script": "", "audio_path": "",
-                   "failed_chapters": []}
+                   "failed_chapters": [], "sendable": False,
+                   "review_result": None}
 
-    # \u5408\u5e76\u7ec8\u7a3f\uff08\u8df3\u8fc7\u751f\u6210\u5931\u8d25\u7684\u7ae0\u8282\uff0c\u7edd\u4e0d\u53d1\u51fa\u5360\u4f4d\u7b26\uff09
-    title = f"\u5373\u65f6\u96f6\u552e \u00d7 \u4e2a\u62a4\u7f8e\u5986\u7ecf\u8425{_TYPE_NAMES[report_type]}\uff5c{period_label}"
-    full_report = f"# {title}\n\n"
-    failed_chapters = []
-    for ch_id in sorted(chapters.keys()):
-        if chapters[ch_id] == _FAILED_CHAPTER_MARKER:
-            failed_chapters.append(ch_id)
-            continue
-        full_report += chapters[ch_id] + "\n\n"
+    # 必需章节检查（审计 §9）：任何章节失败 → 不可发送
+    exp_ids = {"weekly": 6, "monthly": 7, "yearly": 8}.get(report_type, 6)
+    failed_chapters = [ch_id for ch_id, c in chapters.items()
+                       if c == _FAILED_CHAPTER_MARKER]
     result_dict["failed_chapters"] = failed_chapters
     if failed_chapters:
         logger.error(
-            f"{LOG_PREFIX} Phase4: {len(failed_chapters)} \u4e2a\u7ae0\u8282\u751f\u6210\u5931\u8d25\u5df2\u8df3\u8fc7: "
-            f"{failed_chapters}"
-        )
+            f"{LOG_PREFIX} Phase4: {len(failed_chapters)} 个章节生成失败: "
+            f"{failed_chapters} → 不可发送")
 
-    # \u79fb\u9664\u5185\u90e8\u6807\u8bb0\uff08\u4e8b\u4ef6\u7f16\u53f7/\u5224\u65ad\u6807\u7b7e\uff09\u540e\u518d\u843d\u76d8
-    full_report = _strip_internal_markers(full_report)
+    # 合并终稿（跳过失败章节标记，但后续质量门会拒绝）
+    title = f"即时零售 × 个护美妆经营{_TYPE_NAMES[report_type]}｜{period_label}"
+    full_report = f"# {title}\n\n"
+    for ch_id in sorted(chapters.keys()):
+        if chapters[ch_id] == _FAILED_CHAPTER_MARKER:
+            continue
+        full_report += chapters[ch_id] + "\n\n"
 
-    # \u4fdd\u5b58\u62a5\u544a
+    # 质量门（审计 §10）：规则质检在 sanitize 前的原始稿上进行
+    # （event_id 仍在稿中时检查"泄漏"无意义；因此先做展示层清洗前的规则检查
+    #  基于清洗后文本，同时单独检查必检项）
+    review_result = review_final_draft(
+        report_type=report_type,
+        final_draft=full_report,
+        synthesis=synthesis,
+        coverage=coverage,
+        chapter_ids=list(chapters.keys()),
+        event_pool_ids=None,
+    )
+    result_dict["review_result"] = review_result
+    sendable = review_result.get("sendable", False) and not failed_chapters
+    result_dict["sendable"] = sendable
+
+    # 展示层清洗（审计 §6: event_id 只在展示层剥离）
+    clean_report = sanitize_periodic_report(full_report, mode="final")
+
+    # 保存报告
     report_path = _get_report_path(report_type, period_info, project_root)
     os.makedirs(os.path.dirname(report_path), exist_ok=True)
     with open(report_path, "w", encoding="utf-8") as f:
-        f.write(full_report)
+        f.write(clean_report)
     result_dict["report_path"] = report_path
-    logger.info(f"{LOG_PREFIX} Phase4: \u62a5\u544a \u2192 {report_path} ({len(full_report)} \u5b57\u7b26)")
+    logger.info(f"{LOG_PREFIX} Phase4: 报告 → {report_path} ({len(clean_report)} 字符, "
+                f"sendable={sendable})")
 
-    # \u751f\u6210\u53e3\u64ad\u7a3f
-    podcast_script = _generate_podcast_script(full_report, report_type, period_label)
+    if not sendable:
+        logger.error(f"{LOG_PREFIX} Phase4: 质量门未通过，不发邮件")
+        return result_dict
+
+    # 生成口播稿
+    podcast_script = _generate_podcast_script(clean_report, report_type,
+                                              period_label)
     if podcast_script:
         script_path = _get_script_path(report_type, period_info, project_root)
         os.makedirs(os.path.dirname(script_path), exist_ok=True)
         with open(script_path, "w", encoding="utf-8") as f:
             f.write(podcast_script)
         result_dict["podcast_script"] = script_path
-        logger.info(f"{LOG_PREFIX}   \u53e3\u64ad\u7a3f: {len(podcast_script)} \u5b57\u7b26")
+        logger.info(f"{LOG_PREFIX}   口播稿: {len(podcast_script)} 字符")
 
         # TTS
         audio_path = _get_audio_path(report_type, period_info, project_root)
@@ -577,25 +722,57 @@ def phase4_finalize(chapters, report_type, period_label, period_info,
         if tts_ok:
             result_dict["audio_path"] = audio_path
             size_mb = os.path.getsize(audio_path) / 1024 / 1024
-            logger.info(f"{LOG_PREFIX}   \u97f3\u9891: {size_mb:.1f}MB")
+            logger.info(f"{LOG_PREFIX}   音频: {size_mb:.1f}MB")
         else:
-            logger.warning(f"{LOG_PREFIX}   TTS \u5931\u8d25\uff08\u4e0d\u963b\u585e\uff09")
+            logger.warning(f"{LOG_PREFIX}   TTS 失败（不阻塞）")
 
     return result_dict
 
 
-def _generate_podcast_script(full_report, report_type, period_label):
+# ── 口播稿生成 ──
+
+def _get_podcast_spec(report_type, project_root="."):
+    """按周期类型返回口播稿规格（三批整改 §22）。"""
+    try:
+        cfg = _load_periodic_config(project_root)
+        pc = cfg.get("podcast", {}).get(report_type, {})
+        if pc.get("target_chars"):
+            return pc["target_chars"], pc.get("target_seconds", [300, 540])
+    except Exception:
+        pass
+    default = {
+        "weekly": ([3000, 5000], [300, 540]),
+        "monthly": ([4500, 7500], [480, 780]),
+        "yearly": ([7000, 12000], [720, 1260]),
+    }
+    return default.get(report_type, ([3000, 5000], [300, 540]))
+
+
+def _generate_podcast_script(clean_report, report_type, period_label,
+                             project_root="."):
     client = get_llm_client()
-    # 口播稿规格统一: 3000-5000 中文字符, 约 5-8 分钟 (业务顾问风格, 纯文本)
-    target_chars, target_min = "3000-5000", "5-8"
+    target_chars, target_secs = _get_podcast_spec(report_type, project_root)
+    target_min = f"{target_secs[0]//60}-{target_secs[1]//60}"
+    target_str = f"{target_chars[0]}-{target_chars[1]}"
+
+    # 周期类型对应的行动文案（三批整改 §25）
+    action_lines = {
+        "weekly": "结尾必须包含'本周听完最值得做的三件事'（3 个具体行动项）和"
+                  "'本周最值得学习的一件商家动作'。",
+        "monthly": "结尾必须包含'下个月最值得推进的三件事'（3 个具体行动项）和"
+                   "'本月最值得学习的一件商家动作'。",
+        "yearly": "结尾必须包含'下一年最值得推进的三件事'（3 个具体行动项）和"
+                  "'今年最值得学习的一类商家打法'。",
+    }
 
     system = (
         PODCAST_SUMMARY_PROMPT +
-        f"\n\n\u62a5\u544a\u7c7b\u578b: {_TYPE_NAMES[report_type]}\n"
-        f"\u62a5\u544a\u5468\u671f: {period_label}\n"
-        f"\u76ee\u6807\u5b57\u6570: {target_chars} \u4e2d\u6587\u5b57\u7b26\uff08\u7ea6 {target_min} \u5206\u949f\uff09\n"
+        f"\n\n报告类型: {_TYPE_NAMES[report_type]}\n"
+        f"\n报告周期: {period_label}\n"
+        f"\n目标字数: {target_str} 中文字符（约 {target_min} 分钟）\n"
+        f"\n{action_lines.get(report_type, '')}"
     )
-    user_msg = f"\u4ee5\u4e0b\u662f\u5b8c\u6574\u62a5\u544a\uff0c\u8bf7\u8f6c\u5316\u4e3a\u53e3\u64ad\u7a3f\uff1a\n\n{full_report}"
+    user_msg = f"\n以下是完整报告，请转化为口播稿：\n\n{clean_report}"
 
     result = client.chat(
         messages=[{"role": "user", "content": user_msg}],
@@ -603,20 +780,21 @@ def _generate_podcast_script(full_report, report_type, period_label):
         max_tokens=MAX_TOKENS_PODCAST,
         model=LLM_MODEL,
     )
+    script = ""
     if result["ok"] and result["content"].strip():
         script = _strip_markdown(result["content"].strip())
 
-    # \u957f\u5ea6\u6821\u9a8c\uff1a\u76ee\u6807 3000-5000 \u5b57\u3002\u8fc7\u77ed\u6216\u8fc7\u957f\u90fd\u91cd\u8bd5\u4e00\u6b21\uff0c
-    # \u5e76\u660e\u786e\u8981\u6c42\u76f4\u63a5\u8f93\u51fa\u53e3\u64ad\u7a3f\u6b63\u6587\u3001\u4e0d\u8981\u590d\u8ff0\u8981\u6c42\u3002
-    if script and not (2900 <= len(script) <= 5600):
-        reason = "\u592a\u77ed\uff0c\u8bf7\u6269\u5145" if len(script) < 2900 else "\u592a\u957f\uff0c\u8bf7\u538b\u7f29"
+    # 长度校验（按类型目标，放宽 10%）
+    lo, hi = target_chars
+    if script and not (int(lo * 0.9) <= len(script) <= int(hi * 1.1)):
+        reason = "太短，请扩充" if len(script) < int(lo * 0.9) else "太长，请压缩"
         logger.warning(
-            f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u957f\u5ea6\u4e0d\u5408\u89c4({len(script)}\u5b57, {reason})\uff0c\u91cd\u8bd5\u4e00\u6b21")
+            f"{LOG_PREFIX} 口播稿长度不合规({len(script)}字, {reason})，重试一次")
         result2 = client.chat(
             messages=[{"role": "user", "content":
-                       f"\u4ee5\u4e0b\u662f\u5b8c\u6574\u62a5\u544a\uff0c\u8bf7\u8f6c\u5316\u4e3a\u53e3\u64ad\u7a3f\uff1a\n\n{full_report}\n\n"
-                       f"\u4e0a\u4e00\u7248\u53e3\u64ad\u7a3f{reason}（{len(script)}字）\u3002"
-                       f"\u8bf7\u76f4\u63a5\u8f93\u51fa 3000-5000 \u5b57\u7684\u53e3\u64ad\u7a3f\u6b63\u6587\uff0c\u4e0d\u8981\u590d\u8ff0\u8981\u6c42\u3001\u4e0d\u8981\u89e3\u91ca\u3002"}],
+                       f"\n以下是完整报告，请转化为口播稿：\n\n{clean_report}\n\n"
+                       f"\n上一版口播稿{reason}（{len(script)}字）。"
+                       f"\n请直接输出 {target_str} 字的口播稿正文，不要复述要求、不要解释。"}],
             system_prompt=system,
             max_tokens=MAX_TOKENS_PODCAST,
             model=LLM_MODEL,
@@ -625,10 +803,20 @@ def _generate_podcast_script(full_report, report_type, period_label):
             script = _strip_markdown(result2["content"].strip())
 
     if script:
-        if len(script) < 2000 or len(script) > 7000:
-            logger.warning(f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u957f\u5ea6\u5f02\u5e38: {len(script)} \u5b57(\u76ee\u6807 3000-5000)")
+        if len(script) < 2000 or len(script) > 13000:
+            logger.warning(f"{LOG_PREFIX} 口播稿长度异常: {len(script)} 字")
+        # 周期化措辞后处理（§25）：周报禁止"今天/昨天"日报腔
+        period_word = {"weekly": "本周", "monthly": "本月", "yearly": "今年"}.get(
+            report_type, "本期")
+        script = script.replace("今天咱们", f"{period_word}咱们")
+        script = script.replace("今天我们就", f"{period_word}我们就")
+        script = script.replace("今天来聊聊", f"{period_word}来聊聊")
+        script = script.replace("今天不念", f"{period_word}不念")
+        script = script.replace("今天行业", f"{period_word}行业")
+        script = script.replace("咱们今天", f"{period_word}咱们")
+        script = script.replace("下周见", "下期见")
         return script
-    logger.warning(f"{LOG_PREFIX} \u53e3\u64ad\u7a3f\u751f\u6210\u5931\u8d25")
+    logger.warning(f"{LOG_PREFIX} 口播稿生成失败")
     return ""
 
 
@@ -639,23 +827,21 @@ async def _generate_tts(text, output_path):
         await communicate.save(output_path)
         return os.path.exists(output_path) and os.path.getsize(output_path) > 1000
     except ImportError:
-        logger.warning(f"{LOG_PREFIX} edge-tts \u672a\u5b89\u88c5")
+        logger.warning(f"{LOG_PREFIX} edge-tts 未安装")
         return False
     except Exception as e:
-        logger.error(f"{LOG_PREFIX} TTS \u5931\u8d25: {e}")
+        logger.error(f"{LOG_PREFIX} TTS 失败: {e}")
         return False
 
 
-# __MARKER_PART6__
-
+# ── 路径工具 ──
 
 def _get_report_path(report_type, period_info, project_root):
     if report_type == "weekly":
-        year = period_info["start"][:4]
         start_date = datetime.strptime(period_info["start"], "%Y-%m-%d")
-        week_num = start_date.isocalendar()[1]
-        return os.path.join(project_root, "reports", "weekly", year,
-                            f"{year}-W{week_num:02d}.md")
+        iso_year, week_num, _ = start_date.isocalendar()
+        return os.path.join(project_root, "reports", "weekly", str(iso_year),
+                            f"{iso_year}-W{week_num:02d}.md")
     elif report_type == "monthly":
         y, m = period_info["year"], period_info["month"]
         return os.path.join(project_root, "reports", "monthly", y,
@@ -669,10 +855,9 @@ def _get_report_path(report_type, period_info, project_root):
 def _get_script_path(report_type, period_info, project_root):
     base = os.path.join(project_root, "podcasts", "scripts")
     if report_type == "weekly":
-        year = period_info["start"][:4]
         start_date = datetime.strptime(period_info["start"], "%Y-%m-%d")
-        week_num = start_date.isocalendar()[1]
-        return os.path.join(base, f"weekly-{year}-W{week_num:02d}.txt")
+        iso_year, week_num, _ = start_date.isocalendar()
+        return os.path.join(base, f"weekly-{iso_year}-W{week_num:02d}.txt")
     elif report_type == "monthly":
         y, m = period_info["year"], period_info["month"]
         return os.path.join(base, f"monthly-{y}-{m}.txt")
@@ -684,10 +869,9 @@ def _get_script_path(report_type, period_info, project_root):
 def _get_audio_path(report_type, period_info, project_root):
     base = os.path.join(project_root, "podcasts", "audio")
     if report_type == "weekly":
-        year = period_info["start"][:4]
         start_date = datetime.strptime(period_info["start"], "%Y-%m-%d")
-        week_num = start_date.isocalendar()[1]
-        return os.path.join(base, f"weekly-{year}-W{week_num:02d}.mp3")
+        iso_year, week_num, _ = start_date.isocalendar()
+        return os.path.join(base, f"weekly-{iso_year}-W{week_num:02d}.mp3")
     elif report_type == "monthly":
         y, m = period_info["year"], period_info["month"]
         return os.path.join(base, f"monthly-{y}-{m}.mp3")
@@ -702,7 +886,7 @@ def _send_report_email(report_type, period_label, final_result, recipient,
         from skills.send_daily_report_email.send_daily_report_email import (
             send_periodic_report_email)
     except ImportError:
-        logger.warning(f"{LOG_PREFIX} \u90ae\u4ef6\u6a21\u5757\u5bfc\u5165\u5931\u8d25")
+        logger.warning(f"{LOG_PREFIX} 邮件模块导入失败")
         return
 
     result = send_periodic_report_email(
@@ -715,51 +899,131 @@ def _send_report_email(report_type, period_label, final_result, recipient,
         dry_run=False,
     )
     if result.get("ok"):
-        logger.info(f"{LOG_PREFIX} \u90ae\u4ef6\u5df2\u53d1\u9001 \u2192 {recipient}")
+        logger.info(f"{LOG_PREFIX} 邮件已发送 → {recipient}")
     else:
-        logger.error(f"{LOG_PREFIX} \u90ae\u4ef6\u53d1\u9001\u5931\u8d25: {result.get('error', result.get('message', ''))}")
+        logger.error(f"{LOG_PREFIX} 邮件发送失败: {result.get('error', result.get('message', ''))}")
 
 
-
+# ── 主入口 ──
 
 def generate_periodic_report(report_type, period_info, project_root=".",
-                             send_email=True, recipient=""):
-    """Main entry: \u751f\u6210\u5468\u62a5/\u6708\u62a5/\u5e74\u62a5\u7684\u5b8c\u6574\u6d41\u7a0b\u3002"""
+                             send_email=True, recipient="",
+                             force_rebuild_synthesis=False):
+    """Main entry: 生成周报/月报/年报的完整流程。"""
+    started_at = time.time()
     period_label = _make_period_label(report_type, period_info)
-    logger.info(f"{LOG_PREFIX} === \u5f00\u59cb\u751f\u6210{_TYPE_NAMES[report_type]}: {period_label} ===")
+    logger.info(f"{LOG_PREFIX} === 开始生成{_TYPE_NAMES[report_type]}: {period_label} ===")
 
-    # 2026-08 起日报不再生成，优先用事件池作为源材料；回退到历史报告
-    source_text = _load_source_events(report_type, period_info, project_root)
-    if not source_text:
-        logger.warning(f"{LOG_PREFIX} 事件池无数据，回退到历史源报告")
-        source_text = _load_source_reports(report_type, period_info, project_root)
-    if not source_text:
-        logger.error(f"{LOG_PREFIX} \u65e0\u6e90\u6750\u6599")
-        return {"success": False, "error": "no_source_reports"}
+    # 总运行超时（三批整改 §35）
+    try:
+        cfg = _load_periodic_config(project_root)
+        timeout_s = cfg.get("llm", {}).get("total_timeout_seconds", {}) \
+            .get(report_type, 1800)
+    except Exception:
+        timeout_s = 1800
+
+    # Step 0: 周期聚合层
+    synthesis, coverage, build_ok = _load_or_build_synthesis(
+        report_type, period_info, project_root)
+    if not build_ok or not synthesis:
+        logger.error(f"{LOG_PREFIX} 聚合数据构建失败，回退历史报告")
+        source_text = _load_source_reports(report_type, period_info,
+                                           project_root)
+        if not source_text:
+            logger.error(f"{LOG_PREFIX} 无源材料")
+            return {"success": False, "error": "no_synthesis_and_no_source"}
+        # 旧路径兜底（不推荐，但保证不崩）
+        chapters = phase1_generate_chapters_legacy(
+            report_type, source_text, period_label)
+        final = phase4_finalize(chapters, report_type, period_label,
+                                period_info, project_root, None, None)
+        return {"success": final.get("sendable", False),
+                "report_path": final.get("report_path", ""),
+                "audio_path": final.get("audio_path", ""),
+                "sendable": final.get("sendable", False),
+                "review": final.get("review_result")}
+
+    # coverage 不达标 → 不可发送（审计 §4.3 + §10.6）
+    if coverage.get("status") == "failing":
+        logger.error(f"{LOG_PREFIX} 数据覆盖不达标({coverage.get('coverage_ratio')})，"
+                     f"不可发送")
+        return {"success": False, "error": "coverage_failing",
+                "coverage": coverage, "sendable": False}
 
     # Phase 1
-    chapters = phase1_generate_chapters(report_type, source_text, period_label)
+    chapters = phase1_generate_chapters(report_type, synthesis, period_label)
     # Phase 2
     review = phase2_review(chapters, report_type)
     # Phase 3
-    chapters = phase3_revise(chapters, review, report_type, source_text, period_label)
+    chapters = phase3_revise(chapters, review, report_type, synthesis,
+                             period_label)
     # Phase 4
-    final = phase4_finalize(chapters, report_type, period_label, period_info, project_root)
+    final = phase4_finalize(chapters, report_type, period_label, period_info,
+                            project_root, synthesis, coverage)
 
-    if send_email and recipient and final.get("report_path"):
-        _send_report_email(report_type, period_label, final, recipient, project_root)
+    # Delivery gate（三批整改 §30）
+    sendable = final.get("sendable", False)
+    if sendable and send_email and recipient and final.get("report_path"):
+        _send_report_email(report_type, period_label, final, recipient,
+                           project_root)
+    elif not sendable:
+        logger.error(f"{LOG_PREFIX} delivery gate 拦截：sendable=false 不发邮件")
 
-    logger.info(f"{LOG_PREFIX} === {_TYPE_NAMES[report_type]}\u751f\u6210\u5b8c\u6210 ===")
+    elapsed = time.time() - started_at
+    logger.info(f"{LOG_PREFIX} === {_TYPE_NAMES[report_type]}完成 "
+                f"({elapsed:.0f}s, sendable={sendable}) ===")
     return {
-        "success": True,
+        "success": sendable,
         "report_path": final.get("report_path", ""),
         "audio_path": final.get("audio_path", ""),
         "podcast_script": final.get("podcast_script", ""),
+        "sendable": sendable,
+        "review": final.get("review_result"),
+        "coverage": coverage,
     }
 
 
+def phase1_generate_chapters_legacy(report_type, source_text, period_label):
+    """旧路径兜底（synthesis 构建失败时）。"""
+    chapters_def = _get_chapters(report_type)
+    client = get_llm_client()
+    results = {}
+    report_name = _TYPE_NAMES[report_type]
+    for ch in chapters_def:
+        ch_id = ch["id"]
+        ch_title = ch["title"]
+        ch_prompt = ch["prompt"]
+        system = (
+            SYSTEM_PROMPT_BASE +
+            f"\n当前任务：生成{report_name}的第 {ch_id} 章「{ch_title}」。\n"
+            f"\n报告周期：{period_label}\n"
+        )
+        user_msg = (
+            f"\n以下是源材料：\n\n{source_text}\n\n---\n\n"
+            f"请生成第 {ch_id} 章「{ch_title}」的内容。\n"
+            f"具体要求：{ch_prompt}\n\n"
+            f"输出格式：以 ## {ch_id} {ch_title} 开头，纯 Markdown。"
+        )
+        content = ""
+        for attempt in range(1, 3):
+            result = client.chat(
+                messages=[{"role": "user", "content": user_msg}],
+                system_prompt=system,
+                max_tokens=MAX_TOKENS_CHAPTER,
+                model=LLM_MODEL,
+            )
+            if result["ok"] and result["content"].strip():
+                content = result["content"].strip()
+                break
+        results[ch_id] = content if content else _rule_fallback_chapter(
+            report_type, ch_id, ch_title, None)
+    return results
+
+
+# ── CLI ──
+
 def main():
-    parser = argparse.ArgumentParser(description="\u751f\u6210\u5468\u62a5/\u6708\u62a5/\u5e74\u62a5")
+    parser = argparse.ArgumentParser(description="生成周报/月报/年报")
     parser.add_argument("--type", required=True, choices=["weekly", "monthly", "yearly"])
     parser.add_argument("--start", default="", help="weekly start (YYYY-MM-DD)")
     parser.add_argument("--end", default="", help="weekly end (YYYY-MM-DD)")
@@ -768,6 +1032,8 @@ def main():
     parser.add_argument("--project-root", default=".")
     parser.add_argument("--send-email", default="true")
     parser.add_argument("--recipient", default="123399974@qq.com")
+    parser.add_argument("--rebuild-synthesis", default="false",
+                        help="强制重建聚合数据")
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -795,12 +1061,15 @@ def main():
         project_root=args.project_root,
         send_email=args.send_email.lower() == "true",
         recipient=args.recipient,
+        force_rebuild_synthesis=args.rebuild_synthesis.lower() == "true",
     )
 
-    if result.get("success"):
+    if result.get("sendable"):
         print(f"OK report: {result.get('report_path', '')}")
         if result.get("audio_path"):
             print(f"OK audio: {result['audio_path']}")
+    elif result.get("success"):
+        print(f"OK (degraded) report: {result.get('report_path', '')}")
     else:
         print(f"FAIL: {result.get('error', 'unknown')}")
         sys.exit(1)

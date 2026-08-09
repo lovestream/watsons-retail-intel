@@ -173,6 +173,67 @@ def _load_email_config(project_root: str) -> dict:
     return result
 
 
+def _mailcli_path(project_root: str = ".") -> str:
+    """mailcli 路径：优先 config/periodic_report.yaml，其次默认路径（三批整改 §31）。"""
+    try:
+        import yaml
+        cfg_path = Path(project_root) / "config" / "periodic_report.yaml"
+        if cfg_path.exists():
+            with open(cfg_path, "r", encoding="utf-8") as f:
+                cfg = yaml.safe_load(f) or {}
+            p = ((cfg.get("periodic_report") or {}).get("email") or {}).get(
+                "mailcli_path", "")
+            if p:
+                return p
+    except Exception:
+        pass
+    return "/app/working/workspaces/default/skills/email/mailcli.py"
+
+
+def _log_delivery(project_root: str, kind: str, subject: str, to: str,
+                  ok: bool, detail: str = ""):
+    """幂等交付台账（三批整改 §28）：data/delivery/ledger.jsonl。
+
+    kind: "daily" | "weekly" | "monthly" | "yearly"
+    """
+    try:
+        ledger_dir = Path(project_root) / "data" / "delivery"
+        ledger_dir.mkdir(parents=True, exist_ok=True)
+        ledger_path = ledger_dir / "ledger.jsonl"
+        record = {
+            "ts": datetime.now().isoformat(),
+            "kind": kind,
+            "subject": subject,
+            "to": to,
+            "ok": bool(ok),
+            "detail": detail[:200],
+        }
+        with open(ledger_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
+
+def _check_delivery_duplicate(project_root: str, kind: str, subject: str,
+                              to: str) -> bool:
+    """检查是否已发送过同类同主题邮件（防重发）。"""
+    try:
+        ledger_path = Path(project_root) / "data" / "delivery" / "ledger.jsonl"
+        if not ledger_path.exists():
+            return False
+        for line in ledger_path.read_text(encoding="utf-8").splitlines():
+            try:
+                rec = json.loads(line)
+            except Exception:
+                continue
+            if rec.get("kind") == kind and rec.get("subject") == subject \
+               and rec.get("to") == to and rec.get("ok"):
+                return True
+    except Exception:
+        pass
+    return False
+
+
 # ===================== Markdown → HTML =====================
 
 def _repair_char_split(text: str) -> str:
@@ -787,8 +848,8 @@ def _send_email(
     Returns:
         (success, message)
     """
-    # mailcli.py 路径
-    MAILCLI_PATH = Path("/app/working/workspaces/default/skills/email/mailcli.py")
+    # mailcli.py 路径（解耦：config/periodic_report.yaml 可覆盖）
+    MAILCLI_PATH = Path(_mailcli_path(project_root))
     if not MAILCLI_PATH.exists():
         return False, f"mailcli.py 不存在: {MAILCLI_PATH}"
 
@@ -836,6 +897,9 @@ def _send_email(
         for af in attach_files:
             cmd.extend(["--attach", af])
 
+        # mailcli JSON 结果（三批整改 §29）：优先解析 JSON，失败再回退文本
+        cmd.append("--json")
+
         logger.info(f"发送命令: {' '.join(cmd)}")
 
         # 4. 执行发送
@@ -847,7 +911,16 @@ def _send_email(
             env={**os.environ, "PYTHONIOENCODING": "utf-8"},
         )
 
-        if result.returncode == 0 and "✅" in result.stdout:
+        # 解析 JSON 输出
+        json_ok = None
+        try:
+            parsed = json.loads(result.stdout.strip())
+            json_ok = bool(parsed.get("ok"))
+        except Exception:
+            json_ok = None
+
+        if json_ok is True or (json_ok is None and result.returncode == 0
+                               and "✅" in result.stdout):
             logger.info(f"邮件发送成功: {to_addrs}")
             return True, "邮件发送成功"
         else:
@@ -1204,6 +1277,13 @@ def send_periodic_report_email(
     # 邮件标题
     subject = f"即时零售 × 个护美妆经营{report_name}｜{period_label}"
 
+    # 幂等检查（三批整改 §28）：同类型同主题已发送成功则不重发
+    if _check_delivery_duplicate(project_root, report_type, subject,
+                                 ",".join(to_addrs)):
+        logger.info("已发送过相同主题邮件，跳过（幂等）")
+        return {"ok": True, "message": "already_sent", "subject": subject,
+                "idempotent": True}
+
     # 发送
     smtp_config = _load_email_config(project_root)
     success, msg = _send_email(
@@ -1215,6 +1295,10 @@ def send_periodic_report_email(
         logger=logger,
         dry_run=dry_run,
     )
+
+    # 台账记录
+    _log_delivery(project_root, report_type, subject, ",".join(to_addrs),
+                  success, msg)
 
     logger.info(f"发送结果: success={success}, msg={msg}")
     return {"ok": success, "message": msg, "subject": subject}
@@ -1229,11 +1313,11 @@ def _build_periodic_email_html(report_md: str, report_type: str,
     clean_md = _fix_markdown_formatting(clean_md)
     body_html = _md_to_html(clean_md)
 
-    # 根据类型调整提示语
+    # 根据类型调整提示语（三批整改 §25: 周/月/年时长不同）
     audio_tips = {
-        "weekly": "本期周报已生成 AI 播客音频（约 8 分钟），见邮件附件 MP3。",
-        "monthly": "本期月报已生成 AI 播客摘要音频（约 8 分钟），见邮件附件 MP3。",
-        "yearly": "本期年报已生成 AI 播客摘要音频（约 8 分钟），见邮件附件 MP3。",
+        "weekly": "本期周报已生成 AI 播客音频（约 5-8 分钟），见邮件附件 MP3。",
+        "monthly": "本期月报已生成 AI 播客摘要音频（约 8-12 分钟），见邮件附件 MP3。",
+        "yearly": "本期年报已生成 AI 播客摘要音频（约 12-20 分钟），见邮件附件 MP3。",
     }
     system_tips = {
         "weekly": "本期周报基于本周即时零售与个护美妆事件池综合提炼，提供趋势判断与策略建议。",

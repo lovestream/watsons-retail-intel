@@ -62,3 +62,17 @@ routing:
     params:
       max_tokens: 2048
       temperature: 0.2
+  generate_periodic_report:
+    default: deepseek-v4-flash-free
+    fallback:
+    - deepseek-v4-flash-free
+    params:
+      max_tokens: 8192
+      temperature: 0.3
+  periodic_editor_review:
+    default: deepseek-v4-flash-free
+    fallback:
+    - deepseek-v4-flash-free
+    params:
+      max_tokens: 4096
+      temperature: 0.2

@@ -1,0 +1,101 @@
+# periodic_report.yaml — 周期报告系统统一配置（三批整改单一配置源）
+# 适用于周报/月报/年报的聚合、生成、审稿、播客、邮件、运维全链路
+
+periodic_report:
+
+  coverage:
+    weekly:
+      normal: 0.85
+      minimum: 0.70
+    monthly:
+      normal: 0.90
+      minimum: 0.80
+    yearly:
+      normal: 0.95
+      minimum: 0.90
+
+  source_caps:
+    # 分层配额：P0/P1 全保留 + 维度最低配额 + 剩余按 weighted_score 填充
+    weekly:
+      max_clusters: 80
+      per_day_events: 15
+      min_per_month: 3
+    monthly:
+      max_clusters: 150
+      per_day_events: 20
+      min_per_month: 15
+    yearly:
+      max_clusters: 240
+      per_day_events: 15
+      min_per_month: 20
+
+  quota:
+    # 维度最低配额（保证覆盖，不挤掉 P0/P1）
+    weekly:
+      platform: 3
+      competitor: 2
+      category: 2
+      risk: 1
+    monthly:
+      platform: 6
+      competitor: 4
+      category: 4
+      risk: 2
+    yearly:
+      platform: 10
+      competitor: 6
+      category: 8
+      risk: 3
+      # 每年至少保留的月份数（保证全年覆盖）
+      min_months: 12
+
+  clustering:
+    # 聚类相似度阈值（标题归一化 Jaccard / 实体重合）
+    title_jaccard_threshold: 0.65
+    entity_overlap_threshold: 0.6
+
+  trend:
+    # 规则化趋势方向判定
+    accel_cluster_ratio: 1.5      # 本周期 cluster_count > 上周期 * 1.5
+    min_days_active: 3            # days_active >= 3
+    min_source_count: 3           # source_count >= 3
+
+  podcast:
+    # 分类型口播稿目标（周/月/年不同长度与时长）
+    weekly:
+      target_chars: [3000, 5000]
+      target_seconds: [300, 540]   # 5-8 分钟
+    monthly:
+      target_chars: [4500, 7500]
+      target_seconds: [480, 780]   # 8-12 分钟
+    yearly:
+      target_chars: [7000, 12000]
+      target_seconds: [720, 1260]  # 12-20 分钟
+
+  llm:
+    max_revision_rounds: 2
+    max_paid_fallback_calls:
+      weekly: 10
+      monthly: 15
+      yearly: 20
+    # 总运行超时（秒）
+    total_timeout_seconds:
+      weekly: 1200     # 20 min
+      monthly: 1800    # 30 min
+      yearly: 2700     # 45 min
+
+  delivery:
+    require_audio: true
+    require_sendable: true
+    idempotent: true
+    allow_email_without_audio: false
+
+  chapters:
+    weekly: 6
+    monthly: 7
+    yearly: 8
+
+  email:
+    # mailcli 路径（替代硬编码 default workspace 路径）
+    mailcli_path: /app/working/workspaces/default/skills/email/mailcli.py
+    success_requires_json: true

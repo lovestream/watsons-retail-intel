@@ -130,13 +130,29 @@ LLM_USER_PROMPT_TEMPLATE = """从下面文章中抽取事件，只输出JSON，�
       "time_sensitivity": "",
       "novelty": "",
       "confidence": "",
+      "event_occurred_at": "",
+      "event_announced_at": "",
+      "event_effective_at": "",
+      "event_time_precision": "day|week|month|quarter|year|unknown",
+      "event_time_confidence": "high|medium|low",
+      "temporal_evidence": "",
       "reject": false,
       "reject_reason": ""
     }}
   ],
   "article_reject": false,
   "article_reject_reason": ""
-}}"""
+}}
+
+时间字段填写要求（重要）：
+- event_occurred_at: 事件实际发生的日期，格式 YYYY-MM-DD；正文未明确写日期则留空
+- event_announced_at: 事件宣布/公布的日期（通常等于或早于文章发布日）
+- event_effective_at: 政策/规则/措施生效执行的日期；如果是"未来某日执行"，必须填上该未来日期
+- event_time_precision: 能确定到哪一级（日/周/月/季度/年/未知）
+- event_time_confidence: 时间信息的可靠程度
+- temporal_evidence: 正文中支持该时间的原文片段（一句话即可）
+- 如果正文出现"回顾、复盘、去年、上一年、去年双11"等，说明事件属于历史；如果正文有明确"今天/今日/昨天/发布"说明事件是近期
+"""
 
 # 极简重试提示词
 SIMPLIFIED_SYSTEM_PROMPT = (
@@ -464,6 +480,9 @@ def llm_extract_events(
                 ("fact", ""), ("evidence_text", ""),
                 ("business_variables", []), ("time_sensitivity", "background"),
                 ("novelty", "unclear"), ("confidence", "low"),
+                ("event_occurred_at", ""), ("event_announced_at", ""),
+                ("event_effective_at", ""), ("event_time_precision", "unknown"),
+                ("event_time_confidence", "unknown"), ("temporal_evidence", ""),
                 ("reject", False), ("reject_reason", ""),
             ]:
                 ev.setdefault(field, default)
@@ -682,6 +701,12 @@ def rule_fallback_extract(article: dict, date: str, event_index: int) -> tuple:
         "time_sensitivity": time_sensitivity,
         "novelty": "unclear",
         "confidence": "low",
+        "event_occurred_at": "",
+        "event_announced_at": article.get("published_at", "") or "",
+        "event_effective_at": "",
+        "event_time_precision": "unknown",
+        "event_time_confidence": "unknown",
+        "temporal_evidence": "",
         "extraction_method": "rule_fallback",
         "needs_verification": True,   # 规则兜底事件需验证
         "reject": False,
@@ -743,6 +768,12 @@ def rule_extract_events(article: dict, date: str, event_index: int) -> tuple:
             "time_sensitivity": "background",
             "novelty": "unclear",
             "confidence": "low",
+            "event_occurred_at": "",
+            "event_announced_at": article.get("published_at", "") or "",
+            "event_effective_at": "",
+            "event_time_precision": "unknown",
+            "event_time_confidence": "unknown",
+            "temporal_evidence": "",
             "extraction_method": "rule_extraction",
             "reject": False,
             "reject_reason": "",
@@ -1214,6 +1245,12 @@ def extract_events(
                 ev.setdefault("time_sensitivity", "background")
                 ev.setdefault("novelty", "unclear")
                 ev.setdefault("confidence", "low")
+                ev.setdefault("event_occurred_at", "")
+                ev.setdefault("event_announced_at", article.get("published_at", "") or "")
+                ev.setdefault("event_effective_at", "")
+                ev.setdefault("event_time_precision", "unknown")
+                ev.setdefault("event_time_confidence", "unknown")
+                ev.setdefault("temporal_evidence", "")
                 ev.setdefault("extraction_method", "llm")
                 ev.setdefault("entities", {
                     "platforms": [], "companies": [], "competitors": [],

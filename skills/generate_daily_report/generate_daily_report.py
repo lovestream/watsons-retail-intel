@@ -1903,14 +1903,19 @@ def generate_daily_report(
 
     # ── 路径 ──
     if not events_file:
-        # 优先使用 novelty 版本 (含 report_eligibility)
-        novelty_path = resolve_path(project_root, f"data/events/{date}/events_scored_novelty.json")
+        # 新链路 extract → temporal → novelty → score → analyze 下，
+        # events_analyzed.json 是最终完整文件（含 novelty + temporal +
+        # priority + weighted_score + business_analysis），优先使用。
+        # events_scored_novelty.json 在新链路中位于 score 之前，不含
+        # business_analysis / weighted_score，仅作旧数据回退。
         analyzed_path = resolve_path(project_root, f"data/events/{date}/events_analyzed.json")
-        if os.path.exists(novelty_path):
+        novelty_path = resolve_path(project_root, f"data/events/{date}/events_scored_novelty.json")
+        if os.path.exists(analyzed_path):
+            events_file = analyzed_path
+            logger.info(f"  使用 analyzed 版本: {analyzed_path}")
+        elif os.path.exists(novelty_path):
             events_file = novelty_path
             logger.info(f"  使用 novelty 版本: {novelty_path}")
-        elif os.path.exists(analyzed_path):
-            events_file = analyzed_path
         else:
             events_file = analyzed_path  # will fail later with file-not-found
     if not reference_file:
@@ -1958,6 +1963,36 @@ def generate_daily_report(
                 out.write(draft)
             return {"ok": True, "date": date, "event_count": 0,
                     "used_event_count": 0, "core_signal_count": 0, "errors": errors}
+
+        # ── 第十一节: 时效判断分类计数日志 ──
+        try:
+            from collections import Counter as _Counter
+            freshness_counter = _Counter()
+            republished_list = []
+            for _ev in all_events:
+                _fs = _ev.get("fact_freshness_status", "") or ""
+                if _fs:
+                    freshness_counter[_fs] += 1
+                if _fs == "republished_old_fact":
+                    republished_list.append({
+                        "event_id": _ev.get("event_id", ""),
+                        "event_title": (_ev.get("event_title") or "")[:80],
+                        "source_name": _ev.get("source_name", ""),
+                        "reason": "; ".join(_ev.get("temporal_reasons", []) or [])[:200],
+                    })
+            logger.info(f"  时效分类计数: {dict(freshness_counter)}")
+            for name in ("new_fact", "updated_fact", "ongoing_fact", "upcoming_fact",
+                         "republished_old_fact", "retrospective_summary",
+                         "date_conflict", "unknown_fact_time"):
+                logger.info(f"    {name}_count: {freshness_counter.get(name, 0)}")
+            # Top 20 republished_old_fact
+            top20 = republished_list[:20]
+            logger.info(f"  Top20 republished_old_fact 文章 ({len(top20)}):")
+            for i, r in enumerate(top20, 1):
+                logger.info(f"    {i}. [{r['event_id']}] {r['event_title']} "
+                            f"(来源={r['source_name']}) — {r['reason']}")
+        except Exception as _e:
+            logger.warning(f"时效统计日志失败（非阻塞）: {_e}")
 
         logger.info(f"加载 {len(all_events)} 条事件")
 

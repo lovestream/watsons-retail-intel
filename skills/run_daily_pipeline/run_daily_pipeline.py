@@ -85,9 +85,10 @@ STEP_ORDER = [
     "filter_merged",                # 补搜后重过滤
     "enrich_cleaned_fulltext",      # cleaned 全文补抓
     "extract",                      # 事件提取
+    "temporal_fact_validation",     # 时效判断（文章时间 vs 事实时间）
+    "novelty_check",                # 新颖性检查（账本比对，提前到评分前）
     "score",                        # 事件评分
     "analyze",                      # 经营分析
-    "novelty_check",                # 新颖性检查
     "evergreen_candidates",         # 常青知识库
     "generate_podcast",             # 播客（从事件池直接生成，独立于日报）
     "podcast_review",               # 播客审稿
@@ -183,6 +184,11 @@ STEP_DEFS = {
         "module": "skills.extract_events.extract_events",
         "function": "extract_events",
         "cli": "skills/extract_events/extract_events.py",
+    },
+    "temporal_fact_validation": {
+        "module": "skills.temporal_fact_validation.temporal_fact_validation",
+        "function": "temporal_fact_validation",
+        "cli": "skills/temporal_fact_validation/temporal_fact_validation.py",
     },
     "score": {
         "module": "skills.score_events.score_events",
@@ -474,6 +480,9 @@ def build_step_args(step: str, project_root: str, date: str,
         pass  # 只需 project_root 和 date
     elif step == "extract":
         base["use_llm"] = use_llm
+    elif step == "temporal_fact_validation":
+        # 时效判断不需要额外参数（自动读取 events_raw.json + cleaned_articles.json）
+        pass
     elif step == "score":
         pass
     elif step == "analyze":
@@ -895,6 +904,43 @@ def validate_extract(project_root: str, date: str) -> dict:
     if event_count < 1:
         result["valid"] = False
         result["errors"].append(f"事件数 {event_count} 为 0，无法继续")
+
+    return result
+
+
+def validate_temporal_fact_validation(project_root: str, date: str) -> dict:
+    """校验 temporal_fact_validation 步骤输出。"""
+    result = {"valid": True, "warnings": [], "errors": [], "stats": {},
+              "output_files": []}
+    temporal_file = resolve_path(project_root, f"data/events/{date}/events_temporal.json")
+    stats_file = resolve_path(project_root, f"data/logs/{date}/temporal_stats.json")
+
+    if not os.path.exists(temporal_file):
+        result["valid"] = False
+        result["errors"].append(f"时效判断文件不存在: {temporal_file}")
+        return result
+
+    data = load_json_safe(temporal_file)
+    if data is None:
+        result["valid"] = False
+        result["errors"].append(f"JSON 解析失败: {temporal_file}")
+        return result
+
+    events = data.get("events", [])
+    result["stats"]["event_count"] = len(events)
+    result["stats"]["freshness_stats"] = data.get("metadata", {}).get("freshness_stats", {})
+    result["output_files"] = [temporal_file]
+
+    if os.path.exists(stats_file):
+        result["output_files"].append(stats_file)
+        stats = load_json_safe(stats_file)
+        if stats:
+            result["stats"]["republished_old_fact_count"] = stats.get("republished_old_fact_count", 0)
+            result["stats"]["future_date_article_count"] = stats.get("future_date_article_count", 0)
+
+    if len(events) < 1:
+        # 时效判断把旧闻全部 reject 时事件可为 0，这是正常结果（信息过滤成功）
+        result["warnings"].append("时效判断后事件数为 0（全部被识别为旧闻/冲突日期）")
 
     return result
 
@@ -1513,6 +1559,7 @@ STEP_VALIDATORS = {
     "tavily_gap_search": validate_tavily_gap_search,
     "filter_merged": validate_filter_merged,
     "extract": validate_extract,
+    "temporal_fact_validation": validate_temporal_fact_validation,
     "score": validate_score,
     "analyze": validate_analyze,
     "novelty_check": validate_novelty_check,

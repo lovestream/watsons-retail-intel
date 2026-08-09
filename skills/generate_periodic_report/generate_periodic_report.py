@@ -232,7 +232,13 @@ def _events_date_range(report_type, period_info):
 
 
 def _load_source_events(report_type, period_info, project_root):
-    """从 data/events/{date}/events_scored_novelty.json 构建周期报告源材料。
+    """从 data/events/{date}/events_analyzed.json 构建周期报告源材料。
+
+    新链路 extract → temporal → novelty → score → analyze 下，
+    events_analyzed.json 是最终完整文件（含 novelty + temporal +
+    priority + weighted_score + business_analysis）。
+    events_scored_novelty.json 位于 score 之前，不含 weighted_score /
+    business_analysis，仅作旧数据回退。
 
     事件已在日报管线中经过相关性过滤 + 股票/竞对IPO/港台海外过滤 + 评分，
     只取 reject=False 且带 business_analysis 的优质事件，按 weighted_score 排序，
@@ -248,7 +254,11 @@ def _load_source_events(report_type, period_info, project_root):
     while current <= end:
         date_str = current.strftime("%Y-%m-%d")
         path = os.path.join(project_root, "data", "events", date_str,
-                            "events_scored_novelty.json")
+                            "events_analyzed.json")
+        if not os.path.exists(path):
+            # 旧数据回退: novelty 版本
+            path = os.path.join(project_root, "data", "events", date_str,
+                                "events_scored_novelty.json")
         if os.path.exists(path):
             try:
                 with open(path, "r", encoding="utf-8") as f:

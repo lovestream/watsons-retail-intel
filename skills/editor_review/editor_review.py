@@ -1560,12 +1560,15 @@ def editor_review(
     if not draft_v2_file:
         draft_v2_file = resolve_path(project_root, f"data/drafts/{date}/daily_report_draft_v2.md")
     if not events_file:
-        # 优先使用 novelty 版本 (含 report_eligibility + novelty_status)
-        novelty_path = resolve_path(project_root, f"data/events/{date}/events_scored_novelty.json")
-        if os.path.exists(novelty_path):
-            events_file = novelty_path
+        # 新链路 extract → temporal → novelty → score → analyze 下，
+        # events_analyzed.json 是最终完整文件（含 novelty + temporal +
+        # priority + weighted_score + business_analysis），优先使用。
+        # events_scored_novelty.json 位于 score 之前，仅作旧数据回退。
+        analyzed_path = resolve_path(project_root, f"data/events/{date}/events_analyzed.json")
+        if os.path.exists(analyzed_path):
+            events_file = analyzed_path
         else:
-            events_file = resolve_path(project_root, f"data/events/{date}/events_analyzed.json")
+            events_file = resolve_path(project_root, f"data/events/{date}/events_scored_novelty.json")
     if not review_file:
         review_file = resolve_path(project_root, f"data/reviews/{date}/editor_review.md")
     if not final_file:

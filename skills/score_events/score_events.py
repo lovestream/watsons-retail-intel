@@ -855,6 +855,20 @@ def apply_hard_downgrade(
         reasons.append("硬降级: 纯资本市场/证券行情内容 → ARCHIVE")
         return "ARCHIVE", reasons
 
+    # 规则0e(新): 时效判断准入规则（第十节）
+    # fact_freshness_status: republished_old_fact / date_conflict → ARCHIVE
+    # historical_background / retrospective_summary → 最高 P2（reference 级）
+    # new_fact / updated_fact / upcoming_fact → core 正常
+    freshness = event.get("fact_freshness_status", "") or ""
+    temporal_elig = event.get("temporal_eligibility", "") or ""
+    if freshness in ("republished_old_fact", "date_conflict") or temporal_elig == "reject":
+        reasons.append(f"硬降级: 时效判定[{freshness or temporal_elig}] → 旧闻/冲突日期 ARCHIVE")
+        return "ARCHIVE", reasons
+    if freshness in ("historical_background", "retrospective_summary") or temporal_elig == "reference":
+        if current_rank < PRIORITY_ORDER["P2"]:
+            reasons.append(f"硬降级: 时效判定[{freshness or temporal_elig}] → 最高P2 (reference)")
+            priority = "P2"
+
     # 规则0b(新): 竞对/第三方公司的财报/IPO/招股/募资类内容 → ARCHIVE
     # 这类内容数据丰富(data_richness高)、看似"战略重要"，但对屈臣氏电商负责人
     # 没有可执行性，属于纯财经资讯，不应挤占日报正文（如"龙丰集团香港IPO财报"）。
@@ -951,7 +965,16 @@ def score_events(
 
     # ── 路径 ──
     if not events_file:
+        # 优先读取 events_scored_novelty.json（含 novelty + temporal 判断），
+        # fallback 到 events_temporal.json / events_raw.json
         events_file = resolve_path(project_root, f"data/events/{date}/events_raw.json")
+        for cand in (
+            resolve_path(project_root, f"data/events/{date}/events_scored_novelty.json"),
+            resolve_path(project_root, f"data/events/{date}/events_temporal.json"),
+        ):
+            if os.path.exists(cand):
+                events_file = cand
+                break
     events_dir = os.path.dirname(events_file)
     log_dir = resolve_path(project_root, f"data/logs/{date}")
     os.makedirs(events_dir, exist_ok=True)

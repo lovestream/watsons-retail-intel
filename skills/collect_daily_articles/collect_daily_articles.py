@@ -1684,6 +1684,7 @@ def collect_tavily(
                         "source_tier": _parse_tier(source.get("tier", "tier3_anchor")),
                         "collector": "tavily",
                         "published_at": pub_date,
+                        "published_at_source": "tavily",  # 第七节: Tavily 日期置信度=low
                         "collected_at": datetime.now(CST).isoformat(),
                         "time_status": classify_time_status(pub_date, window_start, window_end),
                         "freshness_status": freshness,

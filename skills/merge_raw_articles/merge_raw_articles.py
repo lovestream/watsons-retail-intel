@@ -229,7 +229,12 @@ def _extract_date_from_article(article: dict, logger=None) -> Optional[str]:
 
 
 def _classify_extracted_date(date_str: str, collection_date: str) -> str:
-    """根据提取的日期计算 time_status。"""
+    """根据提取的日期计算 time_status。
+
+    V6 修复：未来日期（diff < 0）不再落入 else 被当成 in_window，
+    而是返回 "old" 走拒绝路径 —— 未来日期通常是假日期/时区错位/
+    排期文章，绝不能当"新鲜"进入报告。
+    """
     try:
         pub_dt = datetime.strptime(date_str[:10], '%Y-%m-%d')
         window_end = datetime.strptime(collection_date, '%Y-%m-%d').replace(hour=7)
@@ -242,7 +247,8 @@ def _classify_extracted_date(date_str: str, collection_date: str) -> str:
         elif diff > 7:
             return "old"
         else:
-            return "in_window"
+            # diff < 0：未来日期 → 视同旧闻，走拒绝路径
+            return "old"
     except (ValueError, IndexError):
         return "unknown_time"
 
@@ -535,6 +541,25 @@ def merge_raw_articles(
                     article["published_at"] = pd
                 date_extracted_count += 1
 
+            # ── 第七节: published_at_source 标记（日期来源置信度）──
+            # 已有标记则保留；否则按来源推断:
+            #   pub_date/pub_time 原始字段 → json_ld/html_time (high)
+            #   URL 提取 → url_date (medium)
+            #   Tavily collector → tavily (low)
+            if not article.get("published_at_source"):
+                collector = (article.get("collector") or article.get("source_type") or "").lower()
+                # 日期从 URL 提取/交叉验证时（URL 日期结构与正文日期一致）
+                url_date_check = _extract_url_date(article.get("url", "") or "")
+                pub_str = str(article.get("published_at") or "")
+                if "tavily" in collector:
+                    article["published_at_source"] = "tavily"
+                elif article.get("pub_date") or article.get("pub_time"):
+                    article["published_at_source"] = "html_time"
+                elif url_date_check and pub_str.startswith(url_date_check):
+                    article["published_at_source"] = "url_date"
+                else:
+                    article["published_at_source"] = "unknown"
+
             # ── 日期补充: 为没有 published_at/time_status 的文章提取日期 ──
             if not article.get("published_at") or not article.get("time_status"):
                 extracted_date = _extract_date_from_article(article, logger)
@@ -589,6 +614,7 @@ def merge_raw_articles(
     kept_articles = []
     rejected_old = 0
     rejected_no_date = 0
+    rejected_future = 0
     kept_near = 0
     
     for a in all_articles:
@@ -635,6 +661,12 @@ def merge_raw_articles(
                     continue
         
         if pub_dt is not None:
+            # ═══ 未来日期拦截（V6）═══
+            # published_at 晚于采集窗口+1天 → 假日期/时区错位/排期文章。
+            # 允许 1 天宽松余量（发布端时区与 CST 差异）。
+            if pub_dt > window_start_dt + timedelta(days=1):
+                rejected_future += 1
+                continue
             # 按时效分层选择 cutoff：channel 1天 / search 3天 / broad 7天
             if tier == _DATE_TIER_BROAD:
                 cutoff = date_cutoff_loose       # 7天
@@ -662,9 +694,9 @@ def merge_raw_articles(
     
     if kept_articles:
         date_reject_total = len(all_articles) - len(kept_articles)
-        logger.info(f"  硬日期门: 丢弃 {date_reject_total} 篇旧闻/无日期文章")
-        logger.info(f"    rejected_old={rejected_old}, rejected_no_date={rejected_no_date}, "
-                    f"near_cutoff_kept={kept_near}")
+        logger.info(f"  硬日期门: 丢弃 {date_reject_total} 篇旧闻/未来日期/无日期文章")
+        logger.info(f"    rejected_old={rejected_old}, rejected_future={rejected_future}, "
+                    f"rejected_no_date={rejected_no_date}, near_cutoff_kept={kept_near}")
         logger.info(f"    保留: {len(kept_articles)} 篇 ({len(kept_articles)/len(all_articles)*100:.1f}%)")
         all_articles = kept_articles
         total_count = len(all_articles)
@@ -692,6 +724,7 @@ def merge_raw_articles(
                 "total_before": len(all_articles) + date_reject_total if kept_articles else len(all_articles),
                 "kept": total_count,
                 "rejected_old": rejected_old,
+                "rejected_future": rejected_future,
                 "rejected_no_date": rejected_no_date,
                 "near_cutoff_kept": kept_near,
             },
@@ -726,9 +759,10 @@ def merge_raw_articles(
             "time_status_filled": time_status_filled_count,
         },
         "date_gate": {
-            "total_before": len(all_articles) + rejected_old + rejected_no_date if kept_articles else len(all_articles),
+            "total_before": len(all_articles) + rejected_old + rejected_future + rejected_no_date if kept_articles else len(all_articles),
             "kept": total_count,
             "rejected_old": rejected_old,
+            "rejected_future": rejected_future,
             "rejected_no_date": rejected_no_date,
             "near_cutoff_kept": kept_near,
         },

@@ -489,10 +489,14 @@ def generate_podcast(
 
     # ── 查找事件文件 ──
     if not events_file:
-        # 优先 events_scored_novelty（含 novelty + business_analysis）
+        # 新链路 extract → temporal → novelty → score → analyze 下，
+        # events_analyzed.json 是最终完整文件（含 novelty + temporal +
+        # priority + weighted_score + business_analysis），优先使用。
+        # events_scored_novelty.json 在新链路中位于 score 之前，
+        # 不含 weighted_score / business_analysis，仅作旧数据回退。
         candidates = [
-            root / "data" / "events" / date / "events_scored_novelty.json",
             root / "data" / "events" / date / "events_analyzed.json",
+            root / "data" / "events" / date / "events_scored_novelty.json",
             root / "data" / "events" / date / "events_scored.json",
         ]
         for c in candidates:

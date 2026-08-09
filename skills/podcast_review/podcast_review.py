@@ -49,11 +49,14 @@ COMMUTE_MAX_EST_MINUTES = 18
 
 def load_events(project_root: str, date: str) -> List[dict]:
     """加载事件池（评分+新颖性后的合并事件）。"""
-    events_path = Path(project_root) / "data" / "events" / date / "events_scored_novelty.json"
+    # 新链路 extract → temporal → novelty → score → analyze 下，
+    # events_analyzed.json 是最终完整文件（含 novelty + temporal +
+    # priority + weighted_score + business_analysis），优先使用。
+    events_path = Path(project_root) / "data" / "events" / date / "events_analyzed.json"
+    if not events_path.exists():
+        events_path = Path(project_root) / "data" / "events" / date / "events_scored_novelty.json"
     if not events_path.exists():
         events_path = Path(project_root) / "data" / "events" / date / "events_scored.json"
-    if not events_path.exists():
-        events_path = Path(project_root) / "data" / "events" / date / "events_analyzed.json"
     if not events_path.exists():
         logger.warning(f"事件文件不存在: {events_path}")
         return []

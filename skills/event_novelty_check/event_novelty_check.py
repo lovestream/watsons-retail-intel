@@ -170,9 +170,16 @@ def determine_novelty(
 
     Returns:
         dict with keys: novelty_status, first_seen_at, last_seen_at,
-                        last_reported_at, report_count, report_eligibility
+                        last_reported_at, report_count, report_eligibility,
+                        fact_first_seen_at, fact_seen_count, fact_has_new_delta,
+                        new_delta_fields
     """
     existing = ledger.get(cluster_key)
+    # 事实级账本字段（第四节）
+    fact_first_seen_at = date
+    fact_seen_count = 1
+    fact_has_new_delta = False
+    new_delta_fields: List[str] = []
 
     if existing is None:
         # 从未出现过 → 今天首次，进正文核心，并记为已报告
@@ -183,6 +190,10 @@ def determine_novelty(
             "last_reported_at": date,
             "report_count": 1,
             "report_eligibility": "core",
+            "fact_first_seen_at": fact_first_seen_at,
+            "fact_seen_count": fact_seen_count,
+            "fact_has_new_delta": fact_has_new_delta,
+            "new_delta_fields": new_delta_fields,
         }
 
     # 已存在
@@ -191,6 +202,18 @@ def determine_novelty(
     last_seen = existing.get("last_seen_at", date)
     last_reported = existing.get("last_reported_at")
     report_count = existing.get("report_count", 0)
+    fact_first_seen_at = existing.get("fact_first_seen_at", first_seen)
+    fact_seen_count = existing.get("fact_seen_count", 0)
+
+    # 事实级账本：fact hash 相同 → 同一事实再次出现
+    if fact_hash == prev_fact_hash:
+        fact_seen_count = int(fact_seen_count or 0) + 1
+    else:
+        # 新事实（同 cluster 但内容变化）→ 新的事实首次出现
+        fact_first_seen_at = date
+        fact_seen_count = 1
+        fact_has_new_delta = True
+        new_delta_fields.append("fact_content")
 
     # ── 同日重跑保护 ──
     # 若该事件 first_seen 就是今天，说明它本来就是"今天首次出现"的事件，
@@ -209,6 +232,10 @@ def determine_novelty(
             "last_reported_at": date,
             "report_count": max(report_count, 1),
             "report_eligibility": eligibility,
+            "fact_first_seen_at": fact_first_seen_at,
+            "fact_seen_count": fact_seen_count,
+            "fact_has_new_delta": fact_has_new_delta,
+            "new_delta_fields": new_delta_fields,
         }
 
     date_dt = datetime.strptime(date, "%Y-%m-%d")
@@ -220,12 +247,23 @@ def determine_novelty(
     new_last_reported = last_reported
     new_report_count = report_count
 
+    # ── 结合时效判断结果（temporal_fact_validation 输出）──
+    freshness = event.get("fact_freshness_status", "")
+    temporal_elig = event.get("temporal_eligibility", "")
+
     if fact_hash != prev_fact_hash:
         # 事实有实质更新 → 进正文核心，记为今天已报告
         novelty = "updated_today"
         eligibility = "core"
         new_last_reported = date
         new_report_count = report_count + 1
+    elif freshness == "republished_old_fact":
+        # 时效判断：历史已存在且无新增 → 不进正文
+        novelty = "repeated"
+        eligibility = "reference"
+    elif temporal_elig == "reject":
+        novelty = "repeated"
+        eligibility = "reference"
     elif last_reported and days_since_seen < 3:
         # 近3天已报告且事实未变 → 重复，只作延续观察引用，不再进正文
         novelty = "repeated"
@@ -250,6 +288,10 @@ def determine_novelty(
         "last_reported_at": new_last_reported,
         "report_count": new_report_count,
         "report_eligibility": eligibility,
+        "fact_first_seen_at": fact_first_seen_at,
+        "fact_seen_count": fact_seen_count,
+        "fact_has_new_delta": fact_has_new_delta,
+        "new_delta_fields": new_delta_fields,
     }
 
 
@@ -268,13 +310,18 @@ def event_novelty_check(
 
     # ── 路径 ──
     if not events_file:
-        # 优先读取 events_analyzed.json（包含 business_analysis），fallback 到 events_scored.json
+        # 优先读取 events_temporal.json（时效判断输出，含 fact_freshness_status），
+        # fallback 到 events_raw.json / events_analyzed.json / events_scored.json
+        temporal_file = resolve_path(project_root, f"data/events/{date}/events_temporal.json")
+        raw_file = resolve_path(project_root, f"data/events/{date}/events_raw.json")
         analyzed_file = resolve_path(project_root, f"data/events/{date}/events_analyzed.json")
         scored_file = resolve_path(project_root, f"data/events/{date}/events_scored.json")
-        if os.path.exists(analyzed_file):
-            events_file = analyzed_file
+        for cand in (temporal_file, raw_file, analyzed_file, scored_file):
+            if os.path.exists(cand):
+                events_file = cand
+                break
         else:
-            events_file = scored_file
+            events_file = raw_file
     if not output_file:
         output_file = resolve_path(project_root, f"data/events/{date}/events_scored_novelty.json")
 
@@ -348,6 +395,11 @@ def event_novelty_check(
                 "last_seen_at": novelty_info["last_seen_at"],
                 "last_reported_at": novelty_info.get("last_reported_at"),
                 "report_count": novelty_info.get("report_count", 0),
+                "fact_first_seen_at": novelty_info.get("fact_first_seen_at", novelty_info["first_seen_at"]),
+                "fact_seen_count": novelty_info.get("fact_seen_count", 1),
+                "fact_has_new_delta": novelty_info.get("fact_has_new_delta", False),
+                "new_delta_fields": novelty_info.get("new_delta_fields", []),
+                "fact_freshness_status": event.get("fact_freshness_status", ""),
                 "date": date,
                 "priority": event.get("priority", ""),
                 "source_url": event.get("source_url", ""),
@@ -361,6 +413,11 @@ def event_novelty_check(
                 existing_entry["fact_hash"] = fact_hash
                 existing_entry["last_reported_at"] = novelty_info.get("last_reported_at")
                 existing_entry["report_count"] = novelty_info.get("report_count", 0)
+                existing_entry["fact_first_seen_at"] = novelty_info.get("fact_first_seen_at", existing_entry.get("fact_first_seen_at", existing_entry.get("first_seen_at", date)))
+                existing_entry["fact_seen_count"] = novelty_info.get("fact_seen_count", 1)
+                existing_entry["fact_has_new_delta"] = novelty_info.get("fact_has_new_delta", False)
+                existing_entry["new_delta_fields"] = novelty_info.get("new_delta_fields", [])
+                existing_entry["fact_freshness_status"] = event.get("fact_freshness_status", "")
                 # 不更新 first_seen_at
             else:
                 # 新事件 → 追加

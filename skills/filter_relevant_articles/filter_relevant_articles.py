@@ -108,6 +108,85 @@ CORE_COMPETITOR_KEYWORDS = [
     "便利蜂", "全家", "711", "罗森",
 ]
 
+# ─── 回顾文特征模式（V6 新增） ──
+# 回顾文 = 对已发生事件的汇总/复盘/时间线类文章，信息时效性差，
+# 混入报告会造成"旧闻当新闻"。命中特征 → 降级 reference 或 reject。
+# strong: 标题直接点名回顾/复盘/时间线/年度盘点 → 基本是旧闻汇总
+RETRO_STRONG_TITLE_PATTERNS = [
+    r"回顾",
+    r"复盘",
+    r"时间线",
+    r"本文由AI生成",
+    r"(?:年终|年度|半年|季度|月度).{0,8}(?:盘点|总结|回顾|榜单)",  # "2026年度即时零售盘点"
+    r"盘点.{0,8}(?:年|季|月)",   # "盘点2026上半年" 类
+    r"(?:一年|这一年|202\d年).{0,12}(?:回顾|总结|复盘)",  # "这一年发生了什么" 类
+]
+# weak: 标题含盘点/总结/对比/时间轴/大事记 → 可能为回顾类，降级 reference
+RETRO_WEAK_TITLE_PATTERNS = [
+    r"盘点",
+    r"总结",
+    r"对比",
+    r"时间轴",
+    r"大事记",
+    r"回看",
+    r"重温",
+    r"梳理",
+]
+# 正文信号（摘要+正文前500字命中）→ 降级 reference，绝不让进 main
+RETRO_BODY_PATTERNS = [
+    r"本文由AI生成",
+    r"AI生成",
+    r"回顾",
+    r"复盘",
+    r"时间线",
+    r"大事记",
+    r"回看",
+    r"盘点",
+]
+
+
+def detect_retrospective(article: dict) -> Tuple[str, str]:
+    """回顾文检测（V6）。
+
+    回顾文 = 对已发生事件的汇总/复盘/时间线/对比类文章，时效性差，
+    混入报告会把旧闻当新闻。命中特征 → 降级 reference 或 reject。
+
+    Returns:
+        (level, reason)
+        level ∈ {"strong", "weak", "none"}
+        strong: 标题明确是回顾/复盘/时间线/年度盘点 → 基本是旧闻汇总
+        weak:   标题含盘点/总结/对比/时间轴/大事记，或正文含回顾特征
+    """
+    title = (article.get("title", "") or "").strip()
+    summary = article.get("summary", "") or ""
+    content = article.get("content", "") or ""
+    if isinstance(summary, list):
+        summary = " ".join(str(s) for s in summary if s)
+    if isinstance(content, list):
+        content = " ".join(str(c) for c in content if c)
+    if not isinstance(summary, str):
+        summary = str(summary) if summary else ""
+    if not isinstance(content, str):
+        content = str(content) if content else ""
+
+    # 1. 标题强信号 → strong
+    for pat in RETRO_STRONG_TITLE_PATTERNS:
+        if re.search(pat, title, re.IGNORECASE):
+            return "strong", f"标题命中回顾特征[{pat}]"
+
+    # 2. 标题弱信号 → weak
+    for pat in RETRO_WEAK_TITLE_PATTERNS:
+        if re.search(pat, title, re.IGNORECASE):
+            return "weak", f"标题命中回顾特征[{pat}]"
+
+    # 3. 正文信号（摘要 + 正文前500字）→ weak
+    body = (summary + " " + content[:500]).lower()
+    for pat in RETRO_BODY_PATTERNS:
+        if re.search(pat, body, re.IGNORECASE):
+            return "weak", f"正文命中回顾特征[{pat}]"
+
+    return "none", ""
+
 
 def has_core_hit(article: dict) -> Tuple[bool, str]:
     """检测文章是否命中屈臣氏/核心平台/竞对的核心关键词。
@@ -1317,6 +1396,20 @@ def decide_final_pool(
     if not title.strip():
         return "reject", "title为空"
 
+    # ── 未来日期兜底拦截（V6）──
+    # published_at 晚于今天+1天 → 假日期/时区错位/未来排期文章，拒绝。
+    # merge 层硬日期门是主拦截，此处是 filter 层兜底。
+    pub_str = article.get("published_at", "") or ""
+    if pub_str and len(pub_str) >= 10:
+        try:
+            _pub_dt = datetime.strptime(pub_str[:10], "%Y-%m-%d")
+            _today_str = datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d")
+            _today_dt = datetime.strptime(_today_str, "%Y-%m-%d")
+            if _pub_dt > _today_dt + timedelta(days=1):
+                return "reject", f"未来日期: published_at={pub_str[:10]}"
+        except ValueError:
+            pass
+
     # ── 内容农场域名黑名单 ──
     domain = ""
     try:
@@ -1384,6 +1477,19 @@ def decide_final_pool(
                 return "reject", f"噪音拦截({noise_reason}): {reason}"
             return "reference", f"噪音保留({noise_reason}): {reason}"
         return target_pool, reason
+
+    # ── 回顾文检测（V6）──
+    # 回顾/复盘/时间线/年度盘点/对比类文章 → 降级 reference 或 reject，
+    # 绝不把"旧闻汇总"当新鲜事件送进报告。
+    retro_level, retro_reason = detect_retrospective(article)
+    if retro_level == "strong":
+        # 强信号：核心命中且高分才保留为 reference（历史背景），否则 reject
+        if core_hit and rule_score >= 5:
+            return _noise_downgrade("reference", f"回顾文(强): {retro_reason}")
+        return "reject", f"回顾文(强): {retro_reason}"
+    if retro_level == "weak":
+        # 弱信号：一律降级 reference，绝不让进 main/cleaned
+        return _noise_downgrade("reference", f"回顾文(弱): {retro_reason}")
 
     # ═══════════════════════════════════════════════
     # freshness_status=bootstrap_seen（首次运行，历史URL，不算新发现）
@@ -1828,6 +1934,11 @@ def filter_relevant_articles(
         article["_campaign_temporality"] = campaign_info["campaign_temporality"]
         article["_campaign_year"] = campaign_info["campaign_year"]
 
+        # 回顾文检测（V6）：注入临时字段供 decide_final_pool 使用
+        retro_level, retro_reason = detect_retrospective(article)
+        article["_retro_level"] = retro_level
+        article["_retro_reason"] = retro_reason
+
         final_pool, final_reason = decide_final_pool(
             article, rule_score, rule_decision, llm_result,
             page_type=page_type, region_tag=region_tag, noise_flags=noise_flags
@@ -1849,10 +1960,15 @@ def filter_relevant_articles(
             "campaign_temporality": campaign_info["campaign_temporality"],
             "campaign_year": campaign_info["campaign_year"],
             "campaign_reason": campaign_info["campaign_reason"],
+            "retrospective": {
+                "level": retro_level,
+                "reason": retro_reason,
+            },
         }
 
         # 清除临时字段（避免污染原始文章数据）
-        for k in ("_campaign_name", "_campaign_temporality", "_campaign_year"):
+        for k in ("_campaign_name", "_campaign_temporality", "_campaign_year",
+                  "_retro_level", "_retro_reason"):
             article.pop(k, None)
 
         if final_pool == "main":

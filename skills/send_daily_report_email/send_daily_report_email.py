@@ -839,6 +839,7 @@ def _send_email(
     attachments: list[tuple[str, bytes, str]],  # (filename, content_bytes, mime_type)
     logger: logging.Logger,
     dry_run: bool = True,
+    project_root: str = "",
 ) -> tuple[bool, str]:
     """通过 mailcli.py 发送邮件（或 dry_run 模拟）。
 
@@ -851,12 +852,14 @@ def _send_email(
         html_body: HTML 正文
         attachments: [(filename, content_bytes, mime_type), ...]
         dry_run: True 时不真实发送
+        project_root: 项目根目录（用于定位 mailcli 路径；缺省用 _PROJECT_ROOT）
 
     Returns:
         (success, message)
     """
     # mailcli.py 路径（解耦：config/periodic_report.yaml 可覆盖）
-    MAILCLI_PATH = Path(_mailcli_path(project_root))
+    # 注意：project_root 可能为空字符串，落到 _PROJECT_ROOT
+    MAILCLI_PATH = Path(_mailcli_path(project_root or _PROJECT_ROOT))
     if not MAILCLI_PATH.exists():
         return False, f"mailcli.py 不存在: {MAILCLI_PATH}"
 
@@ -1177,6 +1180,7 @@ def send_daily_report_email(
             attachments=attachments,
             logger=logger,
             dry_run=dry_run,
+            project_root=project_root,
         )
         # dry_run 模式下 sent 始终为 False（没有真实发送）
         sent = success and not dry_run
@@ -1301,11 +1305,13 @@ def send_periodic_report_email(
         attachments=attachments,
         logger=logger,
         dry_run=dry_run,
+        project_root=project_root,
     )
 
-    # 台账记录
-    _log_delivery(project_root, report_type, subject, ",".join(to_addrs),
-                  success, msg)
+    # 台账记录（dry_run 不写台账，避免幂等误判"已发送"）
+    if not dry_run:
+        _log_delivery(project_root, report_type, subject, ",".join(to_addrs),
+                      success, msg)
 
     logger.info(f"发送结果: success={success}, msg={msg}")
     return {"ok": success, "message": msg, "subject": subject}

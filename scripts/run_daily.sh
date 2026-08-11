@@ -42,15 +42,19 @@ export PYTHONPATH=".venv_packages:.:$PYTHONPATH"
     exit 1
   fi
 
-  # Step 1: 采集/提取/评分/分析/新颖性检查，生成事件池（供周/月/年报使用）。
-  # 2026-08 起不再生成日报/播客/日邮 —— 停在 novelty_check，end at event pool。
+  # Step 1: 采集/提取/时效/新颖性/评分/经营分析，生成完整事件池（供周/月/年报使用）。
+  # 2026-08 起不再生成日报/播客/日邮 —— 停在 analyze（事件池最后一步生产完整字段：
+  # priority/weighted_score 由 score 产出、business_analysis 由 analyze 产出）。
+  # ⚠️ 不能停在 novelty_check：链路重排后(2afeb4d) novelty 在 score/analyze 之前，
+  #    --end-step novelty_check 会导致 score/analyze 永不执行，事件池缺 priority/ba 字段
+  #    → 周期报告源材料空泛（08-10/11 事故）。
   "$PY" -m skills.run_daily_pipeline.run_daily_pipeline \
     --project-root . \
     --date "$TODAY" \
     --use-llm true \
     --send-email false \
     --recipient "$RECIPIENT" \
-    --end-step novelty_check \
+    --end-step analyze \
     --resume false \
     --continue-on-error true
 

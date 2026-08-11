@@ -1398,7 +1398,9 @@ def collect_xcrawl(
             from xcrawl import XcrawlClient
             from xcrawl.types import SearchOptions
 
-            client = XcrawlClient(api_key=api_key, timeout=timeout)
+            # timeout 15s + max_retries 1：XCrawl 网络不稳时快速失败，
+            # 避免 30s×3 重试导致单源空转 374s（2026-08-11 实测 7 源各 374s）
+            client = XcrawlClient(api_key=api_key, timeout=min(timeout, 15), max_retries=1)
             response = client.search(SearchOptions(
                 query=enhanced_query,
                 limit=max_results,

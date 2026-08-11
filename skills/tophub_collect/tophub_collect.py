@@ -52,6 +52,9 @@ SEARCH_QUERIES = [
     "前置仓 闪电仓",
 ]
 
+# 验证码墙快速失败信号（检测到安全验证 → 放弃全部查询）
+_CAPTCHA_BLOCKED = [False]
+
 # 来源域名 → 中文名映射
 DOMAIN_SOURCE_MAP = {
     "163.com": "网易",
@@ -180,6 +183,8 @@ def _search_tophub(browser, page, query: str, logger: logging.Logger) -> List[Di
         captcha_check = page.query_selector("text=安全验证")
         if captcha_check:
             logger.warning(f"  ⚠️ 触发验证码！Cookie 可能已失效，跳过此查询")
+            # 验证码墙 → 快速放弃全部查询，不再逐个尝试（避免空转）
+            _CAPTCHA_BLOCKED[0] = True
             return []
         
         # 多种等待策略
@@ -320,6 +325,11 @@ def run_tophub_collect(
         
         # 逐个查询搜索
         for query in queries:
+            if _CAPTCHA_BLOCKED[0]:
+                logger.warning("检测到验证码墙，放弃全部查询（避免空转）")
+                if "验证码墙拦截" not in errors:
+                    errors.append("验证码墙拦截: tophub.today 安全验证，停止采集")
+                break
             raw = _search_tophub(browser, page, query, logger)
             all_raw.extend(raw)
             time.sleep(2)  # 礼貌间隔

@@ -280,7 +280,13 @@ def run_cloakbrowser_enrich(
         try:
             with open(tophub_file) as f:
                 tophub_data = json.load(f)
-            tophub_articles = tophub_data.get("articles", tophub_data if isinstance(tophub_data, list) else [])
+            # 防御: tophub 输出可能是 list（空/非空）或 dict
+            if isinstance(tophub_data, dict):
+                tophub_articles = tophub_data.get("articles", [])
+            elif isinstance(tophub_data, list):
+                tophub_articles = tophub_data
+            else:
+                tophub_articles = []
             for a in tophub_articles:
                 if not isinstance(a, dict):
                     continue

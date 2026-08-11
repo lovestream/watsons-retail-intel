@@ -281,7 +281,9 @@ def _classify_time_status(
 def _match_keywords(text: str, keywords: List[str]) -> List[str]:
     """匹配关键词。"""
     matched = []
+    text = str(text or "")
     for kw in keywords:
+        kw = str(kw)
         if kw.lower() in text.lower():
             matched.append(kw)
     return matched
@@ -298,11 +300,11 @@ def _load_all_keywords(keywords_file: str, project_root: str) -> List[str]:
     all_kw = []
     for category, kws in config.items():
         if isinstance(kws, list):
-            all_kw.extend(kws)
+            all_kw.extend(str(w) for w in kws)
         elif isinstance(kws, dict):
             for sub_cat, sub_kws in kws.items():
                 if isinstance(sub_kws, list):
-                    all_kw.extend(sub_kws)
+                    all_kw.extend(str(w) for w in sub_kws)
     return list(set(all_kw))
 
 

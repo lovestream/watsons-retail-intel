@@ -796,6 +796,14 @@ def main():
     # ── 关键词相关性过滤 ──
     # 使用"核心关键词"过滤：只有匹配到行业核心词的文章才保留
     # 避免通用词（政策/曝光/流量）误匹配无关新闻
+    #
+    # V2 (2026-08-11): 垂直源（零售行业/美妆个护）跳过标题级过滤。
+    #   这些源是人工挑选的行业垂直站（联商网/亿邦/品观/聚美丽等），
+    #   标题多为品牌名/公司名（如"伊丽莎白雅顿""水光针"），核心词
+    #   列表覆盖不到 → 标题级 CORE 过滤会误杀 111→0。
+    #   垂直源的 URL 放行进 newly_discovered，由 cloakbrowser 抓全文后
+    #   在 filter 阶段用全文做相关性判断（更准）。
+    #   综合快讯源（界面/36kr）仍保留标题级过滤，避免泛新闻灌入。
     CORE_KEYWORDS = {
         '即时零售', '闪购', '小时达', '到家', '外卖', '即时配送', '即配',
         '美妆', '个护', '护肤', '彩妆', '防晒', '洗护',
@@ -806,9 +814,20 @@ def main():
         '盒马', '朴朴', '叮咚买菜', '永辉', '山姆',
         '零售', '门店', '便利店', '药店',
     }
+    # 垂直源类别（跳过标题级过滤）
+    VERTICAL_CATEGORIES = {"零售行业", "美妆个护"}
     before_filter = len(all_new_articles)
     relevant_articles = []
     for a in all_new_articles:
+        # 垂直源放行（其内容相关性由 filter 阶段全文判断）
+        src_cat = ""
+        for s in monitor_sources:
+            if s.get("id") == a.get("source_name"):
+                src_cat = s.get("category", "")
+                break
+        if src_cat in VERTICAL_CATEGORIES:
+            relevant_articles.append(a)
+            continue
         matched = a.get("matched_keywords", [])
         # 检查是否匹配了至少一个核心关键词
         if any(kw in CORE_KEYWORDS for kw in matched):
@@ -816,7 +835,7 @@ def main():
     irrelevant_count = before_filter - len(relevant_articles)
     if irrelevant_count > 0:
         logging.info(f"关键词过滤: {before_filter} → {len(relevant_articles)} "
-                     f"(排除 {irrelevant_count} 篇无关文章)")
+                     f"(排除 {irrelevant_count} 篇无关文章, 垂直源放行)")
     all_new_articles = relevant_articles
 
     # ── 写入输出 ──

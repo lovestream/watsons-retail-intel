@@ -861,7 +861,8 @@ def apply_hard_downgrade(
 
     # 规则0e(新): 时效判断准入规则（第十节）
     # fact_freshness_status: republished_old_fact / date_conflict → ARCHIVE
-    # historical_background / retrospective_summary → 最高 P2（reference 级）
+    # historical_background / retrospective_summary → ARCHIVE（reference 级不进核心报告），
+    #   例外：行业大盘/规模类数据（对屈臣氏有决策参考价值，如美妆大盘GMV、即时零售规模）
     # new_fact / updated_fact / upcoming_fact → core 正常
     freshness = event.get("fact_freshness_status", "") or ""
     temporal_elig = event.get("temporal_eligibility", "") or ""
@@ -869,9 +870,21 @@ def apply_hard_downgrade(
         reasons.append(f"硬降级: 时效判定[{freshness or temporal_elig}] → 旧闻/冲突日期 ARCHIVE")
         return "ARCHIVE", reasons
     if freshness in ("historical_background", "retrospective_summary") or temporal_elig == "reference":
-        if current_rank < PRIORITY_ORDER["P2"]:
-            reasons.append(f"硬降级: 时效判定[{freshness or temporal_elig}] → 最高P2 (reference)")
-            priority = "P2"
+        # 检查是否行业大盘/规模类参考数据（例外保留）
+        _bg_text = ((event.get("event_title") or "") + " " + (event.get("fact") or ""))
+        _is_market_scale = any(k in _bg_text for k in (
+            "大盘", "行业规模", "市场规模", "GMV", "增速", "增长", "渗透率",
+            "占比", "总额", "达", "突破", "超万亿", "预测")) and \
+            any(k in _bg_text for k in ("美妆", "即时零售", "个护", "化妆品", "零售"))
+        _scores_data = scores.get("data_richness", 0)
+        if _is_market_scale and _scores_data >= 4:
+            # 行业参考数据保留，但标记为 reference 语义（供周期报告背景引用）
+            if current_rank < PRIORITY_ORDER["P2"]:
+                reasons.append(f"硬降级: 时效判定[{freshness or temporal_elig}] → 最高P2 (行业参考数据例外)")
+                priority = "P2"
+        else:
+            reasons.append(f"硬降级: 时效判定[{freshness or temporal_elig}] → 旧背景/回顾文 ARCHIVE")
+            return "ARCHIVE", reasons
 
     # 规则0b(新): 竞对/第三方公司的财报/IPO/招股/募资类内容 → ARCHIVE
     # 这类内容数据丰富(data_richness高)、看似"战略重要"，但对屈臣氏电商负责人

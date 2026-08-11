@@ -560,6 +560,7 @@ def cluster_events(events: List[dict], cfg: Dict[str, Any]) -> List[dict]:
                 "source_urls": sorted(set([e.get("source_url") or ""])) if
                                e.get("source_url") else [],
                 "max_weighted_score": e.get("weighted_score") or 0,
+                "_priority_flags": {e.get("priority")} if e.get("priority") else set(),
                 "trend_direction": "unclear",
                 "confidence": "low",
             })
@@ -607,6 +608,9 @@ def cluster_events(events: List[dict], cfg: Dict[str, Any]) -> List[dict]:
                 c.setdefault("facts", []).append(f)
             c["max_weighted_score"] = max(c.get("max_weighted_score") or 0,
                                           e.get("weighted_score") or 0)
+            pr = e.get("priority")
+            if pr:
+                c.setdefault("_priority_flags", set()).add(pr)
 
     # 排序：加权分高的 cluster 在前
     clusters.sort(key=lambda c: c.get("max_weighted_score") or 0, reverse=True)
@@ -810,12 +814,24 @@ def select_by_quota(clusters: List[dict], report_type: str,
     max_clusters = caps.get("max_clusters", 80)
     quota = cfg.get("quota", {}).get(report_type, {})
 
-    # 标记 P0/P1
+    # 标记 P0/P1（收紧: 只有 P0/P1 事件驱动，不再 weighted_score>=3.0 全放行，
+    # 避免"平台大动作+普通事件"全部挤进高优层导致主题偏科/覆盖不足）
     for c in clusters:
-        high = [e for e in c.get("event_ids", [])]
-        c["_is_high"] = c.get("max_weighted_score", 0) >= 3.0 or \
-                        any(x in str(c.get("event_types", "")) for x in
-                            ("platform_move", "policy", "merger"))
+        has_high_event = False
+        for eid in (c.get("event_ids") or []):
+            # event_ids 仅含 id；真正优先级从 representative_event_ids 对应事件取不到时，
+            # 回退到 max_weighted_score + 事件类型双条件
+            pass
+        # 高优判定: P0/P1 事件存在（通过 c["_priority_flags"] 预置），
+        # 或 强平台动作(platform_move/merger/policy) 且 加权分>=3.5
+        high_flags = c.get("_priority_flags") or set()
+        c["_is_high"] = bool(high_flags & {"P0", "P1"}) or (
+            c.get("max_weighted_score", 0) >= 3.5 and
+            any(x in str(c.get("event_types", "")) for x in
+                ("platform_move", "merger", "policy")))
+
+    # 平台多样性: 同一平台高优 cluster 上限（默认 2，避免淘宝/美团刷屏）
+    platform_high_cap = quota.get("platform_high_cap", 2)
 
     selected: List[dict] = []
     seen_ids = set()
@@ -829,9 +845,20 @@ def select_by_quota(clusters: List[dict], report_type: str,
         seen_ids.add(c["cluster_id"])
         return True
 
-    # 第一层: 高优先级 cluster 全保留
-    high_clusters = [c for c in clusters if c.get("_is_high")]
+    # 第一层: 高优先级 cluster 全保留（按平台数量受限）
+    high_clusters = sorted(
+        [c for c in clusters if c.get("_is_high")],
+        key=lambda c: c.get("max_weighted_score") or 0, reverse=True)
+    platform_high_count: Dict[str, int] = {}
     for c in high_clusters:
+        plats = [p for p in (c.get("platforms") or [])]
+        if plats:
+            dominant = plats[0]
+            if platform_high_count.get(dominant, 0) >= platform_high_cap:
+                # 该平台高优名额已满 → 降级为普通待选（仍可能被第二/三层选中）
+                c["_is_high"] = False
+                continue
+            platform_high_count[dominant] = platform_high_count.get(dominant, 0) + 1
         _add(c)
 
     # 第二层: 维度配额
@@ -990,6 +1017,11 @@ def build_periodic_synthesis(report_type: str, period_info: dict,
     }
 
     # 8. 落盘
+    # _priority_flags 是 set，JSON 不可序列化 → 转 list（并保留高优标记供生成器参考）
+    for _c in (selected or []):
+        _pf = _c.pop("_priority_flags", None)
+        if _pf:
+            _c["priority_flags"] = sorted(_pf)
     out_dir = os.path.join(project_root, "data", "periodic", report_type,
                            _period_id(report_type, period_info))
     os.makedirs(out_dir, exist_ok=True)

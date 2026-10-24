@@ -1,0 +1,6 @@
+run_id,window_start,window_end,query_or_section,search_at,retrieved_count,detail_opened_count,status_or_error,candidate_id
+WTD-2026-10-19-24,2026-10-19T00:00:00+08:00,2026-10-24T14:01:11+08:00,L1 official patrol (9 sources),2026-10-24,2-5 per source,see registry,completed; platform site search 0 returned is a search-access gap not proof of no publication,
+WTD-2026-10-19-24,2026-10-19T00:00:00+08:00,2026-10-24T14:01:11+08:00,L2/L3 media patrol (12 sources) + 6 platform keyword groups,2026-10-24,0-12 per group,3 (Ebrun/CS/OFweek),completed; vertical originals poorly indexed,
+WTD-2026-10-19-24,2026-10-19T00:00:00+08:00,2026-10-24T14:01:11+08:00,Keyword gap search (24 groups; not 44-cell exhaustive),2026-10-24,2-4 per group,2,partial; JD/Taobao/Douyin x sunscreen/skincare not single-checked,C-WTD-01
+WTD-2026-10-19-24,2026-10-19T00:00:00+08:00,2026-10-24T14:01:11+08:00,Main-agent verification (Hunan/Shenzhen rider/Ebrun originals),2026-10-24,4 directed searches,3,completed; JD logistics original not recovered,C-WTD-02
+WTD-2026-10-19-24,2026-10-19T00:00:00+08:00,2026-10-24T14:01:11+08:00,Blind sample (neutral media/date search 10 items),2026-10-24,10,0 (sample list only),completed; see S2-RECALL-AUDIT,C-WTD-06

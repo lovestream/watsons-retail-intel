@@ -16,6 +16,11 @@
 | 06 | [06_periodic_report_generation.md](06_periodic_report_generation.md) | 周/月/年报调度、周期聚合层、覆盖度门禁、四阶段生成、周报 6 章、决策建议贴合屈臣氏三层渠道群、真实失效案例 |
 | 07 | [07_podcast_and_email.md](07_podcast_and_email.md) | 口播稿规格与长度校验、TTS、播客质检、HTML 邮件（仅 MP3 附件）、幂等与安全门、告警、重复投递风险 |
 | 08 | [08_llm_config_cron_data.md](08_llm_config_cron_data.md) | 配置体系（全部 YAML）、LLM 客户端与回退、调度 cron、数据模型与账本、健康检查与告警、已知运维问题 |
+| **09** | **[09_20261024_platform_strategy_and_reliability.md](09_20261024_platform_strategy_and_reliability.md)** | **2026-10-24 平台选型：QwenPaw 自有 API Key、Muse 辅助研究、独立调度与容灾、情报价值升级、分阶段改造及验收** |
+
+## 当前改造方案（2026-10-24）
+
+先阅读 [09 平台战略与可靠性改造方案](09_20261024_platform_strategy_and_reliability.md)。这是**待实施的设计文档**，不代表已完成 API 切换、Muse 集成、调度迁移或生产验收。执行时逐阶段提 PR 并回写真实结果。
 
 ## 补充资料
 

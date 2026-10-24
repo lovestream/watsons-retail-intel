@@ -16,11 +16,13 @@
 | 06 | [06_periodic_report_generation.md](06_periodic_report_generation.md) | 周/月/年报调度、周期聚合层、覆盖度门禁、四阶段生成、周报 6 章、决策建议贴合屈臣氏三层渠道群、真实失效案例 |
 | 07 | [07_podcast_and_email.md](07_podcast_and_email.md) | 口播稿规格与长度校验、TTS、播客质检、HTML 邮件（仅 MP3 附件）、幂等与安全门、告警、重复投递风险 |
 | 08 | [08_llm_config_cron_data.md](08_llm_config_cron_data.md) | 配置体系（全部 YAML）、LLM 客户端与回退、调度 cron、数据模型与账本、健康检查与告警、已知运维问题 |
-| **09** | **[09_20261024_platform_strategy_and_reliability.md](09_20261024_platform_strategy_and_reliability.md)** | **2026-10-24 平台选型：QwenPaw 自有 API Key、Muse 辅助研究、独立调度与容灾、情报价值升级、分阶段改造及验收** |
+| **09** | [09_20261024_platform_strategy_and_reliability.md](09_20261024_platform_strategy_and_reliability.md) | 旧 QwenPaw 自有 API 与稳定性改造参考；**Muse 混合联动设想已被第 10 篇取代** |
+| **10** | **[10_muse_web_independent_architecture.md](10_muse_web_independent_architecture.md)** | **Muse 网页版独立建设：GitHub 共享规则、无本地 Agent 直连、并行研究与验收** |
+| **Muse 任务书** | **[../muse/MASTER_GOAL.md](../muse/MASTER_GOAL.md)** | **可交给 Muse 网页 Agent 直接实施的完整总体目标、模块、路线、验收和首轮启动指令** |
 
 ## 当前改造方案（2026-10-24）
 
-先阅读 [09 平台战略与可靠性改造方案](09_20261024_platform_strategy_and_reliability.md)。这是**待实施的设计文档**，不代表已完成 API 切换、Muse 集成、调度迁移或生产验收。执行时逐阶段提 PR 并回写真实结果。
+**Muse 独立版优先**：先读 [10 Muse 网页端独立架构](10_muse_web_independent_architecture.md)，再将 [Muse 总任务书](../muse/MASTER_GOAL.md) 交给 Muse 直接执行。**旧 QwenPaw 继续优化**时再参阅 [09 平台与 API 路线](09_20261024_platform_strategy_and_reliability.md)。两套路线均为待实施方案，不能据此认定 Muse 已授权、定时任务已创建、邮件已发送。
 
 ## 补充资料
 
@@ -34,4 +36,4 @@
 1. 先读 **01**（数据流与编排），建立全局。
 2. 再按数据流向读 **02 → 03 → 04**（采集→过滤→事件加工）。
 3. 需要看报告本身质量时读 **05 / 06**；想排查「发出了没/发得好不好」读 **07**。
-4. 要优化成本/稳定性/调度，读 **08**。
+4. 要优化成本/稳定性/调度，读 **08**；准备 Muse 独立版直接读 **10 和 Muse 总任务书**。

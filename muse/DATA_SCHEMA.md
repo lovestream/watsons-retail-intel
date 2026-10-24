@@ -20,6 +20,7 @@
 | `evidence` * | 证据摘录（关键原文短句；为空 → 最高 P2） |
 | `source_type` * | official / tier4_media / tier3_vertical / tier2_aggregator / unknown |
 | `verified` * | true / false（已打开原文核对时间与事实） |
+| `verification_level` | L1 原始报道已读取 / L2 官方信息已核实 / L3 独立多源已核实（P1 须有首发或官方链接） |
 | `priority` * | P0 / P1 / P2 / ARCHIVE |
 | `status` * | new / updated / superseded / archived |
 | `update_of` | 若为旧事件新进展，填被更新的 event_id |
@@ -63,6 +64,11 @@
 
 ### 年报（8 章）
 全年关键判断 / 阶段回顾 / 品类 / 平台 / 竞争格局 / 年度启示 / 下一年动作 / 长期风险
+
+### R1 补充（2026-10-24）
+
+- 事件时间三字段缺一不可：event_date（事实发生日）、published_date（首发 / 转载发表日）、first_seen（本系统首次发现日）；正文展示可用简写，但账本权威记录必须补齐必填字段并做 schema 校验，不得以表格自称“完备”却缺字段。
+- 每次运行附 search_run_manifest：查询词、检索时刻、命中数、候选 ID、排除理由、失败来源。
 
 ### 通用
 - 显著标注：报告类型、覆盖区间（起止日期，北京时间）、覆盖率状态（normal/不足披露）。

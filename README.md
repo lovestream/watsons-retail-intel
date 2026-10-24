@@ -44,6 +44,8 @@ watsons-retail-intel/
 
 ## 文档
 
+**2026-10-24 优化方案**：[QwenPaw 自有 API / Muse 协同 / 稳定运行与实施路线图](docs/09_20261024_platform_strategy_and_reliability.md)（仅方案，未实施）。
+
 **最新的实现与全流程文档见 [`docs/README.md`](docs/README.md)**，按子系统分 8 篇，全程以真实代码与运行产物为准整理，适合排查问题与制定优化方案。
 
 ## 许可

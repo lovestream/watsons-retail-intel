@@ -1,65 +1,50 @@
 # 即时零售 × 个护美妆经营情报系统
 
-> **Watson's Retail Intel** — 面向即时零售赛道的个护美妆品类经营情报采集、评分、分析与推送系统。
+> **Watson's Retail Intel** — 面向即时零售（Instant Retail）赛道的个护美妆（Personal Care & Beauty）品类经营情报采集、清洗、评分、分析与推送系统，服务屈臣氏电商经营决策。
 
-## 项目简介
+## 项目定位
 
-本系统围绕 **即时零售（Instant Retail）** 赛道中的 **个护美妆（Personal Care & Beauty）** 品类，自动采集公开经营情报，经清洗、评分、摘要后，按设定频率推送至目标渠道（钉钉群、邮件等），辅助品类经营决策。
+围绕**即时零售 × 个护美妆**采集公开经营情报，经清洗、评分、摘要后按频率生成报告，以 **HTML 邮件 + MP3 播客** 推送（收件人 `123399974@qq.com`），助力品类经营决策。
 
-## 核心能力
+## 当前架构形态（2026-08 起）
 
-| 能力 | 说明 |
-|------|------|
-| 🕵️ 情报采集 | 多平台公开数据源定时抓取 |
-| 🧹 数据清洗 | 去重、格式化、关键字抽取 |
-| 📊 评分排序 | 加权评分 + 阈值筛选，产出高价值情报 |
-| 📝 摘要生成 | AI 生成结构化摘要 + 经营建议 |
-| 📡 多渠道推送 | 钉钉群 / 邮件 / 其他渠道定向推送 |
-| 🎙️ 播客生成 | 周报/月报可自动生成音频播客 |
+- **日报停发**：`scripts/run_daily.sh` 以 `--end-step analyze --send-email false` 运行，每日只产出**事件池**（供周/月/年报使用），不再生成/发送日报 HTML 与日更播客。
+- **周期报告为主**：周报（每周一）/ 月报（每月 1 日）/ 年报（1 月 1 日）由 `watsons-periodic-0900` cron 触发 `scripts/run_periodic.sh` 生成。
+- **自动调度**：QwenPaw 平台内有 2 个 agent 型 cron（日报 07:00、周期 09:00，Asia/Shanghai）。
+- **内容边界**：仅大陆内容；仅保留即时零售与个护美妆；排除资本市场/财报/IPO/港台海外内容；无关键词命中即拒。
 
 ## 目录结构
 
 ```
 watsons-retail-intel/
-├── README.md                 # 项目说明
-├── project.yaml              # 项目全局配置
-├── config/                   # 配置文件
-│   ├── sources.yaml          # 采集源定义
-│   ├── keywords.yaml         # 关键词字典
-│   ├── scoring.yaml          # 评分权重与阈值
-│   └── runtime.yaml          # 运行时配置（窗口、调度等）
-├── skills/                   # Agent 技能定义
-├── agents/                   # Agent 配置
-├── data/                     # 数据存储
-│   ├── raw/                  # 原始采集数据
-│   ├── cleaned/              # 清洗后数据
-│   ├── rejected/             # 被过滤的数据
-│   ├── events/               # 事件型情报
-│   ├── drafts/               # 待审核的摘要草稿
-│   ├── reviews/              # 已审核的摘要
-│   └── logs/                 # 运行日志
-├── reports/                  # 定期报告
-│   ├── daily/
-│   ├── weekly/
-│   ├── monthly/
-│   └── yearly/
-├── podcasts/                 # 播客内容
-│   ├── scripts/              # 播客脚本
-│   └── audio/                # 生成的音频文件
-└── tests/                    # 测试
+├── docs/                     # ★ 详细实现与流程文档（GitHub 维护入口）
+│   └── README.md             #   文档索引
+├── skills/                   # 管线技能（采集/过滤/事件/报告/播客/邮件…）
+├── scripts/                  # cron 启动器（run_daily.sh / run_periodic.sh）
+├── config/                   # 全部配置（sources/keywords/scoring/pipeline/…）
+├── data/                     # 运行产物（raw/cleaned/events/runs/logs/账本）
+├── reports/                  # 周期报告（weekly/monthly/yearly）
+├── podcasts/                 # 播客（scripts + audio）
+├── tests/                    # 测试
+└── README.md / project.yaml
 ```
-
-## 配置管理
-
-- **密钥管理**：所有 API Key、密码等敏感信息通过 QwenPaw 环境变量或 Secret 配置管理，不存储于项目文件中。
-- **禁止**：项目中不包含任何 `.env` 文件或硬编码密钥。
 
 ## 快速开始
 
-1. 确认 QwenPaw 环境变量已配置所需密钥
-2. 编辑 `config/sources.yaml` 添加/调整采集源
-3. 编辑 `config/keywords.yaml` 调整关键词
-4. 运行采集 Agent
+1. 配置 API/密钥环境变量；`config/opencode_keys.json` 存放 OpenCode 入口 Key（建议后续改为环境变量）。
+2. 编辑 `config/sources.yaml`（采集源）、`config/keywords.yaml`（关键词）、`config/search_policy.yaml`（搜索词）。
+3. 手动跑一天事件池：
+   ```bash
+   sh scripts/run_daily.sh 2026-10-26
+   ```
+4. 生成周期报告：
+   ```bash
+   sh scripts/run_periodic.sh 2026-10-26   # 周一/每月1日/1月1日才生成对应报告
+   ```
+
+## 文档
+
+**最新的实现与全流程文档见 [`docs/README.md`](docs/README.md)**，按子系统分 8 篇，全程以真实代码与运行产物为准整理，适合排查问题与制定优化方案。
 
 ## 许可
 

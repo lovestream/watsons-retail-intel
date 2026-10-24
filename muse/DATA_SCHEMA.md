@@ -20,8 +20,8 @@
 | `evidence` * | 证据摘录（关键原文短句；为空 → 最高 P2） |
 | `source_type` * | official / tier4_media / tier3_vertical / tier2_aggregator / unknown |
 | `verified` * | true / false（已打开原文核对时间与事实） |
-| `verification_level` | L1 原始报道已读取 / L2 官方信息已核实 / L3 独立多源已核实（P1 须有首发或官方链接） |
-| `priority` * | P0 / P1 / P2 / ARCHIVE |
+| `verification_level` | V1 原始报道/转载已读取 / V2 官方信息已核实 / V3 独立多源已核实（P1 须有首发或官方链接；旧 L1/L2/L3 与 V1/V2/V3 一一对应，仅改名，见 R3 补充） |
+| `priority` * | P0 / P1 / P2 / OBSERVATION（观察项：数值在 P2 区间但两轮评价冲突保留复核，不计确定 P2）/ ARCHIVE |
 | `status` * | new / updated / superseded / archived |
 | `update_of` | 若为旧事件新进展，填被更新的 event_id |
 | `last_updated` * | 最近更新时间 |

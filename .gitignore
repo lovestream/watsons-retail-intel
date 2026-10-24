@@ -37,3 +37,8 @@ test_*.py
 
 # OpenCode API keys (secrets — never commit)
 config/opencode_keys.json
+
+# ---- 2026-10-24: 大体积运行时二进制，禁止入库（GitHub 单文件>100MB 拒收） ----
+# Chromium 由 CloakBrowser 在运行时本地使用，保留在磁盘即可
+tools/cloakbrowser/
+*.chromium.tar.gz

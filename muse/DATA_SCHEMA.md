@@ -81,3 +81,12 @@
 - `score_components`：八维逐维分值与加权明细，固定维序 [战略 0.18、屈臣氏相关 0.24、影响 0.12、来源可信 0.12、数据 0.10、可执行 0.14、时效 0.06、新颖 0.04]，禁止用“约”代替可重算结果。
 - `subject` / `action` / `object`：事件主体 / 动作 / 对象，用于去重与归组。
 - 正文展示简写 vs 机器权威记录：Markdown 为展示层，JSON / JSONL / CSV 为机器版，两者字段一致，计数口径以机器版为准。
+
+## R3 补充（2026-10-24，回应 PR #1 R3 评论）
+
+- 命名纠正：源级别 `source_tier` = T1 官方 / T2 垂类媒体 / T3 商业媒体 / T4 搜索与社交（仅线索）；核验级别 `verification_level` = V1 原始报道/转载已读取 / V2 官方信息已核实 / V3 独立多源已核实。旧 L1/L2/L3 不再作为核验级别使用；旧 Lx 与新 Tx 含义一一对应，仅改名，不得把转载误认为官方。
+- `announcement_date`（可选）：宣布日与发生/启动日不同时必填两者，不得把启动日写成首次宣布日（深圳 EV-20261022-03：宣布 2026-10-20、启动 2026-10-22）。
+- `superseded_by`（废止时必填）：ID 纠正不得静默改旧 ID；旧记录 status=superseded、保留历史、不得再入池，新记录以 previous_event_id 或 superseded_by 链接旧 ID（湖南 EV-20261021-03 → EV-20261012-01）。
+- 机器权威记录：`events/WTD-2026-10-19-24.jsonl` 为 WTD 新增事件的权威机器版（4 条：3 条有效 + 1 条废止），Markdown 为展示层，两者字段一致，计数以机器版为准。校验工具 `tools/validate_events.py` 检查必填字段、枚举、ID 格式、八维加权重算与废止链接；R3 校验结果：4 条、0 错误（见 `reviews/R3-RECTIFICATION-2026-10-24.md`）。
+- 搜索 manifest：R2 的 5 行汇总 CSV 保留为历史快照，不再作为可审计版本；R3 起每查询/每栏目一行为 `runs/SEARCH-MANIFEST-R3-2026-10-24.csv`（15 行：10 个栏目 + 5 个 P0 核验），retrieved_count / detail_opened_count / column_pages_opened 均为整数，含栏目 URL、检查时刻、状态/失败与候选 ID。
+- 栏目覆盖定义：只有浏览器真正打开栏目 URL 才算 opened_column；搜索摘要、转载、首页泛搜均不得冒充栏目巡检；失败栏目单独记 failed，不计入覆盖、不计入无发布。

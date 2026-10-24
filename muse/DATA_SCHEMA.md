@@ -90,3 +90,17 @@
 - 机器权威记录：`events/WTD-2026-10-19-24.jsonl` 为 WTD 新增事件的权威机器版（4 条：3 条有效 + 1 条废止），Markdown 为展示层，两者字段一致，计数以机器版为准。校验工具 `tools/validate_events.py` 检查必填字段、枚举、ID 格式、八维加权重算与废止链接；R3 校验结果：4 条、0 错误（见 `reviews/R3-RECTIFICATION-2026-10-24.md`）。
 - 搜索 manifest：R2 的 5 行汇总 CSV 保留为历史快照，不再作为可审计版本；R3 起每查询/每栏目一行为 `runs/SEARCH-MANIFEST-R3-2026-10-24.csv`（15 行：10 个栏目 + 5 个 P0 核验），retrieved_count / detail_opened_count / column_pages_opened 均为整数，含栏目 URL、检查时刻、状态/失败与候选 ID。
 - 栏目覆盖定义：只有浏览器真正打开栏目 URL 才算 opened_column；搜索摘要、转载、首页泛搜均不得冒充栏目巡检；失败栏目单独记 failed，不计入覆盖、不计入无发布。
+
+## S3-A1 补充（2026-10-24，入池日期判定与合并基线）
+
+- 日期三字段：event_date（发生/启动日）、announcement_date（宣布日，如有）、published_date（发表日）；三者不得混用，缺失不得参与匹配（None 不算匹配）。
+- 判定表（subject/object/action 相同为前提，无新事实时）：
+  - event_date 相同 → SAME_OCCURRENCE（合并为 supporting_url，不新增 ID）。
+  - event_date 不同，但双方宣布日均非空且相同，或宣布日与事件日双向交叉（候选宣布日 == 记录事件日，或记录宣布日 == 候选事件日）→ SAME_STORY（同一宣布行动的故事链接，不是同一次事件合并；不得用 any() 粗暴并为 SAME_OCCURRENCE）。
+  - event_date 不同，无宣布日匹配，且候选明确为跟进报道 → SAME_STORY。
+  - event_date 不同，无宣布日匹配，非跟进报道 → DATE_MISMATCH_REVIEW（不合并、不新增）。
+  - 同日不同动作 → ACTION_MISMATCH_REVIEW（不合并）。
+  - 多个 SAME_OCCURRENCE 候选（不同 ID、同主体/对象/动作/日期）→ AMBIGUOUS_MULTIPLE_MATCH_REVIEW（不自动合并）。
+- update_of 校验：必须指向合并基线中的有效历史 ID 且主体相同；不存在、废止、主体不符一律拒绝。
+- 合并基线：WTD JSONL + LEDGER-2026-10.md 的全部真实事件（有效 8、废止 1，背景 LEAD 不作新事件）；衍生索引由 `tools/build_merged_baseline.py` 重建（`runs/merged-baseline-index.json`，只读，非权威账本，冲突以原账本为准）。
+- 入池约定与脚本实现必须一致：`tools/s2_dedup_test.py` v3 已消费 date_match() 的三项输出，不再只用 same_event。

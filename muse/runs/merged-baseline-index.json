@@ -1,0 +1,128 @@
+{
+  "counts": {
+    "conflicts_wtd_wins": [],
+    "distinct_ev": 9,
+    "superseded": 1,
+    "valid": 8
+  },
+  "generated_from": [
+    "events/WTD-2026-10-19-24.jsonl",
+    "events/LEDGER-2026-10.md (LEDGER-only 5 records, manually extracted from LEDGER sections)"
+  ],
+  "note": "Derived read-only index for dedup matching only; authoritative ledgers are WTD JSONL and LEDGER MD. On conflict, authoritative ledgers win. Rebuildable by tools/build_merged_baseline.py.",
+  "records": [
+    {
+      "action": "开展",
+      "announcement_date": null,
+      "event_date": "2026-10-12",
+      "event_id": "EV-20261012-01",
+      "object": "化妆品“净网清源”专项行动",
+      "priority": "OBSERVATION",
+      "published_date": "2026-10-12 15:33",
+      "source_file": "events/WTD-2026-10-19-24.jsonl",
+      "status": "new",
+      "subject": "湖南省市场监管局"
+    },
+    {
+      "action": "开卖",
+      "announcement_date": null,
+      "event_date": "2026-10-20",
+      "event_id": "EV-20261020-01",
+      "note": "纯 B2C 背景，124 个品牌为全平台总数，无即时零售承接证据",
+      "object": "双11开卖4小时",
+      "priority": "OBSERVATION",
+      "published_date": "2026-10-22",
+      "source_file": "events/LEDGER-2026-10.md",
+      "status": "updated",
+      "subject": "天猫"
+    },
+    {
+      "action": "开业",
+      "announcement_date": null,
+      "event_date": "2026-10-21",
+      "event_id": "EV-20261021-01",
+      "note": "线下单店动作，ARCHIVE",
+      "object": "花知晓十周年全球旗舰店",
+      "priority": "ARCHIVE",
+      "published_date": "2026-10-21",
+      "source_file": "events/LEDGER-2026-10.md",
+      "status": "archived",
+      "subject": "WOW BEAUTY"
+    },
+    {
+      "action": "被处罚",
+      "announcement_date": null,
+      "event_date": "2026-10-21",
+      "event_id": "EV-20261021-02",
+      "note": "文号深市监福处罚〔2026〕福田120号，市监局官网公示直达页仍缺",
+      "object": "广告违法罚款3000元",
+      "priority": "ARCHIVE",
+      "published_date": null,
+      "source_file": "events/LEDGER-2026-10.md",
+      "status": "archived",
+      "subject": "妍丽化妆品（中国）有限公司"
+    },
+    {
+      "action": "开展",
+      "announcement_date": null,
+      "event_date": "2026-10-21",
+      "event_id": "EV-20261021-03",
+      "object": "化妆品“净网清源”专项行动",
+      "priority": "OBSERVATION",
+      "published_date": "2026-10-21 06:56",
+      "source_file": "events/WTD-2026-10-19-24.jsonl",
+      "status": "superseded",
+      "subject": "湖南省市场监管局"
+    },
+    {
+      "action": "披露",
+      "announcement_date": null,
+      "event_date": "2026-10-22",
+      "event_id": "EV-20261022-01",
+      "object": "《若干举措》（20 条）执行进展",
+      "priority": "P2",
+      "published_date": "2026-10-22",
+      "source_file": "events/WTD-2026-10-19-24.jsonl",
+      "status": "updated",
+      "subject": "浙江省药监局"
+    },
+    {
+      "action": "发布",
+      "announcement_date": null,
+      "event_date": "2026-10-22",
+      "event_id": "EV-20261022-02",
+      "note": "倡议性质，无强制条款，与深圳安全激励为不同事件",
+      "object": "骑手参保联合倡议书",
+      "priority": "ARCHIVE",
+      "published_date": null,
+      "source_file": "events/LEDGER-2026-10.md",
+      "status": "archived",
+      "subject": "国家医保局"
+    },
+    {
+      "action": "启动",
+      "announcement_date": "2026-10-20",
+      "event_date": "2026-10-22",
+      "event_id": "EV-20261022-03",
+      "object": "“不闯红灯，安全同行”骑手安全激励活动",
+      "priority": "ARCHIVE",
+      "published_date": "2026-10-22 16:04",
+      "source_file": "events/WTD-2026-10-19-24.jsonl",
+      "status": "archived",
+      "subject": "深圳交警联合美团"
+    },
+    {
+      "action": "发布",
+      "announcement_date": null,
+      "event_date": "2026-10-23",
+      "event_id": "EV-20261023-01",
+      "note": "平台营销榜单，无绝对成交额",
+      "object": "双11开门红热卖品牌榜",
+      "priority": "ARCHIVE",
+      "published_date": null,
+      "source_file": "events/LEDGER-2026-10.md",
+      "status": "archived",
+      "subject": "抖音商城"
+    }
+  ]
+}

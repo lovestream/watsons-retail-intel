@@ -1,3 +1,11 @@
+## 2026-10-24 · v0.9（S3-A1 入池基础修复，本地，待本批推送）
+
+- 同步 S2 状态：TEST_PLAN S2 新会话识别项勾选为受限人工样本通过（PR #1 复审评论 6384685334，真实盲测 9 篇、真实 ID 变化 0，分支头 a7572e00）；保留无法证明高价值召回率 / 隔离全过程的限制；README/OPERATIONS 现役状态同步，历史审计不删除。
+- 修复入池日期判定：`tools/s2_dedup_test.py` v3 全量消费 date_match() 三项（事件日 / 宣布日 / 宣布-事件交叉），SAME_OCCURRENCE 与 SAME_STORY 分清，不用 any() 粗暴合并；多匹配不再第一条即 break，多个 SAME_OCCURRENCE 候选判歧义复核。
+- 合并历史基线：新增 `tools/build_merged_baseline.py` 与衍生索引 `runs/merged-baseline-index.json`（只读、可重建，非权威账本），覆盖 WTD + LEDGER 全部真实事件（有效 8、废止 1）；天猫、妍丽、抖音榜等 LEDGER-only 事件现做全量匹配，不再仅 ID 存在核对。
+- 回归：C1–C15 全部通过（含深圳宣布/启动交叉日期 C13/C14 判 SAME_STORY、LEDGER-only C11/C12/C15 判 SAME_OCCURRENCE、无效 update_of 三种拒绝）；真实账本哈希不变，真实 ID 不变。
+- PR 保持 Draft，两个定时任务继续暂停，不发邮件，不合并，不改动 QwenPaw；S3-A 其余部分（信源、窗口演练、验收报告）见本批其他文件。
+
 ## 2026-10-24 · v0.8（S2 跨会话去重验收，本地，待本批推送）
 
 - 独立读 GitHub 分支头 9ccb9f1c 上的 MASTER_GOAL、DATA_SCHEMA、LEDGER、WTD JSONL，不依赖旧会话记忆；可执行测试 tools/s2_dedup_test.py 通过（见 reviews/S2-DEDUP-ACCEPTANCE-2026-10-24.md）。

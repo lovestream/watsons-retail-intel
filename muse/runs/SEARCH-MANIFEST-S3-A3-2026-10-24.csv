@@ -1,0 +1,11 @@
+window,query_or_column,method,hits_in_window_anchored,notes
+A-2026-10-12,湖南 化妆品 净网清源 专项行动 2026-10-12,search,0,top results generic NMPA/ChemLinked/CIRS not Hunan official
+A-2026-10-12,化妆品 监管 2026年10月12日,search,0,top results cross-year regulatory summaries
+A-2026-10-12,湖南省市场监管局媒体之声栏目,column,1,Hunan official article 2026-10-12 15:33 re-opened 2026-10-24 evening
+A-2026-10-12,浙江省药监局法规文件栏目,column,0,no 2026-10-12 item in window
+B-2026-10-21,妍丽 化妆品 罚款 3000 2026年10月21日,search,0,top results unrelated/cross-year
+B-2026-10-21,WOW BEAUTY 花知晓 旗舰店 开业 2026年10月21日,search,0,top results unrelated
+B-2026-10-21,湖南 化妆品 专项整治 2026年10月21日,search,0,top results cross-year summaries
+B-2026-10-21,账本已知 URL 核对（WOW/妍丽/湖南跟进）,ledger_check,3,all known items deduped not new discovery
+A-repeat-2026-10-12,湖南 化妆品 净网清源 专项行动 2026-10-12,search,0,same miss reproduced
+A-repeat-2026-10-12,湖南省市场监管局媒体之声栏目,column,1,same Hunan official same ID

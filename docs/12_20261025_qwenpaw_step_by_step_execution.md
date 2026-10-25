@@ -1,18 +1,18 @@
 # 12｜经营情报系统分阶段执行手册（Muse负责退役，QwenPaw负责NAS优化）
 
 > 决策日期：2026-10-25。**系统始终部署在 NAS Docker 中，完全没有 NAS 迁移事项；不使用 Codex。**
-> **分工：** ChatGPT 设计/验收；**Muse 只负责 M0 一次性清理其创建的 GitHub 内容**；QwenPaw + 已在NAS配置好的 DeepSeek Flash 执行 **已完成M1、下一轮R0、后续待批准R1-R3及M2-M7**。QwenPaw不负责删除Muse文件，也不负责为模型安装/配置API。
-> 权威架构：[11｜NAS架构、AIHOT对标与模型选型](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)。**M0已于2026-10-25由Muse实际完成GitHub清理，ChatGPT独立复审核验通过**，见[退役与复审记录](reviews/MUSE-RETIREMENT-2026-10-25.md)。M1、R0均已完成，**下一轮仅R1隔离代码/模型测试**；不得重跑M0/M1/R0；本阶段不会修改NAS生产调度、模型设置或投递。
+> **分工：** ChatGPT 设计/验收；**Muse 只负责 M0 一次性清理其创建的 GitHub 内容**；QwenPaw + 已在NAS配置好的 DeepSeek Flash 执行 **已完成M1/R0、R1隔离阶段待R1-FIX，R2/R3/M2-M7仍待批准**。QwenPaw不负责删除Muse文件，也不负责为模型安装/配置API。
+> 权威架构：[11｜NAS架构、AIHOT对标与模型选型](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)。**M0已于2026-10-25由Muse实际完成GitHub清理，ChatGPT独立复审核验通过**，见[退役与复审记录](reviews/MUSE-RETIREMENT-2026-10-25.md)。M1/R0已完成，R1隔离试验完成基础验证，**下一轮仅R1-FIX隔离整改**；不得重复M0/M1/R0、不得切生产调度或邮件。
 
 
-> **2026-10-25 M1审计后的最新执行状态**：M1阶段交付已被ChatGPT独立复审通过，但NAS生产健康未通过。**完整M2 AIHOT优化暂缓，原下一轮许可R0已完成；目前唯一许可是R1隔离代码及模型测试，不改生产行为**。见 [正式M1复审与R0-R3门禁](reviews/NAS-M1-CHATGPT-REVIEW-2026-10-25.md)。R1-R3须另行复审授权；用户选择RightCode百亿补贴、不分时，且不重新配置用户已有API密钥。
 
-> **2026-10-25 R0复审最新状态（覆盖以下旧阶段状态）**：R0已由ChatGPT复审**通过**；下一轮唯一允许**R1在隔离Git工作树与测试数据中开发/验证Python DeepSeek Flash调用链**，不得切正式模型、Cron、数据卷或邮件。关键审校：14,841是待重新计算的日志累计量，不能直接当HTTP请求数；已失效OpenCode不得作备用。请先读[正式R0复审与R1实施指令](reviews/NAS-R0-CHATGPT-REVIEW-2026-10-25.md)，R2/R3/M2仍暂停。
+
+> **2026-10-25 最新权威阶段与模型决策**：M0/M1/R0已完成；R1隔离测试已报告SiliconFlow主通道成功，**本轮只批准R1-FIX整改，未合并生产main**；R2/R3/M2仍暂停。**主：SiliconFlow（硅基流动）DeepSeek-V4.1-Flash；备：RightCode「百亿补贴」DeepSeek Flash**，有限付费回退、不分时切换。参阅[正式R1复审与整改指令](reviews/NAS-R1-CHATGPT-REVIEW-2026-10-25.md)。
 
 ## 总规则
 
-1. **M0和M1已完成并经ChatGPT复审；不得重做。当前阶段仅允许R1隔离代码草案和模型测试，提交真实证据和报告后停下。** R1–R3及原M2–M7只有前一阶段经ChatGPT复审才推进。Muse不再介入生产。
-2. 已在NAS连接好模型，**由用户自行选择 RightCode「百亿补贴」DeepSeek Flash**；按用户提供的价目¥0.6/百万未缓存输入、¥1.8/百万输出、¥0.02/百万缓存读取，价格不以峰谷时间切换。**不编写模型连接、Key、base URL、Provider切换或分时调度任务。**
+1. **M0和M1已完成并经ChatGPT复审；不得重做。当前阶段仅允许R1-FIX按正式复审意见在隔离分支整改、提交证据后停止。** R1–R3及原M2–M7只有前一阶段经ChatGPT复审才推进。Muse不再介入生产。
+2. **主通道SiliconFlow（现有优惠额度优先）、备用RightCode「百亿补贴」DeepSeek Flash**；不分时切换。RightCode按用户提供报价¥0.6/百万未缓存输入、¥1.8/百万输出、¥0.02/百万缓存读取。**已有QwenPaw配置不变，Python隔离R1-FIX继续完善适配器，但不能合并生产、不能直接复制或公开Key；备用要真正的调用次数上限和预算。**
 3. 所有步骤以前一阶段的NAS真实输出为准。仓库已有审计仅为历史记录，不代表生产日志和Docker挂载已被新检查验证。
 4. 禁止未经单独授权启用/停用生产cron、重建容器、删除事件账本/数据卷、改SMTP投递、发送测试邮件或上传Key/Cookie/内部报告至public GitHub。
 5. **各阶段都要完整写入脱敏报告，附来源分母、验证方式、失败项目和代码commit；完成即停，等待ChatGPT复审。** 不要只声称“测试通过”而无实际输入/输出与复现方法。
@@ -72,7 +72,7 @@
 
 ## M5｜QwenPaw：既有模型的使用质量、调用成本和故障控制（不接入模型）
 
-> 用户已经在NAS配置所有需要的模型，且倾向统一使用RightCode「百亿补贴」DeepSeek Flash，**选择由用户完成**。本阶段不重新配置Key、Provider、base URL，不切换模型，不开发峰谷调度，不做三渠道采购对照。只记录既有模型实际端到端调用的输入/输出/cache tokens、响应耗时、结构化JSON成功率、错误类型、每条有效事件/每次周报成本；根据现有代码完善可观测性、明确预算上限、429/超时有限重试、失败后不发不合格报告。涉及生产改动先影子运行；一阶段提交报告并停止。
+> 用户的最新模型选择为SiliconFlow主、RightCode百亿补贴受控备用。前置R1-FIX解决Python独立调用兼容、费用硬门和凭证权限；未来M5只做真实账单、token/错误质量跟踪，不重配QwenPaw Agent、不做峰谷调度。只记录既有模型实际端到端调用的输入/输出/cache tokens、响应耗时、结构化JSON成功率、错误类型、每条有效事件/每次周报成本；根据现有代码完善可观测性、明确预算上限、429/超时有限重试、失败后不发不合格报告。涉及生产改动先影子运行；一阶段提交报告并停止。
 
 ## M6｜QwenPaw：周/月/年报、音频与邮件可靠性交付（dry-run）
 
@@ -84,6 +84,6 @@
 
 ---
 
-## 最新交给QwenPaw的唯一指令（R0已复审）
+## 最新交给QwenPaw的唯一指令（R1-FIX）
 
-> 请读取[docs/reviews/NAS-R0-CHATGPT-REVIEW-2026-10-25.md](reviews/NAS-R0-CHATGPT-REVIEW-2026-10-25.md)，**只执行R1隔离开发/模型探针/冻结样本测试**；不能再次重复R0，不得碰正式QwenPaw provider/Key、生产配置、cron、数据卷、真实账本或邮箱。若Python无法安全复用现有RightCode通道，报告准确阻塞项，不得擅自拷贝私密配置。基于远端最新main建立隔离分支（如本地生产dirty不可reset/clean），提交代码草案、测试和 docs/reviews/NAS-R1-PIPELINE-LLM-RECOVERY-TEST.md 到隔离分支，**不得直接合入生产main**；提供SHA和测试证据后停下等ChatGPT复审。
+> 读取 [R1 ChatGPT正式审查及R1-FIX指令](reviews/NAS-R1-CHATGPT-REVIEW-2026-10-25.md)。只在原隔离分支 r1/pipeline-deepseek-flash-recovery 上修付费备用计数和次数/总预算、主备可用状态与模型ID映射、0600凭证权限与Key脱敏、并发上限、R1S07传闻和R1S13日期冲突回归；模型顺序保持SiliconFlow主/RightCode百亿补贴备。补离线单测、少量故障注入、真实调用与费用分账说明，提交NAS-R1-FIX-VERIFICATION.md后停下等ChatGPT复审。**不合并main、不改生产cron/账本/SMTP/秘钥，不进入R2/M2。**

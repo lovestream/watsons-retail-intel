@@ -2394,6 +2394,11 @@ def collect_daily_articles(
         "log_file": log_file,
         "total_collected": total_collected,
         "total_saved": total_saved,
+        # Explicit completion proof for the scheduled launcher.  This is set
+        # only after the source loop finished and raw_articles.json was
+        # written; an existing cache from an earlier day never carries it.
+        "collection_completed": True,
+        "collection_date": date,
         "by_collector": by_collector,
         "source_total": source_total,
         "source_success": source_success,

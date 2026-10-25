@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "frozen_date": "2026-10-11",
+  "input": "7 cleaned articles -> 50 raw/temporal/scored events",
+  "before": {
+    "verified": 34,
+    "needs_verification": 16,
+    "published_at_source": 2,
+    "reportable_ids": [
+      "E20261011_0023",
+      "E20261011_0024",
+      "E20261011_0026",
+      "E20261011_0035",
+      "E20261011_0036"
+    ]
+  },
+  "after": {
+    "verified": 32,
+    "needs_verification": 18,
+    "published_at_source": 2,
+    "reportable_ids": [
+      "E20261011_0023",
+      "E20261011_0024",
+      "E20261011_0026",
+      "E20261011_0035",
+      "E20261011_0036"
+    ]
+  },
+  "changed_events": [
+    {
+      "event_id": "E20261011_0028",
+      "before": "verified",
+      "after": "needs_verification",
+      "reason": [
+        "event_date_only_article_publication"
+      ],
+      "source": "published_at"
+    },
+    {
+      "event_id": "E20261011_0029",
+      "before": "verified",
+      "after": "needs_verification",
+      "reason": [
+        "event_date_only_article_publication"
+      ],
+      "source": "published_at"
+    }
+  ],
+  "reportable_stable_reason": "The five reportable events use explicitly extracted announced dates, not the article published_at fallback; both published_at-only events are already ARCHIVE.",
+  "reportable_ids": [
+    "E20261011_0023",
+    "E20261011_0024",
+    "E20261011_0026",
+    "E20261011_0035",
+    "E20261011_0036"
+  ]
+}

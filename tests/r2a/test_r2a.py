@@ -78,6 +78,34 @@ def manifest(
     return path
 
 
+def _scheduled_steps(
+    collect_status: str = "success",
+    *,
+    completed: bool = True,
+    collection_date: str = "2026-10-25",
+    source_total: int = 2,
+    source_success: int = 1,
+    source_failed: int = 0,
+    total_collected: int = 1,
+    collect_errors_count: int = 0,
+) -> list:
+    steps = _workflow_steps()
+    steps[0] = {
+        "name": "collect",
+        "status": collect_status,
+        "stats": {
+            "total_collected": total_collected,
+            "collection_completed": completed,
+            "collection_date": collection_date,
+            "source_total": source_total,
+            "source_success": source_success,
+            "source_failed": source_failed,
+            "collect_errors_count": collect_errors_count,
+        },
+    }
+    return steps
+
+
 def _workflow_steps(failed: str | None = None) -> list:
     return [{
         "name": "collect",
@@ -162,6 +190,84 @@ class ClassifyTests(unittest.TestCase):
         out = launcher.classify_outcome(None, {}, exception="RuntimeError: injected")
         self.assertEqual(out["status"], "failed")
         self.assertEqual(out["reason"], "pipeline_exception")
+
+    def test_scheduled_requires_owned_collection_even_with_cached_pool(self) -> None:
+        # Old cleaned/events files make the downstream counts look healthy.
+        # The collect step was skipped, so this run proved nothing about today.
+        out = launcher.classify_outcome(
+            {"ok": True, "steps": _scheduled_steps("skipped")},
+            {"cleaned_articles": 12, "events_raw": 8, "events_scored": 8, "events_analyzed": 8},
+            mode="scheduled",
+            expected_date="2026-10-25",
+        )
+        self.assertEqual(out["status"], "failed")
+        self.assertEqual(out["reason"], "collection_not_verified")
+        self.assertEqual(out["collection_health"], "skipped")
+        self.assertEqual(out["exit_code"], 2)
+
+    def test_scheduled_collect_failure_with_old_events_is_not_success(self) -> None:
+        out = launcher.classify_outcome(
+            {"ok": True, "steps": _scheduled_steps("failed")},
+            {"cleaned_articles": 12, "events_raw": 8, "events_scored": 8, "events_analyzed": 8},
+            mode="scheduled",
+            expected_date="2026-10-25",
+        )
+        self.assertEqual(out["status"], "failed")
+        self.assertEqual(out["reason"], "collection_not_verified")
+        self.assertEqual(out["exit_code"], 2)
+
+    def test_scheduled_no_checkable_sources_is_failed(self) -> None:
+        out = launcher.classify_outcome(
+            {"ok": True, "steps": _scheduled_steps(source_total=0, source_success=0, source_failed=0)},
+            {"cleaned_articles": 0, "events_raw": 0, "events_scored": 0, "events_analyzed": 0},
+            mode="scheduled",
+            expected_date="2026-10-25",
+        )
+        self.assertEqual(out["status"], "failed")
+        self.assertEqual(out["reason"], "collection_not_verified")
+        self.assertEqual(out["collection_health"], "no_sources")
+        self.assertEqual(out["exit_code"], 2)
+
+    def test_scheduled_collection_window_mismatch_is_failed(self) -> None:
+        out = launcher.classify_outcome(
+            {"ok": True, "steps": _scheduled_steps(collection_date="2026-10-24")},
+            {"cleaned_articles": 1, "events_raw": 2, "events_scored": 2, "events_analyzed": 2},
+            mode="scheduled",
+            expected_date="2026-10-25",
+        )
+        self.assertEqual(out["status"], "failed")
+        self.assertEqual(out["reason"], "collection_not_verified")
+        self.assertIn("collection_date_mismatch", out["errors"][0])
+
+    def test_scheduled_verified_empty_day_is_no_signal(self) -> None:
+        out = launcher.classify_outcome(
+            {
+                "ok": True,
+                "no_signal": True,
+                "steps": _scheduled_steps(
+                    total_collected=0, source_success=0, source_failed=0
+                ),
+            },
+            {"cleaned_articles": 0, "events_raw": 0, "events_scored": 0, "events_analyzed": 0},
+            mode="scheduled",
+            expected_date="2026-10-25",
+        )
+        self.assertEqual(out["status"], "no_signal")
+        self.assertEqual(out["exit_code"], 0)
+        self.assertEqual(out["collection_proof"], "verified")
+
+    def test_llm_health_uses_failure_denominator(self) -> None:
+        steps = _workflow_steps()
+        for step in steps:
+            if step["name"] == "analyze":
+                step["stats"] = {"llm_success_count": 1, "llm_failed_count": 49}
+        out = launcher.classify_outcome(
+            {"ok": True, "steps": steps},
+            {"cleaned_articles": 1, "events_raw": 2, "events_scored": 2, "events_analyzed": 2},
+        )
+        self.assertEqual(out["llm_analyze_health"], "degraded")
+        self.assertEqual(out["llm_analyze_attempts"], 50)
+        self.assertEqual(out["llm_analyze_success_ratio"], 0.02)
 
 
 class WatchdogTests(unittest.TestCase):
@@ -296,7 +402,7 @@ class SchedulerTests(unittest.TestCase):
 class LauncherSubprocessTests(unittest.TestCase):
     """Exercise the real launcher process and its exit codes."""
 
-    def _run(self, td: str, mode: str) -> subprocess.CompletedProcess:
+    def _run(self, td: str, mode: str, launcher_mode: str = "shadow") -> subprocess.CompletedProcess:
         env = dict(os.environ)
         env["R2A_FAKE_MODE"] = mode
         env["PYTHONPATH"] = str(REPO) + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
@@ -313,6 +419,8 @@ class LauncherSubprocessTests(unittest.TestCase):
                 "2026-10-25",
                 "--run-id",
                 f"run-{mode}",
+                "--mode",
+                launcher_mode,
                 "--pipeline-module",
                 "tests.r2a.fake_pipeline",
                 "--force",
@@ -362,6 +470,24 @@ class LauncherSubprocessTests(unittest.TestCase):
     def test_collection_failure_is_not_a_quiet_day(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             proc = self._run(td, "collect_failure")
+            self.assertEqual(proc.returncode, 2, proc.stderr)
+            data = json.loads((Path(td) / "state" / "runs" / "2026-10-25" / "run-collect_failure" / "manifest.json").read_text())
+            self.assertEqual(data["status"], "failed")
+            self.assertEqual(data["reason"], "no_signal_without_verified_collection")
+
+    def test_scheduled_full_run_records_collection_proof(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            proc = self._run(td, "success", "scheduled")
+            self.assertEqual(proc.returncode, 0, proc.stderr)
+            data = json.loads((Path(td) / "state" / "runs" / "2026-10-25" / "run-success" / "manifest.json").read_text())
+            self.assertEqual(data["status"], "success")
+            self.assertEqual(data["collection_proof"], "verified")
+
+    def test_scheduled_collection_failure_with_cached_pool_is_failed(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            # The fake writes a cached article pool, but collect failed.  The
+            # scheduled launcher must not report success or no_signal.
+            proc = self._run(td, "collect_failure", "scheduled")
             self.assertEqual(proc.returncode, 2, proc.stderr)
             data = json.loads((Path(td) / "state" / "runs" / "2026-10-25" / "run-collect_failure" / "manifest.json").read_text())
             self.assertEqual(data["status"], "failed")

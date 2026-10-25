@@ -54,6 +54,8 @@ def run_daily_pipeline(
                     "status": "failed" if failed else "success",
                     "stats": {
                         "total_collected": 0,
+                        "collection_completed": not failed,
+                        "collection_date": date,
                         "source_total": 2,
                         "source_success": 0,
                         "source_failed": 2 if failed else 0,
@@ -78,6 +80,8 @@ def run_daily_pipeline(
         "status": "success",
         "stats": {
             "total_collected": 1,
+            "collection_completed": True,
+            "collection_date": date,
             "source_total": 2,
             "source_success": 1,
             "source_failed": 0,

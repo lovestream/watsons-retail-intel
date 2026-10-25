@@ -44,6 +44,28 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(result["verification_event_date"], "2026-10-10")
         self.assertNotIn("event_occurred_at", result)
 
+    def test_article_publication_is_not_an_event_date(self) -> None:
+        ev = event(
+            event_time_source="published_at",
+            event_announced_at="2026-10-10T09:00:00+08:00",
+            event_occurred_at="",
+            published_at="2026-10-10T09:00:00+08:00",
+        )
+        result = report_policy.evaluate_verification(ev, as_of_date="2026-10-11")
+        self.assertFalse(result["verified"])
+        self.assertEqual(result["verification_date_source"], "published_at")
+        self.assertIn("event_date_only_article_publication", result["verification_reasons"])
+
+    def test_explicit_announcement_date_survives_later_article(self) -> None:
+        ev = event(
+            event_time_source="announced",
+            event_announced_at="2026-10-08T09:00:00+08:00",
+            published_at="2026-10-11T09:00:00+08:00",
+        )
+        result = report_policy.evaluate_verification(ev, as_of_date="2026-10-11")
+        self.assertTrue(result["verified"], result)
+        self.assertEqual(result["verification_date_source"], "announced")
+
     def test_missing_event_date_needs_verification(self) -> None:
         ev = event(event_announced_at="", event_time_source="missing")
         result = report_policy.evaluate_verification(ev, as_of_date="2026-10-11")

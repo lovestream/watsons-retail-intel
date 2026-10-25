@@ -219,6 +219,10 @@ def evaluate_verification(
 
     A missing or inferred event date is explicitly ``needs_verification``; it
     is retained for review/reference but cannot become a verified new fact.
+    In particular, an article's ``published_at`` is not by itself proof of the
+    event occurrence or announcement date; only an explicitly extracted
+    event date (or an official source date that the extractor attributed to
+    the event) can clear the date gate.
     """
     event = event if isinstance(event, dict) else {}
     article = article if isinstance(article, dict) else {}
@@ -265,6 +269,13 @@ def evaluate_verification(
 
     if date_source == "inferred_content_date":
         reasons.append("event_date_inferred_from_content")
+    elif date_source == "published_at":
+        # ``temporal_fact_validation`` copies the article publication timestamp
+        # into event_announced_at only as a last-resort fallback.  That copy is
+        # useful for sorting, but it is not evidence that the event was
+        # announced on that date.  Keep it visible for review until an
+        # explicit event date/announcement exists in the source text.
+        reasons.append("event_date_only_article_publication")
     elif date_source in ("published_fallback", "collected_fallback"):
         reasons.append("event_date_not_explicit")
 

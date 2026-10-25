@@ -4,6 +4,9 @@
 > 本篇为当前项目的**最新实施方向**；历史 Muse 独立试验（docs/10 和 muse/）不再是建设方向；**由 Muse 自己负责在 GitHub 做一次性退役清理**，不委派 NAS 上 QwenPaw。具体清理边界与后续 QwenPaw 分工见 [12｜分阶段执行手册](12_20261025_qwenpaw_step_by_step_execution.md)。
 > 用户明确：系统**始终**部署在 NAS Docker 中，QwenPaw 是其中的 Agent/操作入口。**不存在迁移至 NAS**，也不使用 Codex 实施；方案由 ChatGPT 设计、复审；Muse 清理由 Muse 完成，后续优化由 NAS 内 QwenPaw + 已配置的 DeepSeek Flash 执行。用户已在 NAS 配好模型，**无需本任务书指导 API Key、Provider、接口接入或模型切换**。
 
+
+> **2026-10-25 M1审计后的最新执行状态**：M1阶段交付已被ChatGPT独立复审通过，但NAS生产健康未通过。**完整M2 AIHOT优化暂缓，下一轮唯一许可是R0只读故障定位+隔离API自测，不改生产行为**。见 [正式M1复审与R0-R3门禁](reviews/NAS-M1-CHATGPT-REVIEW-2026-10-25.md)。R1-R3须另行复审授权；用户选择RightCode百亿补贴、不分时，且不重新配置用户已有API密钥。
+
 ## 0. 一句话决策
 
 保持现有 NAS Docker 和 Python 管线，**确定性程序负责调度与采集、结构化事件库负责唯一真值、DeepSeek Flash 负责少量语义抽取/疑难复核和周月年报分析**；AIHOT 只借鉴验证有效的机制，不直接以 Node/PostgreSQL/网站框架推倒现有实现。GitHub 负责代码、设计、脱敏审计，而不是生产消息总线或全部抓取原文堆放处。Muse 不承担生产链路任何必经环节。

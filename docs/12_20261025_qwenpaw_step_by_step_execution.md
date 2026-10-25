@@ -1,15 +1,15 @@
 # 12｜经营情报系统分阶段执行手册（Muse负责退役，QwenPaw负责NAS优化）
 
 > 决策日期：2026-10-25。**系统始终部署在 NAS Docker 中，完全没有 NAS 迁移事项；不使用 Codex。**
-> **分工：** ChatGPT 设计/验收；**Muse 只负责 M0 一次性清理其创建的 GitHub 内容**；QwenPaw + 已在NAS配置好的 DeepSeek Flash 执行 **M1–M7**。QwenPaw不负责删除Muse文件，也不负责为模型安装/配置API。
-> 权威架构：[11｜NAS架构、AIHOT对标与模型选型](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)。**M0已于2026-10-25由Muse实际完成GitHub清理，ChatGPT独立复审核验通过**，见[退役与复审记录](reviews/MUSE-RETIREMENT-2026-10-25.md)。下一步**只执行M1 NAS生产只读审计**，不得重跑M0；此结论不表示NAS生产调度、模型设置或投递已被检查/修改。
+> **分工：** ChatGPT 设计/验收；**Muse 只负责 M0 一次性清理其创建的 GitHub 内容**；QwenPaw + 已在NAS配置好的 DeepSeek Flash 执行 **已完成M1、下一轮R0、后续待批准R1-R3及M2-M7**。QwenPaw不负责删除Muse文件，也不负责为模型安装/配置API。
+> 权威架构：[11｜NAS架构、AIHOT对标与模型选型](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)。**M0已于2026-10-25由Muse实际完成GitHub清理，ChatGPT独立复审核验通过**，见[退役与复审记录](reviews/MUSE-RETIREMENT-2026-10-25.md)。M1已完成，**当前只执行R0 P0故障定位和隔离测试**，不得重跑M0/M1；本阶段不会修改NAS生产调度、模型设置或投递。
 
 
 > **2026-10-25 M1审计后的最新执行状态**：M1阶段交付已被ChatGPT独立复审通过，但NAS生产健康未通过。**完整M2 AIHOT优化暂缓，下一轮唯一许可是R0只读故障定位+隔离API自测，不改生产行为**。见 [正式M1复审与R0-R3门禁](reviews/NAS-M1-CHATGPT-REVIEW-2026-10-25.md)。R1-R3须另行复审授权；用户选择RightCode百亿补贴、不分时，且不重新配置用户已有API密钥。
 
 ## 总规则
 
-1. **M0已完成并通过仓库侧复审；不得重做退役删除。当前阶段为M1，仅由 NAS Docker里的QwenPaw做只读现状审计，提交实际证据和报告后停下。** M2–M7只有前一阶段经ChatGPT复审才推进。Muse不再介入生产。
+1. **M0和M1已完成并经ChatGPT复审；不得重做。当前阶段仅允许R0安全诊断和隔离测试，提交实际证据和报告后停下。** R1–R3及原M2–M7只有前一阶段经ChatGPT复审才推进。Muse不再介入生产。
 2. 已在NAS连接好模型，**由用户自行选择 RightCode「百亿补贴」DeepSeek Flash**；按用户提供的价目¥0.6/百万未缓存输入、¥1.8/百万输出、¥0.02/百万缓存读取，价格不以峰谷时间切换。**不编写模型连接、Key、base URL、Provider切换或分时调度任务。**
 3. 所有步骤以前一阶段的NAS真实输出为准。仓库已有审计仅为历史记录，不代表生产日志和Docker挂载已被新检查验证。
 4. 禁止未经单独授权启用/停用生产cron、重建容器、删除事件账本/数据卷、改SMTP投递、发送测试邮件或上传Key/Cookie/内部报告至public GitHub。

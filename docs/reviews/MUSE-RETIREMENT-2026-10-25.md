@@ -38,3 +38,16 @@ Muse 独立试验正式终止。Muse 不再承担情报采集、周报与生产 
 
 - Muse 两个后台定时任务保持暂停，未删除、未启用
 - 未发送邮件或音频；未进入 M1–M7；未新建独立 Muse 试验
+
+## ChatGPT 独立复审（2026-10-25）
+
+**结论：M0 GitHub仓库侧通过，准许转入 M1 只读NAS审计。** 与“Muse系统账号两项任务仍暂停”“NAS生产运行未改”“外部备份包已经校验”有关的项目，属于Muse交接报告的**自述**，我方并无Muse后台、NAS容器或其备份介质的直接观测能力；本项通过不等于NAS生产验收。
+
+独立检查证据：
+
+1. GitHub PR #1 API 状态：\`state=closed\`、\`merged=false\`、\`merged_at=null\`，保留Review历史；试验分支 \`muse/pilot-2026-10-24\` 查询仍存在。
+2. main分支通过GitHub文件接口检验 \`muse/MASTER_GOAL.md\` 与 \`docs/10_muse_web_independent_architecture.md\` 均为404；main仓库代码搜索\`muse\`未返回独立版文件（仅作为辅助，非完整目录证明）；归档仍可从保留分支及PR历史追溯。
+3. \`compare_commits\` 从 \`ba66eef53848f2e7bcf175294ccdae6446536e52\` 到当前main返回 ahead 6 commits、6个变更文件（5个清理/修订 + 本Muse报告1个新增）：\`README.md\`、\`docs/09_20261024_platform_strategy_and_reliability.md\`、\`docs/10_muse_web_independent_architecture.md\`（删除）、\`docs/README.md\`、\`docs/reviews/MUSE-RETIREMENT-2026-10-25.md\`（新增）、\`muse/MASTER_GOAL.md\`（删除）。没有skills/scripts/config/data/reports/podcasts代码或资料变更，docs/11与docs/12设计保留。
+4. 根README和docs/README现在指向**NAS既有Docker+QwenPaw/Python、已配置的RightCode百亿补贴DeepSeek Flash**路线；Muse独立版被标记历史退役。
+
+**下一步唯一动作**：由NAS Docker内QwenPaw执行[docs/12的M1](../12_20261025_qwenpaw_step_by_step_execution.md) **只读现状审计**，不得因本M0通过而启动/停用任何cron、推送邮件、换模型或改生产配置。先获取NAS真实现状和基线，再让ChatGPT复审M1报告。

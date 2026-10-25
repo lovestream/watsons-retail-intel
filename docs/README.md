@@ -17,14 +17,13 @@
 | 07 | [07_podcast_and_email.md](07_podcast_and_email.md) | 口播稿规格与长度校验、TTS、播客质检、HTML 邮件（仅 MP3 附件）、幂等与安全门、告警、重复投递风险 |
 | 08 | [08_llm_config_cron_data.md](08_llm_config_cron_data.md) | 配置体系（全部 YAML）、LLM 客户端与回退、调度 cron、数据模型与账本、健康检查与告警、已知运维问题 |
 | **09** | [09_20261024_platform_strategy_and_reliability.md](09_20261024_platform_strategy_and_reliability.md) | **历史审计参考，不是现役指令**；Muse独立/混合设想均已退役 |
-| 10（待退役） | [10_muse_web_independent_architecture.md](10_muse_web_independent_architecture.md) | Muse历史试验设计，**非现役路线；由Muse在M0核对历史后清理** |
-| Muse历史任务书（待退役） | [../muse/MASTER_GOAL.md](../muse/MASTER_GOAL.md) | **仅为历史试验；M0中备份后删除，禁止当作现役任务书** |
+| 已退役 | Muse 独立试验（main 的 muse/ 与 docs/10 已于 2026-10-25 按 M0 删除） | 历史见未合并 Draft PR #1 与保留的远端试验分支，不再是现役入口 |
 | **11（当前）** | **[11_20261025_nas_qwenpaw_aihot_architecture_decision.md](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)** | **NAS Docker + QwenPaw/Python当前方案、AIHOT取舍、DeepSeek三渠道人民币比较及优化门禁** |
-| **12（执行）** | **[12_20261025_qwenpaw_step_by_step_execution.md](12_20261025_qwenpaw_step_by_step_execution.md)** | **M0 M0由Muse清理自己的GitHub遗留；M1–M7由QwenPaw优化NAS现有系统** |
+| **12（执行）** | **[12_20261025_qwenpaw_step_by_step_execution.md](12_20261025_qwenpaw_step_by_step_execution.md)** | **M0 已由 Muse 完成 GitHub 遗留清理；M1–M7 由 QwenPaw 优化 NAS 现有系统** |
 
 ## 当前改造方案（2026-10-25）
 
-**唯一现役优化路线：一直部署在 NAS Docker 中的 QwenPaw/Python + 用户已配置并自行选择的 RightCode「百亿补贴」DeepSeek Flash。** 不迁移NAS、不使用Codex、不重新配置模型接口、不按峰谷时段切换。**M0由Muse自己完成GitHub试验清理**；M1–M7由NAS中QwenPaw分阶段执行，首项是只读审计。ChatGPT负责GitHub设计和复审；[12号手册](12_20261025_qwenpaw_step_by_step_execution.md)明确双方边界。当前仍未实际删除Muse内容、变更NAS调度或发送邮件；历史docs/09只能用于追溯，以11/12为准。
+**唯一现役优化路线：一直部署在 NAS Docker 中的 QwenPaw/Python + 用户已配置并自行选择的 RightCode「百亿补贴」DeepSeek Flash。** 不迁移NAS、不使用Codex、不重新配置模型接口、不按峰谷时段切换。**M0 已由 Muse 完成 GitHub 试验清理**；M1–M7由NAS中QwenPaw分阶段执行，首项是只读审计。ChatGPT负责GitHub设计和复审；[12号手册](12_20261025_qwenpaw_step_by_step_execution.md)明确双方边界。Muse 内容已于 2026-10-25 按 M0 从 main 删除，NAS 调度未变更、未发送邮件；历史docs/09只能用于追溯，以11/12为准。
 
 ## 补充资料
 
@@ -38,4 +37,4 @@
 1. 先读 **01**（数据流与编排），建立全局。
 2. 再按数据流向读 **02 → 03 → 04**（采集→过滤→事件加工）。
 3. 需要看报告本身质量时读 **05 / 06**；想排查「发出了没/发得好不好」读 **07**。
-4. 要优化成本/稳定性/调度，读 **08**；当前NAS优化请读 **11 和 12**；Muse文档属于待退役历史。
+4. 要优化成本/稳定性/调度，读 **08**；当前NAS优化请读 **11 和 12**；Muse 试验文档已退役并从 main 删除。

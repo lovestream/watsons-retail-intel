@@ -1,182 +1,80 @@
-# 12｜QwenPaw 执行手册：先清理 Muse，再逐阶段优化现有 NAS Docker 系统
+# 12｜经营情报系统分阶段执行手册（Muse负责退役，QwenPaw负责NAS优化）
 
-> 2026-10-25。执行者：**现有 NAS Docker 中的 QwenPaw + DeepSeek Flash**；总体设计与阶段验收由 ChatGPT 负责。**禁止交给 Codex，不迁移NAS，不重建QwenPaw容器。**
-> 设计权威：[11｜架构决策、AIHOT、人民币价格](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)；保留参考 docs/01–09、config/*.yaml、AUDIT_20260811_collection.md；旧 Muse 仅作退役对象。
-> 本文是**命令与任务书**，不是已执行结果。未经单独授权不得执行正式邮箱投递、停服、删除生产数据、重建容器、替换cron。
+> 决策日期：2026-10-25。**系统始终部署在 NAS Docker 中，完全没有 NAS 迁移事项；不使用 Codex。**
+> **分工：** ChatGPT 设计/验收；**Muse 只负责 M0 一次性清理其创建的 GitHub 内容**；QwenPaw + 已在NAS配置好的 DeepSeek Flash 执行 **M1–M7**。QwenPaw不负责删除Muse文件，也不负责为模型安装/配置API。
+> 权威架构：[11｜NAS架构、AIHOT对标与模型选型](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)。本文是任务书，当前**没有实际删除文件、改变NAS生产调度、替换模型或发送邮件**。
 
-## 总控规则：严格逐阶段执行，单步交付，ChatGPT复审后才推进
+## 总规则
 
-- 第一批只做 M0 Muse 退役与GitHub文档清理，不碰原NAS Python、QwenPaw cron、报告发送、事件账本和数据卷。
-- 后续 M1 只读NAS审计 → M2 AIHOT对照/样本冻结 → M3信源采集与来源健康 → M4事件库/质量门 → M5模型路由价格/质量 → M6周报音频/投递 → M7影子对照与正式切换。每阶段应输出**保留、修改、删除**清单、测试命令、前后指标、文件diff、回滚方法、风险和最新commit SHA。
-- 在 NAS 上实测前，绝不能声称“当前Cron已停”“官方API能通”“费用测过”“运行已完成”“历史数据已备份”。
-- QwenPaw 每次必须先核对工作目录、Git分支、文件有无未提交改动，代码和日志只推**脱敏**内容到 GitHub；机密Key、Cookie、邮箱、完整内部报告、网页版权全文不推 public 仓库。
-- 不在Docker容器的临时层保存唯一备份；必须查明实际持久化 mount/volume 后把备份放在可靠的NAS宿主目录或者已挂载的持久卷。
-
----
-
-## M0｜清理旧 Muse 项目（第一步，必须先做）
-
-### M0-0 范围与关系：清理对象不是生产 QwenPaw
-
-GitHub 项目：lovestream/watsons-retail-intel。main 分支**已存在 muse/**（含 Muse 目标任务书），另有单独 **未合并 Draft PR #1**，分支 muse/pilot-2026-10-24，最后审查 HEAD 8418f299059122e523ef35848027677004ba7d9f。两部分**不是同一回事**。
-
-预期需要处理的**现役**旧Muse内容：main 的 muse/ 目录、docs/10_muse_web_independent_architecture.md、主 README 与 docs/README 中把Muse标为优先路线的引用，以及 docs/09 开头原“Muse混合联动已废”叙述和其他被 git grep 查到的现役引用。**docs/09含 NAS API/可靠性有用内容，不可整篇删除**。docs/11、12中的“Muse已退役”历史说明与本任务指令属于审计，不是仍在启用Muse。
-
-不操作：skills/、scripts/、config/、data/、reports/、podcasts/、QwenPaw配置、Docker容器、NAS卷、日/周/月/年cron、现有邮件/音频任务。Muse端已暂停的两个任务继续暂停；**QwenPaw现有调度任务不得因为清Muse被误停**。
-
-### M0-1 只读预检（直接在 NAS 中运行，复制执行）
-
-~~~bash
-cd /app/working/projects/watsons-retail-intel || exit 1
-printf '\n== LOCATION ==\n'
-pwd
-git rev-parse --show-toplevel
-git remote -v
-git branch --show-current
-git status --short
-printf '\n== MUSE TRACKED ON CURRENT BRANCH ==\n'
-git ls-files muse docs/10_muse_web_independent_architecture.md
-printf '\n== ALL MUSE REFERENCES OUTSIDE muse/ ==\n'
-git grep -n -i -e muse -- . ':!muse/**' || true
-printf '\n== RUNNING-DATA ROOT AND MOUNTS (READ-ONLY) ==\n'
-ls -ld data reports config scripts muse 2>/dev/null || true
-df -h .
-~~~
-
-**暂停条件**：实际目录与上面路径不一致、不是预期Git仓库、当前工作树含未提交改动、当前分支不是main、无法明确备份卷位置，**先报告，不要运行任何清理**。Docker内部路径不等于NAS宿主路径，不能猜测宿主 /volume1 目录，也不要对任何未知路径执行 rm -rf。
-
-### M0-2 备份并核对（先由 QwenPaw 找到已挂载的真实持久化卷）
-
-以下命令中的 **BACKUP_ROOT 必须替换为实际存在、可写、长期保留且位于Git工作树外的NAS持久化目录**。若无法确定，停止并报告，不允许用 /tmp 或容器临时层替代。
-
-~~~bash
-cd /app/working/projects/watsons-retail-intel || exit 1
-# 先由QwenPaw现场核对NAS volume映射，再填这里：
-BACKUP_ROOT=/REPLACE_WITH_VERIFIED_PERSISTENT_NAS_MOUNT
-test -d "$BACKUP_ROOT" && test -w "$BACKUP_ROOT" || {
-  echo "STOP: backup directory is not a verified writable persistent mount"
-  exit 1
-}
-test -z "$(git status --porcelain)" || { echo "STOP: working tree dirty"; exit 1; }
-test "$(git branch --show-current)" = "main" || { echo "STOP: not main"; exit 1; }
-STAMP=$(date -u +%Y%m%dT%H%M%SZ)
-BACKUP_DIR="$BACKUP_ROOT/muse-retired-$STAMP"
-mkdir -p "$BACKUP_DIR"
-git rev-parse HEAD > "$BACKUP_DIR/main-before.txt"
-git archive --format=tar HEAD muse docs/10_muse_web_independent_architecture.md |
-  gzip > "$BACKUP_DIR/muse-main-history.tar.gz"
-gzip -t "$BACKUP_DIR/muse-main-history.tar.gz" || exit 1
-tar -tzf "$BACKUP_DIR/muse-main-history.tar.gz" | head -30
-# 若能读取独立试验分支，再单独保存未合并PR的完整Git对象：
-git fetch origin muse/pilot-2026-10-24:refs/remotes/origin/muse/pilot-2026-10-24 || {
-  echo "STOP: cannot fetch Muse PR branch; preserve remote branch and report"
-  exit 1
-}
-git rev-parse refs/remotes/origin/muse/pilot-2026-10-24 > "$BACKUP_DIR/muse-pr-head.txt"
-git bundle create "$BACKUP_DIR/muse-pr.bundle" refs/remotes/origin/muse/pilot-2026-10-24 ||
-  { echo "STOP: Muse PR backup bundle failed"; exit 1; }
-git bundle verify "$BACKUP_DIR/muse-pr.bundle" || exit 1
-echo "BACKUP VERIFIED $BACKUP_DIR"
-~~~
-
-注意：上面的 Git bundle 通过远端跟踪引用创建；如果 fetch、bundle 或 verify 任一项失败，**不得继续删除远端试验分支**，先诊断Git权限和备份路径。原PR在GitHub上也留有历史，但不应把它当作唯一备份。保存备份目录、校验结果和分支HEAD到**不含机密**的变更记录中。
-
-### M0-3 先检查清单，再删除源代码仓库的 Muse 现役文件
-
-只在**完成备份、确认主分支无本地改动**后运行。此命令只移除 Git 所跟踪的 Muse 项目目录及旧独立架构文档，**不会删除**NAS的QwenPaw服务、Python代码或数据目录；同时不要手工执行 rm -rf。
-
-~~~bash
-cd /app/working/projects/watsons-retail-intel || exit 1
-git switch main || exit 1
-git pull --ff-only origin main || exit 1
-test -z "$(git status --porcelain)" || { echo "STOP: dirty tree"; exit 1; }
-git ls-files muse docs/10_muse_web_independent_architecture.md
-# 经QwenPaw逐项确认所有待删文件均属于退役Muse后：
-git rm -r -- muse
-git rm -- docs/10_muse_web_independent_architecture.md
-# 以下为检查，不是自动全局替换；必须逐处辨认并改正：
-git grep -n -i -e muse -- . || true
-git diff --cached --stat
-git diff --cached --name-status
-~~~
-
-QwenPaw必须**人工按真实内容修订**根README、docs/README、docs/09等的过期Muse“最新路线”引用，并将 docs/11 与 docs/12 标为当前实施方案。不要机械地把所有历史审计中的单词“Muse”替换为空；历史可保留“已退役，见11/12”，但不能作为仍在执行的计划。
-
-验收必须确认：
-1. main中 **git ls-files muse** 为0（在删除暂存后，并且提交后远端回读也为0）；
-2. docs/10已删除，主README/docs索引不再让QwenPaw继续读取Muse任务书；
-3. **git diff --cached 仅涉及 Muse 与文档清理**；如果出现 skills/ scripts/ config/ data/ 或Docker部署文件，立刻停止；
-4. 本地正式事件账本、模型Key、任务配置和邮件发送记录未触碰；
-5. 只创建一个清理里程碑提交，保留备份地点和commit SHA。
-
-~~~bash
-# QwenPaw完成README/索引清理并复核diff后再执行：
-git status --short
-git diff --cached --check
-# 审查无误后，由QwenPaw提交；如果未配置Git认证，停止并报告，不尝试绕过
-git commit -m "chore: retire Muse experiment and point docs to NAS QwenPaw plan"
-git push origin main
-git rev-parse HEAD
-~~~
-
-**提示**：上方样例在操作 README 等文件后，要先显式 git add 相关README/文档，确保提交包含修改。Git push 权限失败则保留本地commit，不能说已推送。
-
-### M0-4 Draft PR #1 单独处理（清理main不等于处理PR）
-
-- PR地址：https://github.com/lovestream/watsons-retail-intel/pull/1 。仍为Draft，历史HEAD为8418f299...，**不可合并**。
-- **在已保存分支备份且备份可验证后**：将PR添加“实验结束、转NAS/QwenPaw现有生产系统”的评论并 **Close without merge**；之后才考虑删除远端 muse/pilot-2026-10-24 分支。
-- 若NAS内有**已认证**的GitHub CLI，可运行下面的命令（会实际关闭PR，必须确认备份与权限）；没有就经GitHub网页手工关闭，**不要要求提供管理员令牌给聊天**：
-
-~~~bash
-# 仅在已验证GitHub CLI授权且已备份、希望关闭时执行：
-gh pr close 1 -R lovestream/watsons-retail-intel \
-  --comment "Muse standalone experiment retired. Production plan: NAS Docker + QwenPaw/Python + DeepSeek Flash; see docs/11 and docs/12. Never merged."
-# 只有在用户明确确认不再保留远端实验分支、且备份验证通过后才执行：
-# git push origin --delete muse/pilot-2026-10-24
-~~~
-
-PR关闭后历史评论仍可审计。若分支备份没成功，就**先关闭PR但保留远端分支**，直到备份核验成功。**不得自行启用/删除 Muse 网页后台任务**；用户端已暂停，若需彻底删除由用户在Muse账号中操作，QwenPaw无权替代。
-
-**M0完成后立即停下，给ChatGPT回报：备份路径（不含密钥）、main提交/PR状态、删除文件列表、README索引修订、旧QwenPaw任务未改动的实测证据。未经复审不进入M1。**
+1. **M0交给 Muse，一次性清理后停下；M1–M7交给 NAS 里的 QwenPaw，一阶段一提交/复审，不连续擅自推进。** M0不需要、也不能以NAS本地命令清理。若Muse端GitHub写入需要用户界面点击确认，那是这一轮一次性退役操作需要完成的授权，不将此模式带入生产流水线。
+2. 已在NAS连接好模型，**由用户自行选择 RightCode「百亿补贴」DeepSeek Flash**；按用户提供的价目¥0.6/百万未缓存输入、¥1.8/百万输出、¥0.02/百万缓存读取，价格不以峰谷时间切换。**不编写模型连接、Key、base URL、Provider切换或分时调度任务。**
+3. 所有步骤以前一阶段的NAS真实输出为准。仓库已有审计仅为历史记录，不代表生产日志和Docker挂载已被新检查验证。
+4. 禁止未经单独授权启用/停用生产cron、重建容器、删除事件账本/数据卷、改SMTP投递、发送测试邮件或上传Key/Cookie/内部报告至public GitHub。
+5. **各阶段都要完整写入脱敏报告，附来源分母、验证方式、失败项目和代码commit；完成即停，等待ChatGPT复审。** 不要只声称“测试通过”而无实际输入/输出与复现方法。
 
 ---
 
-## M1｜NAS 实际状态只读审计（不改代码）
+## M0｜由 Muse 处理它自己的 GitHub 独立试验（先执行，QwenPaw不参与）
 
-将下面整段作为阶段任务交给 QwenPaw：
+### M0-0 事实与待清理清单
 
-> 在同一 NAS Docker 现有环境中做**只读**事实盘点：Docker容器/持久化卷/时区、仓库真实HEAD和dirty状态、QwenPaw agent型cron及容器/宿主cron真实启用状态、过去14天日采集成功窗口、周/月/年报成功与邮箱投递去重、来源质量漏斗、P0/P1/P2数、source健康与错误、API模型路由及调用成本。重点读取 scripts/run_daily.sh、run_periodic.sh、skills/run_daily_pipeline、skills/run_periodic_pipeline、skills/utils/llm_client.py、config/model_router.yaml、scoring.yaml、source配置；所有检查不得发送邮件、跑定时、停止容器或在public GitHub泄露Key/Cookie/内部数据。写 docs/reviews/NAS-M1-READONLY-AUDIT.md：运行代码与文档差异、主风险P0/P1/P2、建议保留/改造/删除清单，附脱敏证据与可回滚范围。推送后停止。
+仓库：**lovestream/watsons-retail-intel**，生产默认分支 **main**。旧 Muse 独立试验包括：
+- main上的 **muse/** 目录（历史试验任务书与内容）；
+- **docs/10_muse_web_independent_architecture.md**（仅与Muse网页独立试验有关）；
+- README.md、docs/README.md、docs/09_20261024_platform_strategy_and_reliability.md等内仍把Muse当**现役方向**的提示和入口；
+- 未合并 **Draft PR #1** https://github.com/lovestream/watsons-retail-intel/pull/1 ，分支 **muse/pilot-2026-10-24**，审查已知HEAD 8418f299059122e523ef35848027677004ba7d9f。执行前必须核验PR最新HEAD、是否仍Draft/未合并，不把旧快照当现状。
 
-**门禁**：必须有NAS运行事实，不能仅引用 docs/01–09 的历史审计；运行成功率必须给分母；来源贡献、模型/缓存tokens按实际日志，缺失就写unavailable。
+**必须保留**：NAS QwenPaw实际运行的skills/、scripts/、config/、data/、reports/、podcasts/及生产服务/定时/邮件；docs/01–09里与生产架构及历史经验相关的文档；本项目当前最新 **docs/11、docs/12**；Git历史审计链（可以在现役文档写“旧Muse试验已退役”，但不要保留指向已删除文件的现役入口）。
 
-## M2｜AIHOT机制对标 + 冻结基准（仍不改生产）
+### M0-1 Muse 在 GitHub 独立完成的具体动作
 
-> 基于AIHOT https://github.com/KKKKhazix/AIHOT 的来源健康/动态频率/PASS-UNKNOWN-BLOCK/双评分/事件聚簇/SelectBench，逐项比对现有Python实现，输出 KEEP/REFINE/REMOVE/DEFER。冻结至少30条人工确认的历史样本起步（覆盖高价值、纯B2C误报、跨年旧闻、同事件重发、同一事项进展、官方规则发布日期≠生效日）；**不必为了数字强造P1正例**，如无真实P1则标unmeasured，同时收集可追溯真值表。评测旧管线的发现、文章抽取、去重与评分，记录召回/误报/错误归组，而不是仅统计标题分类。建立只读测试，不动正式账本。输出 docs/reviews/NAS-M2-AIHOT-GAP-AND-BASELINE.md 并停止。
+1. **只读核对**main与PR的目录和实际差异，列出文件级删除候选。检查旧 Muse 任务是否仍处于暂停；如果平台状态不可读，只能写“未独立验证”，不得擅称已经确认。绝不启用任务。
+2. **可恢复备份**：先保存main与PR的准确HEAD/SHA及待删除文件清单；原则上保留历史提交和PR审查记录。若要删除远端试验分支，必须先验证GitHub历史可恢复或备份成功，并由用户明确批准。不得清理Git历史、强制推送或删掉可追溯记录。
+3. **GitHub删除**：仅删除**确定属于Muse网页独立版的**main:muse/及docs/10；修正根README、docs/README和docs/09里已经过时的Muse“优先/独立建设”引导，改为指向当前docs/11、docs/12。不得碰 docs/11/12的NAS设计/执行内容（除必要的已完成状态标记），不做全仓无差别字符串删除。
+4. **逐项复核提交**：变更文件只应是Muse与明确相关的文档引用。若出现Python运行代码、NAS部署相关配置、采集源、数据账本或报告，立即停止。GitHub写入可能需要每次点击批准；Muse应完成实际提交并**再次读回**，不要把“计划删除”说成“已经删除”。
+5. **处理PR #1**：确认其从未合并，在main清理/备份完成后，提交一条“退役、迁移到现有NAS/QwenPaw长期方案”的结案说明，然后 **Close without merge**。默认**保留远端分支和Git历史作为备份**；删除远端分支另需用户明确授权及可恢复备份验证。不要merge，不生成新Muse功能。
+6. 若Muse没有main写权限、GitHub工具无法删除/更新、需要额外授权或PR操作失败，**直接报告具体受阻文件/动作并停止**。不要把清理重新丢给QwenPaw，也不要误称完成。
 
-## M3｜优先解决真实采集漏报
+### M0-2 交付与停止
 
-> 只针对M1/M2证据确认的高价值且失败源做改动。为平台和垂媒实现“可巡检官方列表→单篇URL→绝对发布时间→正文校验→候选事件”的实际路径，不能将搜索结果摘要冒充全文。按独有高价值事件贡献、源故障率/发布时间及时性设频率；search_only明确受限。对比两个相同闭合窗口的现有采集回放，衡量新发现、误报、数据源成本；失败需告警，不能以0篇作为已覆盖成功。原URL/正文缓存和source ledger不得破坏。输出 M3验收记录+单阶段commit，停止。
+向用户/ChatGPT回报：main前后HEAD、删除文件列表、修改文档列表、GitHub读回结果、PR关闭状态与是否仍保留分支、保留历史/可恢复方式、Muse两个后台任务的可验证暂停状态及无法验证处。全部写成一份简短的**GitHub退役验收记录**（仅公开安全信息）。**Muse完成后停下，不进入M1或采集/周报。**
 
-## M4｜事件化/去重/分级与本地唯一账本
+### 发给 Muse 的唯一执行指令（可复制）
 
-> 复用现有事件字段/账本，只修M2证明的问题。先建立当前生产账本的备份和schema迁移演练，在**沙箱镜像**验证：URL→事实→跨源事件→后续进展；published/event/announcement/effective/first_seen分开；同事件vs同故事；无效旧ID和superseded不得复活；新增后重跑保持同一event_id；同一窗口重算不能重复真实ID；分数按config/scoring.yaml程序复算、硬降级不可绕过；UNKNOWN与未核全文不得擅升P1。方案优先沿用现有存储，只有现有写入无事务性且评估充分才引入SQLite，不要同时维护两份权威账本。单阶段提交+测试，停止。
-
-## M5｜DeepSeek Flash 成本与模型质量对照（先影子测试）
-
-> 先在 NAS Docker 中只读识别当前OpenCode入口调用链，配置项目独立的 API Provider Adapter（Key用NAS secrets，不入Git）。依次对 RightCode「国模特惠闲时¥0.5输入/¥2输出/¥0.01缓存命中」、百亿补贴¥0.6/¥1.8/¥0.02、DeepSeek官方闲时¥1/¥4/¥0.02用**相同冻结样本**真实探针验证模型版本、JSON格式、输出完整性、耗时、失败率与账单usage；别混淆美元和人民币、不同计量。主通道按质量合格前提优先国模特惠闲时，其他为备用候选而非默认为已可用。设置费用硬上限、重试、429限流、fallback和故障熔断；禁止发送生产邮件。不能仅把deepseek-v4-flash-free字符串替换为deepseek-flash。写 M5报告，停止。
-
-## M6｜周期报告、音频与邮件交付可靠性（先dry run）
-
-> 继续“每日只入池不发日报”；周/月/年分别从唯一事件库读取有完整日期/证据的封闭周期事实，先校验来源覆盖与schema完成信号，再调用Flash生成6/7/8章和5–10分钟中文口播稿，保留事实→机制→影响→动作KPI→反证，不能把背景重复当新事件。复用edge-tts或已验证TTS；HTML/MP3先只写NAS测试目录，检查音频能播放、报告来源可点、没有编造数字。校验 run_periodic.sh 日期参数与退出码、SMTP超时重复发送风险，建立 idempotency key。真实发送要用户另行确认，dry run绝不发送。单阶段提交+报告，停止。
-
-## M7｜独立调度 + 一个自然周影子运行 + 受控切换
-
-> 在保证同一套 NAS Docker 中、只存在一个调度权威的前提下，将程序启动从QwenPaw Agent理解任务中解耦：评估NAS Task Scheduler、宿主cron或容器持久scheduler，三选一，不同时启用。先在隔离输出目录shadow跑至少一个自然周，保持旧正式投递不被新任务覆盖；收集启动率、覆盖率、有效事件数、人工校准误差、token成本、周报质量、重复/失败恢复。若没有经独立确认的重要正例，不得写“召回100%”。测试通过后，提供明确切换窗口、停旧启新步骤和回滚命令，**由用户另行批准才能实施正式Cron切换与邮件投递**。PR不得未经审查直接合并。
+> 请执行自己创建的 Watsons Retail Intel **Muse独立试验退役清理**，并且只做此事。阅读GitHub main的 docs/12_20261025_qwenpaw_step_by_step_execution.md 中 M0全部步骤，按真实差异删除main中的Muse专属目录与独立试验文档、修正现役README索引。你不能访问/修改 NAS QwenPaw生产系统，不得动skills/scripts/config/data/reports/podcasts，也不能合并PR。提交并读回后，给未合并Draft PR #1写结案说明、Close without merge，默认保留试验分支作历史备份。GitHub操作需要用户确认就按平台流程请求批准，无法执行就停下报告。结束给出实际HEAD、文件清单和PR状态，**不要执行M1–M7**。
 
 ---
 
-## 第一次只应交给 QwenPaw 的命令性指令（复制发送）
+## M1｜QwenPaw：只读 NAS 生产现状审计（Muse清理验收后）
 
-**先执行 M0，后续一律暂停。**
+> 在已存在的NAS Docker + QwenPaw环境**只读**盘点：实际容器/持久化卷/时区、工作区dirty状态、每日与周期任务的真实启用方式、最近14/30天日采集运行成功记录、来源列表和正文可打开率、原文时效和去重事件数、评分分布、周/月/年报及邮件送达记录、历史计费和失败情况。核对 skills/run_daily_pipeline、run_periodic_pipeline、scripts/run_daily.sh、run_periodic.sh、config/model_router.yaml、config/scoring.yaml、采集器与存储实现。注意用户已配置模型，**只核验实际使用状态，不配模型、不改Key、不自动换通道。** 形成docs/reviews/NAS-M1-READONLY-AUDIT.md，依据真实数据给出 KEEP/REFINE/REMOVE/DEFER清单与工程风险；不改生产、不发信，提交后停止。
 
-> 你正在 NAS Docker 内运行，当前系统一直位于NAS；不要提迁移。请从项目GitHub main读取 docs/11_20261025_nas_qwenpaw_aihot_architecture_decision.md 与 docs/12_20261025_qwenpaw_step_by_step_execution.md。严格执行 M0 Muse 退役：先验证Git状态、真实持久卷备份、Muse main文件和未合并PR差异；备份验证过后才删main的muse/和docs/10，修README/docs索引和docs/09的现役Muse错误引导；确认diff不涉及QwenPaw/Python/data/docker/cron；单独关闭未合并的Draft PR但不能merge，远端分支删除需完整备份与明确确认。禁止发送邮件/音频，不改现有NAS生产行为。产出清理报告、主分支提交及回读证据。完成M0立即停止，等ChatGPT复审；不得自行推进M1。
+## M2｜QwenPaw：AIHOT对标与冻结回归集（不改生产）
+
+> 阅读 https://github.com/KKKKhazix/AIHOT 公开设计资料，按来源巡检/动态频率/PASS-UNKNOWN-BLOCK/独立双评分/事件归组/SelectBench逐项比对现有Python实现，先冻结至少30条真实历史样本（重要经营事实、非相关B2C、跨年旧闻、同事件重发、不同进展、公告日与生效日不同等）。真正高价值正例没有就标unmeasured，不用虚构例子凑P1。对真实采集/提取/归组/评分的结果进行盲审，输出 docs/reviews/NAS-M2-AIHOT-GAP-AND-BASELINE.md 和优先级，提交后停止。
+
+## M3｜QwenPaw：先解决采集漏报与来源健康
+
+> 按M1/M2真正的失败证据小步优化官方/垂媒栏目巡检、原始发布时间/正文验证、补搜与来源健康；先看每源成功率/独立高价值事件贡献，调频不能只看抓取量；SEARCH_ONLY不得声称官方覆盖，验证码/登录受限只能记录失败。维持正式历史事件与采集缓存兼容，至少两段闭合窗口对照，提交测试和源贡献表后停止。
+
+## M4｜QwenPaw：事件去重、八维质量门与唯一账本
+
+> 以已有账本作为唯一权威，不要自创新的第二个正式事件库；从M2验证过的缺陷入手，沙箱中验证 article_id/event_id分离、event/announcement/publication/effective/first_seen日期、SAME_OCCURRENCE与SAME_STORY区别、后续进展和superseded、首新增重复再运行1→0、权重程序重算和hard downgrade。使用UNKNOWN复核，不把标题列举当全文事实。真实数据先快照后改，非生产运行验证通过再申请切换，提交后停止。
+
+## M5｜QwenPaw：既有模型的使用质量、调用成本和故障控制（不接入模型）
+
+> 用户已经在NAS配置所有需要的模型，且倾向统一使用RightCode「百亿补贴」DeepSeek Flash，**选择由用户完成**。本阶段不重新配置Key、Provider、base URL，不切换模型，不开发峰谷调度，不做三渠道采购对照。只记录既有模型实际端到端调用的输入/输出/cache tokens、响应耗时、结构化JSON成功率、错误类型、每条有效事件/每次周报成本；根据现有代码完善可观测性、明确预算上限、429/超时有限重试、失败后不发不合格报告。涉及生产改动先影子运行；一阶段提交报告并停止。
+
+## M6｜QwenPaw：周/月/年报、音频与邮件可靠性交付（dry-run）
+
+> 每日只入池、不发日报。周/月/年从唯一已核实事件库按闭合窗口生成事实证据包、来源覆盖统计、少而精的经营洞察（事实、机制、影响、具体动作、KPI和反证）；用现有Flash制作内容，复用已存在音频工具和邮件流程。先在NAS测试目录dry-run检查 Markdown/HTML与MP3音频，可追溯来源、没有无依据销售数据。核查日期参数、退出码、覆盖率门禁和投递去重；**未经用户另行批准不真正发送邮件**。提交后停止。
+
+## M7｜QwenPaw：确定性调度、影子运行、验收与切换
+
+> 在原NAS现有Docker环境里，查明QwenPaw Agent cron与其他系统调度是否重叠；按照只有一个权威调度、程序无需模型先启动的原则，选取最简单可靠的NAS任务调度方式，先与生产隔离影子运行至少一个自然周，记录启动/完成/发现质量/费用/报表音频/失败恢复。提供准确启停、恢复与回滚步骤，**用户批准后才实际改正式cron和邮件投递**，不能双跑。提交门禁评估后停止。
+
+---
+
+## 第一条发给 QwenPaw 的任务（仅在Muse完成M0后）
+
+> 你一直运行在现有NAS的Docker里，没有任何迁移任务。请阅读GitHub主分支 docs/11_20261025_nas_qwenpaw_aihot_architecture_decision.md、docs/12_20261025_qwenpaw_step_by_step_execution.md 和现有代码，**本轮只执行 M1，只读NAS环境审计**。Muse的旧内容由Muse自己清理，你不要处理；NAS各模型已由用户接好并自行选择RightCode「百亿补贴」DeepSeek Flash，你不要配置模型/Key或按峰谷安排任务。提供真实日志及来源贡献、调度与存储事实、保留/改造/删除候选清单，提交脱敏报告后暂停，等ChatGPT复审。

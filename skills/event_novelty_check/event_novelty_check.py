@@ -436,6 +436,7 @@ def event_novelty_check(
                 "created_at": datetime.now(timezone(timedelta(hours=8))).isoformat(),
                 "total_events": len(novelty_events),
                 "novelty_stats": dict(stats),
+                "ledger_entries": len(ledger),
             },
             "events": novelty_events,
         }

@@ -2252,7 +2252,11 @@ def run_daily_pipeline(
     # 仅在主循环未处理时运行
     podcast_ok = False
     gp_step_in_main = any(s["name"] == "generate_podcast" for s in step_results)
-    if not gp_step_in_main:
+    # R2-A: an explicit end_step must suppress all post-step side effects.
+    # Without this guard, --end-step analyze still generated a podcast script
+    # and spent LLM/TTS time after the requested shadow scope was complete.
+    podcast_within_scope = end_step is None or STEP_ORDER.index("generate_podcast") <= end_idx
+    if not gp_step_in_main and podcast_within_scope:
         gp_step = {
             "name": "generate_podcast",
             "status": "pending",

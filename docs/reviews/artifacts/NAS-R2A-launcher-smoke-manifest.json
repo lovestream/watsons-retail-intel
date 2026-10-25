@@ -1,0 +1,84 @@
+{
+  "counts": {
+    "cleaned_articles": 1,
+    "events_analyzed": 4,
+    "events_raw": 4,
+    "events_scored": 4,
+    "events_temporal": 4
+  },
+  "date": "2026-10-11",
+  "end_step": "analyze",
+  "errors": [],
+  "exit_code": 0,
+  "finished_at": "2026-10-25T15:06:55.888787Z",
+  "force": true,
+  "heartbeat_at": "2026-10-25T15:06:55.888846Z",
+  "mode": "shadow",
+  "no_signal": false,
+  "pid": 18833,
+  "pipeline_module": "skills.run_daily_pipeline.run_daily_pipeline",
+  "pipeline_ok": true,
+  "project_root": "/tmp/r2a_launcher_real",
+  "reason": "complete_event_pool",
+  "reportable_count": 0,
+  "run_id": "actual-launcher-smoke",
+  "schema_version": 1,
+  "send_email": false,
+  "sendable": false,
+  "start_step": "extract",
+  "started_at": "2026-10-25T15:06:44.372927Z",
+  "status": "success",
+  "steps": {
+    "analyze": {
+      "duration_seconds": 0.012903690338134766,
+      "error": "",
+      "stats": {
+        "analyzed_count": 4,
+        "event_count": 4,
+        "llm_success_count": 0
+      },
+      "status": "success"
+    },
+    "extract": {
+      "duration_seconds": 10.849545001983643,
+      "error": "",
+      "stats": {
+        "event_count": 4,
+        "llm_success_count": 1
+      },
+      "status": "success"
+    },
+    "novelty_check": {
+      "duration_seconds": 0.15642380714416504,
+      "error": "",
+      "stats": {
+        "event_count": 4
+      },
+      "status": "success"
+    },
+    "score": {
+      "duration_seconds": 0.04056119918823242,
+      "error": "",
+      "stats": {
+        "event_count": 4,
+        "scored_count": 4
+      },
+      "status": "success"
+    },
+    "send_daily_report_email": {
+      "duration_seconds": 0,
+      "error": "",
+      "stats": {},
+      "status": "skipped"
+    },
+    "temporal_fact_validation": {
+      "duration_seconds": 0.1946256160736084,
+      "error": "",
+      "stats": {
+        "event_count": 4
+      },
+      "status": "success"
+    }
+  },
+  "updated_at": "2026-10-25T15:06:55.888861Z"
+}

@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-10-25T13:50:00Z",
+  "purpose": "Gate 1 real-model connectivity after the user injected API keys as process environment variables",
+  "credential_channels": {
+    "siliconflow": "env:siliconflow_api_key (aliases: PIPELINE_LLM_API_KEY, PIPELINE_LLM_API_KEY_FILE)",
+    "rightcode-bybt": "env:rightcode_bybt (aliases: PIPELINE_LLM_FALLBACK_KEY, PIPELINE_LLM_FALLBACK_KEY_FILE)"
+  },
+  "secrets_recorded": false,
+  "probes": [
+    {
+      "name": "primary_json_probe",
+      "provider": "siliconflow",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "http_status": 200,
+      "ok": true,
+      "parsed_json": true,
+      "latency_ms": 1445,
+      "usage_tokens": 130,
+      "attempts": 1,
+      "retries": 0
+    },
+    {
+      "name": "fallback_json_probe",
+      "provider": "rightcode-bybt",
+      "model": "deepseek-flash",
+      "http_status": 200,
+      "ok": true,
+      "parsed_json": true,
+      "latency_ms": 2549,
+      "usage_tokens": 47,
+      "attempts": 1,
+      "retries": 0
+    },
+    {
+      "name": "primary_enable_thinking_false_probe",
+      "provider": "siliconflow",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "http_status": 200,
+      "ok": true,
+      "parsed_json": true,
+      "latency_ms": 800,
+      "usage_tokens": 35,
+      "note": "enable_thinking=false shortens ~30s reasoning calls to ~1s and returns clean JSON"
+    },
+    {
+      "name": "fallback_enable_thinking_false_probe",
+      "provider": "rightcode-bybt",
+      "model": "deepseek-flash",
+      "http_status": 200,
+      "ok": false,
+      "error_type": "invalid_json",
+      "content_length": 0,
+      "usage_tokens": 0,
+      "note": "RightCode returns HTTP 200 with empty content when enable_thinking=false; not enabled for fallback"
+    }
+  ],
+  "integration_smoke": {
+    "caller": "skills.utils.llm_client.get_llm_client / check_llm_config / test_llm_connection",
+    "provider_agnostic_client": true,
+    "legacy_opencode_routed": false,
+    "check_llm_config": {
+      "keys_found": true,
+      "key_count": 2,
+      "base_url": "https://api.siliconflow.cn/v1",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "endpoint": "https://api.siliconflow.cn/v1/chat/completions",
+      "key_masks": [
+        "siliconflow:env:siliconflow_api_key",
+        "rightcode-bybt:env:rightcode_bybt"
+      ],
+      "credential_blockers": [],
+      "provider_mode": "provider_agnostic_r1"
+    },
+    "test_llm_connection": {
+      "llm_config_ok": true,
+      "api_reachable": true,
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "parsed_json_ok": true,
+      "error_message": ""
+    }
+  },
+  "gate1_result": "PASS — both configured providers returned valid JSON with real credentials; no ENC bridge required.",
+  "honesty_note": "Probe token counts are reported by the provider response. They are separate from the 20-sample run and from development retries; exact billed totals must be reconciled in the provider console."
+}

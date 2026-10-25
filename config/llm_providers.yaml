@@ -1,0 +1,59 @@
+# R1 config draft — Python pipeline LLM providers (NO SECRETS HERE)
+# Isolated branch only; not merged to production until ChatGPT review + R2 approval.
+version: 1
+
+policy:
+  primary: siliconflow
+  fallback:
+    - rightcode-bybt
+  allow_fallback: true
+  max_transient_retries: 2          # 429/5xx/timeout only; 400 never retried
+  max_empty_content_retries: 1
+  max_http_requests_per_task: 6     # hard stop against request storms
+  max_http_requests_per_process: 200
+  wall_clock_seconds: 120
+  request_timeout_seconds: 90
+  disabled_providers:
+    - opencode                      # dead 4-entry pool; never a fallback
+    - opencode-keyless
+    - gpt-5.4-xhigh                 # expensive; never auto-invoked
+
+providers:
+  siliconflow:
+    base_url: https://api.siliconflow.cn/v1
+    model: deepseek-ai/DeepSeek-V4.1-Flash
+    timeout: 90
+    json_mode: true
+    # Verified 2026-10-25: SiliconFlow accepts enable_thinking=false and
+    # returns pure JSON ~0.8s instead of reasoning text (~30s).
+    extra_body:
+      enable_thinking: false
+    credential:
+      env: siliconflow_api_key
+      env_aliases: [PIPELINE_LLM_API_KEY]
+      file_env: PIPELINE_LLM_API_KEY_FILE
+    # No price is asserted here: actual billing must be verified from the
+    # provider console. The test budget is expressed in HTTP calls, not money.
+    pricing:
+      verified: false
+      currency: CNY
+
+  rightcode-bybt:
+    base_url: https://rightapi.ai/v1
+    model: deepseek-flash
+    timeout: 90
+    json_mode: true
+    credential:
+      env: rightcode_bybt
+      env_aliases: [PIPELINE_LLM_FALLBACK_KEY]
+      file_env: PIPELINE_LLM_FALLBACK_KEY_FILE
+    pricing:
+      verified: false
+      currency: CNY
+
+# Logical names used by model_router.yaml callers. They are never sent verbatim.
+model_aliases:
+  pipeline-deepseek-flash: siliconflow
+  deepseek-v4-flash-free: siliconflow
+  deepseek-v4-flash: siliconflow
+  deepseek-flash: siliconflow

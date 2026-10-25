@@ -1,0 +1,1313 @@
+{
+  "mode": "real",
+  "generated_at": "2026-10-25T13:47:05.181668+00:00",
+  "providers": "siliconflow deepseek-ai/DeepSeek-V4.1-Flash; fallback rightcode-bybt deepseek-flash",
+  "samples_total": 20,
+  "json_parsed": 20,
+  "accepted": 20,
+  "rejected": 0,
+  "analyses_ok": 20,
+  "analysis_pairing_ok": 20,
+  "score_dimensions": [
+    "strategic_importance",
+    "watsons_relevance",
+    "impact_scope",
+    "source_credibility",
+    "data_richness",
+    "actionability",
+    "time_sensitivity",
+    "novelty"
+  ],
+  "score_integrity": {
+    "weighted_math_errors": [],
+    "score_range_errors": [],
+    "all_events_have_8_dims": true
+  },
+  "priority_counts": {
+    "P0": 0,
+    "P1": 5,
+    "P2": 5,
+    "ARCHIVE": 10
+  },
+  "counters": {
+    "task_calls": 40,
+    "http_requests": 40,
+    "provider_attempts": 40,
+    "retries": 0,
+    "error_events": 0,
+    "fallback_calls": 0,
+    "tokens": {
+      "prompt": 45311,
+      "completion": 29827,
+      "total": 75138
+    },
+    "usage_by_provider": {
+      "siliconflow": {
+        "prompt": 45311,
+        "completion": 29827,
+        "total": 75138,
+        "requests": 40
+      }
+    },
+    "latency_ms": 283948.0
+  },
+  "rows": [
+    {
+      "sample_id": "R1S01",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "2",
+          "2030"
+        ],
+        "title_bigrams": [
+          "03",
+          "0年",
+          "20",
+          "30",
+          "预测"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "该预测确认即时零售是长期结构性增长赛道，对屈臣氏即时零售渠道的战略权重构成正向支撑，但属于2030年远期行业总量判断，不包含平台份额、品类结构或屈臣氏可获取份额，短期不改变竞争格局与资源分配，经营意义偏方向性而非可执行性。"
+    },
+    {
+      "sample_id": "R1S02",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "30%"
+        ],
+        "title_bigrams": [
+          "30",
+          "GM",
+          "MV",
+          "商G",
+          "目标",
+          "阿里"
+        ]
+      },
+      "action_level": "test",
+      "watsons_impact": "阿里将即时零售目标提升至电商GMV的30%，意味着淘宝闪购将获得更强的平台资源倾斜和流量入口，屈臣氏作为淘宝闪购上的美妆个护供给方，有机会争取更多平台坑位、补贴和曝光资源；但同时平台对供给密度、履约时效和货盘丰富度的要求会同步提高，若屈臣氏货盘或门店覆盖跟不上，可能在平台资源分配中被边缘化。"
+    },
+    {
+      "sample_id": "R1S03",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "1.8%"
+        ],
+        "title_bigrams": [
+          ".8",
+          "1.",
+          "上市",
+          "国货",
+          "市公",
+          "营收",
+          "货美"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "国货美妆头部上市公司整体营收增速仅1.8%，且多家净利润下滑，说明国货美妆供给端增长乏力、盈利承压。对屈臣氏而言，这既意味着国货品牌方可能加大渠道促销与库存清理力度（短期可争取更优供货价与活动资源），也意味着国货品类整体动销偏弱，若屈臣氏国货美妆占比高，可能拖累相关品类GMV与毛利。该事件为行业宏观信号，与屈臣氏直接经营动作的关联度较低。"
+    },
+    {
+      "sample_id": "R1S04",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "国货",
+          "妆榜",
+          "榜首",
+          "珀莱",
+          "联国",
+          "莱雅",
+          "蝉联",
+          "货美"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "珀莱雅蝉联国货美妆榜首，反映国货头部品牌集中度持续提升，对屈臣氏美妆货盘结构和品牌合作议价可能形成间接影响，但该事件为行业宏观数据，未涉及屈臣氏具体渠道或经营动作，直接经营意义较弱。"
+    },
+    {
+      "sample_id": "R1S05",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "2",
+          "3.6%",
+          "5.5%"
+        ],
+        "title_bigrams": [
+          ".5",
+          ".6",
+          "5."
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "大盘数据显示美妆电商增速由3.6%回升至5.5%，说明品类需求端在回暖，但该数据覆盖的是四大平台B2C美妆大盘，不包含即时零售与To B渠道，无法直接推导屈臣氏各渠道的份额变化。对屈臣氏的意義在于：品类大盘扩张意味着平台美妆流量池变大，屈臣氏在天猫、京东、抖音的店铺有机会承接增量，但增速仍属温和，且未披露品牌/店铺层面拆分，暂不足以支撑货盘或投放的结构性调整。"
+    },
+    {
+      "sample_id": "R1S06",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "16"
+        ],
+        "title_bigrams": [
+          "BO",
+          "OP",
+          "口腔",
+          "抖音",
+          "护理",
+          "榜首",
+          "理品",
+          "腔护"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "BOP在抖音口腔护理品类从第16位跃升至榜首，说明抖音内容电商对新锐口腔品牌的孵化能力很强，可能挤压屈臣氏在抖音小时达渠道口腔护理品类的流量和转化空间；但事件只反映BOP在抖音电商的排名，未涉及即时零售履约或屈臣氏具体货盘，对屈臣氏即时零售的直接影响有限，属于竞争格局层面的观察信号。"
+    },
+    {
+      "sample_id": "R1S07",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "150%",
+          "200%"
+        ],
+        "title_bigrams": [
+          "-2",
+          "00",
+          "15",
+          "20",
+          "50",
+          "品类",
+          "士护",
+          "得物"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "得物男士护肤品类环比增长150%-200%，说明男士护肤在年轻男性用户中存在增量需求，但得物不在屈臣氏当前电商渠道矩阵内，短期对即时零售、B2C、To B渠道无直接经营影响；该信号更多反映男士护肤品类整体热度上升，可作为品类趋势参考。"
+    },
+    {
+      "sample_id": "R1S08",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "Ae",
+          "es",
+          "op",
+          "so",
+          "三家",
+          "家首",
+          "首店"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "Aesop关闭三家首店属于高端小众护肤品牌的线下渠道调整，与屈臣氏电商即时零售、B2C、To B渠道无直接关联；对屈臣氏门店覆盖和竞争格局的影响有限，更多反映高端品牌线下扩张趋于谨慎。"
+    },
+    {
+      "sample_id": "R1S09",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "假宣",
+          "处罚",
+          "宣传",
+          "直播",
+          "薇诺",
+          "虚假",
+          "诺娜"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "薇诺娜是屈臣氏渠道内的重要美妆品牌，此次处罚针对的是品牌方自运营快手直播间的虚假宣传行为，与屈臣氏各渠道的商品销售和履约无直接关联。但品牌合规负面舆情可能影响消费者对薇诺娜的信任度，进而波及屈臣氏线上渠道该品牌的转化率和平台活动资源位审核。"
+    },
+    {
+      "sample_id": "R1S10",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "38"
+        ],
+        "title_bigrams": [
+          "38",
+          "佳琦",
+          "小样",
+          "播间",
+          "李佳",
+          "琦直",
+          "直播"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "李佳琦直播间将小样单独做成38大促预热专场，反映头部直播渠道正在把小样从赠品升级为独立货盘和引流品。屈臣氏电商当前无直接对应动作，但小样货盘在直播渠道的独立化可能影响大促预热期的流量分配和消费者对小样价值的预期。"
+    },
+    {
+      "sample_id": "R1S11",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "11936",
+          "2",
+          "2025",
+          "48.3%"
+        ],
+        "title_bigrams": [
+          "02",
+          "11",
+          "19",
+          "20",
+          "25",
+          "36",
+          "5年",
+          "6亿"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "商务部披露2025年即时零售规模11936亿元、同比增48.3%，说明即时零售仍是高速扩容赛道，屈臣氏覆盖的五个即时零售渠道处于增量市场而非存量博弈。但该数据为宏观行业口径，未拆分美妆个护品类、平台份额或屈臣氏自身表现，无法直接推导出屈臣氏可获得的增量空间，对具体渠道运营动作的指向性弱。"
+    },
+    {
+      "sample_id": "R1S12",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "三体",
+          "专利",
+          "体胶",
+          "利三",
+          "原技",
+          "可复",
+          "复美",
+          "技术"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "可复美在行业展会解读专利三体胶原技术，属于品牌技术背书动作，短期不直接改变屈臣氏渠道的价格、流量或履约格局；但重组胶原蛋白功效护肤品类热度可能延续，影响屈臣氏相关货盘的选品与陈列权重。"
+    },
+    {
+      "sample_id": "R1S13",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "健康",
+          "品类",
+          "场景",
+          "康场",
+          "永辉",
+          "超市",
+          "辉超"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "该事件为永辉超市线下门店健康场景改造，涉及品类为小吃、熟食、海味厨房等食品类，与屈臣氏美妆个护电商经营无直接关联；watsons_relevance 评分为0，对即时零售、B2C、To B渠道均无实质影响。"
+    },
+    {
+      "sample_id": "R1S14",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "3",
+          "300"
+        ],
+        "title_bigrams": [
+          "00",
+          "0亿",
+          "30",
+          "三年",
+          "售行",
+          "团闪",
+          "投入",
+          "支持"
+        ]
+      },
+      "action_level": "test",
+      "watsons_impact": "美团闪购三年300亿投入将扩大即时零售行业基础设施与营销资源池，屈臣氏作为美团闪购美妆个护核心KA，有机会争取更多平台补贴、营销坑位和履约基建支持，但也意味着平台内品牌竞争加剧，资源获取需要更主动的BD动作。"
+    },
+    {
+      "sample_id": "R1S15",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "台补",
+          "外卖",
+          "战熄",
+          "熄火",
+          "补贴",
+          "贴战"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "外卖补贴战熄火意味着美团、阿里、京东将资源从餐饮外卖补贴转向即时零售竞争，屈臣氏所在的闪购/秒送/小时达渠道可能面临平台补贴结构调整：餐饮类补贴减少，即时零售品类（含美妆个护）可能获得更多平台资源位和补贴倾斜，但也可能因平台整体补贴收缩而面临流量成本上升。事件本身为行业趋势信号，缺乏屈臣氏具体数据，影响方向不确定。"
+    },
+    {
+      "sample_id": "R1S16",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "1.3%",
+          "5"
+        ],
+        "title_bigrams": [
+          ".3",
+          "1.",
+          "消费"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "宏观消费增速放缓至1.3%、5月单月转负，说明整体消费大盘偏弱，美妆个护作为可选消费可能承压；但事件未提供屈臣氏相关品类或渠道的具体数据，对屈臣氏电商经营的直接指向性弱，更多是外部环境背景信号。"
+    },
+    {
+      "sample_id": "R1S17",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "&A",
+          "AI",
+          "Da",
+          "I商",
+          "a&",
+          "at",
+          "ta",
+          "业分"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "雅诗兰黛集团在纽约招聘Data&AI商业分析副总裁，岗位职责覆盖定价、促销和零售分析产品，说明上游品牌方正在强化数据驱动的定价与促销能力。对屈臣氏电商而言，这属于品牌侧组织能力建设的早期信号，短期不改变渠道流量、货盘或履约格局，但中长期可能影响品牌在促销节奏、价格带管理和渠道资源分配上的谈判方式。"
+    },
+    {
+      "sample_id": "R1S18",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "10",
+          "24",
+          "3"
+        ],
+        "title_bigrams": [
+          "24",
+          "3条",
+          "4条",
+          "AI",
+          "I内",
+          "中顺",
+          "内容",
+          "出3"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "中顺洁柔的AI内容生产方法（24条视频跑出3条爆款、两周做出10万粉抖音账号）属于跨品类品牌的内容运营实践，对屈臣氏即时零售的抖音小时达内容获客有参考价值，但不构成直接竞争或渠道冲击；屈臣氏自身内容产能与爆款率是否可对标尚不明确。"
+    },
+    {
+      "sample_id": "R1S19",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "35%"
+        ],
+        "title_bigrams": [
+          "35",
+          "占比",
+          "有品",
+          "比达",
+          "牌占",
+          "盒马",
+          "自有",
+          "马自"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "盒马自有品牌占比达35%反映零售同业在货盘结构上向自有品牌倾斜，但盒马并非屈臣氏即时零售或B2C渠道的直接对标平台，对屈臣氏电商当前经营无直接冲击，仅作为货盘竞争格局的观察信号。"
+    },
+    {
+      "sample_id": "R1S20",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "11",
+          "30",
+          "40"
+        ],
+        "title_bigrams": [
+          "-4",
+          "0-",
+          "0天",
+          "11",
+          "30",
+          "40",
+          "双1",
+          "周期"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "双11周期拉长至30-40天，意味着平台流量分发节奏更分散、大促蓄水期提前，屈臣氏B2C旗舰店与即时零售渠道需更早进入备战状态；长周期可能摊薄单日爆发力，但也给货盘分层、活动排期和库存周转留出更多调整窗口。该事件为行业共性节奏信息，对屈臣氏的直接冲击有限，更多是排期参考。"
+    }
+  ],
+  "audit_events": [
+    {
+      "event_id": "E20261025_0101",
+      "event_title": "商务部研究院预测2030年即时零售市场规模突破2万亿元",
+      "fact_preview": "商务部研究院预测2030年即时零售市场规模将突破2万亿元。",
+      "evidence_preview": "商务部研究院预测2030年即时零售市场规模将突破2万亿元。",
+      "source_url": "https://36kr.com/p/3966091092401667",
+      "published_at": "2026-09-02",
+      "scores": {
+        "strategic_importance": 5,
+        "watsons_relevance": 4,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 4,
+        "actionability": 2,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 3.86,
+      "priority": "P1",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "2",
+          "2030"
+        ],
+        "title_bigrams": [
+          "03",
+          "0年",
+          "20",
+          "30",
+          "预测"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "该预测确认即时零售是长期结构性增长赛道，对屈臣氏即时零售渠道的战略权重构成正向支撑，但属于2030年远期行业总量判断，不包含平台份额、品类结构或屈臣氏可获取份额，短期不改变竞争格局与资源分配，经营意义偏方向性而非可执行性。"
+    },
+    {
+      "event_id": "E20261025_0102",
+      "event_title": "阿里为即时零售设定占电商GMV 30%的新目标",
+      "fact_preview": "阿里为即时零售设定新目标，即占阿里电商GMV的30%，未给出具体实现期限；沿用阿里过往公开大盘测算，30%占比对应交易规模接近2.25万亿。",
+      "evidence_preview": "占阿里电商GMV的30%，是阿里为即时零售定的新目标。",
+      "source_url": "https://36kr.com/p/3966048685366535",
+      "published_at": "2026-09-02",
+      "scores": {
+        "strategic_importance": 5,
+        "watsons_relevance": 4,
+        "impact_scope": 4,
+        "source_credibility": 4.0,
+        "data_richness": 5,
+        "actionability": 4,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 4.12,
+      "priority": "P1",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "30%"
+        ],
+        "title_bigrams": [
+          "30",
+          "GM",
+          "MV",
+          "商G",
+          "目标",
+          "阿里"
+        ]
+      },
+      "action_level": "test",
+      "watsons_impact": "阿里将即时零售目标提升至电商GMV的30%，意味着淘宝闪购将获得更强的平台资源倾斜和流量入口，屈臣氏作为淘宝闪购上的美妆个护供给方，有机会争取更多平台坑位、补贴和曝光资源；但同时平台对供给密度、履约时效和货盘丰富度的要求会同步提高，若屈臣氏货盘或门店覆盖跟不上，可能在平台资源分配中被边缘化。"
+    },
+    {
+      "event_id": "E20261025_0103",
+      "event_title": "2026年上半年国货美妆TOP10上市公司合计营收约300亿元，同比仅增1.8%",
+      "fact_preview": "《FBeauty未来迹》统计显示，2026年上半年国货美妆TOP10上市公司合计营收约300亿元，同比增长约1.8%，十家公司中7家保持增长，仅毛戈平增速超过20%，多家公司净利润出现不同程度下滑。",
+      "evidence_preview": "2026年上半年，国货美妆TOP10上市公司合计营收约300亿元，同比仅增长1.8%左右。十家公司中虽然有7家保持增长，但增速超过20%的只有毛戈平；与此同时，",
+      "source_url": "https://36kr.com/p/3968708637103751",
+      "published_at": "2026-09-04",
+      "scores": {
+        "strategic_importance": 4,
+        "watsons_relevance": 1,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 5,
+        "actionability": 2,
+        "time_sensitivity": 2.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.78,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "1.8%"
+        ],
+        "title_bigrams": [
+          ".8",
+          "1.",
+          "上市",
+          "国货",
+          "市公",
+          "营收",
+          "货美"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "国货美妆头部上市公司整体营收增速仅1.8%，且多家净利润下滑，说明国货美妆供给端增长乏力、盈利承压。对屈臣氏而言，这既意味着国货品牌方可能加大渠道促销与库存清理力度（短期可争取更优供货价与活动资源），也意味着国货品类整体动销偏弱，若屈臣氏国货美妆占比高，可能拖累相关品类GMV与毛利。该事件为行业宏观信号，与屈臣氏直接经营动作的关联度较低。"
+    },
+    {
+      "event_id": "E20261025_0104",
+      "event_title": "珀莱雅2026年上半年营收53.75亿元蝉联国货美妆榜首",
+      "fact_preview": "2026年上半年，珀莱雅营收达53.75亿元，连续三年蝉联国货美妆上市企业十强榜首。",
+      "evidence_preview": "珀莱雅继续稳居榜首，营收达53.75亿元",
+      "source_url": "https://www.pinguan.com/article/content/23035",
+      "published_at": "2026-10-10",
+      "scores": {
+        "strategic_importance": 4,
+        "watsons_relevance": 1,
+        "impact_scope": 2,
+        "source_credibility": 3.0,
+        "data_richness": 5,
+        "actionability": 2,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 2.58,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "国货",
+          "妆榜",
+          "榜首",
+          "珀莱",
+          "联国",
+          "莱雅",
+          "蝉联",
+          "货美"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "珀莱雅蝉联国货美妆榜首，反映国货头部品牌集中度持续提升，对屈臣氏美妆货盘结构和品牌合作议价可能形成间接影响，但该事件为行业宏观数据，未涉及屈臣氏具体渠道或经营动作，直接经营意义较弱。"
+    },
+    {
+      "event_id": "E20261025_0105",
+      "event_title": "2026上半年主流电商美妆GMV达2708.62亿元，同比增长5.5%",
+      "fact_preview": "2026年上半年，淘宝+天猫+京东+抖音四大主流电商平台美妆品类合计GMV为2708.62亿元，同比增长5.5%，增速较2025年同期（2567.53亿元，+3.6%）提升近2个百分点。",
+      "evidence_preview": "2026上半年主流电商美妆成绩单出炉：总共卖了2708.62亿元，同比增长5.5%。",
+      "source_url": "https://www.pinguan.com/article/content/22950",
+      "published_at": "2026-07-24",
+      "scores": {
+        "strategic_importance": 4,
+        "watsons_relevance": 2,
+        "impact_scope": 4,
+        "source_credibility": 3.0,
+        "data_richness": 5,
+        "actionability": 2,
+        "time_sensitivity": 2.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 3.14,
+      "priority": "P2",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "2",
+          "3.6%",
+          "5.5%"
+        ],
+        "title_bigrams": [
+          ".5",
+          ".6",
+          "5."
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "大盘数据显示美妆电商增速由3.6%回升至5.5%，说明品类需求端在回暖，但该数据覆盖的是四大平台B2C美妆大盘，不包含即时零售与To B渠道，无法直接推导屈臣氏各渠道的份额变化。对屈臣氏的意義在于：品类大盘扩张意味着平台美妆流量池变大，屈臣氏在天猫、京东、抖音的店铺有机会承接增量，但增速仍属温和，且未披露品牌/店铺层面拆分，暂不足以支撑货盘或投放的结构性调整。"
+    },
+    {
+      "event_id": "E20261025_0106",
+      "event_title": "BOP波普专研登顶抖音口腔护理品牌榜首",
+      "fact_preview": "2026年上半年，BOP波普专研在抖音口腔护理品类排名登顶榜首，从2024年上半年的第16位、2025年进入前三，跃升至第一。",
+      "evidence_preview": "从2024年上半年的品类第16位，到2025年进入前三，再到2026年上半年登顶榜首。",
+      "source_url": "https://www.pinguan.com/article/content/23039.html",
+      "published_at": "2026-09-04",
+      "scores": {
+        "strategic_importance": 4,
+        "watsons_relevance": 2,
+        "impact_scope": 4,
+        "source_credibility": 3.0,
+        "data_richness": 1,
+        "actionability": 4,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 2.94,
+      "priority": "P2",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "16"
+        ],
+        "title_bigrams": [
+          "BO",
+          "OP",
+          "口腔",
+          "抖音",
+          "护理",
+          "榜首",
+          "理品",
+          "腔护"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "BOP在抖音口腔护理品类从第16位跃升至榜首，说明抖音内容电商对新锐口腔品牌的孵化能力很强，可能挤压屈臣氏在抖音小时达渠道口腔护理品类的流量和转化空间；但事件只反映BOP在抖音电商的排名，未涉及即时零售履约或屈臣氏具体货盘，对屈臣氏即时零售的直接影响有限，属于竞争格局层面的观察信号。"
+    },
+    {
+      "event_id": "E20261025_0107",
+      "event_title": "得物男士护肤品类环比增长150%-200%",
+      "fact_preview": "得物平台男士护肤品类出现环比150%-200%的增长，吸引护肤品牌进入该品类寻找增量。",
+      "evidence_preview": "听说得物男士护肤非常猛，“环比增长150%-200%”。",
+      "source_url": "https://www.pinguan.com/article/content/23038.html",
+      "published_at": "2026-09-03",
+      "scores": {
+        "strategic_importance": 1,
+        "watsons_relevance": 2,
+        "impact_scope": 2,
+        "source_credibility": 3.0,
+        "data_richness": 4,
+        "actionability": 3,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 2.32,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "150%",
+          "200%"
+        ],
+        "title_bigrams": [
+          "-2",
+          "00",
+          "15",
+          "20",
+          "50",
+          "品类",
+          "士护",
+          "得物"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "得物男士护肤品类环比增长150%-200%，说明男士护肤在年轻男性用户中存在增量需求，但得物不在屈臣氏当前电商渠道矩阵内，短期对即时零售、B2C、To B渠道无直接经营影响；该信号更多反映男士护肤品类整体热度上升，可作为品类趋势参考。"
+    },
+    {
+      "event_id": "E20261025_0108",
+      "event_title": "Aesop连关三家“首店”",
+      "fact_preview": "Aesop关闭了三家“首店”。",
+      "evidence_preview": "“网红”护肤品Aesop连关三家“首店”",
+      "source_url": "https://jiemian.com/article/15057991.html",
+      "published_at": "2026-09-05",
+      "scores": {
+        "strategic_importance": 2,
+        "watsons_relevance": 1,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 1,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.28,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "Ae",
+          "es",
+          "op",
+          "so",
+          "三家",
+          "家首",
+          "首店"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "Aesop关闭三家首店属于高端小众护肤品牌的线下渠道调整，与屈臣氏电商即时零售、B2C、To B渠道无直接关联；对屈臣氏门店覆盖和竞争格局的影响有限，更多反映高端品牌线下扩张趋于谨慎。"
+    },
+    {
+      "event_id": "E20261025_0109",
+      "event_title": "薇诺娜因直播虚假宣传被上海市监局行政处罚",
+      "fact_preview": "上海贝泰妮生物科技有限公司于2026年1月通过自运营快手账号“薇诺娜旗舰店”以网络直播形式带货销售化妆品，涉嫌虚假宣传，上海市市场监督管理局于2026年3月在广告监测中发现并作出行政处罚。",
+      "evidence_preview": "据上海市市场监督管理局发布的行政处罚书披露，2026年3月，其在广告监测中发现薇诺娜品牌在网络直播销售商品期间，涉嫌实施虚假宣传行为。经核查，上海贝泰妮生物科技",
+      "source_url": "https://www.huxiu.com/article/4888390.html",
+      "published_at": "2026-09-03",
+      "scores": {
+        "strategic_importance": 1,
+        "watsons_relevance": 2,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 1,
+        "actionability": 4,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.84,
+      "priority": "P2",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "假宣",
+          "处罚",
+          "宣传",
+          "直播",
+          "薇诺",
+          "虚假",
+          "诺娜"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "薇诺娜是屈臣氏渠道内的重要美妆品牌，此次处罚针对的是品牌方自运营快手直播间的虚假宣传行为，与屈臣氏各渠道的商品销售和履约无直接关联。但品牌合规负面舆情可能影响消费者对薇诺娜的信任度，进而波及屈臣氏线上渠道该品牌的转化率和平台活动资源位审核。"
+    },
+    {
+      "event_id": "E20261025_0110",
+      "event_title": "李佳琦直播间开设38小样节",
+      "fact_preview": "2026年2月，李佳琦直播间开出“38小样节”，将小样作为大促预热专场进行销售。",
+      "evidence_preview": "今年2月，李佳琦直播间开出“38小样节”",
+      "source_url": "https://36kr.com/p/3967016145328006",
+      "published_at": "2026-09-03",
+      "scores": {
+        "strategic_importance": 1,
+        "watsons_relevance": 0,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 1,
+        "actionability": 4,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 1.8,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "38"
+        ],
+        "title_bigrams": [
+          "38",
+          "佳琦",
+          "小样",
+          "播间",
+          "李佳",
+          "琦直",
+          "直播"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "李佳琦直播间将小样单独做成38大促预热专场，反映头部直播渠道正在把小样从赠品升级为独立货盘和引流品。屈臣氏电商当前无直接对应动作，但小样货盘在直播渠道的独立化可能影响大促预热期的流量分配和消费者对小样价值的预期。"
+    },
+    {
+      "event_id": "E20261025_0111",
+      "event_title": "商务部披露2025年即时零售规模达11936亿元",
+      "fact_preview": "商务部流通产业促进中心披露，2025年我国即时零售规模达11936亿元，同比增长48.3%，预计2030年将达到2万亿元；2025年全国即时配送订单量超过600亿个。",
+      "evidence_preview": "商务部流通产业促进中心披露的数据显示：2025年我国即时零售规模达11936亿元，同比增长48.3%，预计2030年将达到2万亿元。2025年全国即时配送订单量",
+      "source_url": "https://36kr.com/p/3995747028160647",
+      "published_at": "2026-09-23",
+      "scores": {
+        "strategic_importance": 5,
+        "watsons_relevance": 4,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 5,
+        "actionability": 2,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 3.96,
+      "priority": "P1",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "11936",
+          "2",
+          "2025",
+          "48.3%"
+        ],
+        "title_bigrams": [
+          "02",
+          "11",
+          "19",
+          "20",
+          "25",
+          "36",
+          "5年",
+          "6亿"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "商务部披露2025年即时零售规模11936亿元、同比增48.3%，说明即时零售仍是高速扩容赛道，屈臣氏覆盖的五个即时零售渠道处于增量市场而非存量博弈。但该数据为宏观行业口径，未拆分美妆个护品类、平台份额或屈臣氏自身表现，无法直接推导出屈臣氏可获得的增量空间，对具体渠道运营动作的指向性弱。"
+    },
+    {
+      "event_id": "E20261025_0112",
+      "event_title": "可复美参展2026CAME并解读专利三体胶原技术",
+      "fact_preview": "2026年9月，巨子生物旗下可复美受邀参展在南京扬子江国际会议中心举行的2026中国（国际）香料香精化妆品行业年会暨精品博览会（2026CAME），巨子生物首席技术官段志广在“化妆品创新发展前沿技术交流会”分论坛发表题为《从分子设计到精准递",
+      "evidence_preview": "2026年9月，南京扬子江国际会议中心，2026中国（国际）香料香精化妆品行业年会暨精品博览会（2026CAME）在此举行……作为国货头部品牌，巨子生物旗下可复",
+      "source_url": "https://www.pinguan.com/article/content/23066.html",
+      "published_at": "2026-09-24",
+      "scores": {
+        "strategic_importance": 1,
+        "watsons_relevance": 2,
+        "impact_scope": 5,
+        "source_credibility": 3.0,
+        "data_richness": 1,
+        "actionability": 4,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 2.52,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "三体",
+          "专利",
+          "体胶",
+          "利三",
+          "原技",
+          "可复",
+          "复美",
+          "技术"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "可复美在行业展会解读专利三体胶原技术，属于品牌技术背书动作，短期不直接改变屈臣氏渠道的价格、流量或履约格局；但重组胶原蛋白功效护肤品类热度可能延续，影响屈臣氏相关货盘的选品与陈列权重。"
+    },
+    {
+      "event_id": "E20261025_0113",
+      "event_title": "永辉超市福州奥体中心店十大健康场景落地一个月，多品类销售额环比大幅提升",
+      "fact_preview": "永辉超市福州奥体中心店落地十大健康场景仅一个月，市井小吃销售额环比提升近80%，海味厨房产品环比增长近75%，熟食小龙虾环比增幅超260%。",
+      "evidence_preview": "以福州奥体中心店为例，十大健康场景落地仅一个月，市井小吃销售额环比提升近80%，海味厨房产品环比增长近75%，熟食小龙虾环比增幅超260%。",
+      "source_url": "https://www.cls.cn/detail/2481702",
+      "published_at": "2026-09-26",
+      "scores": {
+        "strategic_importance": 4,
+        "watsons_relevance": 0,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 4,
+        "actionability": 4,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 2.64,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "健康",
+          "品类",
+          "场景",
+          "康场",
+          "永辉",
+          "超市",
+          "辉超"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "该事件为永辉超市线下门店健康场景改造，涉及品类为小吃、熟食、海味厨房等食品类，与屈臣氏美妆个护电商经营无直接关联；watsons_relevance 评分为0，对即时零售、B2C、To B渠道均无实质影响。"
+    },
+    {
+      "event_id": "E20261025_0114",
+      "event_title": "美团闪购宣布未来三年投入300亿元支持即时零售行业伙伴",
+      "fact_preview": "美团副总裁、闪购事业部负责人肖昆在2026美团即时零售产业大会上表示，未来3年美团闪购将在基础设施建设、产品研发、商品营销方面向行业伙伴投入300亿元支持资源。",
+      "evidence_preview": "美团副总裁、闪购事业部负责人肖昆在2026美团即时零售产业大会上表示，未来3年，美团闪购将在基础设施建设、产品研发、商品营销方面向行业伙伴投入300亿元支持资源",
+      "source_url": "https://www.cls.cn/detail/2490220",
+      "published_at": "2026-09-27",
+      "scores": {
+        "strategic_importance": 5,
+        "watsons_relevance": 4,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 3,
+        "actionability": 4,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 4.04,
+      "priority": "P1",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "3",
+          "300"
+        ],
+        "title_bigrams": [
+          "00",
+          "0亿",
+          "30",
+          "三年",
+          "售行",
+          "团闪",
+          "投入",
+          "支持"
+        ]
+      },
+      "action_level": "test",
+      "watsons_impact": "美团闪购三年300亿投入将扩大即时零售行业基础设施与营销资源池，屈臣氏作为美团闪购美妆个护核心KA，有机会争取更多平台补贴、营销坑位和履约基建支持，但也意味着平台内品牌竞争加剧，资源获取需要更主动的BD动作。"
+    },
+    {
+      "event_id": "E20261025_0115",
+      "event_title": "外卖平台补贴战熄火",
+      "fact_preview": "2026年9月，外卖平台补贴战熄火，美团、阿里、京东三巨头转向即时零售竞争，餐饮业需适应新市场环境。",
+      "evidence_preview": "外卖平台补贴战熄火，餐饮业如何适应新市场环境？美团、阿里、京东三巨头如何继续竞逐即时零售？",
+      "source_url": "https://weekly.caixin.com/2026-09-26/102488803.html",
+      "published_at": "2026-09-28",
+      "scores": {
+        "strategic_importance": 5,
+        "watsons_relevance": 4,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 1,
+        "actionability": 4,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 3.84,
+      "priority": "P1",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "台补",
+          "外卖",
+          "战熄",
+          "熄火",
+          "补贴",
+          "贴战"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "外卖补贴战熄火意味着美团、阿里、京东将资源从餐饮外卖补贴转向即时零售竞争，屈臣氏所在的闪购/秒送/小时达渠道可能面临平台补贴结构调整：餐饮类补贴减少，即时零售品类（含美妆个护）可能获得更多平台资源位和补贴倾斜，但也可能因平台整体补贴收缩而面临流量成本上升。事件本身为行业趋势信号，缺乏屈臣氏具体数据，影响方向不确定。"
+    },
+    {
+      "event_id": "E20261025_0116",
+      "event_title": "2026年上半年社会消费品零售总额同比增长1.3%",
+      "fact_preview": "2026年上半年社会消费品零售总额同比增长1.3%，5月份同比下降0.6%。",
+      "evidence_preview": "上半年社会消费品零售总额同比增长1.3%；5月份同比下降0.6%。",
+      "source_url": "https://36kr.com/p/4000041012187010",
+      "published_at": "2026-09-28",
+      "scores": {
+        "strategic_importance": 4,
+        "watsons_relevance": 2,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 4,
+        "actionability": 2,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 2.84,
+      "priority": "P2",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "1.3%",
+          "5"
+        ],
+        "title_bigrams": [
+          ".3",
+          "1.",
+          "消费"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "宏观消费增速放缓至1.3%、5月单月转负，说明整体消费大盘偏弱，美妆个护作为可选消费可能承压；但事件未提供屈臣氏相关品类或渠道的具体数据，对屈臣氏电商经营的直接指向性弱，更多是外部环境背景信号。"
+    },
+    {
+      "event_id": "E20261025_0117",
+      "event_title": "雅诗兰黛集团在纽约招聘Data&AI商业分析副总裁",
+      "fact_preview": "雅诗兰黛集团正在纽约招聘Data&AI商业分析副总裁，基础年薪22.16-37.72万美元（约合人民币151-256万元），奖金与股权激励另计，岗位负责定价、促销和零售分析产品。",
+      "evidence_preview": "雅诗兰黛集团正在纽约招聘Data&AI商业分析副总裁，基础年薪为22.16-37.72万美元（约合人民币151-256万元），奖金与股权激励另计。",
+      "source_url": "https://36kr.com/p/4004093824603783",
+      "published_at": "2026-09-29",
+      "scores": {
+        "strategic_importance": 1,
+        "watsons_relevance": 2,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 3,
+        "actionability": 2,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.4,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [],
+        "title_bigrams": [
+          "&A",
+          "AI",
+          "Da",
+          "I商",
+          "a&",
+          "at",
+          "ta",
+          "业分"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "雅诗兰黛集团在纽约招聘Data&AI商业分析副总裁，岗位职责覆盖定价、促销和零售分析产品，说明上游品牌方正在强化数据驱动的定价与促销能力。对屈臣氏电商而言，这属于品牌侧组织能力建设的早期信号，短期不改变渠道流量、货盘或履约格局，但中长期可能影响品牌在促销节奏、价格带管理和渠道资源分配上的谈判方式。"
+    },
+    {
+      "event_id": "E20261025_0118",
+      "event_title": "中顺洁柔分享AI内容生产实践：24条视频跑出3条爆款",
+      "fact_preview": "中顺洁柔副总裁兼CDO杨森林在虎嗅智库第64期「502线上同行」上分享实践结果：每生产24条视频就能跑出3条爆款内容，两周时间可做出一个拥有10万粉丝的抖音账号。",
+      "evidence_preview": "“每生产24条视频，就能跑出3条爆款内容；两周时间，可以做出一个拥有10万粉丝的抖音账号。”这是中顺洁柔副总裁兼CDO杨森林在虎嗅智库第64期「502线上同行」",
+      "source_url": "https://www.huxiu.com/article/4894574.html",
+      "published_at": "2026-09-30",
+      "scores": {
+        "strategic_importance": 1,
+        "watsons_relevance": 0,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 3,
+        "actionability": 4,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 2.0,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "10",
+          "24",
+          "3"
+        ],
+        "title_bigrams": [
+          "24",
+          "3条",
+          "4条",
+          "AI",
+          "I内",
+          "中顺",
+          "内容",
+          "出3"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "中顺洁柔的AI内容生产方法（24条视频跑出3条爆款、两周做出10万粉抖音账号）属于跨品类品牌的内容运营实践，对屈臣氏即时零售的抖音小时达内容获客有参考价值，但不构成直接竞争或渠道冲击；屈臣氏自身内容产能与爆款率是否可对标尚不明确。"
+    },
+    {
+      "event_id": "E20261025_0119",
+      "event_title": "盒马自有品牌占比达到35%",
+      "fact_preview": "盒马的自有品牌占比已经达到35%。",
+      "evidence_preview": "盒马的自有品牌占比已经摸到 35%",
+      "source_url": "https://app.myzaker.com/news/article.php?pk=6ac45869b15ec0511c488c12",
+      "published_at": "2026-10-06",
+      "scores": {
+        "strategic_importance": 4,
+        "watsons_relevance": 2,
+        "impact_scope": 2,
+        "source_credibility": 1,
+        "data_richness": 3,
+        "actionability": 4,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 2.66,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "35%"
+        ],
+        "title_bigrams": [
+          "35",
+          "占比",
+          "有品",
+          "比达",
+          "牌占",
+          "盒马",
+          "自有",
+          "马自"
+        ]
+      },
+      "action_level": "archive",
+      "watsons_impact": "盒马自有品牌占比达35%反映零售同业在货盘结构上向自有品牌倾斜，但盒马并非屈臣氏即时零售或B2C渠道的直接对标平台，对屈臣氏电商当前经营无直接冲击，仅作为货盘竞争格局的观察信号。"
+    },
+    {
+      "event_id": "E20261025_0120",
+      "event_title": "2026年双11大促周期确定为10月中旬至11月中旬，持续30-40天",
+      "fact_preview": "综合国内8家电商平台大促时间节点，2026年双11从10月中旬启动，持续至11月中旬，整体周期30—40天。",
+      "evidence_preview": "综合国内8家电商平台大促时间节点来看，今年双11从10月中旬启动，持续至11月中旬，整体周期30—40天。",
+      "source_url": "https://36kr.com/p/4019715197147010",
+      "published_at": "2026-10-10",
+      "scores": {
+        "strategic_importance": 4,
+        "watsons_relevance": 2,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 1,
+        "actionability": 4,
+        "time_sensitivity": 2.0,
+        "novelty": 3.0
+      },
+      "weighted_score": 3.18,
+      "priority": "P2",
+      "analysis_pairing_ok": true,
+      "pairing_evidence": {
+        "numbers": [
+          "11",
+          "30",
+          "40"
+        ],
+        "title_bigrams": [
+          "-4",
+          "0-",
+          "0天",
+          "11",
+          "30",
+          "40",
+          "双1",
+          "周期"
+        ]
+      },
+      "action_level": "watch",
+      "watsons_impact": "双11周期拉长至30-40天，意味着平台流量分发节奏更分散、大促蓄水期提前，屈臣氏B2C旗舰店与即时零售渠道需更早进入备战状态；长周期可能摊薄单日爆发力，但也给货盘分层、活动排期和库存周转留出更多调整窗口。该事件为行业共性节奏信息，对屈臣氏的直接冲击有限，更多是排期参考。"
+    }
+  ],
+  "honesty_note": "Real model calls; credentials came from process env only."
+}

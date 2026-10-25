@@ -1,4 +1,4 @@
-> **2026-10-25 现役方案覆盖提示**：本篇为历史审计/备选意见，关于Muse的所有内容已退役且不是执行指令。当前系统从始至终运行在NAS Docker，QwenPaw仅为内部Agent/操作层。**以[11 NAS重设计决策](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)与[12 QwenPaw分步执行手册](12_20261025_qwenpaw_step_by_step_execution.md)为最高优先级**；先备份和清理Muse，不做NAS迁移。以下保留历史以便回溯，M0会清除过期现役引用。
+> **2026-10-25 现役方案覆盖提示**：本篇为历史审计/备选意见，关于Muse的所有内容已退役且不是执行指令。当前系统从始至终运行在NAS Docker，QwenPaw仅为内部Agent/操作层。**以[11 NAS重设计决策](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)与[12 QwenPaw分步执行手册](12_20261025_qwenpaw_step_by_step_execution.md)为最高优先级**；Muse自己负责其GitHub试验内容的M0退役；NAS中的QwenPaw从M1只读审计开始，不负责Muse删除。模型已由用户在NAS配置，选择RightCode「百亿补贴」DeepSeek Flash，不需要API接入或分时配置。本篇其余内容均为历史，仅供追溯，以11/12为准。
 
 # 09｜2026-10-24 平台选型、API 自主化、Muse 协同与稳定运行改造方案
 

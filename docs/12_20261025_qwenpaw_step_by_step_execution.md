@@ -2,11 +2,11 @@
 
 > 决策日期：2026-10-25。**系统始终部署在 NAS Docker 中，完全没有 NAS 迁移事项；不使用 Codex。**
 > **分工：** ChatGPT 设计/验收；**Muse 只负责 M0 一次性清理其创建的 GitHub 内容**；QwenPaw + 已在NAS配置好的 DeepSeek Flash 执行 **M1–M7**。QwenPaw不负责删除Muse文件，也不负责为模型安装/配置API。
-> 权威架构：[11｜NAS架构、AIHOT对标与模型选型](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)。本文是任务书，当前**没有实际删除文件、改变NAS生产调度、替换模型或发送邮件**。
+> 权威架构：[11｜NAS架构、AIHOT对标与模型选型](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)。**M0已于2026-10-25由Muse实际完成GitHub清理，ChatGPT独立复审核验通过**，见[退役与复审记录](reviews/MUSE-RETIREMENT-2026-10-25.md)。下一步**只执行M1 NAS生产只读审计**，不得重跑M0；此结论不表示NAS生产调度、模型设置或投递已被检查/修改。
 
 ## 总规则
 
-1. **M0交给 Muse，一次性清理后停下；M1–M7交给 NAS 里的 QwenPaw，一阶段一提交/复审，不连续擅自推进。** M0不需要、也不能以NAS本地命令清理。若Muse端GitHub写入需要用户界面点击确认，那是这一轮一次性退役操作需要完成的授权，不将此模式带入生产流水线。
+1. **M0已完成并通过仓库侧复审；不得重做退役删除。当前阶段为M1，仅由 NAS Docker里的QwenPaw做只读现状审计，提交实际证据和报告后停下。** M2–M7只有前一阶段经ChatGPT复审才推进。Muse不再介入生产。
 2. 已在NAS连接好模型，**由用户自行选择 RightCode「百亿补贴」DeepSeek Flash**；按用户提供的价目¥0.6/百万未缓存输入、¥1.8/百万输出、¥0.02/百万缓存读取，价格不以峰谷时间切换。**不编写模型连接、Key、base URL、Provider切换或分时调度任务。**
 3. 所有步骤以前一阶段的NAS真实输出为准。仓库已有审计仅为历史记录，不代表生产日志和Docker挂载已被新检查验证。
 4. 禁止未经单独授权启用/停用生产cron、重建容器、删除事件账本/数据卷、改SMTP投递、发送测试邮件或上传Key/Cookie/内部报告至public GitHub。
@@ -14,7 +14,7 @@
 
 ---
 
-## M0｜由 Muse 处理它自己的 GitHub 独立试验（先执行，QwenPaw不参与）
+## M0｜已完成：Muse的GitHub独立试验退役（历史流程留存，不要重执行）
 
 ### M0-0 事实与待清理清单
 
@@ -45,7 +45,7 @@
 
 ---
 
-## M1｜QwenPaw：只读 NAS 生产现状审计（Muse清理验收后）
+## M1｜当前唯一待执行：QwenPaw只读审计 NAS 生产现状（M0已复审通过）
 
 > 在已存在的NAS Docker + QwenPaw环境**只读**盘点：实际容器/持久化卷/时区、工作区dirty状态、每日与周期任务的真实启用方式、最近14/30天日采集运行成功记录、来源列表和正文可打开率、原文时效和去重事件数、评分分布、周/月/年报及邮件送达记录、历史计费和失败情况。核对 skills/run_daily_pipeline、run_periodic_pipeline、scripts/run_daily.sh、run_periodic.sh、config/model_router.yaml、config/scoring.yaml、采集器与存储实现。注意用户已配置模型，**只核验实际使用状态，不配模型、不改Key、不自动换通道。** 形成docs/reviews/NAS-M1-READONLY-AUDIT.md，依据真实数据给出 KEEP/REFINE/REMOVE/DEFER清单与工程风险；不改生产、不发信，提交后停止。
 

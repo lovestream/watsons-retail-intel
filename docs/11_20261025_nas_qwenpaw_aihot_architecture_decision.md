@@ -9,6 +9,8 @@
 
 > **2026-10-25 最新权威阶段与模型决策**：M0/M1/R0已完成；R1隔离测试已报告SiliconFlow主通道成功，**本轮只批准R1-FIX整改，未合并生产main**；R2/R3/M2仍暂停。**主：SiliconFlow（硅基流动）DeepSeek-V4.1-Flash；备：RightCode「百亿补贴」DeepSeek Flash**，有限付费回退、不分时切换。参阅[正式R1复审与整改指令](reviews/NAS-R1-CHATGPT-REVIEW-2026-10-25.md)。
 
+> **2026-10-25 最新复审优先**：R1-FIX 已按用户确认的范围通过，**不再要求系统自建费用台账、日金额预算或单价估算**；SiliconFlow 主，RightCode 百亿补贴备。下一步只做**R2-A 隔离日管线与调度/健康检查验证**，不改正式Cron/生产账本/SMTP、不中途合并R1。详见 [R1-FIX最终审查与R2-A任务](reviews/NAS-R1-FIX-CHATGPT-REVIEW-2026-10-25.md)。
+
 ## 0. 一句话决策
 
 保持现有 NAS Docker 和 Python 管线，**确定性程序负责调度与采集、结构化事件库负责唯一真值、DeepSeek Flash 负责少量语义抽取/疑难复核和周月年报分析**；AIHOT 只借鉴验证有效的机制，不直接以 Node/PostgreSQL/网站框架推倒现有实现。GitHub 负责代码、设计、脱敏审计，而不是生产消息总线或全部抓取原文堆放处。Muse 不承担生产链路任何必经环节。

@@ -1,3 +1,5 @@
+> **2026-10-25 现役方案覆盖提示**：本篇为历史审计/备选意见，关于Muse的所有内容已退役且不是执行指令。当前系统从始至终运行在NAS Docker，QwenPaw仅为内部Agent/操作层。**以[11 NAS重设计决策](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)与[12 QwenPaw分步执行手册](12_20261025_qwenpaw_step_by_step_execution.md)为最高优先级**；先备份和清理Muse，不做NAS迁移。以下保留历史以便回溯，M0会清除过期现役引用。
+
 # 09｜2026-10-24 平台选型、API 自主化、Muse 协同与稳定运行改造方案
 
 > **2026-10-24 修订说明：本篇关于“让 Muse 作为原 Python 系统补搜插件”的混合联动设计已被新路线取代，不再作为 Muse 实施依据。** Muse 现采用**独立网页 Agent 试验、以 GitHub 共享项目规则、与 QwenPaw 平行运行**。详见 [10｜Muse 独立架构](10_muse_web_independent_architecture.md) 和 [Muse 直接执行的完整任务书](../muse/MASTER_GOAL.md)。本篇中 QwenPaw 自有 API、稳定性改造等建议仍可作为旧系统的工程参考，均未实施。

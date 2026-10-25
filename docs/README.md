@@ -16,15 +16,15 @@
 | 06 | [06_periodic_report_generation.md](06_periodic_report_generation.md) | 周/月/年报调度、周期聚合层、覆盖度门禁、四阶段生成、周报 6 章、决策建议贴合屈臣氏三层渠道群、真实失效案例 |
 | 07 | [07_podcast_and_email.md](07_podcast_and_email.md) | 口播稿规格与长度校验、TTS、播客质检、HTML 邮件（仅 MP3 附件）、幂等与安全门、告警、重复投递风险 |
 | 08 | [08_llm_config_cron_data.md](08_llm_config_cron_data.md) | 配置体系（全部 YAML）、LLM 客户端与回退、调度 cron、数据模型与账本、健康检查与告警、已知运维问题 |
-| **09** | [09_20261024_platform_strategy_and_reliability.md](09_20261024_platform_strategy_and_reliability.md) | 旧 QwenPaw 自有 API 与稳定性改造参考；**Muse 混合联动设想已被第 10 篇取代** |
-| 10（待退役） | [10_muse_web_independent_architecture.md](10_muse_web_independent_architecture.md) | Muse历史试验设计，**非现役路线；M0中备份后删除** |
+| **09** | [09_20261024_platform_strategy_and_reliability.md](09_20261024_platform_strategy_and_reliability.md) | **历史审计参考，不是现役指令**；Muse独立/混合设想均已退役 |
+| 10（待退役） | [10_muse_web_independent_architecture.md](10_muse_web_independent_architecture.md) | Muse历史试验设计，**非现役路线；由Muse在M0核对历史后清理** |
 | Muse历史任务书（待退役） | [../muse/MASTER_GOAL.md](../muse/MASTER_GOAL.md) | **仅为历史试验；M0中备份后删除，禁止当作现役任务书** |
 | **11（当前）** | **[11_20261025_nas_qwenpaw_aihot_architecture_decision.md](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)** | **NAS Docker + QwenPaw/Python当前方案、AIHOT取舍、DeepSeek三渠道人民币比较及优化门禁** |
-| **12（执行）** | **[12_20261025_qwenpaw_step_by_step_execution.md](12_20261025_qwenpaw_step_by_step_execution.md)** | **M0 Muse退役安全命令、M1–M7 QwenPaw实施阶段与验收规则** |
+| **12（执行）** | **[12_20261025_qwenpaw_step_by_step_execution.md](12_20261025_qwenpaw_step_by_step_execution.md)** | **M0 M0由Muse清理自己的GitHub遗留；M1–M7由QwenPaw优化NAS现有系统** |
 
 ## 当前改造方案（2026-10-25）
 
-**唯一现役优化路线：NAS现有Docker环境 + QwenPaw/Python + DeepSeek Flash（具体模型渠道待真实API测试）。** 系统一直在NAS，无迁移事项；由ChatGPT提供GitHub方案和复审，QwenPaw在NAS逐阶段施工，不用Codex。先按[12](12_20261025_qwenpaw_step_by_step_execution.md)处理Muse历史遗留，**当前未执行生产删除、模型替换或调度更改**。Muse独立实验资料和原 docs/10 待备份后清理；09仍作为旧审计材料可参考，11/12权威优先。
+**唯一现役优化路线：一直部署在 NAS Docker 中的 QwenPaw/Python + 用户已配置并自行选择的 RightCode「百亿补贴」DeepSeek Flash。** 不迁移NAS、不使用Codex、不重新配置模型接口、不按峰谷时段切换。**M0由Muse自己完成GitHub试验清理**；M1–M7由NAS中QwenPaw分阶段执行，首项是只读审计。ChatGPT负责GitHub设计和复审；[12号手册](12_20261025_qwenpaw_step_by_step_execution.md)明确双方边界。当前仍未实际删除Muse内容、变更NAS调度或发送邮件；历史docs/09只能用于追溯，以11/12为准。
 
 ## 补充资料
 

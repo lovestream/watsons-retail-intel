@@ -1,5 +1,8 @@
 # 12｜经营情报系统分阶段执行手册（Muse负责退役，QwenPaw负责NAS优化）
 
+> **最新阶段提示（2026-10-25）**：R2-A-FIX 的隔离范围已经验收，R2-B 生产切换仍未授权。请优先读 [R2-A-FIX正式复审及R2-B部署前门禁](reviews/NAS-R2A-FIX-CHATGPT-REVIEW-2026-10-25.md)。旧文档里的“当前唯一R1-FIX/R2-A”均为历史指令；不得照旧自动推进。本系统不建设费用台账。
+
+
 > 决策日期：2026-10-25。**系统始终部署在 NAS Docker 中，完全没有 NAS 迁移事项；不使用 Codex。**
 > **分工：** ChatGPT 设计/验收；**Muse 只负责 M0 一次性清理其创建的 GitHub 内容**；QwenPaw + 已在NAS配置好的 DeepSeek Flash 执行 **已完成M1/R0、R1隔离阶段待R1-FIX，R2/R3/M2-M7仍待批准**。QwenPaw不负责删除Muse文件，也不负责为模型安装/配置API。
 > 权威架构：[11｜NAS架构、AIHOT对标与模型选型](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)。**M0已于2026-10-25由Muse实际完成GitHub清理，ChatGPT独立复审核验通过**，见[退役与复审记录](reviews/MUSE-RETIREMENT-2026-10-25.md)。M1/R0已完成，R1隔离试验完成基础验证，**下一轮仅R1-FIX隔离整改**；不得重复M0/M1/R0、不得切生产调度或邮件。

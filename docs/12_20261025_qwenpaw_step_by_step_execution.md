@@ -2,14 +2,16 @@
 
 > 决策日期：2026-10-25。**系统始终部署在 NAS Docker 中，完全没有 NAS 迁移事项；不使用 Codex。**
 > **分工：** ChatGPT 设计/验收；**Muse 只负责 M0 一次性清理其创建的 GitHub 内容**；QwenPaw + 已在NAS配置好的 DeepSeek Flash 执行 **已完成M1、下一轮R0、后续待批准R1-R3及M2-M7**。QwenPaw不负责删除Muse文件，也不负责为模型安装/配置API。
-> 权威架构：[11｜NAS架构、AIHOT对标与模型选型](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)。**M0已于2026-10-25由Muse实际完成GitHub清理，ChatGPT独立复审核验通过**，见[退役与复审记录](reviews/MUSE-RETIREMENT-2026-10-25.md)。M1已完成，**当前只执行R0 P0故障定位和隔离测试**，不得重跑M0/M1；本阶段不会修改NAS生产调度、模型设置或投递。
+> 权威架构：[11｜NAS架构、AIHOT对标与模型选型](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)。**M0已于2026-10-25由Muse实际完成GitHub清理，ChatGPT独立复审核验通过**，见[退役与复审记录](reviews/MUSE-RETIREMENT-2026-10-25.md)。M1、R0均已完成，**下一轮仅R1隔离代码/模型测试**；不得重跑M0/M1/R0；本阶段不会修改NAS生产调度、模型设置或投递。
 
 
-> **2026-10-25 M1审计后的最新执行状态**：M1阶段交付已被ChatGPT独立复审通过，但NAS生产健康未通过。**完整M2 AIHOT优化暂缓，下一轮唯一许可是R0只读故障定位+隔离API自测，不改生产行为**。见 [正式M1复审与R0-R3门禁](reviews/NAS-M1-CHATGPT-REVIEW-2026-10-25.md)。R1-R3须另行复审授权；用户选择RightCode百亿补贴、不分时，且不重新配置用户已有API密钥。
+> **2026-10-25 M1审计后的最新执行状态**：M1阶段交付已被ChatGPT独立复审通过，但NAS生产健康未通过。**完整M2 AIHOT优化暂缓，原下一轮许可R0已完成；目前唯一许可是R1隔离代码及模型测试，不改生产行为**。见 [正式M1复审与R0-R3门禁](reviews/NAS-M1-CHATGPT-REVIEW-2026-10-25.md)。R1-R3须另行复审授权；用户选择RightCode百亿补贴、不分时，且不重新配置用户已有API密钥。
+
+> **2026-10-25 R0复审最新状态（覆盖以下旧阶段状态）**：R0已由ChatGPT复审**通过**；下一轮唯一允许**R1在隔离Git工作树与测试数据中开发/验证Python DeepSeek Flash调用链**，不得切正式模型、Cron、数据卷或邮件。关键审校：14,841是待重新计算的日志累计量，不能直接当HTTP请求数；已失效OpenCode不得作备用。请先读[正式R0复审与R1实施指令](reviews/NAS-R0-CHATGPT-REVIEW-2026-10-25.md)，R2/R3/M2仍暂停。
 
 ## 总规则
 
-1. **M0和M1已完成并经ChatGPT复审；不得重做。当前阶段仅允许R0安全诊断和隔离测试，提交实际证据和报告后停下。** R1–R3及原M2–M7只有前一阶段经ChatGPT复审才推进。Muse不再介入生产。
+1. **M0和M1已完成并经ChatGPT复审；不得重做。当前阶段仅允许R1隔离代码草案和模型测试，提交真实证据和报告后停下。** R1–R3及原M2–M7只有前一阶段经ChatGPT复审才推进。Muse不再介入生产。
 2. 已在NAS连接好模型，**由用户自行选择 RightCode「百亿补贴」DeepSeek Flash**；按用户提供的价目¥0.6/百万未缓存输入、¥1.8/百万输出、¥0.02/百万缓存读取，价格不以峰谷时间切换。**不编写模型连接、Key、base URL、Provider切换或分时调度任务。**
 3. 所有步骤以前一阶段的NAS真实输出为准。仓库已有审计仅为历史记录，不代表生产日志和Docker挂载已被新检查验证。
 4. 禁止未经单独授权启用/停用生产cron、重建容器、删除事件账本/数据卷、改SMTP投递、发送测试邮件或上传Key/Cookie/内部报告至public GitHub。
@@ -52,7 +54,7 @@
 
 > 在已存在的NAS Docker + QwenPaw环境**只读**盘点：实际容器/持久化卷/时区、工作区dirty状态、每日与周期任务的真实启用方式、最近14/30天日采集运行成功记录、来源列表和正文可打开率、原文时效和去重事件数、评分分布、周/月/年报及邮件送达记录、历史计费和失败情况。核对 skills/run_daily_pipeline、run_periodic_pipeline、scripts/run_daily.sh、run_periodic.sh、config/model_router.yaml、config/scoring.yaml、采集器与存储实现。注意用户已配置模型，**只核验实际使用状态，不配模型、不改Key、不自动换通道。** 形成docs/reviews/NAS-M1-READONLY-AUDIT.md，依据真实数据给出 KEEP/REFINE/REMOVE/DEFER清单与工程风险；不改生产、不发信，提交后停止。
 
-## R0｜当前唯一待执行：真实P0故障定位、隔离探针（生产只读）
+## R0｜已复审通过：P0根因定位与隔离探针（无需重做）
 
 > 具体任务、禁止事项、脱敏证据、输出路径、阶段门禁见 [M1 ChatGPT复审与P0 R0-R3恢复方案](reviews/NAS-M1-CHATGPT-REVIEW-2026-10-25.md)。R0只允许读取生产现场并在隔离测试目录用无敏感资料的短文本探测现有Python模型客户端；不得改生产cron、配置、Key、Provider、发邮件、清理脏文件、补跑缺口。输出 docs/reviews/NAS-R0-P0-ROOT-CAUSE-AND-RECOVERY-PLAN.md 后立刻停止。R1/R2/R3必须另获复审授权。
 
@@ -82,6 +84,6 @@
 
 ---
 
-## 最新发给QwenPaw的唯一指令（M1已完成）
+## 最新交给QwenPaw的唯一指令（R0已复审）
 
-> 请读取 docs/reviews/NAS-M1-CHATGPT-REVIEW-2026-10-25.md；严格执行其中 **R0故障定位和隔离短文本模型探针**，读取 NAS现场 logs、jobs_history、manifest、旧 OpenCode Python模型链路和 W40 废稿门禁，区分已确认与未确认根因。当前用户统一用RightCode百亿补贴，无需配置或修改Key/Provider/base URL，也无需峰谷调度。**不要修改生产代码/cron/数据卷/邮件，不得重跑Muse M0，不进入M2。** 形成 docs/reviews/NAS-R0-P0-ROOT-CAUSE-AND-RECOVERY-PLAN.md、提交脱敏证据、停下等ChatGPT复审。
+> 请读取[docs/reviews/NAS-R0-CHATGPT-REVIEW-2026-10-25.md](reviews/NAS-R0-CHATGPT-REVIEW-2026-10-25.md)，**只执行R1隔离开发/模型探针/冻结样本测试**；不能再次重复R0，不得碰正式QwenPaw provider/Key、生产配置、cron、数据卷、真实账本或邮箱。若Python无法安全复用现有RightCode通道，报告准确阻塞项，不得擅自拷贝私密配置。基于远端最新main建立隔离分支（如本地生产dirty不可reset/clean），提交代码草案、测试和 docs/reviews/NAS-R1-PIPELINE-LLM-RECOVERY-TEST.md 到隔离分支，**不得直接合入生产main**；提供SHA和测试证据后停下等ChatGPT复审。

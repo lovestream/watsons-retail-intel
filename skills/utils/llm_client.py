@@ -898,7 +898,13 @@ def check_llm_config() -> Dict[str, Any]:
     blockers = ["%s:%s" % (name, info.get("blocker"))
                 for name, info in credentials.items() if info.get("blocker")]
     return {
-        "keys_found": bool(status.get("available")),
+        "keys_found": bool(status.get("any_usable")),
+        "primary_available": bool(status.get("primary_available")),
+        "fallback_available": bool(status.get("fallback_available")),
+        "any_usable": bool(status.get("any_usable")),
+        "degraded_using_paid_fallback": bool(
+            status.get("degraded_using_paid_fallback")),
+        "primary_blocker": status.get("primary_blocker", ""),
         "key_count": int(status.get("available_keys") or 0),
         "base_url": status.get("base_url", ""),
         "model": status.get("model", ""),
@@ -906,6 +912,8 @@ def check_llm_config() -> Dict[str, Any]:
         "key_masks": ["%s:%s" % (name, info.get("channel", ""))
                       for name, info in credentials.items()],
         "credential_blockers": blockers,
+        "paid_fallback_allowed": bool(status.get("paid_fallback_allowed")),
+        "paid_fallback_calls": int(status.get("paid_fallback_calls") or 0),
         "provider_mode": "provider_agnostic_r1",
     }
 

@@ -23,7 +23,7 @@ from skills.analyze_business_impact.analyze_business_impact import (  # noqa: E4
     llm_analyze_event, apply_analysis_downgrade,
 )
 from tests.r1.run_20_samples import (  # noqa: E402
-    DIMENSIONS, evidence_errors, score_one,
+    DIMENSIONS, assess_verification, evidence_errors, score_one,
 )
 
 log = logging.getLogger("r1-real")
@@ -61,11 +61,17 @@ def main():
             row["rejection_reasons"] = ["no_events"]
             return row
         ev = dict(events[0])
+        # F4: never overwrite an extractor-provided date with the fixture date.
+        # The fixture date is only a labelled fallback when extraction is silent.
+        extracted_pub = str(ev.get("published_at") or "").strip()
         ev.update({
             "event_id": "E20261025_%04d" % int(re.sub(r"\D", "", s["sample_id"]) or "0"),
             "source_url": s["source_url"], "source_name": s["source_name"],
-            "published_at": s["published_at"], "extraction_method": "llm",
+            "published_at": extracted_pub or s["published_at"],
+            "published_at_source": "extracted" if extracted_pub else "fixture_fallback",
+            "extraction_method": "llm",
         })
+        row["verification"] = assess_verification(ev, s)
         errs = evidence_errors(ev, s)
         row["evidence_errors"] = errs
         if errs:
@@ -139,7 +145,17 @@ def main():
         "providers": "siliconflow deepseek-ai/DeepSeek-V4.1-Flash; fallback rightcode-bybt deepseek-flash",
         "samples_total": len(samples),
         "json_parsed": sum(1 for r in rows if r["json_parsed"]),
-        "accepted": len(accepted),
+        "accepted_structural": len(accepted),
+        "verified": sum(1 for r in rows if r.get("accepted") and
+                        (r.get("verification") or {}).get("verified")),
+        "needs_verification": sum(1 for r in rows if r.get("accepted") and
+                                  not (r.get("verification") or {}).get("verified")),
+        "verification_cases": [
+            {"sample_id": r["sample_id"],
+             "status": (r.get("verification") or {}).get("verification_status"),
+             "reasons": (r.get("verification") or {}).get("reasons", [])}
+            for r in rows if (r.get("verification") or {}).get("reasons")
+        ],
         "rejected": len(rows) - len(accepted),
         "analyses_ok": sum(1 for r in rows if r.get("analysis_ok")),
         "analysis_pairing_ok": pair_ok,
@@ -177,8 +193,12 @@ def main():
                                  if r.get("_event") is e),
             "watsons_impact": next(r.get("watsons_impact") for r in rows
                                    if r.get("_event") is e),
+            "verification": next(r.get("verification") for r in rows
+                                 if r.get("_event") is e),
         } for e in accepted],
-        "honesty_note": "Real model calls; credentials came from process env only.",
+        "honesty_note": ("Real model calls; credentials came from process env only. "
+                         "`accepted_structural` means JSON/evidence shape passed; "
+                         "`verified` excludes date conflicts and hearsay-only claims."),
     }
     out = os.path.join(ROOT, "tests/r1/artifacts/20_sample_real_summary.json")
     json.dump(summary, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=2)

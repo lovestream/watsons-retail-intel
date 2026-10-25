@@ -22,6 +22,7 @@ import json
 import logging
 import os
 import re
+import stat
 import threading
 import time
 import uuid
@@ -66,6 +67,21 @@ _PERMANENT_PROVIDER_TYPES = {
     "auth_error", "model_unavailable", "endpoint_not_found", "quota_exhausted",
 }
 
+# F2: paid fallback is allowed only for genuine primary-unavailability or
+# transport/format failure. A bad prompt (`bad_request`) or a caller bug
+# (`unknown_model_override`) must fail, not silently spend on the fallback.
+FALLBACK_ALLOWED_ERROR_TYPES = {
+    "model_unavailable", "auth_error", "quota_exhausted",
+    "endpoint_not_found", "rate_limited", "server_error",
+    "timeout", "connection_error", "invalid_response_body",
+    "empty_content", "invalid_json",
+    "credential_missing", "credential_encrypted_unsupported",
+    "credential_file_missing", "credential_file_unreadable",
+    "credential_file_invalid_json", "credential_file_permissions",
+    "credential_file_symlink", "credential_file_not_regular",
+    "credential_file_outside_allowed_dir",
+}
+
 
 class LLMConfigError(Exception):
     """Configuration or credential problem detected before any HTTP call."""
@@ -92,38 +108,77 @@ class CredentialRef:
     env: str = ""
     file_env: str = ""
     env_aliases: List[str] = field(default_factory=list)
+    allowed_dirs: List[str] = field(default_factory=list)
+    last_channel: str = field(default="", init=False, repr=False)
 
-    def resolve(self) -> Tuple[Optional[str], str]:
-        """Return (secret, blocker). Never logs or persists the secret."""
+    def _allowed_dir(self, real_path: str) -> bool:
+        dirs = list(self.allowed_dirs) or [
+            _PROJECT_ROOT,
+            "/run/secrets",
+            os.environ.get("PIPELINE_LLM_SECRET_DIR", "").strip(),
+        ]
+        for d in dirs:
+            if not d:
+                continue
+            root = os.path.realpath(d)
+            if real_path == root or real_path.startswith(root + os.sep):
+                return True
+        return False
+
+    def resolve_with_channel(self) -> Tuple[Optional[str], str, str]:
+        """Return (secret, blocker, channel). Never logs/persists the secret.
+
+        File credentials must be owner-only regular files (0400/0600), not
+        symlinks, and inside an allowed secret directory. This prevents a
+        world-readable or redirected key from being silently accepted.
+        """
         value = ""
         for name in [self.env] + list(self.env_aliases):
             if name and os.environ.get(name, "").strip():
                 value = os.environ[name].strip()
+                self.last_channel = "env:" + name
                 break
         file_path = os.environ.get(self.file_env, "").strip() if self.file_env else ""
         if not value and file_path:
             if not os.path.exists(file_path):
-                return None, "credential_file_missing"
+                return None, "credential_file_missing", "file_env:" + self.file_env
             try:
-                raw = open(file_path, "r", encoding="utf-8").read().strip()
+                st = os.lstat(file_path)
+            except OSError:
+                return None, "credential_file_unreadable", "file_env:" + self.file_env
+            if stat.S_ISLNK(st.st_mode):
+                return None, "credential_file_symlink", "file_env:" + self.file_env
+            if not stat.S_ISREG(st.st_mode):
+                return None, "credential_file_not_regular", "file_env:" + self.file_env
+            mode = stat.S_IMODE(st.st_mode)
+            if (mode & 0o777) not in (0o400, 0o600):
+                return None, "credential_file_permissions", "file_env:" + self.file_env
+            real_path = os.path.realpath(file_path)
+            if not self._allowed_dir(real_path):
+                return None, "credential_file_outside_allowed_dir", "file_env:" + self.file_env
+            try:
+                with open(real_path, "r", encoding="utf-8") as fh:
+                    raw = fh.read().strip()
             except Exception:
-                return None, "credential_file_unreadable"
+                return None, "credential_file_unreadable", "file_env:" + self.file_env
             if raw.startswith("{"):
                 try:
                     obj = json.loads(raw)
                     value = str(obj.get("api_key") or "").strip()
                 except Exception:
-                    return None, "credential_file_invalid_json"
+                    return None, "credential_file_invalid_json", "file_env:" + self.file_env
             else:
                 value = raw
+            self.last_channel = "file_env:" + self.file_env
         if not value:
-            return None, "credential_missing"
+            return None, "credential_missing", self.last_channel or ""
         if value.startswith(_ENC_PREFIX):
-            # QwenPaw encrypts provider keys at rest. A Python subprocess has no
-            # documented, scoped way to decrypt them; do not import private
-            # QwenPaw internals or copy ciphertext into a new config.
-            return None, "credential_encrypted_unsupported"
-        return value, ""
+            return None, "credential_encrypted_unsupported", self.last_channel or ""
+        return value, "", self.last_channel
+
+    def resolve(self) -> Tuple[Optional[str], str]:
+        secret, blocker, _ = self.resolve_with_channel()
+        return secret, blocker
 
 
 @dataclass
@@ -153,6 +208,8 @@ class Policy:
     primary: str = "siliconflow"
     fallback: List[str] = field(default_factory=lambda: ["rightcode-bybt"])
     allow_fallback: bool = True
+    fallback_on: List[str] = field(default_factory=lambda: sorted(FALLBACK_ALLOWED_ERROR_TYPES))
+    max_fallback_attempts_per_task: int = 1
     max_transient_retries: int = 2
     max_empty_content_retries: int = 1
     max_http_requests_per_task: int = 6
@@ -189,6 +246,7 @@ def _build_specs(config: Dict[str, Any]) -> Dict[str, ProviderSpec]:
                 env=str(cred.get("env") or ""),
                 file_env=str(cred.get("file_env") or ""),
                 env_aliases=[str(x) for x in (cred.get("env_aliases") or [])],
+                allowed_dirs=[str(x) for x in (cred.get("allowed_dirs") or [])],
             ),
             timeout=int(raw.get("timeout") or 90),
             json_mode=bool(raw.get("json_mode", True)),
@@ -207,6 +265,8 @@ def _build_policy(config: Dict[str, Any]) -> Policy:
         primary=str(raw.get("primary") or "siliconflow"),
         fallback=[str(x) for x in (raw.get("fallback") or [])],
         allow_fallback=bool(raw.get("allow_fallback", True)),
+        fallback_on=[str(x) for x in (raw.get("fallback_on") or sorted(FALLBACK_ALLOWED_ERROR_TYPES))],
+        max_fallback_attempts_per_task=max(0, int(raw.get("max_fallback_attempts_per_task", 1))),
         max_transient_retries=max(0, int(raw.get("max_transient_retries", 2))),
         max_empty_content_retries=max(0, int(raw.get("max_empty_content_retries", 1))),
         max_http_requests_per_task=max(1, int(raw.get("max_http_requests_per_task", 6))),
@@ -243,6 +303,7 @@ class PipelineLLMClient:
         self._sleep = sleep or time.sleep
         self._clock = clock or time.monotonic
         self._credential_overrides = dict(credential_overrides or {})
+        self._max_paid_fallback_calls = 0
         self._lock = threading.Lock()
         self._disabled: Dict[str, str] = {}
         self._last_status: Optional[Dict[str, Any]] = None
@@ -300,24 +361,44 @@ class PipelineLLMClient:
         return ["%s:%s" % (name, spec.credential.env or spec.credential.file_env or "unset")
                 for name, spec in self.specs.items()]
 
+    def _provider_state(self, name: str) -> Dict[str, Any]:
+        spec = self.specs.get(name)
+        if not spec:
+            return {"configured": False, "available": False, "blocker": "provider_not_configured",
+                    "channel": ""}
+        disabled = self._disabled.get(name, "")
+        secret, blocker, channel = self._resolve_secret_info(spec)
+        usable = bool(secret) and not blocker and not disabled
+        return {"configured": True, "available": usable,
+                "blocker": disabled or blocker, "channel": channel,
+                "model": spec.model, "base_url": spec.base_url}
+
+    @property
+    def primary_available(self) -> bool:
+        return bool(self._provider_state(self.policy.primary)["available"])
+
+    @property
+    def fallback_available(self) -> bool:
+        return any(self._provider_state(n)["available"]
+                   for n in self.policy.fallback if n != self.policy.primary)
+
+    @property
+    def any_usable(self) -> bool:
+        return self.primary_available or self.fallback_available
+
     @property
     def available(self) -> bool:
-        spec = self.specs.get(self.policy.primary)
-        if not spec or self.policy.primary in self._disabled:
-            return False
-        secret, blocker = self._resolve_secret(spec)
-        return bool(secret) and not blocker
+        """Backward-compatible: any configured channel is usable, not 'all green'."""
+        return self.any_usable
+
+    @property
+    def degraded_using_paid_fallback(self) -> bool:
+        return (not self.primary_available and self.fallback_available) or \
+            int(self._stats.get("fallback_calls", 0)) > 0
 
     @property
     def available_keys(self) -> int:
-        count = 0
-        for name, spec in self.specs.items():
-            if name in self._disabled:
-                continue
-            secret, blocker = self._resolve_secret(spec)
-            if secret and not blocker:
-                count += 1
-        return count
+        return sum(1 for name in self.specs if self._provider_state(name)["available"])
 
     @property
     def total_calls(self) -> int:
@@ -339,33 +420,38 @@ class PipelineLLMClient:
         return self.specs[self.policy.primary].endpoint
 
     def get_paid_fallback_calls(self) -> int:
-        return 0
+        return int(self._stats.get("fallback_calls", 0))
 
     def reset_paid_fallback_calls(self) -> None:
-        return None
+        with self._lock:
+            self._stats["fallback_calls"] = 0
+            self._stats["fallback_success"] = 0
 
     def set_max_paid_fallback_calls(self, limit: int) -> None:
-        return None
+        self._max_paid_fallback_calls = max(0, int(limit or 0))
 
     # ── credentials ────────────────────────────────────────────────────
-    def _resolve_secret(self, spec: ProviderSpec) -> Tuple[Optional[str], str]:
+    def _resolve_secret_info(self, spec: ProviderSpec) -> Tuple[Optional[str], str, str]:
         if spec.name in self._credential_overrides:
             value = str(self._credential_overrides[spec.name] or "").strip()
             if not value:
-                return None, "credential_missing"
+                return None, "credential_missing", "override"
             if value.startswith(_ENC_PREFIX):
-                return None, "credential_encrypted_unsupported"
-            return value, ""
-        return spec.credential.resolve()
+                return None, "credential_encrypted_unsupported", "override"
+            return value, "", "override"
+        return spec.credential.resolve_with_channel()
+
+    def _resolve_secret(self, spec: ProviderSpec) -> Tuple[Optional[str], str]:
+        secret, blocker, _ = self._resolve_secret_info(spec)
+        return secret, blocker
 
     def credential_report(self) -> Dict[str, Any]:
         """Non-secret credential/blocker state for health checks and reports."""
         out = {}
         for name, spec in self.specs.items():
-            secret, blocker = self._resolve_secret(spec)
+            secret, blocker, channel = self._resolve_secret_info(spec)
             out[name] = {
-                "channel": ("env:" + spec.credential.env) if spec.credential.env else
-                           ("file_env:" + spec.credential.file_env),
+                "channel": channel,
                 "present": bool(secret),
                 "blocker": blocker,
                 "disabled": self._disabled.get(name, ""),
@@ -396,11 +482,29 @@ class PipelineLLMClient:
     def get_status(self) -> Dict[str, Any]:
         with self._lock:
             stats = copy.deepcopy(self._stats)
+        primary = self._provider_state(self.policy.primary)
+        fallback_states = {n: self._provider_state(n) for n in self.policy.fallback
+                           if n != self.policy.primary}
+        fallback_available = any(v["available"] for v in fallback_states.values())
+        paid_tokens = {"prompt": 0, "completion": 0, "total": 0}
+        for state_name in fallback_states:
+            usage = stats.get("usage_by_provider", {}).get(state_name) or {}
+            for k in paid_tokens:
+                paid_tokens[k] += int(usage.get(k, 0))
         return {
-            "counter_version": 2,
+            "counter_version": 3,
             "snapshot_scope": "cumulative_process",
             "do_not_sum_repeated_snapshots": True,
-            "available": self.available,
+            # available is kept for old callers; it means "any usable channel".
+            "available": bool(primary["available"] or fallback_available),
+            "primary_available": bool(primary["available"]),
+            "fallback_available": fallback_available,
+            "any_usable": bool(primary["available"] or fallback_available),
+            "degraded_using_paid_fallback": bool(
+                (not primary["available"] and fallback_available) or
+                stats.get("fallback_calls", 0) > 0),
+            "primary_blocker": primary["blocker"],
+            "fallback_blockers": {n: v["blocker"] for n, v in fallback_states.items()},
             "available_keys": self.available_keys,
             "total_keys": len(self.specs),
             "model": self.model,
@@ -412,8 +516,10 @@ class PipelineLLMClient:
             "stats": stats,
             "credential_report": self.credential_report(),
             "disabled_providers": dict(self._disabled),
-            "paid_fallback_allowed": False,
-            "paid_fallback_calls": 0,
+            "paid_fallback_allowed": bool(self.policy.allow_fallback and fallback_available),
+            "paid_fallback_calls": int(stats.get("fallback_calls", 0)),
+            "paid_fallback_success": int(stats.get("fallback_success", 0)),
+            "paid_fallback_tokens": paid_tokens,
             "error_keys": dict(self._disabled),
             "recent_trace": list(self._trace)[-10:],
         }
@@ -474,15 +580,18 @@ class PipelineLLMClient:
         requested = str(requested).strip()
         if requested in ("rule_only", "none", ""):
             return spec.model, ""
+        if requested == spec.model:
+            return requested, ""
         if requested in self.aliases:
             # A logical pipeline alias always resolves to this provider's own
             # model. This is what lets the same caller string work on primary
             # and fallback without sending SiliconFlow's model id to RightCode.
             return spec.model, ""
-        if requested == spec.model:
-            return requested, ""
         if requested in {s.model for s in self.specs.values()}:
-            return requested, ""
+            # F2: a model id belonging to another provider is a cross-channel
+            # request. Map it to this provider's own model rather than sending
+            # an invalid foreign id (e.g. SiliconFlow id to RightCode).
+            return spec.model, ""
         return "", "unknown_model_override:%s" % requested
 
     def _parse_json(self, text: str) -> Optional[dict]:
@@ -547,6 +656,25 @@ class PipelineLLMClient:
             pass
         return default
 
+    def _reserve_http_slot(self, task_http: int) -> Tuple[bool, str]:
+        """Atomically reserve one process-wide HTTP slot.
+
+        F5: checking then incrementing in separate critical sections allowed
+        concurrent tasks to overrun `max_http_requests_per_process`.
+        """
+        with self._lock:
+            if task_http >= self.policy.max_http_requests_per_task:
+                return False, "task_request_budget_exhausted"
+            if self._stats["http_requests"] >= self.policy.max_http_requests_per_process:
+                return False, "process_request_budget_exhausted"
+            self._stats["http_requests"] += 1
+            return True, ""
+
+    def _fallback_allowed(self, error_type: str) -> bool:
+        if not self.policy.allow_fallback:
+            return False
+        return str(error_type or "") in set(self.policy.fallback_on)
+
     def _record_trace(self, **kwargs: Any) -> None:
         self._trace.append(kwargs)
 
@@ -593,6 +721,8 @@ class PipelineLLMClient:
         last_status = None
         last_provider = ""
         last_model = ""
+        fallback_attempts = 0
+        fallback_reason = ""
 
         providers: List[str] = [self.policy.primary]
         if self.policy.allow_fallback:
@@ -607,8 +737,22 @@ class PipelineLLMClient:
                 continue
             if provider_name in self._disabled:
                 last_error = "provider_disabled:%s:%s" % (provider_name, self._disabled[provider_name])
-                last_type = "provider_disabled"
+                last_type = self._disabled[provider_name]
                 continue
+            if p_index > 0:
+                if not self._fallback_allowed(last_type):
+                    last_error = "fallback_suppressed:%s" % (last_type or "unknown")
+                    fallback_reason = last_error
+                    break
+                if fallback_attempts >= self.policy.max_fallback_attempts_per_task:
+                    last_error = "fallback_attempt_budget_exhausted"
+                    fallback_reason = last_error
+                    break
+                if (self._max_paid_fallback_calls > 0 and
+                        int(self._stats.get("fallback_calls", 0)) >= self._max_paid_fallback_calls):
+                    last_error = "paid_fallback_budget_exhausted"
+                    fallback_reason = last_error
+                    break
             if self._clock() > deadline:
                 last_error = "wall_clock_exceeded"
                 last_type = "wall_clock_exceeded"
@@ -630,6 +774,8 @@ class PipelineLLMClient:
                 break
 
             if p_index > 0:
+                fallback_attempts += 1
+                fallback_reason = last_type
                 self._bump("fallback_calls")
 
             attempt = 0
@@ -640,21 +786,14 @@ class PipelineLLMClient:
                     last_error = "wall_clock_exceeded"
                     last_type = "wall_clock_exceeded"
                     break
-                if task_http >= self.policy.max_http_requests_per_task:
-                    last_error = "task_request_budget_exhausted"
+                reserved, budget_reason = self._reserve_http_slot(task_http)
+                if not reserved:
+                    last_error = budget_reason
                     last_type = "budget_exhausted"
                     self._bump("budget_rejections")
                     self._bump_error(last_type)
                     break
-                with self._lock:
-                    over_process_budget = (
-                        self._stats["http_requests"] >= self.policy.max_http_requests_per_process)
-                if over_process_budget:
-                    last_error = "process_request_budget_exhausted"
-                    last_type = "budget_exhausted"
-                    self._bump("budget_rejections")
-                    self._bump_error(last_type)
-                    break
+                task_http += 1
 
                 payload: Dict[str, Any] = {
                     "model": use_model,
@@ -673,9 +812,7 @@ class PipelineLLMClient:
                 headers["Authorization"] = "Bearer " + secret
 
                 attempt += 1
-                task_http += 1
                 self._bump("provider_attempts")
-                self._bump("http_requests")
                 req_started = self._clock()
                 resp = None
                 try:
@@ -797,11 +934,15 @@ class PipelineLLMClient:
                     result_base,
                     ok=True, content=content, parsed=parsed,
                     model=str(body_json.get("model") or use_model),
-                    usage=usage, key_used="%s(%s)" % (provider_name, mask_secret(secret)),
+                    usage=usage, key_used="%s:%s" % (
+                        provider_name, self._resolve_secret_info(spec)[2] or "credential"),
                     error="", provider=provider_name, attempts=task_http,
                     provider_attempts=attempt, retries=total_retries, http_status=status,
                     error_type="", latency_ms=elapsed_ms,
                     content_source=content_source,
+                    fallback_used=bool(p_index > 0),
+                    fallback_reason=fallback_reason,
+                    credential_channel=self._resolve_secret_info(spec)[2],
                     cost_estimate=cost["amount"], pricing_verified=cost["verified"],
                     cost_currency=cost["currency"],
                 )
@@ -817,6 +958,9 @@ class PipelineLLMClient:
             "attempts": task_http,
             "retries": total_retries,
             "latency_ms": int((self._clock() - started) * 1000),
+            "fallback_used": bool(fallback_attempts > 0),
+            "fallback_reason": fallback_reason,
+            "credential_channel": self.credential_report().get(last_provider, {}).get("channel", ""),
         })
         return result_base
 

@@ -7,6 +7,31 @@ policy:
   fallback:
     - rightcode-bybt
   allow_fallback: true
+  # F2: explicit paid-fallback whitelist. A bad prompt (bad_request) or a caller
+  # model bug is not a reason to spend on the fallback.
+  fallback_on:
+    - model_unavailable
+    - auth_error
+    - quota_exhausted
+    - endpoint_not_found
+    - rate_limited
+    - server_error
+    - timeout
+    - connection_error
+    - invalid_response_body
+    - empty_content
+    - invalid_json
+    - credential_missing
+    - credential_encrypted_unsupported
+    - credential_file_missing
+    - credential_file_unreadable
+    - credential_file_invalid_json
+    - credential_file_permissions
+    - credential_file_symlink
+    - credential_file_not_regular
+    - credential_file_outside_allowed_dir
+  # Per task; a second fallback provider is never attempted by default.
+  max_fallback_attempts_per_task: 1
   max_transient_retries: 2          # 429/5xx/timeout only; 400 never retried
   max_empty_content_retries: 1
   max_http_requests_per_task: 6     # hard stop against request storms
@@ -32,6 +57,9 @@ providers:
       env: siliconflow_api_key
       env_aliases: [PIPELINE_LLM_API_KEY]
       file_env: PIPELINE_LLM_API_KEY_FILE
+      # Secret files must be 0400/0600, regular files, not symlinks, and inside
+      # one of these directories (plus /run/secrets).
+      allowed_dirs: []
     # No price is asserted here: actual billing must be verified from the
     # provider console. The test budget is expressed in HTTP calls, not money.
     pricing:
@@ -47,6 +75,7 @@ providers:
       env: rightcode_bybt
       env_aliases: [PIPELINE_LLM_FALLBACK_KEY]
       file_env: PIPELINE_LLM_FALLBACK_KEY_FILE
+      allowed_dirs: []
     pricing:
       verified: false
       currency: CNY

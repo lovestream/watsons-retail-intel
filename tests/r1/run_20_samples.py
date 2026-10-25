@@ -155,6 +155,80 @@ def parse_date(value):
             return None
 
 
+HEARSAY_MARKERS = ("听说", "传闻", "网传", "据传", "消息人士", "未经证实")
+
+
+def _claimed_content_date(sample):
+    """Find an explicit 'M月D日' publication marker in the article text."""
+    text = "%s %s" % (sample.get("summary") or "", sample.get("content_excerpt") or "")
+    m = re.search(r"(\d{1,2})月(\d{1,2})日", text)
+    if not m:
+        return None
+    fixture = parse_date(sample.get("published_at"))
+    if fixture is None:
+        return None
+    month, day = int(m.group(1)), int(m.group(2))
+    year = fixture.year
+    try:
+        candidate = datetime(year, month, day).date()
+    except ValueError:
+        return None
+    # A December article collected in January should not become next December.
+    if candidate > fixture and (candidate - fixture).days > 45:
+        try:
+            candidate = datetime(year - 1, month, day).date()
+        except ValueError:
+            return None
+    return candidate
+
+
+def assess_verification(event, sample):
+    """F4: never claim a fact/date is verified when it is not.
+
+    The extractor's own event date is kept. If it is absent we may fall back to
+    the article date, but the result is explicitly `needs_verification`.
+    A conflicting explicit article date or a hearsay marker is also
+    `needs_verification`; neither is silently promoted to verified.
+    """
+    fixture_date = parse_date(sample.get("published_at"))
+    explicit_pub = None
+    if event.get("published_at_source") != "fixture_fallback":
+        explicit_pub = event.get("published_at")
+    event_date = parse_date(event.get("event_occurred_at")) or \
+        parse_date(event.get("event_announced_at")) or \
+        parse_date(explicit_pub)
+    claimed = _claimed_content_date(sample)
+    reasons = []
+    if event_date is None:
+        reasons.append("event_date_missing_fixture_fallback")
+        date_source = "fixture_fallback"
+    else:
+        date_source = "extracted"
+    compare_date = event_date or fixture_date
+    date_conflict = bool(claimed and compare_date and claimed != compare_date)
+    if date_conflict:
+        reasons.append("date_conflict:%s!=%s" % (claimed.isoformat(), compare_date.isoformat()))
+    # Scope hearsay detection to the event's own claim/evidence. A stray
+    # "听说" elsewhere in a long article must not taint an unrelated event.
+    text = " ".join([
+        event.get("fact") or "", event.get("evidence_text") or "",
+    ])
+    hit_markers = [m for m in HEARSAY_MARKERS if m in text]
+    if hit_markers:
+        reasons.append("hearsay_source:%s" % ",".join(hit_markers))
+    return {
+        "verification_status": "verified" if not reasons else "needs_verification",
+        "verified": not reasons,
+        "reasons": reasons,
+        "date_source": date_source,
+        "event_date": event_date.isoformat() if event_date else "",
+        "fixture_published_at": fixture_date.isoformat() if fixture_date else "",
+        "claimed_content_date": claimed.isoformat() if claimed else "",
+        "date_conflict": date_conflict,
+        "hearsay_markers": hit_markers,
+    }
+
+
 def evidence_errors(event, sample):
     errors = []
     if not (event.get("fact") or "").strip():
@@ -231,8 +305,11 @@ def run_sim():
         ev.update({
             "event_id": "E20261025_%04d" % (len(accepted) + 1),
             "source_url": s["source_url"], "source_name": s["source_name"],
-            "published_at": s["published_at"], "extraction_method": "llm",
+            "published_at": s["published_at"],
+            "published_at_source": "fixture_fallback",
+            "extraction_method": "llm",
         })
+        row["verification"] = assess_verification(ev, s)
         errs = evidence_errors(ev, s)
         row["evidence_errors"] = errs
         if errs:
@@ -286,6 +363,8 @@ def run_sim():
             "priority": ev["priority"],
             "analysis_pairing_ok": next(r.get("analysis_pairing_ok") for r in rows
                                        if r.get("_event") is ev),
+            "verification": next(r.get("verification") for r in rows
+                                 if r.get("_event") is ev),
         })
 
     # Integrity self-check: weighted score must equal configured weights × dims.
@@ -310,6 +389,16 @@ def run_sim():
         "json_parsed": sum(1 for r in rows if r["json_parsed"]),
         "accepted": len(accepted),
         "rejected": len(rows) - len(accepted),
+        "verified": sum(1 for r in rows if r.get("accepted") and
+                        (r.get("verification") or {}).get("verified")),
+        "needs_verification": sum(1 for r in rows if r.get("accepted") and
+                                  not (r.get("verification") or {}).get("verified")),
+        "verification_cases": [
+            {"sample_id": r["sample_id"],
+             "status": (r.get("verification") or {}).get("verification_status"),
+             "reasons": (r.get("verification") or {}).get("reasons", [])}
+            for r in rows if not (r.get("verification") or {}).get("verified")
+        ],
         "analyses_ok": sum(1 for r in rows if r.get("analysis_ok")),
         "analysis_pairing_ok": pair_ok,
         "score_dimensions": DIMENSIONS,

@@ -1,5 +1,7 @@
 # 12｜经营情报系统分阶段执行手册（Muse负责退役，QwenPaw负责NAS优化）
 
+> **最新权威进度（2026-10-26）**：R2-B 上线前隔离预检已复审通过，**生产切换仍为 NO-GO**。下一轮只做收敛型 [R2-B-CUTOVER-PREP（只读＋隔离）](reviews/NAS-R2B-CHATGPT-REVIEW-2026-10-26.md)：整理58个dirty文件与可恢复备份方案、只读核实最简NAS宿主调度替代或PID1风险、daily和periodic的分别处置、dry-run互斥和告警。**不合并main、不安装supervisor、不启停Cron、不发真实通知、不开R3/M2**。早期“R1-FIX/R2-A/R2-A-FIX当前阶段”仅为历史记录，以此条与链接中的最新评审为准。
+
 > **最新阶段提示（2026-10-25）**：R2-A-FIX 的隔离范围已经验收，R2-B 生产切换仍未授权。请优先读 [R2-A-FIX正式复审及R2-B部署前门禁](reviews/NAS-R2A-FIX-CHATGPT-REVIEW-2026-10-25.md)。旧文档里的“当前唯一R1-FIX/R2-A”均为历史指令；不得照旧自动推进。本系统不建设费用台账。
 
 

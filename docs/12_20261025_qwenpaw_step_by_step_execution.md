@@ -68,18 +68,18 @@ git archive --format=tar HEAD muse docs/10_muse_web_independent_architecture.md 
 gzip -t "$BACKUP_DIR/muse-main-history.tar.gz" || exit 1
 tar -tzf "$BACKUP_DIR/muse-main-history.tar.gz" | head -30
 # 若能读取独立试验分支，再单独保存未合并PR的完整Git对象：
-git fetch origin muse/pilot-2026-10-24 || {
+git fetch origin muse/pilot-2026-10-24:refs/remotes/origin/muse/pilot-2026-10-24 || {
   echo "STOP: cannot fetch Muse PR branch; preserve remote branch and report"
   exit 1
 }
-git rev-parse FETCH_HEAD > "$BACKUP_DIR/muse-pr-head.txt"
-git bundle create "$BACKUP_DIR/muse-pr.bundle" FETCH_HEAD ||
+git rev-parse refs/remotes/origin/muse/pilot-2026-10-24 > "$BACKUP_DIR/muse-pr-head.txt"
+git bundle create "$BACKUP_DIR/muse-pr.bundle" refs/remotes/origin/muse/pilot-2026-10-24 ||
   { echo "STOP: Muse PR backup bundle failed"; exit 1; }
 git bundle verify "$BACKUP_DIR/muse-pr.bundle" || exit 1
 echo "BACKUP VERIFIED $BACKUP_DIR"
 ~~~
 
-注意：上面脚本如果 Git 对 FETCH_HEAD bundle 不支持，则 **不得继续删分支**，应由 QwenPaw 改为对已获取的远端跟踪引用创建 bundle 并先验证。原PR在GitHub上也留有历史，但不应把它当作唯一备份。保存备份目录、校验结果和分支HEAD到**不含机密**的变更记录中。
+注意：上面的 Git bundle 通过远端跟踪引用创建；如果 fetch、bundle 或 verify 任一项失败，**不得继续删除远端试验分支**，先诊断Git权限和备份路径。原PR在GitHub上也留有历史，但不应把它当作唯一备份。保存备份目录、校验结果和分支HEAD到**不含机密**的变更记录中。
 
 ### M0-3 先检查清单，再删除源代码仓库的 Muse 现役文件
 

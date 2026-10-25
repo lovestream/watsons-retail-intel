@@ -44,7 +44,7 @@ watsons-retail-intel/
 
 ## 文档
 
-**当前方案（2026-10-25）**：系统一直运行在 **NAS Docker + QwenPaw/Python** 中，无迁移需求。Muse 独立实验已停止作为建设方向，待按退役手册清理；生产优化由 NAS 内 QwenPaw + DeepSeek Flash 逐阶段实施。请先读 [11｜NAS架构决策、AIHOT对标及人民币价格](docs/11_20261025_nas_qwenpaw_aihot_architecture_decision.md)，再按 [12｜Muse退役与NAS逐阶段执行手册](docs/12_20261025_qwenpaw_step_by_step_execution.md) 的 M0 开始；只先执行M0，验收后才进入后续阶段。GitHub文档更新**不代表NAS端配置或任务已改变**。
+**当前方案（2026-10-25）**：系统一直运行在 **NAS Docker + QwenPaw/Python** 中，无迁移需求。Muse 独立实验已停止作为建设方向，**Muse 自己负责一次性清理 GitHub 中的相关内容**；生产优化由 NAS 内 QwenPaw + **用户已接好的 RightCode「百亿补贴」DeepSeek Flash** 逐阶段实施，用户自行选择模型，不重新接入API或按时段切换。请先读 [11｜NAS架构决策和AIHOT对标](docs/11_20261025_nas_qwenpaw_aihot_architecture_decision.md)，再按 [12｜Muse退役（Muse执行）与NAS优化（QwenPaw从M1开始）](docs/12_20261025_qwenpaw_step_by_step_execution.md) 分工执行。GitHub文档更新**不代表NAS端配置或任务已改变**。
 
 **最新的实现与全流程文档见 [`docs/README.md`](docs/README.md)**，按子系统分篇，全程以真实代码与运行产物为准整理，适合排查问题与制定优化方案。
 

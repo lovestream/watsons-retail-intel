@@ -1,8 +1,8 @@
 # 11｜NAS Docker + QwenPaw 经营情报系统：架构决策、AIHOT 对标与 DeepSeek 成本方案
 
 > 日期：2026-10-25（北京时间）。**设计稿 / 待 QwenPaw 在现有 NAS Docker 环境逐阶段实施；不代表代码已修改、服务已重启、调度已变更。**
-> 本篇为当前项目的**最新实施方向**；历史 Muse 独立试验（docs/10 和 muse/）不再是建设方向，历史证据应先备份后清理。执行命令见 [12｜分阶段执行手册](12_20261025_qwenpaw_step_by_step_execution.md)。
-> 用户明确：系统**始终**部署在 NAS Docker 中，QwenPaw 是其中的 Agent/操作入口。**不存在迁移至 NAS**，也不使用 Codex 实施；方案由 ChatGPT 设计、复审，具体工作由 NAS 内 QwenPaw + DeepSeek Flash 执行。
+> 本篇为当前项目的**最新实施方向**；历史 Muse 独立试验（docs/10 和 muse/）不再是建设方向；**由 Muse 自己负责在 GitHub 做一次性退役清理**，不委派 NAS 上 QwenPaw。具体清理边界与后续 QwenPaw 分工见 [12｜分阶段执行手册](12_20261025_qwenpaw_step_by_step_execution.md)。
+> 用户明确：系统**始终**部署在 NAS Docker 中，QwenPaw 是其中的 Agent/操作入口。**不存在迁移至 NAS**，也不使用 Codex 实施；方案由 ChatGPT 设计、复审；Muse 清理由 Muse 完成，后续优化由 NAS 内 QwenPaw + 已配置的 DeepSeek Flash 执行。用户已在 NAS 配好模型，**无需本任务书指导 API Key、Provider、接口接入或模型切换**。
 
 ## 0. 一句话决策
 
@@ -15,35 +15,28 @@
 - 运行位置：NAS Docker 容器中的 /app/working/projects/watsons-retail-intel（**必须在 NAS 内实际核对路径和持久化挂载**）；QwenPaw Agent 及 Python Pipeline 已存在。
 - 启动器 scripts/run_daily.sh 与 scripts/run_periodic.sh；实际主程序 skills/run_daily_pipeline/run_daily_pipeline.py 和 skills/run_periodic_pipeline/run_periodic_pipeline.py。旧审计记录约29步、含多源采集、全文补全、日期门、过滤、事件提取、novelty、score、analyze、报告、音频、邮件。
 - config/scoring.yaml 八维 [0.18,0.24,0.12,0.12,0.10,0.14,0.06,0.04]，P0≥4.3、P1≥3.6、P2≥2.8；已存在 hard downgrade。需要程序重算，不允许模型自行改分或编造影响。
-- config/model_router.yaml 默认与fallback目前均指向 OpenCode 标识 deepseek-v4-flash-free；**其名称不是官方/RightCode deepseek-flash 的 API 端点**。在不改变主流程的情况下先建立适配层。
+- 仓库中的 config/model_router.yaml 仍记载历史 OpenCode 标识 deepseek-v4-flash-free，但用户已在 NAS 中配置好可选模型；**先由 M1 只读核对当前实际调用路径，不能依据旧仓库配置推断在线模型，更不再安排单独的 API 接入/模型配置任务**。
 - docs/09 记录可靠性/安全旧审计：Agent 型 cron 的启动风险、配置漂移、采集贡献不均、run_periodic.sh 日期未向Python CLI透传、发送幂等与 public 仓库跟踪Cookie风险。以上需NAS实查，不能把文档推断当线上运行事实。
 
-## 1. 价格判定：全部按人民币 ¥ / 1M tokens，2026-10-25
+## 1. 模型渠道：用户选择 RightCode「百亿补贴」，不再按闲时调度
 
-### 比价（用户提供RightCode报价；DeepSeek官方中文版价格已核对）
+**已确定的运营偏好**（2026-10-25）：NAS 中各模型渠道已由用户配置完成，到需要调用时由用户在现有环境里选择；**不再在实施任务里配置 Key、base_url、Provider Adapter，不强制比较三个渠道，也不为了优惠安排固定闲时时间窗口。**
 
-| 渠道 / 时段 | 未缓存输入 | 输出 | 缓存命中输入 | 缓存创建 |
-|---|---:|---:|---:|---:|
-| RightCode 国模特惠 闲时 | ¥0.50 | ¥2.00 | ¥0.01 | ¥0 |
-| RightCode 国模特惠 工作日高峰 | ¥1.00 | ¥4.00 | ¥0.02 | ¥0 |
-| RightCode 百亿补贴（按用户所给固定价） | ¥0.60 | ¥1.80 | ¥0.02 | ¥0 |
-| DeepSeek 官方 闲时 | ¥1.00 | ¥4.00 | ¥0.02 | — |
-| DeepSeek 官方 工作日高峰 | ¥2.00 | ¥8.00 | ¥0.04 | — |
+RightCode 「百亿补贴」DeepSeek Flash，按用户提供的报价，单位均为**人民币 ¥ / 百万 tokens**：
 
-官方来源：https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ 。官方 deepseek-flash 版本为 DeepSeek-V4.1-Flash-1017（请上线时再次核验）；峰时北京时间工作日09:00–12:00、14:00–18:00，其他时段及节假日闲时。第三方渠道型号/价格/可用性以 RightCode 实际账单与调用结果为准。
+| 未缓存输入 | 输出 | 缓存创建 | 缓存读取 |
+|---:|---:|---:|---:|
+| ¥0.60 | ¥1.80 | ¥0 | ¥0.02 |
 
-**结论：DeepSeek 官方API不是最低价。** 在这三种渠道、指定计价条件中：
-- 对非缓存输入A、模型输出B、缓存命中输入C，单位均为百万tokens：国模特惠闲时费用 = 0.5A + 2B + 0.01C；百亿补贴 = 0.6A + 1.8B + 0.02C；官方闲时 = 1A + 4B + 0.02C。
-- 国模特惠比百亿补贴划算的条件：B < 0.5A + 0.05C；相等则同价。采集辅助、文章抽取通常输入多输出少，优先国模特惠；极高输出占比的周报写作可能百亿补贴略省，不必为很小差价增加故障点。
-- 假设月未缓存输入20M、输出4M、缓存命中0：国模特惠闲时¥18；百亿补贴¥19.2；官方闲时¥36；官方峰时¥72。
-- **最便宜≠最适合生产**：关键条件是同模型版本、非思考/思考模式、JSON/工具调用兼容性、计费日志、稳定性、速率限制和可控重试。RightCode展示99.6%可用性不能替代项目自己测出的端到端成功率。可用一种渠道为主，异服务商为备用，先按预算批准后再启用备用；不要假装同一渠道的多Key实现容灾。
+RightCode 「国模特惠」闲时 ¥0.50 输入 / ¥2.00 输出 / ¥0.01 缓存读取；在工作日峰时会涨价。因此尽管某些输入量较大的任务在闲时用特惠可能略省，**用户更重视全天价格简单、省去惦记时段的管理成本，统一选择百亿补贴**。这是产品运营取舍，不声称在所有输入/输出比例下数学上最低价。第三方价格及是否不分时均以实际账单/服务条款为准。
 
-### 低成本运行方案
+估算示例：每月未缓存输入20M、输出4M、缓存命中0，则百亿补贴约 ¥19.20；该数字不包括搜索/API/爬取等费用。若后续实际调用质量和可靠性有问题，再单独评估；本阶段不建立自动分时切换或 Provider 路由工程。
 
-- 不调用模型的官方/RSS/网页列表巡检可在白天按需要分频运行。LLM 批处理安排北京时间**07:15后但09:00前**或**18:30后**，避免与每天07:00闭合采集窗口冲突；周一的报告必须等最后一个日窗口入池成功后再开始，实际起止以NAS真实耗时校准。
-- 新闻硬规则过滤与URL去重用程序；低置信正文/重要候选做一次Flash抽取；P0/P1和门槛附近才做独立二次评审；周/月/年报在固定证据包基础上使用Flash撰写并审校。禁止全量新闻逐篇两次模型调用。
-- 运行时记录 provider/channel/model_version、prompt/completion/cache tokens、计费金额、耗时和错误类型；按日/月设置硬预算，超限不再调用高价兜底或发未经审校的报告。
-- DeepSeek官方默认可能是思考模式；常规JSON抽取建议明确非思考，重要综合分析可按实测质量决定思考开关。第三方渠道须做真实 API 探针，不得仅改 config/model_router.yaml 的字符串。
+### 运行安排不再受模型折扣时段约束
+
+- 白天或夜间采集频率按**来源更新节奏和业务时效**确定；模型调用按采集完成信号/完整性门禁触发，不以价格时段来阻断。
+- 仍应减少浪费：硬规则过滤/去重先做，低置信/重要候选用Flash复核，高价值或分数临界才二次评分，周/月/年报对冻结事实包分析。
+- M1 只读盘点实际 token 计量与执行结果；后续只做可观测、预算上限、429/超时处理及质量验证。**不修改用户已设置的模型连接、不重填 Key、不强制重新测试所有渠道**。
 
 ## 2. AIHOT 哪些借鉴、哪些不照搬
 
@@ -81,7 +74,7 @@ Event: event_id / source_urls / source_tier / verification_level / subject / act
 **先只读审计**：NAS容器内实际服务、挂载、定时任务、过去14/30天采集→全文→事件→得分→报表→投递漏斗、财务与稳定性成本，禁止将旧文档当实时运行情况。扫描 public GitHub 追踪过的Cookie、密钥、联系信息；如有真实泄漏，先轮换凭证再处理仓库历史（仅删当前文件不够）。
 
 **阶段实施，不一口气重写29步**：
-- P0 删除/归档Muse遗留并保留备份、审计快照；禁止碰原QwenPaw生产卷。
+- P0 **Muse 自己**清理其创建的GitHub独立试验（经核对的Muse文件与引用、关闭Draft PR但不合并；保留可恢复历史）；QwenPaw不执行此阶段。
 - P1 源健康与发现层：保留真正贡献高价值事件的源，引入官方可巡检列表；SelectBench基线在筛选调整前冻结；修时间错位问题。
 - P2 事件与评分：只改明确存在的问题，先完成旧数据兼容、去重/更新/硬降级/来源证据回归，不新增重复权威账本。
 - P3 模型路由：RightCode国模特惠闲时优先（经探针验证），官方直连作备选候选，量化质量/费用/JSON成功率；凭证仅NAS secrets。
@@ -92,4 +85,4 @@ Event: event_id / source_urls / source_tier / verification_level / subject / act
 
 ## 5. 执行授权与禁区
 
-**ChatGPT负责设计和GitHub文档/验收；NAS中QwenPaw+DeepSeek Flash负责按阶段实施，不用Codex。** 当前本文件仅是方案，不直接变更Docker、cron、模型Key、邮件投递。每一阶段执行后在GitHub新增简短脱敏验收记录，保留运行日志在NAS，返回HEAD和关键真实数据给ChatGPT审查再推进。历史Muse PR #1不得合并；清理细节见文档12。
+**ChatGPT负责设计与复审；Muse只负责一次性清理自己创建的GitHub试验内容；NAS中QwenPaw+用户已配置的DeepSeek Flash负责后续系统优化，不用Codex。** 当前仅为方案，不直接变更Docker、cron、模型Key、邮件投递。Muse清理完成后，由QwenPaw从M1只读审计开始；每阶段提交脱敏验收记录和HEAD，ChatGPT复审后推进。历史Muse PR #1不得合并；清理任务见文档12。

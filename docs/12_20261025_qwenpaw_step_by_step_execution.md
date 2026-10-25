@@ -9,6 +9,8 @@
 
 > **2026-10-25 最新权威阶段与模型决策**：M0/M1/R0已完成；R1隔离测试已报告SiliconFlow主通道成功，**本轮只批准R1-FIX整改，未合并生产main**；R2/R3/M2仍暂停。**主：SiliconFlow（硅基流动）DeepSeek-V4.1-Flash；备：RightCode「百亿补贴」DeepSeek Flash**，有限付费回退、不分时切换。参阅[正式R1复审与整改指令](reviews/NAS-R1-CHATGPT-REVIEW-2026-10-25.md)。
 
+> **2026-10-25 最新复审优先**：R1-FIX 已按用户确认的范围通过，**不再要求系统自建费用台账、日金额预算或单价估算**；SiliconFlow 主，RightCode 百亿补贴备。下一步只做**R2-A 隔离日管线与调度/健康检查验证**，不改正式Cron/生产账本/SMTP、不中途合并R1。详见 [R1-FIX最终审查与R2-A任务](reviews/NAS-R1-FIX-CHATGPT-REVIEW-2026-10-25.md)。
+
 ## 总规则
 
 1. **M0和M1已完成并经ChatGPT复审；不得重做。当前阶段仅允许R1-FIX按正式复审意见在隔离分支整改、提交证据后停止。** R1–R3及原M2–M7只有前一阶段经ChatGPT复审才推进。Muse不再介入生产。
@@ -84,6 +86,10 @@
 
 ---
 
-## 最新交给QwenPaw的唯一指令（R1-FIX）
+## 历史指令（R1-FIX已完成）
 
 > 读取 [R1 ChatGPT正式审查及R1-FIX指令](reviews/NAS-R1-CHATGPT-REVIEW-2026-10-25.md)。只在原隔离分支 r1/pipeline-deepseek-flash-recovery 上修付费备用计数和次数/总预算、主备可用状态与模型ID映射、0600凭证权限与Key脱敏、并发上限、R1S07传闻和R1S13日期冲突回归；模型顺序保持SiliconFlow主/RightCode百亿补贴备。补离线单测、少量故障注入、真实调用与费用分账说明，提交NAS-R1-FIX-VERIFICATION.md后停下等ChatGPT复审。**不合并main、不改生产cron/账本/SMTP/秘钥，不进入R2/M2。**
+
+## 现行唯一可执行任务：R2-A
+
+QwenPaw请以 [NAS-R1-FIX-CHATGPT-REVIEW-2026-10-25.md](reviews/NAS-R1-FIX-CHATGPT-REVIEW-2026-10-25.md) 最后一节为准：复用R1隔离工作树，对一日冻结样本跑真实Python阶段链路（不碰正式账本）、设计和故障注入OS级确定性调度/看门狗草案，提出needs_verification生产传导方案。只提交脱敏R2-A验证报告并停下；**不能切换生产Cron，不发邮件，不改现有容器，不上M2**。费用在供应商后台看，本系统不建费用台账。

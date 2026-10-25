@@ -25,6 +25,11 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+try:  # pipeline / tests are run from the repository root
+    from skills.report_policy import cap_eligibility
+except ImportError:  # direct script execution from the skill directory
+    from report_policy import cap_eligibility
+
 # ── 项目路径 ──
 _PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -189,7 +194,7 @@ def determine_novelty(
             "last_seen_at": date,
             "last_reported_at": date,
             "report_count": 1,
-            "report_eligibility": "core",
+            "report_eligibility": cap_eligibility(event, "core"),
             "fact_first_seen_at": fact_first_seen_at,
             "fact_seen_count": fact_seen_count,
             "fact_has_new_delta": fact_has_new_delta,
@@ -231,7 +236,7 @@ def determine_novelty(
             "last_seen_at": date,
             "last_reported_at": date,
             "report_count": max(report_count, 1),
-            "report_eligibility": eligibility,
+            "report_eligibility": cap_eligibility(event, eligibility),
             "fact_first_seen_at": fact_first_seen_at,
             "fact_seen_count": fact_seen_count,
             "fact_has_new_delta": fact_has_new_delta,
@@ -287,7 +292,7 @@ def determine_novelty(
         "last_seen_at": date,
         "last_reported_at": new_last_reported,
         "report_count": new_report_count,
-        "report_eligibility": eligibility,
+        "report_eligibility": cap_eligibility(event, eligibility),
         "fact_first_seen_at": fact_first_seen_at,
         "fact_seen_count": fact_seen_count,
         "fact_has_new_delta": fact_has_new_delta,

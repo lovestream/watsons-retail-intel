@@ -35,19 +35,32 @@ def run_daily_pipeline(
 ) -> Dict[str, Any]:
     mode = os.environ.get("R2A_FAKE_MODE", "success")
     root = Path(project_root) / "data"
-    _write(root / "cleaned" / date / "cleaned_articles.json", "articles", 0 if mode == "no_signal" else 1)
+    _write(root / "cleaned" / date / "cleaned_articles.json", "articles", 0 if mode in ("no_signal", "collect_failure") else 1)
 
     if mode == "exception":
         raise RuntimeError("injected pipeline exception")
 
-    if mode == "no_signal":
+    if mode in ("no_signal", "collect_failure"):
         for name, count in (("events_raw", 0), ("events_temporal", 0), ("events_scored", 0), ("events_analyzed", 0)):
             _write(root / "events" / date / f"{name}.json", "events", count)
+        failed = mode == "collect_failure"
         return {
-            "ok": True,
+            "ok": not failed,
             "sendable": False,
             "no_signal": True,
-            "steps": [{"name": n, "status": "skipped" if n == "extract" else "success", "stats": {}} for n in CRITICAL],
+            "steps": [
+                {
+                    "name": "collect",
+                    "status": "failed" if failed else "success",
+                    "stats": {
+                        "total_collected": 0,
+                        "source_total": 2,
+                        "source_success": 0,
+                        "source_failed": 2 if failed else 0,
+                        "collect_errors_count": 2 if failed else 0,
+                    },
+                }
+            ] + [{"name": n, "status": "skipped" if n == "extract" else "success", "stats": {}} for n in CRITICAL],
         }
 
     raw = 0 if mode == "empty" else 2
@@ -55,7 +68,29 @@ def run_daily_pipeline(
     _write(root / "events" / date / "events_temporal.json", "events", raw)
     _write(root / "events" / date / "events_scored.json", "events", 2)
     _write(root / "events" / date / "events_analyzed.json", "events", 1 if mode == "incomplete" else 2)
-    steps = [{"name": n, "status": "failed" if (mode == "step_failed" and n == "score") else "success", "stats": {}} for n in CRITICAL]
+    analyze_stats = (
+        {"llm_success_count": 0, "llm_failed_count": 2}
+        if mode == "llm_degraded"
+        else {"llm_success_count": 2, "llm_failed_count": 0}
+    )
+    steps = [{
+        "name": "collect",
+        "status": "success",
+        "stats": {
+            "total_collected": 1,
+            "source_total": 2,
+            "source_success": 1,
+            "source_failed": 0,
+            "collect_errors_count": 0,
+        },
+    }] + [
+        {
+            "name": n,
+            "status": "failed" if (mode == "step_failed" and n == "score") else "success",
+            "stats": analyze_stats if n == "analyze" else {},
+        }
+        for n in CRITICAL
+    ]
     return {
         "ok": mode != "step_failed",
         "sendable": False,

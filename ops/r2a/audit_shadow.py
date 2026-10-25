@@ -26,6 +26,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from . import run_state
+from skills import report_policy
 
 HEARSAY_RE = re.compile(r"据悉|消息称|传闻|网传|据说|听说|知情人士|接近.{0,8}人士")
 STOCK_RE = re.compile(
@@ -51,6 +52,22 @@ def _sha(text: Any) -> str:
 
 
 def _missing_dates(events: List[Dict[str, Any]]) -> List[str]:
+    """Events with no usable event date at all.
+
+    ``event_occurred_at`` may legitimately be empty when the fact is anchored
+    by an announcement or an effective date; that is not a missing date.
+    """
+    return [
+        str(ev.get("event_id"))
+        for ev in events
+        if not any(
+            str(ev.get(k) or "").strip()
+            for k in ("event_occurred_at", "event_announced_at", "event_effective_at")
+        )
+    ]
+
+
+def _occurred_missing(events: List[Dict[str, Any]]) -> List[str]:
     return [
         str(ev.get("event_id"))
         for ev in events
@@ -127,6 +144,7 @@ def audit(project_root: Path, date: str) -> Dict[str, Any]:
     low_overlap = _pairing_low_overlap(analyzed)
 
     missing_dates = _missing_dates(analyzed)
+    occurred_missing = _occurred_missing(analyzed)
     hearsay_ids = [
         str(ev.get("event_id"))
         for ev in analyzed
@@ -152,10 +170,13 @@ def audit(project_root: Path, date: str) -> Dict[str, Any]:
     pipeline_date_missing = sum(not str(ev.get("event_occurred_at") or "").strip() for ev in analyzed)
 
     reportable = [
-        ev
-        for ev in stages["scored"]
-        if ev.get("priority") != "ARCHIVE" and ev.get("report_eligibility") not in ("archive",)
+        ev for ev in stages["scored"] if report_policy.is_reportable_event(ev)
     ]
+    out_of_domain = []
+    for ev in stages["scored"]:
+        blocked, vertical = report_policy.is_out_of_domain_event(ev)
+        if blocked:
+            out_of_domain.append({"event_id": str(ev.get("event_id")), "vertical": vertical})
 
     return {
         "schema_version": run_state.SCHEMA_VERSION,
@@ -174,8 +195,10 @@ def audit(project_root: Path, date: str) -> Dict[str, Any]:
             "duplicate_raw_ids": [item for item, count in Counter(all_ids).items() if count > 1],
         },
         "dates": {
-            "event_occurred_missing_count": len(missing_dates),
-            "event_occurred_missing_ids": missing_dates[:30],
+            "event_date_missing_count": len(missing_dates),
+            "event_date_missing_ids": missing_dates[:30],
+            "event_occurred_missing_count": len(occurred_missing),
+            "event_occurred_missing_ids": occurred_missing[:30],
             "event_date_precision": dict(Counter(str(ev.get("event_time_precision") or "MISSING") for ev in analyze_stages(stages))),
         },
         "evidence": {
@@ -201,6 +224,7 @@ def audit(project_root: Path, date: str) -> Dict[str, Any]:
             "eligibility_counts": dict(eligibility_counts),
             "reportable_count": len(reportable),
             "reportable_ids": [str(ev.get("event_id")) for ev in reportable],
+            "out_of_domain": out_of_domain,
             "missing_weighted_score": [
                 str(ev.get("event_id")) for ev in stages["scored"] if ev.get("weighted_score") is None
             ],
@@ -235,14 +259,20 @@ def audit(project_root: Path, date: str) -> Dict[str, Any]:
             ),
             "pipeline_flag_true_count": pipeline_needs_flag,
             "pipeline_status_counts": dict(pipeline_verification),
-            "pipeline_event_date_missing_count": pipeline_date_missing,
+            "verification_date_source_counts": dict(
+                Counter(str(ev.get("verification_date_source") or "MISSING") for ev in analyzed)
+            ),
+            "pipeline_event_date_missing_count": sum(
+                1 for ev in analyzed
+                if any(str(r).startswith("event_date_missing") for r in (ev.get("verification_reasons") or []))
+            ),
             "heuristic_date_missing_count": len(missing_dates),
             "heuristic_date_missing_ids": missing_dates[:30],
             "heuristic_hearsay_count": len(hearsay_ids),
             "heuristic_hearsay_ids": hearsay_ids[:20],
             "heuristic_evidence_missing_count": len(evidence_empty),
             "heuristic_source_missing_count": len(source_empty),
-            "pipeline_enforced": False,
+            "pipeline_enforced": True,
         },
         "capital_market": {
             "matches_count": len(stock_ids),
@@ -251,6 +281,7 @@ def audit(project_root: Path, date: str) -> Dict[str, Any]:
         "notes": [
             "This audit does not call an LLM and does not send email.",
             "needs_verification is reported separately from factual verification; a missing field is not a pass.",
+            "reportable_count uses the shared core+verified+new-today+evidence predicate, not priority alone.",
             "pairing_low_overlap is an alarm, not a semantic proof.",
         ],
     }

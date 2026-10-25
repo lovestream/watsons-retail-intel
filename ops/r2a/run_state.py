@@ -14,6 +14,14 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 
 try:
+    from skills.report_policy import is_reportable_event
+except ImportError:  # direct invocation from the ops/r2a directory
+    try:
+        from report_policy import is_reportable_event  # type: ignore
+    except ImportError:  # pragma: no cover - only when PYTHONPATH is absent
+        is_reportable_event = None  # type: ignore
+
+try:
     from zoneinfo import ZoneInfo
 except ImportError:  # pragma: no cover - Python 3.8 fallback
     ZoneInfo = None  # type: ignore
@@ -133,10 +141,8 @@ def reportable_count(scored_path: Path) -> int:
     events = data.get("events")
     if not isinstance(events, list):
         return 0
-    return sum(
-        1
-        for ev in events
-        if isinstance(ev, dict)
-        and ev.get("priority") != "ARCHIVE"
-        and ev.get("report_eligibility") not in ("archive",)
-    )
+    if is_reportable_event is None:
+        # Conservative fallback: without the shared policy, do not count
+        # anything as a verified new fact.
+        return 0
+    return sum(1 for ev in events if is_reportable_event(ev))

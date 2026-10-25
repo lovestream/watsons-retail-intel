@@ -70,7 +70,15 @@ def _step_view(steps: Any) -> Dict[str, Dict[str, Any]]:
                     "scored_count",
                     "analyzed_count",
                     "llm_success_count",
+                    "llm_failed_count",
                     "llm_fallback_count",
+                    "total_collected",
+                    "source_total",
+                    "source_success",
+                    "source_failed",
+                    "collector_count",
+                    "collector_nonzero_count",
+                    "collect_errors_count",
                 )
                 if k in stats
             },
@@ -78,10 +86,67 @@ def _step_view(steps: Any) -> Dict[str, Dict[str, Any]]:
     return out
 
 
+def _stat_int(stats: Dict[str, Any], key: str) -> Optional[int]:
+    value = stats.get(key) if isinstance(stats, dict) else None
+    if value is None:
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _llm_health(steps: Dict[str, Dict[str, Any]], name: str) -> str:
+    """Return ok/degraded/unknown for a step's real LLM usage.
+
+    ``success`` on a step only means the step did not crash.  A rule-only
+    fallback is operational, but it must not be reported as a full LLM success.
+    """
+    step = steps.get(name)
+    if not step:
+        return "not_run"
+    success = _stat_int(step.get("stats", {}), "llm_success_count")
+    if success is None:
+        return "unknown"
+    return "ok" if success > 0 else "degraded"
+
+
+def _collection_health(steps: Dict[str, Dict[str, Any]]) -> str:
+    """Classify whether collection itself succeeded.
+
+    Legitimate empty days and an all-sources-down day both produce zero cleaned
+    articles.  They are only distinguishable by the collection step's status,
+    source counts and collector errors.
+    """
+    step = steps.get("collect")
+    if not step:
+        return "not_run"
+    if step.get("status") not in ("success", "warning"):
+        return "failed"
+    stats = step.get("stats", {})
+    collected = _stat_int(stats, "total_collected")
+    errors = _stat_int(stats, "collect_errors_count") or 0
+    source_total = _stat_int(stats, "source_total")
+    source_success = _stat_int(stats, "source_success")
+    source_failed = _stat_int(stats, "source_failed")
+    if errors > 0 and (collected or 0) == 0:
+        return "failed"
+    if (
+        source_total is not None
+        and source_total > 0
+        and (source_success or 0) == 0
+        and (source_failed or 0) >= source_total
+    ):
+        # Every tried source failed.  Do not call this a quiet news day.
+        return "no_source_success"
+    return "ok"
+
+
 def classify_outcome(
     result: Optional[Dict[str, Any]],
     counts: Dict[str, int],
     exception: Optional[str] = None,
+    start_step: str = "health_check",
 ) -> Dict[str, Any]:
     """Classify a pipeline result into a truthful terminal status.
 
@@ -101,39 +166,98 @@ def classify_outcome(
     no_signal_flag = result.get("no_signal") is True
     steps = _step_view(result.get("steps"))
 
+    cleaned = int(counts.get("cleaned_articles", 0) or 0)
+
     if not pipeline_ok:
+        # A collection failure that leaves no articles is more specific than a
+        # generic pipeline error; keep the operational cause visible.
+        if no_signal_flag and cleaned == 0:
+            return {
+                "status": "failed",
+                "reason": "no_signal_without_verified_collection",
+                "errors": ["pipeline returned ok=false with no signal and zero articles"],
+                "exit_code": 2,
+                "pipeline_completed": False,
+                "content_ready": False,
+                "collection_health": _collection_health(steps),
+                "llm_extract_health": _llm_health(steps, "extract"),
+                "llm_analyze_health": _llm_health(steps, "analyze"),
+                "analysis_mode": "not_run",
+            }
         return {
             "status": "failed",
             "reason": "pipeline_not_ok",
             "errors": ["pipeline returned ok=false"],
             "exit_code": 2,
         }
-
-    cleaned = int(counts.get("cleaned_articles", 0) or 0)
     raw = int(counts.get("events_raw", 0) or 0)
     scored = int(counts.get("events_scored", 0) or 0)
     analyzed = int(counts.get("events_analyzed", 0) or 0)
 
-    missing_steps = [name for name in CRITICAL_STEPS if name not in steps]
+    if start_step == "health_check":
+        # A scheduled full workflow must prove collection happened; starting at
+        # health_check while skipping collect is still an extract-only run.
+        required_critical = ["collect"] + list(CRITICAL_STEPS)
+    elif start_step == "collect":
+        required_critical = list(CRITICAL_STEPS)
+    elif start_step in CRITICAL_STEPS:
+        required_critical = list(CRITICAL_STEPS[CRITICAL_STEPS.index(start_step):])
+    else:
+        required_critical = list(CRITICAL_STEPS)
+
+    missing_steps = [name for name in required_critical if name not in steps]
     bad_steps = [
         name
-        for name in CRITICAL_STEPS
+        for name in required_critical
         if name in steps and steps[name].get("status") not in ("success", "warning", "skipped")
     ]
 
+    collection_health = _collection_health(steps)
+    llm_extract_health = _llm_health(steps, "extract")
+    llm_analyze_health = _llm_health(steps, "analyze")
+
     if no_signal_flag:
         if cleaned == 0:
+            if collection_health == "ok":
+                return {
+                    "status": "no_signal",
+                    "reason": "no_input_articles_after_successful_collection",
+                    "errors": [],
+                    "exit_code": 0,
+                    "pipeline_completed": True,
+                    "content_ready": False,
+                    "collection_health": collection_health,
+                    "llm_extract_health": llm_extract_health,
+                    "llm_analyze_health": llm_analyze_health,
+                    "analysis_mode": "not_run",
+                }
+            # Zero articles without a verified collection run is not a quiet
+            # news day; it is an unverified/failed collection result.
             return {
-                "status": "no_signal",
-                "reason": "no_input_articles",
-                "errors": [],
-                "exit_code": 0,
+                "status": "failed",
+                "reason": "no_signal_without_verified_collection",
+                "errors": [
+                    f"no_signal with cleaned_articles=0 but collection_health={collection_health}"
+                ],
+                "exit_code": 2,
+                "pipeline_completed": bool(pipeline_ok),
+                "content_ready": False,
+                "collection_health": collection_health,
+                "llm_extract_health": llm_extract_health,
+                "llm_analyze_health": llm_analyze_health,
+                "analysis_mode": "not_run",
             }
         return {
             "status": "failed",
             "reason": "no_signal_with_nonempty_input",
             "errors": [f"no_signal reported but cleaned_articles={cleaned}"],
             "exit_code": 2,
+            "pipeline_completed": bool(pipeline_ok),
+            "content_ready": False,
+            "collection_health": collection_health,
+            "llm_extract_health": llm_extract_health,
+            "llm_analyze_health": llm_analyze_health,
+            "analysis_mode": "not_run",
         }
 
     if missing_steps:
@@ -179,11 +303,24 @@ def classify_outcome(
             "exit_code": 2,
         }
 
+    analysis_mode = "llm" if llm_analyze_health == "ok" else (
+        "rule_fallback_or_degraded" if llm_analyze_health == "degraded" else "unknown"
+    )
+    reason = "complete_event_pool"
+    if analysis_mode != "llm":
+        reason = "complete_event_pool_degraded_analysis"
     return {
         "status": "success",
-        "reason": "complete_event_pool",
+        "reason": reason,
         "errors": [],
         "exit_code": 0,
+        "pipeline_completed": True,
+        "content_ready": analyzed > 0,
+        "collection_health": collection_health,
+        "llm_extract_health": llm_extract_health,
+        "llm_analyze_health": llm_analyze_health,
+        "analysis_mode": analysis_mode,
+        "degraded_analysis": analysis_mode != "llm",
     }
 
 
@@ -344,7 +481,9 @@ def execute(args: argparse.Namespace) -> int:
             pass
 
     counts = run_state.event_counts(Path(args.project_root), date)
-    outcome = classify_outcome(result, counts, exception=exception_text)
+    outcome = classify_outcome(
+        result, counts, exception=exception_text, start_step=args.start_step
+    )
     step_view = _step_view((result or {}).get("steps"))
     reportable = run_state.reportable_count(
         Path(args.project_root) / "data" / "events" / date / "events_scored.json"
@@ -363,6 +502,13 @@ def execute(args: argparse.Namespace) -> int:
         reportable_count=reportable,
         steps=step_view,
         errors=errors,
+        pipeline_completed=outcome.get("pipeline_completed"),
+        content_ready=outcome.get("content_ready"),
+        collection_health=outcome.get("collection_health", "unknown"),
+        llm_extract_health=outcome.get("llm_extract_health", "unknown"),
+        llm_analyze_health=outcome.get("llm_analyze_health", "unknown"),
+        analysis_mode=outcome.get("analysis_mode", "unknown"),
+        degraded_analysis=bool(outcome.get("degraded_analysis", False)),
     )
     print(
         json.dumps(
@@ -387,7 +533,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--date", default=None)
     parser.add_argument("--run-id", default=None)
     parser.add_argument("--mode", default="shadow", choices=("shadow", "scheduled"))
-    parser.add_argument("--start-step", default="extract")
+    parser.add_argument("--start-step", default="health_check")
     parser.add_argument("--end-step", default="analyze")
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--pipeline-module", default="skills.run_daily_pipeline.run_daily_pipeline")
@@ -399,6 +545,10 @@ def main(argv: Optional[List[str]] = None) -> int:
     args = build_parser().parse_args(argv)
     if args.mode == "shadow" and args.end_step not in ("analyze", "score", "novelty_check", "temporal_fact_validation"):
         raise SystemExit("shadow mode must end at or before analyze")
+    if args.mode == "scheduled" and args.start_step not in ("health_check", "collect"):
+        raise SystemExit(
+            "scheduled mode must start at health_check/collect, not at a pre-existing extract pool"
+        )
     return execute(args)
 
 

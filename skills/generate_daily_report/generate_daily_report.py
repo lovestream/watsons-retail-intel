@@ -19,6 +19,11 @@ from collections import Counter
 from datetime import datetime, timezone, timedelta
 from typing import Any, Dict, List, Optional, Tuple
 
+try:  # pipeline / tests are run from the repository root
+    from skills.report_policy import is_reportable_event
+except ImportError:  # direct script execution from the skill directory
+    from report_policy import is_reportable_event
+
 # ── 项目路径 ──
 _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__))))
@@ -230,6 +235,7 @@ def select_events(events: List[dict]) -> Tuple[List[dict], dict]:
         "rule_fallback_used_count": sum(
             1 for ev in used if ev.get("extraction_method") == "rule_fallback"),
         "core_signal_count": 0,
+        "reportable_count": sum(1 for ev in used if is_reportable_event(ev)),
         "novelty_stats": {
             "core": sum(1 for ev in used if ev.get("report_eligibility") == "core"),
             "tracking": sum(1 for ev in used if ev.get("report_eligibility") == "tracking"),
@@ -393,8 +399,10 @@ def select_top_signals(events: List[dict], max_signals: int = 3) -> List[dict]:
                   and ev.get("report_eligibility") != "archive"]
 
     # 排除 repeated — 不得进入核心信号
-    core_candidates = [ev for ev in candidates
-                       if ev.get("report_eligibility") == "core"]
+    # Only verified new/legitimate-update events may enter today's top signals.
+    # review/reference/tracking stay available for background/follow-up, but
+    # cannot masquerade as newly verified facts.
+    core_candidates = [ev for ev in candidates if is_reportable_event(ev)]
 
     # 如果 core 候选不足，不硬凑
     signal_candidates = core_candidates if core_candidates else []

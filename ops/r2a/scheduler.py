@@ -212,7 +212,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--window-minutes", type=int, default=DEFAULT_WINDOW_MINUTES)
     parser.add_argument("--poll-seconds", type=int, default=60)
     parser.add_argument("--mode", default="scheduled", choices=("shadow", "scheduled"))
-    parser.add_argument("--start-step", default="extract")
+    parser.add_argument("--start-step", default="health_check")
     parser.add_argument("--end-step", default="analyze")
     parser.add_argument("--pipeline-module", default="skills.run_daily_pipeline.run_daily_pipeline")
     parser.add_argument("--force", action="store_true")
@@ -227,6 +227,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Optional[List[str]] = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.mode == "scheduled" and args.start_step not in ("health_check", "collect"):
+        raise SystemExit(
+            "scheduled mode must start at health_check/collect; extract-only launches are not a full workflow"
+        )
     now = run_state.parse_iso(args.now) if args.now else run_state.cst_now()
     if args.loop:
         return run_loop(args)

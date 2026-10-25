@@ -18,11 +18,13 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from . import run_state
+from . import alerts, run_state
 
 CST = run_state.CST
 
@@ -109,6 +111,13 @@ def evaluate(
             "heartbeat_at": latest.get("heartbeat_at"),
             "counts": latest.get("counts") or {},
             "reportable_count": latest.get("reportable_count"),
+            "pipeline_completed": latest.get("pipeline_completed"),
+            "content_ready": latest.get("content_ready"),
+            "collection_health": latest.get("collection_health"),
+            "llm_extract_health": latest.get("llm_extract_health"),
+            "llm_analyze_health": latest.get("llm_analyze_health"),
+            "analysis_mode": latest.get("analysis_mode"),
+            "degraded_analysis": latest.get("degraded_analysis"),
             "errors": (latest.get("errors") or [])[:3],
             "manifest": latest.get("_path"),
         }
@@ -128,8 +137,40 @@ def evaluate(
         elif status == "failed":
             alerts.append(_alert("run_failed", "critical", f"latest run failed: {latest.get('reason')}", latest))
         elif status in ("success", "no_signal"):
-            if status == "no_signal" and cleaned > 0:
-                alerts.append(_alert("no_signal_with_input", "critical", "no_signal but cleaned_articles>0", latest))
+            collection_health = str(latest.get("collection_health") or "unknown")
+            if status == "no_signal":
+                if cleaned > 0:
+                    alerts.append(_alert("no_signal_with_input", "critical", "no_signal but cleaned_articles>0", latest))
+                elif collection_health != "ok":
+                    alerts.append(
+                        _alert(
+                            "no_signal_without_verified_collection",
+                            "critical",
+                            f"zero articles is not a quiet day: collection_health={collection_health}",
+                            latest,
+                        )
+                    )
+            content_ready = latest.get("content_ready")
+            if status == "success" and content_ready is False:
+                alerts.append(_alert("content_not_ready", "critical", "success but content_ready=false", latest))
+            if latest.get("degraded_analysis") is True or str(latest.get("llm_analyze_health")) == "degraded":
+                warnings.append(
+                    _alert(
+                        "llm_analysis_degraded",
+                        "warning",
+                        "event pool complete but analysis used rule fallback/degraded LLM",
+                        latest,
+                    )
+                )
+            if str(latest.get("llm_extract_health")) == "degraded":
+                warnings.append(
+                    _alert(
+                        "llm_extraction_degraded",
+                        "warning",
+                        "extraction completed without a successful LLM call",
+                        latest,
+                    )
+                )
             if cleaned > 0 and raw == 0:
                 alerts.append(_alert("empty_event_pool", "critical", f"cleaned={cleaned} but events_raw=0", latest))
             if raw > 0 and scored == 0:
@@ -209,20 +250,25 @@ def evaluate(
     }
 
 
-def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="R2-A independent run health watchdog")
-    parser.add_argument("--state-dir", required=True)
-    parser.add_argument("--now", default=None)
-    parser.add_argument("--max-age-hours", type=float, default=48.0)
-    parser.add_argument("--stale-minutes", type=float, default=120.0)
-    parser.add_argument("--require-scheduler", action="store_true")
-    parser.add_argument("--quiet", action="store_true")
-    return parser
+def _write_status(state_dir: Path, result: Dict[str, Any], exit_code: int,
+                  sink: Optional[Dict[str, Any]]) -> None:
+    """Persist the watchdog's real exit code so a service manager cannot hide it."""
+    status_path = Path(state_dir) / "watchdog" / "status.json"
+    payload = {
+        "checked_at": result.get("checked_at"),
+        "updated_at": run_state.iso(),
+        "status": result.get("status"),
+        "ok": bool(result.get("ok")),
+        "exit_code": int(exit_code),
+        "alerts": result.get("alerts") or [],
+        "warnings": result.get("warnings") or [],
+        "alert_sink": sink,
+    }
+    run_state.atomic_write_json(status_path, payload)
 
 
-def main(argv: Optional[List[str]] = None) -> int:
-    args = build_parser().parse_args(argv)
-    now = run_state.parse_iso(args.now) if args.now else run_state.utc_now()
+def _run_once(args: argparse.Namespace, now: Optional[datetime] = None) -> Dict[str, Any]:
+    now = now or (run_state.parse_iso(args.now) if args.now else run_state.utc_now())
     result = evaluate(
         Path(args.state_dir),
         now=now,
@@ -230,9 +276,86 @@ def main(argv: Optional[List[str]] = None) -> int:
         stale_minutes=args.stale_minutes,
         require_scheduler=args.require_scheduler,
     )
+    sink_result = None
+    if not args.no_alert_sink:
+        sink = Path(args.alert_sink) if args.alert_sink else Path(args.state_dir) / "alerts"
+        sink_result = alerts.emit(
+            result, Path(args.state_dir), source="watchdog", alert_dir=sink
+        )
+        result["alert_sink"] = sink_result
+        result["alert_sink_requested"] = str(sink)
+    exit_code = 0 if result.get("ok") else 1
+    _write_status(Path(args.state_dir), result, exit_code, sink_result)
+    return result
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="R2-A independent run health watchdog")
+    parser.add_argument("--state-dir", required=True)
+    parser.add_argument("--now", default=None)
+    parser.add_argument("--max-age-hours", type=float, default=48.0)
+    parser.add_argument("--stale-minutes", type=float, default=120.0)
+    parser.add_argument("--require-scheduler", action="store_true")
+    parser.add_argument("--alert-sink", default=None,
+                        help="local alert directory (default: <state-dir>/alerts)")
+    parser.add_argument("--no-alert-sink", action="store_true",
+                        help="diagnostic only; do not use in the supervisor")
+    parser.add_argument("--loop", action="store_true",
+                        help="run continuously; each check preserves exit status in status.json")
+    parser.add_argument("--interval", type=float, default=300.0)
+    parser.add_argument("--quiet", action="store_true")
+    return parser
+
+
+def _loop(args: argparse.Namespace) -> int:
+    """Service mode.
+
+    A failing check must not kill the health detector; the real exit code is
+    written to ``watchdog/status.json`` on every pass.  Alerts are additionally
+    appended to the local sink before the next sleep.
+    """
+    last_exit = 0
+    while True:
+        try:
+            result = _run_once(args)
+            last_exit = 0 if result.get("ok") else 1
+            if not args.quiet:
+                print(json.dumps(result, ensure_ascii=False))
+                sys.stdout.flush()
+        except BaseException as exc:  # watchdog must record its own failure
+            last_exit = 2
+            result = {
+                "ok": False,
+                "status": "watchdog_exception",
+                "checked_at": run_state.iso(),
+                "alerts": [{
+                    "code": "watchdog_exception",
+                    "severity": "critical",
+                    "message": f"{type(exc).__name__}: {str(exc)[:300]}",
+                }],
+                "warnings": [],
+            }
+            try:
+                sink_dir = Path(args.alert_sink) if args.alert_sink else Path(args.state_dir) / "alerts"
+                sink = alerts.emit(
+                    result, Path(args.state_dir), source="watchdog_exception", alert_dir=sink_dir
+                )
+                _write_status(Path(args.state_dir), result, last_exit, sink)
+            except BaseException:
+                pass
+            print(json.dumps(result, ensure_ascii=False), file=sys.stderr)
+            sys.stderr.flush()
+        time.sleep(max(1.0, float(args.interval)))
+
+
+def main(argv: Optional[List[str]] = None) -> int:
+    args = build_parser().parse_args(argv)
+    if args.loop:
+        return _loop(args)
+    result = _run_once(args)
     if not args.quiet:
         print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 1
+    return 0 if result.get("ok") else 1
 
 
 if __name__ == "__main__":

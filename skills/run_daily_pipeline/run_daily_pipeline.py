@@ -1969,6 +1969,8 @@ def run_daily_pipeline(
                 # 收集统计
                 stat_keys = [
                     "total_collected", "total_saved",
+                    "source_total", "source_success", "source_failed",
+                    "collector_count", "collector_nonzero_count", "collect_errors_count",
                     "raw_count", "cleaned_count", "reference_count", "rejected_count",
                     "event_count", "rejected_article_count", "failed_article_count",
                     "rule_fallback_count", "llm_success_count",

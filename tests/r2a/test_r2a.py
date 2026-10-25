@@ -32,6 +32,12 @@ def manifest(
     reportable: int = 2,
     reason: str = "test",
     errors: list | None = None,
+    collection_health: str = "ok",
+    content_ready: bool | None = None,
+    llm_extract_health: str = "ok",
+    llm_analyze_health: str = "ok",
+    analysis_mode: str = "llm",
+    degraded_analysis: bool = False,
 ) -> Path:
     now = datetime.now(UTC)
     started_at = started_at or now
@@ -60,15 +66,39 @@ def manifest(
         },
         "reportable_count": reportable,
         "errors": errors or [],
+        "pipeline_completed": status in ("success", "no_signal"),
+        "content_ready": (status == "success") if content_ready is None else content_ready,
+        "collection_health": collection_health,
+        "llm_extract_health": llm_extract_health,
+        "llm_analyze_health": llm_analyze_health,
+        "analysis_mode": analysis_mode,
+        "degraded_analysis": degraded_analysis,
     }
     run_state.atomic_write_json(path, data)
     return path
 
 
+def _workflow_steps(failed: str | None = None) -> list:
+    return [{
+        "name": "collect",
+        "status": "success",
+        "stats": {
+            "total_collected": 1,
+            "source_total": 2,
+            "source_success": 1,
+            "source_failed": 0,
+            "collect_errors_count": 0,
+        },
+    }] + [
+        {"name": n, "status": "failed" if n == failed else "success", "stats": {"llm_success_count": 2} if n == "analyze" else {}}
+        for n in launcher.CRITICAL_STEPS
+    ]
+
+
 class ClassifyTests(unittest.TestCase):
     def test_success(self) -> None:
         out = launcher.classify_outcome(
-            {"ok": True, "steps": [{"name": n, "status": "success"} for n in launcher.CRITICAL_STEPS]},
+            {"ok": True, "steps": _workflow_steps()},
             {"cleaned_articles": 1, "events_raw": 2, "events_scored": 2, "events_analyzed": 2},
         )
         self.assertEqual(out["status"], "success")
@@ -76,7 +106,21 @@ class ClassifyTests(unittest.TestCase):
 
     def test_no_signal_empty_input_is_success_not_crash(self) -> None:
         out = launcher.classify_outcome(
-            {"ok": True, "no_signal": True, "steps": []},
+            {
+                "ok": True,
+                "no_signal": True,
+                "steps": [{
+                    "name": "collect",
+                    "status": "success",
+                    "stats": {
+                        "total_collected": 0,
+                        "source_total": 2,
+                        "source_success": 0,
+                        "source_failed": 0,
+                        "collect_errors_count": 0,
+                    },
+                }],
+            },
             {"cleaned_articles": 0, "events_raw": 0, "events_scored": 0, "events_analyzed": 0},
         )
         self.assertEqual(out["status"], "no_signal")
@@ -92,7 +136,7 @@ class ClassifyTests(unittest.TestCase):
 
     def test_empty_event_pool_is_failed(self) -> None:
         out = launcher.classify_outcome(
-            {"ok": True, "steps": [{"name": n, "status": "success"} for n in launcher.CRITICAL_STEPS]},
+            {"ok": True, "steps": _workflow_steps()},
             {"cleaned_articles": 7, "events_raw": 0, "events_scored": 0, "events_analyzed": 0},
         )
         self.assertEqual(out["status"], "failed")
@@ -100,16 +144,15 @@ class ClassifyTests(unittest.TestCase):
 
     def test_incomplete_analysis_is_failed(self) -> None:
         out = launcher.classify_outcome(
-            {"ok": True, "steps": [{"name": n, "status": "success"} for n in launcher.CRITICAL_STEPS]},
+            {"ok": True, "steps": _workflow_steps()},
             {"cleaned_articles": 1, "events_raw": 2, "events_scored": 2, "events_analyzed": 1},
         )
         self.assertEqual(out["status"], "failed")
         self.assertEqual(out["reason"], "incomplete_analysis")
 
     def test_critical_step_failed(self) -> None:
-        steps = [{"name": n, "status": "failed" if n == "score" else "success"} for n in launcher.CRITICAL_STEPS]
         out = launcher.classify_outcome(
-            {"ok": True, "steps": steps},
+            {"ok": True, "steps": _workflow_steps(failed="score")},
             {"cleaned_articles": 1, "events_raw": 2, "events_scored": 2, "events_analyzed": 2},
         )
         self.assertEqual(out["status"], "failed")
@@ -203,6 +246,7 @@ class WatchdogTests(unittest.TestCase):
                 scored=0,
                 analyzed=0,
                 reportable=0,
+                content_ready=False,
             )
             result = watchdog.evaluate(state, now=now)
             self.assertTrue(result["ok"], result["alerts"])
@@ -314,6 +358,24 @@ class LauncherSubprocessTests(unittest.TestCase):
             self.assertEqual(proc.returncode, 0, proc.stderr)
             data = json.loads((Path(td) / "state" / "runs" / "2026-10-25" / "run-no_signal" / "manifest.json").read_text())
             self.assertEqual(data["status"], "no_signal")
+
+    def test_collection_failure_is_not_a_quiet_day(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            proc = self._run(td, "collect_failure")
+            self.assertEqual(proc.returncode, 2, proc.stderr)
+            data = json.loads((Path(td) / "state" / "runs" / "2026-10-25" / "run-collect_failure" / "manifest.json").read_text())
+            self.assertEqual(data["status"], "failed")
+            self.assertEqual(data["reason"], "no_signal_without_verified_collection")
+            self.assertEqual(data["collection_health"], "failed")
+
+    def test_degraded_analysis_is_success_but_flagged(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            proc = self._run(td, "llm_degraded")
+            self.assertEqual(proc.returncode, 0, proc.stderr)
+            data = json.loads((Path(td) / "state" / "runs" / "2026-10-25" / "run-llm_degraded" / "manifest.json").read_text())
+            self.assertEqual(data["status"], "success")
+            self.assertTrue(data["degraded_analysis"])
+            self.assertEqual(data["analysis_mode"], "rule_fallback_or_degraded")
 
 
 if __name__ == "__main__":

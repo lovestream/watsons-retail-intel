@@ -1,0 +1,207 @@
+{
+  "analyze": {
+    "action_empty_count": 0,
+    "action_empty_ids": [],
+    "analysis_missing_count": 0,
+    "analysis_missing_ids": [],
+    "duplicate_impact_groups": [],
+    "follow_up_question_count": 32,
+    "impact_empty_count": 0,
+    "impact_empty_ids": [],
+    "pairing_low_overlap_count": 0,
+    "pairing_low_overlap_ids": [],
+    "unique_impact_count": 50
+  },
+  "capital_market": {
+    "matches_count": 1,
+    "matches_ids": [
+      "E20261011_0038"
+    ]
+  },
+  "date": "2026-10-11",
+  "dates": {
+    "event_date_missing_count": 2,
+    "event_date_missing_ids": [
+      "E20261011_0038",
+      "E20261011_0039"
+    ],
+    "event_date_precision": {
+      "day": 14,
+      "month": 14,
+      "quarter": 6,
+      "unknown": 9,
+      "week": 1,
+      "year": 6
+    },
+    "event_occurred_missing_count": 22,
+    "event_occurred_missing_ids": [
+      "E20261011_0026",
+      "E20261011_0041",
+      "E20261011_0023",
+      "E20261011_0036",
+      "E20261011_0033",
+      "E20261011_0024",
+      "E20261011_0035",
+      "E20261011_0048",
+      "E20261011_0047",
+      "E20261011_0050",
+      "E20261011_0025",
+      "E20261011_0030",
+      "E20261011_0032",
+      "E20261011_0028",
+      "E20261011_0029",
+      "E20261011_0046",
+      "E20261011_0031",
+      "E20261011_0038",
+      "E20261011_0049",
+      "E20261011_0034",
+      "E20261011_0039",
+      "E20261011_0043"
+    ]
+  },
+  "evidence": {
+    "evidence_text_empty_count": 0,
+    "evidence_text_empty_ids": [],
+    "source_url_empty_count": 0,
+    "source_url_empty_ids": []
+  },
+  "id_integrity": {
+    "analyzed_unique": 50,
+    "duplicate_raw_ids": [],
+    "extra_vs_raw": [],
+    "lost_vs_raw": [],
+    "novelty_unique": 50,
+    "raw_unique": 50,
+    "scored_unique": 50,
+    "temporal_unique": 50
+  },
+  "needs_verification": {
+    "heuristic_date_missing_count": 2,
+    "heuristic_date_missing_ids": [
+      "E20261011_0038",
+      "E20261011_0039"
+    ],
+    "heuristic_evidence_missing_count": 0,
+    "heuristic_hearsay_count": 2,
+    "heuristic_hearsay_ids": [
+      "E20261011_0041",
+      "E20261011_0046"
+    ],
+    "heuristic_source_missing_count": 0,
+    "pipeline_enforced": true,
+    "pipeline_event_date_missing_count": 2,
+    "pipeline_field_present_count": 50,
+    "pipeline_flag_true_count": 18,
+    "pipeline_status_counts": {
+      "needs_verification": 18,
+      "verified": 32
+    },
+    "verification_date_source_counts": {
+      "announced": 34,
+      "inferred_content_date": 1,
+      "missing": 2,
+      "occurred": 11,
+      "published_at": 2
+    }
+  },
+  "notes": [
+    "This audit does not call an LLM and does not send email.",
+    "needs_verification is reported separately from factual verification; a missing field is not a pass.",
+    "reportable_count uses the shared core+verified+new-today+evidence predicate, not priority alone.",
+    "pairing_low_overlap is an alarm, not a semantic proof."
+  ],
+  "novelty": {
+    "eligibility_counts": {
+      "core": 25,
+      "reference": 8,
+      "review": 15,
+      "tracking": 2
+    },
+    "status_counts": {
+      "new_today": 47,
+      "updated_today": 3
+    }
+  },
+  "project_root": "<isolated-shadow-root>",
+  "schema_version": 1,
+  "score": {
+    "eligibility_counts": {
+      "archive": 40,
+      "core": 5,
+      "reference": 1,
+      "review": 3,
+      "tracking": 1
+    },
+    "hard_downgrade_count": 35,
+    "missing_weighted_score": [],
+    "out_of_domain": [
+      {
+        "event_id": "E20261011_0044",
+        "vertical": "passenger_vehicle_retail"
+      },
+      {
+        "event_id": "E20261011_0021",
+        "vertical": "apparel_vertical"
+      },
+      {
+        "event_id": "E20261011_0018",
+        "vertical": "apparel_vertical"
+      },
+      {
+        "event_id": "E20261011_0022",
+        "vertical": "apparel_vertical"
+      },
+      {
+        "event_id": "E20261011_0019",
+        "vertical": "apparel_vertical"
+      },
+      {
+        "event_id": "E20261011_0020",
+        "vertical": "apparel_vertical"
+      }
+    ],
+    "priority_counts": {
+      "ARCHIVE": 40,
+      "P1": 1,
+      "P2": 9
+    },
+    "reportable_count": 5,
+    "reportable_ids": [
+      "E20261011_0026",
+      "E20261011_0023",
+      "E20261011_0036",
+      "E20261011_0024",
+      "E20261011_0035"
+    ]
+  },
+  "stage_counts": {
+    "analyzed": 50,
+    "novelty": 50,
+    "raw": 50,
+    "scored": 50,
+    "temporal": 50
+  },
+  "stage_files": {
+    "analyzed": "/tmp/r2a_fix_after/data/events/2026-10-11/events_analyzed.json",
+    "novelty": "/tmp/r2a_fix_after/data/events/2026-10-11/events_scored_novelty.json",
+    "raw": "/tmp/r2a_fix_after/data/events/2026-10-11/events_raw.json",
+    "scored": "/tmp/r2a_fix_after/data/events/2026-10-11/events_scored.json",
+    "temporal": "/tmp/r2a_fix_after/data/events/2026-10-11/events_temporal.json"
+  },
+  "temporal": {
+    "eligibility_counts": {
+      "core": 25,
+      "reference": 8,
+      "review": 15,
+      "tracking": 2
+    },
+    "freshness_counts": {
+      "historical_background": 8,
+      "new_fact": 30,
+      "ongoing_fact": 2,
+      "unknown_fact_time": 2,
+      "upcoming_fact": 5,
+      "updated_fact": 3
+    }
+  }
+}

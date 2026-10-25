@@ -17,12 +17,14 @@
 | 07 | [07_podcast_and_email.md](07_podcast_and_email.md) | 口播稿规格与长度校验、TTS、播客质检、HTML 邮件（仅 MP3 附件）、幂等与安全门、告警、重复投递风险 |
 | 08 | [08_llm_config_cron_data.md](08_llm_config_cron_data.md) | 配置体系（全部 YAML）、LLM 客户端与回退、调度 cron、数据模型与账本、健康检查与告警、已知运维问题 |
 | **09** | [09_20261024_platform_strategy_and_reliability.md](09_20261024_platform_strategy_and_reliability.md) | 旧 QwenPaw 自有 API 与稳定性改造参考；**Muse 混合联动设想已被第 10 篇取代** |
-| **10** | **[10_muse_web_independent_architecture.md](10_muse_web_independent_architecture.md)** | **Muse 网页版独立建设：GitHub 共享规则、无本地 Agent 直连、并行研究与验收** |
-| **Muse 任务书** | **[../muse/MASTER_GOAL.md](../muse/MASTER_GOAL.md)** | **可交给 Muse 网页 Agent 直接实施的完整总体目标、模块、路线、验收和首轮启动指令** |
+| 10（待退役） | [10_muse_web_independent_architecture.md](10_muse_web_independent_architecture.md) | Muse历史试验设计，**非现役路线；M0中备份后删除** |
+| Muse历史任务书（待退役） | [../muse/MASTER_GOAL.md](../muse/MASTER_GOAL.md) | **仅为历史试验；M0中备份后删除，禁止当作现役任务书** |
+| **11（当前）** | **[11_20261025_nas_qwenpaw_aihot_architecture_decision.md](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)** | **NAS Docker + QwenPaw/Python当前方案、AIHOT取舍、DeepSeek三渠道人民币比较及优化门禁** |
+| **12（执行）** | **[12_20261025_qwenpaw_step_by_step_execution.md](12_20261025_qwenpaw_step_by_step_execution.md)** | **M0 Muse退役安全命令、M1–M7 QwenPaw实施阶段与验收规则** |
 
-## 当前改造方案（2026-10-24）
+## 当前改造方案（2026-10-25）
 
-**Muse 独立版优先**：先读 [10 Muse 网页端独立架构](10_muse_web_independent_architecture.md)，再将 [Muse 总任务书](../muse/MASTER_GOAL.md) 交给 Muse 直接执行。**旧 QwenPaw 继续优化**时再参阅 [09 平台与 API 路线](09_20261024_platform_strategy_and_reliability.md)。两套路线均为待实施方案，不能据此认定 Muse 已授权、定时任务已创建、邮件已发送。
+**唯一现役优化路线：NAS现有Docker环境 + QwenPaw/Python + DeepSeek Flash（具体模型渠道待真实API测试）。** 系统一直在NAS，无迁移事项；由ChatGPT提供GitHub方案和复审，QwenPaw在NAS逐阶段施工，不用Codex。先按[12](12_20261025_qwenpaw_step_by_step_execution.md)处理Muse历史遗留，**当前未执行生产删除、模型替换或调度更改**。Muse独立实验资料和原 docs/10 待备份后清理；09仍作为旧审计材料可参考，11/12权威优先。
 
 ## 补充资料
 
@@ -36,4 +38,4 @@
 1. 先读 **01**（数据流与编排），建立全局。
 2. 再按数据流向读 **02 → 03 → 04**（采集→过滤→事件加工）。
 3. 需要看报告本身质量时读 **05 / 06**；想排查「发出了没/发得好不好」读 **07**。
-4. 要优化成本/稳定性/调度，读 **08**；准备 Muse 独立版直接读 **10 和 Muse 总任务书**。
+4. 要优化成本/稳定性/调度，读 **08**；当前NAS优化请读 **11 和 12**；Muse文档属于待退役历史。

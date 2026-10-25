@@ -21,6 +21,9 @@
 | **11（当前）** | **[11_20261025_nas_qwenpaw_aihot_architecture_decision.md](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)** | **NAS Docker + QwenPaw/Python当前方案、AIHOT取舍、DeepSeek三渠道人民币比较及优化门禁** |
 | **12（执行）** | **[12_20261025_qwenpaw_step_by_step_execution.md](12_20261025_qwenpaw_step_by_step_execution.md)** | **M0 已由 Muse 完成 GitHub 遗留清理；M1–M7 由 QwenPaw 优化 NAS 现有系统** |
 
+
+> **2026-10-25 M1审计后的最新执行状态**：M1阶段交付已被ChatGPT独立复审通过，但NAS生产健康未通过。**完整M2 AIHOT优化暂缓，下一轮唯一许可是R0只读故障定位+隔离API自测，不改生产行为**。见 [正式M1复审与R0-R3门禁](reviews/NAS-M1-CHATGPT-REVIEW-2026-10-25.md)。R1-R3须另行复审授权；用户选择RightCode百亿补贴、不分时，且不重新配置用户已有API密钥。
+
 ## 当前改造方案（2026-10-25）
 
 **唯一现役优化路线：一直部署在 NAS Docker 中的 QwenPaw/Python + 用户已配置并自行选择的 RightCode「百亿补贴」DeepSeek Flash。** 不迁移NAS、不使用Codex、不重新配置模型接口、不按峰谷时段切换。**M0 已由 Muse 完成 GitHub 试验清理**；M1–M7由NAS中QwenPaw分阶段执行，首项是只读审计。ChatGPT负责GitHub设计和复审；[12号手册](12_20261025_qwenpaw_step_by_step_execution.md)明确双方边界。Muse 内容已于 2026-10-25 按 M0 从 main 删除，NAS 调度未变更、未发送邮件；历史docs/09只能用于追溯，以11/12为准。

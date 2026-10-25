@@ -22,13 +22,13 @@
 | **12（执行）** | **[12_20261025_qwenpaw_step_by_step_execution.md](12_20261025_qwenpaw_step_by_step_execution.md)** | **M0 已由 Muse 完成 GitHub 遗留清理；M1–M7 由 QwenPaw 优化 NAS 现有系统** |
 
 
-> **2026-10-25 M1审计后的最新执行状态**：M1阶段交付已被ChatGPT独立复审通过，但NAS生产健康未通过。**完整M2 AIHOT优化暂缓，下一轮唯一许可是R0只读故障定位+隔离API自测，不改生产行为**。见 [正式M1复审与R0-R3门禁](reviews/NAS-M1-CHATGPT-REVIEW-2026-10-25.md)。R1-R3须另行复审授权；用户选择RightCode百亿补贴、不分时，且不重新配置用户已有API密钥。
 
-> **2026-10-25 R0复审最新状态（覆盖以下旧阶段状态）**：R0已由ChatGPT复审**通过**；下一轮唯一允许**R1在隔离Git工作树与测试数据中开发/验证Python DeepSeek Flash调用链**，不得切正式模型、Cron、数据卷或邮件。关键审校：14,841是待重新计算的日志累计量，不能直接当HTTP请求数；已失效OpenCode不得作备用。请先读[正式R0复审与R1实施指令](reviews/NAS-R0-CHATGPT-REVIEW-2026-10-25.md)，R2/R3/M2仍暂停。
+
+> **2026-10-25 最新权威阶段与模型决策**：M0/M1/R0已完成；R1隔离测试已报告SiliconFlow主通道成功，**本轮只批准R1-FIX整改，未合并生产main**；R2/R3/M2仍暂停。**主：SiliconFlow（硅基流动）DeepSeek-V4.1-Flash；备：RightCode「百亿补贴」DeepSeek Flash**，有限付费回退、不分时切换。参阅[正式R1复审与整改指令](reviews/NAS-R1-CHATGPT-REVIEW-2026-10-25.md)。
 
 ## 当前改造方案（2026-10-25）
 
-**唯一现役优化路线：一直部署在 NAS Docker 中的 QwenPaw/Python + 用户已配置并自行选择的 RightCode「百亿补贴」DeepSeek Flash。** 不迁移NAS、不使用Codex、不重新配置模型接口、不按峰谷时段切换。**M0 已由 Muse 完成 GitHub 试验清理**；M1–M7由NAS中QwenPaw分阶段执行，首项是只读审计。ChatGPT负责GitHub设计和复审；[12号手册](12_20261025_qwenpaw_step_by_step_execution.md)明确双方边界。Muse 内容已于 2026-10-25 按 M0 从 main 删除，NAS 调度未变更、未发送邮件；历史docs/09只能用于追溯，以11/12为准。
+**唯一现役优化路线：一直部署在 NAS Docker 中的 QwenPaw/Python；SiliconFlow DeepSeek-V4.1-Flash 为主、RightCode「百亿补贴」DeepSeek Flash 受控备用。** 不迁移NAS、不使用Codex、不重新配置模型接口、不按峰谷时段切换。**M0 已由 Muse 完成 GitHub 试验清理**；M1、R0已通过，R1隔离测试完成但现需先整改R1-FIX；后续阶段经ChatGPT验收才推进。ChatGPT负责GitHub设计和复审；[12号手册](12_20261025_qwenpaw_step_by_step_execution.md)明确双方边界。Muse 内容已于 2026-10-25 按 M0 从 main 删除，NAS 调度未变更、未发送邮件；历史docs/09只能用于追溯，以11/12为准。
 
 ## 补充资料
 

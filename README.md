@@ -4,7 +4,7 @@
 
 ## 项目定位
 
-围绕**即时零售 × 个护美妆**采集公开经营情报，经清洗、评分、摘要后按频率生成报告，以 **HTML 邮件 + MP3 播客** 推送（收件人 `123399974@qq.com`），助力品类经营决策。
+围绕**即时零售 × 个护美妆**采集公开经营情报，经清洗、评分、摘要后按频率生成报告，以 **HTML 邮件 + MP3 播客** 推送（收件人由 NAS 私有配置管理，不公开），助力品类经营决策。
 
 ## 当前架构形态（2026-08 起）
 
@@ -44,9 +44,7 @@ watsons-retail-intel/
 
 ## 文档
 
-**Muse 网页端独立版（最新）**：[完整总体目标与交给 Muse 的执行任务书](muse/MASTER_GOAL.md) · [GitHub 共享接口与独立架构](docs/10_muse_web_independent_architecture.md)。**不需要 Muse 与 QwenPaw 本地 Agent 直接对接**，两套系统平行运行、对照结果；尚未在 Muse 账号执行。
-
-**QwenPaw 旧系统优化参考**：[API 自主化与稳定性改造方案](docs/09_20261024_platform_strategy_and_reliability.md)（其中 Muse 混合联动设想已被最新 Muse 独立路线取代）。
+**当前方案（2026-10-25）**：系统一直运行在 **NAS Docker + QwenPaw/Python** 中，无迁移需求。Muse 独立实验已停止作为建设方向，待按退役手册清理；生产优化由 NAS 内 QwenPaw + DeepSeek Flash 逐阶段实施。请先读 [11｜NAS架构决策、AIHOT对标及人民币价格](docs/11_20261025_nas_qwenpaw_aihot_architecture_decision.md)，再按 [12｜Muse退役与NAS逐阶段执行手册](docs/12_20261025_qwenpaw_step_by_step_execution.md) 的 M0 开始；只先执行M0，验收后才进入后续阶段。GitHub文档更新**不代表NAS端配置或任务已改变**。
 
 **最新的实现与全流程文档见 [`docs/README.md`](docs/README.md)**，按子系统分篇，全程以真实代码与运行产物为准整理，适合排查问题与制定优化方案。
 

@@ -1969,6 +1969,9 @@ def run_daily_pipeline(
                 # 收集统计
                 stat_keys = [
                     "total_collected", "total_saved",
+                    "collection_completed", "collection_date",
+                    "source_total", "source_success", "source_failed",
+                    "collector_count", "collector_nonzero_count", "collect_errors_count",
                     "raw_count", "cleaned_count", "reference_count", "rejected_count",
                     "event_count", "rejected_article_count", "failed_article_count",
                     "rule_fallback_count", "llm_success_count",
@@ -2252,7 +2255,11 @@ def run_daily_pipeline(
     # 仅在主循环未处理时运行
     podcast_ok = False
     gp_step_in_main = any(s["name"] == "generate_podcast" for s in step_results)
-    if not gp_step_in_main:
+    # R2-A: an explicit end_step must suppress all post-step side effects.
+    # Without this guard, --end-step analyze still generated a podcast script
+    # and spent LLM/TTS time after the requested shadow scope was complete.
+    podcast_within_scope = end_step is None or STEP_ORDER.index("generate_podcast") <= end_idx
+    if not gp_step_in_main and podcast_within_scope:
         gp_step = {
             "name": "generate_podcast",
             "status": "pending",

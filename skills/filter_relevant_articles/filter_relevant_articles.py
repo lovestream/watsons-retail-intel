@@ -2089,7 +2089,7 @@ def run_test_llm():
     from skills.utils.llm_client import check_llm_config, test_llm_connection
 
     print("=" * 60)
-    print("OpenCode LLM 连通性测试")
+    print("Pipeline LLM 连通性测试")
     print("=" * 60)
 
     # 1. 配置检查
@@ -2101,12 +2101,15 @@ def run_test_llm():
     print(f"  base_url:      {config['base_url']}")
     print(f"  model:         {config['model']}")
     print(f"  endpoint:      {config['endpoint']}")
-    print(f"  key_masks:     {config['key_masks']}")
+    print(f"  channels:      {config['key_masks']}")
+    print(f"  primary_available: {config.get('primary_available')}")
+    print(f"  fallback_available: {config.get('fallback_available')}")
+    print(f"  degraded_using_paid_fallback: {config.get('degraded_using_paid_fallback')}")
 
     if not config["keys_found"]:
         print()
         print("❌ 未找到任何 API Key，无法进行连通性测试。")
-        print("   请设置环境变量: OPENCODE_API_KEYS 或 config/opencode_keys.json")
+        print("   请设置 PIPELINE_LLM_API_KEY / PIPELINE_LLM_FALLBACK_KEY 或对应 0600 文件")
         return
 
     # 2. 连通性测试

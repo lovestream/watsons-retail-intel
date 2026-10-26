@@ -1436,7 +1436,7 @@ def run_test_llm():
     from skills.utils.llm_client import check_llm_config, test_llm_connection
 
     print("=" * 60)
-    print("Event Extractor — OpenCode LLM 连通性测试")
+    print("Event Extractor — Pipeline LLM 连通性测试")
     print("=" * 60)
 
     config = check_llm_config()
@@ -1447,6 +1447,9 @@ def run_test_llm():
     print(f"  base_url:      {config['base_url']}")
     print(f"  model:         {config['model']}")
     print(f"  endpoint:      {config['endpoint']}")
+    print(f"  primary_available: {config.get('primary_available')}")
+    print(f"  fallback_available: {config.get('fallback_available')}")
+    print(f"  degraded_using_paid_fallback: {config.get('degraded_using_paid_fallback')}")
 
     if not config["keys_found"]:
         print("\n❌ 未找到任何 API Key。")

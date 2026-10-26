@@ -2380,6 +2380,13 @@ def collect_daily_articles(
     logging.getLogger().removeHandler(file_handler)
     file_handler.close()
 
+    source_total = len(source_stats)
+    source_success = sum(
+        1 for s in source_stats.values() if int(s.get("success", 0) or 0) > 0
+    )
+    source_failed = sum(
+        1 for s in source_stats.values() if int(s.get("failed", 0) or 0) > 0
+    )
     return {
         "ok": True,
         "date": date,
@@ -2387,7 +2394,18 @@ def collect_daily_articles(
         "log_file": log_file,
         "total_collected": total_collected,
         "total_saved": total_saved,
+        # Explicit completion proof for the scheduled launcher.  This is set
+        # only after the source loop finished and raw_articles.json was
+        # written; an existing cache from an earlier day never carries it.
+        "collection_completed": True,
+        "collection_date": date,
         "by_collector": by_collector,
+        "source_total": source_total,
+        "source_success": source_success,
+        "source_failed": source_failed,
+        "collector_count": len(by_collector),
+        "collector_nonzero_count": sum(1 for v in by_collector.values() if int(v or 0) > 0),
+        "collect_errors_count": len(errors),
         "tavily_key_status": tavily_status,
         "errors": errors,
     }

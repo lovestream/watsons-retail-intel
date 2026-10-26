@@ -38,6 +38,11 @@ from datetime import datetime, timezone, timedelta
 from difflib import SequenceMatcher
 from typing import Any, Dict, List, Optional, Tuple
 
+try:  # pipeline / tests are run from the repository root
+    from skills.report_policy import cap_eligibility, is_out_of_domain_event
+except ImportError:  # direct script execution from the skill directory
+    from report_policy import cap_eligibility, is_out_of_domain_event
+
 # ── 项目路径 ──
 _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__))))
@@ -799,12 +804,24 @@ def _is_non_mainland_subject_event(event: dict) -> bool:
         "香港", "港交所", "港元", "港币", "HK$", "HKD", "联交所", "恒生",
         "台湾", "台北", "新台币", "台股", "澳门",
         "新加坡", "马来西亚", "日本市场", "韩国市场", "美国市场",
+        "印度", "英国", "美国", "日本", "韩国", "法国", "德国",
+        "澳大利亚", "加拿大", "土耳其", "巴西", "欧洲市场", "北美市场",
+        "东南亚市场", "中东市场",
     ]
     MAINLAND_SIGNALS = [
         "中国大陆", "内地", "大陆市场", "人民币", "A股", "沪", "深圳",
+        "中国", "国内", "全国",
         "北京", "上海", "广州", "成都", "杭州", "南京", "武汉", "西安",
         "天猫", "京东", "拼多多", "美团", "抖音", "淘宝", "饿了么",
     ]
+
+    title = (event.get("event_title", "") or "")
+    title_foreign = any(k in title for k in NON_MAINLAND_SIGNALS)
+    title_mainland = any(k in title for k in MAINLAND_SIGNALS)
+    # A country in the subject/title is decisive unless the same title clearly
+    # names the mainland market (e.g. "某中国品牌进入英国市场").
+    if title_foreign and not title_mainland:
+        return True
 
     non_hits = sum(1 for k in NON_MAINLAND_SIGNALS if k in text)
     mainland_hits = sum(1 for k in MAINLAND_SIGNALS if k in text)
@@ -893,18 +910,33 @@ def apply_hard_downgrade(
         reasons.append("硬降级: 竞对/第三方财报·IPO·募资类内容 → ARCHIVE")
         return "ARCHIVE", reasons
 
+    # 规则0f(新): 域外垂直内容 → ARCHIVE
+    # 乘用车零售、波司登门店等只是"零售/门店"字面重合，没有即时零售或
+    # 个护美妆强信号。保留真正的屈臣氏/即时零售/美妆个护事件。
+    out_of_domain, vertical = is_out_of_domain_event(event)
+    if out_of_domain:
+        reasons.append(f"硬降级: 域外垂直[{vertical}]且无即时零售/个护美妆强信号 → ARCHIVE")
+        return "ARCHIVE", reasons
+
+    # 规则0d(新): 事件主体/市场为香港·台湾/海外 → ARCHIVE
+    # 只关注中国大陆市场；即便由大陆媒体报道，若事件本身讲的是港/台/海外
+    # 公司或市场(如"龙丰集团香港门店"、"港元营收")，也不进报告正文。
+    if _is_non_mainland_subject_event(event):
+        reasons.append("硬降级: 事件主体/市场为港台海外 → ARCHIVE")
+        return "ARCHIVE", reasons
+
     # 规则0c(新): watsons_relevance 极低(≤1) → ARCHIVE
     # 与屈臣氏几乎无关的事件，无论数据多丰富/看似多重要，都不进报告正文。
     if watsons_rel <= 1:
         reasons.append(f"硬降级: watsons_relevance={watsons_rel}≤1 几乎无关 → ARCHIVE")
         return "ARCHIVE", reasons
 
-    # 规则0d(新): 事件主体/市场为香港·台湾·海外 → ARCHIVE
-    # 只关注中国大陆市场；即便由大陆媒体报道，若事件本身讲的是港/台/海外
-    # 公司或市场(如"龙丰集团香港门店"、"港元营收")，也不进报告正文。
-    if _is_non_mainland_subject_event(event):
-        reasons.append("硬降级: 事件主体/市场为港台海外 → ARCHIVE")
-        return "ARCHIVE", reasons
+    # 规则0g(新): 待核实事件不得冒充已证实新事实
+    # 保留在事件池中供 review/reference，但最高 P2，且 eligibility 后续降为 review。
+    if event.get("needs_verification") or str(event.get("verification_status") or "") == "needs_verification":
+        if current_rank < PRIORITY_ORDER["P2"]:
+            reasons.append("硬降级: 待核实(needs_verification) → 最高P2")
+            priority = "P2"
 
     # 规则1: confidence=low → 最高 P2 (但如果加权分>=3.5且source_credibility>=3，允许升到P1)
     if confidence == "low":
@@ -1142,6 +1174,25 @@ def score_events(
             scored_event["priority"] = priority
             scored_event["score_reasons"] = score_reasons
             scored_event["downgrade_reasons"] = downgrade_reasons
+
+            # Monotonic final eligibility: scoring may not promote a
+            # review/reference event to core.  It also keeps needs_verification
+            # visible without letting it become a verified new fact.
+            final_eligibility = cap_eligibility(
+                scored_event, event.get("report_eligibility")
+            )
+            if is_out_of_domain_event(scored_event)[0]:
+                final_eligibility = "reference"
+            if priority == "ARCHIVE":
+                final_eligibility = "archive"
+            scored_event["report_eligibility"] = final_eligibility
+            scored_event["reportable"] = (
+                priority in ("P0", "P1", "P2")
+                and final_eligibility == "core"
+                and str(scored_event.get("verification_status") or "") == "verified"
+                and not scored_event.get("needs_verification")
+                and str(scored_event.get("novelty_status") or "") in ("new_today", "updated_today")
+            )
 
             scored_events.append(scored_event)
 

@@ -1,0 +1,1101 @@
+{
+  "mode": "simulation",
+  "generated_at": "2026-10-25T14:20:26.729411+00:00",
+  "samples_total": 20,
+  "json_parsed": 20,
+  "accepted": 18,
+  "rejected": 2,
+  "verified": 17,
+  "needs_verification": 1,
+  "verification_cases": [
+    {
+      "sample_id": "R1S13",
+      "status": "needs_verification",
+      "reasons": [
+        "date_conflict:2026-09-13!=2027-01-01"
+      ]
+    },
+    {
+      "sample_id": "R1S14",
+      "status": "needs_verification",
+      "reasons": [
+        "date_conflict:2026-09-22!=2026-09-27"
+      ]
+    }
+  ],
+  "analyses_ok": 18,
+  "analysis_pairing_ok": 18,
+  "score_dimensions": [
+    "strategic_importance",
+    "watsons_relevance",
+    "impact_scope",
+    "source_credibility",
+    "data_richness",
+    "actionability",
+    "time_sensitivity",
+    "novelty"
+  ],
+  "score_integrity": {
+    "weighted_math_errors": [],
+    "score_range_errors": [],
+    "all_events_have_8_dims": true
+  },
+  "priority_counts": {
+    "P0": 2,
+    "P1": 2,
+    "P2": 5,
+    "ARCHIVE": 9
+  },
+  "counters": {
+    "task_calls": 38,
+    "http_requests": 38,
+    "provider_attempts": 38,
+    "retries": 0,
+    "error_events": 0,
+    "fallback_calls": 0,
+    "tokens": {
+      "prompt": 30400,
+      "completion": 9880,
+      "total": 40280
+    },
+    "usage_by_provider": {
+      "siliconflow": {
+        "prompt": 30400,
+        "completion": 9880,
+        "total": 40280,
+        "requests": 38
+      }
+    }
+  },
+  "rows": [
+    {
+      "sample_id": "R1S01",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-02",
+        "fixture_published_at": "2026-09-02",
+        "claimed_content_date": "2026-09-02",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "test"
+    },
+    {
+      "sample_id": "R1S02",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-02",
+        "fixture_published_at": "2026-09-02",
+        "claimed_content_date": "2026-09-02",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "test"
+    },
+    {
+      "sample_id": "R1S03",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-04",
+        "fixture_published_at": "2026-09-04",
+        "claimed_content_date": "2026-09-04",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "archive"
+    },
+    {
+      "sample_id": "R1S04",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-10-10",
+        "fixture_published_at": "2026-10-10",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "archive"
+    },
+    {
+      "sample_id": "R1S05",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-07-24",
+        "fixture_published_at": "2026-07-24",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "archive"
+    },
+    {
+      "sample_id": "R1S06",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-04",
+        "fixture_published_at": "2026-09-04",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "archive"
+    },
+    {
+      "sample_id": "R1S07",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-03",
+        "fixture_published_at": "2026-09-03",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [
+        "evidence_text_empty"
+      ],
+      "accepted": false,
+      "rejection_reasons": [
+        "evidence_text_empty"
+      ]
+    },
+    {
+      "sample_id": "R1S08",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-05",
+        "fixture_published_at": "2026-09-05",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "archive"
+    },
+    {
+      "sample_id": "R1S09",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-03",
+        "fixture_published_at": "2026-09-03",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "archive"
+    },
+    {
+      "sample_id": "R1S10",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-03",
+        "fixture_published_at": "2026-09-03",
+        "claimed_content_date": "2026-09-03",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "test"
+    },
+    {
+      "sample_id": "R1S11",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-23",
+        "fixture_published_at": "2026-09-23",
+        "claimed_content_date": "2026-09-23",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "test"
+    },
+    {
+      "sample_id": "R1S12",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-24",
+        "fixture_published_at": "2026-09-24",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "archive"
+    },
+    {
+      "sample_id": "R1S13",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "needs_verification",
+        "verified": false,
+        "reasons": [
+          "date_conflict:2026-09-13!=2027-01-01"
+        ],
+        "date_source": "extracted",
+        "event_date": "2027-01-01",
+        "fixture_published_at": "2026-09-26",
+        "claimed_content_date": "2026-09-13",
+        "date_conflict": true,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [
+        "future_event_date"
+      ],
+      "accepted": false,
+      "rejection_reasons": [
+        "future_event_date"
+      ]
+    },
+    {
+      "sample_id": "R1S14",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "needs_verification",
+        "verified": false,
+        "reasons": [
+          "date_conflict:2026-09-22!=2026-09-27"
+        ],
+        "date_source": "extracted",
+        "event_date": "2026-09-27",
+        "fixture_published_at": "2026-09-27",
+        "claimed_content_date": "2026-09-22",
+        "date_conflict": true,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "test"
+    },
+    {
+      "sample_id": "R1S15",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-28",
+        "fixture_published_at": "2026-09-28",
+        "claimed_content_date": "2026-09-28",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "test"
+    },
+    {
+      "sample_id": "R1S16",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-28",
+        "fixture_published_at": "2026-09-28",
+        "claimed_content_date": "2026-09-28",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "test"
+    },
+    {
+      "sample_id": "R1S17",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-29",
+        "fixture_published_at": "2026-09-29",
+        "claimed_content_date": "2026-09-29",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "archive"
+    },
+    {
+      "sample_id": "R1S18",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-30",
+        "fixture_published_at": "2026-09-30",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "archive"
+    },
+    {
+      "sample_id": "R1S19",
+      "topic": "即时零售",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-10-06",
+        "fixture_published_at": "2026-10-06",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "test"
+    },
+    {
+      "sample_id": "R1S20",
+      "topic": "个护美妆",
+      "json_parsed": true,
+      "extract_failure_type": null,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-10-10",
+        "fixture_published_at": "2026-10-10",
+        "claimed_content_date": "2026-10-10",
+        "date_conflict": false,
+        "hearsay_markers": []
+      },
+      "evidence_errors": [],
+      "accepted": true,
+      "analysis_ok": true,
+      "analysis_pairing_ok": true,
+      "action_level": "test"
+    }
+  ],
+  "audit_events": [
+    {
+      "event_id": "E20261025_0001",
+      "event_title": "即时零售，商超的最后生存赛道？",
+      "fact_preview": "即时零售，商超的最后生存赛道？ 联商网 ·2026年09月02日 11:21 即时零售已经不是风口，而是实体商超进化的必然优势路径。 即时零售早已不是实体店“做不做”的问题，而是为了生存“必须做好”的不二法则。 若是三年前说这样的话，或许还",
+      "evidence_preview": "即时零售，商超的最后生存赛道？ 联商网 ·2026年09月02日 11:21 即时零售已经不是风口，而是实体商超进化的必然优势路径。 即时零售早已不是实体店“做",
+      "source_url": "https://36kr.com/p/3966091092401667",
+      "published_at": "2026-09-02",
+      "scores": {
+        "strategic_importance": 5,
+        "watsons_relevance": 4,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 4,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 4.2,
+      "priority": "P1",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-02",
+        "fixture_published_at": "2026-09-02",
+        "claimed_content_date": "2026-09-02",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0002",
+      "event_title": "马云如何才能拿下即时零售的“大结果”？",
+      "fact_preview": "马云如何才能拿下即时零售的“大结果”？ 字母榜 ·2026年09月02日 18:11 钱袋子紧了，仗还得打 占阿里电商GMV的30%，是阿里为即时零售定的新目标。 从年初开始，阿里即时零售的目标一再拔高。从冲刺市场绝对份额第一，成为淘天升级",
+      "evidence_preview": "马云如何才能拿下即时零售的“大结果”？ 字母榜 ·2026年09月02日 18:11 钱袋子紧了，仗还得打 占阿里电商GMV的30%，是阿里为即时零售定的新目标",
+      "source_url": "https://36kr.com/p/3966048685366535",
+      "published_at": "2026-09-02",
+      "scores": {
+        "strategic_importance": 5,
+        "watsons_relevance": 4,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 5,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 4.3,
+      "priority": "P0",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-02",
+        "fixture_published_at": "2026-09-02",
+        "claimed_content_date": "2026-09-02",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0003",
+      "event_title": "头部国货美妆们，迎来增长新考题",
+      "fact_preview": "头部国货美妆们，迎来增长新考题 未来迹FBeauty ·2026年09月04日 09:06 从品牌突围到集团竞速 国货美妆还在增长，但头部公司的日子，已经没有前几年那么好过了。 《FBeauty未来迹》统计发现，2026年上半年，国货美妆T",
+      "evidence_preview": "头部国货美妆们，迎来增长新考题 未来迹FBeauty ·2026年09月04日 09:06 从品牌突围到集团竞速 国货美妆还在增长，但头部公司的日子，已经没有前",
+      "source_url": "https://36kr.com/p/3968708637103751",
+      "published_at": "2026-09-04",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 2,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 5,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 3.1,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-04",
+        "fixture_published_at": "2026-09-04",
+        "claimed_content_date": "2026-09-04",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0004",
+      "event_title": "今年，60亿级国货美妆企业将增至4家！",
+      "fact_preview": "首页 CiE官网 2026中国化妆品大会 2025（第六届）中国化妆品年会 直播 下载APP 扫码下载“CiE美妆创新展App”与化妆品产业一同进化 搜索 请输入关键字 确定 今年，60亿级国货美妆企业将增至4家！ 品牌 陈其胜 · 202",
+      "evidence_preview": "首页 CiE官网 2026中国化妆品大会 2025（第六届）中国化妆品年会 直播 下载APP 扫码下载“CiE美妆创新展App”与化妆品产业一同进化 搜索 请输",
+      "source_url": "https://www.pinguan.com/article/content/23035",
+      "published_at": "2026-10-10",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 2,
+        "impact_scope": 2,
+        "source_credibility": 3.0,
+        "data_richness": 3,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.78,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-10-10",
+        "fixture_published_at": "2026-10-10",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0005",
+      "event_title": "2708亿！上半年美妆电商成绩单出炉",
+      "fact_preview": "首页 CiE官网 2025（第六届）中国化妆品年会 2025（第十八届）中国化妆品大会 2024CiE美妆创新展 直播 下载APP 扫码下载“CiE美妆创新展App”与化妆品产业一同进化 搜索 请输入关键字 确定 2708亿！上半年美妆电商",
+      "evidence_preview": "首页 CiE官网 2025（第六届）中国化妆品年会 2025（第十八届）中国化妆品大会 2024CiE美妆创新展 直播 下载APP 扫码下载“CiE美妆创新展A",
+      "source_url": "https://www.pinguan.com/article/content/22950",
+      "published_at": "2026-07-24",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 2,
+        "impact_scope": 2,
+        "source_credibility": 3.0,
+        "data_richness": 3,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.78,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-07-24",
+        "fixture_published_at": "2026-07-24",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0006",
+      "event_title": "抖音口腔护理Top 1易主",
+      "fact_preview": "首页 CiE官网 2026中国化妆品大会 2025（第六届）中国化妆品年会 直播 下载APP 扫码下载“CiE美妆创新展App”与化妆品产业一同进化 搜索 请输入关键字 确定 抖音口腔护理Top 1易主 品牌 BOP · 2026-09-0",
+      "evidence_preview": "首页 CiE官网 2026中国化妆品大会 2025（第六届）中国化妆品年会 直播 下载APP 扫码下载“CiE美妆创新展App”与化妆品产业一同进化 搜索 请输",
+      "source_url": "https://www.pinguan.com/article/content/23039.html",
+      "published_at": "2026-09-04",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 2,
+        "impact_scope": 2,
+        "source_credibility": 3.0,
+        "data_richness": 1,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.58,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-04",
+        "fixture_published_at": "2026-09-04",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0007",
+      "event_title": "“网红”护肤品Aesop连关三家“首店”|界面新闻 · 时尚",
+      "fact_preview": "[]( * [首页]( * []( * []( * []( * []( * []( * []( * []( * []( * []( * []( * []( * []( * []( * [商业]( * []( * []( * []( * []",
+      "evidence_preview": "[]( * [首页]( * []( * []( * []( * []( * []( * []( * []( * []( * []( * []( * []( * ",
+      "source_url": "https://jiemian.com/article/15057991.html",
+      "published_at": "2026-09-05",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 1,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 1,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.46,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-05",
+        "fixture_published_at": "2026-09-05",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0008",
+      "event_title": "百雀羚、韩束等国牌美妆集体翻车，美妆营销还剩多少体面？",
+      "fact_preview": "<figure><img src=\" /></figure><p><span>本文来自微信公众号：</span><a href=\" rel=\"nofollow\" style=\"text-decoration: none;\" target=\"",
+      "evidence_preview": "<figure><img src=\" /></figure><p><span>本文来自微信公众号：</span><a href=\" rel=\"nofollow\"",
+      "source_url": "https://www.huxiu.com/article/4888390.html",
+      "published_at": "2026-09-03",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 1,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 1,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.46,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-03",
+        "fixture_published_at": "2026-09-03",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0009",
+      "event_title": "5年后再看美妆“小样经济”，这门生意变了",
+      "fact_preview": "5年后再看美妆“小样经济”，这门生意变了 未来迹FBeauty ·2026年09月03日 03:42 从赠品到经营工具 大约五年前，“大牌小样”第一次大规模出现在中国美妆零售市场时，行业讨论的重点还是：一个原本免费送的东西，为什么开始有人花",
+      "evidence_preview": "5年后再看美妆“小样经济”，这门生意变了 未来迹FBeauty ·2026年09月03日 03:42 从赠品到经营工具 大约五年前，“大牌小样”第一次大规模出现",
+      "source_url": "https://36kr.com/p/3967016145328006",
+      "published_at": "2026-09-03",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 2,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 1,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 3.06,
+      "priority": "P2",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-03",
+        "fixture_published_at": "2026-09-03",
+        "claimed_content_date": "2026-09-03",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0010",
+      "event_title": "即时零售大步跨入「商品时代」",
+      "fact_preview": "即时零售大步跨入「商品时代」 碧根果 ·2026年09月23日 08:45 告别内卷，用“百万好商品”回归本质。 告别内卷，用“百万好商品”回归本质。 即时零售行业，正在跨越一道关键的分水岭。 商务部流通产业促进中心披露的数据显示：2025",
+      "evidence_preview": "即时零售大步跨入「商品时代」 碧根果 ·2026年09月23日 08:45 告别内卷，用“百万好商品”回归本质。 告别内卷，用“百万好商品”回归本质。 即时零售",
+      "source_url": "https://36kr.com/p/3995747028160647",
+      "published_at": "2026-09-23",
+      "scores": {
+        "strategic_importance": 5,
+        "watsons_relevance": 4,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 5,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 4.3,
+      "priority": "P0",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-23",
+        "fixture_published_at": "2026-09-23",
+        "claimed_content_date": "2026-09-23",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0011",
+      "event_title": "不止于成分：可复美在2026CAME给出的“递送效率”新解",
+      "fact_preview": "首页 CiE官网 2026中国化妆品大会 2025（第六届）中国化妆品年会 直播 下载APP 扫码下载“CiE美妆创新展App”与化妆品产业一同进化 搜索 请输入关键字 确定 不止于成分：可复美在2026CAME给出的“递送效率”新解 品牌",
+      "evidence_preview": "首页 CiE官网 2026中国化妆品大会 2025（第六届）中国化妆品年会 直播 下载APP 扫码下载“CiE美妆创新展App”与化妆品产业一同进化 搜索 请输",
+      "source_url": "https://www.pinguan.com/article/content/23066.html",
+      "published_at": "2026-09-24",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 2,
+        "impact_scope": 2,
+        "source_credibility": 3.0,
+        "data_richness": 1,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.58,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-24",
+        "fixture_published_at": "2026-09-24",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0012",
+      "event_title": "【美团：未来三年加码300亿投入即时零售】财联社9月22日电，美团副总裁、闪购事业部负责人肖昆在2026美团即时零售产业",
+      "fact_preview": "关于我们网站声明联系方式用户反馈网站地图帮助注册|登录首页电报话题盯盘VIPFM投研下载全部加红公司看盘港美股基金提醒2026年09月22日 09:33:37美团：未来三年加码300亿投入即时零售财联社9月22日电，美团副总裁、闪购事业部负",
+      "evidence_preview": "关于我们网站声明联系方式用户反馈网站地图帮助注册|登录首页电报话题盯盘VIPFM投研下载全部加红公司看盘港美股基金提醒2026年09月22日 09:33:37美",
+      "source_url": "https://www.cls.cn/detail/2490220",
+      "published_at": "2026-09-27",
+      "scores": {
+        "strategic_importance": 5,
+        "watsons_relevance": 4,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 3,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 4.1,
+      "priority": "P1",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "needs_verification",
+        "verified": false,
+        "reasons": [
+          "date_conflict:2026-09-22!=2026-09-27"
+        ],
+        "date_source": "extracted",
+        "event_date": "2026-09-27",
+        "fixture_published_at": "2026-09-27",
+        "claimed_content_date": "2026-09-22",
+        "date_conflict": true,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0013",
+      "event_title": "最新财新周刊｜外卖平台停补之后",
+      "fact_preview": "商城 数据 我闻 机构订阅 会议 Promotion 应用下载 帮助 网上有害信息举报专区 首页 经济 金融 公司 政经 世界 观点 博客 图片 视频 English mini+ 周刊 数据通 企业数据库 沪深股市 数据通Claw🦞 更多 ",
+      "evidence_preview": "商城 数据 我闻 机构订阅 会议 Promotion 应用下载 帮助 网上有害信息举报专区 首页 经济 金融 公司 政经 世界 观点 博客 图片 视频 Engl",
+      "source_url": "https://weekly.caixin.com/2026-09-26/102488803.html",
+      "published_at": "2026-09-28",
+      "scores": {
+        "strategic_importance": 4,
+        "watsons_relevance": 2,
+        "impact_scope": 3,
+        "source_credibility": 4.0,
+        "data_richness": 1,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 3.0,
+      "priority": "P2",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-28",
+        "fixture_published_at": "2026-09-28",
+        "claimed_content_date": "2026-09-28",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0014",
+      "event_title": "老板别再把问题推给“消费不行”：卖得动却不赚钱，才是真危险",
+      "fact_preview": "老板别再把问题推给“消费不行”：卖得动却不赚钱，才是真危险 晏涛 ·2026年09月28日 01:17 2026消费真相：不是消费降级，而是增长重新分配 最近，我把2026年上半年的消费数据重新过了一遍。 如果只看表面，很容易得出一个结论：",
+      "evidence_preview": "老板别再把问题推给“消费不行”：卖得动却不赚钱，才是真危险 晏涛 ·2026年09月28日 01:17 2026消费真相：不是消费降级，而是增长重新分配 最近，",
+      "source_url": "https://36kr.com/p/4000041012187010",
+      "published_at": "2026-09-28",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 2,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 4,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 3.0,
+      "priority": "P2",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-28",
+        "fixture_published_at": "2026-09-28",
+        "claimed_content_date": "2026-09-28",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0015",
+      "event_title": "百万年薪抢人？美妆打响AI人才争夺战",
+      "fact_preview": "百万年薪抢人？美妆打响AI人才争夺战 未来迹FBeauty ·2026年09月29日 08:55 抢人只是开场 AI人才市场的升温，已经传导至美妆行业。 脉脉人才智库数据显示，2026年1-7月，新经济行业新发AI岗位量同比增长789.47",
+      "evidence_preview": "百万年薪抢人？美妆打响AI人才争夺战 未来迹FBeauty ·2026年09月29日 08:55 抢人只是开场 AI人才市场的升温，已经传导至美妆行业。 脉脉人",
+      "source_url": "https://36kr.com/p/4004093824603783",
+      "published_at": "2026-09-29",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 1,
+        "impact_scope": 5,
+        "source_credibility": 4.0,
+        "data_richness": 4,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 3.12,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-29",
+        "fixture_published_at": "2026-09-29",
+        "claimed_content_date": "2026-09-29",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0016",
+      "event_title": "每24条视频跑出3条爆品：美妆内容开始拼“命中率”",
+      "fact_preview": "<figure><img src=\" /></figure>一边批量仿爆款，一边拒绝信任AI，一场闭门会里的两种答案<p><span>作者 | 虎嗅智库</span><br /><span>头图 | AI生成</span><br /><br",
+      "evidence_preview": "<figure><img src=\" /></figure>一边批量仿爆款，一边拒绝信任AI，一场闭门会里的两种答案<p><span>作者 | 虎嗅智库</sp",
+      "source_url": "https://www.huxiu.com/article/4894574.html",
+      "published_at": "2026-09-30",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 1,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 3,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.66,
+      "priority": "ARCHIVE",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-09-30",
+        "fixture_published_at": "2026-09-30",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0017",
+      "event_title": "零售业集体走向“自营时代”:盒马、七鲜、小象超市都在干同一件事_ZAKER新闻",
+      "fact_preview": "六六看世界 9小时前 2026 年的中国零售业，正在发生一场静悄悄但影响深远的转向。 曾经靠 \" 租货架 \" 赚钱的商超们，纷纷卷起袖子自己下场做商品了。盒马的自有品牌占比已经摸到 35%，京东七鲜的自有品牌 SKU 突破了 800 款，美",
+      "evidence_preview": "六六看世界 9小时前 2026 年的中国零售业，正在发生一场静悄悄但影响深远的转向。 曾经靠 \" 租货架 \" 赚钱的商超们，纷纷卷起袖子自己下场做商品了。盒马的",
+      "source_url": "https://app.myzaker.com/news/article.php?pk=6ac45869b15ec0511c488c12",
+      "published_at": "2026-10-06",
+      "scores": {
+        "strategic_importance": 4,
+        "watsons_relevance": 2,
+        "impact_scope": 3,
+        "source_credibility": 1,
+        "data_richness": 4,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 2.94,
+      "priority": "P2",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-10-06",
+        "fixture_published_at": "2026-10-06",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    },
+    {
+      "event_id": "E20261025_0018",
+      "event_title": "从冲规模到保利润，美妆双11要打四场硬仗",
+      "fact_preview": "从冲规模到保利润，美妆双11要打四场硬仗 看见美业 ·2026年10月10日 20:59 双11还是那个双11，打法已不是那个打法 “直播排期是否敲定？达人资源是否确认？营销预算是否获批？主推品类与价格方案是否落地？”2026年双11大促已",
+      "evidence_preview": "从冲规模到保利润，美妆双11要打四场硬仗 看见美业 ·2026年10月10日 20:59 双11还是那个双11，打法已不是那个打法 “直播排期是否敲定？达人资源",
+      "source_url": "https://36kr.com/p/4019715197147010",
+      "published_at": "2026-10-10",
+      "scores": {
+        "strategic_importance": 3,
+        "watsons_relevance": 2,
+        "impact_scope": 2,
+        "source_credibility": 4.0,
+        "data_richness": 5,
+        "actionability": 3,
+        "time_sensitivity": 4.0,
+        "novelty": 5.0
+      },
+      "weighted_score": 3.1,
+      "priority": "P2",
+      "analysis_pairing_ok": true,
+      "verification": {
+        "verification_status": "verified",
+        "verified": true,
+        "reasons": [],
+        "date_source": "extracted",
+        "event_date": "2026-10-10",
+        "fixture_published_at": "2026-10-10",
+        "claimed_content_date": "2026-10-10",
+        "date_conflict": false,
+        "hearsay_markers": []
+      }
+    }
+  ],
+  "honesty_note": "SIMULATION ONLY: transport is deterministic, not the real SiliconFlow model. Real-model gate is blocked by encrypted provider credentials (see NAS-R1 report)."
+}

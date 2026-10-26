@@ -32,6 +32,11 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+try:  # pipeline / tests are run from the repository root
+    from skills.report_policy import evaluate_verification, most_restrictive
+except ImportError:  # direct script execution from the skill directory
+    from report_policy import evaluate_verification, most_restrictive
+
 _PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 logging.basicConfig(
@@ -113,6 +118,15 @@ def resolve_path(project_root: str, rel_path: str) -> str:
 
 def _now_cst() -> datetime:
     return datetime.now(CST)
+
+
+def _window_now(date_text: str) -> datetime:
+    """Use the closed day's end for historical replays, not today's clock."""
+    now = _now_cst()
+    parsed = parse_flexible_date(date_text, now)
+    if parsed and parsed.date() < now.date():
+        return datetime(parsed.year, parsed.month, parsed.day, 23, 59, 59, tzinfo=CST)
+    return now
 
 
 def parse_flexible_date(text: str, now: Optional[datetime] = None) -> Optional[datetime]:
@@ -462,7 +476,10 @@ def validate_event_times(
         dates = []
         for iso in content_dates.get("absolute_dates", []) + content_dates.get("relative_dates", []):
             d = parse_flexible_date(iso, now)
-            if d:
+            # A future date is an upcoming/effective date, not proof that the
+            # fact already occurred on the collection day.  Keeping it out of
+            # occurred_at prevents the "future occurred" false fresh fact.
+            if d and d <= now + timedelta(days=1):
                 dates.append(d)
         if dates:
             occurred_dt = max(dates)
@@ -602,8 +619,20 @@ def classify_fact_freshness(
 
     # ── 规则5: 回顾文识别（第五节）──
     hdr = temporal.get("historical_date_ratio", 0.0)
+    # A fact may be anchored by an announcement or an effective date when the
+    # extraction did not return event_occurred_at.  These are distinct date
+    # semantics; do not silently copy announcement time into occurrence time.
     occurred = temporal.get("event_occurred_at", "")
     occurred_dt = parse_flexible_date(occurred, now)
+    time_source = "occurred"
+    if not occurred_dt:
+        announced = temporal.get("event_announced_at", "")
+        occurred_dt = parse_flexible_date(announced, now)
+        time_source = "announced" if occurred_dt else "missing"
+    if not occurred_dt:
+        effective = temporal.get("event_effective_at", "")
+        occurred_dt = parse_flexible_date(effective, now)
+        time_source = "effective" if occurred_dt else "missing"
     recent_mentions = temporal.get("content_dates", {}).get("recent_mentions", 0)
 
     if hdr >= 0.6 and recent_mentions == 0:
@@ -622,24 +651,24 @@ def classify_fact_freshness(
     if occurred_dt:
         if occurred_dt >= now - timedelta(days=7):
             status = "new_fact"
-            reasons.append(f"事件发生时间 {date_str(occurred_dt)} 在近7天窗口内 → new_fact")
+            reasons.append(f"事件时间({time_source}) {date_str(occurred_dt)} 在近7天窗口内 → new_fact")
             return {"fact_freshness_status": status, "reasons": reasons,
                     "temporal_eligibility": FRESHNESS_ELIGIBILITY[status]}
         if occurred_dt.year < now.year:
             # 明确旧年份发生 → 旧背景（如拆事件中的背景部分）
             status = "historical_background"
-            reasons.append(f"事件发生时间 {date_str(occurred_dt)} 属于旧年份 → historical_background")
+            reasons.append(f"事件时间({time_source}) {date_str(occurred_dt)} 属于旧年份 → historical_background")
             return {"fact_freshness_status": status, "reasons": reasons,
                     "temporal_eligibility": FRESHNESS_ELIGIBILITY[status]}
         if occurred_dt < now - timedelta(days=30):
             # 今年内但超过30天 → 旧背景
             status = "historical_background"
-            reasons.append(f"事件发生时间 {date_str(occurred_dt)} 距今>30天 → historical_background")
+            reasons.append(f"事件时间({time_source}) {date_str(occurred_dt)} 距今>30天 → historical_background")
             return {"fact_freshness_status": status, "reasons": reasons,
                     "temporal_eligibility": FRESHNESS_ELIGIBILITY[status]}
         # 今年内 7-30 天 → 延续/ongoing
         status = "ongoing_fact"
-        reasons.append(f"事件发生时间 {date_str(occurred_dt)} 在今年7-30天窗口 → ongoing_fact")
+        reasons.append(f"事件时间({time_source}) {date_str(occurred_dt)} 在今年7-30天窗口 → ongoing_fact")
         return {"fact_freshness_status": status, "reasons": reasons,
                 "temporal_eligibility": FRESHNESS_ELIGIBILITY[status]}
 
@@ -647,7 +676,7 @@ def classify_fact_freshness(
     title_fact = (event.get("event_title") or "") + " " + (event.get("fact") or "")
     is_high_value = any(s in title_fact for s in _HIGH_VALUE_SIGNALS)
     status = "unknown_fact_time"
-    reasons.append(f"无法确定事实时间 (occurred={occurred or '空'}, hdr={hdr})")
+    reasons.append(f"无法确定事实时间 (occurred/announced/effective 均缺失, hdr={hdr})")
     return {
         "fact_freshness_status": status,
         "reasons": reasons,
@@ -779,7 +808,7 @@ def temporal_fact_validation(
     输出 events_temporal.json + 日志 + 统计。
     """
     errors: List[str] = []
-    now = _now_cst()
+    now = _window_now(date)
 
     # ── 路径 ──
     if not events_file:
@@ -838,6 +867,7 @@ def temporal_fact_validation(
         # ── 逐事件处理 ──
         temporal_events = []
         stats = Counter()
+        verification_stats = Counter()
         reject_reasons: List[dict] = []
         future_date_articles: List[dict] = []
 
@@ -907,6 +937,47 @@ def temporal_fact_validation(
             updated["temporal_eligibility"] = freshness["temporal_eligibility"]
             updated["temporal_reasons"] = freshness.get("reasons", [])
 
+            # Date provenance must survive into novelty/score/report.  Only an
+            # explicitly extracted occurrence date is ``occurred``; content-date
+            # inference and publication-time fallbacks are labelled separately.
+            if event.get("event_occurred_at"):
+                time_source = "occurred"
+            elif event.get("event_announced_at"):
+                time_source = "announced"
+            elif event.get("event_effective_at"):
+                time_source = "effective"
+            elif temporal.get("event_occurred_at"):
+                time_source = "inferred_content_date"
+            elif temporal.get("event_announced_at"):
+                time_source = "published_at"
+            else:
+                time_source = "missing"
+            updated["event_time_source"] = time_source
+
+            # R1-FIX verification rules are now part of the real extract-after
+            # chain, not a test-only harness.  Inferred/missing dates, date
+            # conflicts, hearsay and missing evidence remain visible but are
+            # downgraded before novelty/score can promote them.
+            verification = evaluate_verification(
+                updated,
+                as_of_date=date,
+                article=article,
+                article_sanity=sanity,
+                temporal=temporal,
+                freshness=freshness,
+            )
+            updated.update(verification)
+            verification_stats[verification["verification_status"]] += 1
+            if not verification["verified"]:
+                updated["temporal_eligibility"] = most_restrictive(
+                    freshness["temporal_eligibility"], "review"
+                )
+                if verification.get("date_conflict"):
+                    updated["temporal_eligibility"] = most_restrictive(
+                        updated["temporal_eligibility"], "reference"
+                    )
+            updated["report_eligibility"] = updated["temporal_eligibility"]
+
             temporal_events.append(updated)
             stats[freshness["fact_freshness_status"]] += 1
 
@@ -944,6 +1015,7 @@ def temporal_fact_validation(
                 "created_at": now.isoformat(),
                 "total_events": len(temporal_events),
                 "freshness_stats": dict(stats),
+                "verification_stats": dict(verification_stats),
                 "republished_old_fact_count": len(republished),
                 "future_date_article_count": len(future_date_articles),
             },
@@ -983,6 +1055,7 @@ def temporal_fact_validation(
             "stats_file": stats_file,
             "event_count": len(temporal_events),
             "freshness_stats": dict(stats),
+            "verification_stats": dict(verification_stats),
             "republished_old_fact_count": len(republished),
             "future_date_article_count": len(future_date_articles),
             "errors": errors,

@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-26",
+  "head": "2464df94e7ceb7b327eb912fd4fdeeb77ba22f11",
+  "dirty_entries": 71,
+  "untracked": 63,
+  "backup_dir": "/app/working/backups/watsons-retail-intel/cutover-20261026T140436Z",
+  "size_bytes": 1092049202,
+  "business_files": 7979,
+  "restore_ok": 7979,
+  "restore_bad": 0,
+  "verify_txt": [
+    "HEAD: OK",
+    "status.txt: OK",
+    "diffstat.txt: OK",
+    "tracked.patch: OK",
+    "untracked.list.z: OK",
+    "untracked.tar.gz: OK",
+    "business-data.list: OK",
+    "business-data.manifest.tsv: OK",
+    "business-data.tar.gz: OK",
+    "secrets_not_included.txt: OK"
+  ],
+  "artifacts": {
+    "tracked.patch": {
+      "bytes": 548522,
+      "sha256": "2e7e54b0b7aa81c68f65328b4bbc5658dc2de8e46ef2b037b6f0258e800f9284"
+    },
+    "untracked.tar.gz": {
+      "bytes": 250122865,
+      "sha256": "f495d8481af68da1800fa158b71303f9699534d01358cbb3fde0fa3285646b56"
+    },
+    "business-data.tar.gz": {
+      "bytes": 839191820,
+      "sha256": "df21f7e0318ad68eef2684445b18c1cb53296a1fb03238be54e834542c3bd1b4"
+    },
+    "business-data.manifest.tsv": {
+      "bytes": 919356,
+      "sha256": "8a7ed0dd3f6689875582ba0353c9543797c8f51e860cdc25871594145da1e6ee"
+    }
+  },
+  "secrets_not_included": [
+    "config/email.yaml"
+  ],
+  "persistence_finding": "PID1 is supervisord using /etc/supervisor/conf.d/supervisord.conf. /etc is container writable layer (overlay, not a mounted volume); /app/working is the persistent ext4 mount. Supervisor config is not persistent as-is.",
+  "control_plane_dryrun": {
+    "isolated": true,
+    "socket": "/tmp/sup_dry/supervisor.sock",
+    "before_pid": 4792,
+    "after_sigkill_pid": 4795,
+    "autorestart_verified": true,
+    "supervisorctl_status": "RUNNING",
+    "shutdown": "ok",
+    "note": "Production /etc/supervisor/conf.d/supervisord.conf has no [unix_http_server]/[rpcinterface]/[supervisorctl]; /var/run/supervisor.sock absent. Draft not installed."
+  }
+}

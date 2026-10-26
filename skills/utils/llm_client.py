@@ -353,8 +353,14 @@ def _repair_truncated_json(fragment: str) -> Optional[dict]:
 
 # ===================== LLM 客户端 =====================
 
-class LLMClient:
-    """基于 requests 的 OpenCode LLM 调用客户端。"""
+class LegacyOpenCodeClient:
+    """DEPRECATED legacy OpenCode client (kept only for archaeology/tests).
+
+    The 4-entry OpenCode pool returned HTTP 400 for every entry since 2026-10.
+    It is intentionally NOT the active client and MUST NOT be used as a
+    fallback. The active client is imported at the bottom of this module from
+    ``llm_pipeline_adapter``.
+    """
 
     def __init__(self):
         # ── 主 Provider: OpenCode 轮换入口（3 Key + 1 keyless） ──
@@ -840,6 +846,15 @@ class LLMClient:
             self._max_paid_fallback_calls = max(0, int(limit or 0))
 
 
+# ===================== Active provider-agnostic client =====================
+# R1: the pipeline now uses a provider-agnostic adapter. The legacy OpenCode
+# class above is retained only as `LegacyOpenCodeClient`; it is never routed to.
+try:
+    from .llm_pipeline_adapter import PipelineLLMClient as LLMClient  # noqa: E402
+except ImportError:  # top-level import (skills/utils on sys.path)
+    from llm_pipeline_adapter import PipelineLLMClient as LLMClient  # noqa: E402
+
+
 # ===================== 单例 =====================
 
 _llm_client_instance: Optional[LLMClient] = None
@@ -878,13 +893,28 @@ def check_llm_config() -> Dict[str, Any]:
         }
     """
     client = get_llm_client()
+    status = client.get_status()
+    credentials = status.get("credential_report", {})
+    blockers = ["%s:%s" % (name, info.get("blocker"))
+                for name, info in credentials.items() if info.get("blocker")]
     return {
-        "keys_found": bool(client.keys),
-        "key_count": len(client.keys),
-        "base_url": client.base_url,
-        "model": client.model,
-        "endpoint": client._get_endpoint(),
-        "key_masks": [_mask_key(k) for k in client.keys],
+        "keys_found": bool(status.get("any_usable")),
+        "primary_available": bool(status.get("primary_available")),
+        "fallback_available": bool(status.get("fallback_available")),
+        "any_usable": bool(status.get("any_usable")),
+        "degraded_using_paid_fallback": bool(
+            status.get("degraded_using_paid_fallback")),
+        "primary_blocker": status.get("primary_blocker", ""),
+        "key_count": int(status.get("available_keys") or 0),
+        "base_url": status.get("base_url", ""),
+        "model": status.get("model", ""),
+        "endpoint": status.get("endpoint", ""),
+        "key_masks": ["%s:%s" % (name, info.get("channel", ""))
+                      for name, info in credentials.items()],
+        "credential_blockers": blockers,
+        "paid_fallback_allowed": bool(status.get("paid_fallback_allowed")),
+        "paid_fallback_calls": int(status.get("paid_fallback_calls") or 0),
+        "provider_mode": "provider_agnostic_r1",
     }
 
 
@@ -910,11 +940,18 @@ def test_llm_connection() -> Dict[str, Any]:
         "error_message": "",
     }
 
-    # 1. 检查配置
-    if not client.keys:
-        result["error_message"] = "未找到任何 API Key"
+    # 1. 检查配置（不读取/打印 Key 原文）
+    if not getattr(client, "available", False):
+        status = client.get_status() if hasattr(client, "get_status") else {}
+        blockers = [
+            "%s:%s" % (name, info.get("blocker"))
+            for name, info in (status.get("credential_report") or {}).items()
+            if info.get("blocker")
+        ]
+        result["error_message"] = "LLM 凭证不可用或未配置" + (
+            " (" + ", ".join(blockers) + ")" if blockers else "")
         return result
-    
+
     result["llm_config_ok"] = True
 
     # 2. 尝试调用

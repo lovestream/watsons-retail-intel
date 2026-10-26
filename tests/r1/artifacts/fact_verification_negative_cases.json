@@ -1,0 +1,45 @@
+{
+  "mode": "deterministic_fixture_check",
+  "description": "F4 negative cases; no real model call, 0 tokens, 0 HTTP.",
+  "cases": [
+    {
+      "sample_id": "R1S07",
+      "event_title": "得物男士护肤品类环比增长150%-200%",
+      "verification": {
+        "verification_status": "needs_verification",
+        "verified": false,
+        "reasons": [
+          "hearsay_source:听说"
+        ],
+        "date_source": "extracted",
+        "event_date": "2026-09-03",
+        "fixture_published_at": "2026-09-03",
+        "claimed_content_date": "",
+        "date_conflict": false,
+        "hearsay_markers": [
+          "听说"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "sample_id": "R1S13",
+      "event_title": "永辉超市福州奥体中心店健康场景改造带动多品类增长",
+      "verification": {
+        "verification_status": "needs_verification",
+        "verified": false,
+        "reasons": [
+          "date_conflict:2026-09-13!=2026-09-26"
+        ],
+        "date_source": "extracted",
+        "event_date": "2026-09-26",
+        "fixture_published_at": "2026-09-26",
+        "claimed_content_date": "2026-09-13",
+        "date_conflict": true,
+        "hearsay_markers": []
+      },
+      "pass": true
+    }
+  ],
+  "all_pass": true
+}

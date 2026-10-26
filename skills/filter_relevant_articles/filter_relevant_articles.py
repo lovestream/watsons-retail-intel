@@ -19,6 +19,11 @@ import logging
 import os
 import re
 import sys
+
+try:
+    from skills.m2.tri_state_prefilter import classify_candidate as _m2_classify
+except Exception:  # advisory only: never break the production filter
+    _m2_classify = None
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -1787,6 +1792,7 @@ def filter_relevant_articles(
     by_region = Counter()
     by_noise = Counter()
     reject_reasons = Counter()
+    tri_state_counts = Counter()
     all_matched_keywords = Counter()
 
     # 中间结果：存储每篇文章的规则评分和是否需要 LLM
@@ -1945,6 +1951,9 @@ def filter_relevant_articles(
         )
 
         output_article = dict(article)
+        tri = _m2_classify(output_article) if _m2_classify else None
+        if tri:
+            tri_state_counts[tri["label"]] += 1
         output_article["filter"] = {
             "rule_score": rule_score,
             "rule_decision": rule_decision,
@@ -1965,6 +1974,8 @@ def filter_relevant_articles(
                 "reason": retro_reason,
             },
         }
+        if tri:
+            output_article["filter"]["tri_state"] = tri
 
         # 清除临时字段（避免污染原始文章数据）
         for k in ("_campaign_name", "_campaign_temporality", "_campaign_year",
@@ -2002,6 +2013,7 @@ def filter_relevant_articles(
             "by_noise": dict(by_noise),
             "top_matched_keywords": dict(all_matched_keywords.most_common(20)),
             "reject_reasons": dict(reject_reasons),
+            "tri_state_counts": dict(tri_state_counts),
         },
         "articles": cleaned_articles,
     }
@@ -2051,6 +2063,7 @@ def filter_relevant_articles(
     logger.info(f"  by_source: {dict(by_source)}")
     logger.info(f"  top_matched_keywords: {dict(all_matched_keywords.most_common(10))}")
     logger.info(f"  reject_reasons: {dict(reject_reasons)}")
+    logger.info(f"  tri_state_counts: {dict(tri_state_counts)}")
     if llm_client:
         status = llm_client.get_status()
         logger.info(f"  LLM status: available_keys={status['available_keys']}, "
@@ -2072,6 +2085,7 @@ def filter_relevant_articles(
         "reference_count": len(reference_articles),
         "rejected_count": len(rejected_articles),
         "llm_reviewed_count": llm_reviewed_count,
+        "tri_state_counts": dict(tri_state_counts),
         "errors": errors,
     }
 

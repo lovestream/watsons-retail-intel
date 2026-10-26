@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-26",
+  "period": "2026-W40",
+  "mode": "frozen-sample phase4; TTS provider unavailable",
+  "sendable": true,
+  "delivery_allowed": true,
+  "delivery_blockers": [],
+  "review": {
+    "sendable": true,
+    "overall_quality": "good",
+    "failed_checks": [],
+    "high_issues": [],
+    "medium_issues": []
+  },
+  "podcast_review": {
+    "passed": true,
+    "issues": [],
+    "checks": {
+      "length": 3098,
+      "has_action": true,
+      "action_phrase": "本周听完最值得做的三件事",
+      "has_merchant_action": true,
+      "no_markdown": true,
+      "no_internal_markers": true,
+      "period_word": "本周"
+    },
+    "chars": 3098
+  },
+  "tts": {
+    "ok": true,
+    "duration_seconds": 415.3,
+    "rate": "+0%",
+    "error": ""
+  },
+  "audio_issues": [],
+  "report_chars": 1589,
+  "report_sha256": "8dad8fddd80973558a8b6c72a753923b101667bf373f8569c317da9f71894c63",
+  "audio_path": "/tmp/r3_dryrun_2tqte3fr/podcasts/audio/weekly-2026-W40.mp3",
+  "audio_bytes": 2492064,
+  "audio_sha256": "5928ddec807030f394019f6b036292377f88cbb076263bb49971e0efa1896249",
+  "script_chars": 3098,
+  "script_sha256": "3e0ccbf8a6fdd09720c4efb3b22d9bec57682f370c80c961c45d54bad70bae12",
+  "internal_markers_in_report": {
+    "E\\d{8}_\\d{4}": false,
+    "【[ABCRKX]】": false,
+    "\\b涉及事件\\b": false,
+    "\\b置信度\\b": false,
+    "规则兜底": false,
+    "按事件密度排序": false
+  },
+  "email_dry_run": {
+    "ok": true,
+    "message": "dry_run: 邮件未发送（仅模拟）",
+    "subject": "即时零售 × 个护美妆经营周报｜2026-W40",
+    "dry_run": true,
+    "html_length": 4762,
+    "html_sha256": "c83e926b71c65326faf37a583b12b8c9e8a4c0f7473b9e2ceeaebe6188a67832",
+    "audio_bytes": 2492064,
+    "attachments": 1
+  },
+  "tts_note": "edge-tts HTTP 403; existing Chinese MP3 used as playback fixture only."
+}

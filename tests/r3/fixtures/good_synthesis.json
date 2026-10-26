@@ -1,0 +1,36 @@
+{
+  "all_clusters": [
+    {
+      "cluster_id": "PC_TEST_0001",
+      "theme": "美团加码即时零售投入",
+      "source_count": 1,
+      "independent_source_count": 1,
+      "source_urls": ["https://www.cls.cn/detail/2490220"],
+      "facts": ["美团宣布未来三年加码即时零售投入，覆盖前置仓和城市履约。"],
+      "event_count": 2
+    },
+    {
+      "cluster_id": "PC_TEST_0002",
+      "theme": "美团闪购双11消费变化",
+      "source_count": 1,
+      "independent_source_count": 1,
+      "source_urls": ["https://www.cbndata.com/information/260843"],
+      "facts": ["年轻消费者在美团闪购购买美妆个护，即时零售成为双11增量。"],
+      "event_count": 2
+    }
+  ],
+  "selected_clusters": [
+    {"cluster_id": "PC_TEST_0001", "theme": "美团加码即时零售投入",
+     "source_count": 1, "independent_source_count": 1,
+     "source_urls": ["https://www.cls.cn/detail/2490220"],
+     "facts": ["美团宣布未来三年加码即时零售投入，覆盖前置仓和城市履约。"],
+     "event_count": 2},
+    {"cluster_id": "PC_TEST_0002", "theme": "美团闪购双11消费变化",
+     "source_count": 1, "independent_source_count": 1,
+     "source_urls": ["https://www.cbndata.com/information/260843"],
+     "facts": ["年轻消费者在美团闪购购买美妆个护，即时零售成为双11增量。"],
+     "event_count": 2}
+  ],
+  "coverage": {"status": "passing", "coverage_ratio": 0.9},
+  "event_stats": {"period_events": 12, "reportable_events": 4}
+}

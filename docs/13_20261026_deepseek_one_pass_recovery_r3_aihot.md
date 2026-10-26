@@ -1,5 +1,8 @@
 # 13｜DeepSeek / QwenPaw 一次性交付总指令：生产恢复、R3播客、AIHOT精选优化
 
+> **2026-10-26 最新复审与返工边界**：本文件A–D三工作包均有隔离交付。新验收详见[一次性交付复审 D1–D5](reviews/NAS-ONEPASS-CHATGPT-REVIEW-2026-10-26.md)。现在连续修正：R3/M2测试源码GitHub缺失（gitignore test_*.py）、R3真实TTS 403/旧MP3不可作本期音频、M2 SelectBench source_url/evidence_url字段错配、R2+R3+M2兄弟分支尚未集成、supervisor配置位于非持久层。只做安全开发/集成验证；生产切换仍须明确授权。
+
+
 > **最新执行任务（2026-10-26）**。发起人要求尽快把系统做成真正可用的服务，**不要再把每一项无风险代码改动拆成新申请、反复请示**。DeepSeek（NAS Docker内的QwenPaw）是执行者，ChatGPT做架构与最终验收。
 >
 > 权威输入：[R2-B-CUTOVER正式复审](reviews/NAS-R2B-CUTOVER-CHATGPT-REVIEW-2026-10-26.md)、[AIHOT落地差距](reviews/AIHOT-ADOPTION-GAP-2026-10-26.md)、[R2-B切换准备](https://github.com/lovestream/watsons-retail-intel/blob/r2b/cutover-prep/docs/reviews/NAS-R2B-CUTOVER-READINESS.md)、[R1–R2已验证分支](https://github.com/lovestream/watsons-retail-intel/tree/r2b/cutover-prep)、[11号架构](11_20261025_nas_qwenpaw_aihot_architecture_decision.md)。遇到旧docs/12历史状态描述时，以本文优先。

@@ -1,5 +1,7 @@
 # 11｜NAS Docker + QwenPaw 经营情报系统：架构决策、AIHOT 对标与 DeepSeek 成本方案
 
+> **2026-10-26 AIHOT落实状态复核**：AIHOT确已纳入本架构文档的选型参考，但R1/R2实做主要是恢复旧NAS系统的LLM、日期、去重资格、调度和告警；**AIHOT源自适应采集、PASS/UNKNOWN/BLOCK、独立双评分、SelectBench、独立源热度均未完成专项实现/验收**。具体证据和M2优先顺序见[AIHOT采用差距清单](reviews/AIHOT-ADOPTION-GAP-2026-10-26.md)。当前生产切换NO-GO，见[R2B最新审查](reviews/NAS-R2B-CUTOVER-CHATGPT-REVIEW-2026-10-26.md)。
+
 > 日期：2026-10-25（北京时间）。**设计稿 / 待 QwenPaw 在现有 NAS Docker 环境逐阶段实施；不代表代码已修改、服务已重启、调度已变更。**
 > 本篇为当前项目的**最新实施方向**；历史 Muse 独立试验（docs/10 和 muse/）不再是建设方向；**由 Muse 自己负责在 GitHub 做一次性退役清理**，不委派 NAS 上 QwenPaw。具体清理边界与后续 QwenPaw 分工见 [12｜分阶段执行手册](12_20261025_qwenpaw_step_by_step_execution.md)。
 > 用户明确：系统**始终**部署在 NAS Docker 中，QwenPaw 是其中的 Agent/操作入口。**不存在迁移至 NAS**，也不使用 Codex 实施；方案由 ChatGPT 设计、复审；Muse 清理由 Muse 完成，后续优化由 NAS 内 QwenPaw + 已配置的 DeepSeek Flash 执行。用户已在 NAS 配好模型，**无需本任务书指导 API Key、Provider、接口接入或模型切换**。

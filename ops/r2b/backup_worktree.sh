@@ -11,14 +11,15 @@
 #
 # Usage:
 #   sh ops/r2b/backup_worktree.sh
-#   sh ops/r2b/backup_worktree.sh --execute --output-root /app/working/backups/watsons-retail-intel
+#   sh ops/r2b/backup_worktree.sh --execute --output-root <BACKUP_ROOT>
 #
 # This script never deletes or overwrites an existing backup directory.
 
 set -eu
 
-PROJECT_ROOT="${PROJECT_ROOT:-/app/working/projects/watsons-retail-intel}"
-OUTPUT_ROOT="${OUTPUT_ROOT:-/app/working/backups/watsons-retail-intel}"
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+PROJECT_ROOT="${PROJECT_ROOT:-$(CDPATH= cd -- "$SCRIPT_DIR/../.." && pwd)}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-}"
 EXECUTE=0
 
 usage() {
@@ -35,11 +36,12 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
-test -d "$PROJECT_ROOT/.git" || { echo "not a git worktree: $PROJECT_ROOT" >&2; exit 2; }
+git -C "$PROJECT_ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "not a git worktree: $PROJECT_ROOT" >&2; exit 2; }
 test -d "$PROJECT_ROOT/data" || { echo "missing production data directory" >&2; exit 2; }
+test -n "$OUTPUT_ROOT" || [ "$EXECUTE" -ne 1 ] || { echo "set --output-root to a persistent path outside the project" >&2; exit 2; }
 
 STAMP=$(date -u +%Y%m%dT%H%M%SZ)
-OUT="$OUTPUT_ROOT/cutover-$STAMP"
+OUT="${OUTPUT_ROOT:-<output-root-unset>}/cutover-$STAMP"
 STATUS_COUNT=$(git -C "$PROJECT_ROOT" status --porcelain=v1 -uall | wc -l | tr -d ' ')
 UNTRACKED_COUNT=$(git -C "$PROJECT_ROOT" ls-files --others --exclude-standard | wc -l | tr -d ' ')
 HEAD_SHA=$(git -C "$PROJECT_ROOT" rev-parse HEAD)

@@ -30,16 +30,18 @@
 | GitHub `main`（只读） | `6c224aed1062c0ac92b209ecf141dda00330ef80` |
 | R2-B 预检远端分支 | `r2b/preflight` = `db95334006f1933af402b36ee0476bd086a8b431` |
 | 本地预检提交/树 | `db4e385`，tree `6fbc65d242290d5756da6adad628182395afc8ef`（与远端预检树一致） |
-| 生产工作副本 | `/app/working/projects/watsons-retail-intel`，HEAD `2464df94e7ceb7b327eb912fd4fdeeb77ba22f11` |
+| 生产工作副本 | `<PROD_ROOT>`，HEAD `2464df94e7ceb7b327eb912fd4fdeeb77ba22f11` |
 | 本报告分支 | `r2b/cutover-prep`，从 R2-B 预检树派生；不合并 `main` |
 | 隔离测试 | `PYTHONPATH=. python3 -m unittest discover -s tests/r2a -v` → **Ran 53 tests, OK** |
-| 生产数据 | `/app/working` 卷 3.6T，已用 1.4T，可用 2.2T；项目 `data` 约 1.8G |
+| 生产数据 | 生产持久卷 3.6T，已用 1.4T，可用 2.2T；项目 `data` 约 1.8G |
 
 边界说明：
 
 - 生产 HEAD 是 M1 审计提交，不是 R2-A/R2-B 代码；本地历史存在 graft，不能把 `r2b/preflight` 当成生产 HEAD 的快进分支。
 - 本轮所有演练使用 `/tmp` 下的 fake pipeline/隔离 state；没有调用真实付费 LLM、没有真实采集、没有 SMTP、没有正式 `data/events`。
 - 本报告不包含报告原文、事件正文、密钥、SMTP 凭据或真实告警接收地址。生产文件清单只以类别/路径族统计；完整 `status.txt` 只保存在本地备份中。
+
+本文用 `<PROD_ROOT>` 表示生产 checkout，用 `<BACKUP_ROOT>` 表示项目外持久备份目录；公开文档不展开宿主机绝对路径。
 
 ## 2. 生产工作区：71 项 dirty 变更分层
 
@@ -95,7 +97,7 @@
 
 新增：
 
-- `ops/r2b/backup_worktree.sh`：默认 dry-run；`--execute` 时才写入项目外目录。
+- `ops/r2b/backup_worktree.sh`：默认 dry-run；`--execute --output-root <BACKUP_ROOT>` 时才写入项目外目录；未给 output-root 的 execute 会拒绝运行。
 - `ops/r2b/restore_worktree.sh`：默认只校验；`--execute` 只解到空 staging 目录，**不在生产原地恢复**。
 
 备份内容：
@@ -108,7 +110,7 @@
 目标路径（执行时）：
 
 ```text
-/app/working/backups/watsons-retail-intel/cutover-<UTC>/
+<BACKUP_ROOT>/cutover-<UTC>/
 ```
 
 该路径在项目外、同一持久卷内，能防误覆盖，但**不能防整卷/宿主机故障**；真正的异地副本需要用户在宿主侧另行批准。备份可能含私有报告/诊断内容，禁止提交或上传。
@@ -167,10 +169,10 @@ serverurl=unix:///var/run/supervisor.sock
 再追加两个 program（复用已审的 `ops/r2a/supervisor/watsons-retail-intel-r2a.conf`，但必须按生产路径核对）：
 
 - `watsons-r2b-scheduler`：
-  - `python3 -m ops.r2a.scheduler --project-root /app/working/projects/watsons-retail-intel --state-dir /app/working/projects/watsons-retail-intel/data/ops --loop --mode scheduled --start-step health_check --end-step analyze --hour 7 --minute 0 --window-minutes 90`
+  - `python3 -m ops.r2a.scheduler --project-root <PROD_ROOT> --state-dir <PROD_ROOT>/data/ops --loop --mode scheduled --start-step health_check --end-step analyze --hour 7 --minute 0 --window-minutes 90`
   - `autostart=true`、`autorestart=true`、`startsecs=5`、`stopsignal=TERM`、日志到 `data/logs/`；
 - `watsons-r2b-watchdog`：
-  - `python3 -m ops.r2a.watchdog --state-dir /app/working/projects/watsons-retail-intel/data/ops --max-age-hours 48 --stale-minutes 120 --require-scheduler --loop --interval 300`
+  - `python3 -m ops.r2a.watchdog --state-dir <PROD_ROOT>/data/ops --max-age-hours 48 --stale-minutes 120 --require-scheduler --loop --interval 300`
   - `autostart=true`、不吞 exit code；只写本地 sink，通知通道另行配置。
 
 关键约束：
@@ -260,7 +262,7 @@ serverurl=unix:///var/run/supervisor.sock
 
 1. 用户明确批准：备份、代码人工集成、supervisor control socket + PID1 重启、暂停旧 Cron、启动新 scheduler/watchdog、测试告警接收。
 2. 切换窗口：**周二至周四，09:00 之后，非周一/月初/1 月 1 日**；当天旧 daily 已为 `success`/合法 `no_signal`，旧 periodic 无待执行任务；无采集/报告进程。
-3. `ops/r2b/backup_worktree.sh --execute` 成功，`verify.txt` 全 OK；71 项 dirty 有完整快照；旧备份和新快照都在。
+3. `ops/r2b/backup_worktree.sh --execute --output-root <BACKUP_ROOT>` 成功，`verify.txt` 全 OK；71 项 dirty 有完整快照；旧备份和新快照都在。
 4. R2-B 代码已按文件人工 diff、冲突审查、53 项隔离测试通过；没有 `git merge/pull/reset/clean` 整体覆盖。
 5. `data/locks/periodic.lock` 已复核无活跃 holder；保留原文件。
 6. 真实告警通道已测试接收，或用户明确接受“容器整体死亡时无外部告警”的残留风险。
@@ -268,7 +270,7 @@ serverurl=unix:///var/run/supervisor.sock
 
 ### 8.2 切换步骤
 
-1. **备份**：运行 `backup_worktree.sh --execute`；记录 `HEAD`、71 项、SHA256；不改工作区。
+1. **备份**：运行 `backup_worktree.sh --execute --output-root <BACKUP_ROOT>`；记录 `HEAD`、71 项、SHA256；不改工作区。
 2. **暂停旧 Cron**（需批准）：
    ```bash
    qwenpaw cron pause a892335a-4c55-4bce-8e57-6be07aa1764a --agent-id watsonmainagent

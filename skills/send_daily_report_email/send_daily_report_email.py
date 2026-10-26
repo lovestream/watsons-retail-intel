@@ -1232,6 +1232,7 @@ def send_periodic_report_email(
     recipient: str = "",
     project_root: str = ".",
     dry_run: bool = False,
+    require_audio: bool = True,
 ) -> dict:
     """发送周报/月报/年报邮件（HTML 格式 + 附件）。
 
@@ -1263,21 +1264,40 @@ def send_periodic_report_email(
 
     report_md = report_fp.read_text(encoding="utf-8")
 
-    # 构建 HTML
-    html_body = _build_periodic_email_html(
-        report_md, report_type, report_name, period_label)
+    # R3: MP3 is part of the delivery contract; dry-run must exercise the same
+    # attachment checks as a real send.  A missing/short MP3 is a blocker.
+    audio_fp = Path(audio_path) if audio_path else None
+    audio_bytes = b""
+    if require_audio:
+        if not audio_fp or not audio_fp.exists():
+            logger.error("require_audio=true 但 MP3 不存在: %s", audio_path)
+            return {"ok": False, "error": "audio_missing", "dry_run": dry_run}
+        audio_bytes = audio_fp.read_bytes()
+        if len(audio_bytes) < 10 * 1024:
+            logger.error("MP3 文件过小: %d bytes", len(audio_bytes))
+            return {"ok": False, "error": "audio_too_small",
+                    "audio_bytes": len(audio_bytes), "dry_run": dry_run}
 
-    # 构建附件
+    # 构建 HTML（正文清洗后才是验收对象）
+    clean_md = _clean_report_for_display(report_md, keep_canonical=False)
+    if EVENT_ID_PATTERN.search(clean_md) or "判断标签" in clean_md:
+        logger.error("清洗后仍含内部标记，拒绝发送")
+        return {"ok": False, "error": "display_marker_leak",
+                "dry_run": dry_run}
+    html_body = _build_periodic_email_html(
+        report_md, report_type, report_name, period_label,
+        has_audio=bool(audio_bytes))
+
+    # 构建附件（只附 MP3，不附 .md 原文）
     attachments = []
     # 不附加 .md 原文：报告正文已在 HTML 邮件正文中呈现，避免用户看到原始 Markdown 符号。
 
     # MP3 附件
-    if audio_path and Path(audio_path).exists():
-        audio_fp = Path(audio_path)
+    if audio_bytes:
         attachments.append(
-            (audio_fp.name, audio_fp.read_bytes(), "audio/mpeg"))
+            (audio_fp.name, audio_bytes, "audio/mpeg"))
         logger.info(f"附加音频: {audio_fp.name} "
-                    f"({audio_fp.stat().st_size / 1024 / 1024:.1f}MB)")
+                    f"({len(audio_bytes) / 1024 / 1024:.1f}MB)")
 
     # 收件人
     to_addrs = [recipient] if recipient else _load_email_config(project_root).get("to_addrs", [])
@@ -1289,8 +1309,8 @@ def send_periodic_report_email(
     subject = f"即时零售 × 个护美妆经营{report_name}｜{period_label}"
 
     # 幂等检查（三批整改 §28）：同类型同主题已发送成功则不重发
-    if _check_delivery_duplicate(project_root, report_type, subject,
-                                 ",".join(to_addrs)):
+    if not dry_run and _check_delivery_duplicate(
+            project_root, report_type, subject, ",".join(to_addrs)):
         logger.info("已发送过相同主题邮件，跳过（幂等）")
         return {"ok": True, "message": "already_sent", "subject": subject,
                 "idempotent": True}
@@ -1313,12 +1333,17 @@ def send_periodic_report_email(
         _log_delivery(project_root, report_type, subject, ",".join(to_addrs),
                       success, msg)
 
-    logger.info(f"发送结果: success={success}, msg={msg}")
-    return {"ok": success, "message": msg, "subject": subject}
+    logger.info(f"发送结果: success={success}, msg={msg}, dry_run={dry_run}")
+    return {"ok": success, "message": msg, "subject": subject,
+            "dry_run": dry_run, "html_length": len(html_body),
+            "html_sha256": __import__("hashlib").sha256(
+                html_body.encode("utf-8")).hexdigest(),
+            "audio_bytes": len(audio_bytes), "attachments": len(attachments)}
 
 
 def _build_periodic_email_html(report_md: str, report_type: str,
-                               report_name: str, period_label: str) -> str:
+                               report_name: str, period_label: str,
+                               has_audio: bool = True) -> str:
     """构建周报/月报/年报邮件 HTML。"""
     # 清理内部标记（事件ID/判断标签/思考泄露）+ 格式修正 + 转换
     # 周报/月报章节集与日报不同，关闭 canonical 章节过滤避免误删。
@@ -1356,9 +1381,7 @@ def _build_periodic_email_html(report_md: str, report_type: str,
 
 <div class="content">
 
-<div class="audio-notice">
-  <p>🎧 {audio_tips.get(report_type, "")}</p>
-</div>
+{f'<div class="audio-notice"><p>🎧 {audio_tips.get(report_type, "")}</p></div>' if has_audio else ''}
 
 <div class="system-note">
   <p>📊 {system_tips.get(report_type, "")}</p>

@@ -1,5 +1,8 @@
 # Watson's Retail Intel — 实现与流程文档
 
+> **2026-10-26 晚间最新审查**：[R2+R3+M2一次性交付复审](reviews/NAS-ONEPASS-CHATGPT-REVIEW-2026-10-26.md)：R2备份、R3 W40质量门、M2 AIHOT advisory已提交；仍需补齐测试源码、解决TTS 403/禁止旧音频冒充新音频、修SelectBench证据映射并做三分支集成验证；生产NO-GO。
+
+
 > **2026-10-26 DeepSeek执行总指令**：[13｜一次性交付：安全生产恢复准备、R3周/月/年报播客、AIHOT精准采集优化](13_20261026_deepseek_one_pass_recovery_r3_aihot.md)。安全开发连续推进；生产重启、调度切换与真实邮件待单独授权。
 
 

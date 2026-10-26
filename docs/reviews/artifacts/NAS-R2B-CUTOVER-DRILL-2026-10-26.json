@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-26T11:25:00Z",
+  "scope": "R2-B-CUTOVER-PREP isolated rehearsal; fake pipeline only; no production data, SMTP, Cron, supervisor install, or main merge",
+  "review_basis": {
+    "main": "6c224aed1062c0ac92b209ecf141dda00330ef80",
+    "r2b_preflight_remote": "db95334006f1933af402b36ee0476bd086a8b431",
+    "r2b_preflight_local": "db4e385",
+    "r2b_preflight_tree": "6fbc65d242290d5756da6adad628182395afc8ef",
+    "tests": {
+      "command": "PYTHONPATH=. python3 -m unittest discover -s tests/r2a -v",
+      "ran": 53,
+      "result": "OK"
+    }
+  },
+  "production_worktree": {
+    "head": "2464df94e7ceb7b327eb912fd4fdeeb77ba22f11",
+    "dirty_entries_observed": 71,
+    "tracked_modified": 8,
+    "untracked": 63,
+    "review_snapshot_was": 58,
+    "categories": {
+      "tracked_docs": 3,
+      "tracked_data": 5,
+      "untracked_data": 47,
+      "untracked_one_off_scripts": 16
+    },
+    "data_bytes": "~1.8G total; dirty subset ~244MB",
+    "stale_periodic_lock": {
+      "path_class": "data/locks/periodic.lock",
+      "value_class": "PID record",
+      "pid": 25923,
+      "process_alive": false,
+      "action": "preserve; do not delete without approval"
+    },
+    "existing_backup": {
+      "date": "2026-08-09",
+      "bundle_sha256_prefix": "378bb6fef13c4b49ad7f5e997e7eb55d457dfee5d9cce64b4d3e90cf1f47503f",
+      "tar_sha256_prefix": "0b45f6fd7cbd28de7c28f59e6b698098e2981f399cd57ac54a3a42ab56a0c502",
+      "bundle_verify": "complete history",
+      "tar_entries": 166,
+      "covers_current_71_changes": false
+    }
+  },
+  "scheduler_drill": [
+    {
+      "date": "2026-10-25",
+      "fake_mode": "success",
+      "action": "launched",
+      "terminal_status": "success",
+      "reason": "complete_event_pool",
+      "collection_proof": "verified",
+      "collection_health": "ok"
+    },
+    {
+      "date": "2026-10-25",
+      "fake_mode": "success",
+      "action": "skip",
+      "reason": "already_success",
+      "note": "second process after simulated restart; no duplicate launch"
+    },
+    {
+      "date": "2026-10-24",
+      "fake_mode": "collect_failure",
+      "action": "launched",
+      "terminal_status": "failed",
+      "reason": "no_signal_without_verified_collection",
+      "collection_proof": "failed",
+      "collection_health": "failed"
+    },
+    {
+      "date": "2026-10-23",
+      "fake_mode": "no_signal",
+      "action": "launched",
+      "terminal_status": "no_signal",
+      "reason": "no_input_articles_after_successful_collection",
+      "collection_proof": "verified",
+      "collection_health": "ok"
+    }
+  ],
+  "watchdog_drill": {
+    "failed_manifest_exit": 1,
+    "failed_manifest_alert": "run_failed",
+    "recovery_exit": 0,
+    "recovery_event": "recovered",
+    "dedupe_repeat_events_before": 3,
+    "dedupe_repeat_events_after": 3,
+    "active_after_recovery": []
+  },
+  "supervisor_drill": {
+    "mode": "isolated supervisord with unix_http_server + rpcinterface + supervisorctl",
+    "scheduler_state": "RUNNING",
+    "watchdog_state": "RUNNING",
+    "watchdog_kill9_old_pid": 28746,
+    "watchdog_autorestart_new_pid": 28768,
+    "control_plane": "isolated verified; production PID1 still has no socket"
+  },
+  "old_cron_guard_drill": {
+    "method": "simulated argv0 scripts/run_periodic.sh + pgrep pattern",
+    "while_running_matches": 2,
+    "after_stop_exact_process": "absent",
+    "production_old_processes": "none observed at audit time"
+  },
+  "backup_script_drill": {
+    "fake_repo_dirty_entries": 4,
+    "tracked_patch_verified": true,
+    "untracked_archive_verified": true,
+    "sha256sums_verified": true,
+    "restore_staging_verified": true,
+    "production_dry_run_dirty_entries": 71,
+    "production_dry_run_wrote_files": false
+  },
+  "host_scheduler_probe": {
+    "usr_syno_present": false,
+    "volume1_present": false,
+    "synoschedtask_binary": false,
+    "docker_socket_present": false,
+    "dsm_ports_5000_5001": "empty reply / not usable from container",
+    "conclusion": "host Task Scheduler not verifiable from inside this container"
+  },
+  "selected_control": {
+    "name": "existing PID1 supervisord",
+    "why": "host Task Scheduler unavailable/unverified; no second scheduler system added",
+    "requires": "add supervisor control socket + two program entries; one controlled PID1 restart; user approval"
+  }
+}

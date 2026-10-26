@@ -19,7 +19,7 @@
 | daily 旧 Cron | 切换时暂停，由新 supervisor scheduler 取代；不再恢复旧 daily。 |
 | periodic 旧 Cron | **本轮不切换**。只在切换窗口暂停，首轮新 daily 成功后恢复原 periodic；周/月/年报质量仍属 R3。 |
 | 真实告警 | **尚未可宣称送达**。建议只用一份 SMTP critical 邮件通道，去重/恢复/静默；容器整体死亡的外部 dead-man 仍依赖未验证的宿主侧检查，属于上线前必须批准的残留项。 |
-| 现在能否直接切换？ | **不能。** 需先完成：备份执行、代码人工集成、supervisor 控制面配置与重启、旧 Cron 暂停授权、真实告警接收测试、切换窗口确认。完成这些后可按 Runbook 一次性切换。 |
+| 现在能否直接切换？ | **不能。** 备份已于 2026-10-26 执行并 restore 校验通过（7,979/7,979）；仍需：代码人工集成、supervisor 控制面配置与重启、旧 Cron 暂停授权、真实告警接收测试、切换窗口确认。完成这些后可按 Runbook 一次性切换。 |
 
 **建议批准方式：** 批准“日更切换到 supervisor”这一条；periodic 保持旧实现；不批准任何新的调度器、费用台账或自动重试扩张。
 
@@ -119,7 +119,7 @@
 
 - 在临时 git 仓库注入 4 项 dirty（2 tracked + 2 untracked）：backup dry-run 不写文件；execute 生成 patch/tar/SHA；`sha256sum -c` 全 OK；restore dry-run 校验；restore execute 只写空 staging；未触碰生产。
 - 对生产工作区只做 **dry-run**：识别 `head=2464df9`、`dirty_entries=71`、`untracked=63`；确认没有创建备份目录。
-- 现有 71 项尚未执行真实备份；这是切换前必须由用户批准的动作。
+- 2026-10-26 已在项目外执行真实备份：71 项、7,979 个业务文件、restore `7979/7979`、`bad=0`；证据见 `artifacts/R2B-BACKUP-AND-SUPERVISOR-DRYRUN-2026-10-26.json`。
 
 ## 4. 调度入口：为什么只选 supervisor
 

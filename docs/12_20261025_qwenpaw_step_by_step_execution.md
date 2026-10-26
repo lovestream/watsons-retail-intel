@@ -1,5 +1,8 @@
 # 12｜经营情报系统分阶段执行手册（Muse负责退役，QwenPaw负责NAS优化）
 
+> **2026-10-26 最新执行授权（覆盖本页历史阶段指令）**：用户要求DeepSeek尽快一次性完成后续工作，权威总指令见 [13｜DeepSeek一次性交付：R2上线准备+R3播客质量+AIHOT M2](13_20261026_deepseek_one_pass_recovery_r3_aihot.md)。已授权安全备份、隔离代码/测试/报告连续推进，无须每小项反复请示；**尚未授权生产PID1重启、Cron启停、代码覆盖生产、正式账本/真实邮件变更，须单独批准**。
+
+
 > **最新权威结论（2026-10-26）**：[R2-B-CUTOVER-PREP正式复审](reviews/NAS-R2B-CUTOVER-CHATGPT-REVIEW-2026-10-26.md)已确认准备/模拟交付通过、**未授权生产切换**。71项dirty的Git可见备份**不含被.gitignore排除的运行数据**，首次切换前要独立保护正式事件、账本、周期原件和状态；核实supervisor配置在容器重建后是否持久、PID1恢复路径与真实告警收件。AIHOT参考已存在，但[具体借鉴缺口](reviews/AIHOT-ADOPTION-GAP-2026-10-26.md)安排在稳定运行后做M2，不混进本次切换。以下此前R1/R2阶段指令仅作历史。
 
 > **最新权威进度（2026-10-26）**：R2-B 上线前隔离预检已复审通过，**生产切换仍为 NO-GO**。下一轮只做收敛型 [R2-B-CUTOVER-PREP（只读＋隔离）](reviews/NAS-R2B-CHATGPT-REVIEW-2026-10-26.md)：整理58个dirty文件与可恢复备份方案、只读核实最简NAS宿主调度替代或PID1风险、daily和periodic的分别处置、dry-run互斥和告警。**不合并main、不安装supervisor、不启停Cron、不发真实通知、不开R3/M2**。早期“R1-FIX/R2-A/R2-A-FIX当前阶段”仅为历史记录，以此条与链接中的最新评审为准。

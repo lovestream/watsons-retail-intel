@@ -1,0 +1,177 @@
+{
+  "metadata": {
+    "source": "E1 curated",
+    "date": "2026-10-22"
+  },
+  "events": [
+    {
+      "event_id": "E1-W42-007",
+      "event_title": "即时零售五平台集体加码餐食：朴朴厨房日均2200单，京东七鲜小厨1800家",
+      "fact": "据10月22日报道，即时零售头部平台集体加码餐食：朴朴厨房11个、单仓日均超2200单；京东七鲜小厨门店突破1800家、覆盖35城；淘宝闪购‘家宴’计划四季度多城上线。",
+      "evidence_text": "朴朴厨房上线满一年，单仓日均单量超过2200单。",
+      "source_url": "https://www.huxiu.com/article/4899661.html",
+      "source_name": "虎嗅/联商网",
+      "source_title": "即时零售头部玩家，集体涌进厨房",
+      "published_at": "Thu, 22 Oct 2026 10:49:51 GMT",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "",
+      "event_announced_at": "",
+      "event_effective_at": "",
+      "event_time_source": "article_published_at",
+      "date_semantics": "reported_on",
+      "effective_event_time": "2026-10-22",
+      "effective_time_source": "published_at",
+      "verification_status": "verified",
+      "verification_scope": "article_claim",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "行业趋势",
+      "entities": {
+        "platforms": [
+          "美团",
+          "京东",
+          "淘宝闪购",
+          "朴朴",
+          "叮咚买菜"
+        ],
+        "companies": [
+          "京东",
+          "阿里"
+        ],
+        "competitors": [],
+        "brands": []
+      },
+      "business_variables": [
+        "品类机会",
+        "供应链",
+        "履约"
+      ],
+      "weighted_score": 80,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "美团闪购",
+          "京东秒送",
+          "淘宝闪购",
+          "朴朴"
+        ],
+        "affected_business_variables": [
+          "品类机会",
+          "供应链",
+          "履约"
+        ],
+        "watsons_impact": "平台正在用高频餐食训练用户‘30分钟送达’心智，并把供应链能力向自营/定制延伸。对屈臣氏而言，餐食不是应追的品类，但平台的前置仓、冷链和履约密度会外溢到美妆个护；屈臣氏应借平台基础设施做‘高频个护+应急美妆’，而不是扩食品SKU。",
+        "recommended_action": "不与平台争餐食；梳理屈臣氏门店3公里内‘应急美妆/个护’TOP20 SKU，优先进入平台前置仓或门店发货；用平台餐食高峰时段测试美妆应急订单的履约时效。",
+        "action_level": "watch",
+        "owner_hint": "即时零售/供应链",
+        "tracking_metrics": [
+          "3公里应急SKU覆盖",
+          "30分钟履约率",
+          "高峰期取消率",
+          "履约成本"
+        ],
+        "follow_up_questions": [
+          "平台餐食高峰是否挤压美妆订单运力？",
+          "哪些个护SKU具备‘应急’属性？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "d2d6a9808d27b0040bf280c1b167488fff4b49b78bf8c86d5499f99039742761",
+      "source_snapshot_sha256": "970cab22cd58295fd53b5b2243147e7c9414a69efbef21cd8ebfe8c419fc0163",
+      "source_snapshot_kind": "raw_archive",
+      "_file_date": "2026-10-22"
+    },
+    {
+      "event_id": "E1-W42-008",
+      "event_title": "自营零售走向深水区：六成受访零售企业采用深度定制",
+      "fact": "据10月22日报道，中国连锁经营协会与波士顿咨询2026年8月报告显示，30家受访零售企业中六成采用深度定制，77%计划升级供应链与品质管控；即时零售玩家正向采购、品控和线下门店延伸。",
+      "evidence_text": "30家受访零售企业中，六成采用深度定制模式，77%计划升级供应链与品质管控能力",
+      "source_url": "https://www.36kr.com/p/4036858464851079",
+      "source_name": "36氪",
+      "source_title": "自营零售热潮背后，从哪里来，向何处去？",
+      "published_at": "Thu, 22 Oct 2026 09:46:06 GMT",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "",
+      "event_announced_at": "",
+      "event_effective_at": "",
+      "event_time_source": "article_published_at",
+      "date_semantics": "reported_on",
+      "effective_event_time": "2026-10-22",
+      "effective_time_source": "published_at",
+      "verification_status": "verified",
+      "verification_scope": "article_claim",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "供应链",
+      "entities": {
+        "platforms": [],
+        "companies": [
+          "山姆",
+          "沃尔玛",
+          "奥乐齐",
+          "胖东来",
+          "永辉"
+        ],
+        "competitors": [],
+        "brands": []
+      },
+      "business_variables": [
+        "供应链",
+        "自有品牌",
+        "品质"
+      ],
+      "weighted_score": 79,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "门店",
+          "即时零售"
+        ],
+        "affected_business_variables": [
+          "供应链",
+          "自有品牌",
+          "品质"
+        ],
+        "watsons_impact": "零售竞争从‘货架丰富’转向‘替顾客选好商品’，自有品牌/独家定制成为差异化来源。屈臣氏若只做品牌分销，价格与货盘都容易被平台旗舰店替代；需要把自有/独家品做成可验证的品质承诺。",
+        "recommended_action": "选3-5个高频个护SKU做Watsons独家规格或组合，公开关键品质指标与供应商审核结果；先在即时零售测试‘独家品+会员价’，用复购与退货率验证，而不是只看首单GMV。",
+        "action_level": "watch",
+        "owner_hint": "自有品牌/品控",
+        "tracking_metrics": [
+          "独家SKU占比",
+          "独家品复购率",
+          "退货率",
+          "品质投诉率"
+        ],
+        "follow_up_questions": [
+          "哪些品类适合做独家规格而不是直接贴牌？",
+          "品质承诺能否转化为溢价？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "5848df0847b46aea8efd843d2ff1a3026ab783a5a7ba819b0ac5611888d053be",
+      "source_snapshot_sha256": "51af7391d83790fcf13f246a81d1bb4f700480e7d4a9cfe0ecba142c4cb7b03e",
+      "source_snapshot_kind": "network_snapshot",
+      "_file_date": "2026-10-22"
+    }
+  ]
+}

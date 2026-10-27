@@ -1,0 +1,13 @@
+{
+  "url": "https://www.huxiu.com/article/4899652.html",
+  "title": "当咖啡越来越容易快取，星巴克为什么还要往门店砸3亿",
+  "published_at": "Fri, 23 Oct 2026 00:00:01 GMT",
+  "article_id": "5f1c831560ccbf17",
+  "ok": true,
+  "http_status": 200,
+  "page_sha256": "0a74fdc13285ea925bc9c76710e98319f0cd729c6948fd2475f30ff91aad787c",
+  "page_bytes": 16124,
+  "text": "appkey: \"CF_APP_WAF\", // 应用标识var AC_Opt = {userUserId: requestInfo.userUserId\nvar requestInfo = {\"data\":\"\",\"region\":\"cn\",\"sceneId\":\"19x5u7lo\",\"token\":\"8ed7da33964f0d7b44c242fab9e1ebc0\",\"traceid\":\"2f5e3b8017931082627882578ed050\",\"type\":\"GET\",\"userId\":\"HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=\",\"userUserId\":\"z2sSI1lCSPT4LVQYDAFLOSh5Pu7mTIHsG0EpLm16bEw=\"};",
+  "text_sha256": "7abf39dcb19240312e5bc5bb1da552d45b8ea1901c918244fc8e6e97513c2e81",
+  "text_len": 358
+}

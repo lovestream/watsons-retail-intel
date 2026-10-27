@@ -1,0 +1,13 @@
+{
+  "url": "https://www.huxiu.com/article/4899661.html",
+  "title": "即时零售头部玩家，集体涌进厨房",
+  "published_at": "Thu, 22 Oct 2026 10:49:51 GMT",
+  "article_id": "d46b18f350d41143",
+  "ok": true,
+  "http_status": 200,
+  "page_sha256": "9aaf2fca5a4bc654922b225729939ab869c42b38c67ff50418a6b72c6a594a0b",
+  "page_bytes": 16124,
+  "text": "appkey: \"CF_APP_WAF\", // 应用标识var AC_Opt = {userUserId: requestInfo.userUserId\nvar requestInfo = {\"data\":\"\",\"region\":\"cn\",\"sceneId\":\"19x5u7lo\",\"token\":\"403fe333d5014fd2febb800db4b02a7a\",\"traceid\":\"2f5e3b8017931082706351626ed03d\",\"type\":\"GET\",\"userId\":\"HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=\",\"userUserId\":\"z2sSI1lCSPT4LVQYDAFLOSh5Pu7mTIHsG0EpLm16bEw=\"};",
+  "text_sha256": "d815b969fb189a601dc46d4e2a41b2e8e935ce9679510aaf0e9dd1d116e4322a",
+  "text_len": 358
+}

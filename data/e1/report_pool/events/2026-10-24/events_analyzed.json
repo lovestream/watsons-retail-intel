@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "source": "E1 curated",
+    "date": "2026-10-24"
+  },
+  "events": [
+    {
+      "event_id": "E1-W42-009",
+      "event_title": "商场C位转向体验与潮玩：门店从卖货转向场景",
+      "fact": "据10月24日走访报道，武汉10余家商场核心C位转向泡泡玛特、老铺黄金、FILA等体验/潮流品牌；门店通过场景化陈列、试用与互动延长停留，而非直接推销。",
+      "evidence_text": "门店不直接卖货，让消费者先感受“场景”",
+      "source_url": "https://www.36kr.com/p/4038591177986951",
+      "source_name": "36氪",
+      "source_title": "走访一线商场，我发现了三大消费趋势",
+      "published_at": "Sat, 24 Oct 2026 08:00:15 GMT",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "",
+      "event_announced_at": "",
+      "event_effective_at": "",
+      "event_time_source": "article_published_at",
+      "date_semantics": "reported_on",
+      "effective_event_time": "2026-10-24",
+      "effective_time_source": "published_at",
+      "verification_status": "verified",
+      "verification_scope": "article_claim",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "门店体验",
+      "entities": {
+        "platforms": [],
+        "companies": [
+          "泡泡玛特",
+          "老铺黄金",
+          "FILA",
+          "宝可梦"
+        ],
+        "competitors": [],
+        "brands": []
+      },
+      "business_variables": [
+        "门店体验",
+        "会员",
+        "客流"
+      ],
+      "weighted_score": 76,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "门店",
+          "美团闪购"
+        ],
+        "affected_business_variables": [
+          "门店体验",
+          "会员",
+          "客流"
+        ],
+        "watsons_impact": "线下门店的价值正从‘货架密度’转向‘体验与停留’。屈臣氏门店若继续以堆货和促销为主，很难对抗丝芙兰等体验型竞对；但屈臣氏有社区门店密度，可以把‘快捷服务+体验’做成差异化。",
+        "recommended_action": "选10家重点门店设置‘敏感肌/眼霜/香氛’体验台与15分钟美容服务，先测停留时长、试用转化与会员新增；即时零售页同步展示门店体验预约，把线上流量引到店。",
+        "action_level": "watch",
+        "owner_hint": "门店运营",
+        "tracking_metrics": [
+          "停留时长",
+          "试用转化率",
+          "到店预约数",
+          "会员新增"
+        ],
+        "follow_up_questions": [
+          "体验台是否影响坪效？",
+          "哪些门店适合做服务而非纯货架？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "928268cd313c231442877f09b53935ceac27b50d5e31868894610d1c4d1ada9d",
+      "source_snapshot_sha256": "b6ad659a8f11c2c0511aeb6cafc63db8166581c4cb0e43ae1102c65f6948e46a",
+      "source_snapshot_kind": "network_snapshot",
+      "_file_date": "2026-10-24"
+    }
+  ]
+}

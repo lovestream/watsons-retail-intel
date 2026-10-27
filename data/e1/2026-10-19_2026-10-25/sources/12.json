@@ -1,0 +1,13 @@
+{
+  "url": "https://www.huxiu.com/article/4897432.html",
+  "title": "长沙为何常年爆火，一次次制造线下爆款门店？",
+  "published_at": "Mon, 19 Oct 2026 08:39:39 GMT",
+  "article_id": "44b9fe0921a225d6",
+  "ok": true,
+  "http_status": 200,
+  "page_sha256": "35530304ef41f009233845a2e35198df5c16594a0ed1837ab35940558cf9fa1c",
+  "page_bytes": 16124,
+  "text": "appkey: \"CF_APP_WAF\", // 应用标识var AC_Opt = {userUserId: requestInfo.userUserId\nvar requestInfo = {\"data\":\"\",\"region\":\"cn\",\"sceneId\":\"19x5u7lo\",\"token\":\"b1b0b0af30593a318ed69551bebf523f\",\"traceid\":\"2f5e3b8017931082675552575ecff6\",\"type\":\"GET\",\"userId\":\"HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=\",\"userUserId\":\"z2sSI1lCSPT4LVQYDAFLOSh5Pu7mTIHsG0EpLm16bEw=\"};",
+  "text_sha256": "99918dea1d3563910f0f715efd4a68a4c265b673f4719c5690bc926ab1d69c3c",
+  "text_len": 358
+}

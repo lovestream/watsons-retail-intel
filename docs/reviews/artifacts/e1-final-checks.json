@@ -1,0 +1,29 @@
+{
+  "report_chars": 16707,
+  "chapters": 6,
+  "event_id_leaks": 0,
+  "judgment_tags": 0,
+  "internal_terms": 0,
+  "sephora_present": true,
+  "table_columns_consistent": true,
+  "quality_sendable": true,
+  "quality": "good",
+  "synthesis": {
+    "raw_events": 13,
+    "period_events": 13,
+    "reportable_events": 13,
+    "clusters": 12,
+    "selected_clusters": 12,
+    "high_priority_clusters": 9,
+    "platform_clusters": 9,
+    "competitor_clusters": 1,
+    "risk_clusters": 0
+  },
+  "competitor_clusters": 1,
+  "audio_seconds": 478.416,
+  "audio_bytes": 7655084,
+  "audio_sha256": "aa90a423dcf1825e1e781288bea9fef4ac45844d828dfcc9a298dabeb47b18a0",
+  "script_chars": 3682,
+  "script_has_3_actions": true,
+  "script_has_merchant_action": true
+}

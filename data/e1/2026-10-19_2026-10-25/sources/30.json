@@ -1,0 +1,13 @@
+{
+  "url": "https://www.huxiu.com/article/4899343.html",
+  "title": "2500家门店与7年老店退场，乐刻的规模化大考",
+  "published_at": "Wed, 21 Oct 2026 12:11:08 GMT",
+  "article_id": "772a954fdba3b234",
+  "ok": true,
+  "http_status": 200,
+  "page_sha256": "c39d4db137f55bcdc0c72381cd7d1d93b8a04a54536b77cdadc3588ed7608f70",
+  "page_bytes": 16124,
+  "text": "appkey: \"CF_APP_WAF\", // 应用标识var AC_Opt = {userUserId: requestInfo.userUserId\nvar requestInfo = {\"data\":\"\",\"region\":\"cn\",\"sceneId\":\"19x5u7lo\",\"token\":\"2aa30f11694f54c97781a007ba946dd5\",\"traceid\":\"2f5e3b8017931082753176098ed005\",\"type\":\"GET\",\"userId\":\"HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=\",\"userUserId\":\"z2sSI1lCSPT4LVQYDAFLOSh5Pu7mTIHsG0EpLm16bEw=\"};",
+  "text_sha256": "3bee59c2767af57bb3258c8cddcf29dd046f12add41fad5b47791b0c0c4e7d73",
+  "text_len": 358
+}

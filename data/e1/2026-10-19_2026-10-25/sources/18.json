@@ -1,0 +1,13 @@
+{
+  "url": "https://www.huxiu.com/article/4899575.html",
+  "title": "以小欺大？野人先生加盟商怒砸自家门店",
+  "published_at": "Thu, 22 Oct 2026 07:53:06 GMT",
+  "article_id": "cb206bb66c634dff",
+  "ok": true,
+  "http_status": 200,
+  "page_sha256": "e200474201259300de0cb845d58dfab65b69a32d399b2b9584f6244c053b99eb",
+  "page_bytes": 16124,
+  "text": "appkey: \"CF_APP_WAF\", // 应用标识var AC_Opt = {userUserId: requestInfo.userUserId\nvar requestInfo = {\"data\":\"\",\"region\":\"cn\",\"sceneId\":\"19x5u7lo\",\"token\":\"85b56cb25400f22028f0813db28d04f0\",\"traceid\":\"2f5e3b8017931082699333739ed037\",\"type\":\"GET\",\"userId\":\"HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=\",\"userUserId\":\"z2sSI1lCSPT4LVQYDAFLOSh5Pu7mTIHsG0EpLm16bEw=\"};",
+  "text_sha256": "25b43807cf08e993b7d4d2a0924ae89b28abe9742f5163789982aa13c3e530db",
+  "text_len": 358
+}

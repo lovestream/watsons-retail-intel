@@ -1,0 +1,344 @@
+{
+  "metadata": {
+    "source": "E1 curated",
+    "date": "2026-10-23"
+  },
+  "events": [
+    {
+      "event_id": "E1-W42-006",
+      "event_title": "双11平台规则转向：取消凑单与定金预售，预算向货架场和复购迁移",
+      "fact": "据10月23日报道，今年双11天猫取消跨店满减与凑单、京东取消定金预售，平台普遍缩短大促周期；大量品牌把投放预算从达播转向货架场，并把老客占比纳入考核。",
+      "evidence_text": "天猫把跨店满减和凑单整体拿掉了，统一成官方立减",
+      "source_url": "https://www.36kr.com/p/4038146420627074",
+      "source_name": "36氪",
+      "source_title": "第十八个双11，没有人再喊“全网最低价”",
+      "published_at": "Fri, 23 Oct 2026 10:19:35 GMT",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "",
+      "event_announced_at": "",
+      "event_effective_at": "",
+      "event_time_source": "article_published_at",
+      "date_semantics": "reported_on",
+      "effective_event_time": "2026-10-23",
+      "effective_time_source": "published_at",
+      "verification_status": "verified",
+      "verification_scope": "article_claim",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "平台规则",
+      "entities": {
+        "platforms": [
+          "天猫",
+          "京东",
+          "抖音",
+          "拼多多",
+          "小红书",
+          "快手"
+        ],
+        "companies": [
+          "天猫",
+          "京东"
+        ],
+        "competitors": [],
+        "brands": []
+      },
+      "business_variables": [
+        "价格",
+        "流量",
+        "会员"
+      ],
+      "weighted_score": 88,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "天猫",
+          "京东",
+          "抖音"
+        ],
+        "affected_business_variables": [
+          "价格",
+          "流量",
+          "会员"
+        ],
+        "watsons_impact": "平台不再用复杂凑单制造GMV，意味着‘低价+凑单’带来的冲动订单会减少，复购与货架承接变得更重要。屈臣氏的即时零售如果仍靠大额满减拉新，可能换来低质量订单；应把预算转向会员复购与门店履约确定性。",
+        "recommended_action": "把双11预算从‘满减凑单’拆出一部分到会员复购券与门店自提权益；用老客占比、复购间隔、退货率替代单纯GMV考核，按周复盘。",
+        "action_level": "watch",
+        "owner_hint": "电商/会员",
+        "tracking_metrics": [
+          "老客占比",
+          "复购间隔",
+          "退货率",
+          "每单履约成本"
+        ],
+        "follow_up_questions": [
+          "取消凑单后客单价下降多少？",
+          "会员复购券的核销率是否高于平台满减？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "daa5752ede1e71ce31eff6f94314b42f3e7e9d61cb6ef92ea0f6e04ab509ac93",
+      "source_snapshot_sha256": "5ce5de018c87fc2f9cc38d905d3ab752dfd29fce25bb8353562b131c272d1805",
+      "source_snapshot_kind": "network_snapshot",
+      "_file_date": "2026-10-23"
+    },
+    {
+      "event_id": "E1-W42-010",
+      "event_title": "AI素材工业化：5人团队日产千条视频，单条成本降至5元以内",
+      "fact": "据10月23日报道，AIGC把电商种草视频单条成本从人工拍摄的100-200元降到5-10元，5人团队一天可产上千条；美妆、洗护等头部商家已开始用AI内容抢流量。",
+      "evidence_text": "比如有 5 个人的团队，一天能出上千条视频，每条成本还能控制在 10 元乃至 5 元以内。",
+      "source_url": "https://www.36kr.com/p/4038077554218117",
+      "source_name": "36氪",
+      "source_title": "AI疯狂复制抖音“厦门帮”，日产200条视频、一条成本不到5元",
+      "published_at": "Fri, 23 Oct 2026 07:39:46 GMT",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "",
+      "event_announced_at": "",
+      "event_effective_at": "",
+      "event_time_source": "article_published_at",
+      "date_semantics": "reported_on",
+      "effective_event_time": "2026-10-23",
+      "effective_time_source": "published_at",
+      "verification_status": "verified",
+      "verification_scope": "article_claim",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "内容营销",
+      "entities": {
+        "platforms": [
+          "抖音"
+        ],
+        "companies": [],
+        "competitors": [],
+        "brands": [
+          "温博士",
+          "可逐"
+        ]
+      },
+      "business_variables": [
+        "内容",
+        "流量",
+        "转化"
+      ],
+      "weighted_score": 78,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "抖音",
+          "小红书",
+          "美团闪购"
+        ],
+        "affected_business_variables": [
+          "内容",
+          "流量",
+          "转化"
+        ],
+        "watsons_impact": "内容供给从‘稀缺’变成‘工业化’，靠堆量获取流量的边际收益会下降。屈臣氏的机会不是无脑批量生成，而是用AI降低测评/教程/门店素材成本，把内容与真实库存、门店服务绑定，形成可转化的本地化内容。",
+        "recommended_action": "建立‘门店实拍+AI二创’内容流水线：每周选10个重点SKU，由门店拍真实试用素材，AI生成不同场景脚本；以点击率、到店核销、退货率筛选，而不是以发布量考核。",
+        "action_level": "watch",
+        "owner_hint": "内容/电商",
+        "tracking_metrics": [
+          "内容点击率",
+          "到店核销率",
+          "内容带来GMV",
+          "退货率"
+        ],
+        "follow_up_questions": [
+          "AI内容是否引发品牌调性/合规风险？",
+          "门店实拍产能能否支撑周更？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "60591614179c0f3e6d85b358aeb32d8d66689c5ca79c77834450e382f39ee9a0",
+      "source_snapshot_sha256": "61a851b38f91adecd94ec4fbd92f4443cbbcfdc98e57c6ff63e3dffa6a7da989",
+      "source_snapshot_kind": "network_snapshot",
+      "_file_date": "2026-10-23"
+    },
+    {
+      "event_id": "E1-W42-012",
+      "event_title": "双11需求分化：即时零售承接临时缺货，大牌美妆仍是计划性大促硬通货",
+      "fact": "据10月23日报道，双11需求分化：高频补货被天天低价分走，临时缺货由即时零售承接；大牌美妆核心单品、新品/限定仍是计划性大促的硬通货；消费者年均通过7种以上渠道购买快消品。",
+      "evidence_text": "大牌美妆核心单品、大家电和知名数码产品，就仍是大促的硬通货",
+      "source_url": "https://www.36kr.com/p/4037147836536454",
+      "source_name": "36氪",
+      "source_title": "双11走向分化",
+      "published_at": "Fri, 23 Oct 2026 01:32:20 GMT",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "",
+      "event_announced_at": "",
+      "event_effective_at": "",
+      "event_time_source": "article_published_at",
+      "date_semantics": "reported_on",
+      "effective_event_time": "2026-10-23",
+      "effective_time_source": "published_at",
+      "verification_status": "verified",
+      "verification_scope": "article_claim",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "行业趋势",
+      "entities": {
+        "platforms": [
+          "天猫",
+          "抖音",
+          "京东",
+          "快手",
+          "小红书"
+        ],
+        "companies": [],
+        "competitors": [],
+        "brands": []
+      },
+      "business_variables": [
+        "货盘",
+        "履约",
+        "渠道"
+      ],
+      "weighted_score": 83,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "天猫",
+          "京东秒送",
+          "美团闪购"
+        ],
+        "affected_business_variables": [
+          "货盘",
+          "履约",
+          "渠道"
+        ],
+        "watsons_impact": "屈臣氏同时经营‘计划性大促’和‘即时应急’两种需求，不能用同一货盘打两场仗。大牌核心单品适合大促锁客，应急个护/小样适合即时零售拉新；两者混在一起会稀释价格与库存效率。",
+        "recommended_action": "把货盘拆成‘大促计划装’与‘30分钟应急装’：计划装上大牌核心单品/限定套组，应急装上小规格、旅行装、敏感肌刚需；分别设置价格与库存策略，按渠道复盘。",
+        "action_level": "watch",
+        "owner_hint": "商品/渠道",
+        "tracking_metrics": [
+          "计划装GMV",
+          "应急装订单占比",
+          "缺货率",
+          "渠道毛利率"
+        ],
+        "follow_up_questions": [
+          "哪些SKU适合小规格应急装？",
+          "计划装与应急装是否互相蚕食？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "ca3a3ef2ef8b6e070b847919342be199786a911fda59ae469ff25e84538f04fd",
+      "source_snapshot_sha256": "c1ffbac783f1ae51ce76bf08a3c25c82ac4c19c2660df5fc1492680a6e58e914",
+      "source_snapshot_kind": "network_snapshot",
+      "_file_date": "2026-10-23"
+    },
+    {
+      "event_id": "E1-W42-013",
+      "event_title": "丝芙兰SEPHORiA玩妆节10月23-25日落地上海张园：4000名爱好者、60余品牌",
+      "fact": "10月23日至25日，2026 SEPHORiA丝芙兰玩妆节在上海张园举办；三天4000余名爱好者、60余个全球品牌、40余场大师课，会员积分可兑换入场权益。",
+      "evidence_text": "2026 SEPHORiA丝芙兰玩妆节于10月23日至25日在上海张园圆满举办。",
+      "source_url": "https://www.36kr.com/p/4042615186789256",
+      "source_name": "36氪",
+      "source_title": "2026 SEPHORiA丝芙兰玩妆节圆满收官 打造沉浸式玩妆体验新标杆",
+      "published_at": "Mon, 26 Oct 2026 11:54:09 GMT",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "2026-10-23",
+      "event_announced_at": "2026-10-23",
+      "event_effective_at": "",
+      "event_time_source": "explicit_text",
+      "date_semantics": "event_occurrence",
+      "effective_event_time": "2026-10-23",
+      "effective_time_source": "event_occurred_at",
+      "verification_status": "verified",
+      "verification_scope": "event_occurrence",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "竞对动态",
+      "entities": {
+        "platforms": [],
+        "companies": [
+          "丝芙兰"
+        ],
+        "competitors": [
+          "丝芙兰"
+        ],
+        "brands": [
+          "丝芙兰",
+          "KAYALI",
+          "欧缇丽"
+        ]
+      },
+      "business_variables": [
+        "门店体验",
+        "会员",
+        "品牌"
+      ],
+      "weighted_score": 85,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "门店",
+          "小程序"
+        ],
+        "affected_business_variables": [
+          "门店体验",
+          "会员",
+          "品牌"
+        ],
+        "watsons_impact": "丝芙兰把年度活动做成‘会员权益+品牌体验+内容共创’的线下IP，用积分兑换把会员从交易关系转为参与关系。屈臣氏的优势是门店密度与社区客群，不能照搬高成本大展，但可以把‘会员日+门店体验’做成轻量版。",
+        "recommended_action": "在重点城市试点‘Watsons Beauty Day’：会员积分兑换15分钟服务/小样礼包，联合3-5个独家品牌做门店大师课；用会员到场率、二次购买、内容自发传播衡量，不追求单日GMV。",
+        "action_level": "watch",
+        "owner_hint": "会员/门店",
+        "tracking_metrics": [
+          "会员到场率",
+          "积分兑换率",
+          "二次购买率",
+          "UGC数量"
+        ],
+        "follow_up_questions": [
+          "轻量会员日能否复制丝芙兰的参与感？",
+          "门店服务产能是否足够？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "790bae46cfb610fd951925ff7ac835c9a4aee660baaeb3c571db52e302ee4549",
+      "source_snapshot_sha256": "fb05433f0efd199cc1d06c414010b110475bb5f8d3adcff1a8369141db5f4fba",
+      "source_snapshot_kind": "network_snapshot",
+      "_file_date": "2026-10-23"
+    }
+  ]
+}

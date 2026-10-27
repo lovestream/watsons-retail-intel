@@ -29,6 +29,8 @@ import shutil
 import subprocess
 import sys
 import time
+import urllib.error
+import urllib.request
 from datetime import datetime, timedelta, date
 from typing import Any, Dict, List, Optional
 
@@ -80,6 +82,13 @@ MAX_TOKENS_REVIEW = 8192
 MAX_TOKENS_PODCAST = 8192
 TTS_VOICE = "zh-CN-XiaoxiaoNeural"
 TTS_RATE = "+5%"
+# SiliconFlow uses an existing project credential; edge-tts is retained only as
+# a fallback for environments where the Microsoft endpoint is reachable.
+TTS_SILICONFLOW_MODEL = os.getenv(
+    "PERIODIC_TTS_MODEL", "FunAudioLLM/CosyVoice2-0.5B")
+TTS_SILICONFLOW_VOICE = os.getenv(
+    "PERIODIC_TTS_VOICE", "FunAudioLLM/CosyVoice2-0.5B:anna")
+TTS_PROVIDER = os.getenv("PERIODIC_TTS_PROVIDER", "siliconflow").strip().lower()
 
 _TYPE_NAMES = {"weekly": "周报", "monthly": "月报", "yearly": "年报"}
 
@@ -216,7 +225,7 @@ def _load_source_reports(report_type, period_info, project_root):
 
 # ── 周期聚合层接入（第一批核心） ──
 
-def _load_or_build_synthesis(report_type, period_info, project_root):
+def _load_or_build_synthesis(report_type, period_info, project_root, force_rebuild=False):
     """优先读已生成的 periodic_synthesis.json；不存在则现场构建。
 
     Returns:
@@ -226,7 +235,7 @@ def _load_or_build_synthesis(report_type, period_info, project_root):
     pid = _period_id(report_type, period_info)
     syn_path = os.path.join(project_root, "data", "periodic", report_type,
                             pid, "periodic_synthesis.json")
-    if os.path.exists(syn_path):
+    if os.path.exists(syn_path) and not force_rebuild:
         try:
             with open(syn_path, "r", encoding="utf-8") as f:
                 synthesis = json.load(f)
@@ -269,6 +278,9 @@ def _cluster_to_text(cluster: dict, include_event_ids: bool = True) -> str:
         cluster.get("business_variables", []) or ["-"]))
     lines.append("  趋势方向(规则判定): %s" % cluster.get("trend_direction", "unclear"))
     # 上游 AI 分析提示（明确标注：只是提示，不是事实）
+    if cluster.get("analyst_hints"):
+        lines.append("  上游分析提示(非事实,可参考不可当证据): %s" % " || ".join(
+            str(x)[:220] for x in cluster["analyst_hints"][:4]))
     hints = []
     for eid in cluster.get("representative_event_ids", [])[:5]:
         hints.append(f"[event {eid}]")
@@ -643,63 +655,150 @@ def _chapter_has_high_issue(chapter: str) -> bool:
 
 # ── Phase 4: 终稿合并 + 质量门 + 口播稿 + TTS ──
 
+_EXPECTED_CHAPTERS = {
+    "weekly": ["01", "02", "03", "04", "05", "06"],
+    "monthly": ["01", "02", "03", "04", "05", "06", "07"],
+    "yearly": ["01", "02", "03", "04", "05", "06", "07", "08"],
+}
+
+
+def _is_rule_fallback_chapter(chapter: str) -> bool:
+    return bool(chapter and (
+        "generation_method=rule_fallback" in chapter or
+        "规则兜底生成" in chapter or "规则兜底" in chapter))
+
+
+def _build_evidence_appendix(synthesis: Optional[dict]) -> str:
+    """Visible evidence links for a clean periodic report.
+
+    The appendix is deliberately not numbered, so the six/seven/eight chapter
+    structure contract remains intact.  W40's clean report had no link at all;
+    a reader could not verify a single fact.
+    """
+    if not synthesis:
+        return ""
+    lines: List[str] = ["## 证据来源", ""]
+    seen: set = set()
+    count = 0
+    for c in (synthesis.get("all_clusters") or []):
+        theme = (c.get("theme") or "未命名事件").strip()[:80]
+        urls = [u for u in (c.get("source_urls") or []) if str(u).startswith("http")]
+        if not urls:
+            continue
+        for u in urls:
+            if u in seen:
+                continue
+            seen.add(u)
+            lines.append("- %s｜%s" % (theme, u))
+            count += 1
+            break
+        if count >= 12:
+            break
+    if count == 0:
+        return ""
+    lines.extend(["", "> 以上链接只对应本期可报告事件；未核实内容不进入正文。" ])
+    return "\n".join(lines)
+
+
+def _validate_audio_result(tts_result: Optional[dict], audio_path: str) -> List[str]:
+    issues: List[str] = []
+    if not tts_result or not tts_result.get("ok"):
+        return ["TTS 未成功"]
+    if not audio_path or not os.path.exists(audio_path):
+        return ["MP3 文件不存在"]
+    try:
+        size = os.path.getsize(audio_path)
+    except OSError:
+        size = 0
+    if size < 10 * 1024:
+        issues.append("MP3 文件过小(%d bytes)" % size)
+    duration = tts_result.get("duration_seconds")
+    if not duration or float(duration) < 60:
+        issues.append("MP3 实际时长不足(%s秒)" % duration)
+    if tts_result.get("error") == "duration_out_of_range":
+        issues.append("MP3 时长未达目标范围")
+    return issues
+
+
 def phase4_finalize(chapters, report_type, period_label, period_info,
                     project_root, synthesis=None, coverage=None):
-    """Phase 4: 终稿合并 + editor_review 质量门 + 口播稿 + TTS。"""
-    result_dict = {"report_path": "", "podcast_script": "", "audio_path": "",
-                   "failed_chapters": [], "sendable": False,
-                   "review_result": None}
+    """Phase 4: 合并 + 证据索引 + 清洗后质量门 + 口播稿 + TTS。
 
-    # 必需章节检查（审计 §9）：任何章节失败 → 不可发送
-    exp_ids = {"weekly": 6, "monthly": 7, "yearly": 8}.get(report_type, 6)
+    Important R3 change: the *clean displayed text* is the quality-gate object.
+    The old code validated the raw draft before sanitization, so fallback
+    markers could be removed after passing.  We now build the final display,
+    then validate it, and pass fallback statistics explicitly.
+    """
+    result_dict = {"report_path": "", "podcast_script": "", "audio_path": "",
+                   "failed_chapters": [], "missing_chapters": [],
+                   "fallback_chapters": [], "sendable": False,
+                   "review_result": None, "delivery_blockers": []}
+
+    expected_ids = _EXPECTED_CHAPTERS.get(report_type, ["01"])
     failed_chapters = [ch_id for ch_id, c in chapters.items()
                        if c == _FAILED_CHAPTER_MARKER]
-    result_dict["failed_chapters"] = failed_chapters
-    if failed_chapters:
-        logger.error(
-            f"{LOG_PREFIX} Phase4: {len(failed_chapters)} 个章节生成失败: "
-            f"{failed_chapters} → 不可发送")
+    missing_chapters = [ch_id for ch_id in expected_ids
+                        if ch_id not in chapters or
+                        chapters.get(ch_id) == _FAILED_CHAPTER_MARKER]
+    fallback_chapters = [ch_id for ch_id, c in chapters.items()
+                         if _is_rule_fallback_chapter(c)]
+    result_dict.update({
+        "failed_chapters": failed_chapters,
+        "missing_chapters": missing_chapters,
+        "fallback_chapters": fallback_chapters,
+    })
+    if missing_chapters:
+        logger.error(f"{LOG_PREFIX} Phase4: 章节缺失/失败: {missing_chapters} → 不可发送")
 
-    # 合并终稿（跳过失败章节标记，但后续质量门会拒绝）
+    # Merge only actual chapter bodies; expected-order keeps a missing chapter
+    # from being silently renumbered.
     title = f"即时零售 × 个护美妆经营{_TYPE_NAMES[report_type]}｜{period_label}"
     full_report = f"# {title}\n\n"
-    for ch_id in sorted(chapters.keys()):
-        if chapters[ch_id] == _FAILED_CHAPTER_MARKER:
-            continue
-        full_report += chapters[ch_id] + "\n\n"
+    for ch_id in expected_ids:
+        if ch_id in chapters and chapters[ch_id] != _FAILED_CHAPTER_MARKER:
+            full_report += chapters[ch_id] + "\n\n"
 
-    # 质量门（审计 §10）：规则质检在 sanitize 前的原始稿上进行
-    # （event_id 仍在稿中时检查"泄漏"无意义；因此先做展示层清洗前的规则检查
-    #  基于清洗后文本，同时单独检查必检项）
-    review_result = review_final_draft(
-        report_type=report_type,
-        final_draft=full_report,
-        synthesis=synthesis,
-        coverage=coverage,
-        chapter_ids=list(chapters.keys()),
-        event_pool_ids=None,
-    )
-    result_dict["review_result"] = review_result
-    sendable = review_result.get("sendable", False) and not failed_chapters
-    result_dict["sendable"] = sendable
+    appendix = _build_evidence_appendix(synthesis)
+    if appendix:
+        full_report += appendix + "\n\n"
 
-    # 展示层清洗（审计 §6: event_id 只在展示层剥离）
+    # Display-layer cleaning happens before the final gate.  Event IDs remain
+    # in the draft only for upstream validation; they never reach this stage.
     clean_report = sanitize_periodic_report(full_report, mode="final")
 
-    # 保存报告
+    # Quality-gate the exact object that will be saved and emailed.
+    review_result = review_final_draft(
+        report_type=report_type,
+        final_draft=clean_report,
+        synthesis=synthesis,
+        coverage=coverage,
+        chapter_ids=expected_ids,
+        event_pool_ids=None,
+        fallback_chapters=fallback_chapters,
+        generation_stats={
+            "expected_chapters": len(expected_ids),
+            "fallback_chapters": len(fallback_chapters),
+            "generated_chapters": len(expected_ids) - len(missing_chapters),
+        },
+    )
+    result_dict["review_result"] = review_result
+    sendable = bool(review_result.get("sendable", False)) and not missing_chapters
+    result_dict["sendable"] = sendable
+
     report_path = _get_report_path(report_type, period_info, project_root)
     os.makedirs(os.path.dirname(report_path), exist_ok=True)
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(clean_report)
     result_dict["report_path"] = report_path
     logger.info(f"{LOG_PREFIX} Phase4: 报告 → {report_path} ({len(clean_report)} 字符, "
-                f"sendable={sendable})")
+                f"sendable={sendable}, fallback={len(fallback_chapters)})")
 
     if not sendable:
+        result_dict["delivery_blockers"].append("quality_gate")
         logger.error(f"{LOG_PREFIX} Phase4: 质量门未通过，不发邮件")
         return result_dict
 
-    # 生成口播稿
+    # Generate podcast script.
     podcast_script = _generate_podcast_script(clean_report, report_type,
                                               period_label)
     if podcast_script:
@@ -710,15 +809,15 @@ def phase4_finalize(chapters, report_type, period_label, period_info,
         result_dict["podcast_script"] = script_path
         logger.info(f"{LOG_PREFIX}   口播稿: {len(podcast_script)} 字符")
 
-        # 播客规则质检（§24，不烧 LLM token）
         podcast_review = _review_periodic_podcast(podcast_script, report_type)
         result_dict["podcast_review"] = podcast_review
         if not podcast_review["passed"]:
-            logger.warning(
-                f"{LOG_PREFIX}   播客质检未完全通过: "
+            # Script quality is now a delivery gate, not a warning.
+            result_dict["delivery_blockers"].append("podcast_quality")
+            logger.error(
+                f"{LOG_PREFIX}   播客质检未通过: "
                 f"{'; '.join(podcast_review['issues'][:3])}")
 
-        # TTS（§23/§26/§27: 分块生成 + duration 验收 + 语速校准）
         audio_path = _get_audio_path(report_type, period_info, project_root)
         os.makedirs(os.path.dirname(audio_path), exist_ok=True)
         _, target_secs = _get_podcast_spec(report_type, project_root)
@@ -726,28 +825,32 @@ def phase4_finalize(chapters, report_type, period_label, period_info,
                                    target_seconds=target_secs,
                                    project_root=project_root)
         result_dict["tts"] = tts_result
-        if tts_result.get("ok"):
+        audio_issues = _validate_audio_result(tts_result, audio_path)
+        result_dict["audio_issues"] = audio_issues
+        if audio_issues:
+            result_dict["delivery_blockers"].append("audio_quality")
+            logger.error(f"{LOG_PREFIX}   音频验收失败: {audio_issues}")
+        else:
             result_dict["audio_path"] = audio_path
             size_mb = os.path.getsize(audio_path) / 1024 / 1024
             logger.info(
                 f"{LOG_PREFIX}   音频: {size_mb:.1f}MB, "
                 f"{tts_result.get('duration_seconds', 0):.0f}s, "
                 f"rate={tts_result.get('rate')}")
-        else:
-            logger.warning(
-                f"{LOG_PREFIX}   TTS 失败: {tts_result.get('error')}")
-            result_dict["tts_success"] = False
     else:
         result_dict["podcast_review"] = {
             "passed": False, "issues": ["口播稿生成失败"], "chars": 0}
         result_dict["tts"] = {"ok": False, "error": "no_script"}
+        result_dict["delivery_blockers"].append("podcast_script")
 
-    # §27: 统一状态
     result_dict["report_success"] = sendable
     result_dict["podcast_script_success"] = bool(podcast_script)
     result_dict["tts_success"] = bool(
-        result_dict.get("tts", {}).get("ok", False))
-
+        result_dict.get("tts", {}).get("ok", False) and
+        not result_dict.get("audio_issues"))
+    result_dict["delivery_allowed"] = bool(
+        sendable and result_dict["podcast_script_success"] and
+        result_dict["tts_success"] and not result_dict["delivery_blockers"])
     return result_dict
 
 
@@ -868,13 +971,25 @@ def _split_tts_chunks(text: str, max_chars: int = 800) -> List[str]:
 
 
 def _mp3_duration(path: str) -> Optional[float]:
-    """mutagen 读取 MP3 时长（秒）。失败返回 None。"""
+    """Read MP3 duration with mutagen, falling back to ffmpeg."""
     try:
         from mutagen.mp3 import MP3
         info = MP3(path).info
-        return float(info.length) if info and info.length else None
+        if info and info.length:
+            return float(info.length)
     except Exception:
-        return None
+        pass
+    try:
+        import imageio_ffmpeg
+        ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+        result = subprocess.run(
+            [ffmpeg, "-i", path], capture_output=True, text=True, timeout=30)
+        m = re.search(r"Duration: (\d+):(\d+):(\d+\.\d+)", result.stderr)
+        if m:
+            return int(m.group(1)) * 3600 + int(m.group(2)) * 60 + float(m.group(3))
+    except Exception:
+        pass
+    return None
 
 
 def _estimate_mp3_duration(path: str) -> Optional[float]:
@@ -924,9 +1039,68 @@ def _concat_mp3(parts: List[str], out_path: str) -> bool:
             pass
 
 
+def _rate_to_speed(rate: str) -> float:
+    """Convert edge-style +25%/-15% to a provider speed multiplier."""
+    try:
+        pct = int(str(rate).strip().replace("%", ""))
+    except Exception:
+        pct = 0
+    return max(0.5, min(2.0, 1.0 + pct / 100.0))
+
+
+def _siliconflow_tts_chunk(text: str, rate: str, out_path: str) -> bool:
+    """Generate one MP3 chunk with SiliconFlow's OpenAI-compatible TTS.
+
+    Uses the already-authorized `siliconflow_api_key`; no new credential or
+    provider is introduced.  The endpoint is synchronous, so callers run it
+    through asyncio.to_thread.
+    """
+    key = os.getenv("siliconflow_api_key") or os.getenv("SILICONFLOW_API_KEY")
+    if not key:
+        logger.warning(f"{LOG_PREFIX} SiliconFlow TTS 缺少 siliconflow_api_key")
+        return False
+    body = {
+        "model": TTS_SILICONFLOW_MODEL,
+        "input": text,
+        "voice": TTS_SILICONFLOW_VOICE,
+        "response_format": "mp3",
+        "speed": _rate_to_speed(rate),
+    }
+    req = urllib.request.Request(
+        "https://api.siliconflow.cn/v1/audio/speech",
+        data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
+        headers={
+            "Authorization": "Bearer " + key,
+            "Content-Type": "application/json",
+            "User-Agent": "watsons-retail-intel/1.0",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=180) as resp:
+            audio = resp.read()
+        if len(audio) < 2000 or not audio.startswith(b"ID3") and audio[:2] != b"\xff\xfb":
+            logger.error(f"{LOG_PREFIX} SiliconFlow TTS 返回非 MP3 (%d bytes)", len(audio))
+            return False
+        with open(out_path, "wb") as fh:
+            fh.write(audio)
+        return os.path.getsize(out_path) > 500
+    except urllib.error.HTTPError as e:
+        logger.error(f"{LOG_PREFIX} SiliconFlow TTS HTTP {e.code}: "
+                     f"{e.read().decode('utf-8', 'ignore')[:200]}")
+    except Exception as e:
+        logger.error(f"{LOG_PREFIX} SiliconFlow TTS 异常: {e}")
+    return False
+
+
 async def _generate_tts_chunk(text: str, voice: str, rate: str,
                               out_path: str) -> bool:
-    """单块 edge-tts 生成。"""
+    """Generate one MP3 chunk (SiliconFlow primary, edge-tts fallback)."""
+    if TTS_PROVIDER == "siliconflow":
+        ok = await asyncio.to_thread(_siliconflow_tts_chunk, text, rate, out_path)
+        if ok:
+            return True
+        logger.warning(f"{LOG_PREFIX} SiliconFlow TTS 分块失败，尝试 edge-tts")
     try:
         import edge_tts
         communicate = edge_tts.Communicate(text, voice, rate=rate)
@@ -947,7 +1121,10 @@ def _generate_tts(text, output_path, target_seconds=None, project_root="."):
         {"ok": bool, "duration_seconds": float|None, "rate": str,
          "error": str, "out_of_range": bool}
     """
-    rate_plan = [TTS_RATE, "+25%", "+40%", "-15%"]  # 过长加速，过短减速
+    # Chinese business scripts are ~3,000-4,000 chars; at 1.0x they run
+    # 9-12 minutes.  Start near the 5-8 minute target instead of burning
+    # several 4-minute network rounds on known-too-slow rates.
+    rate_plan = ["+55%", "+70%", "+85%", "+40%", "-10%"]
     output_path = os.path.abspath(output_path)
     tmpdir = os.path.abspath(os.path.join(project_root, "data", "tmp",
                                           "podcast"))
@@ -1138,7 +1315,7 @@ def _get_audio_path(report_type, period_info, project_root):
 
 
 def _send_report_email(report_type, period_label, final_result, recipient,
-                       project_root):
+                       project_root, dry_run=True):
     try:
         from skills.send_daily_report_email.send_daily_report_email import (
             send_periodic_report_email)
@@ -1153,19 +1330,23 @@ def _send_report_email(report_type, period_label, final_result, recipient,
         audio_path=final_result.get("audio_path", ""),
         recipient=recipient,
         project_root=project_root,
-        dry_run=False,
+        dry_run=dry_run,
+        require_audio=True,
     )
     if result.get("ok"):
-        logger.info(f"{LOG_PREFIX} 邮件已发送 → {recipient}")
+        mode = "dry-run" if dry_run else "已发送"
+        logger.info(f"{LOG_PREFIX} 邮件{mode} → {recipient}")
     else:
         logger.error(f"{LOG_PREFIX} 邮件发送失败: {result.get('error', result.get('message', ''))}")
+    return result
 
 
 # ── 主入口 ──
 
 def generate_periodic_report(report_type, period_info, project_root=".",
                              send_email=True, recipient="",
-                             force_rebuild_synthesis=False):
+                             force_rebuild_synthesis=False,
+                             email_dry_run=True):
     """Main entry: 生成周报/月报/年报的完整流程。"""
     started_at = time.time()
     period_label = _make_period_label(report_type, period_info)
@@ -1195,36 +1376,28 @@ def generate_periodic_report(report_type, period_info, project_root=".",
 
     # Step 0: 周期聚合层
     synthesis, coverage, build_ok = _load_or_build_synthesis(
-        report_type, period_info, project_root)
+        report_type, period_info, project_root,
+        force_rebuild=force_rebuild_synthesis)
     if not build_ok or not synthesis:
-        logger.error(f"{LOG_PREFIX} 聚合数据构建失败，回退历史报告")
-        source_text = _load_source_reports(report_type, period_info,
-                                           project_root)
-        if not source_text:
-            logger.error(f"{LOG_PREFIX} 无源材料")
-            return {"success": False, "error": "no_synthesis_and_no_source"}
-        # 旧路径兜底（不推荐，但保证不崩）
-        chapters = phase1_generate_chapters_legacy(
-            report_type, source_text, period_label, deadline=deadline)
-        final = phase4_finalize(chapters, report_type, period_label,
-                                period_info, project_root, None, None)
-        legacy_ok = final.get("sendable", False)
-        if legacy_ok and send_email and recipient and final.get("report_path"):
-            _send_report_email(report_type, period_label, final, recipient,
-                               project_root)
-        return {"success": legacy_ok,
-                "report_path": final.get("report_path", ""),
-                "audio_path": final.get("audio_path", ""),
-                "sendable": legacy_ok,
-                "delivery_allowed": legacy_ok,
-                "review": final.get("review_result")}
+        # R3: no raw-event fallback.  A report without a verified synthesis
+        # package is blocked/degraded, never padded with old source text.
+        logger.error(f"{LOG_PREFIX} 聚合数据构建失败；按 R3 规则标记 blocked，不生成水稿")
+        return {"success": False, "error": "synthesis_unavailable",
+                "sendable": False, "delivery_allowed": False,
+                "coverage": coverage}
 
-    # coverage 不达标 → 不可发送（审计 §4.3 + §10.6）
+    # coverage / verified-evidence gate (审计 §4.3 + §10.6 + R3)
     if coverage.get("status") == "failing":
         logger.error(f"{LOG_PREFIX} 数据覆盖不达标({coverage.get('coverage_ratio')})，"
                      f"不可发送")
         return {"success": False, "error": "coverage_failing",
-                "coverage": coverage, "sendable": False}
+                "coverage": coverage, "sendable": False,
+                "delivery_allowed": False}
+    if not (synthesis.get("all_clusters") or []):
+        logger.error(f"{LOG_PREFIX} 无可报告已核验事件簇；标记 blocked，不发水稿")
+        return {"success": False, "error": "no_verified_events",
+                "coverage": coverage, "sendable": False,
+                "delivery_allowed": False}
 
     # Phase 1
     chapters = phase1_generate_chapters(report_type, synthesis, period_label,
@@ -1242,29 +1415,22 @@ def generate_periodic_report(report_type, period_info, project_root=".",
     final = phase4_finalize(chapters, report_type, period_label, period_info,
                             project_root, synthesis, coverage)
 
-    # §27/§30 Delivery gate: sendable + 必需音频
-    sendable = final.get("sendable", False)
-    require_audio = True
-    try:
-        require_audio = bool(cfg.get("delivery", {}).get(
-            "require_audio", True))
-    except Exception:
-        pass
-    tts_ok = final.get("tts_success", False)
-
-    delivery_allowed = sendable
-    if delivery_allowed and require_audio and not tts_ok:
-        logger.error(f"{LOG_PREFIX} delivery gate 拦截：require_audio=true 但 "
-                     f"TTS 失败 → 不发邮件（§27）")
-        delivery_allowed = False
-
-    if delivery_allowed and send_email and recipient and final.get("report_path"):
-        _send_report_email(report_type, period_label, final, recipient,
-                           project_root)
-    elif sendable and not delivery_allowed:
-        logger.error(f"{LOG_PREFIX} delivery gate 拦截：不发邮件")
-    elif not sendable:
+    # R3 delivery gate: clean report + podcast script + real non-zero MP3.
+    sendable = bool(final.get("sendable", False))
+    tts_ok = bool(final.get("tts_success", False))
+    delivery_allowed = bool(final.get("delivery_allowed", False))
+    if sendable and not delivery_allowed:
+        logger.error(f"{LOG_PREFIX} delivery gate 拦截：{final.get('delivery_blockers')}；不发邮件")
+    if not sendable:
         logger.error(f"{LOG_PREFIX} delivery gate 拦截：sendable=false 不发邮件")
+
+    email_result = None
+    if delivery_allowed and send_email and recipient and final.get("report_path"):
+        email_result = _send_report_email(
+            report_type, period_label, final, recipient, project_root,
+            dry_run=email_dry_run)
+    elif delivery_allowed and not send_email:
+        logger.info(f"{LOG_PREFIX} send_email=false：跳过邮件（报告与 MP3 已生成）")
 
     elapsed = time.time() - started_at
     paid_used = 0
@@ -1274,7 +1440,7 @@ def generate_periodic_report(report_type, period_info, project_root=".",
         pass
     logger.info(f"{LOG_PREFIX} === {_TYPE_NAMES[report_type]}完成 "
                 f"({elapsed:.0f}s, sendable={sendable}, "
-                f"paid_fallback={paid_used}) ===")
+                f"email_dry_run={email_dry_run}, paid_fallback={paid_used}) ===")
     return {
         "success": sendable,
         "report_path": final.get("report_path", ""),
@@ -1288,6 +1454,9 @@ def generate_periodic_report(report_type, period_info, project_root=".",
         "podcast_review": final.get("podcast_review"),
         "podcast_script_success": final.get("podcast_script_success"),
         "tts_success": tts_ok,
+        "delivery_blockers": final.get("delivery_blockers", []),
+        "email_result": email_result,
+        "email_dry_run": bool(email_dry_run),
         "paid_fallback_calls": paid_used,
         "elapsed_seconds": round(elapsed, 1),
     }

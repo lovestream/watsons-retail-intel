@@ -1,0 +1,519 @@
+{
+  "metadata": {
+    "source": "E1 curated",
+    "date": "2026-10-20"
+  },
+  "events": [
+    {
+      "event_id": "E1-W42-001",
+      "event_title": "天猫双11于10月20日20点开卖，4小时124个品牌成交破亿",
+      "fact": "10月20日20:00天猫双11正式开卖；开卖4小时124个品牌成交额破亿，27681个品牌成交额超过去年全天。",
+      "evidence_text": "10月20日晚八点，天猫双11正式开启全品类售卖。",
+      "source_url": "https://www.36kr.com/p/4035580422247302",
+      "source_name": "36氪",
+      "source_title": "双11首日观察：商家还在爆单，但增长已不是首要目标",
+      "published_at": "Thu, 22 Oct 2026 02:24:52 GMT",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "2026-10-20",
+      "event_announced_at": "2026-10-20",
+      "event_effective_at": "",
+      "event_time_source": "explicit_text",
+      "date_semantics": "event_occurrence",
+      "effective_event_time": "2026-10-20",
+      "effective_time_source": "event_occurred_at",
+      "verification_status": "verified",
+      "verification_scope": "event_occurrence",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "平台大促",
+      "entities": {
+        "platforms": [
+          "天猫"
+        ],
+        "companies": [
+          "天猫"
+        ],
+        "competitors": [],
+        "brands": []
+      },
+      "business_variables": [
+        "流量",
+        "货盘",
+        "价格"
+      ],
+      "weighted_score": 92,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "京东秒送",
+          "美团闪购",
+          "淘宝闪购"
+        ],
+        "affected_business_variables": [
+          "流量",
+          "货盘",
+          "价格"
+        ],
+        "watsons_impact": "双11首日成交向头部品牌集中，说明用户在大促中仍愿意为确定性与品牌力买单；对屈臣氏即时零售而言，首日流量高峰是检验‘线上下单、门店履约’能力的窗口，而不是单纯跟价。",
+        "recommended_action": "在京东秒送、美团闪购、淘宝闪购同步设置‘双11开门红’专区，优先保证美妆个护TOP品牌与Watsons独家套组的30分钟可达库存；把首日流量承接、缺货率、取消率纳入当日战报。",
+        "action_level": "watch",
+        "owner_hint": "即时零售运营",
+        "tracking_metrics": [
+          "首日GMV",
+          "30分钟履约率",
+          "缺货率",
+          "取消率",
+          "TOP品牌动销"
+        ],
+        "follow_up_questions": [
+          "首日流量中有多少来自平台大促会场？",
+          "门店拣货峰值是否造成缺货或超时？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "ee856d77cdb7ae70f075e72ed00bfbcbfbb2076279eeba9bb28314657af1781e",
+      "source_snapshot_sha256": "7f41a2667afbc8a1293b6df7937c344d3054f0505d29c98fe3d92746d21fd4b5",
+      "source_snapshot_kind": "network_snapshot",
+      "_file_date": "2026-10-20"
+    },
+    {
+      "event_id": "E1-W42-002",
+      "event_title": "天猫双11美妆开门红TOP5：珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II",
+      "fact": "10月20日20:00-23:59天猫双11美妆开门红榜单：珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II列前五；TOP20国货占四席（珀莱雅、薇诺娜、Fan Beauty Diary、毛戈平）。",
+      "evidence_text": "美妆品类TOP20中，珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II名列前五名。",
+      "source_url": "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml",
+      "source_name": "新浪科技/亿邦动力",
+      "source_title": "天猫双11开门红4小时：珀莱雅为美妆品类TOP1 卡诗拿下个护品类榜首_新浪科技_新浪网",
+      "published_at": "Thu, 22 Oct 2026 00:00:00 +0800",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "2026-10-20",
+      "event_announced_at": "2026-10-20",
+      "event_effective_at": "",
+      "event_time_source": "explicit_text",
+      "date_semantics": "event_occurrence",
+      "effective_event_time": "2026-10-20",
+      "effective_time_source": "event_occurred_at",
+      "verification_status": "verified",
+      "verification_scope": "event_occurrence",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "品类榜单",
+      "entities": {
+        "platforms": [
+          "天猫"
+        ],
+        "companies": [
+          "天猫"
+        ],
+        "competitors": [],
+        "brands": [
+          "珀莱雅",
+          "修丽可",
+          "兰蔻",
+          "雅诗兰黛",
+          "SK-II",
+          "薇诺娜",
+          "毛戈平"
+        ]
+      },
+      "business_variables": [
+        "货盘",
+        "品牌",
+        "价格"
+      ],
+      "weighted_score": 90,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "天猫",
+          "京东秒送",
+          "美团闪购"
+        ],
+        "affected_business_variables": [
+          "货盘",
+          "品牌",
+          "价格"
+        ],
+        "watsons_impact": "榜单同时验证国际大牌与功效国货的双主线：高端修护、功效面霜和国货大单品都在增长。屈臣氏货盘若只押国际大牌，会错过国货功效客群；若只做低价，会丢掉高客单修护需求。",
+        "recommended_action": "按‘高端修护/功效国货/敏感肌基础’三组重排双11货盘，确保榜单前五品牌与薇诺娜、毛戈平在门店和即时零售前置仓有可见陈列；每组配置一个Watsons独家组合，避免与平台旗舰店同款同价硬碰。",
+        "action_level": "watch",
+        "owner_hint": "商品/货盘",
+        "tracking_metrics": [
+          "TOP20品牌覆盖数",
+          "国货功效SKU动销",
+          "组合装毛利率",
+          "缺货率"
+        ],
+        "follow_up_questions": [
+          "TOP20中屈臣氏已覆盖多少个品牌？",
+          "国货功效品的到店转化是否低于国际大牌？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "0ce41af38bf0271aceadf68a1d61ef5b976723bf0d01aa2f040b3b83560f58ca",
+      "source_snapshot_sha256": "11125c1799d6b6b25f152831902ec9381ff74f3ba3711053c1bd1b26dc220397",
+      "source_snapshot_kind": "raw_archive",
+      "_file_date": "2026-10-20"
+    },
+    {
+      "event_id": "E1-W42-003",
+      "event_title": "天猫双11个护开门红TOP5：卡诗、Off&Relax、护舒宝、潘婷、欧莱雅",
+      "fact": "10月20日20:00-23:59天猫双11个护开门红榜单：卡诗、Off&Relax、护舒宝、潘婷、欧莱雅列前五；Off&Relax开卖4小时成交首次破亿。",
+      "evidence_text": "个护品类TOP20中，前五名分别是卡诗、Off&Relax、护舒宝、潘婷、欧莱雅。",
+      "source_url": "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml",
+      "source_name": "新浪科技/亿邦动力",
+      "source_title": "天猫双11开门红4小时：珀莱雅为美妆品类TOP1 卡诗拿下个护品类榜首_新浪科技_新浪网",
+      "published_at": "Thu, 22 Oct 2026 00:00:00 +0800",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "2026-10-20",
+      "event_announced_at": "2026-10-20",
+      "event_effective_at": "",
+      "event_time_source": "explicit_text",
+      "date_semantics": "event_occurrence",
+      "effective_event_time": "2026-10-20",
+      "effective_time_source": "event_occurred_at",
+      "verification_status": "verified",
+      "verification_scope": "event_occurrence",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "品类榜单",
+      "entities": {
+        "platforms": [
+          "天猫"
+        ],
+        "companies": [
+          "天猫"
+        ],
+        "competitors": [],
+        "brands": [
+          "卡诗",
+          "Off&Relax",
+          "护舒宝",
+          "潘婷",
+          "欧莱雅"
+        ]
+      },
+      "business_variables": [
+        "货盘",
+        "品牌",
+        "客单"
+      ],
+      "weighted_score": 86,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "天猫",
+          "京东秒送",
+          "美团闪购"
+        ],
+        "affected_business_variables": [
+          "货盘",
+          "品牌",
+          "客单"
+        ],
+        "watsons_impact": "个护榜单出现高端洗护（卡诗、Off&Relax）与大众刚需（护舒宝、潘婷、欧莱雅）并存，说明‘高端护理升级’和‘高频补货’不是二选一。屈臣氏可以把高端洗护做成毛利与会员黏性，把刚需个护做成即时零售复购入口。",
+        "recommended_action": "把卡诗、Off&Relax放入‘高端洗护’专题，与护舒宝、潘婷组成‘满额加购’；在即时零售设置‘个护补货’常驻入口，重点跟踪高端洗护的复购周期与刚需品的客单提升。",
+        "action_level": "watch",
+        "owner_hint": "品类运营",
+        "tracking_metrics": [
+          "高端洗护GMV",
+          "个护复购率",
+          "加购率",
+          "客单价"
+        ],
+        "follow_up_questions": [
+          "高端洗护在屈臣氏即时零售的复购周期是多少？",
+          "刚需个护是否被平台补贴拉低毛利？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "17bb67877772de436bf386fab6cca6524ec407ffc0d727303d16627ad51b78b6",
+      "source_snapshot_sha256": "11125c1799d6b6b25f152831902ec9381ff74f3ba3711053c1bd1b26dc220397",
+      "source_snapshot_kind": "raw_archive",
+      "_file_date": "2026-10-20"
+    },
+    {
+      "event_id": "E1-W42-004",
+      "event_title": "丸美小红笔眼霜4.0进入天猫双11去黑眼圈眼霜榜TOP4",
+      "fact": "丸美小红笔眼霜4.0登上天猫双11开门红去黑眼圈眼霜热卖榜TOP4，是TOP5中唯一国货品牌；增长来自产品升级与功效表达，而非单纯低价。",
+      "evidence_text": "丸美今年力推的新品小红笔眼霜4.0，登上了双11开门红去黑眼圈眼霜热卖榜的Top4",
+      "source_url": "https://www.36kr.com/p/4035580422247302",
+      "source_name": "36氪",
+      "source_title": "双11首日观察：商家还在爆单，但增长已不是首要目标",
+      "published_at": "Thu, 22 Oct 2026 02:24:52 GMT",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "2026-10-20",
+      "event_announced_at": "2026-10-20",
+      "event_effective_at": "",
+      "event_time_source": "explicit_text",
+      "date_semantics": "event_occurrence",
+      "effective_event_time": "2026-10-20",
+      "effective_time_source": "event_occurred_at",
+      "verification_status": "verified",
+      "verification_scope": "event_occurrence",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "产品动态",
+      "entities": {
+        "platforms": [
+          "天猫"
+        ],
+        "companies": [
+          "丸美"
+        ],
+        "competitors": [],
+        "brands": [
+          "丸美"
+        ]
+      },
+      "business_variables": [
+        "货盘",
+        "内容",
+        "价格"
+      ],
+      "weighted_score": 82,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "天猫",
+          "门店",
+          "美团闪购"
+        ],
+        "affected_business_variables": [
+          "货盘",
+          "内容",
+          "价格"
+        ],
+        "watsons_impact": "眼霜是屈臣氏美妆品类中高毛利、强体验的细分；丸美用‘7天淡化眼纹’的功效表达打榜，说明可解释的功效比泛泛折扣更能带来转化。屈臣氏可将眼霜从货架品转为‘可试用、可解释’的体验品。",
+        "recommended_action": "在重点门店设置眼霜试用与7天效果记录卡，把丸美小红笔4.0与Watsons眼霜组合放在同一体验区；即时零售页同步上线‘眼霜+眼膜’组合，用短视频解释成分与使用方法。",
+        "action_level": "watch",
+        "owner_hint": "门店体验/内容",
+        "tracking_metrics": [
+          "眼霜试用转化率",
+          "组合装GMV",
+          "内容点击率",
+          "复购率"
+        ],
+        "follow_up_questions": [
+          "眼霜试用品类的转化率是否高于面霜？",
+          "功效内容是否带来退货率上升？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "6818381e54a46a40c60f26e1bd60eab491e11f20c72ea52170e10af6d2cf0938",
+      "source_snapshot_sha256": "7f41a2667afbc8a1293b6df7937c344d3054f0505d29c98fe3d92746d21fd4b5",
+      "source_snapshot_kind": "network_snapshot",
+      "_file_date": "2026-10-20"
+    },
+    {
+      "event_id": "E1-W42-005",
+      "event_title": "双11预售90分钟：丝塔芙大白罐登付定金人数榜首",
+      "fact": "据10月20日报道，双11预售开售90分钟，丝塔芙大白罐登付定金人数榜首；550g两罐折后134元，黄牛转售价炒至250元以上。",
+      "evidence_text": "开售90分钟，丝塔芙大白罐便荣登付定金人数榜首",
+      "source_url": "https://www.36kr.com/p/4033954676446340",
+      "source_name": "36氪",
+      "source_title": "「大白罐」艳压大牌成李佳琦直播间新顶流，打工人疯抢宝妈必囤的「敏感肌版大宝」",
+      "published_at": "Tue, 20 Oct 2026 09:37:00 GMT",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "",
+      "event_announced_at": "",
+      "event_effective_at": "",
+      "event_time_source": "article_published_at",
+      "date_semantics": "reported_on",
+      "effective_event_time": "2026-10-20",
+      "effective_time_source": "published_at",
+      "verification_status": "verified",
+      "verification_scope": "article_claim",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "产品动态",
+      "entities": {
+        "platforms": [
+          "天猫",
+          "抖音"
+        ],
+        "companies": [
+          "丝塔芙"
+        ],
+        "competitors": [],
+        "brands": [
+          "丝塔芙"
+        ]
+      },
+      "business_variables": [
+        "货盘",
+        "价格",
+        "履约"
+      ],
+      "weighted_score": 84,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "天猫",
+          "抖音",
+          "门店"
+        ],
+        "affected_business_variables": [
+          "货盘",
+          "价格",
+          "履约"
+        ],
+        "watsons_impact": "基础保湿大罐装的需求不是‘消费降级’，而是‘一罐多用、家庭共用’的确定性需求。屈臣氏自有/独家基础护理品可以承接这类需求，但必须解决大促期间的黄牛转售与缺货，否则会伤害会员体验。",
+        "recommended_action": "把550g大罐保湿品放入‘家庭装/敏感肌’常驻货盘，设置会员限购与门店自提优先；即时零售端用‘两罐家庭装+小样’替代单纯降价，避免黄牛套利。",
+        "action_level": "watch",
+        "owner_hint": "商品/会员",
+        "tracking_metrics": [
+          "大罐装销量",
+          "会员限购拦截率",
+          "黄牛投诉数",
+          "缺货率"
+        ],
+        "follow_up_questions": [
+          "大罐装的毛利率能否覆盖即时零售履约成本？",
+          "限购是否误伤真实家庭用户？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "10a969d4806203cd45c6641322e7a921e3ea8d475ba3594ba8ba1b0d5bbc4f5b",
+      "source_snapshot_sha256": "dfe3b2a2cc7a9f41fc172be09d5cdd8de965322c81c3be275c4659f4212896d2",
+      "source_snapshot_kind": "network_snapshot",
+      "_file_date": "2026-10-20"
+    },
+    {
+      "event_id": "E1-W42-011",
+      "event_title": "到店团购竞争继续：抖省省DAU约2100万，淘宝闪购团购仍限三城试点",
+      "fact": "据10月20日报道，抖省省6月底DAU约2103万，约为大众点评六成；淘宝闪购团购仍仅在上海、深圳、嘉兴试点，类目从餐饮向休闲娱乐拓展。",
+      "evidence_text": "截至6月底，抖省省DAU已达2103万，约为大众点评同期日活的六成以上",
+      "source_url": "https://www.36kr.com/p/4034051883111297",
+      "source_name": "36氪",
+      "source_title": "字节阿里美团暗战到店团购",
+      "published_at": "Tue, 20 Oct 2026 11:02:57 GMT",
+      "collected_at": "2026-10-27T00:00:00+08:00",
+      "event_occurred_at": "",
+      "event_announced_at": "",
+      "event_effective_at": "",
+      "event_time_source": "article_published_at",
+      "date_semantics": "reported_on",
+      "effective_event_time": "2026-10-20",
+      "effective_time_source": "published_at",
+      "verification_status": "verified",
+      "verification_scope": "article_claim",
+      "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
+      "verified_by": "E1-manual",
+      "verified_at": "2026-10-27",
+      "needs_verification": false,
+      "date_conflict": false,
+      "hearsay_markers": false,
+      "temporal_eligibility": "core",
+      "novelty_status": "new_today",
+      "novelty_eligibility": "core",
+      "report_eligibility": "core",
+      "priority": "P1",
+      "event_type": "本地生活",
+      "entities": {
+        "platforms": [
+          "抖音",
+          "高德",
+          "淘宝闪购",
+          "美团"
+        ],
+        "companies": [
+          "字节",
+          "阿里",
+          "美团"
+        ],
+        "competitors": [],
+        "brands": []
+      },
+      "business_variables": [
+        "流量",
+        "到店",
+        "服务"
+      ],
+      "weighted_score": 74,
+      "business_analysis": {
+        "impact_type": "watch",
+        "affected_channels": [
+          "淘宝闪购",
+          "抖音",
+          "高德"
+        ],
+        "affected_business_variables": [
+          "流量",
+          "到店",
+          "服务"
+        ],
+        "watsons_impact": "到店流量正在分散，消费者可能从美团之外发现美妆服务/体验。屈臣氏若只有商品交易，没有到店服务，难以承接这波流量；但淘宝闪购团购仅三城，暂不宜全国投入。",
+        "recommended_action": "仅在上海/深圳/嘉兴跟踪淘宝闪购团购的美妆服务类目；用1-2家门店测试‘15分钟修眉/敏感肌检测’团购套餐，验证到店核销与二次购买，不扩城。",
+        "action_level": "watch",
+        "owner_hint": "新渠道/门店",
+        "tracking_metrics": [
+          "团购核销率",
+          "到店二次购买率",
+          "获客成本",
+          "服务满意度"
+        ],
+        "follow_up_questions": [
+          "美妆服务团购是否存在合规/资质门槛？",
+          "三城试点的流量是否足够？"
+        ],
+        "confidence": "high",
+        "downgrade_reasons": []
+      },
+      "evidence_sha256": "05cf02a9d88c7f89abb37569cde376780356e92b3298dc4bb76690563b41c436",
+      "source_snapshot_sha256": "db1f2fb324cc049f97bc1fb0e1b4f688d417b5f026e40b6d85efa2d5b77384a0",
+      "source_snapshot_kind": "network_snapshot",
+      "_file_date": "2026-10-20"
+    }
+  ]
+}

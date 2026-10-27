@@ -1,0 +1,59 @@
+{
+  "inventory": {
+    "period": {
+      "start": "2026-10-19",
+      "end": "2026-10-25"
+    },
+    "days": 7,
+    "raw_articles": 718,
+    "cleaned_articles": 21,
+    "analyzed_events": 300,
+    "unique_fact_hashes": 191,
+    "published_in_week_articles": 32,
+    "relevant_published_in_week": 8
+  },
+  "accepted_events": 13,
+  "accepted_occurrence_verified": 5,
+  "accepted_article_claim_verified": 8,
+  "rejected_examples": [
+    {
+      "date_file": "2026-10-19",
+      "event_id": "E20261019_0049",
+      "event_title": "美团闪购双11上线直播工具并与丝芙兰、屈臣氏试点合作",
+      "reason": "source_stale",
+      "detail": "引用 CBNData 2022-11-17 文章，非2026年事件",
+      "source_url": "https://www.cbndata.com/information/260843"
+    },
+    {
+      "date_file": "2026-10-21",
+      "event_id": "E20261021_0029",
+      "event_title": "京东11.11屈臣氏抢先购预热活动上线",
+      "reason": "event_outside_window",
+      "detail": "事件日期2026-10-16，早于本周开始；不得按采集日冒充本周事件",
+      "source_url": "https://www.sina.cn/media/5508964879"
+    },
+    {
+      "date_file": "2026-10-21",
+      "event_id": "E20261021_0033",
+      "event_title": "京东秒送屈臣氏国庆出行个护活动",
+      "reason": "event_outside_window",
+      "detail": "事件日期2026-09-30，国庆活动已结束",
+      "source_url": "https://www.sina.cn/media/5508964879"
+    }
+  ],
+  "exclusion_reasons": {
+    "source_stale": 11,
+    "no_archived_source": 2,
+    "archive_or_off_domain": 159,
+    "duplicate_repetition": 109,
+    "event_outside_window": 12,
+    "not_manual_selected": 7
+  },
+  "excluded_total": 300,
+  "notes": [
+    "Only 13 events were manually reviewed; the rest of the pool was not re-reviewed by an LLM.",
+    "Article publication date is not treated as event occurrence date.",
+    "Context claims are marked verification_scope=article_claim and date_semantics=reported_on.",
+    "No historical event was bulk-marked verified."
+  ]
+}

@@ -1,5 +1,8 @@
 # 13｜DeepSeek / QwenPaw 一次性交付总指令：生产恢复、R3播客、AIHOT精选优化
 
+> **2026-10-28 最新 E1 编辑验收**：已收到2026-10-19~25真实周期周报与MP3隔离候选，但[ChatGPT人工内容审查](reviews/NAS-E1-CHATGPT-EDITORIAL-ACCEPTANCE-2026-10-28.md)确认：ISO周次是**W43非W42**；E1手写`weighted_score=74–92`与生产0–5八维评分冲突，全13条P1且`verified_by=E1-manual`是脚本写入，不等于业务人员签字；报道型内容不能升级成平台官方确认；口播有过期“本周内”行动。现在请DeepSeek在隔离分支**一次性做最小编辑修正**后重新出对应MP3，供用户/业务收件人试听签收；真实账本、main、Cron、PID1、SMTP仍未获授权。
+
+
 > **2026-10-27 最新执行优先级（覆盖本文此前D1–D5）**：R2+R3+M2已在`integration/onepass-20261026`汇总，测试71项由QwenPaw报告通过，SiliconFlow新TTS已跑通。**现在唯一待推进的隔离内容工作是[E1：真实目标周事件原文证据补全及R3全链路](reviews/NAS-ONEPASS-INTEGRATION-CHATGPT-REVIEW-2026-10-27.md)**。特别注意：344/37/5发生在**W32**，不是W40；W40音频来自样例稿。先恢复真实目标周证据，修回放脚本日期角色与分析文件覆盖，最终真实稿才能配音。**不自动切生产、合并main、修改Cron或发送邮件**。
 
 

@@ -83,6 +83,26 @@ _UNSUPPORTED_CLAIMS = [
 # 弱建议词（全部命中 → high issue：无明确可执行建议）
 _WEAK_ADVICE = ["持续关注", "加强关注", "保持关注", "密切关注", "进一步观察"]
 
+# 规则兜底/模板化水文特征。清洗层会删掉内部标记，因此生成器必须把
+# fallback_chapters 作为显式参数传进来；同时在文本里保留第二道防线。
+_FALLBACK_MARKERS = [
+    "generation_method=rule_fallback", "规则兜底生成", "规则兜底",
+    "本期证据不足，规则兜底", "按事件密度排序",
+]
+_TEMPLATE_LINES = [
+    "建议结合后续周期观察", "本期该维度证据较少",
+    "本期事件池信号有限", "建议下期重点跟踪",
+    "即时零售渠道：跟踪平台补贴与履约政策变化",
+    "个护美妆品类：关注品类增长信号",
+    "竞对动态：结合本期竞对动作",
+]
+_ACTIONABLE_VERBS = [
+    "上架", "下架", "调价", "定价", "备货", "补货", "铺货", "排期",
+    "投放", "投流", "报名", "谈判", "签约", "测试", "复盘", "配置",
+    "设置", "锁定", "跟进", "核对", "申请", "调整", "优化", "复制",
+]
+
+
 # 屈臣氏渠道群关键词（建议相关性检查）
 _WATSONS_CHANNELS = ["美团闪购", "京东秒送", "京东到家", "淘宝闪购", "抖音小时达",
                      "天猫", "京东", "猫超", "京东自营", "经销商", "门店",
@@ -248,11 +268,121 @@ def _check_numeric_claims(draft: str, synthesis: Optional[dict]) -> List[str]:
     return issues[:5]
 
 
+def _check_fallback_and_template(
+    draft: str,
+    fallback_chapters: Optional[List[str]] = None,
+    generation_stats: Optional[Dict[str, Any]] = None,
+) -> List[str]:
+    """Reject rule-fallback/template water.  W40 proved length checks alone
+    cannot distinguish a generated chapter from six copies of a fallback.
+    """
+    issues: List[str] = []
+    fb = list(fallback_chapters or [])
+    stats = generation_stats or {}
+    if fb:
+        expected = stats.get("expected_chapters") or 0
+        ratio = len(fb) / expected if expected else 0.0
+        if len(fb) >= max(1, int(expected * 0.5)) if expected else len(fb) >= 2:
+            issues.append(
+                "规则兜底章节过多(%d/%s): %s" %
+                (len(fb), expected or "?", ",".join(fb[:8])))
+        else:
+            issues.append("规则兜底章节: %s" % ",".join(fb[:8]))
+    text = draft or ""
+    hits = [m for m in _FALLBACK_MARKERS if m in text]
+    if hits:
+        issues.append("规则兜底/模板标记泄漏: %s" % ",".join(hits[:4]))
+    template_hits = [t for t in _TEMPLATE_LINES if t in text]
+    if template_hits:
+        issues.append("模板化水文: %s" % "；".join(template_hits[:3]))
+    return issues
+
+
+def _check_content_distinctness(draft: str) -> List[str]:
+    """Detect the W40 signature: the same paragraph repeated across chapters."""
+    issues: List[str] = []
+    current = ""
+    sections: Dict[str, List[str]] = {}
+    for line in (draft or "").splitlines():
+        m = re.match(r"^##\s+(\d{2})\b", line.strip())
+        if m:
+            current = m.group(1)
+            sections.setdefault(current, [])
+            continue
+        if current and len(line.strip()) >= 25:
+            sections[current].append(line.strip())
+    seen: Dict[str, List[str]] = {}
+    for ch, lines in sections.items():
+        for line in set(lines):
+            seen.setdefault(line, []).append(ch)
+    repeated = [(line, chs) for line, chs in seen.items()
+                if len(set(chs)) >= 3]
+    if repeated:
+        issues.append(
+            "跨章节重复段落(%d处): %s" %
+            (len(repeated), repeated[0][0][:60]))
+    # 章节之间有大量完全相同的行也算重复。
+    total_lines = sum(len(set(v)) for v in sections.values())
+    unique_lines = len(set().union(*[set(v) for v in sections.values()])) \
+        if sections else 0
+    if total_lines >= 12 and unique_lines and \
+            unique_lines / total_lines < 0.55:
+        issues.append("章节内容高度重复(unique=%d/%d)" %
+                      (unique_lines, total_lines))
+    return issues
+
+
+def _check_evidence_sufficiency(report_type: str,
+                                synthesis: Optional[dict]) -> List[str]:
+    """A periodic report must be supported by independent verified facts."""
+    if not synthesis:
+        return ["缺少周期证据包，无法证明事实"]
+    clusters = synthesis.get("all_clusters") or []
+    selected = synthesis.get("selected_clusters") or clusters
+    urls = set()
+    for c in clusters:
+        for u in (c.get("source_urls") or []):
+            if str(u).startswith("http"):
+                urls.add(str(u))
+    minimum = {"weekly": 2, "monthly": 4, "yearly": 6}.get(report_type, 2)
+    issues: List[str] = []
+    if len(clusters) < minimum:
+        issues.append("独立证据簇不足(%d<%d)" % (len(clusters), minimum))
+    if len(urls) < minimum:
+        issues.append("独立来源链接不足(%d<%d)" % (len(urls), minimum))
+    if not selected:
+        issues.append("没有可报告证据簇")
+    return issues
+
+
+def _check_advice_quality(draft: str, report_type: str) -> List[str]:
+    """Advisory chapter must contain at least one concrete Watsons action."""
+    advice_ch = {"weekly": "05", "monthly": "06", "yearly": "07"}.get(
+        report_type, "05")
+    m = re.search(r"^##\s+%s\b.*?$\n(.*?)(?=^##\s+\d{2}|\Z)" % advice_ch,
+                  draft or "", re.M | re.S)
+    if not m:
+        return ["建议章节缺失"]
+    body = m.group(1)
+    hits = [v for v in _ACTIONABLE_VERBS if v in body]
+    channels = [c for c in _WATSONS_CHANNELS if c in body]
+    issues: List[str] = []
+    if not hits:
+        issues.append("建议章节无具体可执行动作")
+    if not channels:
+        issues.append("建议章节未关联屈臣氏渠道")
+    if sum(1 for w in _WEAK_ADVICE if w in body) >= 3 and not hits:
+        issues.append("建议章节仅含泛泛关注词")
+    return issues
+
+
 def rule_validate(report_type: str, final_draft: str,
                   synthesis: Optional[dict] = None,
                   coverage: Optional[dict] = None,
                   expected_chapters: Optional[List[str]] = None,
-                  event_pool_ids: Optional[List[str]] = None) -> dict:
+                  event_pool_ids: Optional[List[str]] = None,
+                  fallback_chapters: Optional[List[str]] = None,
+                  generation_stats: Optional[Dict[str, Any]] = None) -> dict:
     """规则化质检。返回 {sendable, high_issues, medium_issues, low_issues,
     failed_checks}。"""
     if not final_draft or not final_draft.strip():
@@ -279,7 +409,7 @@ def rule_validate(report_type: str, final_draft: str,
             final_draft, re.MULTILINE | re.DOTALL)
         if m:
             body = m.group(1).strip()
-            if body and len(body) < 120:
+            if body and len(body) < 180:
                 high.append("章节 %s 内容过短(%d字)" % (ch_id, len(body)))
                 failed.append("chapter_too_short")
 
@@ -302,6 +432,23 @@ def rule_validate(report_type: str, final_draft: str,
     for issue in _check_numeric_claims(final_draft, synthesis):
         high.append(issue)
         failed.append("numeric_claim_no_evidence")
+
+    # W40 regression: fallback/template/repetition/evidence/action quality.
+    # These are high issues, not warnings: a clean-looking but water report
+    # must never be emailed.
+    for issue in _check_fallback_and_template(
+            final_draft, fallback_chapters, generation_stats):
+        high.append(issue)
+        failed.append("fallback_or_template")
+    for issue in _check_content_distinctness(final_draft):
+        high.append(issue)
+        failed.append("repeated_content")
+    for issue in _check_evidence_sufficiency(report_type, synthesis):
+        high.append(issue)
+        failed.append("insufficient_evidence")
+    for issue in _check_advice_quality(final_draft, report_type):
+        high.append(issue)
+        failed.append("advice_quality")
 
     # coverage
     if coverage:
@@ -334,10 +481,13 @@ def review_final_draft(report_type: str, final_draft: str,
                        coverage: Optional[dict] = None,
                        chapter_ids: Optional[List[str]] = None,
                        event_pool_ids: Optional[List[str]] = None,
-                       llm_review: bool = False) -> dict:
+                       llm_review: bool = False,
+                       fallback_chapters: Optional[List[str]] = None,
+                       generation_stats: Optional[Dict[str, Any]] = None) -> dict:
     """终稿质量门。规则检查必做；LLM review 可选（默认不启用，避免额外调用）。"""
     result = rule_validate(report_type, final_draft, synthesis, coverage,
-                           chapter_ids, event_pool_ids)
+                           chapter_ids, event_pool_ids, fallback_chapters,
+                           generation_stats)
 
     # review 执行失败 → sendable=false（审计 §10.6）
     # 此处规则检查本身不抛异常；若抛异常由调用方捕获并置 sendable=false

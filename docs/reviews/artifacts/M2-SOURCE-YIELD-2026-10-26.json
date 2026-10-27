@@ -1,0 +1,129 @@
+{
+  "total_sources": 67,
+  "total_events": 6235,
+  "total_reportable": 0,
+  "note": "read-only audit; no ledger mutation",
+  "sources_sample": [
+    {
+      "source": "cloakbrowser_36kr_beauty",
+      "events": 152,
+      "unique_urls": 22,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 41,
+      "domains": 1
+    },
+    {
+      "source": "cloakbrowser_36kr_consumer",
+      "events": 83,
+      "unique_urls": 16,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 19,
+      "domains": 1
+    },
+    {
+      "source": "cloakbrowser_36kr_instant_retail",
+      "events": 76,
+      "unique_urls": 12,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 24,
+      "domains": 1
+    },
+    {
+      "source": "cloakbrowser_36kr_new_retail",
+      "events": 3,
+      "unique_urls": 1,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 2,
+      "domains": 1
+    },
+    {
+      "source": "cloakbrowser_cls_beauty",
+      "events": 342,
+      "unique_urls": 5,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 105,
+      "domains": 1
+    },
+    {
+      "source": "cloakbrowser_cls_instant_retail",
+      "events": 395,
+      "unique_urls": 39,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 99,
+      "domains": 1
+    },
+    {
+      "source": "cloakbrowser_huxiu_consume_channel",
+      "events": 5,
+      "unique_urls": 2,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 2,
+      "domains": 1
+    },
+    {
+      "source": "cloakbrowser_pinguan_beauty",
+      "events": 1031,
+      "unique_urls": 69,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 79,
+      "domains": 1
+    },
+    {
+      "source": "cloakbrowser_wallstreetcn_instant",
+      "events": 13,
+      "unique_urls": 2,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 5,
+      "domains": 1
+    },
+    {
+      "source": "rsshub_36kr_newsflashes",
+      "events": 245,
+      "unique_urls": 218,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 58,
+      "domains": 1
+    },
+    {
+      "source": "rsshub_36kr_search_beauty",
+      "events": 97,
+      "unique_urls": 47,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 50,
+      "domains": 1
+    },
+    {
+      "source": "rsshub_36kr_search_instant_retail",
+      "events": 65,
+      "unique_urls": 24,
+      "verified": 0,
+      "reportable": 0,
+      "reportable_rate": 0.0,
+      "active_dates": 34,
+      "domains": 1
+    }
+  ],
+  "finding": "Production events in the audited ledger have verification_status unset in the sampled data, so reportable=0. This audit is read-only and does not claim M2 production value."
+}

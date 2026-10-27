@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-26",
+  "scope": "isolated supervisor persistence rehearsal; no production install/restart",
+  "persistent_source": "ops/r2b/supervisor_persistence/watsons-retail-intel-r2b.conf",
+  "persistent_sha256": "1106ff1015ee3d67cbca76acb548a1e55b6ced98c7d493e841b068ec5c0289fd",
+  "source_is_on_app_working": true,
+  "app_working_mount": true,
+  "etc_mount": false,
+  "production_pid1": "/usr/bin/python3 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf ",
+  "production_control_socket_present": false,
+  "etc_wipe_reinstall": {
+    "pass": true,
+    "hash_before": "1106ff1015ee3d67cbca76acb548a1e55b6ced98c7d493e841b068ec5c0289fd",
+    "hash_after": "1106ff1015ee3d67cbca76acb548a1e55b6ced98c7d493e841b068ec5c0289fd"
+  },
+  "install_script_default_dry_run": true,
+  "host_bind_mount_required": "ops/r2b/supervisor_persistence/watsons-retail-intel-r2b.conf:/etc/supervisor/conf.d/watsons-retail-intel-r2b.conf:ro",
+  "backup_evidence": "docs/reviews/artifacts/R2B-BACKUP-AND-SUPERVISOR-DRYRUN-2026-10-26.json",
+  "backup_verified": {
+    "restore_ok": 7979,
+    "restore_bad": 0,
+    "business_files": 7979,
+    "size_bytes": 1092049202
+  },
+  "not_done": [
+    "production config copy",
+    "PID1 restart",
+    "Cron stop/start",
+    "real alert",
+    "Docker rebuild"
+  ]
+}

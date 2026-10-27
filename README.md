@@ -51,3 +51,12 @@ watsons-retail-intel/
 ## 许可
 
 内部使用，请勿外传。
+
+## 2026-10-26 一次性整合候选（未生产切换）
+
+- 集成分支：`integration/onepass-20261026`
+- 交付报告：`docs/reviews/NAS-ONEPASS-FINAL-INTEGRATION-2026-10-26.md`
+- 状态：R2/R3/M2 代码与测试已集成，干净 clone **71/71** 通过；真实中文 TTS 已用
+  SiliconFlow CosyVoice2 生成新 MP3，未复用历史音频。
+- 限制：生产旧事件池无 `verified` 事件，周期报告仍被 R3 严格门拦截；生产代码、PID1、
+  Cron、真实邮件/告警均未改动，切换需单独授权。

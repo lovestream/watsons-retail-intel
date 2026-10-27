@@ -243,6 +243,49 @@ except Exception:
     _is_non_mainland_subject_event = None
 
 
+try:
+    from skills.m2.event_relationship import independent_sources as _m2_independent_sources
+except Exception:  # pragma: no cover
+    _m2_independent_sources = None
+
+
+try:
+    from skills.report_policy import (
+        is_reportable_event as _policy_is_reportable_event,
+        normalize_eligibility as _policy_normalize_eligibility,
+    )
+except Exception:  # pragma: no cover - release branch always has policy
+    _policy_is_reportable_event = None
+    _policy_normalize_eligibility = None
+
+
+def _is_verified_reportable_event(e: dict) -> bool:
+    """R3: periodic reports use the same verified new-fact pool as daily.
+
+    A P1/P2 label is not evidence.  The event must be core, verified, fresh
+    for the period, and carry fact/evidence/source_url.  Missing verification
+    fields are deliberately *not* treated as verified (that was the W40
+    failure mode: rules turned three repeated P2 items into a six-chapter
+    water report).
+    """
+    if not isinstance(e, dict) or _is_archive_event(e):
+        return False
+    if _policy_is_reportable_event is not None:
+        return _policy_is_reportable_event(e)
+    eligibility = str(e.get("report_eligibility") or "").lower()
+    if eligibility != "core":
+        return False
+    if str(e.get("verification_status") or "") != "verified":
+        return False
+    if e.get("needs_verification") or e.get("date_conflict") or e.get("hearsay_markers"):
+        return False
+    if str(e.get("novelty_status") or "") not in ("new_today", "updated_today"):
+        return False
+    return bool(str(e.get("fact") or "").strip() and
+                str(e.get("evidence_text") or "").strip() and
+                str(e.get("source_url") or "").strip())
+
+
 def _is_archive_event(e: dict) -> bool:
     """与 generate_periodic_report 相同的归档判断 + 财经噪音二次拦截。"""
     if not isinstance(e, dict):
@@ -612,6 +655,17 @@ def cluster_events(events: List[dict], cfg: Dict[str, Any]) -> List[dict]:
             if pr:
                 c.setdefault("_priority_flags", set()).add(pr)
 
+    # M2: corroboration is measured by independent domains, not by the
+    # number of source labels (same article/repost must not inflate heat).
+    for c in clusters:
+        urls = [{"source_url": u} for u in (c.get("source_urls") or [])]
+        if _m2_independent_sources is not None:
+            indep = len(_m2_independent_sources(urls))
+        else:
+            indep = int(c.get("source_count") or 0)
+        c["independent_source_count"] = indep
+        c["heat_score"] = min(5, max(1, indep))
+
     # 排序：加权分高的 cluster 在前
     clusters.sort(key=lambda c: c.get("max_weighted_score") or 0, reverse=True)
     # 重新编号 cluster_id
@@ -947,8 +1001,10 @@ def build_periodic_synthesis(report_type: str, period_info: dict,
     pad_end = end_date.date() + timedelta(days=1)
     all_events = _load_events_range(pad_start, pad_end, project_root)
     period_events = period_time_filter(all_events, report_type, period_info)
+    # R3: only the final verified/reportable pool may enter a periodic report.
+    # Keeping raw P1/P2 events here is what produced W40's repeated fallback.
     reportable = [e for e in period_events
-                  if not _is_archive_event(e) and
+                  if _is_verified_reportable_event(e) and
                   (e.get("event_title") or e.get("fact"))]
     reportable.sort(key=lambda x: x.get("weighted_score") or 0, reverse=True)
 

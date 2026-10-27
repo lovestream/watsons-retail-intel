@@ -1,0 +1,532 @@
+{
+  "report_type": "weekly",
+  "period": {
+    "start": "2026-09-28T00:00:00+08:00",
+    "end": "2026-10-04T23:59:59+08:00",
+    "label": "2026-W40 (09-28 ~ 10-04)"
+  },
+  "coverage": {
+    "expected_days": 7,
+    "available_days": 7,
+    "healthy_days": 7,
+    "degraded_days": 0,
+    "coverage_ratio": 1.0,
+    "raw_ratio": 1.0,
+    "missing_dates": [],
+    "degraded_dates": [],
+    "status": "normal",
+    "normal": 0.85,
+    "minimum": 0.7
+  },
+  "event_stats": {
+    "raw_events": 16,
+    "period_events": 3,
+    "reportable_events": 3,
+    "clusters": 1,
+    "selected_clusters": 1,
+    "high_priority_clusters": 0,
+    "platform_clusters": 1,
+    "competitor_clusters": 1,
+    "risk_clusters": 0
+  },
+  "previous_period_comparison": {
+    "period_info": {
+      "start": "2026-09-21",
+      "end": "2026-09-27"
+    },
+    "event_count": 3,
+    "cluster_count": 2,
+    "high_priority_count": 0
+  },
+  "trend_clusters": [],
+  "channel_summary": {
+    "即时零售": 1,
+    "B2C旗舰电商": 0,
+    "ToB/经销": 0,
+    "clusters_ir": [
+      "PC_202610_0001"
+    ]
+  },
+  "platform_summary": {
+    "美团闪购": 1
+  },
+  "competitor_summary": {
+    "丝芙兰": 1
+  },
+  "category_summary": {
+    "platform_move": 1
+  },
+  "risk_summary": [],
+  "opportunity_summary": [],
+  "chapter_evidence": {
+    "01": [
+      {
+        "cluster_id": "PC_202610_0001",
+        "cluster_key": "美团闪购|屈臣氏|platform_move",
+        "theme": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "rep_title": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "fact_hash": "1230f88e2ae53b4a",
+        "first_seen_at": "2026-10-01",
+        "last_seen_at": "2026-10-03",
+        "days_active": 2,
+        "event_count": 3,
+        "source_count": 1,
+        "platforms": [
+          "美团闪购"
+        ],
+        "competitors": [
+          "丝芙兰"
+        ],
+        "event_types": [
+          "platform_move"
+        ],
+        "business_variables": [
+          "会员",
+          "复购",
+          "履约",
+          "转化率"
+        ],
+        "action_words": [],
+        "entities": {
+          "platforms": [
+            "美团闪购"
+          ],
+          "companies": [
+            "屈臣氏"
+          ],
+          "brands": []
+        },
+        "representative_event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "facts": [
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData"
+        ],
+        "sources": [
+          "tavily_gap_search"
+        ],
+        "source_urls": [
+          "https://www.cbndata.com/information/260843"
+        ],
+        "max_weighted_score": 3.3,
+        "trend_direction": "unclear",
+        "confidence": "high",
+        "_is_high": false,
+        "priority_flags": [
+          "P2"
+        ]
+      }
+    ],
+    "02": [
+      {
+        "cluster_id": "PC_202610_0001",
+        "cluster_key": "美团闪购|屈臣氏|platform_move",
+        "theme": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "rep_title": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "fact_hash": "1230f88e2ae53b4a",
+        "first_seen_at": "2026-10-01",
+        "last_seen_at": "2026-10-03",
+        "days_active": 2,
+        "event_count": 3,
+        "source_count": 1,
+        "platforms": [
+          "美团闪购"
+        ],
+        "competitors": [
+          "丝芙兰"
+        ],
+        "event_types": [
+          "platform_move"
+        ],
+        "business_variables": [
+          "会员",
+          "复购",
+          "履约",
+          "转化率"
+        ],
+        "action_words": [],
+        "entities": {
+          "platforms": [
+            "美团闪购"
+          ],
+          "companies": [
+            "屈臣氏"
+          ],
+          "brands": []
+        },
+        "representative_event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "facts": [
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData"
+        ],
+        "sources": [
+          "tavily_gap_search"
+        ],
+        "source_urls": [
+          "https://www.cbndata.com/information/260843"
+        ],
+        "max_weighted_score": 3.3,
+        "trend_direction": "unclear",
+        "confidence": "high",
+        "_is_high": false,
+        "priority_flags": [
+          "P2"
+        ]
+      }
+    ],
+    "03": [
+      {
+        "cluster_id": "PC_202610_0001",
+        "cluster_key": "美团闪购|屈臣氏|platform_move",
+        "theme": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "rep_title": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "fact_hash": "1230f88e2ae53b4a",
+        "first_seen_at": "2026-10-01",
+        "last_seen_at": "2026-10-03",
+        "days_active": 2,
+        "event_count": 3,
+        "source_count": 1,
+        "platforms": [
+          "美团闪购"
+        ],
+        "competitors": [
+          "丝芙兰"
+        ],
+        "event_types": [
+          "platform_move"
+        ],
+        "business_variables": [
+          "会员",
+          "复购",
+          "履约",
+          "转化率"
+        ],
+        "action_words": [],
+        "entities": {
+          "platforms": [
+            "美团闪购"
+          ],
+          "companies": [
+            "屈臣氏"
+          ],
+          "brands": []
+        },
+        "representative_event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "facts": [
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData"
+        ],
+        "sources": [
+          "tavily_gap_search"
+        ],
+        "source_urls": [
+          "https://www.cbndata.com/information/260843"
+        ],
+        "max_weighted_score": 3.3,
+        "trend_direction": "unclear",
+        "confidence": "high",
+        "_is_high": false,
+        "priority_flags": [
+          "P2"
+        ]
+      }
+    ],
+    "04": [
+      {
+        "cluster_id": "PC_202610_0001",
+        "cluster_key": "美团闪购|屈臣氏|platform_move",
+        "theme": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "rep_title": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "fact_hash": "1230f88e2ae53b4a",
+        "first_seen_at": "2026-10-01",
+        "last_seen_at": "2026-10-03",
+        "days_active": 2,
+        "event_count": 3,
+        "source_count": 1,
+        "platforms": [
+          "美团闪购"
+        ],
+        "competitors": [
+          "丝芙兰"
+        ],
+        "event_types": [
+          "platform_move"
+        ],
+        "business_variables": [
+          "会员",
+          "复购",
+          "履约",
+          "转化率"
+        ],
+        "action_words": [],
+        "entities": {
+          "platforms": [
+            "美团闪购"
+          ],
+          "companies": [
+            "屈臣氏"
+          ],
+          "brands": []
+        },
+        "representative_event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "facts": [
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData"
+        ],
+        "sources": [
+          "tavily_gap_search"
+        ],
+        "source_urls": [
+          "https://www.cbndata.com/information/260843"
+        ],
+        "max_weighted_score": 3.3,
+        "trend_direction": "unclear",
+        "confidence": "high",
+        "_is_high": false,
+        "priority_flags": [
+          "P2"
+        ]
+      }
+    ],
+    "05": [
+      {
+        "cluster_id": "PC_202610_0001",
+        "cluster_key": "美团闪购|屈臣氏|platform_move",
+        "theme": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "rep_title": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "fact_hash": "1230f88e2ae53b4a",
+        "first_seen_at": "2026-10-01",
+        "last_seen_at": "2026-10-03",
+        "days_active": 2,
+        "event_count": 3,
+        "source_count": 1,
+        "platforms": [
+          "美团闪购"
+        ],
+        "competitors": [
+          "丝芙兰"
+        ],
+        "event_types": [
+          "platform_move"
+        ],
+        "business_variables": [
+          "会员",
+          "复购",
+          "履约",
+          "转化率"
+        ],
+        "action_words": [],
+        "entities": {
+          "platforms": [
+            "美团闪购"
+          ],
+          "companies": [
+            "屈臣氏"
+          ],
+          "brands": []
+        },
+        "representative_event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "facts": [
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData"
+        ],
+        "sources": [
+          "tavily_gap_search"
+        ],
+        "source_urls": [
+          "https://www.cbndata.com/information/260843"
+        ],
+        "max_weighted_score": 3.3,
+        "trend_direction": "unclear",
+        "confidence": "high",
+        "_is_high": false,
+        "priority_flags": [
+          "P2"
+        ]
+      }
+    ],
+    "06": [
+      {
+        "cluster_id": "PC_202610_0001",
+        "cluster_key": "美团闪购|屈臣氏|platform_move",
+        "theme": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "rep_title": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "fact_hash": "1230f88e2ae53b4a",
+        "first_seen_at": "2026-10-01",
+        "last_seen_at": "2026-10-03",
+        "days_active": 2,
+        "event_count": 3,
+        "source_count": 1,
+        "platforms": [
+          "美团闪购"
+        ],
+        "competitors": [
+          "丝芙兰"
+        ],
+        "event_types": [
+          "platform_move"
+        ],
+        "business_variables": [
+          "会员",
+          "复购",
+          "履约",
+          "转化率"
+        ],
+        "action_words": [],
+        "entities": {
+          "platforms": [
+            "美团闪购"
+          ],
+          "companies": [
+            "屈臣氏"
+          ],
+          "brands": []
+        },
+        "representative_event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "event_ids": [
+          "E20261001_0004",
+          "E20261002_0004",
+          "E20261003_0004"
+        ],
+        "facts": [
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+          "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData"
+        ],
+        "sources": [
+          "tavily_gap_search"
+        ],
+        "source_urls": [
+          "https://www.cbndata.com/information/260843"
+        ],
+        "max_weighted_score": 3.3,
+        "trend_direction": "unclear",
+        "confidence": "high",
+        "_is_high": false,
+        "priority_flags": [
+          "P2"
+        ]
+      }
+    ]
+  },
+  "all_clusters": [
+    {
+      "cluster_id": "PC_202610_0001",
+      "cluster_key": "美团闪购|屈臣氏|platform_move",
+      "theme": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+      "rep_title": "对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+      "fact_hash": "1230f88e2ae53b4a",
+      "first_seen_at": "2026-10-01",
+      "last_seen_at": "2026-10-03",
+      "days_active": 2,
+      "event_count": 3,
+      "source_count": 1,
+      "platforms": [
+        "美团闪购"
+      ],
+      "competitors": [
+        "丝芙兰"
+      ],
+      "event_types": [
+        "platform_move"
+      ],
+      "business_variables": [
+        "会员",
+        "复购",
+        "履约",
+        "转化率"
+      ],
+      "action_words": [],
+      "entities": {
+        "platforms": [
+          "美团闪购"
+        ],
+        "companies": [
+          "屈臣氏"
+        ],
+        "brands": []
+      },
+      "representative_event_ids": [
+        "E20261001_0004",
+        "E20261002_0004",
+        "E20261003_0004"
+      ],
+      "event_ids": [
+        "E20261001_0004",
+        "E20261002_0004",
+        "E20261003_0004"
+      ],
+      "facts": [
+        "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData",
+        "[规则兜底] tavily_gap_search报道：对电商大促“麻了”的年轻人，选择在美团闪购上过双11 | CBNData"
+      ],
+      "sources": [
+        "tavily_gap_search"
+      ],
+      "source_urls": [
+        "https://www.cbndata.com/information/260843"
+      ],
+      "max_weighted_score": 3.3,
+      "trend_direction": "unclear",
+      "confidence": "high",
+      "_is_high": false,
+      "priority_flags": [
+        "P2"
+      ]
+    }
+  ]
+}

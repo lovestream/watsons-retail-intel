@@ -28,6 +28,11 @@ _TAG_RE = re.compile(
     r'(?:\s+[ABCRKX]\s*-\s*[^\[\]]{1,12})*\s*\]'
 )
 
+# 判断标签行（可能不带方括号：`判断标签：A` / `判断标签: ['A']`）
+# 这是历史日报最常见的泄漏形式，不能只靠 _TAG_RE 的内联方括号规则。
+_JUDGMENT_LINE_RE = re.compile(
+    r'^\s*(?:\*\*)?判断标签(?:\*\*)?\s*[：:].*?$', re.MULTILINE)
+
 # 内部行（整行清除）
 _INTERNAL_LINE_RE = re.compile(
     r'^.*?(?:涉及事件|置信度).*?$', re.MULTILINE)
@@ -76,12 +81,14 @@ def sanitize_periodic_report(text: str, mode: str = "final") -> str:
         return text
     if mode == "draft":
         # draft 阶段只清标签，保留 event_id（editor_review 需要校验）
+        text = _JUDGMENT_LINE_RE.sub('', text)
         text = _TAG_RE.sub('', text)
         text = _INTERNAL_LINE_RE.sub('', text)
         text = re.sub(r'\n{3,}', '\n\n', text)
         return text.strip()
 
     text = _EVENT_ID_RE.sub('', text)
+    text = _JUDGMENT_LINE_RE.sub('', text)
     text = _TAG_RE.sub('', text)
     text = _INTERNAL_LINE_RE.sub('', text)
     text = _RULE_FALLBACK_RE.sub('', text)

@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-26",
+  "mode": "isolated same-window replay; no production writes",
+  "window": [
+    "2026-08-03",
+    "2026-08-09"
+  ],
+  "days_copied": 7,
+  "raw_events": 344,
+  "m2_labels": {
+    "PASS": 219,
+    "UNKNOWN": 110,
+    "BLOCK": 15
+  },
+  "verified_reportable_events": 0,
+  "verification_replay": {
+    "verified": 0,
+    "needs_verification": 344,
+    "top_reasons": {
+      "event_date_missing": 230,
+      "event_date_missing_published_fallback": 114,
+      "event_date_not_explicit": 114,
+      "hearsay_source:有望": 6,
+      "hearsay_source:内部人士": 5,
+      "hearsay_source:疑似": 1
+    },
+    "note": "Re-ran report_policy.evaluate_verification from raw fields; published_at alone is not accepted as event occurrence proof."
+  },
+  "reportable_events": 0,
+  "synthesis_success": true,
+  "clusters": 0,
+  "coverage": {
+    "expected_days": 7,
+    "available_days": 7,
+    "healthy_days": 7,
+    "degraded_days": 0,
+    "coverage_ratio": 1.0,
+    "raw_ratio": 1.0,
+    "missing_dates": [],
+    "degraded_dates": [],
+    "status": "normal",
+    "normal": 0.85,
+    "minimum": 0.7
+  },
+  "r3_candidate_status": "blocked_no_verified_core_events",
+  "policy": "Old raw P1/P2 events are never bulk-marked verified; missing evidence stays review/reference.",
+  "production_untouched": true
+}

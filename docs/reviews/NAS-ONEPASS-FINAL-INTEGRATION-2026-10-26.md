@@ -3,7 +3,7 @@
 日期：2026-10-26（执行环境时间 2026-10-27）  
 状态：**隔离集成候选已完成；生产代码、PID1、Cron、真实邮件/告警均未改动。**  
 权威分支：`integration/onepass-20261026`  
-代码候选 commit：`7590632`（本文件为该 commit 之后的交付说明）
+本地最终 HEAD：`566670f`；远端同步 commit：`d27b84b`（GitHub tree 与本地 tree 一致）
 
 ## 0. 结论先行
 
@@ -28,9 +28,15 @@
 | `release/r2-cutover-candidate` | R2 部署/备份/回滚底座 | 既有 |
 | `r3/periodic-quality` | R3 周期质量门与真实 TTS | `be44441` |
 | `m2/aihot-adoption` | M2 预筛、来源产出、SelectBench | `7dd3fd0` |
-| `integration/onepass-20261026` | **最终集成候选** | `7590632` |
+| `integration/onepass-20261026` | **最终集成候选** | 本地 `566670f` / 远端 `d27b84b` |
 
-集成分支已合入 R3、M2，并包含本报告、D5 持久化草案、D4 回放脚本。
+集成分支已合入 R3、M2，并包含本报告、D5 持久化草案、D4 回放脚本。远端同步结果：
+
+| 分支 | 远端 commit | 远端 tree | 与本地 tree |
+|---|---|---|---|
+| `r3/periodic-quality` | `ca372f0` | `cf3e9a9` | 一致 |
+| `m2/aihot-adoption` | `fe6ba15` | `4324f6a` | 一致 |
+| `integration/onepass-20261026` | `d27b84b` | `59b4341` | 一致 |
 
 ## 2. D1｜测试源码、`.gitignore`、干净 clone
 

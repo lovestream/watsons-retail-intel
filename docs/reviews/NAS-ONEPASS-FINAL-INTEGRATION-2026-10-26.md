@@ -12,8 +12,9 @@
   **462.624 秒**，不是旧 W27 音频，不是“假装成功”。
 - D3：SelectBench 扩到 **59 条**（40 条真实文章 URL + 19 条合成回归），字段不一致已修；
   **59/59**，但仍 **advisory**，`safe_to_enable=false`。
-- D4：R2/R3/M2 已合入一个可测试候选；W32 隔离回放 344 条事件，**verified=0**，
-  R3 严格门正确返回 `blocked_no_verified_core_events`，没有把旧池批量标 verified。
+- D4：R2/R3/M2 已合入一个可测试候选；W32 隔离回放 344 条事件，按“文内明确日期”
+  逐条重跑核验得到 **37 verified / 5 reportable / 4 clusters**，R3 返回
+  `candidate_review_required`；没有把旧池批量标 verified。
 - D5：supervisor 持久化方案已落地为草案 + 脚本 + `/etc` 清空重装模拟；
   宿主 bind mount 尚需 NAS 宿主机核验和单独授权。
 
@@ -159,17 +160,21 @@ PYTHONPATH=".:/app/working/projects/watsons-retail-intel/.venv_packages:$PYTHONP
 
 - 原始事件：**344**
 - M2：PASS 219 / UNKNOWN 110 / BLOCK 15
-- 核验重跑：`verified=0`，`needs_verification=344`
-- 主要原因：`event_date_missing` 230、`event_date_missing_published_fallback` 114、
-  `event_date_not_explicit` 114；少量传闻标记
-- R3 候选状态：`blocked_no_verified_core_events`
-- 集群数：0；覆盖 7 天均为 healthy，但无可报告 verified 事件
+- 核验重跑：**37 verified**，307 `needs_verification`
+- 其中按文内明确日期选择性核验：64 条（只接受事实/证据文本自带日期，且落在窗口内）
+- reportable：**5**；4 clusters；2 个高优 cluster
+- R3 候选状态：`candidate_review_required`
+- 主要原因：`event_date_missing` 206、`event_date_missing_published_fallback` 80、
+  `event_date_not_explicit` 80、`event_date_after_collection` 18；少量传闻标记
+- 覆盖 7 天均为 healthy；已形成候选，但只有 5 条可报告事实，仍需人工审阅，
+  不能直接当作完整周报
 
 这说明两件事：
 
 1. 现有旧池不能靠批量标 `verified` 生成周报；会污染正式报告。
-2. 需要修复“从原始证据提取/核验事件日期”的链路，或在隔离回放中逐条复核；
-   当前严格门拦截是正确行为。
+2. 回放证明“只从文内明确日期选择性核验”能把候选从 0 推到 5 条，但远不足以
+   支撑高质量周报；其余 307 条仍缺显式日期/证据，需要修复提取链路或逐条人工复核。
+3. 当前 `candidate_review_required` 是候选状态，不是生产可发送状态。
 
 证据：`docs/reviews/artifacts/ONEPASS-E2E-REPLAY-2026-10-26.json`
 
@@ -216,7 +221,8 @@ NAS 容器增加只读 bind mount：
 
 ### 7.1 生产周期报告的数据阻塞
 
-当前生产 W32 快照 344 条事件中 0 条 verified。要真正生成 R3 周报，必须：
+当前生产 W32 快照 344 条事件中 0 条 verified；隔离回放按文内明确日期仅选择性核验出
+5 条 reportable。要真正生成生产 R3 周报，必须：
 
 1. 在隔离回放/已备份快照中，从原始文章重新提取事件日期与证据；
 2. 逐条人工复核或接入独立核验；

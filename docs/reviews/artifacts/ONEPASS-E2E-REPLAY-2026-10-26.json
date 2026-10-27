@@ -12,23 +12,35 @@
     "UNKNOWN": 110,
     "BLOCK": 15
   },
-  "verified_reportable_events": 0,
+  "verified_reportable_events": 5,
   "verification_replay": {
-    "verified": 0,
-    "needs_verification": 344,
+    "verified": 37,
+    "explicit_date_verified_before_synthesis": 64,
+    "needs_verification": 307,
     "top_reasons": {
-      "event_date_missing": 230,
-      "event_date_missing_published_fallback": 114,
-      "event_date_not_explicit": 114,
+      "event_date_missing": 206,
+      "event_date_missing_published_fallback": 80,
+      "event_date_not_explicit": 80,
+      "event_date_after_collection:occurred:2026-08-26>2026-08-09": 18,
       "hearsay_source:有望": 6,
-      "hearsay_source:内部人士": 5,
-      "hearsay_source:疑似": 1
+      "hearsay_source:内部人士": 5
     },
     "note": "Re-ran report_policy.evaluate_verification from raw fields; published_at alone is not accepted as event occurrence proof."
   },
-  "reportable_events": 0,
+  "reportable_events": 5,
   "synthesis_success": true,
-  "clusters": 0,
+  "clusters": 4,
+  "synthesis_event_stats": {
+    "raw_events": 76,
+    "period_events": 67,
+    "reportable_events": 5,
+    "clusters": 4,
+    "selected_clusters": 4,
+    "high_priority_clusters": 2,
+    "platform_clusters": 4,
+    "competitor_clusters": 1,
+    "risk_clusters": 0
+  },
   "coverage": {
     "expected_days": 7,
     "available_days": 7,
@@ -42,7 +54,7 @@
     "normal": 0.85,
     "minimum": 0.7
   },
-  "r3_candidate_status": "blocked_no_verified_core_events",
+  "r3_candidate_status": "candidate_review_required",
   "policy": "Old raw P1/P2 events are never bulk-marked verified; missing evidence stays review/reference.",
   "production_untouched": true
 }

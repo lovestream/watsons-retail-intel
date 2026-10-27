@@ -1,5 +1,8 @@
 # 13｜DeepSeek / QwenPaw 一次性交付总指令：生产恢复、R3播客、AIHOT精选优化
 
+> **2026-10-27 最新执行优先级（覆盖本文此前D1–D5）**：R2+R3+M2已在`integration/onepass-20261026`汇总，测试71项由QwenPaw报告通过，SiliconFlow新TTS已跑通。**现在唯一待推进的隔离内容工作是[E1：真实目标周事件原文证据补全及R3全链路](reviews/NAS-ONEPASS-INTEGRATION-CHATGPT-REVIEW-2026-10-27.md)**。特别注意：344/37/5发生在**W32**，不是W40；W40音频来自样例稿。先恢复真实目标周证据，修回放脚本日期角色与分析文件覆盖，最终真实稿才能配音。**不自动切生产、合并main、修改Cron或发送邮件**。
+
+
 > **2026-10-26 最新复审与返工边界**：本文件A–D三工作包均有隔离交付。新验收详见[一次性交付复审 D1–D5](reviews/NAS-ONEPASS-CHATGPT-REVIEW-2026-10-26.md)。现在连续修正：R3/M2测试源码GitHub缺失（gitignore test_*.py）、R3真实TTS 403/旧MP3不可作本期音频、M2 SelectBench source_url/evidence_url字段错配、R2+R3+M2兄弟分支尚未集成、supervisor配置位于非持久层。只做安全开发/集成验证；生产切换仍须明确授权。
 
 

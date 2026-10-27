@@ -213,7 +213,7 @@ OK
 1. 将 `e1/real-period-recovery` 的代码改动合并到生产分支。
 2. 用恢复后的 13 条事件替换/补充正式 W42 账本，并决定 8 条报道型事件是否以 `article_claim` 身份保留。
 3. 将 2026-W43 周报与 MP3 作为真实周期产物发布/归档。
-4. 真实发送周报邮件（HTML 正文 + MP3 附件，不发 .md 附件），收件人 123399974@qq.com。
+4. 真实发送周报邮件（HTML 正文 + MP3 附件，不发 .md 附件），收件人 <APPROVED_RECIPIENT_FROM_LOCAL_CONFIG>。
 5. 切换 Cron 到新周期任务，或暂停旧周期任务。
 6. 安装/持久化 supervisor 并重启 PID1（或等价进程管理）。
 7. 启用真实 critical-only 告警及其去重/恢复/静默策略。

@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
-"""Small explainable SelectBench for the Watsons tri-state prefilter.
+"""Explainable SelectBench for the Watsons tri-state prefilter.
 
-Inspired by AIHOT `admin/selectbench.ts`: every case has a human label and an
-evidence URL, so a precision/recall change can be traced to a concrete source
-rather than a vibe.  This is intentionally a fixture harness, not a claim of
-production accuracy.
+Each case carries a human label plus an evidence URL.  The report separates
+real article URLs from synthetic regression cases/home pages; 24 hand-written
+cases are not evidence of production precision.
 """
 from __future__ import annotations
 
 import argparse
 import json
 from pathlib import Path
-from typing import Any, Dict, Iterable, List
-
-from skills.m2.tri_state_prefilter import BLOCK, PASS, UNKNOWN, classify_candidate
+from typing import Any, Dict, Iterable, List, Tuple
 
 
 def load_cases(path: str) -> List[Dict[str, Any]]:
@@ -26,50 +23,117 @@ def load_cases(path: str) -> List[Dict[str, Any]]:
     return cases
 
 
+def _url_strength(url: str) -> str:
+    u = str(url or "").strip()
+    if not u.startswith("http"):
+        return "missing"
+    path = u.split("://", 1)[-1].split("/", 1)
+    tail = path[1] if len(path) > 1 else ""
+    if any(x in u for x in ("/detail/", "/information/", "/article", "/news/",
+                            ".html", "/p/", "/articles/", "/content/")):
+        return "article_url"
+    if tail in ("", "/"):
+        return "homepage"
+    return "listing_or_unknown"
+
+
+def _normalise(c: Dict[str, Any]) -> Dict[str, Any]:
+    url = str(c.get("evidence_url") or c.get("source_url") or "").strip()
+    strength = _url_strength(url)
+    etype = str(c.get("evidence_type") or "").strip()
+    if not etype:
+        etype = "fixture_synthetic" if strength != "article_url" else "real_source"
+    return {
+        "id": c.get("id"),
+        "stratum": str(c.get("stratum") or "other"),
+        "expected": str(c.get("expected") or "").upper(),
+        "source_url": c.get("source_url") or "",
+        "evidence_url": url,
+        "evidence_type": etype,
+        "evidence_strength": strength,
+        "evidence_verified": bool(c.get("evidence_verified", False)),
+        "evidence_note": str(c.get("evidence_note") or ""),
+        "text": c,
+    }
+
+
+def _metrics(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+    expected_pass = [r for r in rows if r["expected"] == "PASS"]
+    pass_pred = [r for r in rows if r["predicted"] == "PASS"]
+    block_pred = [r for r in rows if r["predicted"] == "BLOCK"]
+    return {
+        "n": len(rows),
+        "precision_pass": round(
+            sum(r["correct"] for r in pass_pred) / len(pass_pred), 4
+        ) if pass_pred else 0.0,
+        "recall_pass": round(
+            sum(r["correct"] for r in expected_pass) / len(expected_pass), 4
+        ) if expected_pass else 0.0,
+        "precision_block": round(
+            sum(r["correct"] for r in block_pred) / len(block_pred), 4
+        ) if block_pred else 0.0,
+        "correct": sum(r["correct"] for r in rows),
+        "false_block": sum(r["false_block"] for r in rows),
+        "false_pass": sum(r["false_pass"] for r in rows),
+    }
+
+
 def evaluate(cases: Iterable[Dict[str, Any]]) -> Dict[str, Any]:
-    rows = []
-    for c in cases:
-        got = classify_candidate(c)
-        expected = str(c.get("expected") or "").upper()
+    from skills.m2.tri_state_prefilter import BLOCK, PASS, UNKNOWN, classify_candidate
+
+    rows: List[Dict[str, Any]] = []
+    for raw in cases:
+        c = _normalise(raw)
+        got = classify_candidate(c["text"])
+        expected = c["expected"]
+        complete = bool(c["evidence_url"]) and (
+            c["evidence_type"] == "real_source" and c["evidence_strength"] == "article_url"
+            or c["evidence_type"] == "fixture_synthetic" and c["evidence_strength"] in ("article_url", "homepage")
+        )
         rows.append({
-            "id": c.get("id"),
-            "stratum": c.get("stratum"),
+            "id": c["id"],
+            "stratum": c["stratum"],
             "expected": expected,
             "predicted": got["label"],
             "reason": got["reason"],
-            "evidence_url": c.get("evidence_url"),
+            "source_url": c["source_url"],
+            "evidence_url": c["evidence_url"],
+            "evidence_type": c["evidence_type"],
+            "evidence_strength": c["evidence_strength"],
+            "evidence_verified": c["evidence_verified"],
+            "evidence_complete": complete,
             "correct": got["label"] == expected,
             "false_block": expected in (PASS, UNKNOWN) and got["label"] == BLOCK,
             "false_pass": expected == BLOCK and got["label"] == PASS,
         })
-    expected_pass = [r for r in rows if r["expected"] == PASS]
-    expected_block = [r for r in rows if r["expected"] == BLOCK]
-    pass_pred = [r for r in rows if r["predicted"] == PASS]
-    block_pred = [r for r in rows if r["predicted"] == BLOCK]
-    unknown = [r for r in rows if r["predicted"] == UNKNOWN]
-    precision = (sum(r["correct"] for r in pass_pred) / len(pass_pred)
-                 if pass_pred else 0.0)
-    recall = (sum(r["correct"] for r in expected_pass) / len(expected_pass)
-              if expected_pass else 0.0)
-    block_precision = (sum(r["correct"] for r in block_pred) / len(block_pred)
-                       if block_pred else 0.0)
+
+    real = [r for r in rows if r["evidence_type"] == "real_source" and
+            r["evidence_strength"] == "article_url"]
+    synthetic = [r for r in rows if r not in real]
+    overall = _metrics(rows)
+    real_m = _metrics(real)
+    synthetic_m = _metrics(synthetic)
+    traceability_ok = all(bool(r["evidence_url"]) for r in rows)
+    verified_real = [r for r in real if r["evidence_verified"]]
+    safe = bool(
+        len(verified_real) >= 40 and traceability_ok and
+        real_m["precision_pass"] >= 0.90 and real_m["recall_pass"] >= 0.80 and
+        real_m["precision_block"] >= 0.95 and real_m["false_block"] == 0)
     return {
-        "n": len(rows),
-        "precision_pass": round(precision, 4),
-        "recall_pass": round(recall, 4),
-        "precision_block": round(block_precision, 4),
-        "unknown_rate": round(len(unknown) / len(rows), 4) if rows else 0.0,
-        "false_block": sum(r["false_block"] for r in rows),
-        "false_pass": sum(r["false_pass"] for r in rows),
-        "correct": sum(r["correct"] for r in rows),
+        **overall,
+        "traceability_ok": traceability_ok,
+        "real_evidence_n": len(real),
+        "verified_real_evidence_n": len(verified_real),
+        "synthetic_n": len(synthetic),
+        "real_evidence": real_m,
+        "synthetic": synthetic_m,
         "by_stratum": _by_stratum(rows),
         "rows": rows,
-        "safe_to_enable": bool(
-            len(rows) >= 40 and precision >= 0.90 and recall >= 0.80 and
-            block_precision >= 0.95 and
-            sum(r["false_block"] for r in rows) == 0),
-        "note": "Advisory fixture only; production remains on hard gates until "
-                "a larger human-labeled set clears the same thresholds.",
+        "safe_to_enable": safe,
+        "note": "Advisory only. Real article URLs and synthetic/homepage cases are "
+                "reported separately; 24 hand-built cases never establish production "
+                "precision, and evidence_verified is false unless article text was "
+                "re-read and checked manually.",
     }
 
 

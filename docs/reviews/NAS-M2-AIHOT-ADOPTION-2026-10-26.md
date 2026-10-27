@@ -13,19 +13,25 @@
   unique URLs、verified、reportable、活跃日期；不写账本。
 - `skills/m2/event_relationship.py`：same_event / update / related / unrelated，并只按
   独立域名计数，避免同文转载把 heat 抬高；heat 与 editorial priority 分离。
-- `skills/m2/selectbench.py` + `tests/m2/fixtures/selectbench.jsonl`：24 条手写、
-  可追溯到 evidence URL 的 fixture。
+- `skills/m2/selectbench.py` + `tests/m2/fixtures/selectbench.jsonl`：**59 条**手写 fixture；
+  `evidence_url` 显式映射，40 条真实文章 URL 与 19 条合成/首页回归样本分开统计。
 - `skills/filter_relevant_articles.py`：接入 tri-state **annotation**；现有硬过滤仍是
   生产判定，annotation 不改变 ARCHIVE/PASS 结果。
 
 ## 2. 验证
 
-- SelectBench 24/24：`precision_pass=1.0`、`recall_pass=1.0`、`precision_block=1.0`、
-  `false_block=0`、`false_pass=0`。
-- 但 24 条为手工小样本，`safe_to_enable=false`（阈值要求 ≥40 条且 precision≥0.90、
-  recall≥0.80、block precision≥0.95、false_block=0）。**不把 24/24 当作生产精度。**
-- M2 单测 9/9 通过；本分支全仓 62 项通过（M2 新增 + 既有 R1/R2A 集）。
-- 负例覆盖：股价续创新高、招聘、香港本地、否定语义、空正文。
+- SelectBench **59/59**：`precision_pass=1.0`、`recall_pass=1.0`、`precision_block=1.0`、
+  `false_block=0`、`false_pass=0`；`traceability_ok=true`，每行均有非空 `evidence_url`。
+- 真实文章 URL 子集 **40 条**（40/40），合成/首页回归子集 19/19。
+- 但 `verified_real_evidence_n=0`：40 条 URL 是从生产语料捕获的，未逐条重新抓取原文，
+  因此 `safe_to_enable=false`（阈值要求真实且已核验 ≥40 条）。**不把 59/59 当作生产精度，
+  也不把首页 URL 说成可追溯原文。**
+- M2 单测 **10/10** 通过（新增 event-pool 字段映射回归）；测试源码
+  `tests/m2/test_m2_adoption.py` 已提交，`.gitignore` 已改为仅忽略根目录一次性
+  `test_*.py`。
+- 负例覆盖：股价续创新高、招聘、香港本地、否定语义、空正文、过期 2024 年公告。
+- 旧规则在同一 59 条样本上 52/59，6 个财务/IPO/旧公告样本漏为 UNKNOWN 或 PASS；
+  新增 stale + corporate-finance 规则后 59/59。这是 fixture 前后对照，不是生产 A/B。
 - 在 `periodic_synthesis` 中只新增独立域名计数与 heat 分离；不改变
   `report_eligibility`/`verification_status`/priority 的任何判定。
 
@@ -52,4 +58,5 @@
 
 - `docs/reviews/artifacts/M2-SOURCE-YIELD-2026-10-26.json`
 - `tests/m2/test_m2_adoption.py`（9 项）
-- `tests/m2/fixtures/selectbench.jsonl`（24 条）
+- `tests/m2/fixtures/selectbench.jsonl`（59 条；40 条真实文章 URL + 19 条合成回归）
+- `docs/reviews/artifacts/M2-SELECTBENCH-2026-10-26.json`（完整逐项结果）

@@ -33,6 +33,8 @@ _STRONG_SIGNALS = [
     "抖音小时达", "前置仓", "闪电仓", "屈臣氏", "watsons",
     "美妆", "个护", "护肤", "彩妆", "洗护", "防晒", "面膜", "香水",
     "化妆品", "个人护理", "口腔护理", "身体护理", "男士护理",
+    "林清轩", "道星球", "丝芙兰", "雅诗兰黛", "欧莱雅", "珀莱雅",
+    "韩束", "薇诺娜", "自然堂",
 ]
 _WEAK_SIGNALS = [
     "零售", "电商", "平台", "门店", "品牌", "消费", "快消", "渠道",
@@ -47,7 +49,8 @@ _ACTION_SIGNALS = [
 _STOCK_RE = re.compile(
     r"涨停|跌停|股价|市值|买入评级|增持|减持|研报|目标价|盈利预测|"
     r"估值|PE\b|PB\b|A股|港股|美股|收盘|开盘|主力资金|龙虎榜|"
-    r"续创历史新高|创历史新高|券商|分析师|投资建议"
+    r"续创历史新高|创历史新高|券商|分析师|投资建议|"
+    r"财报|营收|净利润|归母|IPO|招股|经营利润|业绩预告"
 )
 _BLOCK_CONTEXT = re.compile(
     r"招聘|求职|简历|面试|招生|培训课程|优惠券领取|抽奖|"
@@ -68,6 +71,11 @@ _OUT_VERTICALS = re.compile(
     r"乘用车|新能源车|汽车销量|车企|羽绒服|服饰品牌|服装品牌|鞋服|"
     r"安踏|李宁|优衣库|波司登|海澜之家|太平鸟"
 )
+_STALE_RE = re.compile(
+    r"(?:2023|2024)年.{0,24}(?:全年|财报|业绩|公告|报告|数据|政策)|"
+    r"(?:历史回顾|旧公告|旧文|往年回顾|复盘旧文)"
+)
+_CURRENT_YEAR = re.compile(r"2025年|2026年|今年")
 
 
 def _remove_negated(text: str) -> str:
@@ -107,6 +115,8 @@ def classify_candidate(article: Dict[str, Any]) -> Dict[str, Any]:
             return _result(UNKNOWN, "强信号但正文不足，进入复核队列",
                            early_strong[:5], domain)
         return _result(BLOCK, "内容为空或过短", [], domain)
+    if _STALE_RE.search(compact) and not _CURRENT_YEAR.search(compact):
+        return _result(BLOCK, "过期公告/历史数据，不能作为今日事实", ["stale"], domain)
     if _STOCK_RE.search(text):
         return _result(BLOCK, "资本市场/研报内容，非经营情报", ["stock"], domain)
     if _BLOCK_CONTEXT.search(text):
@@ -157,3 +167,21 @@ def annotate_articles(articles: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         item["tri_state"] = classify_candidate(item)
         out.append(item)
     return out
+
+
+def annotate_events(events: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Annotate event-pool rows without pretending they are raw articles.
+
+    Event rows use `event_title`/`fact`; the article prefilter expects
+    `title`/`summary`.  Mapping them is required, otherwise every event looks
+    empty and is wrongly BLOCKed.  This function only annotates; it never
+    changes report eligibility or verification status.
+    """
+    mapped = []
+    for e in events:
+        item = dict(e)
+        item.setdefault("title", e.get("event_title") or "")
+        item.setdefault("summary", e.get("fact") or e.get("summary") or "")
+        item.setdefault("content", e.get("evidence_text") or "")
+        mapped.append(item)
+    return annotate_articles(mapped)

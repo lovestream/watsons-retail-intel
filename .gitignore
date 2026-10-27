@@ -33,7 +33,9 @@ podcasts/scripts/
 # Dev scripts
 check_*.py
 batch_*.py
-test_*.py
+# Only root-level one-off test scripts are dev artifacts; committed tests
+# under tests/ must never be ignored by a recursive basename pattern.
+/test_*.py
 
 # OpenCode API keys (secrets — never commit)
 config/opencode_keys.json

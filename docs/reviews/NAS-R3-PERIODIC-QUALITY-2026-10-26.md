@@ -2,7 +2,7 @@
 
 日期：2026-10-26  
 分支：`r3/periodic-quality`  
-结论：**质量门与交付门禁已按 R3 落地；W40 被正确拦截；正常样例通过；真实 TTS 因 403 阻塞，未伪称新音频。**
+结论：**质量门与交付门禁已按 R3 落地；W40 被正确拦截；正常样例通过；已用冻结口播稿真实生成新 MP3，未复用历史音频。**
 
 ## 1. 解决的问题
 
@@ -33,26 +33,30 @@
 | 单证据簇 | 命中 `独立证据簇不足` 与 `独立来源链接不足` |
 | 脏展示文本 | 清洗后无 event_id、判断标签、规则兜底标记，且仍通过正常门 |
 | Phase4 全兜底章节 | `sendable=false`，`delivery_blockers=[quality_gate]`，无音频、无邮件 |
-| 正常样例 Phase4 | `sendable=true`、`delivery_allowed=true`，报告 1,589 字、口播稿 3,098 字、音频 415.3s |
+| 正常样例 Phase4 | `sendable=true`、`delivery_allowed=true`，报告 1,589 字、口播稿 3,098 字、**新合成音频 456.84s** |
 | 邮件 dry-run | `ok=true`，HTML 4,762 字，附件 1 个 MP3，未真实发送 |
 | 终稿内部标记 | event_id/判断标签/涉及事件/置信度/规则兜底/按事件密度排序 全部为 false |
 
-单测：`tests/r3` 6/6 通过；本分支全仓 59 项通过（R3 新增 + 既有 R1/R2A 集）。
+单测：`tests/r3` **8/8** 通过（6 项质量门/USE + 2 项 TTS 适配器；测试源码已提交）；从干净 worktree 运行本分支全仓测试。
 
 ## 4. 交付证据哈希
 
 - 报告 SHA256：`8dad8fddd80973558a8b6c72a753923b101667bf373f8569c317da9f71894c63`
 - 口播稿 SHA256：`3e0ccbf8a6fdd09720c4efb3b22d9bec57682f370c80c961c45d54bad70bae12`
-- 音频 SHA256：`5928ddec807030f394019f6b036292377f88cbb076263bb49971e0efa1896249`
+- 音频 SHA256：`94ad828dfc9394ca58636f57b8ee86e7a037100c960c92c9fdf9c530e7064954`
 - 邮件 HTML SHA256：`c83e926b71c65326faf37a583b12b8c9e8a4c0f7473b9e2ceeaebe6188a67832`
 
 完整 JSON：`docs/reviews/artifacts/R3-FROZEN-DRYRUN-2026-10-26.json`。
 
 ## 5. 明确的阻塞与边界
 
-- `edge-tts` 在本环境连接 Microsoft speech endpoint 返回 **HTTP 403**；本轮不能生成新的
-  中文语音。Phase4 的音频验收使用冻结的真实中文 MP3（W27，415 秒）作为播放/附件 fixture，
-  仅验证“非零、可读、时长、邮件附件”链路，**不声称该音频由本轮文本生成**。
-- 报告与邮件均为 frozen fixture dry-run；没有真实发送邮件，没有改生产报告/账本。
+- `edge-tts` 在本环境连接 Microsoft speech endpoint 返回 **HTTP 403**。已改用项目已有的
+  SiliconFlow `FunAudioLLM/CosyVoice2-0.5B` 中文 TTS（复用现有 `siliconflow_api_key`，
+  不新增第三方 Key），从冻结口播稿合成 **456.84 秒新 MP3**；音频哈希与口播稿哈希成对记录，
+  `script_audio_match=true`。旧 W27 音频不再作为交付证据。
+- TTS 分块按 800 字切分后以 ffmpeg concat 拼接；`+55%` 语速使 3,098 字口播稿落在
+  5-8 分钟目标内；edge-tts 仅保留为不可达时的 fallback，不伪造成功。
+- 报告与邮件均为 frozen fixture dry-run；收件人固定为 `review-test@example.invalid`，
+  没有真实发送邮件，没有改生产报告/账本。
 - 生产事件池当前普遍缺少 `verification_status=verified`，因此 R3 收紧后无法用未核实事件凑章节。
   这是有意的质量约束；生产周报恢复需要先恢复事实核验链路，不能用放宽门禁代替。

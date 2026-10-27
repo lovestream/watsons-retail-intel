@@ -29,6 +29,8 @@ import shutil
 import subprocess
 import sys
 import time
+import urllib.error
+import urllib.request
 from datetime import datetime, timedelta, date
 from typing import Any, Dict, List, Optional
 
@@ -80,6 +82,13 @@ MAX_TOKENS_REVIEW = 8192
 MAX_TOKENS_PODCAST = 8192
 TTS_VOICE = "zh-CN-XiaoxiaoNeural"
 TTS_RATE = "+5%"
+# SiliconFlow uses an existing project credential; edge-tts is retained only as
+# a fallback for environments where the Microsoft endpoint is reachable.
+TTS_SILICONFLOW_MODEL = os.getenv(
+    "PERIODIC_TTS_MODEL", "FunAudioLLM/CosyVoice2-0.5B")
+TTS_SILICONFLOW_VOICE = os.getenv(
+    "PERIODIC_TTS_VOICE", "FunAudioLLM/CosyVoice2-0.5B:anna")
+TTS_PROVIDER = os.getenv("PERIODIC_TTS_PROVIDER", "siliconflow").strip().lower()
 
 _TYPE_NAMES = {"weekly": "周报", "monthly": "月报", "yearly": "年报"}
 
@@ -959,13 +968,25 @@ def _split_tts_chunks(text: str, max_chars: int = 800) -> List[str]:
 
 
 def _mp3_duration(path: str) -> Optional[float]:
-    """mutagen 读取 MP3 时长（秒）。失败返回 None。"""
+    """Read MP3 duration with mutagen, falling back to ffmpeg."""
     try:
         from mutagen.mp3 import MP3
         info = MP3(path).info
-        return float(info.length) if info and info.length else None
+        if info and info.length:
+            return float(info.length)
     except Exception:
-        return None
+        pass
+    try:
+        import imageio_ffmpeg
+        ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+        result = subprocess.run(
+            [ffmpeg, "-i", path], capture_output=True, text=True, timeout=30)
+        m = re.search(r"Duration: (\d+):(\d+):(\d+\.\d+)", result.stderr)
+        if m:
+            return int(m.group(1)) * 3600 + int(m.group(2)) * 60 + float(m.group(3))
+    except Exception:
+        pass
+    return None
 
 
 def _estimate_mp3_duration(path: str) -> Optional[float]:
@@ -1015,9 +1036,68 @@ def _concat_mp3(parts: List[str], out_path: str) -> bool:
             pass
 
 
+def _rate_to_speed(rate: str) -> float:
+    """Convert edge-style +25%/-15% to a provider speed multiplier."""
+    try:
+        pct = int(str(rate).strip().replace("%", ""))
+    except Exception:
+        pct = 0
+    return max(0.5, min(2.0, 1.0 + pct / 100.0))
+
+
+def _siliconflow_tts_chunk(text: str, rate: str, out_path: str) -> bool:
+    """Generate one MP3 chunk with SiliconFlow's OpenAI-compatible TTS.
+
+    Uses the already-authorized `siliconflow_api_key`; no new credential or
+    provider is introduced.  The endpoint is synchronous, so callers run it
+    through asyncio.to_thread.
+    """
+    key = os.getenv("siliconflow_api_key") or os.getenv("SILICONFLOW_API_KEY")
+    if not key:
+        logger.warning(f"{LOG_PREFIX} SiliconFlow TTS 缺少 siliconflow_api_key")
+        return False
+    body = {
+        "model": TTS_SILICONFLOW_MODEL,
+        "input": text,
+        "voice": TTS_SILICONFLOW_VOICE,
+        "response_format": "mp3",
+        "speed": _rate_to_speed(rate),
+    }
+    req = urllib.request.Request(
+        "https://api.siliconflow.cn/v1/audio/speech",
+        data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
+        headers={
+            "Authorization": "Bearer " + key,
+            "Content-Type": "application/json",
+            "User-Agent": "watsons-retail-intel/1.0",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=180) as resp:
+            audio = resp.read()
+        if len(audio) < 2000 or not audio.startswith(b"ID3") and audio[:2] != b"\xff\xfb":
+            logger.error(f"{LOG_PREFIX} SiliconFlow TTS 返回非 MP3 (%d bytes)", len(audio))
+            return False
+        with open(out_path, "wb") as fh:
+            fh.write(audio)
+        return os.path.getsize(out_path) > 500
+    except urllib.error.HTTPError as e:
+        logger.error(f"{LOG_PREFIX} SiliconFlow TTS HTTP {e.code}: "
+                     f"{e.read().decode('utf-8', 'ignore')[:200]}")
+    except Exception as e:
+        logger.error(f"{LOG_PREFIX} SiliconFlow TTS 异常: {e}")
+    return False
+
+
 async def _generate_tts_chunk(text: str, voice: str, rate: str,
                               out_path: str) -> bool:
-    """单块 edge-tts 生成。"""
+    """Generate one MP3 chunk (SiliconFlow primary, edge-tts fallback)."""
+    if TTS_PROVIDER == "siliconflow":
+        ok = await asyncio.to_thread(_siliconflow_tts_chunk, text, rate, out_path)
+        if ok:
+            return True
+        logger.warning(f"{LOG_PREFIX} SiliconFlow TTS 分块失败，尝试 edge-tts")
     try:
         import edge_tts
         communicate = edge_tts.Communicate(text, voice, rate=rate)
@@ -1038,7 +1118,10 @@ def _generate_tts(text, output_path, target_seconds=None, project_root="."):
         {"ok": bool, "duration_seconds": float|None, "rate": str,
          "error": str, "out_of_range": bool}
     """
-    rate_plan = [TTS_RATE, "+25%", "+40%", "-15%"]  # 过长加速，过短减速
+    # Chinese business scripts are ~3,000-4,000 chars; at 1.0x they run
+    # 9-12 minutes.  Start near the 5-8 minute target instead of burning
+    # several 4-minute network rounds on known-too-slow rates.
+    rate_plan = ["+55%", "+70%", "+85%", "+40%", "-10%"]
     output_path = os.path.abspath(output_path)
     tmpdir = os.path.abspath(os.path.join(project_root, "data", "tmp",
                                           "podcast"))

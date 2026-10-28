@@ -1319,63 +1319,15 @@ def send_periodic_report_email(
 
 def _build_periodic_email_html(report_md: str, report_type: str,
                                report_name: str, period_label: str) -> str:
-    """构建周报/月报/年报邮件 HTML。"""
-    # 清理内部标记（事件ID/判断标签/思考泄露）+ 格式修正 + 转换
-    # 周报/月报章节集与日报不同，关闭 canonical 章节过滤避免误删。
+    """Business-reader digest, separate from the archived full Markdown report.
+
+    Avoid audit notes, evidence appendices, multi-column business tables and
+    repeated next-week validation filler in the recipient's email body.
+    Does not alter the upstream editorial/delivery quality gate.
+    """
+    from skills.send_daily_report_email.periodic_mobile_digest import render
     clean_md = _clean_report_for_display(report_md, keep_canonical=False)
-    clean_md = _fix_markdown_formatting(clean_md)
-    body_html = _md_to_html(clean_md)
-
-    # 根据类型调整提示语（三批整改 §25: 周/月/年时长不同）
-    audio_tips = {
-        "weekly": "本期周报已生成 AI 播客音频（约 5-8 分钟），见邮件附件 MP3。",
-        "monthly": "本期月报已生成 AI 播客摘要音频（约 8-12 分钟），见邮件附件 MP3。",
-        "yearly": "本期年报已生成 AI 播客摘要音频（约 12-20 分钟），见邮件附件 MP3。",
-    }
-    system_tips = {
-        "weekly": "本期周报基于本周即时零售与个护美妆事件池综合提炼，提供趋势判断与策略建议。",
-        "monthly": "本期月报基于本月事件池综合分析生成，提供格局判断与战略建议。",
-        "yearly": "本期年报基于全年事件池综合分析生成，提供行业复盘与年度战略。",
-    }
-
-    full_html = f"""<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-{EMAIL_CSS}
-</style>
-</head>
-<body>
-
-<div class="header">
-  <h1>即时零售 × 个护美妆经营{report_name}</h1>
-  <p>{period_label} ｜ 屈臣氏电商经营决策参考</p>
-</div>
-
-<div class="content">
-
-<div class="audio-notice">
-  <p>🎧 {audio_tips.get(report_type, "")}</p>
-</div>
-
-<div class="system-note">
-  <p>📊 {system_tips.get(report_type, "")}</p>
-</div>
-
-{body_html}
-
-</div>
-
-<div class="footer">
-  <p>本邮件由 Watsons Retail Intel 自动生成 · {period_label} · 仅供内部参考</p>
-</div>
-
-</body>
-</html>"""
-
-    return full_html
+    return render(clean_md, report_name, period_label)
 
 
 # ===================== CLI =====================

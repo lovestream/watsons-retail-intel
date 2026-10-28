@@ -1,5 +1,8 @@
 # Watson's Retail Intel — 实现与流程文档
 
+> **2026-10-29 最新TTS任务（已获用户授权安装）**：SiliconFlow收费TTS拟换成本地离线 [Sherpa-ONNX + MeloTTS中文](14_20261029_qwenpaw_offline_tts_sherpa_melo_install.md)；DeepSeek在QwenPaw中使用独立持久venv及模型目录，先短句/全篇测试再局部接入。**禁SiliconFlow/edge-tts静默回退及多语速整篇重复合成；文本大模型主备路由不变。** 生产Cron/PID1/SMTP/账本仍无授权。
+
+
 > **2026-10-28 最新用户体验要求**：[精简手机邮件预览](reviews/NAS-E1-W43-EMAIL-BODY-2026-10-28.html)及[周期邮件UX专项整改](reviews/NAS-PERIODIC-EMAIL-UX-REDESIGN-2026-10-28.md)。内部证据/评分/日志不进入收件邮件；一页经营重点、竞对纵向卡、3条行动、无全量来源附录；修复代码在`fix/periodic-email-mobile-digest`隔离分支，生产未启用。
 
 

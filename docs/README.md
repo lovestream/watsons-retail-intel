@@ -1,5 +1,8 @@
 # Watson's Retail Intel — 实现与流程文档
 
+> **2026-10-28 最新用户体验要求**：[精简手机邮件预览](reviews/NAS-E1-W43-EMAIL-BODY-2026-10-28.html)及[周期邮件UX专项整改](reviews/NAS-PERIODIC-EMAIL-UX-REDESIGN-2026-10-28.md)。内部证据/评分/日志不进入收件邮件；一页经营重点、竞对纵向卡、3条行动、无全量来源附录；修复代码在`fix/periodic-email-mobile-digest`隔离分支，生产未启用。
+
+
 > **2026-10-28 编辑验收**：[E1真实周期周报/播客独立审查](reviews/NAS-E1-CHATGPT-EDITORIAL-ACCEPTANCE-2026-10-28.md)：2026-10-19～25应为W43；部分自动写入的“人工verified”与0–5评分量纲不一致，正式发送前需修正证据与编辑口径，用户须实际听音。E1本轮未授权生产切换。
 
 

@@ -1,5 +1,8 @@
 # 13｜DeepSeek / QwenPaw 一次性交付总指令：生产恢复、R3播客、AIHOT精选优化
 
+> **2026-10-28 读者邮件反馈优先级（最新）**：不要把内部审计要求写给邮件收件人。[新版W43手机邮件预览](reviews/NAS-E1-W43-EMAIL-BODY-2026-10-28.html)已按用户意见直接精简；[UX审查和执行规范](reviews/NAS-PERIODIC-EMAIL-UX-REDESIGN-2026-10-28.md)为最新接续任务。邮件正文禁出现P1/P2、评分、人工/官方核验长解释、完整来源清单与附录；竞对改竖向卡片；删掉整章下周验证和“为什么下一工作周关键”。源材料与审计留后台。邮件renderer已在隔离分支`fix/periodic-email-mobile-digest`，需用真实W43及月年报样本验收，不得动生产或发信。
+
+
 > **2026-10-28 最新 E1 编辑验收**：已收到2026-10-19~25真实周期周报与MP3隔离候选，但[ChatGPT人工内容审查](reviews/NAS-E1-CHATGPT-EDITORIAL-ACCEPTANCE-2026-10-28.md)确认：ISO周次是**W43非W42**；E1手写`weighted_score=74–92`与生产0–5八维评分冲突，全13条P1且`verified_by=E1-manual`是脚本写入，不等于业务人员签字；报道型内容不能升级成平台官方确认；口播有过期“本周内”行动。现在请DeepSeek在隔离分支**一次性做最小编辑修正**后重新出对应MP3，供用户/业务收件人试听签收；真实账本、main、Cron、PID1、SMTP仍未获授权。
 
 

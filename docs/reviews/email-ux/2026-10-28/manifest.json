@@ -1,0 +1,219 @@
+{
+  "out": "/tmp/email_ux_out",
+  "cases": [
+    {
+      "slug": "weekly-2026-W43",
+      "html_bytes": 9315,
+      "visible_chars": 2019,
+      "internal_marker": false,
+      "banned_hits": [],
+      "has_th": false,
+      "max_width_600": true,
+      "viewport": true,
+      "http_links": 0,
+      "sha256": "2d94d993bc28a8b9bd9558494cc6e22635bafb49e72ff8aefef90ec725dd6b84",
+      "report_path": "/tmp/e1_wt/reports/weekly/2026/2026-W43.md",
+      "real_report": true,
+      "html_path": "/tmp/email_ux_out/weekly-2026-W43.html",
+      "screenshots": [
+        "/tmp/email_ux_out/screenshots/weekly-2026-W43-360.png",
+        "/tmp/email_ux_out/screenshots/weekly-2026-W43-375.png",
+        "/tmp/email_ux_out/screenshots/weekly-2026-W43-390.png",
+        "/tmp/email_ux_out/screenshots/weekly-2026-W43-600.png"
+      ],
+      "contact_sheet": "/tmp/email_ux_out/weekly-2026-W43-360-375-390.png"
+    },
+    {
+      "slug": "monthly-2026-07",
+      "html_bytes": 8804,
+      "visible_chars": 1597,
+      "internal_marker": false,
+      "banned_hits": [],
+      "has_th": false,
+      "max_width_600": true,
+      "viewport": true,
+      "http_links": 0,
+      "sha256": "c7c4e9e434b083625df9b1de067f49e7954bf6fc6057f2a0603579db0e1d5591",
+      "report_path": "/app/working/projects/watsons-retail-intel/reports/monthly/2026/2026-07.md",
+      "real_report": true,
+      "html_path": "/tmp/email_ux_out/monthly-2026-07.html",
+      "screenshots": [
+        "/tmp/email_ux_out/screenshots/monthly-2026-07-360.png",
+        "/tmp/email_ux_out/screenshots/monthly-2026-07-375.png",
+        "/tmp/email_ux_out/screenshots/monthly-2026-07-390.png",
+        "/tmp/email_ux_out/screenshots/monthly-2026-07-600.png"
+      ],
+      "contact_sheet": "/tmp/email_ux_out/monthly-2026-07-360-375-390.png"
+    },
+    {
+      "slug": "yearly-2026-sample",
+      "html_bytes": 7723,
+      "visible_chars": 1249,
+      "internal_marker": false,
+      "banned_hits": [],
+      "has_th": false,
+      "max_width_600": true,
+      "viewport": true,
+      "http_links": 0,
+      "sha256": "773ad09d31d20882a1743288b2d6077113b1714e049ee6dc431461e621fc551c",
+      "report_path": "/tmp/email_ux_wt/tests/fixtures/periodic/yearly_sample.md",
+      "real_report": false,
+      "html_path": "/tmp/email_ux_out/yearly-2026-sample.html",
+      "screenshots": [
+        "/tmp/email_ux_out/screenshots/yearly-2026-sample-360.png",
+        "/tmp/email_ux_out/screenshots/yearly-2026-sample-375.png",
+        "/tmp/email_ux_out/screenshots/yearly-2026-sample-390.png",
+        "/tmp/email_ux_out/screenshots/yearly-2026-sample-600.png"
+      ],
+      "contact_sheet": "/tmp/email_ux_out/yearly-2026-sample-360-375-390.png"
+    }
+  ],
+  "dry_runs": [
+    {
+      "slug": "weekly-2026-W43",
+      "ok": true,
+      "message": "dry_run: 邮件未发送（仅模拟）",
+      "subject": "即时零售 × 个护美妆经营周报｜2026-W43（10/19–10/25）",
+      "dry_run": true,
+      "html_length": 5894,
+      "html_sha256": "2d94d993bc28a8b9bd9558494cc6e22635bafb49e72ff8aefef90ec725dd6b84",
+      "audio_bytes": 7602860,
+      "attachments": 1
+    },
+    {
+      "slug": "monthly-2026-07",
+      "ok": true,
+      "message": "dry_run: 邮件未发送（仅模拟）",
+      "subject": "即时零售 × 个护美妆经营月报｜2026年7月",
+      "dry_run": true,
+      "html_length": 6049,
+      "html_sha256": "c7c4e9e434b083625df9b1de067f49e7954bf6fc6057f2a0603579db0e1d5591",
+      "audio_bytes": 0,
+      "attachments": 0
+    },
+    {
+      "slug": "yearly-2026-sample",
+      "ok": true,
+      "message": "dry_run: 邮件未发送（仅模拟）",
+      "subject": "即时零售 × 个护美妆经营年报｜2026年",
+      "dry_run": true,
+      "html_length": 5533,
+      "html_sha256": "773ad09d31d20882a1743288b2d6077113b1714e049ee6dc431461e621fc551c",
+      "audio_bytes": 0,
+      "attachments": 0
+    }
+  ],
+  "layout": [
+    {
+      "slug": "weekly-2026-W43",
+      "width": 360,
+      "viewport": 360,
+      "scrollWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": [],
+      "height": 3435
+    },
+    {
+      "slug": "weekly-2026-W43",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "bodyScrollWidth": 375,
+      "overflow": [],
+      "height": 3355
+    },
+    {
+      "slug": "weekly-2026-W43",
+      "width": 390,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": [],
+      "height": 3177
+    },
+    {
+      "slug": "weekly-2026-W43",
+      "width": 600,
+      "viewport": 600,
+      "scrollWidth": 600,
+      "bodyScrollWidth": 600,
+      "overflow": [],
+      "height": 2311
+    },
+    {
+      "slug": "monthly-2026-07",
+      "width": 360,
+      "viewport": 360,
+      "scrollWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": [],
+      "height": 3118
+    },
+    {
+      "slug": "monthly-2026-07",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "bodyScrollWidth": 375,
+      "overflow": [],
+      "height": 2984
+    },
+    {
+      "slug": "monthly-2026-07",
+      "width": 390,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": [],
+      "height": 2958
+    },
+    {
+      "slug": "monthly-2026-07",
+      "width": 600,
+      "viewport": 600,
+      "scrollWidth": 600,
+      "bodyScrollWidth": 600,
+      "overflow": [],
+      "height": 2081
+    },
+    {
+      "slug": "yearly-2026-sample",
+      "width": 360,
+      "viewport": 360,
+      "scrollWidth": 360,
+      "bodyScrollWidth": 360,
+      "overflow": [],
+      "height": 2646
+    },
+    {
+      "slug": "yearly-2026-sample",
+      "width": 375,
+      "viewport": 375,
+      "scrollWidth": 375,
+      "bodyScrollWidth": 375,
+      "overflow": [],
+      "height": 2481
+    },
+    {
+      "slug": "yearly-2026-sample",
+      "width": 390,
+      "viewport": 390,
+      "scrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "overflow": [],
+      "height": 2455
+    },
+    {
+      "slug": "yearly-2026-sample",
+      "width": 600,
+      "viewport": 600,
+      "scrollWidth": 600,
+      "bodyScrollWidth": 600,
+      "overflow": [],
+      "height": 1913
+    }
+  ],
+  "layout_ok": true,
+  "pass": true,
+  "code_sha": "dd7054270a7ee22d978d173841e1df9d5feb322a"
+}

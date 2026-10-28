@@ -27,11 +27,17 @@ def _parts(md):
 def _first(body):
     for p in re.split(r"\n\s*\n", body):
         p = p.strip()
-        if not p or p.startswith(("##", ">", "|", "- ", "* ", "**建议")):
+        if not p or p.startswith(("##", ">", "|", "- ", "* ", "**建议", "**支撑事件")):
             continue
-        if re.search(r"证据级别|评分口径|官方规则原件|下一工作周|为什么下一", p):
-            continue
-        return _clip(p)
+        readable = _plain(p)
+        # Drop tedious audit/disclaimer sentences rather than discarding the
+        # whole business paragraph around them.
+        sentences = re.split(r"(?<=[。！？])", readable)
+        kept = [s for s in sentences if s and not re.search(
+            r"证据级别|评分口径|官方规则原件|截至本稿未见|"
+            r"下一工作周|为什么下一", s)]
+        if kept:
+            return _clip("".join(kept))
     return ""
 
 def _trends(body):

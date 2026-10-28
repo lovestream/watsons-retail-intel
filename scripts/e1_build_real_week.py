@@ -334,7 +334,7 @@ def build(root):
         from skills.score_events.score_events import score_events as _score_events
         _tmp = Path(root) / "data/e1" / "_score_input.json"
         _tmp.write_text(json.dumps({"events": curated}, ensure_ascii=False), encoding="utf-8")
-        _score_events(str(root), "2026-10-23", events_file=str(_tmp),
+        _score_events(str(root), "2026-10-28", events_file=str(_tmp),
                       scoring_file="config/scoring.yaml",
                       output_file=str(Path(root) / "data/e1" / "_score_output.json"))
         _scored = json.loads((Path(root) / "data/e1" / "_score_output.json").read_text())["events"]

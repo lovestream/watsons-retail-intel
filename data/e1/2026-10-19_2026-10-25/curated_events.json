@@ -16,20 +16,23 @@
     "date_semantics": "event_occurrence",
     "effective_event_time": "2026-10-20",
     "effective_time_source": "event_occurred_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "event_occurrence",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-001",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "平台大促",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 1,
+    "event_type": "platform_move",
     "entities": {
       "platforms": [
         "天猫"
@@ -45,7 +48,6 @@
       "货盘",
       "价格"
     ],
-    "weighted_score": 92,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -73,13 +75,36 @@
         "首日流量中有多少来自平台大促会场？",
         "门店拣货峰值是否造成缺货或超时？"
       ],
-      "confidence": "high",
+      "confidence": "medium",
       "downgrade_reasons": []
     },
     "evidence_sha256": "ee856d77cdb7ae70f075e72ed00bfbcbfbb2076279eeba9bb28314657af1781e",
     "source_snapshot_sha256": "7f41a2667afbc8a1293b6df7937c344d3054f0505d29c98fe3d92746d21fd4b5",
     "source_snapshot_kind": "network_snapshot",
-    "_file_date": "2026-10-20"
+    "_file_date": "2026-10-20",
+    "scores": {
+      "strategic_importance": 4,
+      "watsons_relevance": 2,
+      "impact_scope": 3,
+      "source_credibility": 4.0,
+      "data_richness": 1,
+      "actionability": 4,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 2.82,
+    "priority": "P2",
+    "score_reasons": [
+      "[strategic_importance] event_type=platform_move 基线分=4",
+      "[watsons_relevance] 泛零售相关",
+      "[impact_scope] 单平台但类型=platform_move具代表性",
+      "[source_credibility] 域名=36kr.com → 头部权威媒体 (Tier 4)",
+      "[data_richness] 缺乏量化数据",
+      "[actionability] 含高可执行变量(流量, 货盘)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": []
   },
   {
     "event_id": "E1-W42-002",
@@ -98,20 +123,23 @@
     "date_semantics": "event_occurrence",
     "effective_event_time": "2026-10-20",
     "effective_time_source": "event_occurred_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "event_occurrence",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-002",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "品类榜单",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 2,
+    "event_type": "data_signal",
     "entities": {
       "platforms": [
         "天猫"
@@ -135,7 +163,6 @@
       "品牌",
       "价格"
     ],
-    "weighted_score": 90,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -162,13 +189,38 @@
         "TOP20中屈臣氏已覆盖多少个品牌？",
         "国货功效品的到店转化是否低于国际大牌？"
       ],
-      "confidence": "high",
+      "confidence": "medium",
       "downgrade_reasons": []
     },
     "evidence_sha256": "0ce41af38bf0271aceadf68a1d61ef5b976723bf0d01aa2f040b3b83560f58ca",
     "source_snapshot_sha256": "11125c1799d6b6b25f152831902ec9381ff74f3ba3711053c1bd1b26dc220397",
     "source_snapshot_kind": "raw_archive",
-    "_file_date": "2026-10-20"
+    "_file_date": "2026-10-20",
+    "scores": {
+      "strategic_importance": 4,
+      "watsons_relevance": 1,
+      "impact_scope": 2,
+      "source_credibility": 4.0,
+      "data_richness": 1,
+      "actionability": 5,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 2.6,
+    "priority": "ARCHIVE",
+    "score_reasons": [
+      "[strategic_importance] event_type=data_signal 基线分=4",
+      "[watsons_relevance] 仅涉及个护美妆品类",
+      "[impact_scope] 单平台或单竞对",
+      "[source_credibility] 域名=finance.sina.com.cn → 头部权威媒体 (Tier 4)",
+      "[data_richness] 缺乏量化数据",
+      "[actionability] 类型=data_signal+高可执行变量(货盘)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": [
+      "硬降级: watsons_relevance=1≤1 几乎无关 → ARCHIVE"
+    ]
   },
   {
     "event_id": "E1-W42-003",
@@ -187,20 +239,23 @@
     "date_semantics": "event_occurrence",
     "effective_event_time": "2026-10-20",
     "effective_time_source": "event_occurred_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "event_occurrence",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-003",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "品类榜单",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 3,
+    "event_type": "data_signal",
     "entities": {
       "platforms": [
         "天猫"
@@ -222,7 +277,6 @@
       "品牌",
       "客单"
     ],
-    "weighted_score": 86,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -249,13 +303,38 @@
         "高端洗护在屈臣氏即时零售的复购周期是多少？",
         "刚需个护是否被平台补贴拉低毛利？"
       ],
-      "confidence": "high",
+      "confidence": "medium",
       "downgrade_reasons": []
     },
     "evidence_sha256": "17bb67877772de436bf386fab6cca6524ec407ffc0d727303d16627ad51b78b6",
     "source_snapshot_sha256": "11125c1799d6b6b25f152831902ec9381ff74f3ba3711053c1bd1b26dc220397",
     "source_snapshot_kind": "raw_archive",
-    "_file_date": "2026-10-20"
+    "_file_date": "2026-10-20",
+    "scores": {
+      "strategic_importance": 4,
+      "watsons_relevance": 1,
+      "impact_scope": 2,
+      "source_credibility": 4.0,
+      "data_richness": 1,
+      "actionability": 5,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 2.6,
+    "priority": "ARCHIVE",
+    "score_reasons": [
+      "[strategic_importance] event_type=data_signal 基线分=4",
+      "[watsons_relevance] 仅涉及个护美妆品类",
+      "[impact_scope] 单平台或单竞对",
+      "[source_credibility] 域名=finance.sina.com.cn → 头部权威媒体 (Tier 4)",
+      "[data_richness] 缺乏量化数据",
+      "[actionability] 类型=data_signal+高可执行变量(货盘)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": [
+      "硬降级: watsons_relevance=1≤1 几乎无关 → ARCHIVE"
+    ]
   },
   {
     "event_id": "E1-W42-004",
@@ -274,20 +353,23 @@
     "date_semantics": "event_occurrence",
     "effective_event_time": "2026-10-20",
     "effective_time_source": "event_occurred_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "event_occurrence",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-004",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "产品动态",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 4,
+    "event_type": "new_product",
     "entities": {
       "platforms": [
         "天猫"
@@ -305,7 +387,6 @@
       "内容",
       "价格"
     ],
-    "weighted_score": 82,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -332,13 +413,36 @@
         "眼霜试用品类的转化率是否高于面霜？",
         "功效内容是否带来退货率上升？"
       ],
-      "confidence": "high",
+      "confidence": "medium",
       "downgrade_reasons": []
     },
     "evidence_sha256": "6818381e54a46a40c60f26e1bd60eab491e11f20c72ea52170e10af6d2cf0938",
     "source_snapshot_sha256": "7f41a2667afbc8a1293b6df7937c344d3054f0505d29c98fe3d92746d21fd4b5",
     "source_snapshot_kind": "network_snapshot",
-    "_file_date": "2026-10-20"
+    "_file_date": "2026-10-20",
+    "scores": {
+      "strategic_importance": 3,
+      "watsons_relevance": 2,
+      "impact_scope": 2,
+      "source_credibility": 4.0,
+      "data_richness": 2,
+      "actionability": 4,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 2.62,
+    "priority": "ARCHIVE",
+    "score_reasons": [
+      "[strategic_importance] event_type=new_product 基线分=3",
+      "[watsons_relevance] 泛零售相关",
+      "[impact_scope] 单平台或单竞对",
+      "[source_credibility] 域名=36kr.com → 头部权威媒体 (Tier 4)",
+      "[data_richness] 方向性描述无具体数据",
+      "[actionability] 含高可执行变量(货盘)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": []
   },
   {
     "event_id": "E1-W42-005",
@@ -357,20 +461,23 @@
     "date_semantics": "reported_on",
     "effective_event_time": "2026-10-20",
     "effective_time_source": "published_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "article_claim",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-005",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "产品动态",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 5,
+    "event_type": "new_product",
     "entities": {
       "platforms": [
         "天猫",
@@ -389,7 +496,6 @@
       "价格",
       "履约"
     ],
-    "weighted_score": 84,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -416,13 +522,38 @@
         "大罐装的毛利率能否覆盖即时零售履约成本？",
         "限购是否误伤真实家庭用户？"
       ],
-      "confidence": "high",
+      "confidence": "low",
       "downgrade_reasons": []
     },
     "evidence_sha256": "10a969d4806203cd45c6641322e7a921e3ea8d475ba3594ba8ba1b0d5bbc4f5b",
     "source_snapshot_sha256": "dfe3b2a2cc7a9f41fc172be09d5cdd8de965322c81c3be275c4659f4212896d2",
     "source_snapshot_kind": "network_snapshot",
-    "_file_date": "2026-10-20"
+    "_file_date": "2026-10-20",
+    "scores": {
+      "strategic_importance": 3,
+      "watsons_relevance": 0,
+      "impact_scope": 4,
+      "source_credibility": 4.0,
+      "data_richness": 3,
+      "actionability": 4,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 2.48,
+    "priority": "ARCHIVE",
+    "score_reasons": [
+      "[strategic_importance] event_type=new_product 基线分=3",
+      "[watsons_relevance] 与屈臣氏/即时零售/个护美妆无直接关联",
+      "[impact_scope] 涉及多平台(2)或多竞对(0)",
+      "[source_credibility] 域名=36kr.com → 头部权威媒体 (Tier 4)",
+      "[data_richness] 含部分数据()",
+      "[actionability] 含高可执行变量(货盘, 履约)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": [
+      "硬降级: watsons_relevance=0≤1 几乎无关 → ARCHIVE"
+    ]
   },
   {
     "event_id": "E1-W42-006",
@@ -441,20 +572,23 @@
     "date_semantics": "reported_on",
     "effective_event_time": "2026-10-23",
     "effective_time_source": "published_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "article_claim",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-006",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "平台规则",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 6,
+    "event_type": "platform_rule",
     "entities": {
       "platforms": [
         "天猫",
@@ -476,7 +610,6 @@
       "流量",
       "会员"
     ],
-    "weighted_score": 88,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -503,13 +636,37 @@
         "取消凑单后客单价下降多少？",
         "会员复购券的核销率是否高于平台满减？"
       ],
-      "confidence": "high",
+      "confidence": "low",
       "downgrade_reasons": []
     },
     "evidence_sha256": "daa5752ede1e71ce31eff6f94314b42f3e7e9d61cb6ef92ea0f6e04ab509ac93",
     "source_snapshot_sha256": "5ce5de018c87fc2f9cc38d905d3ab752dfd29fce25bb8353562b131c272d1805",
     "source_snapshot_kind": "network_snapshot",
-    "_file_date": "2026-10-23"
+    "_file_date": "2026-10-23",
+    "scores": {
+      "strategic_importance": 5,
+      "watsons_relevance": 2,
+      "impact_scope": 5,
+      "source_credibility": 4.0,
+      "data_richness": 1,
+      "actionability": 3,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 3.1,
+    "priority": "P2",
+    "score_reasons": [
+      "[strategic_importance] 平台规则变更直接影响经营",
+      "[watsons_relevance] 泛零售相关",
+      "[impact_scope] 涉及全国性/行业性影响",
+      "[impact_scope] 涉及6个平台",
+      "[source_credibility] 域名=36kr.com → 头部权威媒体 (Tier 4)",
+      "[data_richness] 缺乏量化数据",
+      "[actionability] 含中等可执行变量(流量, 会员)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": []
   },
   {
     "event_id": "E1-W42-007",
@@ -528,20 +685,23 @@
     "date_semantics": "reported_on",
     "effective_event_time": "2026-10-22",
     "effective_time_source": "published_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "article_claim",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-007",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "行业趋势",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 7,
+    "event_type": "category_trend",
     "entities": {
       "platforms": [
         "美团",
@@ -562,7 +722,6 @@
       "供应链",
       "履约"
     ],
-    "weighted_score": 80,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -590,13 +749,36 @@
         "平台餐食高峰是否挤压美妆订单运力？",
         "哪些个护SKU具备‘应急’属性？"
       ],
-      "confidence": "high",
+      "confidence": "low",
       "downgrade_reasons": []
     },
     "evidence_sha256": "d2d6a9808d27b0040bf280c1b167488fff4b49b78bf8c86d5499f99039742761",
     "source_snapshot_sha256": "970cab22cd58295fd53b5b2243147e7c9414a69efbef21cd8ebfe8c419fc0163",
     "source_snapshot_kind": "raw_archive",
-    "_file_date": "2026-10-22"
+    "_file_date": "2026-10-22",
+    "scores": {
+      "strategic_importance": 4,
+      "watsons_relevance": 4,
+      "impact_scope": 4,
+      "source_credibility": 4.0,
+      "data_richness": 2,
+      "actionability": 3,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 3.38,
+    "priority": "P2",
+    "score_reasons": [
+      "[strategic_importance] 含高战略关键词",
+      "[watsons_relevance] 涉及屈臣氏核心即时零售渠道",
+      "[impact_scope] 涉及多平台(5)或多竞对(0)",
+      "[source_credibility] 域名=huxiu.com → 头部权威媒体 (Tier 4)",
+      "[data_richness] 方向性描述无具体数据",
+      "[actionability] 含中等可执行变量(品类机会, 供应链, 履约)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": []
   },
   {
     "event_id": "E1-W42-008",
@@ -615,20 +797,23 @@
     "date_semantics": "reported_on",
     "effective_event_time": "2026-10-22",
     "effective_time_source": "published_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "article_claim",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-008",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "供应链",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 8,
+    "event_type": "supply_chain",
     "entities": {
       "platforms": [],
       "companies": [
@@ -646,7 +831,6 @@
       "自有品牌",
       "品质"
     ],
-    "weighted_score": 79,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -672,13 +856,36 @@
         "哪些品类适合做独家规格而不是直接贴牌？",
         "品质承诺能否转化为溢价？"
       ],
-      "confidence": "high",
+      "confidence": "low",
       "downgrade_reasons": []
     },
     "evidence_sha256": "5848df0847b46aea8efd843d2ff1a3026ab783a5a7ba819b0ac5611888d053be",
     "source_snapshot_sha256": "51af7391d83790fcf13f246a81d1bb4f700480e7d4a9cfe0ecba142c4cb7b03e",
     "source_snapshot_kind": "network_snapshot",
-    "_file_date": "2026-10-22"
+    "_file_date": "2026-10-22",
+    "scores": {
+      "strategic_importance": 4,
+      "watsons_relevance": 4,
+      "impact_scope": 4,
+      "source_credibility": 4.0,
+      "data_richness": 3,
+      "actionability": 3,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 3.48,
+    "priority": "P2",
+    "score_reasons": [
+      "[strategic_importance] 含高战略关键词",
+      "[watsons_relevance] 涉及屈臣氏核心即时零售渠道",
+      "[impact_scope] 多渠道/多城市影响",
+      "[source_credibility] 域名=36kr.com → 头部权威媒体 (Tier 4)",
+      "[data_richness] 含部分数据(%)",
+      "[actionability] 含中等可执行变量(供应链)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": []
   },
   {
     "event_id": "E1-W42-009",
@@ -697,20 +904,23 @@
     "date_semantics": "reported_on",
     "effective_event_time": "2026-10-24",
     "effective_time_source": "published_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "article_claim",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-009",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "门店体验",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 9,
+    "event_type": "consumer_trend",
     "entities": {
       "platforms": [],
       "companies": [
@@ -727,7 +937,6 @@
       "会员",
       "客流"
     ],
-    "weighted_score": 76,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -753,13 +962,36 @@
         "体验台是否影响坪效？",
         "哪些门店适合做服务而非纯货架？"
       ],
-      "confidence": "high",
+      "confidence": "low",
       "downgrade_reasons": []
     },
     "evidence_sha256": "928268cd313c231442877f09b53935ceac27b50d5e31868894610d1c4d1ada9d",
     "source_snapshot_sha256": "b6ad659a8f11c2c0511aeb6cafc63db8166581c4cb0e43ae1102c65f6948e46a",
     "source_snapshot_kind": "network_snapshot",
-    "_file_date": "2026-10-24"
+    "_file_date": "2026-10-24",
+    "scores": {
+      "strategic_importance": 3,
+      "watsons_relevance": 2,
+      "impact_scope": 2,
+      "source_credibility": 4.0,
+      "data_richness": 1,
+      "actionability": 3,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 2.38,
+    "priority": "ARCHIVE",
+    "score_reasons": [
+      "[strategic_importance] event_type=consumer_trend 基线分=3",
+      "[watsons_relevance] 泛零售相关",
+      "[impact_scope] 影响范围一般",
+      "[source_credibility] 域名=36kr.com → 头部权威媒体 (Tier 4)",
+      "[data_richness] 缺乏量化数据",
+      "[actionability] 含中等可执行变量(会员)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": []
   },
   {
     "event_id": "E1-W42-010",
@@ -778,20 +1010,23 @@
     "date_semantics": "reported_on",
     "effective_event_time": "2026-10-23",
     "effective_time_source": "published_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "article_claim",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-010",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "内容营销",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 10,
+    "event_type": "marketing",
     "entities": {
       "platforms": [
         "抖音"
@@ -808,7 +1043,6 @@
       "流量",
       "转化"
     ],
-    "weighted_score": 78,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -835,13 +1069,36 @@
         "AI内容是否引发品牌调性/合规风险？",
         "门店实拍产能能否支撑周更？"
       ],
-      "confidence": "high",
+      "confidence": "low",
       "downgrade_reasons": []
     },
     "evidence_sha256": "60591614179c0f3e6d85b358aeb32d8d66689c5ca79c77834450e382f39ee9a0",
     "source_snapshot_sha256": "61a851b38f91adecd94ec4fbd92f4443cbbcfdc98e57c6ff63e3dffa6a7da989",
     "source_snapshot_kind": "network_snapshot",
-    "_file_date": "2026-10-23"
+    "_file_date": "2026-10-23",
+    "scores": {
+      "strategic_importance": 2,
+      "watsons_relevance": 2,
+      "impact_scope": 2,
+      "source_credibility": 4.0,
+      "data_richness": 3,
+      "actionability": 3,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 2.4,
+    "priority": "ARCHIVE",
+    "score_reasons": [
+      "[strategic_importance] event_type=marketing 基线分=2",
+      "[watsons_relevance] 泛零售相关",
+      "[impact_scope] 单平台或单竞对",
+      "[source_credibility] 域名=36kr.com → 头部权威媒体 (Tier 4)",
+      "[data_richness] 含部分数据()",
+      "[actionability] 含中等可执行变量(流量)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": []
   },
   {
     "event_id": "E1-W42-011",
@@ -860,20 +1117,23 @@
     "date_semantics": "reported_on",
     "effective_event_time": "2026-10-20",
     "effective_time_source": "published_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "article_claim",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-011",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "本地生活",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 11,
+    "event_type": "platform_move",
     "entities": {
       "platforms": [
         "抖音",
@@ -894,7 +1154,6 @@
       "到店",
       "服务"
     ],
-    "weighted_score": 74,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -921,13 +1180,36 @@
         "美妆服务团购是否存在合规/资质门槛？",
         "三城试点的流量是否足够？"
       ],
-      "confidence": "high",
+      "confidence": "low",
       "downgrade_reasons": []
     },
     "evidence_sha256": "05cf02a9d88c7f89abb37569cde376780356e92b3298dc4bb76690563b41c436",
     "source_snapshot_sha256": "db1f2fb324cc049f97bc1fb0e1b4f688d417b5f026e40b6d85efa2d5b77384a0",
     "source_snapshot_kind": "network_snapshot",
-    "_file_date": "2026-10-20"
+    "_file_date": "2026-10-20",
+    "scores": {
+      "strategic_importance": 4,
+      "watsons_relevance": 4,
+      "impact_scope": 4,
+      "source_credibility": 4.0,
+      "data_richness": 3,
+      "actionability": 3,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 3.48,
+    "priority": "P2",
+    "score_reasons": [
+      "[strategic_importance] event_type=platform_move 基线分=4",
+      "[watsons_relevance] 涉及屈臣氏核心即时零售渠道",
+      "[impact_scope] 涉及多平台(4)或多竞对(0)",
+      "[source_credibility] 域名=36kr.com → 头部权威媒体 (Tier 4)",
+      "[data_richness] 含部分数据(万)",
+      "[actionability] 含中等可执行变量(流量)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": []
   },
   {
     "event_id": "E1-W42-012",
@@ -946,20 +1228,23 @@
     "date_semantics": "reported_on",
     "effective_event_time": "2026-10-23",
     "effective_time_source": "published_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "article_claim",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-012",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "行业趋势",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 12,
+    "event_type": "category_trend",
     "entities": {
       "platforms": [
         "天猫",
@@ -977,7 +1262,6 @@
       "履约",
       "渠道"
     ],
-    "weighted_score": 83,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -1004,13 +1288,36 @@
         "哪些SKU适合小规格应急装？",
         "计划装与应急装是否互相蚕食？"
       ],
-      "confidence": "high",
+      "confidence": "low",
       "downgrade_reasons": []
     },
     "evidence_sha256": "ca3a3ef2ef8b6e070b847919342be199786a911fda59ae469ff25e84538f04fd",
     "source_snapshot_sha256": "c1ffbac783f1ae51ce76bf08a3c25c82ac4c19c2660df5fc1492680a6e58e914",
     "source_snapshot_kind": "network_snapshot",
-    "_file_date": "2026-10-23"
+    "_file_date": "2026-10-23",
+    "scores": {
+      "strategic_importance": 4,
+      "watsons_relevance": 4,
+      "impact_scope": 4,
+      "source_credibility": 4.0,
+      "data_richness": 1,
+      "actionability": 4,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 3.42,
+    "priority": "P2",
+    "score_reasons": [
+      "[strategic_importance] 含高战略关键词",
+      "[watsons_relevance] 涉及屈臣氏核心即时零售渠道",
+      "[impact_scope] 涉及多平台(5)或多竞对(0)",
+      "[source_credibility] 域名=36kr.com → 头部权威媒体 (Tier 4)",
+      "[data_richness] 缺乏量化数据",
+      "[actionability] 含高可执行变量(货盘, 履约)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": []
   },
   {
     "event_id": "E1-W42-013",
@@ -1029,20 +1336,23 @@
     "date_semantics": "event_occurrence",
     "effective_event_time": "2026-10-23",
     "effective_time_source": "event_occurred_at",
-    "verification_status": "verified",
+    "verification_status": "source_checked",
     "verification_scope": "event_occurrence",
-    "verification_basis": "manual_source_review: snippet hash + publication date + date semantics",
-    "verified_by": "E1-manual",
+    "verification_basis": "agent_source_checked: snippet hash + publication date + date semantics; human review pending",
+    "verified_by": "agent_source_checked",
     "verified_at": "2026-10-27",
-    "needs_verification": false,
+    "human_review_status": "pending",
+    "canonical_event_id": "E1-W43-013",
+    "report_week": "2026-W43",
+    "needs_verification": true,
     "date_conflict": false,
     "hearsay_markers": false,
-    "temporal_eligibility": "core",
+    "temporal_eligibility": "candidate",
     "novelty_status": "new_today",
-    "novelty_eligibility": "core",
-    "report_eligibility": "core",
-    "priority": "P1",
-    "event_type": "竞对动态",
+    "novelty_eligibility": "candidate",
+    "report_eligibility": "candidate",
+    "editorial_rank": 13,
+    "event_type": "competitor_move",
     "entities": {
       "platforms": [],
       "companies": [
@@ -1062,7 +1372,6 @@
       "会员",
       "品牌"
     ],
-    "weighted_score": 85,
     "business_analysis": {
       "impact_type": "watch",
       "affected_channels": [
@@ -1088,12 +1397,35 @@
         "轻量会员日能否复制丝芙兰的参与感？",
         "门店服务产能是否足够？"
       ],
-      "confidence": "high",
+      "confidence": "medium",
       "downgrade_reasons": []
     },
     "evidence_sha256": "790bae46cfb610fd951925ff7ac835c9a4aee660baaeb3c571db52e302ee4549",
     "source_snapshot_sha256": "fb05433f0efd199cc1d06c414010b110475bb5f8d3adcff1a8369141db5f4fba",
     "source_snapshot_kind": "network_snapshot",
-    "_file_date": "2026-10-23"
+    "_file_date": "2026-10-23",
+    "scores": {
+      "strategic_importance": 4,
+      "watsons_relevance": 3,
+      "impact_scope": 2,
+      "source_credibility": 4.0,
+      "data_richness": 1,
+      "actionability": 3,
+      "time_sensitivity": 0.0,
+      "novelty": 3.0
+    },
+    "weighted_score": 2.8,
+    "priority": "P2",
+    "score_reasons": [
+      "[strategic_importance] event_type=competitor_move 基线分=4",
+      "[watsons_relevance] 涉及竞对",
+      "[impact_scope] 单平台或单竞对",
+      "[source_credibility] 域名=36kr.com → 头部权威媒体 (Tier 4)",
+      "[data_richness] 缺乏量化数据",
+      "[actionability] 含中等可执行变量(会员)",
+      "[time_sensitivity] time_sensitivity=未知 → 0分",
+      "[novelty] novelty=空，内容无重复 → 推断=3"
+    ],
+    "downgrade_reasons": []
   }
 ]

@@ -1,0 +1,351 @@
+{
+  "report_week": "2026-W43",
+  "period_start": "2026-10-19",
+  "period_end": "2026-10-25",
+  "all_clusters": [
+    {
+      "cluster_id": "C01",
+      "event_ids": [
+        "E1-W42-001"
+      ],
+      "title": "天猫双11于10月20日20点开卖，4小时124个品牌成交破亿",
+      "fact": "10月20日20:00天猫双11正式开卖；开卖4小时124个品牌成交额破亿，27681个品牌成交额超过去年全天。",
+      "evidence_text": "10月20日晚八点，天猫双11正式开启全品类售卖。",
+      "source_urls": [
+        "https://www.36kr.com/p/4035580422247302"
+      ],
+      "priority": "P2",
+      "weighted_score": 2.82
+    },
+    {
+      "cluster_id": "C02",
+      "event_ids": [
+        "E1-W42-002",
+        "E1-W42-003"
+      ],
+      "title": "天猫双11美妆开门红TOP5：珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II / 天猫双11个护开门红TOP5：卡诗、Off&Relax、护舒宝、潘婷、欧莱雅",
+      "fact": "10月20日20:00-23:59天猫双11美妆开门红榜单：珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II列前五；TOP20国货占四席（珀莱雅、薇诺娜、Fan Beauty Diary、毛戈平）。 10月20日20:00-23:59天猫双11个护开门红榜单：卡诗、Off&Relax、护舒宝、潘婷、欧莱雅列前五；Off&Relax开卖4小时成交首次破亿。",
+      "evidence_text": "美妆品类TOP20中，珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II名列前五名。 个护品类TOP20中，前五名分别是卡诗、Off&Relax、护舒宝、潘婷、欧莱雅。",
+      "source_urls": [
+        "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml",
+        "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml"
+      ],
+      "priority": "ARCHIVE",
+      "weighted_score": 2.6
+    },
+    {
+      "cluster_id": "C03",
+      "event_ids": [
+        "E1-W42-004"
+      ],
+      "title": "丸美小红笔眼霜4.0进入天猫双11去黑眼圈眼霜榜TOP4",
+      "fact": "丸美小红笔眼霜4.0登上天猫双11开门红去黑眼圈眼霜热卖榜TOP4，是TOP5中唯一国货品牌；增长来自产品升级与功效表达，而非单纯低价。",
+      "evidence_text": "丸美今年力推的新品小红笔眼霜4.0，登上了双11开门红去黑眼圈眼霜热卖榜的Top4",
+      "source_urls": [
+        "https://www.36kr.com/p/4035580422247302"
+      ],
+      "priority": "ARCHIVE",
+      "weighted_score": 2.62
+    },
+    {
+      "cluster_id": "C04",
+      "event_ids": [
+        "E1-W42-005"
+      ],
+      "title": "双11预售90分钟：丝塔芙大白罐登付定金人数榜首",
+      "fact": "据10月20日报道，双11预售开售90分钟，丝塔芙大白罐登付定金人数榜首；550g两罐折后134元，黄牛转售价炒至250元以上。",
+      "evidence_text": "开售90分钟，丝塔芙大白罐便荣登付定金人数榜首",
+      "source_urls": [
+        "https://www.36kr.com/p/4033954676446340"
+      ],
+      "priority": "ARCHIVE",
+      "weighted_score": 2.48
+    },
+    {
+      "cluster_id": "C05",
+      "event_ids": [
+        "E1-W42-006"
+      ],
+      "title": "双11平台规则转向：取消凑单与定金预售，预算向货架场和复购迁移",
+      "fact": "据10月23日报道，今年双11天猫取消跨店满减与凑单、京东取消定金预售，平台普遍缩短大促周期；大量品牌把投放预算从达播转向货架场，并把老客占比纳入考核。",
+      "evidence_text": "天猫把跨店满减和凑单整体拿掉了，统一成官方立减",
+      "source_urls": [
+        "https://www.36kr.com/p/4038146420627074"
+      ],
+      "priority": "P2",
+      "weighted_score": 3.1
+    },
+    {
+      "cluster_id": "C06",
+      "event_ids": [
+        "E1-W42-007"
+      ],
+      "title": "即时零售五平台集体加码餐食：朴朴厨房日均2200单，京东七鲜小厨1800家",
+      "fact": "据10月22日报道，即时零售头部平台集体加码餐食：朴朴厨房11个、单仓日均超2200单；京东七鲜小厨门店突破1800家、覆盖35城；淘宝闪购‘家宴’计划四季度多城上线。",
+      "evidence_text": "朴朴厨房上线满一年，单仓日均单量超过2200单。",
+      "source_urls": [
+        "https://www.huxiu.com/article/4899661.html"
+      ],
+      "priority": "P2",
+      "weighted_score": 3.38
+    },
+    {
+      "cluster_id": "C07",
+      "event_ids": [
+        "E1-W42-008"
+      ],
+      "title": "自营零售走向深水区：六成受访零售企业采用深度定制",
+      "fact": "据10月22日报道，中国连锁经营协会与波士顿咨询2026年8月报告显示，30家受访零售企业中六成采用深度定制，77%计划升级供应链与品质管控；即时零售玩家正向采购、品控和线下门店延伸。",
+      "evidence_text": "30家受访零售企业中，六成采用深度定制模式，77%计划升级供应链与品质管控能力",
+      "source_urls": [
+        "https://www.36kr.com/p/4036858464851079"
+      ],
+      "priority": "P2",
+      "weighted_score": 3.48
+    },
+    {
+      "cluster_id": "C08",
+      "event_ids": [
+        "E1-W42-009"
+      ],
+      "title": "商场C位转向体验与潮玩：门店从卖货转向场景",
+      "fact": "据10月24日走访报道，武汉10余家商场核心C位转向泡泡玛特、老铺黄金、FILA等体验/潮流品牌；门店通过场景化陈列、试用与互动延长停留，而非直接推销。",
+      "evidence_text": "门店不直接卖货，让消费者先感受“场景”",
+      "source_urls": [
+        "https://www.36kr.com/p/4038591177986951"
+      ],
+      "priority": "ARCHIVE",
+      "weighted_score": 2.38
+    },
+    {
+      "cluster_id": "C09",
+      "event_ids": [
+        "E1-W42-010"
+      ],
+      "title": "AI素材工业化：5人团队日产千条视频，单条成本降至5元以内",
+      "fact": "据10月23日报道，AIGC把电商种草视频单条成本从人工拍摄的100-200元降到5-10元，5人团队一天可产上千条；美妆、洗护等头部商家已开始用AI内容抢流量。",
+      "evidence_text": "比如有 5 个人的团队，一天能出上千条视频，每条成本还能控制在 10 元乃至 5 元以内。",
+      "source_urls": [
+        "https://www.36kr.com/p/4038077554218117"
+      ],
+      "priority": "ARCHIVE",
+      "weighted_score": 2.4
+    },
+    {
+      "cluster_id": "C10",
+      "event_ids": [
+        "E1-W42-011"
+      ],
+      "title": "到店团购竞争继续：抖省省DAU约2100万，淘宝闪购团购仍限三城试点",
+      "fact": "据10月20日报道，抖省省6月底DAU约2103万，约为大众点评六成；淘宝闪购团购仍仅在上海、深圳、嘉兴试点，类目从餐饮向休闲娱乐拓展。",
+      "evidence_text": "截至6月底，抖省省DAU已达2103万，约为大众点评同期日活的六成以上",
+      "source_urls": [
+        "https://www.36kr.com/p/4034051883111297"
+      ],
+      "priority": "P2",
+      "weighted_score": 3.48
+    },
+    {
+      "cluster_id": "C11",
+      "event_ids": [
+        "E1-W42-012"
+      ],
+      "title": "双11需求分化：即时零售承接临时缺货，大牌美妆仍是计划性大促硬通货",
+      "fact": "据10月23日报道，双11需求分化：高频补货被天天低价分走，临时缺货由即时零售承接；大牌美妆核心单品、新品/限定仍是计划性大促的硬通货；消费者年均通过7种以上渠道购买快消品。",
+      "evidence_text": "大牌美妆核心单品、大家电和知名数码产品，就仍是大促的硬通货",
+      "source_urls": [
+        "https://www.36kr.com/p/4037147836536454"
+      ],
+      "priority": "P2",
+      "weighted_score": 3.42
+    },
+    {
+      "cluster_id": "C12",
+      "event_ids": [
+        "E1-W42-013"
+      ],
+      "title": "丝芙兰SEPHORiA玩妆节10月23-25日落地上海张园：4000名爱好者、60余品牌",
+      "fact": "10月23日至25日，2026 SEPHORiA丝芙兰玩妆节在上海张园举办；三天4000余名爱好者、60余个全球品牌、40余场大师课，会员积分可兑换入场权益。",
+      "evidence_text": "2026 SEPHORiA丝芙兰玩妆节于10月23日至25日在上海张园圆满举办。",
+      "source_urls": [
+        "https://www.36kr.com/p/4042615186789256"
+      ],
+      "priority": "P2",
+      "weighted_score": 2.8
+    }
+  ],
+  "selected_clusters": [
+    {
+      "cluster_id": "C01",
+      "event_ids": [
+        "E1-W42-001"
+      ],
+      "title": "天猫双11于10月20日20点开卖，4小时124个品牌成交破亿",
+      "fact": "10月20日20:00天猫双11正式开卖；开卖4小时124个品牌成交额破亿，27681个品牌成交额超过去年全天。",
+      "evidence_text": "10月20日晚八点，天猫双11正式开启全品类售卖。",
+      "source_urls": [
+        "https://www.36kr.com/p/4035580422247302"
+      ],
+      "priority": "P2",
+      "weighted_score": 2.82
+    },
+    {
+      "cluster_id": "C02",
+      "event_ids": [
+        "E1-W42-002",
+        "E1-W42-003"
+      ],
+      "title": "天猫双11美妆开门红TOP5：珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II / 天猫双11个护开门红TOP5：卡诗、Off&Relax、护舒宝、潘婷、欧莱雅",
+      "fact": "10月20日20:00-23:59天猫双11美妆开门红榜单：珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II列前五；TOP20国货占四席（珀莱雅、薇诺娜、Fan Beauty Diary、毛戈平）。 10月20日20:00-23:59天猫双11个护开门红榜单：卡诗、Off&Relax、护舒宝、潘婷、欧莱雅列前五；Off&Relax开卖4小时成交首次破亿。",
+      "evidence_text": "美妆品类TOP20中，珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II名列前五名。 个护品类TOP20中，前五名分别是卡诗、Off&Relax、护舒宝、潘婷、欧莱雅。",
+      "source_urls": [
+        "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml",
+        "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml"
+      ],
+      "priority": "ARCHIVE",
+      "weighted_score": 2.6
+    },
+    {
+      "cluster_id": "C03",
+      "event_ids": [
+        "E1-W42-004"
+      ],
+      "title": "丸美小红笔眼霜4.0进入天猫双11去黑眼圈眼霜榜TOP4",
+      "fact": "丸美小红笔眼霜4.0登上天猫双11开门红去黑眼圈眼霜热卖榜TOP4，是TOP5中唯一国货品牌；增长来自产品升级与功效表达，而非单纯低价。",
+      "evidence_text": "丸美今年力推的新品小红笔眼霜4.0，登上了双11开门红去黑眼圈眼霜热卖榜的Top4",
+      "source_urls": [
+        "https://www.36kr.com/p/4035580422247302"
+      ],
+      "priority": "ARCHIVE",
+      "weighted_score": 2.62
+    },
+    {
+      "cluster_id": "C04",
+      "event_ids": [
+        "E1-W42-005"
+      ],
+      "title": "双11预售90分钟：丝塔芙大白罐登付定金人数榜首",
+      "fact": "据10月20日报道，双11预售开售90分钟，丝塔芙大白罐登付定金人数榜首；550g两罐折后134元，黄牛转售价炒至250元以上。",
+      "evidence_text": "开售90分钟，丝塔芙大白罐便荣登付定金人数榜首",
+      "source_urls": [
+        "https://www.36kr.com/p/4033954676446340"
+      ],
+      "priority": "ARCHIVE",
+      "weighted_score": 2.48
+    },
+    {
+      "cluster_id": "C05",
+      "event_ids": [
+        "E1-W42-006"
+      ],
+      "title": "双11平台规则转向：取消凑单与定金预售，预算向货架场和复购迁移",
+      "fact": "据10月23日报道，今年双11天猫取消跨店满减与凑单、京东取消定金预售，平台普遍缩短大促周期；大量品牌把投放预算从达播转向货架场，并把老客占比纳入考核。",
+      "evidence_text": "天猫把跨店满减和凑单整体拿掉了，统一成官方立减",
+      "source_urls": [
+        "https://www.36kr.com/p/4038146420627074"
+      ],
+      "priority": "P2",
+      "weighted_score": 3.1
+    },
+    {
+      "cluster_id": "C06",
+      "event_ids": [
+        "E1-W42-007"
+      ],
+      "title": "即时零售五平台集体加码餐食：朴朴厨房日均2200单，京东七鲜小厨1800家",
+      "fact": "据10月22日报道，即时零售头部平台集体加码餐食：朴朴厨房11个、单仓日均超2200单；京东七鲜小厨门店突破1800家、覆盖35城；淘宝闪购‘家宴’计划四季度多城上线。",
+      "evidence_text": "朴朴厨房上线满一年，单仓日均单量超过2200单。",
+      "source_urls": [
+        "https://www.huxiu.com/article/4899661.html"
+      ],
+      "priority": "P2",
+      "weighted_score": 3.38
+    },
+    {
+      "cluster_id": "C07",
+      "event_ids": [
+        "E1-W42-008"
+      ],
+      "title": "自营零售走向深水区：六成受访零售企业采用深度定制",
+      "fact": "据10月22日报道，中国连锁经营协会与波士顿咨询2026年8月报告显示，30家受访零售企业中六成采用深度定制，77%计划升级供应链与品质管控；即时零售玩家正向采购、品控和线下门店延伸。",
+      "evidence_text": "30家受访零售企业中，六成采用深度定制模式，77%计划升级供应链与品质管控能力",
+      "source_urls": [
+        "https://www.36kr.com/p/4036858464851079"
+      ],
+      "priority": "P2",
+      "weighted_score": 3.48
+    },
+    {
+      "cluster_id": "C08",
+      "event_ids": [
+        "E1-W42-009"
+      ],
+      "title": "商场C位转向体验与潮玩：门店从卖货转向场景",
+      "fact": "据10月24日走访报道，武汉10余家商场核心C位转向泡泡玛特、老铺黄金、FILA等体验/潮流品牌；门店通过场景化陈列、试用与互动延长停留，而非直接推销。",
+      "evidence_text": "门店不直接卖货，让消费者先感受“场景”",
+      "source_urls": [
+        "https://www.36kr.com/p/4038591177986951"
+      ],
+      "priority": "ARCHIVE",
+      "weighted_score": 2.38
+    },
+    {
+      "cluster_id": "C09",
+      "event_ids": [
+        "E1-W42-010"
+      ],
+      "title": "AI素材工业化：5人团队日产千条视频，单条成本降至5元以内",
+      "fact": "据10月23日报道，AIGC把电商种草视频单条成本从人工拍摄的100-200元降到5-10元，5人团队一天可产上千条；美妆、洗护等头部商家已开始用AI内容抢流量。",
+      "evidence_text": "比如有 5 个人的团队，一天能出上千条视频，每条成本还能控制在 10 元乃至 5 元以内。",
+      "source_urls": [
+        "https://www.36kr.com/p/4038077554218117"
+      ],
+      "priority": "ARCHIVE",
+      "weighted_score": 2.4
+    },
+    {
+      "cluster_id": "C10",
+      "event_ids": [
+        "E1-W42-011"
+      ],
+      "title": "到店团购竞争继续：抖省省DAU约2100万，淘宝闪购团购仍限三城试点",
+      "fact": "据10月20日报道，抖省省6月底DAU约2103万，约为大众点评六成；淘宝闪购团购仍仅在上海、深圳、嘉兴试点，类目从餐饮向休闲娱乐拓展。",
+      "evidence_text": "截至6月底，抖省省DAU已达2103万，约为大众点评同期日活的六成以上",
+      "source_urls": [
+        "https://www.36kr.com/p/4034051883111297"
+      ],
+      "priority": "P2",
+      "weighted_score": 3.48
+    },
+    {
+      "cluster_id": "C11",
+      "event_ids": [
+        "E1-W42-012"
+      ],
+      "title": "双11需求分化：即时零售承接临时缺货，大牌美妆仍是计划性大促硬通货",
+      "fact": "据10月23日报道，双11需求分化：高频补货被天天低价分走，临时缺货由即时零售承接；大牌美妆核心单品、新品/限定仍是计划性大促的硬通货；消费者年均通过7种以上渠道购买快消品。",
+      "evidence_text": "大牌美妆核心单品、大家电和知名数码产品，就仍是大促的硬通货",
+      "source_urls": [
+        "https://www.36kr.com/p/4037147836536454"
+      ],
+      "priority": "P2",
+      "weighted_score": 3.42
+    },
+    {
+      "cluster_id": "C12",
+      "event_ids": [
+        "E1-W42-013"
+      ],
+      "title": "丝芙兰SEPHORiA玩妆节10月23-25日落地上海张园：4000名爱好者、60余品牌",
+      "fact": "10月23日至25日，2026 SEPHORiA丝芙兰玩妆节在上海张园举办；三天4000余名爱好者、60余个全球品牌、40余场大师课，会员积分可兑换入场权益。",
+      "evidence_text": "2026 SEPHORiA丝芙兰玩妆节于10月23日至25日在上海张园圆满举办。",
+      "source_urls": [
+        "https://www.36kr.com/p/4042615186789256"
+      ],
+      "priority": "P2",
+      "weighted_score": 2.8
+    }
+  ],
+  "previous_period_comparison": {},
+  "evidence_note": "13 source-checked evidence items; 7 P2 reportable and 6 background references; human review pending."
+}

@@ -1,0 +1,110 @@
+{
+  "report_week": "2026-W43",
+  "note": "Legacy IDs are preserved in the isolated evidence pack; canonical aliases are for W43 references. Production ledger is unchanged.",
+  "events": [
+    {
+      "legacy_id": "E1-W42-001",
+      "canonical_id": "E1-W43-001",
+      "priority": "P2",
+      "weighted_score": 2.82,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-002",
+      "canonical_id": "E1-W43-002",
+      "priority": "ARCHIVE",
+      "weighted_score": 2.6,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-003",
+      "canonical_id": "E1-W43-003",
+      "priority": "ARCHIVE",
+      "weighted_score": 2.6,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-004",
+      "canonical_id": "E1-W43-004",
+      "priority": "ARCHIVE",
+      "weighted_score": 2.62,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-005",
+      "canonical_id": "E1-W43-005",
+      "priority": "ARCHIVE",
+      "weighted_score": 2.48,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-006",
+      "canonical_id": "E1-W43-006",
+      "priority": "P2",
+      "weighted_score": 3.1,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-007",
+      "canonical_id": "E1-W43-007",
+      "priority": "P2",
+      "weighted_score": 3.38,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-008",
+      "canonical_id": "E1-W43-008",
+      "priority": "P2",
+      "weighted_score": 3.48,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-009",
+      "canonical_id": "E1-W43-009",
+      "priority": "ARCHIVE",
+      "weighted_score": 2.38,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-010",
+      "canonical_id": "E1-W43-010",
+      "priority": "ARCHIVE",
+      "weighted_score": 2.4,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-011",
+      "canonical_id": "E1-W43-011",
+      "priority": "P2",
+      "weighted_score": 3.48,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-012",
+      "canonical_id": "E1-W43-012",
+      "priority": "P2",
+      "weighted_score": 3.42,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    },
+    {
+      "legacy_id": "E1-W42-013",
+      "canonical_id": "E1-W43-013",
+      "priority": "P2",
+      "weighted_score": 2.8,
+      "verification_status": "source_checked",
+      "human_review_status": "pending"
+    }
+  ]
+}

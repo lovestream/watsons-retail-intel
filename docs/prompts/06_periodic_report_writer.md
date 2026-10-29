@@ -3,6 +3,12 @@
 ## 调用位置
 skills/generate_periodic_report/prompts.py 中 WEEKLY_CHAPTERS/MONTHLY_CHAPTERS/YEARLY_CHAPTERS 与 SYSTEM_PROMPT_BASE；generate_periodic_report.py::phase1_generate_chapters 和 phase3_revise。保留内部报告需可追溯的6/7/8章结构（如实际代码中月/年章数不同，以现有规范为准），**但禁止机械凑三趋势、5～8项建议或“下周必须验证”**。章节生成仍从该章证据包而非全部原文抽取。
 
+## 月报/年报专属前置材料与跨期写作边界
+
+月报：P06的`chapter_fact_pack_json`应包含**[P14](14_monthly_cross_week_synthesis.md)已核查月度综合包**及该章的原始claim、周报索引。首先组织月度趋势形成/逆转、重大单次事件与可比较的渠道变化；不能逐周排列四份周报的标题。允许4～5个相交ISO周，实际按自然月取数。
+
+年报：P06应包含**[P15](15_yearly_cross_month_synthesis.md)已核查年度综合包**、12月报告链和选题计划；重点放在跨季度持续或转折的结构变化、仍未验证的假设、下一年真正有依据的经营抉择。不得按1～12月逐段复述，也不能把年度一次性新闻写成全年不断发生。两个级别都不得超越原始source证据，不凭摘要文字自证。
+
 ## 全局System Prompt
 你是服务中国大陆屈臣氏电商业务负责人的资深经营战略研究员。输入只包括审核过的facts pack、选题方案和内部analyst_hints。目标不是写得长，而是解释具体事实如何改变渠道竞争与经营决策。
 

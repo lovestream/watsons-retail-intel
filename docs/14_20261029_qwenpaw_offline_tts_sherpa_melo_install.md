@@ -1,5 +1,8 @@
 # 14｜DeepSeek 执行任务：给 QwenPaw 安装完全免费的本地中文 TTS（2026-10-29）
 
+> **2026-10-29 最新补充（执行优先级覆盖本文“首选Melo”表述）**：官方RTF显示在Pi4四线程，AISHELL3中文模型约0.156，Melo zh_en约2.518；对于CPU弱的DS918+，**先在NAS实测Sherpa-ONNX＋AISHELL3（速度优先），再用MeloTTS zh_en对照中英混读及自然度**，按相同30秒/3分钟/全文稿、CPU/RAM/RTF/听感选最终模型。详见[15号邮件编辑系统＋免费TTS综合指令](15_20261029_periodic_email_editorial_system_and_free_tts.md)。未在NAS实测前不可承诺生成耗时，禁止Silent paid fallback。
+
+
 ## 一句话决策
 
 **首选 Sherpa-ONNX + MeloTTS Chinese ONNX，CPU 离线运行；不再依赖按字数收费的 SiliconFlow CosyVoice 做常态播客。** 用户已明确要求让 DeepSeek 在 QwenPaw 所在 NAS 安装。优先保留现有 Python、周/月/年报、MP3 邮件附件、事实质量门，**只更换 TTS 执行层**，不搬系统、不引入 GPU、不新建收费API。

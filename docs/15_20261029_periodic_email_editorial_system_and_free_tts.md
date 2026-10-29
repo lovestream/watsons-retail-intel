@@ -1,6 +1,6 @@
 # 15｜DeepSeek执行：从可信情报到高价值经营邮件的重新设计＋免费离线TTS验收
 
-> **2026-10-29 独立提示词实施补充（最新）**：本文提出的facts pack→reader_brief→事实审稿→HTML邮件和口播流程，现已由[13份逐模块Prompt](prompts/README.md)落成具体System/User模板，**接入总清单见[16号指令](16_20261029_deepseek_llm_prompt_integration.md)**。DeepSeek不要再自创一套临时Prompt，必须将P08/P09实接到隔离代码，旧P06硬性3趋势/5–8建议/下周关注条目一并纠偏，并做真实W43/2026-07回归。
+> **2026-10-29 独立提示词实施补充（最新）**：本文提出的facts pack→reader_brief→事实审稿→HTML邮件和口播流程，现已由[15份逐模块Prompt](prompts/README.md)落成具体System/User模板，**接入总清单见[16号指令](16_20261029_deepseek_llm_prompt_integration.md)**。DeepSeek不要再自创一套临时Prompt，必须将P08/P09实接到隔离代码，旧P06硬性3趋势/5–8建议/下周关注条目一并纠偏，并做真实W43/2026-07回归。
 
 日期：2026-10-29｜权威新指令（覆盖此前仅修CSS、摘取Markdown段落的旧执行方案）
 

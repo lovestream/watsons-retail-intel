@@ -717,6 +717,25 @@ def _build_email_html(report_md: str, date: str, is_no_signal: bool) -> str:
 
 # ===================== 安全门 =====================
 
+def _is_playable_audio(path) -> bool:
+    """附件前置校验：文件存在、体积合理、且是 MP3 帧头。
+
+    TTS 失败时会留下 0 字节或损坏文件；直接按 exists() 判断会把空音频
+    当附件发出去（收件人点开是坏文件），比"没有音频"更糟。
+    """
+    try:
+        p = Path(path)
+        if not p.exists() or p.stat().st_size < 10_000:
+            return False
+        with open(p, "rb") as f:
+            head = f.read(3)
+        # ID3 tag 或 MPEG 帧同步字
+        return head[:3] == b"ID3" or (len(head) >= 2 and head[0] == 0xFF
+                                      and (head[1] & 0xE0) == 0xE0)
+    except Exception:
+        return False
+
+
 def _check_gate(
     manifest: dict,
     report_path: Path,
@@ -1139,7 +1158,7 @@ def send_daily_report_email(
 
     # 播客 MP3
     podcast_attached = False
-    if attach_podcast and podcast_audio_path.exists():
+    if attach_podcast and _is_playable_audio(podcast_audio_path):
         mp3_bytes = podcast_audio_path.read_bytes()
         attachments.append((
             f"podcast_{date}.mp3",
@@ -1148,6 +1167,9 @@ def send_daily_report_email(
         ))
         podcast_attached = True
         logger.info(f"附加播客 MP3: {podcast_audio_path} ({len(mp3_bytes)} bytes)")
+    elif attach_podcast and podcast_audio_path.exists():
+        logger.warning(f"播客 MP3 为空/损坏，不附加: {podcast_audio_path} "
+                       f"({podcast_audio_path.stat().st_size} bytes)")
     elif attach_podcast:
         logger.warning(f"播客 MP3 不存在: {podcast_audio_path}")
 
@@ -1274,10 +1296,14 @@ def send_periodic_report_email(
     # MP3 附件
     if audio_path and Path(audio_path).exists():
         audio_fp = Path(audio_path)
-        attachments.append(
-            (audio_fp.name, audio_fp.read_bytes(), "audio/mpeg"))
-        logger.info(f"附加音频: {audio_fp.name} "
-                    f"({audio_fp.stat().st_size / 1024 / 1024:.1f}MB)")
+        if not _is_playable_audio(audio_fp):
+            logger.warning(f"音频为空/损坏，不附加: {audio_fp.name} "
+                           f"({audio_fp.stat().st_size} bytes)")
+        else:
+            attachments.append(
+                (audio_fp.name, audio_fp.read_bytes(), "audio/mpeg"))
+            logger.info(f"附加音频: {audio_fp.name} "
+                        f"({audio_fp.stat().st_size / 1024 / 1024:.1f}MB)")
 
     # 收件人
     to_addrs = [recipient] if recipient else _load_email_config(project_root).get("to_addrs", [])

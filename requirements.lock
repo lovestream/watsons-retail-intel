@@ -1,8 +1,9 @@
 # requirements.lock — Watsons Retail Intel 生产依赖锁定（§36）
 # 由 pip_ensure.py 在存在本文件时优先使用（pip install -r requirements.lock）。
 # 生成时间: 2026-08-09（三批整改第二批）。版本为当前 .venv_packages 已验证版本。
+# 2026-10-29: edge-tts 7.2.8 → 7.3.1（7.2.8 的 Sec-MS-GEC/Chromium 版本已失效，WSS 握手 403）
 
-edge-tts==7.2.8
+edge-tts==7.3.1
 mutagen==1.48.1
 imageio-ffmpeg==0.6.0
 pyyaml==6.0.3

@@ -218,6 +218,9 @@ def _mask_key(key: str) -> str:
 
 def _error_type_from_exception(e: Exception) -> str:
     s = str(e).lower()
+    # edge-tts 专属：WSS 403 基本都是微软 DRM 令牌(Sec-MS-GEC)版本过期
+    if "wsserverhandshake" in s or "sec-ms-gec" in s or "handshake" in s:
+        return "tts_token_stale"
     if "401" in s or "auth" in s:
         return "auth_failed"
     if "429" in s or "rate" in s:
@@ -394,8 +397,14 @@ def test_rsshub(url: str, timeout: int = 10) -> dict:
         return {"ok": False, "error": str(e)[:150]}
 
 
-def test_edge_tts(project_root: str = ".", timeout: int = 15) -> dict:
-    """实测 edge-tts TTS 合成：生成一小段测试音频。"""
+def test_edge_tts(project_root: str = ".", timeout: int = 15,
+                  attempts: int = 3) -> dict:
+    """实测 edge-tts TTS 合成：生成一小段测试音频。
+
+    edge-tts 的失败常见于"微软 DRM 令牌版本过期"(WSS 403) 或瞬时网络抖动，
+    因此默认重试 3 次（间隔递增），并把 403 单独归类为
+    `tts_token_stale`，以便健康检查给出可操作结论而不是笼统的网络错误。
+    """
     try:
         import edge_tts
     except ImportError:
@@ -405,22 +414,30 @@ def test_edge_tts(project_root: str = ".", timeout: int = 15) -> dict:
     test_path = Path(project_root) / "podcasts" / "audio" / ".health_check_test.mp3"
     test_path.parent.mkdir(parents=True, exist_ok=True)
 
-    try:
-        async def _run():
-            communicate = edge_tts.Communicate(test_text, "zh-CN-XiaoxiaoNeural", rate="+0%")
-            await communicate.save(str(test_path))
+    async def _one_try() -> None:
+        communicate = edge_tts.Communicate(
+            test_text, "zh-CN-XiaoxiaoNeural", rate="+0%")
+        await communicate.save(str(test_path))
 
-        asyncio.run(_run())
-
-        if test_path.exists() and test_path.stat().st_size > 100:
-            test_path.unlink()  # 清理测试文件
-            return {"ok": True, "voice": "zh-CN-XiaoxiaoNeural"}
-        else:
+    last_err: Optional[str] = None
+    last_type = "unknown"
+    for i in range(max(1, attempts)):
+        try:
             test_path.unlink(missing_ok=True)
-            return {"ok": False, "error": "TTS 生成文件为空"}
-    except Exception as e:
-        test_path.unlink(missing_ok=True)
-        return {"ok": False, "error": str(e)[:200], "error_type": _error_type_from_exception(e)}
+            asyncio.run(_one_try())
+            if test_path.exists() and test_path.stat().st_size > 100:
+                test_path.unlink()  # 清理测试文件
+                return {"ok": True, "voice": "zh-CN-XiaoxiaoNeural",
+                        "attempts_used": i + 1}
+            last_err, last_type = "TTS 生成文件为空", "empty_audio"
+        except Exception as e:
+            last_err = str(e)[:200]
+            last_type = _error_type_from_exception(e)
+        if i + 1 < attempts:
+            time.sleep(1.0 * (i + 1))
+    test_path.unlink(missing_ok=True)
+    return {"ok": False, "error": last_err, "error_type": last_type,
+            "attempts_used": attempts}
 
 
 def test_python_packages(packages: List[Tuple[str, str]]) -> dict:
@@ -749,13 +766,19 @@ def run_health_check(project_root: str = ".", logger: logging.Logger = None) -> 
             svc_result["keys_total"] = 1
             if r["ok"]:
                 svc_result["keys_ok"] = 1
-                svc_result["detail"] = f"TTS 合成正常 ({r.get('voice', '?')})"
+                svc_result["detail"] = (
+                    f"TTS 合成正常 ({r.get('voice', '?')}, "
+                    f"第 {r.get('attempts_used', 1)} 次成功)")
             else:
                 svc_result["keys_failed"] = 1
+                err_type = r.get("error_type", "tts_failed")
+                if err_type == "tts_token_stale":
+                    err_type = ("tts_token_stale:微软DRM令牌过期→"
+                                "pip install -U edge-tts (需 >=7.3.1)")
                 svc_result["failed_keys"].append({
                     "key": "edge-tts",
                     "env_name": "EDGE_TTS",
-                    "error": r.get("error_type", r.get("error", "TTS failed")),
+                    "error": err_type,
                 })
 
         # ── Python 包 ──

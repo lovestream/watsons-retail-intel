@@ -1,5 +1,8 @@
 # Watson's Retail Intel — 实现与流程文档
 
+> **2026-10-29 最新DeepSeek主执行要求**：[15｜高质量经营邮件编辑引擎与免费TTS](15_20261029_periodic_email_editorial_system_and_free_tts.md)；已复核最新`fix/periodic-email-mobile-digest-r3`：12个窄屏测试通过，但三份HTML新闻原文链接0、月报存在交易状态过度确定、W43行动需前置企业数据，不能只做Markdown机械选句；需以核验事实包→结构化读者简报→质量审校→手机HTML重建。TTS优先NAS同机AISHELL3/Melo对照，禁止任何付费语音默默回退。
+
+
 > **2026-10-29 最新TTS任务（已获用户授权安装）**：SiliconFlow收费TTS拟换成本地离线 [Sherpa-ONNX + MeloTTS中文](14_20261029_qwenpaw_offline_tts_sherpa_melo_install.md)；DeepSeek在QwenPaw中使用独立持久venv及模型目录，先短句/全篇测试再局部接入。**禁SiliconFlow/edge-tts静默回退及多语速整篇重复合成；文本大模型主备路由不变。** 生产Cron/PID1/SMTP/账本仍无授权。
 
 

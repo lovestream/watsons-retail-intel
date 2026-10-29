@@ -1,78 +1,79 @@
-default_model: deepseek-v4-flash-free
+default_model: deepseek-ai/DeepSeek-V4.1-Flash
 global_fallback:
-- deepseek-v4-flash-free
+- deepseek-ai/DeepSeek-V4.1-Flash
+- deepseek-flash
 models:
-  deepseek-v4-flash-free:
-    description: OpenCode 免费 DeepSeek V4 Flash（2026-08 起全任务默认），4 入口轮换
+  deepseek-ai/DeepSeek-V4.1-Flash:
+    description: SiliconFlow DeepSeek-V4.1-Flash（主 Provider，环境变量 siliconflow_api_key）
     max_tokens: 8192
     temperature: 0.3
     timeout: 240
 routing:
   analyze_business_impact:
     fallback:
-    - deepseek-v4-flash-free
+    - deepseek-ai/DeepSeek-V4.1-Flash
     params:
       max_tokens: 4096
       temperature: 0.3
     priority_routing:
       ARCHIVE: rule_only
-      P0: deepseek-v4-flash-free
-      P1: deepseek-v4-flash-free
-      P2: deepseek-v4-flash-free
+      P0: deepseek-ai/DeepSeek-V4.1-Flash
+      P1: deepseek-ai/DeepSeek-V4.1-Flash
+      P2: deepseek-ai/DeepSeek-V4.1-Flash
   editor_review:
-    default: deepseek-v4-flash-free
+    default: deepseek-ai/DeepSeek-V4.1-Flash
     fallback:
-    - deepseek-v4-flash-free
+    - deepseek-ai/DeepSeek-V4.1-Flash
     params:
       max_tokens: 4096
       temperature: 0.3
   extract_events:
-    default: deepseek-v4-flash-free
+    default: deepseek-ai/DeepSeek-V4.1-Flash
     fallback:
-    - deepseek-v4-flash-free
+    - deepseek-ai/DeepSeek-V4.1-Flash
     params:
       max_tokens: 4096
       temperature: 0.2
   filter_relevant_articles:
-    default: deepseek-v4-flash-free
+    default: deepseek-ai/DeepSeek-V4.1-Flash
     fallback:
-    - deepseek-v4-flash-free
+    - deepseek-ai/DeepSeek-V4.1-Flash
     params:
       max_tokens: 2048
       temperature: 0.1
   generate_daily_report:
-    default: deepseek-v4-flash-free
+    default: deepseek-ai/DeepSeek-V4.1-Flash
     fallback:
-    - deepseek-v4-flash-free
+    - deepseek-ai/DeepSeek-V4.1-Flash
     params:
       max_tokens: 8192
       temperature: 0.3
-    optional_deep_review: deepseek-v4-flash-free
+    optional_deep_review: deepseek-ai/DeepSeek-V4.1-Flash
   generate_podcast:
-    default: deepseek-v4-flash-free
+    default: deepseek-ai/DeepSeek-V4.1-Flash
     fallback:
-    - deepseek-v4-flash-free
+    - deepseek-ai/DeepSeek-V4.1-Flash
     params:
       max_tokens: 8192
       temperature: 0.3
   podcast_review:
-    default: deepseek-v4-flash-free
+    default: deepseek-ai/DeepSeek-V4.1-Flash
     fallback:
-    - deepseek-v4-flash-free
+    - deepseek-ai/DeepSeek-V4.1-Flash
     params:
       max_tokens: 2048
       temperature: 0.2
   generate_periodic_report:
-    default: deepseek-v4-flash-free
+    default: deepseek-ai/DeepSeek-V4.1-Flash
     fallback:
-    - deepseek-v4-flash-free
+    - deepseek-ai/DeepSeek-V4.1-Flash
     params:
       max_tokens: 8192
       temperature: 0.3
   periodic_editor_review:
-    default: deepseek-v4-flash-free
+    default: deepseek-ai/DeepSeek-V4.1-Flash
     fallback:
-    - deepseek-v4-flash-free
+    - deepseek-ai/DeepSeek-V4.1-Flash
     params:
       max_tokens: 4096
       temperature: 0.2

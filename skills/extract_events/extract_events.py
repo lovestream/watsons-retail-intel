@@ -1519,3 +1519,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+try:
+    from skills.utils.prompt_bindings import p02_system as _p02_system
+    LLM_SYSTEM_PROMPT = _p02_system()
+except Exception as _exc:  # pragma: no cover - 仅当提示词库缺失
+    import logging as _logging
+    _logging.getLogger(__name__).warning("P02 加载失败，沿用旧系统提示词: %s", _exc)

@@ -52,7 +52,7 @@ WEEKLY_CHAPTERS = [
         "id": "05",
         "title": "本周经营建议",
         "prompt": (
-            "基于本周所有信号，为屈臣氏即时零售业务提出 5-8 条经营建议。\n"
+            "基于本周信号提出有依据的经营建议；证据不足时少于3条甚至不写，禁止凑数。\n"
             "按优先级排列（P0 立即行动 / P1 本周跟进 / P2 持续关注），每条包含：\n"
             "- 建议内容（具体可执行）\n"
             "- 依据（引用本周哪个事件/趋势）\n"
@@ -64,7 +64,7 @@ WEEKLY_CHAPTERS = [
         "title": "下周关注点",
         "prompt": (
             "基于本周趋势的延续和已知的行业日程（促销节点、政策生效、财报发布等），"
-            "列出下周需要重点关注的 3-5 个事项。每项说明：\n"
+            "只列有真实未决要素的关注点（可0～2条）；无新增关注点则直说，不排期。\n"
             "- 关注什么\n"
             "- 为什么重要\n"
             "- 建议的跟踪方式\n"
@@ -141,7 +141,7 @@ MONTHLY_CHAPTERS = [
         "id": "06",
         "title": "下月战略建议",
         "prompt": (
-            "基于本月的趋势和格局变化，为屈臣氏提出 3-5 条战略级建议：\n"
+            "基于本月的趋势和格局变化，提出有证据支撑的战略取舍建议（可少于3条，不凑数）：\n"
             "每条建议需包含：\n"
             "- 战略方向（一句话）\n"
             "- 具体行动项（可执行的 2-3 步）\n"
@@ -242,7 +242,7 @@ YEARLY_CHAPTERS = [
         "id": "07",
         "title": "下一年战略建议",
         "prompt": (
-            "为屈臣氏下一年度提出 3-5 条年度战略建议：\n"
+            "提出有全年事实支撑的年度战略建议（可少于3条，不虚构）：\n"
             "每条需包含：\n"
             "- 战略主题\n"
             "- 核心逻辑（为什么要做）\n"
@@ -338,3 +338,15 @@ PODCAST_SUMMARY_PROMPT = (
     "'今天''明天''昨日''下周见'等日报措辞；使用'本周''本周以来''相比上周'"
     "（周报）、'本月''相比上月'（月报）、'今年''全年''相比去年'（年报）等周期措辞。\n"
 )
+
+# ── 独立提示词库接入（P06 分章写作 / P07 审稿 / P10 口播）──
+# 语义以 docs/prompts/06|07|10 为准；旧章节结构与字段保留，避免破坏既有解析。
+try:
+    from skills.utils.prompt_bindings import (p06_system, p07_system,
+                                              p10_system)
+    SYSTEM_PROMPT_BASE = SYSTEM_PROMPT_BASE + "\n\n" + p06_system()
+    REVIEW_SYSTEM_PROMPT = REVIEW_SYSTEM_PROMPT + "\n\n" + p07_system()
+    PODCAST_SUMMARY_PROMPT = PODCAST_SUMMARY_PROMPT + "\n\n" + p10_system()
+except Exception as _exc:  # pragma: no cover
+    import logging as _logging
+    _logging.getLogger(__name__).warning("P06/P07/P10 加载失败: %s", _exc)

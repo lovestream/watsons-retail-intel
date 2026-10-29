@@ -1299,3 +1299,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+try:
+    from skills.utils.prompt_bindings import p04_system as _p04_system
+    LLM_SYSTEM_PROMPT = _p04_system()
+except Exception as _exc:  # pragma: no cover
+    import logging as _logging
+    _logging.getLogger(__name__).warning("P04 加载失败，沿用旧系统提示词: %s", _exc)

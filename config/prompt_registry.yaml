@@ -1,0 +1,175 @@
+version: '1.1'
+source: docs/prompts/README.md (2026-10-29)
+note: '运行时只抽取 ## System Prompt / ## User Prompt；变量列表由模板自动提取并校验。'
+prompts:
+  P01:
+    title: 文章语义准入＋三态
+    file: docs/prompts/01_article_relevance.md
+    call_site: skills/filter_relevant_articles/filter_relevant_articles.py
+    output_type: json
+    enabled: true
+    variables: []
+    max_tokens: 2048
+    temperature: 0.2
+  P02:
+    title: 事件及主张抽取
+    file: docs/prompts/02_event_extraction.md
+    call_site: skills/extract_events/extract_events.py
+    output_type: json
+    enabled: true
+    variables: []
+    max_tokens: 4096
+    temperature: 0.2
+  P03:
+    title: 时间/状态冲突澄清
+    file: docs/prompts/03_temporal_and_claim_disambiguation.md
+    call_site: skills/temporal_fact_validation/temporal_fact_validation.py
+    output_type: json
+    enabled: true
+    variables:
+    - claim_and_source_json
+    max_tokens: 2048
+    temperature: 0.1
+  P04:
+    title: 屈臣氏经营影响
+    file: docs/prompts/04_business_impact.md
+    call_site: skills/analyze_business_impact/analyze_business_impact.py
+    output_type: json
+    enabled: true
+    variables:
+    - event_json
+    max_tokens: 2048
+    temperature: 0.3
+  P05:
+    title: 跨事件选题策划
+    file: docs/prompts/05_periodic_signal_selection.md
+    call_site: skills/reader_brief/topic_plan.py
+    output_type: json
+    enabled: true
+    variables:
+    - periodic_fact_pack_json
+    max_tokens: 2048
+    temperature: 0.2
+  P06:
+    title: 6/7/8章长报告
+    file: docs/prompts/06_periodic_report_writer.md
+    call_site: skills/generate_periodic_report/prompts.py
+    output_type: markdown
+    enabled: true
+    variables: []
+    max_tokens: 4096
+    temperature: 0.35
+  P07:
+    title: 周期长报告审稿
+    file: docs/prompts/07_periodic_review_and_revision.md
+    call_site: skills/generate_periodic_report/generate_periodic_report.py
+    output_type: json
+    enabled: true
+    variables:
+    - coverage_json
+    - draft_chapters
+    - fact_pack_subset
+    - period_range
+    - period_type
+    - topic_plan
+    max_tokens: 4096
+    temperature: 0.2
+  P08:
+    title: 独立手机邮件总编
+    file: docs/prompts/08_reader_brief_editor.md
+    call_site: skills/reader_brief/editor.py
+    output_type: json
+    enabled: true
+    variables:
+    - period_end
+    - period_start
+    - period_type
+    - previous_digest_fingerprints_json
+    - reader_fact_pack_json
+    - send_at
+    - topic_plan_json
+    - verified_internal_capabilities_json
+    max_tokens: 4096
+    temperature: 0.3
+  P09:
+    title: 邮件事实一致性复核
+    file: docs/prompts/09_reader_claim_checker.md
+    call_site: skills/reader_brief/p09_reviewer.py
+    output_type: json
+    enabled: true
+    variables:
+    - deterministic_validation_findings_json
+    - reader_brief_json
+    - selected_claim_evidence_json
+    max_tokens: 3072
+    temperature: 0.1
+  P10:
+    title: 周/月/年播客口播
+    file: docs/prompts/10_periodic_podcast_writer.md
+    call_site: skills/generate_periodic_report/generate_periodic_report.py
+    output_type: text
+    enabled: true
+    variables:
+    - approved_detail_claims_json
+    - approved_reader_brief_json
+    - duration_range
+    - generated_at
+    - period_end
+    - period_start
+    - period_type
+    max_tokens: 4096
+    temperature: 0.4
+  P11:
+    title: 周/月/年播客审稿
+    file: docs/prompts/11_podcast_quality_review.md
+    call_site: skills/generate_periodic_report/generate_periodic_report.py
+    output_type: json
+    enabled: false
+    variables:
+    - approved_reader_brief_and_claims_json
+    - period_spec_json
+    - podcast_script
+    max_tokens: 2048
+    temperature: 0.2
+  P12:
+    title: 旧日报/日播客（仅兼容）
+    file: docs/prompts/12_daily_internal_editor_legacy.md
+    call_site: skills/generate_daily_report/generate_daily_report.py
+    output_type: json
+    enabled: false
+    variables:
+    - daily_fact_pack_json
+    - date
+    - previous_occurrences
+    max_tokens: 4096
+    temperature: 0.3
+  P13:
+    title: 重大事件独立反证
+    file: docs/prompts/13_critical_second_opinion_optional.md
+    call_site: skills/score_events/score_events.py
+    output_type: json
+    enabled: false
+    variables:
+    - candidate_and_primary_review_json
+    - deterministic_scoring_json
+    - source_evidence_json
+    max_tokens: 2048
+    temperature: 0.2
+  P14:
+    title: 月报跨周汇总
+    file: docs/prompts/14_monthly_cross_week_synthesis.md
+    call_site: skills/periodic_synthesis/cross_period.py
+    output_type: json
+    enabled: true
+    variables: []
+    max_tokens: 4096
+    temperature: 0.25
+  P15:
+    title: 年报跨月汇总
+    file: docs/prompts/15_yearly_cross_month_synthesis.md
+    call_site: skills/periodic_synthesis/cross_period.py
+    output_type: json
+    enabled: true
+    variables: []
+    max_tokens: 4096
+    temperature: 0.25

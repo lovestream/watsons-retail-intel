@@ -1,0 +1,105 @@
+{
+ "period_type": "weekly",
+ "period_start": "2026-10-19",
+ "period_end": "2026-10-25",
+ "single_biggest_change": "天猫双11把跨店满减和凑单整体拿掉，统一为官方立减，平台大促促销机制出现明确变化。",
+ "topics": [
+  {
+   "topic_id": "T001",
+   "headline": "天猫双11取消跨店满减改官方立减",
+   "source_fact_ids": [],
+   "new_information": "本期报道显示，天猫双11将跨店满减和凑单整体拿掉，统一成官方立减。",
+   "what_it_changes": "大促优惠从常见的跨店满减/凑单玩法转为官方直降表达，直接影响屈臣氏天猫旗舰店的大促定价、套组设计和凑单策略。",
+   "affected_channels": [
+    "天猫",
+    "B2C",
+    "即时零售"
+   ],
+   "business_variable": "促销机制与客单价",
+   "impact_hypothesis": "推断：取消凑单会削弱为满减凑单带来的连带加购，官方立减强化单品价格比较；屈臣氏需重算大促价格带、套组和包邮门槛，即时零售可参考直降表达但受平台规则不同限制。",
+   "reader_priority": "must_read",
+   "should_publish": false,
+   "reason": "这是本期明确且可直接落地到电商大促决策的平台规则变化，业务读者需要据此调整价格、套组和凑单策略。"
+  },
+  {
+   "topic_id": "T002",
+   "headline": "双11首轮榜单：美妆个护头部集中",
+   "source_fact_ids": [],
+   "new_information": "10月22日报道显示，天猫双11美妆TOP20前五为珀莱雅、修丽可、兰蔻、雅诗兰黛、S-II；个护TOP20前五为卡诗、Off&Relax、护舒宝、潘婷、欧莱雅。同期开门红中丸美小红笔眼霜4.0进入去黑眼圈眼霜热卖榜Top4，丝塔芙大白罐开售90分钟居付定金人数榜首；另有报道称大牌美妆核心单品仍是大促硬通货。",
+   "what_it_changes": "新增双11首轮品牌排序和爆品信号，为屈臣氏核对品牌货盘、主推单品和促销资源提供外部参照；但这些是天猫平台榜单，不代表屈臣氏同口径销售变化。",
+   "affected_channels": [
+    "天猫",
+    "B2C",
+    "门店"
+   ],
+   "business_variable": "品牌货盘与主推单品",
+   "impact_hypothesis": "推断：屈臣氏可据此优先核对头部品牌库存、价格力和陈列/内容资源，并评估榜单爆品在同城即时零售的可得性；不能把天猫榜单直接当作屈臣氏销售增长依据。",
+   "reader_priority": "useful",
+   "should_publish": false,
+   "reason": "首轮榜单和爆品清单对美妆个护选品、品牌联合与主推资源分配有参考价值，但证据为平台榜单而非屈臣氏自身数据，适合有用级而非必读级。"
+  }
+ ],
+ "competitor_fact_ids": [
+  "C013"
+ ],
+ "not_selected": [
+  {
+   "fact_id": "C001",
+   "reason": "background"
+  },
+  {
+   "fact_id": "C007",
+   "reason": "low_relevance"
+  },
+  {
+   "fact_id": "C008",
+   "reason": "weak_evidence"
+  },
+  {
+   "fact_id": "C009",
+   "reason": "weak_evidence"
+  },
+  {
+   "fact_id": "C010",
+   "reason": "low_relevance"
+  },
+  {
+   "fact_id": "C011",
+   "reason": "old_news"
+  }
+ ],
+ "genuine_watch_triggers": [
+  {
+   "fact_ids": [
+    "C007"
+   ],
+   "trigger": "朴朴厨房公布非餐品类复用、美妆个护前置仓合作，或与屈臣氏同类门店/仓履约对比数据",
+   "why_material": "餐食高频履约效率若迁移到美妆个护，才可能影响屈臣氏即时零售的选品与履约预期；当前不能直接外推美妆个护GMV。"
+  },
+  {
+   "fact_ids": [
+    "C008"
+   ],
+   "trigger": "屈臣氏或头部美妆零售商发布自有品牌深度定制、供应链品质升级的正式方案或签约",
+   "why_material": "调查仅显示零售企业计划，若转为正式动作才影响屈臣氏自有品牌差异化与毛利。"
+  },
+  {
+   "fact_ids": [
+    "C013"
+   ],
+   "trigger": "丝芙兰公布玩妆节客流、会员转化或销售数据，或在更多城市复制",
+   "why_material": "单场活动报道不足以判断对屈臣氏门店客流的实质影响；有转化数据或复制动作后才评估竞对体验营销冲击。"
+  }
+ ],
+ "missing_coverage": [
+  "缺少屈臣氏自身双11及即时零售同口径销售、客流、客单价与库存数据",
+  "缺少天猫官方立减规则对美妆个护客单价和连带率实际影响的观测数据",
+  "缺少丝芙兰玩妆节的客流、会员转化和销售数据"
+ ],
+ "_meta": {
+  "prompt": "P05",
+  "prompt_version": "fbe1742eebc1",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+  "fallback": false
+ }
+}

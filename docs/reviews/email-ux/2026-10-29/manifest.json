@@ -1,0 +1,191 @@
+{
+ "generated_at": "2026-10-29",
+ "pipeline": "skills/reader_brief (fact pack -> editor -> claim_checker -> mobile html)",
+ "offline_tts": "excluded_by_user_decision",
+ "reports": [
+  {
+   "period_type": "weekly",
+   "period": {
+    "start": "2026-10-19T00:00:00+08:00",
+    "end": "2026-10-25T23:59:59+08:00",
+    "label": "2026-W43 (10-19 ~ 10-25)"
+   },
+   "html": "docs/reviews/email-ux/2026-10-29/weekly-2026-W43.html",
+   "html_bytes": 8447,
+   "html_sha256": "e834a2783a568ef688631292ae2b70dd56a603433c501537a5080c9bf0a5f0ba",
+   "facts": 13,
+   "brief_items": 11,
+   "check": {
+    "pass": true,
+    "errors": 0,
+    "warnings": 0,
+    "stats": {
+     "items": 11,
+     "facts_referenced": [
+      "F001",
+      "F002",
+      "F003",
+      "F004",
+      "F005",
+      "F006",
+      "F008",
+      "F010",
+      "F013"
+     ],
+     "numbers_checked": 21
+    }
+   },
+   "revision_rounds": [
+    {
+     "round": 1,
+     "errors_after": 0
+    }
+   ],
+   "editor": {
+    "editor_mode": "llm",
+    "provider": "siliconflow_text",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+    "attempt": 1,
+    "revised": true
+   },
+   "forbidden_hits": {
+    "event_id": 0,
+    "score_words": 0,
+    "tables": 0
+   },
+   "source_links": 13,
+   "screenshots": [
+    "docs/reviews/email-ux/2026-10-29/screenshots/weekly-2026-W43-360.png",
+    "docs/reviews/email-ux/2026-10-29/screenshots/weekly-2026-W43-375.png",
+    "docs/reviews/email-ux/2026-10-29/screenshots/weekly-2026-W43-390.png",
+    "docs/reviews/email-ux/2026-10-29/screenshots/weekly-2026-W43-600.png"
+   ],
+   "overflow_px": 0
+  },
+  {
+   "period_type": "monthly",
+   "period": {
+    "start": "2026-07-01",
+    "end": "2026-07-31"
+   },
+   "html": "docs/reviews/email-ux/2026-10-29/monthly-2026-07.html",
+   "html_bytes": 10919,
+   "html_sha256": "c665a7fd05e43bcdbc5f8e37eb1b9c80e68db1dde8003588c6b94c89f15c7ee9",
+   "facts": 100,
+   "brief_items": 12,
+   "check": {
+    "pass": true,
+    "errors": 0,
+    "warnings": 1,
+    "stats": {
+     "items": 12,
+     "facts_referenced": [
+      "F002",
+      "F007",
+      "F009",
+      "F011",
+      "F013",
+      "F017",
+      "F021",
+      "F025",
+      "F034",
+      "F037",
+      "F039",
+      "F046",
+      "F052"
+     ],
+     "numbers_checked": 21
+    }
+   },
+   "revision_rounds": [],
+   "editor": {
+    "editor_mode": "llm",
+    "provider": "siliconflow_text",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+    "attempt": 1
+   },
+   "forbidden_hits": {
+    "event_id": 0,
+    "score_words": 0,
+    "tables": 0
+   },
+   "source_links": 22,
+   "screenshots": [
+    "docs/reviews/email-ux/2026-10-29/screenshots/monthly-2026-07-360.png",
+    "docs/reviews/email-ux/2026-10-29/screenshots/monthly-2026-07-375.png",
+    "docs/reviews/email-ux/2026-10-29/screenshots/monthly-2026-07-390.png",
+    "docs/reviews/email-ux/2026-10-29/screenshots/monthly-2026-07-600.png"
+   ],
+   "overflow_px": 0
+  },
+  {
+   "period_type": "yearly",
+   "period": {
+    "start": "2026-01-01",
+    "end": "2026-09-30"
+   },
+   "html": "docs/reviews/email-ux/2026-10-29/yearly-2026-ytd.html",
+   "html_bytes": 9633,
+   "html_sha256": "299484acab51ea643d1df79453f100312c76ef405149eb3b1dc9acf6181a3229",
+   "facts": 60,
+   "brief_items": 10,
+   "check": {
+    "pass": true,
+    "errors": 0,
+    "warnings": 1,
+    "stats": {
+     "items": 10,
+     "facts_referenced": [
+      "F001",
+      "F004",
+      "F007",
+      "F010",
+      "F011",
+      "F013",
+      "F015",
+      "F016",
+      "F017",
+      "F018",
+      "F019",
+      "F024",
+      "F025",
+      "F033",
+      "F037",
+      "F038",
+      "F043",
+      "F044",
+      "F052",
+      "F055"
+     ],
+     "numbers_checked": 20
+    }
+   },
+   "revision_rounds": [
+    {
+     "round": 1,
+     "errors_after": 0
+    }
+   ],
+   "editor": {
+    "editor_mode": "llm",
+    "provider": "siliconflow_text",
+    "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+    "attempt": 1,
+    "revised": true
+   },
+   "forbidden_hits": {
+    "event_id": 0,
+    "score_words": 0,
+    "tables": 0
+   },
+   "source_links": 20,
+   "screenshots": [
+    "docs/reviews/email-ux/2026-10-29/screenshots/yearly-2026-ytd-360.png",
+    "docs/reviews/email-ux/2026-10-29/screenshots/yearly-2026-ytd-375.png",
+    "docs/reviews/email-ux/2026-10-29/screenshots/yearly-2026-ytd-390.png",
+    "docs/reviews/email-ux/2026-10-29/screenshots/yearly-2026-ytd-600.png"
+   ],
+   "overflow_px": 0
+  }
+ ]
+}

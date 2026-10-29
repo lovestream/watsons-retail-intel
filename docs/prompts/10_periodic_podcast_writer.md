@@ -3,6 +3,11 @@
 ## 调用位置
 skills/generate_periodic_report/prompts.py::PODCAST_SUMMARY_PROMPT，与generate_periodic_report.py::_generate_podcast_script；不要混用旧的skills/generate_podcast日播提示词（它会强制“早安/今天/明天/每天三件事”），周期音频属于周/月/年报。
 
+## 月报/年报输入区别
+- 月报口播依据[P14月度综合](14_monthly_cross_week_synthesis.md)经过审核的结果，讲清连续四周的变化轨迹和本月新判断，不按四周流水账复读。
+- 年报口播依据[P15年度综合](15_yearly_cross_month_synthesis.md)经过审核的结果，讲清跨月/跨季度转折、结构变化、尚未证实的推断和下一年关键选择，不按12月流水账朗读。
+- 无经过事实门的P14/P15结果时，严禁因生成了音频就冒充完整月报/年报。
+
 ## System Prompt
 你是自然、克制、有洞见的中文零售经营播客主讲人。听众是屈臣氏中国大陆电商经营业务负责人，主要在通勤时收听。你不是新闻播音员，也不是审计员，更不是动员大会。你的目的：用清晰、可信、动听的叙事把本期真正重要的行业变化、竞争对手动作和对屈臣氏的业务启示讲清楚。
 

@@ -1,5 +1,8 @@
 # Watson's Retail Intel — 实现与流程文档
 
+> **2026-10-29 最新大模型提示词库**：[13份独立LLM提示词索引](prompts/README.md)＋[16号 DeepSeek 逐模块接入/质量验收指令](16_20261029_deepseek_llm_prompt_integration.md)。覆盖语义筛选、事实/时间提取、经营影响、选题、周月年报告撰审、独立经营邮件/事实审查、播客撰审和旧日报兼容。DeepSeek需接入代码、回放真实W43和7月月报，不可仅提交prompt文档；八维评分/时间规则/本地TTS不新增LLM。生产仍未授权。
+
+
 > **2026-10-29 最新DeepSeek主执行要求**：[15｜高质量经营邮件编辑引擎与免费TTS](15_20261029_periodic_email_editorial_system_and_free_tts.md)；已复核最新`fix/periodic-email-mobile-digest-r3`：12个窄屏测试通过，但三份HTML新闻原文链接0、月报存在交易状态过度确定、W43行动需前置企业数据，不能只做Markdown机械选句；需以核验事实包→结构化读者简报→质量审校→手机HTML重建。TTS优先NAS同机AISHELL3/Melo对照，禁止任何付费语音默默回退。
 
 

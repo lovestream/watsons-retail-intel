@@ -975,20 +975,46 @@ def _concat_mp3(parts: List[str], out_path: str) -> bool:
             pass
 
 
+def _is_stale_token_error(err: Exception) -> bool:
+    """判断是否 edge-tts 的 DRM 令牌/版本失效（重试无意义，需升级）。"""
+    s = str(err).lower()
+    return ("wsserverhandshake" in s or "sec-ms-gec" in s
+            or ("403" in s and "handshake" in s))
+
+
 async def _generate_tts_chunk(text: str, voice: str, rate: str,
-                              out_path: str) -> bool:
-    """单块 edge-tts 生成。"""
+                              out_path: str, attempts: int = 3) -> bool:
+    """单块 edge-tts 生成（瞬时失败自动重试）。
+
+    微软侧偶发握手抖动/限流很常见；WSS 403 则是 edge-tts 的 DRM 令牌
+    (Sec-MS-GEC) 版本过期，重试无用但必须给出可操作提示，避免误判为断网。
+    """
     try:
         import edge_tts
-        communicate = edge_tts.Communicate(text, voice, rate=rate)
-        await communicate.save(out_path)
-        return os.path.exists(out_path) and os.path.getsize(out_path) > 500
     except ImportError:
         logger.warning(f"{LOG_PREFIX} edge-tts 未安装")
         return False
-    except Exception as e:
-        logger.error(f"{LOG_PREFIX} TTS 分块失败: {e}")
-        return False
+
+    last_err = ""
+    for i in range(max(1, attempts)):
+        try:
+            communicate = edge_tts.Communicate(text, voice, rate=rate)
+            await communicate.save(out_path)
+            if os.path.exists(out_path) and os.path.getsize(out_path) > 500:
+                if i:
+                    logger.info(f"{LOG_PREFIX} TTS 分块第 {i + 1} 次重试成功")
+                return True
+            last_err = "生成文件为空/过小"
+        except Exception as e:
+            last_err = str(e)
+            if _is_stale_token_error(e):
+                logger.error(f"{LOG_PREFIX} edge-tts DRM 令牌失效(WSS 403)："
+                             f"版本过旧，需 pip install -U 'edge-tts>=7.3.1'")
+                return False
+        if i + 1 < attempts:
+            await asyncio.sleep(1.0 * (i + 1))
+    logger.error(f"{LOG_PREFIX} TTS 分块失败({attempts} 次): {last_err[:200]}")
+    return False
 
 
 def _generate_tts(text, output_path, target_seconds=None, project_root="."):
@@ -1021,9 +1047,6 @@ def _generate_tts(text, output_path, target_seconds=None, project_root="."):
                 tmpdir, f"part_{attempt:02d}_{i:03d}.mp3")
             ok = asyncio.run(_generate_tts_chunk(chunk, TTS_VOICE, cur_rate,
                                                  part_path))
-            if not ok and i < len(chunks):
-                ok = asyncio.run(_generate_tts_chunk(chunk, TTS_VOICE,
-                                                     cur_rate, part_path))
             if not ok:
                 all_ok = False
                 break

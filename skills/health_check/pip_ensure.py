@@ -18,7 +18,7 @@ import argparse
 
 REQUIRED_PACKAGES = [
     ("xcrawl", "xcrawl"),
-    ("edge_tts", "edge-tts"),
+    ("edge_tts", "edge-tts"),  # 版本下限见 MIN_VERSIONS
     ("mutagen", "mutagen"),
     ("imageio_ffmpeg", "imageio-ffmpeg"),
     ("cloakbrowser", "cloakbrowser"),
@@ -33,7 +33,42 @@ REQUIRED_PACKAGES = [
     ("dateutil", "python-dateutil"),
 ]
 
+# 版本下限：已安装但低于下限也视为"需要修复"（不只是"能不能 import"）。
+# edge-tts 7.2.8 起微软 DRM 令牌(Sec-MS-GEC)版本失效 → WSS 握手 403，
+# 语音合成就整条挂掉，且表现为"库装好了、就是跑不通"，极易被误判成网络问题。
+MIN_VERSIONS = {
+    "edge-tts": (7, 3, 1),
+}
+
 VENV_PACKAGES_DIR = None  # set by setup_path()
+
+
+def _parse_version(v: str):
+    """把 '7.3.1' / '7.3.1rc1' 解析成可比较元组（非数字段忽略）。"""
+    nums = []
+    for part in str(v).replace("-", ".").split("."):
+        digits = "".join(ch for ch in part if ch.isdigit())
+        if digits == "":
+            break
+        nums.append(int(digits))
+    while len(nums) < 3:
+        nums.append(0)
+    return tuple(nums[:3])
+
+
+def _installed_version(pip_name: str):
+    """读取已安装版本：优先 importlib.metadata，退回包内 __version__。"""
+    try:
+        from importlib.metadata import version as _v
+        return _v(pip_name)
+    except Exception:
+        pass
+    try:
+        import importlib
+        mod = importlib.import_module(pip_name.replace("-", "_"))
+        return getattr(mod, "__version__", None)
+    except Exception:
+        return None
 
 
 def setup_path(project_root: str) -> str:
@@ -46,7 +81,7 @@ def setup_path(project_root: str) -> str:
 
 
 def check_packages(quiet: bool = False) -> dict:
-    """检查所有关键包，返回缺失列表。"""
+    """检查所有关键包（存在性 + 版本下限），返回需要修复列表。"""
     missing = {}
     for import_name, pip_name in REQUIRED_PACKAGES:
         try:
@@ -55,9 +90,25 @@ def check_packages(quiet: bool = False) -> dict:
             missing[import_name] = pip_name
             if not quiet:
                 print(f"  ❌ {import_name} (pip: {pip_name}) 未安装", file=sys.stderr)
-        else:
-            if not quiet:
-                print(f"  ✅ {import_name}", file=sys.stderr)
+            continue
+
+        floor = MIN_VERSIONS.get(pip_name)
+        if floor:
+            cur = _installed_version(pip_name)
+            if cur is None:
+                if not quiet:
+                    print(f"  ✅ {import_name}（版本未知，按满足下限处理）",
+                          file=sys.stderr)
+                continue
+            if _parse_version(cur) < floor:
+                need = ".".join(str(x) for x in floor)
+                missing[import_name] = pip_name
+                if not quiet:
+                    print(f"  ⚠️ {import_name} 版本过旧 {cur} < {need}，需升级",
+                          file=sys.stderr)
+                continue
+        if not quiet:
+            print(f"  ✅ {import_name}", file=sys.stderr)
     return missing
 
 
@@ -73,26 +124,38 @@ def install_packages(packages: dict, target_dir: str,
     pip_names = list(set(packages.values()))
     os.makedirs(target_dir, exist_ok=True)
 
-    # 锁文件优先：缺失包必须全部在锁文件覆盖范围内才使用锁文件
-    lock_path = os.path.join(project_root, "requirements.lock")
-    install_spec = None
-    if os.path.exists(lock_path):
-        try:
-            locked_names = set()
-            for line in open(lock_path, encoding="utf-8"):
-                line = line.strip()
-                if not line or line.startswith("#"):
-                    continue
-                name = line.split("==")[0].split(">=")[0].strip().lower()
-                locked_names.add(name)
-            missing_locked = {n.lower() for n in pip_names}
-            if missing_locked.issubset(locked_names):
-                install_spec = ["-r", lock_path]
-                print(f"🔒 使用 requirements.lock 安装", file=sys.stderr)
-        except Exception as e:
-            print(f"⚠️ 锁文件解析失败，退回按包名安装: {e}", file=sys.stderr)
-    if install_spec is None:
-        install_spec = pip_names
+    # 版本下限不满足：直接精确升级这些包，避免重装整份 lock（慢且会动到别的包）
+    floor_specs = [
+        "%s>=%s" % (n, ".".join(str(x) for x in MIN_VERSIONS[n]))
+        for n in pip_names if n in MIN_VERSIONS
+    ]
+    extra_flags: list = []
+    if floor_specs:
+        rest = [n for n in pip_names if n not in MIN_VERSIONS]
+        install_spec = floor_specs + rest
+        extra_flags = ["--upgrade"]
+        print(f"⬆️ 版本下限升级: {' '.join(floor_specs)}", file=sys.stderr)
+    else:
+        # 锁文件优先：缺失包必须全部在锁文件覆盖范围内才使用锁文件
+        lock_path = os.path.join(project_root, "requirements.lock")
+        install_spec = None
+        if os.path.exists(lock_path):
+            try:
+                locked_names = set()
+                for line in open(lock_path, encoding="utf-8"):
+                    line = line.strip()
+                    if not line or line.startswith("#"):
+                        continue
+                    name = line.split("==")[0].split(">=")[0].strip().lower()
+                    locked_names.add(name)
+                missing_locked = {n.lower() for n in pip_names}
+                if missing_locked.issubset(locked_names):
+                    install_spec = ["-r", lock_path]
+                    print(f"🔒 使用 requirements.lock 安装", file=sys.stderr)
+            except Exception as e:
+                print(f"⚠️ 锁文件解析失败，退回按包名安装: {e}", file=sys.stderr)
+        if install_spec is None:
+            install_spec = pip_names
 
     print(f"\n🔧 安装 {len(pip_names)} 个缺失包到 {target_dir}: "
           f"{' '.join(pip_names)}", file=sys.stderr)
@@ -100,8 +163,8 @@ def install_packages(packages: dict, target_dir: str,
     try:
         result = subprocess.run(
             [sys.executable, "-m", "pip", "install", "--target", target_dir,
-             "--quiet"] + install_spec,
-            capture_output=True, text=True, timeout=180,
+             "--quiet"] + extra_flags + install_spec,
+            capture_output=True, text=True, timeout=300,
         )
         if result.returncode != 0:
             print(f"❌ pip install 失败:\n{result.stderr[:500]}", file=sys.stderr)

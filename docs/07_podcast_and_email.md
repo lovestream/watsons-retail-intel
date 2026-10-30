@@ -81,6 +81,14 @@
 - 流程：`generate_audio()` 同步包装 → `_tts_generate()` 异步 `edge_tts.Communicate(text, voice, rate=rate).save(output_path)`。成功判据：文件存在且 `size > 1000` 字节。
 - 输出：`podcasts/scripts/{date}.md` + `podcasts/audio/{date}.mp3`，结果 JSON `data/logs/{date}/generate_podcast.json`（含 `script_length`、`audio_exists`、`audio_size_bytes`、`is_no_signal`、`tts_success` 等）。
 
+**2026-10-29 版本约束与重试（重要）**
+
+- **edge-tts 必须 >= 7.3.1**（`requirements.lock` 锁定 `edge-tts==7.3.1`）。7.2.8 的 `Sec-MS-GEC` DRM 令牌/Chromium 版本已被微软判失效，表现为 **WSS 握手 403**：库装得好好的、import 正常，但一合成音频就失败 → 极易被误判成"网络不通"或"需要换付费 TTS"。
+- `pip_ensure.py` 增加**版本下限检查**（`MIN_VERSIONS`）：已安装但低于下限同样触发修复，且只精确升级该包（不重装整份 lock）。
+- 两个 TTS 入口（`generate_podcast._tts_generate` / `generate_periodic_report._generate_tts_chunk`）默认**重试 3 次、间隔递增**；识别到 WSS 403 时直接给出"需升级 edge-tts"的可操作结论，不做无意义重试。
+- 邮件附件增加**可播放校验**（`_is_playable_audio`：>=10KB 且 ID3/MP3 帧头）；TTS 失败留下的 0 字节文件不再作为附件发出（比"没有音频"更糟）。
+- **不使用任何付费 TTS**：SiliconFlow CosyVoice2 已于 2026-10-29 从所有分支移除（`c5d9812`/`fc2ca92`/`842db14`/`29a676f`），并由 `tests/r3/test_tts_edge_only.py` 防回归。
+
 ### 2.2 与任务描述的"分块合成/超时/费用上限/无信号不生成"对照
 
 - **分块合成（commit d823682）**：d823682（TTS 分块 + duration 验收 + 语速校准超时 + fallback 上限，`_split_tts_chunks` / `_concat_mp3` / `_generate_tts` rate_plan / `_mp3_duration` / `_estimate_mp3_duration`）在仓库中位于**周期播客/周期报告 TTS 链路**（已在 `docs/_draft/06` commit 表核对），**`generate_podcast.py`（日报/事件池口播稿 TTS）目前是整段单次 save，未见分块**。→ 分块合成是周期链路的特性，日报链路未采用。

@@ -94,6 +94,9 @@ def review(brief: Dict, pack: Dict, send_at: str,
 
     decision = str(review_json.get("decision") or "").lower()
     issues = review_json.get("issues") or []
+    if decision not in ("approve", "revise", "block") or not isinstance(issues, list):
+        return {"state": "hold_for_review", "status": "hold_for_review",
+                "decision": "invalid_p09_response"}, meta
     meta["review"] = review_json
     meta["raw_reviews"] = [review_json]
 
@@ -104,6 +107,10 @@ def review(brief: Dict, pack: Dict, send_at: str,
                 "decision": decision or "block",
                 "review": review_json, "issues": critical or issues,
                 "det_errors": hard_errors or det_errors}, meta
+
+    if any(str(i.get("severity")).lower() == "major" for i in issues) and not review_json.get("suggested_replacements"):
+        return {"state": "blocked", "status": "blocked",
+                "decision": "major_issues_unfixed", "issues": issues}, meta
 
     if decision == "revise" or review_json.get("suggested_replacements"):
         fixed, applied = schema.apply_replacements(
@@ -129,6 +136,8 @@ def review(brief: Dict, pack: Dict, send_at: str,
             gate2, meta2 = _second_round(fixed, pack, send_at, issues, client, pr)
             meta["rounds"] = 2
             meta["second_round"] = meta2
+            if meta2.get("review"):
+                meta.setdefault("raw_reviews", []).append(meta2["review"])
             if gate2.get("status") != "approved":
                 return gate2, meta
         return {"state": "approved", "status": "approved",
@@ -146,8 +155,25 @@ def _still_major(issues) -> bool:
 
 
 def _second_round(brief, pack, send_at, issues, client, pr) -> Tuple[Dict, Dict]:
-    user = (pr.user + "\n\n上一轮修改后仍存在以下问题，请重新给出最小更正：\n" +
-            json.dumps(issues, ensure_ascii=False))
+    """Independently reassess the ACTUAL revised brief, not the original pr.user.
+
+    A second model response requesting further revisions is not an approval.
+    """
+    det = schema.validate_brief(brief, pack, send_at)
+    if not det["pass"]:
+        return {"state": "blocked", "status": "blocked",
+                "decision": "second_round_deterministic_errors",
+                "det_errors": det["errors"]}, {"deterministic": det}
+    user = (
+        "仅审阅下面的【已修订简报】，不要审阅上一版。"
+        "下列证据是唯一可用的原始主张，若仍有major/critical问题必须block。"
+        "只有完全正确时 decision=approve；不要直接提出第三轮修订。\n"
+        "已修订简报JSON:\n" + json.dumps(brief, ensure_ascii=False) +
+        "\n来源事实与证据:\n" + json.dumps(_evidence(brief, pack), ensure_ascii=False) +
+        "\n上一轮需修复问题（只用来检查是否解决）:\n" +
+        json.dumps(issues, ensure_ascii=False) +
+        "\n确定性校验:\n" + json.dumps(det, ensure_ascii=False)
+    )
     res = client.chat(messages=[{"role": "user", "content": user}],
                       system_prompt=pr.system, response_format="json",
                       temperature=0.0, max_tokens=pr.max_tokens)
@@ -155,14 +181,16 @@ def _second_round(brief, pack, send_at, issues, client, pr) -> Tuple[Dict, Dict]
     if not isinstance(rj, dict):
         return {"state": "hold_for_review", "status": "hold_for_review",
                 "decision": "second_round_failed"}, {}
-    crit = [i for i in (rj.get("issues") or [])
-            if str(i.get("severity")).lower() == "critical"]
-    if str(rj.get("decision")).lower() == "block" or crit:
+    findings = rj.get("issues") or []
+    if (str(rj.get("decision")).lower() != "approve" or
+            not isinstance(findings, list) or any(
+                str(item.get("severity")).lower() in ("critical", "major")
+                for item in findings if isinstance(item, dict))):
         return {"state": "blocked", "status": "blocked",
-                "decision": "block", "review": rj}, {}
+                "decision": "second_round_unresolved", "review": rj,
+                "issues": findings}, {"review": rj}
     return {"state": "approved", "status": "approved",
-            "decision": str(rj.get("decision")), "review": rj}, {}
-
+            "decision": "approve", "review": rj}, {"review": rj}
 
 STATE_ZH = {"approved": "已通过（本批次可发送）",
             "hold_for_review": "暂缓（P09 未完成，需人工复核后放行）",

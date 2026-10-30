@@ -1,6 +1,6 @@
 """Production delivery gates: run in NAS venv, no real SMTP or LLM calls.
 
-PYTHONPATH=".venv_packages:." python3 -m unittest -v tests.test_production_delivery_gate
+PYTHONPATH=".venv_packages:." python3 tests/test_production_delivery_gate.py -v
 """
 import hashlib
 import json

@@ -44,6 +44,8 @@ def build_topic_plan(pack: Dict, send_at: str, previous=None,
         "period_start": (pack.get("period") or {}).get("start", ""),
         "period_end": (pack.get("period") or {}).get("end", ""),
         "news_clusters": _clusters(pack),
+        # The current P14/P15 result is not a previous-period comparison.
+        "current_cross_period_synthesis": pack.get("synthesis") or {},
         "previous_comparison": previous or "本期无同口径上一周期数据",
         "published_fingerprints": published_fingerprints or [],
     }
@@ -124,7 +126,12 @@ def write_brief(pack: Dict, send_at: str, topic_plan: Optional[Dict] = None,
                 period_start=(pack.get("period") or {}).get("start", ""),
                 period_end=(pack.get("period") or {}).get("end", ""),
                 send_at=send_at,
-                reader_fact_pack_json=reader_fact_pack_json(pack),
+                reader_fact_pack_json=(
+                    {"facts": reader_fact_pack_json(pack),
+                     "current_cross_period_synthesis": pack["synthesis"],
+                     "synthesis_status": (pack.get("synthesis_meta") or {}).get("status")}
+                    if pack.get("synthesis") else reader_fact_pack_json(pack)
+                ),
                 topic_plan_json=topic_plan or {"topics": []},
                 verified_internal_capabilities_json=verified_internal or {},
                 previous_digest_fingerprints_json=previous_fingerprints or [])

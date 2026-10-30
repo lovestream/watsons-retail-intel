@@ -1212,28 +1212,42 @@ def _get_audio_path(report_type, period_info, project_root):
 
 
 def _send_report_email(report_type, period_label, final_result, recipient,
-                       project_root):
+                       project_root, period_info=None, synthesis=None, cross=None):
+    """Only send approved reader brief; a generated long report is not approval."""
+    from skills.reader_brief.production_delivery import prepare_approved_brief
+    if os.environ.get("WATSONS_PERIODIC_MAIL_MODE", "hold").strip().lower() != "reader_brief":
+        logger.warning("%s 生产周期邮件处于hold，未发送", LOG_PREFIX)
+        return {"ok": False, "error": "periodic_delivery_disabled"}
+    if not period_info:
+        return {"ok": False, "error": "missing_period_info"}
+    prepared = prepare_approved_brief(
+        report_type, period_info, project_root, synthesis, cross,
+        final_result.get("audio_path", ""))
+    if not prepared.get("approved"):
+        logger.error("%s 新版读者简报未获批准: %s", LOG_PREFIX, prepared)
+        return {"ok": False, "error": prepared.get("error", "reader_brief_hold")}
     try:
         from skills.send_daily_report_email.send_daily_report_email import (
             send_periodic_report_email)
-    except ImportError:
-        logger.warning(f"{LOG_PREFIX} 邮件模块导入失败")
-        return
-
-    result = send_periodic_report_email(
-        report_type=report_type,
-        period_label=period_label,
-        report_path=final_result.get("report_path", ""),
-        audio_path=final_result.get("audio_path", ""),
-        recipient=recipient,
-        project_root=project_root,
-        dry_run=False,
-    )
+        result = send_periodic_report_email(
+            report_type=report_type,
+            period_label=period_label,
+            report_path=final_result.get("report_path", ""),
+            audio_path=final_result.get("audio_path", ""),
+            recipient=recipient,
+            project_root=project_root,
+            dry_run=False,
+            approved_brief_html_path=prepared["html_path"],
+            approved_brief_manifest_path=prepared["manifest_path"],
+        )
+    except Exception as exc:
+        logger.error("%s 新版邮件发送入口异常: %s", LOG_PREFIX, exc)
+        return {"ok": False, "error": "reader_brief_delivery_exception"}
     if result.get("ok"):
-        logger.info(f"{LOG_PREFIX} 邮件已发送 → {recipient}")
+        logger.info("%s 经P09复核的新版经营简报已发送", LOG_PREFIX)
     else:
-        logger.error(f"{LOG_PREFIX} 邮件发送失败: {result.get('error', result.get('message', ''))}")
-
+        logger.error("%s 新版经营简报发送失败: %s", LOG_PREFIX, result)
+    return result
 
 # ── 主入口 ──
 
@@ -1298,15 +1312,16 @@ def generate_periodic_report(report_type, period_info, project_root=".",
         final = phase4_finalize(chapters, report_type, period_label,
                                 period_info, project_root, None, None)
         legacy_ok = final.get("sendable", False)
-        if legacy_ok and send_email and recipient and final.get("report_path"):
-            _send_report_email(report_type, period_label, final, recipient,
-                               project_root)
+        # synthesis构建失败的旧降级路径：可归档研究稿，永不自动发邮件。
+        if legacy_ok and send_email:
+            logger.error("%s 旧路径回退稿未通过新版事实门，禁止SMTP", LOG_PREFIX)
         return {"success": legacy_ok,
                 "report_path": final.get("report_path", ""),
                 "audio_path": final.get("audio_path", ""),
                 "sendable": legacy_ok,
-                "delivery_allowed": legacy_ok,
-                "review": final.get("review_result")}
+                "delivery_allowed": False,
+                "review": final.get("review_result"),
+                "delivery_error": "legacy_report_not_approved"}
 
     # coverage 不达标 → 不可发送（审计 §4.3 + §10.6）
     if coverage.get("status") == "failing":
@@ -1348,9 +1363,13 @@ def generate_periodic_report(report_type, period_info, project_root=".",
                      f"TTS 失败 → 不发邮件（§27）")
         delivery_allowed = False
 
+    email_delivery = None
     if delivery_allowed and send_email and recipient and final.get("report_path"):
-        _send_report_email(report_type, period_label, final, recipient,
-                           project_root)
+        email_delivery = _send_report_email(
+            report_type, period_label, final, recipient, project_root,
+            period_info=period_info, synthesis=synthesis, cross=cross)
+        if not email_delivery.get("ok"):
+            delivery_allowed = False
     elif sendable and not delivery_allowed:
         logger.error(f"{LOG_PREFIX} delivery gate 拦截：不发邮件")
     elif not sendable:
@@ -1372,6 +1391,8 @@ def generate_periodic_report(report_type, period_info, project_root=".",
         "podcast_script": final.get("podcast_script", ""),
         "sendable": sendable,
         "delivery_allowed": delivery_allowed,
+        "email_delivery": email_delivery,
+        "delivery_error": (email_delivery or {}).get("error", ""),
         "review": final.get("review_result"),
         "coverage": coverage,
         "tts": final.get("tts"),

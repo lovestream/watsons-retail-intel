@@ -118,7 +118,11 @@ def main(argv=None) -> int:
     for i, raw in enumerate(rmeta.get("raw_reviews") or [], start=1):
         _dump(outdir / f"p09_round{i}.json", raw)
     if gate.get("brief"):
-        _dump(outdir / "reader_brief_after_revise.json", gate["brief"])
+        # P09 revised text is the ONLY body that may be rendered/sent.
+        # Always persist the final edited version back to the canonical artifact.
+        brief = gate["brief"]
+        _dump(outdir / "reader_brief_after_revise.json", brief)
+        _dump(outdir / "reader_brief.json", brief)
     if gate.get("det_errors"):
         _dump(outdir / "p09_det_errors.json", gate["det_errors"])
 

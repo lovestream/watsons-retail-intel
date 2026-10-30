@@ -389,5 +389,36 @@ class ProviderRoutingTest(unittest.TestCase):
         self.assertFalse(hasattr(lc, "OPENCODE_BASE_URL"))
 
 
+# ---------------- 模型名回归（2026-10 连续 0% 成功率真因） ----------------
+
+class DeadModelNameRegressionTest(unittest.TestCase):
+    def test_no_dead_model_in_configs_and_skills(self):
+        import re
+        root = Path(__file__).resolve().parents[1]
+        dead = ["deepseek-v4-flash-free", "claude-opus-4-8"]
+        offenders = []
+        for base in ("config", "skills", "scripts"):
+            for p in (root / base).rglob("*"):
+                if p.suffix not in (".py", ".yaml", ".yml", ".json") or not p.is_file():
+                    continue
+                if ".venv" in str(p) or "__pycache__" in str(p):
+                    continue
+                if p.name == "llm_client.py":
+                    continue  # DEAD_MODEL_NAMES 白名单常量本身必须包含这些名字
+                txt = p.read_text(encoding="utf-8", errors="ignore")
+                for d in dead:
+                    if d in txt:
+                        offenders.append(f"{p.relative_to(root)}:{d}")
+        self.assertEqual(offenders, [], offenders)
+
+    def test_sanitize_maps_dead_to_live(self):
+        self.assertEqual(lc.sanitize_model("deepseek-v4-flash-free",
+                                           "deepseek-ai/DeepSeek-V4.1-Flash"),
+                         "deepseek-ai/DeepSeek-V4.1-Flash")
+        self.assertEqual(lc.sanitize_model("deepseek-ai/DeepSeek-V4.1-Flash",
+                                           "deepseek-ai/DeepSeek-V4.1-Flash"),
+                         "deepseek-ai/DeepSeek-V4.1-Flash")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

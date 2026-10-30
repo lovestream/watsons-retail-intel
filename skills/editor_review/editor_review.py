@@ -1707,7 +1707,7 @@ def editor_review(
                             if llm_result and "final_markdown" in llm_result:
                                 llm_review_data = llm_result.get("review", {})
                                 final_md = llm_result["final_markdown"]
-                                model_used = _review_model or "deepseek-v4-flash-free"
+                                model_used = _review_model or "deepseek-ai/DeepSeek-V4.1-Flash"
                                 logger.info(f"  LLM 审稿成功，终稿长度: {len(final_md)} 字符")
                             else:
                                 logger.warning("默认模型审稿失败，尝试 fallback...")

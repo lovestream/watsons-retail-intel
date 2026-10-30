@@ -79,6 +79,27 @@ FALLBACK_BASE_URL = os.environ.get("RIGHTCODE_BASE_URL",
                                    "https://right.codes/codex/v1")
 FALLBACK_MODEL = os.environ.get("RIGHTCODE_MODEL", "deepseek-flash")
 
+# 已确认下线、但历史上散落在 config/parallel.yaml 与各脚本默认值里的模型名。
+# 任何调用方若仍传这些名字，一律回落到当前主模型，避免"HTTP 400 Model does not exist"
+# 导致的静默 0% 成功率（2026-10 连续多日 0 事件的真因）。
+DEAD_MODEL_NAMES = (
+    "deepseek-v4-flash-free",
+    "deepseek-v4-flash",
+    "OpenCode/deepseek-v4-flash-free",
+    "claude-opus-4-8",
+)
+
+
+def sanitize_model(name: str, default: str) -> str:
+    """把已下线模型名映射到当前可用模型；其它名字原样返回。"""
+    n = (name or "").strip()
+    if not n:
+        return default
+    if n in DEAD_MODEL_NAMES or n.endswith("-free") or "/" not in n and n.startswith("deepseek-v4"):
+        logger.warning("模型 %s 已下线，回落到 %s", n, default)
+        return default
+    return n
+
 # ── 付费兜底总开关 ──
 # 历史开关（保留兼容）：RightCode 现为用户授权的唯一备用，无需付费开关。
 # 明确同意花钱时，临时设 ALLOW_PAID_FALLBACK=1 启用。正常情况绝不走付费。
@@ -481,8 +502,11 @@ class LLMClient:
             }
         """
         # ── 实际使用模型（主 Provider） ──
-        actual_model = model if model else self.model
-        if model and model != self.model:
+        actual_model = sanitize_model(model if model else self.model,
+                                     self.model)
+        if model and actual_model != model:
+            logger.warning("请求模型 %s 不可用，实际使用 %s", model, actual_model)
+        if actual_model != self.model:
             logger.info(f"模型覆盖: self.model={self.model} → 实际使用={actual_model}")
 
         result_base = {
@@ -594,6 +618,8 @@ class LLMClient:
             endpoint = self._build_endpoint(entry.get("base_url") or self.base_url)
             if entry.get("tier") == "fallback" and not model:
                 use_model = entry.get("model") or FALLBACK_MODEL
+            elif entry.get("name") == "siliconflow":
+                use_model = sanitize_model(use_model, self.model)
             key_label = entry.get("name") or _mask_key(key)
             with self._lock:
                 self.total_calls += 1

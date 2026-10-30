@@ -1,0 +1,28 @@
+{
+ "status": "incomplete",
+ "gate": {
+  "expected_weeks": [
+   "2026-W27",
+   "2026-W28",
+   "2026-W29",
+   "2026-W30",
+   "2026-W31"
+  ],
+  "found_weeks": [],
+  "missing_weeks": [
+   "2026-W27",
+   "2026-W28",
+   "2026-W29",
+   "2026-W30",
+   "2026-W31"
+  ],
+  "month_closed": true,
+  "status": "incomplete"
+ },
+ "synthesis": null,
+ "_meta": {
+  "prompt": "P14",
+  "llm_called": false,
+  "reason": "缺周/缺月或未封账，禁止假装完整期间"
+ }
+}

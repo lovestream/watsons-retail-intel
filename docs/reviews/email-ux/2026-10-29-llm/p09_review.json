@@ -1,0 +1,37 @@
+{
+ "gate": {
+  "status": "pass",
+  "decision": "deterministic_only",
+  "review": null,
+  "degraded": true,
+  "issues": [],
+  "reason": "所有 Provider 尝试完毕。最后错误: 主Provider(SiliconFlow): 请求超时(300s)| 重试超过墙钟上限300s | gpt兜底: Fallback 异常: HTTPSConnectionPool(host='right.codes', port=443): Max retries exc"
+ },
+ "meta": {
+  "prompt": "P09",
+  "prompt_version": "a1003f9ce985",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+  "rounds": 1,
+  "deterministic": {
+   "pass": true,
+   "errors": [],
+   "warnings": [
+    {
+     "code": "supports_unbound",
+     "severity": "warning",
+     "where": "competitor_cards[0].source_refs[0]",
+     "message": "supports_claim_ids 不在本条 claim_ids 中"
+    }
+   ],
+   "stats": {
+    "signals": 2,
+    "competitors": 1,
+    "actions": 2,
+    "watch": 2,
+    "omitted": 8
+   }
+  },
+  "degraded": true,
+  "error": "所有 Provider 尝试完毕。最后错误: 主Provider(SiliconFlow): 请求超时(300s)| 重试超过墙钟上限300s | gpt兜底: Fallback 异常: HTTPSConnectionPool(host='right.codes', port=443): Max retries exceeded with url: /codex/v1/chat/completio"
+ }
+}

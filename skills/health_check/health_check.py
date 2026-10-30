@@ -53,7 +53,7 @@ SERVICES = {
         "critical": True,
         "key_source": "file",          # key 从 config/opencode_keys.json 载入
         "key_count": 4,                 # 3 自定义 Key + 1 内置 keyless
-        "test_model": "deepseek-v4-flash-free",
+        "test_model": "deepseek-ai/DeepSeek-V4.1-Flash",
         "test_url": "https://opencode.ai/zen/v1",
         "test_type": "api_key",
     },
@@ -244,7 +244,7 @@ _OPENCODE_UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 )
-_OPENCODE_MODEL = "deepseek-v4-flash-free"
+_TEST_MODEL = "deepseek-ai/DeepSeek-V4.1-Flash"
 _OPENCODE_URL = "https://opencode.ai/zen/v1"
 
 
@@ -285,7 +285,7 @@ def test_opencode_key(name: str, key: str, model: str, timeout: int = 25) -> dic
     """测试单个 OpenCode 入口（带浏览器 User-Agent 绕过 Cloudflare 403 code 1010）。"""
     try:
         payload = json.dumps({
-            "model": model or _OPENCODE_MODEL,
+            "model": model or _TEST_MODEL,
             "messages": [{"role": "user", "content": "ok"}],
             "max_tokens": 3,
         }).encode()
@@ -720,7 +720,7 @@ def run_health_check(project_root: str = ".", logger: logging.Logger = None) -> 
             else:
                 for key_name, key_val in keys:
                     if svc_id == "opencode_llm":
-                        r = test_opencode_key(key_name, key_val, svc_cfg.get("test_model", _OPENCODE_MODEL))
+                        r = test_opencode_key(key_name, key_val, svc_cfg.get("test_model", _TEST_MODEL))
                     elif svc_id == "tavily_search":
                         r = test_tavily_key(key_name, key_val)
                     elif svc_id == "xcrawl":

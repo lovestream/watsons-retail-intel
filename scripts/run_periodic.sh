@@ -31,6 +31,9 @@ mkdir -p "$LOG_DIR"
 LOG="$LOG_DIR/_run_periodic.out"
 
 export PYTHONPATH=".venv_packages:.:$PYTHONPATH"
+# Default is fail-closed. Only a separate, reviewed NAS release may enable reader_brief.
+: "${WATSONS_PERIODIC_MAIL_MODE:=hold}"
+export WATSONS_PERIODIC_MAIL_MODE
 
 {
   echo "=== run_periodic.sh start $(date -u +%Y-%m-%dT%H:%M:%SZ) date=$TODAY ==="
@@ -43,12 +46,14 @@ export PYTHONPATH=".venv_packages:.:$PYTHONPATH"
 
   # Step 1: 周期报告全流程（含发邮件 + 播客生成）。
   # 规则内嵌在 run_periodic_pipeline: 周一->周报, 月初->月报, 1/1->年报, 冲突串行。
+  set +e
   "$PY" -m skills.run_periodic_pipeline.run_periodic_pipeline \
     --project-root . \
+    --date "$TODAY" \
     --send-email true \
     --recipient "$RECIPIENT"
-    # --date 参数由脚本内部按当天日期自行判定, 无需传入
-
-  echo "=== run_periodic.sh done $(date -u +%Y-%m-%dT%H:%M:%SZ) exit=$? ===" >> "$LOG" 2>&1
-  exit $?
+  RC=$?
+  set -e
+  echo "=== run_periodic.sh done $(date -u +%Y-%m-%dT%H:%M:%SZ) exit=$RC ==="
+  exit "$RC"
 } >> "$LOG" 2>&1

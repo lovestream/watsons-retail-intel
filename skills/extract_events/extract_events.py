@@ -31,6 +31,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
+# 抽取是高频批量调用：thinking 先写 reasoning 会把单篇耗时推到 300s，
+# 生产上必须默认关闭；需要推理质量时用 EXTRACT_ENABLE_THINKING=1 打开。
+_ENABLE_THINKING = os.environ.get("EXTRACT_ENABLE_THINKING", "0") in ("1", "true", "True")
+
 # ===================== 依赖检查 =====================
 _MISSING = []
 try:
@@ -449,6 +453,7 @@ def llm_extract_events(
         temperature=0.15,
         max_tokens=4096,
         model=model,
+        enable_thinking=_ENABLE_THINKING,
     )
 
     content = result.get("content", "")
@@ -574,6 +579,7 @@ def llm_extract_events(
         temperature=0.1,
         max_tokens=2048,
         model=_retry_model,
+        enable_thinking=_ENABLE_THINKING,
     )
     attempt_count = 2
     content2 = result2.get("content", "")
@@ -866,6 +872,7 @@ def extract_events(
     file_handler = logging.FileHandler(log_file, encoding="utf-8")
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(message)s"))
+    
     logger = logging.getLogger("extract_events")
     logger.handlers.clear()
     logger.addHandler(file_handler)
@@ -1021,14 +1028,14 @@ def extract_events(
         _max_workers = _ee_cfg.get("max_workers", 4)
         _article_timeout = _ee_cfg.get("article_timeout", 180)
         _retry_on_failure = _ee_cfg.get("retry_on_failure", True)
-        _retry_model_name = _ee_cfg.get("retry_model", "deepseek-v4-flash-free")
+        _retry_model_name = _ee_cfg.get("retry_model", "deepseek-ai/DeepSeek-V4.1-Flash")
         _checkpoint_filename = _ee_cfg.get("checkpoint_file", "extract_events_checkpoint.jsonl")
         _checkpoint_path = os.path.join(events_dir, _checkpoint_filename)
 
         # 模型策略: Lite 默认, Chat 重试
         _model_strategy = _ee_cfg.get("model_strategy", {})
-        _default_model = _model_strategy.get("default", _extract_default_model or "deepseek-v4-flash-free")
-        _fallback_model = _model_strategy.get("fallback", "deepseek-v4-flash-free")
+        _default_model = _model_strategy.get("default", _extract_default_model or "deepseek-ai/DeepSeek-V4.1-Flash")
+        _fallback_model = _model_strategy.get("fallback", "deepseek-ai/DeepSeek-V4.1-Flash")
         _skip_thinking = _model_strategy.get("skip_thinking", True)
 
         # 清除旧 checkpoint
@@ -1519,3 +1526,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+try:
+    from skills.utils.prompt_bindings import p02_system as _p02_system
+    LLM_SYSTEM_PROMPT = _p02_system()
+except Exception as _exc:  # pragma: no cover - 仅当提示词库缺失
+    import logging as _logging
+    _logging.getLogger(__name__).warning("P02 加载失败，沿用旧系统提示词: %s", _exc)

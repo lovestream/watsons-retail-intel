@@ -1,0 +1,55 @@
+{
+ "period_type": "weekly",
+ "start": "2026-10-19",
+ "end": "2026-10-25",
+ "send_at": "2026-10-29",
+ "deliverable": true,
+ "notes": [],
+ "gate": "pass",
+ "gate_summary": "P09 approve（程序确定性检查通过）",
+ "pack_sha256": "c2836944401fc0a7c9363bce36683adb3baf91a42eb8d828007d4a8e3fbf1f68",
+ "facts": 13,
+ "p05": {
+  "prompt": "P05",
+  "prompt_version": "fbe1742eebc1",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+  "fallback": false
+ },
+ "p08": {
+  "prompt": "P08",
+  "prompt_version": "b402c2f55c43",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+  "repair_rounds": 1,
+  "final_verdict": {
+   "pass": true,
+   "errors": [],
+   "warnings": [
+    {
+     "code": "supports_unbound",
+     "severity": "warning",
+     "where": "competitor_cards[0].source_refs[0]",
+     "message": "supports_claim_ids 不在本条 claim_ids 中"
+    }
+   ],
+   "stats": {
+    "signals": 2,
+    "competitors": 1,
+    "actions": 2,
+    "watch": 2,
+    "omitted": 8
+   }
+  }
+ },
+ "p09": {
+  "prompt": "P09",
+  "version": "a1003f9ce985",
+  "rounds": 1
+ },
+ "stats": {
+  "signals": 2,
+  "competitors": 1,
+  "actions": 2,
+  "watch": 2,
+  "omitted": 8
+ }
+}

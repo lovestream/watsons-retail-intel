@@ -1,0 +1,534 @@
+{
+ "gate": {
+  "state": "approved",
+  "status": "approved",
+  "decision": "revise",
+  "review": {
+   "decision": "revise",
+   "issues": [
+    {
+     "location": "one_line_takeaway",
+     "severity": "major",
+     "problem": "“大促囤货”是未被来源支持的行为判断；原文只说大牌美妆核心单品/新品限定是计划性大促的硬通货，未称消费者囤货。且“把B2C资源压向核心单品”替业务负责人做了资源分配，缺少屈臣氏内部授权/预算事实。",
+     "claim_id": "CL012",
+     "supported_by_source": false,
+     "correction": "改为“据行业报道，双11需求分化为即时缺货、日常低价与计划性大促；建议先用自身订单验证即时缺货单占比，再评估B2C资源是否向核心单品倾斜。”",
+     "evidence_url": "https://www.36kr.com/p/4037147836536454"
+    },
+    {
+     "location": "signals[0].business_impact",
+     "severity": "major",
+     "problem": "“B2C/大促资源集中核心单品”是无内部资源/预算依据的分配决定；来源仅支持需求分化，不能直接推出资源集中。",
+     "claim_id": "CL012",
+     "supported_by_source": false,
+     "correction": "改为“若成立，即时零售应优先验证高频缺货SKU与履约；B2C/大促资源是否向核心单品倾斜需待自身订单验证后再评估。”",
+     "evidence_url": "https://www.36kr.com/p/4037147836536454"
+    },
+    {
+     "location": "title",
+     "severity": "minor",
+     "problem": "“内容成本骤降”泛化为全部内容；来源仅指电商种草视频单条制作成本。",
+     "claim_id": "CL011",
+     "supported_by_source": false,
+     "correction": "改为“种草视频成本骤降”，保留限定对象。",
+     "evidence_url": "https://www.36kr.com/p/4038077554218117"
+    },
+    {
+     "location": "signals[1].fact",
+     "severity": "minor",
+     "problem": "“已用AI内容抢流量”比原文“已开始用AI内容抢流量”更强，暗示已全面使用。",
+     "claim_id": "CL011",
+     "supported_by_source": false,
+     "correction": "改为“已开始用AI内容抢流量”。",
+     "evidence_url": "https://www.36kr.com/p/4038077554218117"
+    },
+    {
+     "location": "signals[1].business_impact",
+     "severity": "minor",
+     "problem": "“同质化内容稀释品牌信任”是无来源的经营因果判断；只能作为需监测的质量风险。",
+     "claim_id": "CL011",
+     "supported_by_source": false,
+     "correction": "改为“需人工审核并监测内容质量与品牌一致性”。",
+     "evidence_url": "https://www.36kr.com/p/4038077554218117"
+    },
+    {
+     "location": "signals[2].fact",
+     "severity": "minor",
+     "problem": "超过110字，触发预核验警告；事实和数字本身有来源。",
+     "claim_id": "CL007,CL008",
+     "supported_by_source": true,
+     "correction": "压缩为“10月20日20:00-23:59天猫双11开门红：美妆前五珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II（TOP20国货四席）；个护前五卡诗、Off&Relax、护舒宝、潘婷、欧莱雅，Off&Relax 4小时首破亿。”",
+     "evidence_url": "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml"
+    }
+   ],
+   "missing_important_context": [
+    "缺屈臣氏即时零售订单结构、内容素材授权/审核流程、门店货架与同口径销售数据；相关动作只能作为小样本验证。"
+   ],
+   "repeated_claims": [],
+   "unnecessary_audit_or_filler": [],
+   "suggested_replacements": [
+    {
+     "path": "one_line_takeaway",
+     "replacement_text": "据行业报道，双11需求分化为即时缺货、日常低价与计划性大促；建议先用自身订单验证即时缺货单占比，再评估B2C资源是否向核心单品倾斜。"
+    },
+    {
+     "path": "signals[0].business_impact",
+     "replacement_text": "若成立，即时零售应优先验证高频缺货SKU与履约；B2C/大促资源是否向核心单品倾斜需待自身订单验证后再评估。"
+    },
+    {
+     "path": "title",
+     "replacement_text": "双11渠道分工：即时零售接缺货，种草视频成本骤降"
+    },
+    {
+     "path": "signals[1].fact",
+     "replacement_text": "据10月23日报道，AIGC把电商种草视频单条成本从人工拍摄100-200元降到5-10元，5人团队一天可产上千条；美妆、洗护头部商家已开始用AI内容抢流量。"
+    },
+    {
+     "path": "signals[1].business_impact",
+     "replacement_text": "内容测试频次与长尾覆盖会被重估；屈臣氏若仍以人工拍摄为主，素材迭代速度可能落后，同时需人工审核并监测内容质量与品牌一致性。"
+    },
+    {
+     "path": "signals[2].fact",
+     "replacement_text": "10月20日20:00-23:59天猫双11开门红：美妆前五珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II（TOP20国货四席）；个护前五卡诗、Off&Relax、护舒宝、潘婷、欧莱雅，Off&Relax 4小时首破亿。"
+    }
+   ],
+   "editor_note": "保留媒体口径和活动时间；删去未经内部数据支持的资源分配与囤货判断，压缩超长榜单句。"
+  },
+  "issues": [
+   {
+    "location": "one_line_takeaway",
+    "severity": "major",
+    "problem": "“大促囤货”是未被来源支持的行为判断；原文只说大牌美妆核心单品/新品限定是计划性大促的硬通货，未称消费者囤货。且“把B2C资源压向核心单品”替业务负责人做了资源分配，缺少屈臣氏内部授权/预算事实。",
+    "claim_id": "CL012",
+    "supported_by_source": false,
+    "correction": "改为“据行业报道，双11需求分化为即时缺货、日常低价与计划性大促；建议先用自身订单验证即时缺货单占比，再评估B2C资源是否向核心单品倾斜。”",
+    "evidence_url": "https://www.36kr.com/p/4037147836536454"
+   },
+   {
+    "location": "signals[0].business_impact",
+    "severity": "major",
+    "problem": "“B2C/大促资源集中核心单品”是无内部资源/预算依据的分配决定；来源仅支持需求分化，不能直接推出资源集中。",
+    "claim_id": "CL012",
+    "supported_by_source": false,
+    "correction": "改为“若成立，即时零售应优先验证高频缺货SKU与履约；B2C/大促资源是否向核心单品倾斜需待自身订单验证后再评估。”",
+    "evidence_url": "https://www.36kr.com/p/4037147836536454"
+   },
+   {
+    "location": "title",
+    "severity": "minor",
+    "problem": "“内容成本骤降”泛化为全部内容；来源仅指电商种草视频单条制作成本。",
+    "claim_id": "CL011",
+    "supported_by_source": false,
+    "correction": "改为“种草视频成本骤降”，保留限定对象。",
+    "evidence_url": "https://www.36kr.com/p/4038077554218117"
+   },
+   {
+    "location": "signals[1].fact",
+    "severity": "minor",
+    "problem": "“已用AI内容抢流量”比原文“已开始用AI内容抢流量”更强，暗示已全面使用。",
+    "claim_id": "CL011",
+    "supported_by_source": false,
+    "correction": "改为“已开始用AI内容抢流量”。",
+    "evidence_url": "https://www.36kr.com/p/4038077554218117"
+   },
+   {
+    "location": "signals[1].business_impact",
+    "severity": "minor",
+    "problem": "“同质化内容稀释品牌信任”是无来源的经营因果判断；只能作为需监测的质量风险。",
+    "claim_id": "CL011",
+    "supported_by_source": false,
+    "correction": "改为“需人工审核并监测内容质量与品牌一致性”。",
+    "evidence_url": "https://www.36kr.com/p/4038077554218117"
+   },
+   {
+    "location": "signals[2].fact",
+    "severity": "minor",
+    "problem": "超过110字，触发预核验警告；事实和数字本身有来源。",
+    "claim_id": "CL007,CL008",
+    "supported_by_source": true,
+    "correction": "压缩为“10月20日20:00-23:59天猫双11开门红：美妆前五珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II（TOP20国货四席）；个护前五卡诗、Off&Relax、护舒宝、潘婷、欧莱雅，Off&Relax 4小时首破亿。”",
+    "evidence_url": "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml"
+   }
+  ],
+  "applied": [
+   "one_line_takeaway",
+   "signals[0].business_impact",
+   "title",
+   "signals[1].fact",
+   "signals[1].business_impact",
+   "signals[2].fact"
+  ],
+  "brief": {
+   "period_type": "weekly",
+   "period_start": "2026-10-19",
+   "period_end": "2026-10-25",
+   "title": "双11渠道分工：即时零售接缺货，种草视频成本骤降",
+   "one_line_takeaway": "据行业报道，双11需求分化为即时缺货、日常低价与计划性大促；建议先用自身订单验证即时缺货单占比，再评估B2C资源是否向核心单品倾斜。",
+   "signals": [
+    {
+     "headline": "双11需求分成三条渠道路径",
+     "fact": "据10月23日报道，双11高频补货被天天低价分走，临时缺货由即时零售承接，大牌美妆核心单品和新品/限定仍集中在计划性大促；消费者年均经7种以上渠道购买快消品。",
+     "fact_ids": [
+      "F012"
+     ],
+     "claim_ids": [
+      "CL012"
+     ],
+     "source_refs": [
+      {
+       "name": "36氪",
+       "url": "https://www.36kr.com/p/4037147836536454",
+       "supports_claim_ids": [
+        "CL012"
+       ]
+      }
+     ],
+     "business_impact": "若成立，即时零售应优先验证高频缺货SKU与履约；B2C/大促资源是否向核心单品倾斜需待自身订单验证后再评估。",
+     "is_inference": true
+    },
+    {
+     "headline": "AIGC把种草视频成本压到5-10元",
+     "fact": "据10月23日报道，AIGC把电商种草视频单条成本从人工拍摄100-200元降到5-10元，5人团队一天可产上千条；美妆、洗护头部商家已开始用AI内容抢流量。",
+     "fact_ids": [
+      "F011"
+     ],
+     "claim_ids": [
+      "CL011"
+     ],
+     "source_refs": [
+      {
+       "name": "36氪",
+       "url": "https://www.36kr.com/p/4038077554218117",
+       "supports_claim_ids": [
+        "CL011"
+       ]
+      }
+     ],
+     "business_impact": "内容测试频次与长尾覆盖会被重估；屈臣氏若仍以人工拍摄为主，素材迭代速度可能落后，同时需人工审核并监测内容质量与品牌一致性。",
+     "is_inference": true
+    },
+    {
+     "headline": "天猫双11开门红美妆个护榜单",
+     "fact": "10月20日20:00-23:59天猫双11开门红：美妆前五珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II（TOP20国货四席）；个护前五卡诗、Off&Relax、护舒宝、潘婷、欧莱雅，Off&Relax 4小时首破亿。",
+     "fact_ids": [
+      "F007",
+      "F008"
+     ],
+     "claim_ids": [
+      "CL007",
+      "CL008"
+     ],
+     "source_refs": [
+      {
+       "name": "新浪科技/亿邦动力",
+       "url": "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml",
+       "supports_claim_ids": [
+        "CL007",
+        "CL008"
+       ]
+      }
+     ],
+     "business_impact": "平台榜单只反映大促首段，不等于屈臣氏线下动销；可作国货美妆与个护新锐的货架/供应商沟通参照，需同口径销售验证。",
+     "is_inference": true
+    }
+   ],
+   "competitor_cards": [],
+   "priority_actions": [
+    {
+     "title": "验证即时缺货单占比",
+     "precondition": "需先拉取屈臣氏即时零售渠道近4周订单，区分高频补货、临时缺货与计划性囤货；当前无内部数据。",
+     "trial": "选一个即时零售平台、少量高频个护SKU做缺货场景标签与履约时效复盘，不扩全渠道。",
+     "metric": "临时缺货归因订单占即时零售订单比例",
+     "linked_fact_ids": [
+      "F012"
+     ]
+    },
+    {
+     "title": "小样本测AI种草素材",
+     "precondition": "需确认品牌授权、平台内容合规与审核流程，不默认已有品牌素材授权。",
+     "trial": "选1-2个已授权个护SKU，用AI生成小批量短视频，经人工审核后做A/B测试。",
+     "metric": "单素材有效点击成本",
+     "linked_fact_ids": [
+      "F011"
+     ]
+    },
+    {
+     "title": "复核国货美妆货架位",
+     "precondition": "需用屈臣氏自身同口径销售与库存数据核对，平台开门红榜单不能直接作为铺货依据。",
+     "trial": "对已在售的国货美妆/个护各1-2个品牌，在少量门店做货架位与促销资源对照观察，不宣布全渠道调整。",
+     "metric": "试点品牌周动销率",
+     "linked_fact_ids": [
+      "F007",
+      "F008"
+     ]
+    }
+   ],
+   "watch_items": [],
+   "omitted_fact_ids": [
+    {
+     "fact_id": "F001",
+     "reason": "单点爆品黄牛价差，与本期渠道分工主线弱关联"
+    },
+    {
+     "fact_id": "F003",
+     "reason": "天猫双11开卖数据笼统，未提供品类/渠道可用信号"
+    },
+    {
+     "fact_id": "F004",
+     "reason": "商圈C位变化为背景观察，无屈臣氏直接关联"
+    },
+    {
+     "fact_id": "F005",
+     "reason": "团购/点评DAU与本期即时零售美妆经营弱关联"
+    },
+    {
+     "fact_id": "F006",
+     "reason": "供应链定制报告为计划性表述，缺落地证据"
+    },
+    {
+     "fact_id": "F009",
+     "reason": "与美妆开门红榜单同源且冗余"
+    },
+    {
+     "fact_id": "F013",
+     "reason": "丝芙兰活动未披露门店客流与转化，证据不足"
+    }
+   ],
+   "audit": {
+    "human_review_status": "pending",
+    "source_pack_sha256": "ff9fe0e38d7d56bca567f3faa2d7af4e9b0d5ec2f6a5e69521c41f8190083c9b"
+   }
+  }
+ },
+ "meta": {
+  "prompt": "P09",
+  "prompt_version": "a1003f9ce985",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+  "rounds": 2,
+  "deterministic": {
+   "pass": true,
+   "errors": [],
+   "warnings": [
+    {
+     "code": "too_long",
+     "severity": "warning",
+     "where": "signals[2].fact",
+     "message": "超过 110 字"
+    }
+   ],
+   "stats": {
+    "signals": 3,
+    "competitors": 0,
+    "actions": 3,
+    "watch": 0,
+    "omitted": 7
+   }
+  },
+  "review": {
+   "decision": "revise",
+   "issues": [
+    {
+     "location": "one_line_takeaway",
+     "severity": "major",
+     "problem": "“大促囤货”是未被来源支持的行为判断；原文只说大牌美妆核心单品/新品限定是计划性大促的硬通货，未称消费者囤货。且“把B2C资源压向核心单品”替业务负责人做了资源分配，缺少屈臣氏内部授权/预算事实。",
+     "claim_id": "CL012",
+     "supported_by_source": false,
+     "correction": "改为“据行业报道，双11需求分化为即时缺货、日常低价与计划性大促；建议先用自身订单验证即时缺货单占比，再评估B2C资源是否向核心单品倾斜。”",
+     "evidence_url": "https://www.36kr.com/p/4037147836536454"
+    },
+    {
+     "location": "signals[0].business_impact",
+     "severity": "major",
+     "problem": "“B2C/大促资源集中核心单品”是无内部资源/预算依据的分配决定；来源仅支持需求分化，不能直接推出资源集中。",
+     "claim_id": "CL012",
+     "supported_by_source": false,
+     "correction": "改为“若成立，即时零售应优先验证高频缺货SKU与履约；B2C/大促资源是否向核心单品倾斜需待自身订单验证后再评估。”",
+     "evidence_url": "https://www.36kr.com/p/4037147836536454"
+    },
+    {
+     "location": "title",
+     "severity": "minor",
+     "problem": "“内容成本骤降”泛化为全部内容；来源仅指电商种草视频单条制作成本。",
+     "claim_id": "CL011",
+     "supported_by_source": false,
+     "correction": "改为“种草视频成本骤降”，保留限定对象。",
+     "evidence_url": "https://www.36kr.com/p/4038077554218117"
+    },
+    {
+     "location": "signals[1].fact",
+     "severity": "minor",
+     "problem": "“已用AI内容抢流量”比原文“已开始用AI内容抢流量”更强，暗示已全面使用。",
+     "claim_id": "CL011",
+     "supported_by_source": false,
+     "correction": "改为“已开始用AI内容抢流量”。",
+     "evidence_url": "https://www.36kr.com/p/4038077554218117"
+    },
+    {
+     "location": "signals[1].business_impact",
+     "severity": "minor",
+     "problem": "“同质化内容稀释品牌信任”是无来源的经营因果判断；只能作为需监测的质量风险。",
+     "claim_id": "CL011",
+     "supported_by_source": false,
+     "correction": "改为“需人工审核并监测内容质量与品牌一致性”。",
+     "evidence_url": "https://www.36kr.com/p/4038077554218117"
+    },
+    {
+     "location": "signals[2].fact",
+     "severity": "minor",
+     "problem": "超过110字，触发预核验警告；事实和数字本身有来源。",
+     "claim_id": "CL007,CL008",
+     "supported_by_source": true,
+     "correction": "压缩为“10月20日20:00-23:59天猫双11开门红：美妆前五珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II（TOP20国货四席）；个护前五卡诗、Off&Relax、护舒宝、潘婷、欧莱雅，Off&Relax 4小时首破亿。”",
+     "evidence_url": "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml"
+    }
+   ],
+   "missing_important_context": [
+    "缺屈臣氏即时零售订单结构、内容素材授权/审核流程、门店货架与同口径销售数据；相关动作只能作为小样本验证。"
+   ],
+   "repeated_claims": [],
+   "unnecessary_audit_or_filler": [],
+   "suggested_replacements": [
+    {
+     "path": "one_line_takeaway",
+     "replacement_text": "据行业报道，双11需求分化为即时缺货、日常低价与计划性大促；建议先用自身订单验证即时缺货单占比，再评估B2C资源是否向核心单品倾斜。"
+    },
+    {
+     "path": "signals[0].business_impact",
+     "replacement_text": "若成立，即时零售应优先验证高频缺货SKU与履约；B2C/大促资源是否向核心单品倾斜需待自身订单验证后再评估。"
+    },
+    {
+     "path": "title",
+     "replacement_text": "双11渠道分工：即时零售接缺货，种草视频成本骤降"
+    },
+    {
+     "path": "signals[1].fact",
+     "replacement_text": "据10月23日报道，AIGC把电商种草视频单条成本从人工拍摄100-200元降到5-10元，5人团队一天可产上千条；美妆、洗护头部商家已开始用AI内容抢流量。"
+    },
+    {
+     "path": "signals[1].business_impact",
+     "replacement_text": "内容测试频次与长尾覆盖会被重估；屈臣氏若仍以人工拍摄为主，素材迭代速度可能落后，同时需人工审核并监测内容质量与品牌一致性。"
+    },
+    {
+     "path": "signals[2].fact",
+     "replacement_text": "10月20日20:00-23:59天猫双11开门红：美妆前五珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II（TOP20国货四席）；个护前五卡诗、Off&Relax、护舒宝、潘婷、欧莱雅，Off&Relax 4小时首破亿。"
+    }
+   ],
+   "editor_note": "保留媒体口径和活动时间；删去未经内部数据支持的资源分配与囤货判断，压缩超长榜单句。"
+  },
+  "raw_reviews": [
+   {
+    "decision": "revise",
+    "issues": [
+     {
+      "location": "one_line_takeaway",
+      "severity": "major",
+      "problem": "“大促囤货”是未被来源支持的行为判断；原文只说大牌美妆核心单品/新品限定是计划性大促的硬通货，未称消费者囤货。且“把B2C资源压向核心单品”替业务负责人做了资源分配，缺少屈臣氏内部授权/预算事实。",
+      "claim_id": "CL012",
+      "supported_by_source": false,
+      "correction": "改为“据行业报道，双11需求分化为即时缺货、日常低价与计划性大促；建议先用自身订单验证即时缺货单占比，再评估B2C资源是否向核心单品倾斜。”",
+      "evidence_url": "https://www.36kr.com/p/4037147836536454"
+     },
+     {
+      "location": "signals[0].business_impact",
+      "severity": "major",
+      "problem": "“B2C/大促资源集中核心单品”是无内部资源/预算依据的分配决定；来源仅支持需求分化，不能直接推出资源集中。",
+      "claim_id": "CL012",
+      "supported_by_source": false,
+      "correction": "改为“若成立，即时零售应优先验证高频缺货SKU与履约；B2C/大促资源是否向核心单品倾斜需待自身订单验证后再评估。”",
+      "evidence_url": "https://www.36kr.com/p/4037147836536454"
+     },
+     {
+      "location": "title",
+      "severity": "minor",
+      "problem": "“内容成本骤降”泛化为全部内容；来源仅指电商种草视频单条制作成本。",
+      "claim_id": "CL011",
+      "supported_by_source": false,
+      "correction": "改为“种草视频成本骤降”，保留限定对象。",
+      "evidence_url": "https://www.36kr.com/p/4038077554218117"
+     },
+     {
+      "location": "signals[1].fact",
+      "severity": "minor",
+      "problem": "“已用AI内容抢流量”比原文“已开始用AI内容抢流量”更强，暗示已全面使用。",
+      "claim_id": "CL011",
+      "supported_by_source": false,
+      "correction": "改为“已开始用AI内容抢流量”。",
+      "evidence_url": "https://www.36kr.com/p/4038077554218117"
+     },
+     {
+      "location": "signals[1].business_impact",
+      "severity": "minor",
+      "problem": "“同质化内容稀释品牌信任”是无来源的经营因果判断；只能作为需监测的质量风险。",
+      "claim_id": "CL011",
+      "supported_by_source": false,
+      "correction": "改为“需人工审核并监测内容质量与品牌一致性”。",
+      "evidence_url": "https://www.36kr.com/p/4038077554218117"
+     },
+     {
+      "location": "signals[2].fact",
+      "severity": "minor",
+      "problem": "超过110字，触发预核验警告；事实和数字本身有来源。",
+      "claim_id": "CL007,CL008",
+      "supported_by_source": true,
+      "correction": "压缩为“10月20日20:00-23:59天猫双11开门红：美妆前五珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II（TOP20国货四席）；个护前五卡诗、Off&Relax、护舒宝、潘婷、欧莱雅，Off&Relax 4小时首破亿。”",
+      "evidence_url": "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml"
+     }
+    ],
+    "missing_important_context": [
+     "缺屈臣氏即时零售订单结构、内容素材授权/审核流程、门店货架与同口径销售数据；相关动作只能作为小样本验证。"
+    ],
+    "repeated_claims": [],
+    "unnecessary_audit_or_filler": [],
+    "suggested_replacements": [
+     {
+      "path": "one_line_takeaway",
+      "replacement_text": "据行业报道，双11需求分化为即时缺货、日常低价与计划性大促；建议先用自身订单验证即时缺货单占比，再评估B2C资源是否向核心单品倾斜。"
+     },
+     {
+      "path": "signals[0].business_impact",
+      "replacement_text": "若成立，即时零售应优先验证高频缺货SKU与履约；B2C/大促资源是否向核心单品倾斜需待自身订单验证后再评估。"
+     },
+     {
+      "path": "title",
+      "replacement_text": "双11渠道分工：即时零售接缺货，种草视频成本骤降"
+     },
+     {
+      "path": "signals[1].fact",
+      "replacement_text": "据10月23日报道，AIGC把电商种草视频单条成本从人工拍摄100-200元降到5-10元，5人团队一天可产上千条；美妆、洗护头部商家已开始用AI内容抢流量。"
+     },
+     {
+      "path": "signals[1].business_impact",
+      "replacement_text": "内容测试频次与长尾覆盖会被重估；屈臣氏若仍以人工拍摄为主，素材迭代速度可能落后，同时需人工审核并监测内容质量与品牌一致性。"
+     },
+     {
+      "path": "signals[2].fact",
+      "replacement_text": "10月20日20:00-23:59天猫双11开门红：美妆前五珀莱雅、修丽可、兰蔻、雅诗兰黛、SK-II（TOP20国货四席）；个护前五卡诗、Off&Relax、护舒宝、潘婷、欧莱雅，Off&Relax 4小时首破亿。"
+     }
+    ],
+    "editor_note": "保留媒体口径和活动时间；删去未经内部数据支持的资源分配与囤货判断，压缩超长榜单句。"
+   }
+  ],
+  "applied_replacements": [
+   "one_line_takeaway",
+   "signals[0].business_impact",
+   "title",
+   "signals[1].fact",
+   "signals[1].business_impact",
+   "signals[2].fact"
+  ],
+  "post_revise": {
+   "pass": true,
+   "errors": [],
+   "warnings": [],
+   "stats": {
+    "signals": 3,
+    "competitors": 0,
+    "actions": 3,
+    "watch": 0,
+    "omitted": 7
+   }
+  },
+  "unresolved_major": [],
+  "second_round": {}
+ }
+}

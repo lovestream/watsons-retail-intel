@@ -1166,7 +1166,7 @@ def make_rule_decision(rule_score: int) -> str:
 # ===================== LLM 语义复核 =====================
 
 
-def _build_llm_prompt(article: dict) -> str:
+def _build_llm_prompt_legacy(article: dict) -> str:
     """构建 LLM 复核 prompt。"""
     title = article.get("title", "") or ""
     summary = article.get("summary", "") or ""
@@ -2190,3 +2190,16 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+def _build_llm_prompt(article: dict) -> str:
+    """P01（docs/prompts/01_article_relevance.md）+ 旧字段兼容层。
+
+    语义以独立提示词库为准；registry 不可用时回退旧模板，保证管线不中断。
+    """
+    try:
+        from skills.utils.prompt_bindings import p01_prompt
+        return p01_prompt(article)
+    except Exception as exc:  # pragma: no cover
+        import logging
+        logging.getLogger(__name__).warning("P01 加载失败，回退旧模板: %s", exc)
+        return _build_llm_prompt_legacy(article)

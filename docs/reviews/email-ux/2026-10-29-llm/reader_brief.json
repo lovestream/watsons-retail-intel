@@ -1,0 +1,149 @@
+{
+ "period_type": "weekly",
+ "period_start": "2026-10-19",
+ "period_end": "2026-10-25",
+ "title": "天猫双11改官方立减，屈臣氏套组要重算",
+ "one_line_takeaway": "天猫双11把跨店满减和凑单整体拿掉，统一官方立减；屈臣氏天猫大促的套组、价格带和连带设计需重算，不能沿用凑单逻辑。",
+ "signals": [
+  {
+   "headline": "天猫双11促销机制改直降",
+   "fact": "天猫把跨店满减和凑单整体拿掉了，统一成官方立减。",
+   "fact_ids": [
+    "F006"
+   ],
+   "claim_ids": [
+    "CL006"
+   ],
+   "source_refs": [
+    {
+     "name": "36氪",
+     "url": "https://www.36kr.com/p/4038146420627074",
+     "supports_claim_ids": [
+      "CL006"
+     ]
+    }
+   ],
+   "business_impact": "天猫旗舰店大促从凑单转向单品直降，屈臣氏需重算套组价格带、包邮门槛与连带设计；即时零售不可直接套用天猫规则。",
+   "is_inference": true
+  },
+  {
+   "headline": "双11首轮榜单：美妆个护头部集中",
+   "fact": "据新浪科技/亿邦动力报道，美妆TOP20前五为珀莱雅、修丽可、兰蔻、雅诗兰黛、S-II；个护TOP20前五为卡诗、Off&Relax、护舒宝、潘婷、欧莱雅。",
+   "fact_ids": [
+    "F002",
+    "F003"
+   ],
+   "claim_ids": [
+    "CL002",
+    "CL003"
+   ],
+   "source_refs": [
+    {
+     "name": "新浪科技/亿邦动力",
+     "url": "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml",
+     "supports_claim_ids": [
+      "CL002",
+      "CL003"
+     ]
+    }
+   ],
+   "business_impact": "头部品牌集中，屈臣氏需核对在售品牌的价格力与主推资源，防止大促主推与平台热销脱节；榜单不代表屈臣氏销售。",
+   "is_inference": true
+  }
+ ],
+ "competitor_cards": [
+  {
+   "name": "丝芙兰",
+   "move": "2026 SEPHORi丝芙兰玩妆节于10月23日至25日在上海张园举办。",
+   "occurred_on": "2026-10-23至2026-10-25",
+   "why_matters": "体验型活动强化高端美妆线下场景，对屈臣氏门店体验营销有参照；报道未披露客流/转化，暂不能判断实质冲击。",
+   "fact_ids": [
+    "F013"
+   ],
+   "source_refs": [
+    {
+     "name": "36氪",
+     "url": "https://www.36kr.com/p/4042615186789256",
+     "supports_claim_ids": [
+      "CL013"
+     ]
+    }
+   ]
+  }
+ ],
+ "priority_actions": [
+  {
+   "title": "重算天猫大促套组价格带",
+   "precondition": "先由电商团队核对天猫旗舰店当前活动报价、套组结构与官方立减适用规则，确认可调整范围。",
+   "trial": "选少量美妆个护套组，按官方立减口径改直降表达，测试替代凑单的连带设计；不默认特定品牌库存或授权。",
+   "metric": "套组连带率",
+   "linked_fact_ids": [
+    "F006"
+   ]
+  },
+  {
+   "title": "榜单同款货盘核对",
+   "precondition": "先核对榜单头部品牌与单品在屈臣氏天猫及即时零售是否已在售、有授权且库存可得。",
+   "trial": "对已确认在售的头部单品，小范围测试主推位或内容位，不扩至全渠道。",
+   "metric": "主推位点击转化率",
+   "linked_fact_ids": [
+    "F002",
+    "F003"
+   ]
+  }
+ ],
+ "watch_items": [
+  {
+   "trigger": "丝芙兰公布玩妆节客流、会员转化或销售数据，或在更多城市复制",
+   "business_relevance": "若转化或复制成立，才需评估体验营销对屈臣氏门店客流与会员互动的实质影响。",
+   "fact_ids": [
+    "F013"
+   ]
+  },
+  {
+   "trigger": "朴朴厨房公布非餐品类复用、美妆个护前置仓合作，或披露与屈臣氏同类门店/仓的履约对比数据",
+   "business_relevance": "餐食高频履约若迁移到美妆个护，才可能影响屈臣氏即时零售选品与履约预期。",
+   "fact_ids": [
+    "F007"
+   ]
+  }
+ ],
+ "omitted_fact_ids": [
+  {
+   "fact_id": "F001",
+   "reason": "仅确认大促开售时点，主判断已由促销机制覆盖"
+  },
+  {
+   "fact_id": "F004",
+   "reason": "单一爆品表现，信息量弱"
+  },
+  {
+   "fact_id": "F005",
+   "reason": "单一爆品信号，未纳入主判断"
+  },
+  {
+   "fact_id": "F008",
+   "reason": "调查为计划状态，不能作为确定动作"
+  },
+  {
+   "fact_id": "F009",
+   "reason": "脱离语境的场景表述，证据不足"
+  },
+  {
+   "fact_id": "F010",
+   "reason": "视频成本与本期经营决策关联弱"
+  },
+  {
+   "fact_id": "F011",
+   "reason": "数据截至6月底，旧数据且低关联"
+  },
+  {
+   "fact_id": "F012",
+   "reason": "泛化判断，已被榜单事实覆盖"
+  }
+ ],
+ "audit": {
+  "human_review_status": "pending",
+  "source_pack_sha256": "c2836944401fc0a7c9363bce36683adb3baf91a42eb8d828007d4a8e3fbf1f68"
+ }
+}

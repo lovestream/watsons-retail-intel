@@ -1,0 +1,376 @@
+{
+ "period_type": "weekly",
+ "period": {
+  "start": "2026-10-19",
+  "end": "2026-10-25"
+ },
+ "coverage": {
+  "events_in": 13,
+  "facts_kept": 13,
+  "source": "/tmp/email_ux_wt/data/e1/2026-10-19_2026-10-25/curated_events.json"
+ },
+ "facts": [
+  {
+   "fact_id": "F001",
+   "claim_id": "CL001",
+   "text": "10月20日晚八点，天猫双11正式开启全品类售卖。",
+   "date": "2026-10-20",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [
+    "10",
+    "20",
+    "11"
+   ],
+   "platforms": [
+    "天猫"
+   ],
+   "competitors": [
+    "天猫"
+   ],
+   "event_ids": [
+    "E1-W42-001"
+   ],
+   "event_type": "platform_move",
+   "source": {
+    "name": "36氪",
+    "url": "https://www.36kr.com/p/4035580422247302",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F002",
+   "claim_id": "CL002",
+   "text": "美妆品类TOP20中，珀莱雅、修丽可、兰蔻、雅诗兰黛、S-II名列前五名。",
+   "date": "2026-10-20",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [
+    "20"
+   ],
+   "platforms": [
+    "天猫"
+   ],
+   "competitors": [
+    "天猫"
+   ],
+   "event_ids": [
+    "E1-W42-002"
+   ],
+   "event_type": "data_signal",
+   "source": {
+    "name": "新浪科技/亿邦动力",
+    "url": "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F003",
+   "claim_id": "CL003",
+   "text": "个护品类TOP20中，前五名分别是卡诗、Off&Relax、护舒宝、潘婷、欧莱雅。",
+   "date": "2026-10-20",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [
+    "20"
+   ],
+   "platforms": [
+    "天猫"
+   ],
+   "competitors": [
+    "天猫"
+   ],
+   "event_ids": [
+    "E1-W42-003"
+   ],
+   "event_type": "data_signal",
+   "source": {
+    "name": "新浪科技/亿邦动力",
+    "url": "https://finance.sina.com.cn/tech/roll/2026-10-22/doc-iniwaezt5950286.shtml",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F004",
+   "claim_id": "CL004",
+   "text": "丸美今年力推的新品小红笔眼霜4.0，登上了双11开门红去黑眼圈眼霜热卖榜的Top4",
+   "date": "2026-10-20",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [
+    "4.0",
+    "11",
+    "4"
+   ],
+   "platforms": [
+    "天猫"
+   ],
+   "competitors": [
+    "丸美"
+   ],
+   "event_ids": [
+    "E1-W42-004"
+   ],
+   "event_type": "new_product",
+   "source": {
+    "name": "36氪",
+    "url": "https://www.36kr.com/p/4035580422247302",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F005",
+   "claim_id": "CL005",
+   "text": "开售90分钟，丝塔芙大白罐便荣登付定金人数榜首",
+   "date": "Tue, 20 Oc",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [
+    "90分钟"
+   ],
+   "platforms": [
+    "天猫",
+    "抖音"
+   ],
+   "competitors": [
+    "丝塔芙"
+   ],
+   "event_ids": [
+    "E1-W42-005"
+   ],
+   "event_type": "new_product",
+   "source": {
+    "name": "36氪",
+    "url": "https://www.36kr.com/p/4033954676446340",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F006",
+   "claim_id": "CL006",
+   "text": "天猫把跨店满减和凑单整体拿掉了，统一成官方立减",
+   "date": "Fri, 23 Oc",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [],
+   "platforms": [
+    "天猫",
+    "京东",
+    "抖音",
+    "拼多多",
+    "小红书",
+    "快手"
+   ],
+   "competitors": [
+    "天猫",
+    "京东"
+   ],
+   "event_ids": [
+    "E1-W42-006"
+   ],
+   "event_type": "platform_rule",
+   "source": {
+    "name": "36氪",
+    "url": "https://www.36kr.com/p/4038146420627074",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F007",
+   "claim_id": "CL007",
+   "text": "朴朴厨房上线满一年，单仓日均单量超过2200单。",
+   "date": "Thu, 22 Oc",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [
+    "2200"
+   ],
+   "platforms": [
+    "美团",
+    "京东",
+    "淘宝闪购",
+    "朴朴",
+    "叮咚买菜"
+   ],
+   "competitors": [
+    "京东",
+    "阿里"
+   ],
+   "event_ids": [
+    "E1-W42-007"
+   ],
+   "event_type": "category_trend",
+   "source": {
+    "name": "虎嗅/联商网",
+    "url": "https://www.huxiu.com/article/4899661.html",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F008",
+   "claim_id": "CL008",
+   "text": "30家受访零售企业中，六成采用深度定制模式，77%计划升级供应链与品质管控能力",
+   "date": "Thu, 22 Oc",
+   "date_role": "occurred",
+   "status": "proposed",
+   "numbers": [
+    "30家",
+    "77%"
+   ],
+   "platforms": [],
+   "competitors": [
+    "山姆",
+    "沃尔玛",
+    "奥乐齐",
+    "胖东来",
+    "永辉"
+   ],
+   "event_ids": [
+    "E1-W42-008"
+   ],
+   "event_type": "supply_chain",
+   "source": {
+    "name": "36氪",
+    "url": "https://www.36kr.com/p/4036858464851079",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F009",
+   "claim_id": "CL009",
+   "text": "门店不直接卖货，让消费者先感受“场景”",
+   "date": "Sat, 24 Oc",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [],
+   "platforms": [],
+   "competitors": [
+    "泡泡玛特",
+    "老铺黄金",
+    "FILA",
+    "宝可梦"
+   ],
+   "event_ids": [
+    "E1-W42-009"
+   ],
+   "event_type": "consumer_trend",
+   "source": {
+    "name": "36氪",
+    "url": "https://www.36kr.com/p/4038591177986951",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F010",
+   "claim_id": "CL010",
+   "text": "比如有 5 个人的团队，一天能出上千条视频，每条成本还能控制在 10 元乃至 5 元以内。",
+   "date": "Fri, 23 Oc",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [
+    "5个",
+    "10元",
+    "5元"
+   ],
+   "platforms": [
+    "抖音"
+   ],
+   "competitors": [],
+   "event_ids": [
+    "E1-W42-010"
+   ],
+   "event_type": "marketing",
+   "source": {
+    "name": "36氪",
+    "url": "https://www.36kr.com/p/4038077554218117",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F011",
+   "claim_id": "CL011",
+   "text": "截至6月底，抖省省DU已达2103万，约为大众点评同期日活的六成以上",
+   "date": "Tue, 20 Oc",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [
+    "6",
+    "2103万"
+   ],
+   "platforms": [
+    "抖音",
+    "高德",
+    "淘宝闪购",
+    "美团"
+   ],
+   "competitors": [
+    "字节",
+    "阿里",
+    "美团"
+   ],
+   "event_ids": [
+    "E1-W42-011"
+   ],
+   "event_type": "platform_move",
+   "source": {
+    "name": "36氪",
+    "url": "https://www.36kr.com/p/4034051883111297",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F012",
+   "claim_id": "CL012",
+   "text": "大牌美妆核心单品、大家电和知名数码产品，就仍是大促的硬通货",
+   "date": "Fri, 23 Oc",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [],
+   "platforms": [
+    "天猫",
+    "抖音",
+    "京东",
+    "快手",
+    "小红书"
+   ],
+   "competitors": [],
+   "event_ids": [
+    "E1-W42-012"
+   ],
+   "event_type": "category_trend",
+   "source": {
+    "name": "36氪",
+    "url": "https://www.36kr.com/p/4037147836536454",
+    "kind": "media"
+   }
+  },
+  {
+   "fact_id": "F013",
+   "claim_id": "CL013",
+   "text": "2026 SEPHORi丝芙兰玩妆节于10月23日至25日在上海张园圆满举办。",
+   "date": "2026-10-23",
+   "date_role": "occurred",
+   "status": "reported",
+   "numbers": [
+    "2026",
+    "10",
+    "23",
+    "25"
+   ],
+   "platforms": [],
+   "competitors": [
+    "丝芙兰"
+   ],
+   "event_ids": [
+    "E1-W42-013"
+   ],
+   "event_type": "competitor_move",
+   "source": {
+    "name": "36氪",
+    "url": "https://www.36kr.com/p/4042615186789256",
+    "kind": "media"
+   }
+  }
+ ],
+ "pack_sha256": "c2836944401fc0a7c9363bce36683adb3baf91a42eb8d828007d4a8e3fbf1f68"
+}

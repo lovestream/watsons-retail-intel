@@ -68,7 +68,7 @@ def reload_config(config_path: Optional[str] = None):
 def get_default_model() -> str:
     """获取全局默认模型。"""
     config = _load_config()
-    return config.get("default_model", "deepseek-v4-flash-free")
+    return config.get("default_model", "deepseek-ai/DeepSeek-V4.1-Flash")
 
 
 def get_models_config() -> Dict[str, Any]:
@@ -100,8 +100,8 @@ def get_model_for_skill(
 
     config = _load_config(config_path)
     routing = config.get("routing", {})
-    global_fallback = config.get("global_fallback", ["deepseek-v4-flash-free"])
-    default_model = config.get("default_model", "deepseek-v4-flash-free")
+    global_fallback = config.get("global_fallback", ["deepseek-ai/DeepSeek-V4.1-Flash"])
+    default_model = config.get("default_model", "deepseek-ai/DeepSeek-V4.1-Flash")
 
     if skill_name not in routing:
         logger.info(f"技能 '{skill_name}' 未在路由配置中，使用全局默认模型: {default_model}")

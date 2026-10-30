@@ -70,9 +70,9 @@ try:
     elif isinstance(_periodic_model_res, str):
         _PERIODIC_MODEL = _periodic_model_res
     else:
-        _PERIODIC_MODEL = "deepseek-v4-flash-free"
+        _PERIODIC_MODEL = "deepseek-ai/DeepSeek-V4.1-Flash"
 except Exception:
-    _PERIODIC_MODEL = "deepseek-v4-flash-free"
+    _PERIODIC_MODEL = "deepseek-ai/DeepSeek-V4.1-Flash"
 
 LLM_MODEL = _PERIODIC_MODEL
 MAX_TOKENS_CHAPTER = 8192
@@ -247,6 +247,25 @@ def _load_or_build_synthesis(report_type, period_info, project_root):
         return None, None, False
 
 
+def _load_cross_period(report_type, period_info, project_root="."):
+    """读取/构建 P14（月）或 P15（年）综合包，带来源门状态。"""
+    from pathlib import Path
+    from skills.periodic_synthesis import cross_period
+    try:
+        if report_type == "monthly":
+            y = int(period_info.get("year"))
+            m = int(period_info.get("month"))
+            send_at = period_info.get("send_at") or date.today().isoformat()
+            return cross_period.monthly_synthesis(Path(project_root), y, m, send_at)
+        if report_type == "yearly":
+            y = int(period_info.get("year"))
+            send_at = period_info.get("send_at") or date.today().isoformat()
+            return cross_period.yearly_synthesis(Path(project_root), y, send_at)
+    except Exception as e:
+        logger.error("%s 跨期综合失败: %s", LOG_PREFIX, e)
+    return None
+
+
 def _cluster_to_text(cluster: dict, include_event_ids: bool = True) -> str:
     """将 cluster 转为 LLM 输入文本（内部保留 event_id；facts 与 hints 分离）。"""
     lines = []
@@ -281,20 +300,52 @@ def _cluster_to_text(cluster: dict, include_event_ids: bool = True) -> str:
     return "\n".join(lines)
 
 
-def _build_chapter_source(report_type, synthesis, ch_id):
+CROSS_CHAPTERS = {"monthly": ("02", "03", "06", "07"),
+                  "yearly": ("01", "02", "06", "07")}
+
+
+def _cross_block(cross, report_type, ch_id) -> str:
+    """P14/P15 综合结论（跨周/跨月），只喂给需要战略取舍的章节。"""
+    if not cross or cross.get("status") != "complete":
+        return ""
+    if ch_id not in CROSS_CHAPTERS.get(report_type, ()):
+        return ""
+    synth = cross.get("synthesis") or {}
+    lines = ["【本期跨周/跨月综合（P14/P15，程序校验过来源链）】"]
+    for key in ("headline", "structural_changes", "trends",
+                "sustained_changes", "strategic_tradeoffs",
+                "comparison_with_previous_period", "data_gaps"):
+        val = synth.get(key)
+        if not val:
+            continue
+        txt = json.dumps(val, ensure_ascii=False) if not isinstance(val, str) else val
+        lines.append(f"- {key}: {txt[:1200]}")
+    lines.append("要求：本章引用综合结论时必须与具体事件对得上，不得引用未列出的数字。")
+    return "\n".join(lines)
+
+
+def _build_chapter_source(report_type, synthesis, ch_id, cross=None):
     """为该章构建 evidence pack 文本（只传本章证据 + 必要的全局摘要）。"""
     ch_evidence = (synthesis or {}).get("chapter_evidence", {}).get(ch_id, [])
+    extra = _cross_block(cross, report_type, ch_id)
     if not ch_evidence:
-        return ""
+        return extra
     parts = ["【本章证据（内部含事件ID，仅用于追溯，输出时不得出现）】"]
     for c in ch_evidence[:30]:
         parts.append(_cluster_to_text(c, include_event_ids=True))
+    if extra:
+        parts.append(extra)
     return "\n".join(parts)
 
 
-def _build_global_context(report_type, synthesis) -> str:
+def _build_global_context(report_type, synthesis, cross=None) -> str:
     """全局摘要（每章都附，控制篇幅）：覆盖度 + 上期对比 + 平台/竞对汇总。"""
     lines = []
+    if cross and cross.get("status") == "complete":
+        synth = cross.get("synthesis") or {}
+        hl = synth.get("headline") or ""
+        if hl:
+            lines.append("跨期综合结论: %s" % str(hl)[:300])
     cov = (synthesis or {}).get("coverage", {})
     if cov:
         lines.append("数据覆盖: %s/%s 天, 状态=%s" % (
@@ -367,7 +418,7 @@ def _rule_fallback_chapter(report_type, ch_id, ch_title, synthesis) -> str:
 
 
 def phase1_generate_chapters(report_type, synthesis, period_label,
-                             chapter_source_fn=None, deadline=None):
+                             chapter_source_fn=None, deadline=None, cross=None):
     """Phase 1: 逐章生成报告内容。
 
     主模型重试 → fallback 模型（client.chat 内部已含 OpenCode→付费兜底）→
@@ -378,7 +429,7 @@ def phase1_generate_chapters(report_type, synthesis, period_label,
     client = get_llm_client()
     results = {}
     report_name = _TYPE_NAMES[report_type]
-    global_ctx = _build_global_context(report_type, synthesis)
+    global_ctx = _build_global_context(report_type, synthesis, cross)
 
     for ch in chapters_def:
         if deadline is not None and time.time() > deadline:
@@ -390,7 +441,7 @@ def phase1_generate_chapters(report_type, synthesis, period_label,
         ch_prompt = ch["prompt"]
         ch_source = chapter_source_fn(report_type, synthesis, ch_id) \
             if chapter_source_fn else _build_chapter_source(
-                report_type, synthesis, ch_id)
+                report_type, synthesis, ch_id, cross)
 
         system = (
             SYSTEM_PROMPT_BASE +
@@ -1161,28 +1212,42 @@ def _get_audio_path(report_type, period_info, project_root):
 
 
 def _send_report_email(report_type, period_label, final_result, recipient,
-                       project_root):
+                       project_root, period_info=None, synthesis=None, cross=None):
+    """Only send approved reader brief; a generated long report is not approval."""
+    from skills.reader_brief.production_delivery import prepare_approved_brief
+    if os.environ.get("WATSONS_PERIODIC_MAIL_MODE", "hold").strip().lower() != "reader_brief":
+        logger.warning("%s 生产周期邮件处于hold，未发送", LOG_PREFIX)
+        return {"ok": False, "error": "periodic_delivery_disabled"}
+    if not period_info:
+        return {"ok": False, "error": "missing_period_info"}
+    prepared = prepare_approved_brief(
+        report_type, period_info, project_root, synthesis, cross,
+        final_result.get("audio_path", ""))
+    if not prepared.get("approved"):
+        logger.error("%s 新版读者简报未获批准: %s", LOG_PREFIX, prepared)
+        return {"ok": False, "error": prepared.get("error", "reader_brief_hold")}
     try:
         from skills.send_daily_report_email.send_daily_report_email import (
             send_periodic_report_email)
-    except ImportError:
-        logger.warning(f"{LOG_PREFIX} 邮件模块导入失败")
-        return
-
-    result = send_periodic_report_email(
-        report_type=report_type,
-        period_label=period_label,
-        report_path=final_result.get("report_path", ""),
-        audio_path=final_result.get("audio_path", ""),
-        recipient=recipient,
-        project_root=project_root,
-        dry_run=False,
-    )
+        result = send_periodic_report_email(
+            report_type=report_type,
+            period_label=period_label,
+            report_path=final_result.get("report_path", ""),
+            audio_path=final_result.get("audio_path", ""),
+            recipient=recipient,
+            project_root=project_root,
+            dry_run=False,
+            approved_brief_html_path=prepared["html_path"],
+            approved_brief_manifest_path=prepared["manifest_path"],
+        )
+    except Exception as exc:
+        logger.error("%s 新版邮件发送入口异常: %s", LOG_PREFIX, exc)
+        return {"ok": False, "error": "reader_brief_delivery_exception"}
     if result.get("ok"):
-        logger.info(f"{LOG_PREFIX} 邮件已发送 → {recipient}")
+        logger.info("%s 经P09复核的新版经营简报已发送", LOG_PREFIX)
     else:
-        logger.error(f"{LOG_PREFIX} 邮件发送失败: {result.get('error', result.get('message', ''))}")
-
+        logger.error("%s 新版经营简报发送失败: %s", LOG_PREFIX, result)
+    return result
 
 # ── 主入口 ──
 
@@ -1216,6 +1281,21 @@ def generate_periodic_report(report_type, period_info, project_root=".",
     except Exception:
         pass
 
+    # Step 0a: 月/年报必须先过 P14/P15 来源门（封账+质量门+sha），否则不出报告
+    cross = None
+    if report_type in ("monthly", "yearly"):
+        cross = _load_cross_period(report_type, period_info, project_root)
+        if not cross:
+            logger.error(f"{LOG_PREFIX} 跨期综合不可用（P14/P15 缺失或来源门未过）")
+            return {"success": False, "error": "cross_period_unavailable",
+                    "sendable": False}
+        if cross.get("status") != "complete":
+            logger.error(f"{LOG_PREFIX} 跨期来源门 {cross.get('status')}，"
+                         f"不生成{_TYPE_NAMES[report_type]}（禁止假装完整期间）")
+            return {"success": False,
+                    "error": f"cross_period_{cross.get('status')}",
+                    "gate": cross.get("gate"), "sendable": False}
+
     # Step 0: 周期聚合层
     synthesis, coverage, build_ok = _load_or_build_synthesis(
         report_type, period_info, project_root)
@@ -1232,15 +1312,16 @@ def generate_periodic_report(report_type, period_info, project_root=".",
         final = phase4_finalize(chapters, report_type, period_label,
                                 period_info, project_root, None, None)
         legacy_ok = final.get("sendable", False)
-        if legacy_ok and send_email and recipient and final.get("report_path"):
-            _send_report_email(report_type, period_label, final, recipient,
-                               project_root)
+        # synthesis构建失败的旧降级路径：可归档研究稿，永不自动发邮件。
+        if legacy_ok and send_email:
+            logger.error("%s 旧路径回退稿未通过新版事实门，禁止SMTP", LOG_PREFIX)
         return {"success": legacy_ok,
                 "report_path": final.get("report_path", ""),
                 "audio_path": final.get("audio_path", ""),
                 "sendable": legacy_ok,
-                "delivery_allowed": legacy_ok,
-                "review": final.get("review_result")}
+                "delivery_allowed": False,
+                "review": final.get("review_result"),
+                "delivery_error": "legacy_report_not_approved"}
 
     # coverage 不达标 → 不可发送（审计 §4.3 + §10.6）
     if coverage.get("status") == "failing":
@@ -1251,6 +1332,7 @@ def generate_periodic_report(report_type, period_info, project_root=".",
 
     # Phase 1
     chapters = phase1_generate_chapters(report_type, synthesis, period_label,
+                                        cross=cross,
                                         deadline=deadline)
     # Phase 2
     review = phase2_review(chapters, report_type)
@@ -1281,9 +1363,13 @@ def generate_periodic_report(report_type, period_info, project_root=".",
                      f"TTS 失败 → 不发邮件（§27）")
         delivery_allowed = False
 
+    email_delivery = None
     if delivery_allowed and send_email and recipient and final.get("report_path"):
-        _send_report_email(report_type, period_label, final, recipient,
-                           project_root)
+        email_delivery = _send_report_email(
+            report_type, period_label, final, recipient, project_root,
+            period_info=period_info, synthesis=synthesis, cross=cross)
+        if not email_delivery.get("ok"):
+            delivery_allowed = False
     elif sendable and not delivery_allowed:
         logger.error(f"{LOG_PREFIX} delivery gate 拦截：不发邮件")
     elif not sendable:
@@ -1305,6 +1391,8 @@ def generate_periodic_report(report_type, period_info, project_root=".",
         "podcast_script": final.get("podcast_script", ""),
         "sendable": sendable,
         "delivery_allowed": delivery_allowed,
+        "email_delivery": email_delivery,
+        "delivery_error": (email_delivery or {}).get("error", ""),
         "review": final.get("review_result"),
         "coverage": coverage,
         "tts": final.get("tts"),

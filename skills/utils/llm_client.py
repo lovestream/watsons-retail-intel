@@ -11,7 +11,7 @@ llm_client.py — 共享 LLM 调用客户端（requests 实现）
 - 用量统计
 - 安全配置检查（不输出 Key 原文）
 
-主 Provider: OpenCode deepseek-v4-flash-free（4 入口轮换：3 自定义 Key + 1 内置 keyless）。
+主 Provider: SiliconFlow DeepSeek-V4.1-Flash；备用: RightCode deepseek-flash（各用自己的 base_url/model）。
 付费兜底 gpt-5.4-xhigh 仅在 ALLOW_PAID_FALLBACK=1 时启用；默认禁用，绝不烧钱。
 
 用法:
@@ -42,22 +42,22 @@ logger = logging.getLogger(__name__)
 
 # ===================== 默认配置 =====================
 
-# ── 主 Provider: OpenCode (免费 DeepSeek V4 Flash) ──
-# 2026-08 起用户默认 LLM。4 个轮换入口 = 3 个自定义 Key + 1 个内置 keyless。
-# 注意: opencode.ai 有 Cloudflare 防护，请求必须携带浏览器 User-Agent，
-# 否则返回 HTTP 403 error code 1010（"banned based on browser signature"）。
-OPENCODE_BASE_URL = "https://opencode.ai/zen/v1"
-OPENCODE_MODEL = "deepseek-v4-flash-free"
-OPENCODE_KEYS_FILE = "config/opencode_keys.json"
+# ── 主 Provider: SiliconFlow（DeepSeek 文本模型）──
+# 用户 2026-10-29 明确要求：禁止 OpenCode，只允许 SiliconFlow + RightCode。
+# 密钥来自环境变量 siliconflow_api_key / rightcode_bybt。
+SILICONFLOW_BASE_URL = "https://api.siliconflow.cn/v1"
+SILICONFLOW_MODEL = os.environ.get("PIPELINE_LLM_MODEL",
+                                   "deepseek-ai/DeepSeek-V4.1-Flash")
+SILICONFLOW_KEY_ENV = "siliconflow_api_key"
 LLM_USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 )
 
 
-# ── 默认（主 Provider = OpenCode） ──
-DEFAULT_MODEL = OPENCODE_MODEL
-DEFAULT_BASE_URL = OPENCODE_BASE_URL
+# ── 默认（主 Provider = SiliconFlow） ──
+DEFAULT_MODEL = SILICONFLOW_MODEL
+DEFAULT_BASE_URL = SILICONFLOW_BASE_URL
 DEFAULT_MAX_TOKENS = 4096
 DEFAULT_TEMPERATURE = 0.3
 DEFAULT_TIMEOUT = 180  # 秒（thinking 模型需要更长等待）
@@ -73,19 +73,42 @@ TRANSIENT_BACKOFF_MAX = 10.0  # 秒，单次退避上限
 MAX_RETRY_WALL_SECONDS = 300  # 5 分钟
 DAILY_TOKEN_LIMIT_PER_KEY = 5_000_000
 
-# ── 付费兜底 Provider: rightcode gpt (贵，仅在免费池全灭时启用) ──
-FALLBACK_KEY_ENV = "rightcode_key"
-FALLBACK_BASE_URL = "https://right.codes/codex/v1"
-FALLBACK_MODEL = "gpt-5.4-xhigh"
+# ── 备用 Provider: RightCode（用户授权的唯一备用，主 Provider 失败时使用）──
+FALLBACK_KEY_ENV = "rightcode_bybt"
+FALLBACK_BASE_URL = os.environ.get("RIGHTCODE_BASE_URL",
+                                   "https://right.codes/codex/v1")
+FALLBACK_MODEL = os.environ.get("RIGHTCODE_MODEL", "deepseek-flash")
+SKIP_THINKING_DEFAULT = os.environ.get("LLM_SKIP_THINKING", "0") in ("1", "true", "True")
+
+# 已确认下线、但历史上散落在 config/parallel.yaml 与各脚本默认值里的模型名。
+# 任何调用方若仍传这些名字，一律回落到当前主模型，避免"HTTP 400 Model does not exist"
+# 导致的静默 0% 成功率（2026-10 连续多日 0 事件的真因）。
+DEAD_MODEL_NAMES = (
+    "deepseek-v4-flash-free",
+    "deepseek-v4-flash",
+    "OpenCode/deepseek-v4-flash-free",
+    "claude-opus-4-8",
+)
+
+
+def sanitize_model(name: str, default: str) -> str:
+    """把已下线模型名映射到当前可用模型；其它名字原样返回。"""
+    n = (name or "").strip()
+    if not n:
+        return default
+    if n in DEAD_MODEL_NAMES or n.endswith("-free") or "/" not in n and n.startswith("deepseek-v4"):
+        logger.warning("模型 %s 已下线，回落到 %s", n, default)
+        return default
+    return n
 
 # ── 付费兜底总开关 ──
-# 默认彻底禁用付费兜底(gpt-5.4-xhigh 烧钱)。仅当 OpenCode 全部入口不可用且你
+# 历史开关（保留兼容）：RightCode 现为用户授权的唯一备用，无需付费开关。
 # 明确同意花钱时，临时设 ALLOW_PAID_FALLBACK=1 启用。正常情况绝不走付费。
 ALLOW_PAID_FALLBACK_ENV = "ALLOW_PAID_FALLBACK"
 
 
 def _load_allow_paid_fallback() -> bool:
-    """是否允许在 OpenCode 全灭时走付费兜底。默认 False(禁用)。"""
+    """历史开关：现 RightCode 备用始终可用，此函数仅保留兼容。"""
     val = os.environ.get(ALLOW_PAID_FALLBACK_ENV, "0").strip().lower()
     return val in ("1", "true", "yes", "on")
 
@@ -100,57 +123,28 @@ def _load_force_fallback() -> bool:
 
 # ===================== 环境变量加载 =====================
 
-def _load_opencode_keys() -> List[Dict[str, str]]:
-    """加载 OpenCode 轮换入口（主 Provider）。每个元素: {"name":..., "key":...}。
+def _load_provider_endpoints() -> List[Dict[str, str]]:
+    """只加载**主 Provider**（SiliconFlow）入口。
 
-    优先级:
-    1. OPENCODE_API_KEYS 环境变量（JSON dict 或逗号分隔字符串）
-    2. config/opencode_keys.json（dict {name: key} 或 list）
-    3. 空列表（仅保留内置 keyless）
-
-    末尾始终附加内置 keyless 入口（"key": ""，请求不带 Authorization 头），
-    使轮换池始终有兜底入口。总入口 = 3 自定义 Key + 1 内置 keyless。
+    RightCode 不在主池里轮询：它由 `_call_fallback()` 在 SF 全部失败后
+    单独调用一次，使用自己的 base_url + model(`deepseek-flash`) + key。
+    两者混池会把 SF 的模型名发到 RC，也会造成重复访问。
+    用户已明确禁止 OpenCode 渠道。
     """
     entries: List[Dict[str, str]] = []
-
-    env_val = os.environ.get("OPENCODE_API_KEYS", "").strip()
-    if env_val:
-        try:
-            parsed = json.loads(env_val)
-            if isinstance(parsed, dict):
-                items = list(parsed.items())
-            else:
-                items = [("env%d" % i, v) for i, v in enumerate(str(parsed).split(","))]
-        except Exception:
-            items = [("env%d" % i, v) for i, v in enumerate(env_val.split(","))]
-        for name, key in items:
-            if isinstance(key, str) and key.strip():
-                entries.append({"name": str(name), "key": key.strip()})
-    else:
-        for candidate in (os.environ.get("OPENCODE_KEYS_FILE", "").strip(),
-                          OPENCODE_KEYS_FILE):
-            if not candidate:
-                continue
-            if os.path.exists(candidate):
-                try:
-                    with open(candidate, "r", encoding="utf-8") as f:
-                        data = json.load(f)
-                    if isinstance(data, dict):
-                        for name, key in data.items():
-                            if isinstance(key, str) and key.strip():
-                                entries.append({"name": str(name), "key": key.strip()})
-                    elif isinstance(data, list):
-                        for i, key in enumerate(data):
-                            if isinstance(key, str) and key.strip():
-                                entries.append({"name": "key%d" % i, "key": key})
-                except Exception as e:
-                    logger.warning("OpenCode 配置读取失败 %s: %s" % (candidate, e))
-                break
-
-    # 内置 keyless 入口始终保留，保证轮换池有兜底
-    if not any(e["key"] == "" for e in entries):
-        entries.append({"name": "opencode-keyless", "key": ""})
+    sf_key = (os.environ.get(SILICONFLOW_KEY_ENV, "")
+              or os.environ.get("SILICONFLOW_API_KEY", "")).strip()
+    if sf_key:
+        entries.append({"name": "siliconflow", "tier": "primary",
+                        "base_url": SILICONFLOW_BASE_URL,
+                        "model": SILICONFLOW_MODEL, "key": sf_key})
     return entries
+
+
+def _load_opencode_keys() -> List[Dict[str, str]]:
+    """已废弃：保留函数名仅为兼容旧调用，内部改为 Provider 入口。"""
+    return _load_provider_endpoints()
+
 
 
 def _mask_key(key: str) -> str:
@@ -358,10 +352,10 @@ class LLMClient:
 
     def __init__(self):
         # ── 主 Provider: OpenCode 轮换入口（3 Key + 1 keyless） ──
-        self.endpoints: List[Dict[str, str]] = _load_opencode_keys()
+        self.endpoints: List[Dict[str, str]] = _load_provider_endpoints()
         self.keys: List[str] = [e["key"] for e in self.endpoints]  # 兼容旧字段
-        self.model: str = OPENCODE_MODEL
-        self.base_url: str = OPENCODE_BASE_URL
+        self.model: str = SILICONFLOW_MODEL
+        self.base_url: str = SILICONFLOW_BASE_URL
         self.timeout: int = DEFAULT_TIMEOUT
         self.max_retries: int = DEFAULT_RETRIES
 
@@ -387,7 +381,9 @@ class LLMClient:
 
         # 付费兜底总开关：默认彻底禁用。仅当 OpenCode 全灭且你明确同意花钱时
         # 设 ALLOW_PAID_FALLBACK=1 才启用付费兜底(gpt-5.4-xhigh 烧钱)。
-        self._allow_paid = _load_allow_paid_fallback()
+        # RightCode 是用户授权的唯一备用 Provider，不需要付费开关；
+        # 旧开关保留仅为兼容调用方读取。
+        self._allow_paid = True
 
         # 强制兜底：立即走付费兜底，跳过 OpenCode
         self._force_fallback = _load_force_fallback()
@@ -460,7 +456,7 @@ class LLMClient:
         """瞬时错误后的指数退避。
 
         failure_count 为累计连续瞬时失败次数，退避时间随之指数增长（带上限）。
-        让 OpenCode 偶发的网络抖动有时间恢复，而不是连续猛打后直接放弃。
+        让主 Provider 偶发的网络抖动有时间恢复，而不是连续猛打后直接放弃。
         """
         if failure_count <= 0:
             return
@@ -478,13 +474,15 @@ class LLMClient:
         temperature: float = DEFAULT_TEMPERATURE,
         max_tokens: int = DEFAULT_MAX_TOKENS,
         model: Optional[str] = None,
+        enable_thinking: Optional[bool] = None,
     ) -> Dict[str, Any]:
         """调用 LLM，返回标准结果 dict。
 
-        路由顺序（免费优先，绝不悄悄烧钱）:
-          1. OpenCode deepseek-v4-flash-free（主池，4 入口轮换: 3 Key + 1 keyless）
-          2. rightcode gpt-5.4-xhigh（付费兜底，仅 ALLOW_PAID_FALLBACK=1 且
-             OpenCode 全部入口失败时启用）
+        路由顺序（用户 2026-10-29 定稿）:
+          1. SiliconFlow `deepseek-ai/DeepSeek-V4.1-Flash`（主池，可多 Key 轮换）
+          2. RightCode `deepseek-flash`（唯一备用；主池全部失败后单独调用一次，
+             使用自己的 base_url/model/key，不沿用主 Provider 的模型名）
+        不存在 OpenCode 调用路径。
 
         Args:
             messages: OpenAI 格式消息列表
@@ -506,8 +504,11 @@ class LLMClient:
             }
         """
         # ── 实际使用模型（主 Provider） ──
-        actual_model = model if model else self.model
-        if model and model != self.model:
+        actual_model = sanitize_model(model if model else self.model,
+                                     self.model)
+        if model and actual_model != model:
+            logger.warning("请求模型 %s 不可用，实际使用 %s", model, actual_model)
+        if actual_model != self.model:
             logger.info(f"模型覆盖: self.model={self.model} → 实际使用={actual_model}")
 
         result_base = {
@@ -552,16 +553,17 @@ class LLMClient:
         _retry_deadline = time_mod.monotonic() + MAX_RETRY_WALL_SECONDS
         last_error = ""
 
-        # ── 阶段 1: OpenCode（主池，免费，4 入口轮换） ──
+        # ── 阶段 1: SiliconFlow（主 Provider，多 Key 轮换） ──
         res, err = self._try_pool(
             full_messages, response_format, temperature, max_tokens,
-            "primary", _retry_deadline, model=actual_model)
+            "primary", _retry_deadline, model=actual_model,
+            enable_thinking=enable_thinking)
         if res and res.get("ok"):
             return res
         if err:
-            last_error = "OpenCode: " + err
+            last_error = "主Provider(SiliconFlow): " + err
 
-        # ── 阶段 2: 付费兜底（仅当明确允许花钱 + 未超 §20 次数上限） ──
+        # ── 阶段 2: RightCode 备用（单独一次，专属 base_url/model） ──
         if self._fallback_key and self._allow_paid:
             if (self._max_paid_fallback_calls > 0 and
                     self._paid_fallback_calls >= self._max_paid_fallback_calls):
@@ -569,27 +571,26 @@ class LLMClient:
                     f" | gpt兜底达到 §20 上限({self._max_paid_fallback_calls})"
                     "，停止付费调用")
             else:
-                logger.warning("OpenCode 全部失败，使用付费备用 Provider(ALLOW_PAID_FALLBACK=1)")
+                logger.warning("主 Provider 全部失败，使用付费备用 Provider(ALLOW_PAID_FALLBACK=1)")
                 fallback_result = self._call_fallback(
                     full_messages, temperature, max_tokens, response_format)
                 if fallback_result.get("ok"):
                     return fallback_result
                 last_error += f" | gpt兜底: {fallback_result.get('error', '')}"
         elif self._fallback_key:
-            last_error += " | 付费兜底未开启(设 ALLOW_PAID_FALLBACK=1 启用)"
+            last_error += " | 备用 Provider 未启用(设 ALLOW_PAID_FALLBACK=1 启用)"
 
         result_base["error"] = f"所有 Provider 尝试完毕。最后错误: {last_error}"
         return result_base
 
     def _try_pool(self, full_messages, response_format, temperature, max_tokens,
-                  pool, deadline, model):
+                  pool, deadline, model, enable_thinking=None):
         """尝试一个 provider 池（round-robin + 瞬时重试 + 墙钟上限）。
 
         pool 当前固定为 "primary"(OpenCode，4 入口轮换)。
         Returns: (result_dict_or_None, last_error_str)
         """
         entries = self.endpoints
-        base_url = self.base_url
         pool_model = self.model
 
         if not entries:
@@ -597,7 +598,6 @@ class LLMClient:
         if len(entries) - len(self._exhausted.get(pool, set())) <= 0:
             return None, "全部入口已耗尽"
 
-        endpoint = self._build_endpoint(base_url)
         use_model = model if model else pool_model
         result = {
             "ok": False, "content": "", "parsed": None,
@@ -618,6 +618,11 @@ class LLMClient:
                 break
 
             key = entry.get("key", "")
+            endpoint = self._build_endpoint(entry.get("base_url") or self.base_url)
+            if entry.get("tier") == "fallback" and not model:
+                use_model = entry.get("model") or FALLBACK_MODEL
+            elif entry.get("name") == "siliconflow":
+                use_model = sanitize_model(use_model, self.model)
             key_label = entry.get("name") or _mask_key(key)
             with self._lock:
                 self.total_calls += 1
@@ -628,6 +633,13 @@ class LLMClient:
                 "temperature": temperature,
                 "max_tokens": max_tokens,
             }
+            # thinking 模型默认先输出 reasoning，单篇抽取可达 300s 超时；
+            # SiliconFlow 支持 enable_thinking=false，配置 skip_thinking 时要真正下发。
+            if enable_thinking is None:
+                enable_thinking = SKIP_THINKING_DEFAULT
+            _et = enable_thinking
+            if _et is False and entry.get("name") == "siliconflow":
+                payload["enable_thinking"] = False
             headers = {
                 "Content-Type": "application/json",
                 "User-Agent": LLM_USER_AGENT,

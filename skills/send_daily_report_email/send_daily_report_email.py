@@ -1313,6 +1313,12 @@ def send_periodic_report_email(
         logger.error("读者简报质量门校验失败: %s", exc)
         return {"ok": False, "error": "reader_brief_validation_failed"}
 
+    # 正式周期邮件默认要求可播放的音频；不能发出“成功”却缺附件的邮件。
+    # 原有调度器还会在调用本发送器前执行require_audio门。
+    if not dry_run and (not audio_path or not Path(audio_path).is_file() or
+                        not _is_playable_audio(Path(audio_path))):
+        return {"ok": False, "error": "required_audio_missing_or_invalid"}
+
     # 构建附件
     attachments = []
     # 不附加 .md 原文：报告正文已在 HTML 邮件正文中呈现，避免用户看到原始 Markdown 符号。

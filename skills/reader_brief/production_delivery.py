@@ -67,6 +67,14 @@ def prepare_approved_brief(kind, period, root, synthesis, cross=None,
         pack = build_from_synthesis(synthesis, "weekly", max_facts=80)
         if not pack.get("facts"):
             return {"approved": False, "error": "no_source_linked_weekly_facts", "period_id": pid}
+        # An LLM or secondary report cannot turn a headline into verified source.
+        # Every exported fact must carry a real link and claim text.
+        for fact in pack["facts"]:
+            u = (fact.get("source") or {}).get("url") or ""
+            if (not str(u).startswith(("https://", "http://")) or
+                    not fact.get("text") or not fact.get("claim_id")):
+                return {"approved": False, "error": "source_or_claim_missing",
+                        "period_id": pid}
         pack["period"] = {"start": start, "end": end}
         pack_path = outdir / "canonical_weekly_pack.json"
         pack_path.write_text(json.dumps(pack, ensure_ascii=False, indent=2), encoding="utf-8")

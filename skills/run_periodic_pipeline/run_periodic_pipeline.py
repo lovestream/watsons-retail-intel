@@ -183,6 +183,35 @@ def run_periodic_pipeline(
         tasks.append(("yearly", period))
         logger.info(f"{LOG_PREFIX} 📋 需要生成年报: {period['year']}")
 
+    # 月/年报需要封账后的下级报告，月初/元旦可能尚未齐全。
+    # 本月前7日每周一(以及第7日)补试上月；一月15日前每周一/15日补试上年。
+    # 不以旧的“报告生成成功”代替“已通过新版SMTP交付”。
+    def pending_delivery(kind, spec):
+        from pathlib import Path
+        pid = _period_id(kind, spec)
+        path = Path(project_root) / "data" / "runs" / "periodic" / kind / pid / "manifest.json"
+        try:
+            last = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return True
+        if last.get("status") != "success":
+            return True
+        if send_email:
+            return not bool((last.get("email_delivery") or {}).get("ok"))
+        return False
+
+    if 2 <= today.day <= 7 and (today.weekday() == 0 or today.day == 7):
+        p = get_last_month(today)
+        if pending_delivery("monthly", p):
+            tasks.append(("monthly", p))
+            logger.info("%s 月报封账补试: %s", LOG_PREFIX, p)
+    if today.month == 1 and 2 <= today.day <= 15 and (
+            today.weekday() == 0 or today.day == 15):
+        p = get_last_year(today)
+        if pending_delivery("yearly", p):
+            tasks.append(("yearly", p))
+            logger.info("%s 年报封账补试: %s", LOG_PREFIX, p)
+
     if not tasks:
         logger.info(f"{LOG_PREFIX} 今天无需生成周期报告")
         return {"tasks_run": [], "results": {}}
@@ -229,6 +258,8 @@ def run_periodic_pipeline(
                     "status": "success" if result.get("success") else "failed",
                     "sendable": result.get("sendable", False),
                     "delivery_allowed": result.get("delivery_allowed", False),
+                    "email_delivery": result.get("email_delivery"),
+                    "delivery_error": result.get("delivery_error", ""),
                     "report_path": result.get("report_path", ""),
                     "audio_path": result.get("audio_path", ""),
                     "error": result.get("error", ""),

@@ -78,6 +78,7 @@ FALLBACK_KEY_ENV = "rightcode_bybt"
 FALLBACK_BASE_URL = os.environ.get("RIGHTCODE_BASE_URL",
                                    "https://right.codes/codex/v1")
 FALLBACK_MODEL = os.environ.get("RIGHTCODE_MODEL", "deepseek-flash")
+SKIP_THINKING_DEFAULT = os.environ.get("LLM_SKIP_THINKING", "0") in ("1", "true", "True")
 
 # 已确认下线、但历史上散落在 config/parallel.yaml 与各脚本默认值里的模型名。
 # 任何调用方若仍传这些名字，一律回落到当前主模型，避免"HTTP 400 Model does not exist"
@@ -473,6 +474,7 @@ class LLMClient:
         temperature: float = DEFAULT_TEMPERATURE,
         max_tokens: int = DEFAULT_MAX_TOKENS,
         model: Optional[str] = None,
+        enable_thinking: Optional[bool] = None,
     ) -> Dict[str, Any]:
         """调用 LLM，返回标准结果 dict。
 
@@ -554,7 +556,8 @@ class LLMClient:
         # ── 阶段 1: SiliconFlow（主 Provider，多 Key 轮换） ──
         res, err = self._try_pool(
             full_messages, response_format, temperature, max_tokens,
-            "primary", _retry_deadline, model=actual_model)
+            "primary", _retry_deadline, model=actual_model,
+            enable_thinking=enable_thinking)
         if res and res.get("ok"):
             return res
         if err:
@@ -581,7 +584,7 @@ class LLMClient:
         return result_base
 
     def _try_pool(self, full_messages, response_format, temperature, max_tokens,
-                  pool, deadline, model):
+                  pool, deadline, model, enable_thinking=None):
         """尝试一个 provider 池（round-robin + 瞬时重试 + 墙钟上限）。
 
         pool 当前固定为 "primary"(OpenCode，4 入口轮换)。
@@ -630,6 +633,13 @@ class LLMClient:
                 "temperature": temperature,
                 "max_tokens": max_tokens,
             }
+            # thinking 模型默认先输出 reasoning，单篇抽取可达 300s 超时；
+            # SiliconFlow 支持 enable_thinking=false，配置 skip_thinking 时要真正下发。
+            if enable_thinking is None:
+                enable_thinking = SKIP_THINKING_DEFAULT
+            _et = enable_thinking
+            if _et is False and entry.get("name") == "siliconflow":
+                payload["enable_thinking"] = False
             headers = {
                 "Content-Type": "application/json",
                 "User-Agent": LLM_USER_AGENT,

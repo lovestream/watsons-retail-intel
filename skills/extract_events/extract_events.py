@@ -31,6 +31,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
+# 抽取是高频批量调用：thinking 先写 reasoning 会把单篇耗时推到 300s，
+# 生产上必须默认关闭；需要推理质量时用 EXTRACT_ENABLE_THINKING=1 打开。
+_ENABLE_THINKING = os.environ.get("EXTRACT_ENABLE_THINKING", "0") in ("1", "true", "True")
+
 # ===================== 依赖检查 =====================
 _MISSING = []
 try:
@@ -449,6 +453,7 @@ def llm_extract_events(
         temperature=0.15,
         max_tokens=4096,
         model=model,
+        enable_thinking=_ENABLE_THINKING,
     )
 
     content = result.get("content", "")
@@ -574,6 +579,7 @@ def llm_extract_events(
         temperature=0.1,
         max_tokens=2048,
         model=_retry_model,
+        enable_thinking=_ENABLE_THINKING,
     )
     attempt_count = 2
     content2 = result2.get("content", "")
@@ -866,6 +872,7 @@ def extract_events(
     file_handler = logging.FileHandler(log_file, encoding="utf-8")
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(message)s"))
+    
     logger = logging.getLogger("extract_events")
     logger.handlers.clear()
     logger.addHandler(file_handler)

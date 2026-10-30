@@ -1254,8 +1254,10 @@ def send_periodic_report_email(
     recipient: str = "",
     project_root: str = ".",
     dry_run: bool = False,
+    approved_brief_html_path: str = "",
+    approved_brief_manifest_path: str = "",
 ) -> dict:
-    """发送周报/月报/年报邮件（HTML 格式 + 附件）。
+    """发送通过 P09 复核的周期经营简报；旧Markdown邮件禁止生产发送。
 
     复用日报的 HTML 模板和 _send_email 基础设施。
 
@@ -1277,17 +1279,39 @@ def send_periodic_report_email(
 
     logger.info(f"发送{report_name}邮件: {period_label}")
 
-    # 读取报告
+    # 永不在默认部署配置中发旧Markdown邮件。正式发送必须显式启用新简报。
+    import hashlib
+    mode = os.environ.get("WATSONS_PERIODIC_MAIL_MODE", "hold").strip().lower()
+    if mode != "reader_brief" and not dry_run:
+        logger.error("周期正式邮件未启用（WATSONS_PERIODIC_MAIL_MODE!=reader_brief）")
+        return {"ok": False, "error": "periodic_delivery_disabled"}
+
     report_fp = Path(report_path)
-    if not report_fp.exists():
-        logger.error(f"报告文件不存在: {report_path}")
-        return {"ok": False, "error": "report_not_found"}
-
-    report_md = report_fp.read_text(encoding="utf-8")
-
-    # 构建 HTML
-    html_body = _build_periodic_email_html(
-        report_md, report_type, report_name, period_label)
+    html_fp = Path(approved_brief_html_path) if approved_brief_html_path else None
+    manifest_fp = Path(approved_brief_manifest_path) if approved_brief_manifest_path else None
+    if not report_fp.is_file() or not html_fp or not html_fp.is_file() or not manifest_fp or not manifest_fp.is_file():
+        return {"ok": False, "error": "approved_reader_brief_missing"}
+    try:
+        m = json.loads(manifest_fp.read_text(encoding="utf-8"))
+        blob = html_fp.read_bytes()
+        expected = m.get("html_sha256")
+        valid = (
+            m.get("period_type") == report_type and
+            m.get("delivery_state") == "approved" and
+            m.get("sendable") is True and
+            bool(expected) and hashlib.sha256(blob).hexdigest() == expected
+        )
+        if audio_path:
+            ap = Path(audio_path)
+            a = m.get("audio") or {}
+            valid = (valid and ap.is_file() and a.get("exists") is True and
+                     hashlib.sha256(ap.read_bytes()).hexdigest() == a.get("sha256"))
+        if not valid:
+            return {"ok": False, "error": "reader_brief_approval_or_hash_mismatch"}
+        html_body = blob.decode("utf-8")
+    except (ValueError, OSError, TypeError) as exc:
+        logger.error("读者简报质量门校验失败: %s", exc)
+        return {"ok": False, "error": "reader_brief_validation_failed"}
 
     # 构建附件
     attachments = []

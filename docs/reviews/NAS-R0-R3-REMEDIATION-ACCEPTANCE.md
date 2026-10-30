@@ -42,9 +42,11 @@
 - 反例：缺 manifest → `degraded` 且 `llm_called=false`；质量门失败 → `degraded`；未知 ID/URL → `hold_for_review`。
 - 测试入库：`.gitignore` 增加 `!tests/test_*.py`，`tests/test_prompt_integration.py`、`tests/test_pipeline_r0_r3.py`、`tests/reader_brief/test_reader_brief.py` 均已被跟踪。
 
-## R2 主线整合（进行中）
+## R2 主线整合（已完成）
 
-- 已 fetch `origin/main`（`2f1a4f0`，领先 29 提交，均为 P14/P15 文档迭代，不含 `skills/reader_brief`），本轮在此分支合并后再验收；合并冲突若涉及本文档以本文件为准。
+- `origin/main` = `2f1a4f0`（领先 29 提交，均为 P14/P15 文档迭代与 health_check/podcast 小改，不含 `skills/reader_brief`）。
+- 已 `--no-ff` 合并入本分支，**0 冲突**；合并后 `skills/generate_periodic_report/generate_periodic_report.py` 同时保留跨期来源门（Step 0a）与主线新增逻辑，`compileall` 通过、47 项测试全绿。
+- 合并提交见分支历史（`merge: 整合 origin/main (P14/P15 文档迭代) 到 R0–R3 整改分支`）。
 
 ## R3 交付证据与已知限制
 

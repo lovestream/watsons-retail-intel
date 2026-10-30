@@ -30,10 +30,11 @@ podcasts/scripts/
 *.bak
 .email_sent
 
-# Dev scripts
+# Dev scripts（tests/ 下的正式测试必须入库，见 R3 整改）
 check_*.py
 batch_*.py
 test_*.py
+!tests/test_*.py
 
 # OpenCode API keys (secrets — never commit)
 config/opencode_keys.json

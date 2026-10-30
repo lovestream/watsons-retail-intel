@@ -61,6 +61,7 @@ def review(brief: Dict, pack: Dict, send_at: str,
            deterministic: Optional[Dict] = None) -> Tuple[Dict, Dict]:
     """返回 (gate, meta)。gate: {status: pass|revise_applied|block, ...}"""
     det = deterministic or schema.validate_brief(brief, pack, send_at)
+    det_errors = det.get("errors") or []
     pr = render("P09",
                 reader_brief_json=brief,
                 selected_claim_evidence_json=_evidence(brief, pack),
@@ -76,25 +77,33 @@ def review(brief: Dict, pack: Dict, send_at: str,
             "model": res.get("model"), "rounds": 1,
             "deterministic": det}
     if not isinstance(review_json, dict):
-        # 模型不可用：保留确定性结论；critical 存在则 block，否则 revise-only 放行
-        status = "block" if any(e["code"] in CRITICAL_CODES for e in det["errors"]) \
-            else "pass"
+        # 模型不可用 → fail-closed：任何程序门错误 blocked；否则 hold_for_review。
+        # 绝不把"没审"当成"已审"。
         meta["degraded"] = True
         meta["error"] = (res.get("error") or "")[:200]
-        return {"status": status, "decision": "deterministic_only",
-                "review": None, "degraded": True,
-                "issues": [], "reason": (res.get("error") or "")[:160]}, meta
+        if det_errors:
+            return {"state": "blocked", "status": "blocked",
+                    "decision": "deterministic_errors",
+                    "review": None, "degraded": True, "issues": [],
+                    "det_errors": det_errors,
+                    "reason": (res.get("error") or "")[:160]}, meta
+        return {"state": "hold_for_review", "status": "hold_for_review",
+                "decision": "p09_unavailable", "review": None,
+                "degraded": True, "issues": [],
+                "reason": (res.get("error") or "")[:160]}, meta
 
     decision = str(review_json.get("decision") or "").lower()
     issues = review_json.get("issues") or []
     meta["review"] = review_json
+    meta["raw_reviews"] = [review_json]
 
     critical = [i for i in issues if str(i.get("severity")).lower() == "critical"]
     hard_errors = [e for e in det["errors"] if e["code"] in CRITICAL_CODES]
-    if decision == "block" or critical or hard_errors:
-        return {"status": "block", "decision": decision or "block",
+    if decision == "block" or critical or hard_errors or det_errors:
+        return {"state": "blocked", "status": "blocked",
+                "decision": decision or "block",
                 "review": review_json, "issues": critical or issues,
-                "det_errors": hard_errors}, meta
+                "det_errors": hard_errors or det_errors}, meta
 
     if decision == "revise" or review_json.get("suggested_replacements"):
         fixed, applied = schema.apply_replacements(
@@ -103,7 +112,8 @@ def review(brief: Dict, pack: Dict, send_at: str,
         meta["applied_replacements"] = applied
         meta["post_revise"] = after
         if not after["pass"]:
-            return {"status": "block", "decision": "revise_rejected",
+            return {"state": "blocked", "status": "blocked",
+                    "decision": "revise_rejected",
                     "review": review_json, "issues": issues,
                     "det_errors": after["errors"]}, meta
         unresolved = [i for i in issues
@@ -111,20 +121,22 @@ def review(brief: Dict, pack: Dict, send_at: str,
                       and str(i.get("location") or "") not in applied]
         meta["unresolved_major"] = unresolved
         if unresolved:
-            return {"status": "block", "decision": "revise_incomplete",
+            return {"state": "blocked", "status": "blocked",
+                    "decision": "revise_incomplete",
                     "review": review_json, "issues": unresolved,
                     "applied": applied}, meta
         if applied and _still_major(issues):
             gate2, meta2 = _second_round(fixed, pack, send_at, issues, client, pr)
             meta["rounds"] = 2
             meta["second_round"] = meta2
-            if gate2["status"] != "pass":
+            if gate2.get("status") != "approved":
                 return gate2, meta
-        return {"status": "revise_applied", "decision": "revise",
-                "review": review_json, "issues": issues,
-                "applied": applied, "brief": fixed}, meta
+        return {"state": "approved", "status": "approved",
+                "decision": "revise", "review": review_json,
+                "issues": issues, "applied": applied, "brief": fixed}, meta
 
-    return {"status": "pass", "decision": "approve", "review": review_json,
+    return {"state": "approved", "status": "approved",
+            "decision": "approve", "review": review_json,
             "issues": issues}, meta
 
 
@@ -141,19 +153,31 @@ def _second_round(brief, pack, send_at, issues, client, pr) -> Tuple[Dict, Dict]
                       temperature=0.0, max_tokens=pr.max_tokens)
     rj = res.get("parsed") if res.get("ok") else None
     if not isinstance(rj, dict):
-        return {"status": "block", "decision": "second_round_failed"}, {}
+        return {"state": "hold_for_review", "status": "hold_for_review",
+                "decision": "second_round_failed"}, {}
     crit = [i for i in (rj.get("issues") or [])
             if str(i.get("severity")).lower() == "critical"]
     if str(rj.get("decision")).lower() == "block" or crit:
-        return {"status": "block", "decision": "block", "review": rj}, {}
-    return {"status": "pass", "decision": str(rj.get("decision")), "review": rj}, {}
+        return {"state": "blocked", "status": "blocked",
+                "decision": "block", "review": rj}, {}
+    return {"state": "approved", "status": "approved",
+            "decision": str(rj.get("decision")), "review": rj}, {}
+
+
+STATE_ZH = {"approved": "已通过（本批次可发送）",
+            "hold_for_review": "暂缓（P09 未完成，需人工复核后放行）",
+            "blocked": "已阻断（存在未解决事实问题）"}
 
 
 def summarize_gate(gate: Dict) -> str:
-    if gate.get("degraded") or gate.get("decision") == "deterministic_only":
-        return "确定性检查通过；P09 模型本轮不可用，未做主张级语义复核（降级，需人工留意）"
-    if gate["status"] == "pass":
-        return "P09 approve（程序确定性检查通过）"
-    if gate["status"] == "revise_applied":
-        return f"P09 revise，已定点更正 {len(gate.get('applied') or [])} 处"
-    return f"P09 BLOCK：{len(gate.get('issues') or gate.get('det_errors') or [])} 个问题"
+    state = gate.get("state") or gate.get("status")
+    if state == "blocked":
+        n = len(gate.get("issues") or gate.get("det_errors") or [])
+        return f"已阻断：{n} 个未解决问题（禁止发送）"
+    if state == "hold_for_review":
+        return "暂缓：P09 模型未完成主张级复核（禁止自动发送，需人工放行）"
+    if gate.get("degraded"):
+        return "暂缓：P09 降级执行（禁止自动发送）"
+    if gate.get("decision") == "revise":
+        return f"已通过：P09 定点更正 {len(gate.get('applied') or [])} 处后复核通过"
+    return "已通过：P09 approve（程序确定性检查 + 主张级复核）"

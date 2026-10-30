@@ -1,0 +1,61 @@
+{
+ "schema_version": 2,
+ "period_type": "weekly",
+ "start": "2026-10-19",
+ "end": "2026-10-25",
+ "send_at": "2026-10-29",
+ "delivery_state": "approved",
+ "sendable": true,
+ "deliverable": true,
+ "gate_summary": "已通过：P09 定点更正 6 处后复核通过",
+ "pack_sha256": "ff9fe0e38d7d56bca567f3faa2d7af4e9b0d5ec2f6a5e69521c41f8190083c9b",
+ "facts": 13,
+ "synthesis_status": null,
+ "notes": [],
+ "p05": {
+  "prompt": "P05",
+  "prompt_version": "fbe1742eebc1",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+  "fallback": false
+ },
+ "p05_rejected_topics": [],
+ "p08": {
+  "prompt": "P08",
+  "prompt_version": "b402c2f55c43",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+  "repair_rounds": 1,
+  "final_verdict": {
+   "pass": true,
+   "errors": [],
+   "warnings": [
+    {
+     "code": "too_long",
+     "severity": "warning",
+     "where": "signals[2].fact",
+     "message": "超过 110 字"
+    }
+   ],
+   "stats": {
+    "signals": 3,
+    "competitors": 0,
+    "actions": 3,
+    "watch": 0,
+    "omitted": 7
+   }
+  }
+ },
+ "p09": {
+  "state": "approved",
+  "decision": "revise",
+  "rounds": 2,
+  "degraded": false,
+  "prompt_version": "a1003f9ce985",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash"
+ },
+ "audio": {
+  "path": "",
+  "exists": false
+ },
+ "html_sha256": "b16348cd64d9c8ac9025253dc80faa1aae36015f0391effff35fc64a50f801a1",
+ "generated_at": "2026-10-29T15:55:17"
+}

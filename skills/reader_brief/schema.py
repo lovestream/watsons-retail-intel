@@ -71,7 +71,8 @@ def _texts(item: Dict, fields) -> str:
     return " ".join(str(item.get(f, "")) for f in fields)
 
 
-def validate_brief(brief: Dict, pack: Dict, send_at: str) -> Dict:
+def validate_brief(brief: Dict, pack: Dict, send_at: str,
+                   allowed_fact_ids=None) -> Dict:
     facts = {f["fact_id"]: f for f in pack.get("facts", [])}
     claims = {f["claim_id"]: f for f in pack.get("facts", [])}
     pack_urls = {f["source"]["url"] for f in pack.get("facts", [])}
@@ -113,6 +114,11 @@ def validate_brief(brief: Dict, pack: Dict, send_at: str) -> Dict:
         if bad:
             errors.append(_issue("unknown_fact_id", "error", where, f"不存在: {bad}"))
             return
+        if allowed_fact_ids is not None:
+            outside = [x for x in ids if x not in allowed_fact_ids]
+            if outside:
+                errors.append(_issue("p05_topic_not_published", "error", where,
+                                     f"引用了 P05 未发布选题的事实: {outside}"))
         cids = item.get("claim_ids") or []
         if cids:
             badc = [x for x in cids if x not in claims]
@@ -173,6 +179,11 @@ def validate_brief(brief: Dict, pack: Dict, send_at: str) -> Dict:
     for i, it in enumerate(brief.get("priority_actions") or []):
         check_item("priority_actions", i, it, "linked_fact_ids",
                    ("title", "precondition", "trial", "metric"), True)
+        _due = parse_date(str(it.get("due_date") or ""), today.year)
+        if _due and _due < today:
+            errors.append(_issue("expired_deadline", "error",
+                                 f"priority_actions[{i}]",
+                                 f"期限 {_due.isoformat()} 已过期"))
     for i, it in enumerate(brief.get("watch_items") or []):
         check_item("watch_items", i, it, "fact_ids",
                    ("trigger", "business_relevance"), True)

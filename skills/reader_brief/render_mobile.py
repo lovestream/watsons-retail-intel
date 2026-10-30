@@ -12,32 +12,28 @@ import html
 from typing import Dict, List
 
 CSS = """
-:root{--ink:#1f2328;--muted:#6b7280;--line:#e6e8eb;--accent:#0b7a5e;
---accent2:#eef7f4;--warn:#b45309;--bg:#f5f6f8}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
+body{margin:0;background:#f5f6f8;color:#1f2328;
 font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
-.wrap{max-width:600px;margin:0 auto;background:#fff;padding:20px 18px 28px}
-.kicker{font-size:12px;letter-spacing:.08em;color:var(--accent);font-weight:700}
-h1{font-size:22px;line-height:1.35;margin:6px 0 10px}
-.take{background:var(--accent2);border-left:4px solid var(--accent);
-padding:12px 14px;border-radius:6px;font-size:15px;margin:0 0 22px}
-h2{font-size:13px;letter-spacing:.06em;color:var(--muted);margin:26px 0 10px;
-font-weight:700;text-transform:uppercase}
-.card{border:1px solid var(--line);border-radius:8px;padding:13px 14px;margin:0 0 12px}
-.card h3{font-size:16px;margin:0 0 6px;line-height:1.4}
-.card p{margin:0 0 8px;font-size:15px;word-break:break-word}
+.wrap{max-width:600px;margin:0 auto;background:#ffffff;padding:20px 18px 28px}
+.kicker{font-size:12px;letter-spacing:.08em;color:#0b7a5e;font-weight:700}
+h1{font-size:22px;line-height:1.35;margin:6px 0 10px;color:#1f2328}
+.take{background:#eef7f4;border-left:4px solid #0b7a5e;
+padding:12px 14px;border-radius:6px;font-size:15px;margin:0 0 22px;color:#1f2328}
+h2{font-size:13px;letter-spacing:.06em;color:#6b7280;margin:26px 0 10px;font-weight:700}
+.card{border:1px solid #e6e8eb;border-radius:8px;padding:13px 14px;margin:0 0 12px}
+.card h3{font-size:16px;margin:0 0 6px;line-height:1.4;color:#1f2328}
+.card p{margin:0 0 8px;font-size:15px;word-break:break-word;color:#1f2328}
 .impact{font-size:14px;color:#0d5f4a;background:#f6fbf9;border-radius:6px;
 padding:8px 10px;margin:6px 0 0}
-.meta{font-size:12px;color:var(--muted);margin-top:8px}
-a{color:var(--accent);text-decoration:none;border-bottom:1px solid #bfe0d5}
+.meta{font-size:12px;color:#6b7280;margin-top:8px}
+a{color:#0b7a5e;text-decoration:none;border-bottom:1px solid #bfe0d5}
 ol.actions{margin:0;padding-left:20px}
 ol.actions li{margin:0 0 14px}
 .at{font-weight:700;font-size:15px}
 .row{font-size:14px;margin:4px 0}
-.row b{color:var(--muted);font-weight:600}
-.watch{font-size:14px;border-left:3px solid var(--warn);padding:2px 0 2px 10px;margin:0 0 10px}
-footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);
+.row b{color:#6b7280;font-weight:600}
+.watch{font-size:14px;border-left:3px solid #b45309;padding:2px 0 2px 10px;margin:0 0 10px}
+footer{font-size:12px;color:#6b7280;border-top:1px solid #e6e8eb;
 margin-top:24px;padding-top:12px}
 @media (max-width:400px){.wrap{padding:16px 14px 24px}h1{font-size:20px}}
 """
@@ -111,7 +107,8 @@ def _action_li(a: Dict) -> str:
 
 def render(brief: Dict, pack: Dict, period_type: str = "",
            period_start: str = "", period_end: str = "",
-           audio_note: str = "", generated_at: str = "") -> str:
+           audio_note: str = "", generated_at: str = "",
+           basis_note: str = "") -> str:
     ptype = period_type or brief.get("period_type", "weekly")
     p0 = period_start or brief.get("period_start", "")
     p1 = period_end or brief.get("period_end", "")
@@ -147,8 +144,11 @@ def render(brief: Dict, pack: Dict, period_type: str = "",
                          f'<span class="meta">{_e(w.get("business_relevance"))}</span></div>')
 
     n_facts = len({fid for s in signals for fid in (s.get("fact_ids") or [])})
-    foot = [f"本期基于 {len(pack.get('facts', []))} 条已核验事实，"
-            f"正文引用 {n_facts} 条；来源链接附在对应事实处。"]
+    foot = [f"本期基于 {len(pack.get('facts', []))} 条来自媒体原始报道的事实，"
+            f"正文引用 {n_facts} 条；来源链接附在对应事实处，"
+            "未经当事方官方确认的内容按报道处理。"]
+    if basis_note:
+        foot.append(_e(basis_note))
     if audio_note:
         foot.append(_e(audio_note))
     if generated_at:

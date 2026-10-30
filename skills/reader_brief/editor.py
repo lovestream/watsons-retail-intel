@@ -26,9 +26,14 @@ def _clusters(pack: Dict) -> list:
         g = groups.setdefault(key, {"cluster_id": f"C{len(groups) + 1:03d}",
                                     "theme": f["text"][:60], "facts": [],
                                     "claims": [], "source": f["source"]["url"],
-                                    "status": f["status"]})
+                                    "status": f["status"],
+                                    "fact_ids": [], "claim_ids": [],
+                                    "canonical_event_ids": []})
         g["facts"].append(f["text"])
         g["claims"].append(f["claim_id"])
+        g["fact_ids"].append(f["fact_id"])
+        g["claim_ids"].append(f["claim_id"])
+        g["canonical_event_ids"].extend(f.get("event_ids") or [])
     return list(groups.values())
 
 
@@ -53,7 +58,9 @@ def build_topic_plan(pack: Dict, send_at: str, previous=None,
         return _rule_topic_plan(pack, fallback_reason="llm_unavailable")
     plan["_meta"] = {"prompt": "P05", "prompt_version": pr.version,
                      "model": res.get("model"), "fallback": False}
-    _validate_topic_plan(plan, pack)
+    plan = _validate_topic_plan(plan, pack)
+    if not plan["published_fact_ids"]:
+        logger.warning("P05 无任何可发布选题（全部缺合法 fact_id）")
     return plan
 
 
@@ -68,7 +75,7 @@ def _rule_topic_plan(pack: Dict, fallback_reason: str) -> Dict:
                        "business_variable": "", "impact_hypothesis": "",
                        "reader_priority": "must_read" if i == 0 else "useful",
                        "should_publish": True, "reason": "规则回退排序"})
-    return {"period_type": pack.get("period_type", "weekly"),
+    plan = {"period_type": pack.get("period_type", "weekly"),
             "period_start": (pack.get("period") or {}).get("start", ""),
             "period_end": (pack.get("period") or {}).get("end", ""),
             "single_biggest_change": topics[0]["headline"] if topics else "",
@@ -76,23 +83,36 @@ def _rule_topic_plan(pack: Dict, fallback_reason: str) -> Dict:
             "genuine_watch_triggers": [], "missing_coverage": [],
             "_meta": {"prompt": "P05", "fallback": True,
                       "reason": fallback_reason}}
+    return _validate_topic_plan(plan, pack)
 
 
-def _validate_topic_plan(plan: Dict, pack: Dict) -> None:
+def _validate_topic_plan(plan: Dict, pack: Dict) -> Dict:
     ids = fact_index(pack)
+    rejected = plan.get("rejected_topics") or []
     for t in plan.get("topics") or []:
         bad = [x for x in (t.get("source_fact_ids") or []) if x not in ids]
         if bad:
             t["source_fact_ids"] = [x for x in (t.get("source_fact_ids") or [])
                                     if x in ids]
-            logger.warning("P05 引用了不存在的事实 %s，已剔除", bad)
+            t["invalid_fact_ids"] = bad
+            logger.warning("P05 引用了不存在的事实 %s", bad)
         if not t.get("source_fact_ids"):
             t["should_publish"] = False
+            t["rejected_reason"] = "no_valid_fact_ids"
+            rejected.append({"topic_id": t.get("topic_id"),
+                             "headline": t.get("headline", ""),
+                             "reason": "no_valid_fact_ids"})
     must = [t for t in plan.get("topics") or []
             if t.get("reader_priority") == "must_read"]
     if len(must) > 3:
         for t in must[3:]:
             t["reader_priority"] = "useful"
+    plan["rejected_topics"] = rejected
+    published = sorted({fid for t in plan.get("topics") or []
+                        if t.get("should_publish")
+                        for fid in (t.get("source_fact_ids") or [])})
+    plan["published_fact_ids"] = published
+    return plan
 
 
 def write_brief(pack: Dict, send_at: str, topic_plan: Optional[Dict] = None,
@@ -117,12 +137,17 @@ def write_brief(pack: Dict, send_at: str, topic_plan: Optional[Dict] = None,
         raise RuntimeError("P08 未返回 JSON: " + (res.get("error") or "")[:200])
     brief.setdefault("audit", {})["source_pack_sha256"] = pack["pack_sha256"]
 
-    verdict = schema.validate_brief(brief, pack, send_at)
+    allowed = None
+    if topic_plan and topic_plan.get("topics"):
+        allowed = set(topic_plan.get("published_fact_ids") or [])
+    verdict = schema.validate_brief(brief, pack, send_at,
+                                    allowed_fact_ids=allowed)
     meta = {"prompt": "P08", "prompt_version": pr.version,
             "model": res.get("model"), "first_pass": verdict,
             "repair_rounds": 0}
     if not verdict["pass"]:
-        brief = _repair(pr, pack, brief, verdict, client, meta, send_at)
+        brief = _repair(pr, pack, brief, verdict, client, meta, send_at,
+                        allowed)
         verdict = meta["final_verdict"]
     meta["final_verdict"] = verdict
     if not verdict["pass"]:
@@ -131,7 +156,8 @@ def write_brief(pack: Dict, send_at: str, topic_plan: Optional[Dict] = None,
     return brief, meta
 
 
-def _repair(pr, pack, brief, verdict, client, meta, send_at) -> Dict:
+def _repair(pr, pack, brief, verdict, client, meta, send_at,
+            allowed=None) -> Dict:
     meta["repair_rounds"] = 1
     errs = json.dumps(verdict["errors"][:12], ensure_ascii=False, indent=1)
     user = (pr.user + "\n\n上一版输出被程序验收拒绝，错误如下（只修正这些，"
@@ -145,5 +171,6 @@ def _repair(pr, pack, brief, verdict, client, meta, send_at) -> Dict:
         meta["final_verdict"] = verdict
         return brief
     fixed.setdefault("audit", {})["source_pack_sha256"] = pack["pack_sha256"]
-    meta["final_verdict"] = schema.validate_brief(fixed, pack, send_at)
+    meta["final_verdict"] = schema.validate_brief(fixed, pack, send_at,
+                                                  allowed_fact_ids=allowed)
     return fixed

@@ -70,33 +70,56 @@ def extract_numbers(text: str) -> List[str]:
 def _clean(text: str, limit: int = 240) -> str:
     t = re.sub(r"\s+", " ", str(text or "")).strip()
     t = re.sub(r"\bE\d{8}_\d{3,4}\b", "", t)
-    t = re.sub(r"【?[ABK]】?|\bP[012]\b|置信度\s*[:：]?\s*[\w.]+", "", t)
+    # 只清洗真正的标签形态：【A】/\[B\]/(K)/独立的 A B K 词，绝不拆品牌名
+    t = re.sub(r"(?:【\s*[ABK][^】]{0,12}】|\[\s*[ABK]\s*\]|\(\s*[ABK]\s*\)|\b[A-BK]\b)"
+               r"|\bP[012]\b|置信度\s*[:：]?\s*[\w.]+", "", t)
     t = re.sub(r"\s{2,}", " ", t).strip(" ，,；;")
     return t[:limit]
 
 
 def _date_of(value: str) -> Optional[date]:
-    m = re.search(r"(20\d{2})[-/年](\d{1,2})[-/月](\d{1,2})", str(value or ""))
-    if not m:
-        return None
+    """解析 ISO / 中文 / RFC822 三种日期；解析不出返回 None（绝不截断字符串当日期）。"""
+    raw = str(value or "")
+    m = re.search(r"(20\d{2})[-/年](\d{1,2})[-/月](\d{1,2})", raw)
+    if m:
+        try:
+            return date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        except ValueError:
+            return None
     try:
-        return date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
-    except ValueError:
-        return None
+        from email.utils import parsedate_to_datetime
+        dt = parsedate_to_datetime(raw)
+        if dt:
+            return dt.date()
+    except Exception:
+        pass
+    m = re.search(r"(\d{1,2})\s+([A-Za-z]{3})[a-z]*\s+(20\d{2})", raw)
+    if m:
+        months = {name: i for i, name in enumerate(
+            ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep",
+             "oct", "nov", "dec"], start=1)}
+        mon = months.get(m.group(2).lower())
+        if mon:
+            try:
+                return date(int(m.group(3)), mon, int(m.group(1)))
+            except ValueError:
+                return None
+    return None
 
 
 def _add_fact(facts: List[Dict], text: str, day: str, url: str, name: str,
               platforms=None, competitors=None, event_ids=None,
-              event_type: str = "") -> None:
+              event_type: str = "", date_role: str = "published") -> None:
     clean = _clean(text)
     if not clean:
         return
+    parsed = _date_of(day)
     facts.append({
         "fact_id": f"F{len(facts) + 1:03d}",
         "claim_id": f"CL{len(facts) + 1:03d}",
         "text": clean,
-        "date": (day or "")[:10],
-        "date_role": "published",
+        "date": parsed.isoformat() if parsed else "",
+        "date_role": date_role,
         "status": infer_status(clean),
         "numbers": extract_numbers(clean),
         "platforms": platforms or [],
@@ -136,11 +159,18 @@ def build_from_synthesis(synth: Dict, period_type: str = "weekly",
                  {"facts_kept": len(facts)})
 
 
+def occurrences_ok(ev: Dict) -> bool:
+    """仅当事件自带可解析的 occurred/occurred_at 时才把日期角色标成 occurred。"""
+    return bool(_date_of(ev.get("event_occurred_at") or ev.get("occurred_at")
+                         or ""))
+
+
 def build_from_events(events_dir: str, start: str, end: str,
                       period_type: str = "monthly", max_facts: int = 120) -> Dict:
     d0, d1 = _date_of(start), _date_of(end)
     raw = []
-    days = sorted(p for p in Path(events_dir).glob("2026-*") if p.is_dir())
+    days = sorted((p for p in Path(events_dir).glob("*") if p.is_dir()
+                   and _date_of(p.name)), key=lambda p: p.name)
     for day in days:
         dd = _date_of(day.name)
         if not dd or not d0 or not d1 or not (d0 <= dd <= d1):
@@ -168,12 +198,15 @@ def build_from_events(events_dir: str, start: str, end: str,
             continue
         seen.add(key)
         ents = ev.get("entities") or {}
-        _add_fact(facts, text, day_name, ev.get("source_url") or "",
+        occurred = (ev.get("event_occurred_at") or ev.get("occurred_at")
+                    or ev.get("published_at") or day_name)
+        role = "occurred" if occurrences_ok(ev) else "published"
+        _add_fact(facts, text, occurred, ev.get("source_url") or "",
                   ev.get("source_name") or "",
                   (ents.get("platforms") or [])[:3],
                   (ents.get("companies") or [])[:3],
                   [ev.get("event_id")] if ev.get("event_id") else [],
-                  ev.get("event_type") or "")
+                  ev.get("event_type") or "", date_role=role)
         if len(facts) >= max_facts:
             break
     return _pack(facts, period_type, {"start": start, "end": end},

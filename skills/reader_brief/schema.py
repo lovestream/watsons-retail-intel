@@ -12,8 +12,13 @@ from typing import Dict, List, Tuple
 REQUIRED = ("period_type", "period_start", "period_end", "title",
             "one_line_takeaway", "signals", "competitor_cards",
             "priority_actions", "watch_items", "omitted_fact_ids", "audit")
+# 2026-10-31：真实周数据（586 事件）下，未采用事实常达 20+ 条。
+# omitted_fact_ids 是"编辑取舍说明"，不是全量清单 —— 列代表性条目即可，
+# 全量清单由程序侧 coverage_report 统计，不应让模型逐条枚举（会挤占正文预算）。
+# 因此上限提升到 24 并改为 warning 级：超限不阻断，只提示精简。
 CAPS = {"signals": 3, "competitor_cards": 2, "priority_actions": 3,
-        "watch_items": 2, "omitted_fact_ids": 12}
+        "watch_items": 2, "omitted_fact_ids": 24}
+SOFT_CAPS = {"omitted_fact_ids"}   # 超限只 warning，不阻断
 TEXT_LIMITS = {"title": 32, "one_line_takeaway": 90,
                "signals.headline": 24, "signals.fact": 110,
                "signals.business_impact": 100,
@@ -89,8 +94,13 @@ def validate_brief(brief: Dict, pack: Dict, send_at: str,
             errors.append(_issue("bad_type", "error", key, "应为数组"))
             continue
         if len(items) > cap:
-            errors.append(_issue("too_many_items", "error", key,
-                                 f"{len(items)} 条 > 上限 {cap}"))
+            if key in SOFT_CAPS:
+                warnings.append(_issue("too_many_items", "warning", key,
+                                       f"{len(items)} 条 > 建议上限 {cap}（已截断显示）"))
+                brief[key] = items[:cap]
+            else:
+                errors.append(_issue("too_many_items", "error", key,
+                                     f"{len(items)} 条 > 上限 {cap}"))
     for key, limit in TEXT_LIMITS.items():
         section = key.split(".")[0]
         field = key.split(".")[1] if "." in key else key

@@ -82,11 +82,20 @@ def classify_issue(issue: Dict, brief: Dict, pack: Dict) -> Dict:
         return {"kind": "ungrounded_material", "reason": "claim_or_source_unbound"}
     if not source or not any(source in (f.get("text") or "") for f in facts):
         return {"kind": "ungrounded_material", "reason": "source_excerpt_unbound"}
-    # An issue may cite a real source while attacking a different card.
-    if isinstance(item, dict):
-        fids = set(item.get("fact_ids") or item.get("linked_fact_ids") or [])
+    # A field-level issue (e.g. signals[0].fact) also needs the card's own
+    # claim bindings. Without this, a valid source from a DIFFERENT card could
+    # give a bogus reviewer finding an apparently admissible anchor.
+    m = LOCATION.fullmatch(location)
+    card = item
+    if m and m.group(2) is not None and m.group(3) is not None:
+        card = _get_item(brief, f"{m.group(1)}[{m.group(2)}]")
+    if isinstance(card, dict):
+        fids = set(card.get("fact_ids") or card.get("linked_fact_ids") or [])
+        cids = set(card.get("claim_ids") or [])
         if fids and not any(f.get("fact_id") in fids for f in facts):
             return {"kind": "ungrounded_material", "reason": "source_not_of_location"}
+        if cids and cid not in cids:
+            return {"kind": "ungrounded_material", "reason": "claim_not_of_location"}
     return {"kind": "material", "reason": cat}
 
 

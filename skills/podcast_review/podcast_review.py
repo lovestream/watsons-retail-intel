@@ -569,7 +569,7 @@ def llm_deep_review(script: str, events: List[dict], report_snippet: str = "") -
             response_format="json",
             temperature=0.2,
             max_tokens=2048,
-            model="deepseek-v4-flash-free",
+            model="deepseek-flash",
         )
         if result.get("ok"):
             content = result.get("content", "")

@@ -947,19 +947,19 @@ def analyze_business_impact(
         p2_cfg = _priority_batches_cfg.get("P2", {})
         batch_workers["P2"] = p2_cfg.get("max_workers", 6)
         batch_timeouts["P2"] = p2_cfg.get("timeout", 60)
-        batch_models["P2"] = p2_cfg.get("model", _analyze_route.get("P2", "deepseek-v4-flash-free"))
+        batch_models["P2"] = p2_cfg.get("model", _analyze_route.get("P2", "deepseek-flash"))
 
         # P1: Chat, 中并发
         p1_cfg = _priority_batches_cfg.get("P1", {})
         batch_workers["P1"] = p1_cfg.get("max_workers", 4)
         batch_timeouts["P1"] = p1_cfg.get("timeout", 120)
-        batch_models["P1"] = p1_cfg.get("model", _analyze_route.get("P1", "deepseek-v4-flash-free"))
+        batch_models["P1"] = p1_cfg.get("model", _analyze_route.get("P1", "deepseek-flash"))
 
         # P0: Chat, 低并发
         p0_cfg = _priority_batches_cfg.get("P0", {})
         batch_workers["P0"] = p0_cfg.get("max_workers", 2)
         batch_timeouts["P0"] = p0_cfg.get("timeout", 150)
-        batch_models["P0"] = p0_cfg.get("model", _analyze_route.get("P0", "deepseek-v4-flash-free"))
+        batch_models["P0"] = p0_cfg.get("model", _analyze_route.get("P0", "deepseek-flash"))
 
         # ARCHIVE: 纯规则
         batch_workers["ARCHIVE"] = 0
@@ -989,7 +989,7 @@ def analyze_business_impact(
             使用对应批次模型，失败时回退到规则分析。
             """
             event_id = event.get("event_id", f"ev_{orig_idx+1}")
-            model = batch_models.get(batch_name, "deepseek-v4-flash-free")
+            model = batch_models.get(batch_name, "deepseek-flash")
 
             try:
                 ba = llm_analyze_event(event, llm_client, model=model)
@@ -1101,7 +1101,7 @@ def analyze_business_impact(
             # 串行模式
             logger.info("串行 LLM 分析模式")
             for _prio_name, _indices_list in [("P2", p2_indices), ("P1", p1_indices), ("P0", p0_indices)]:
-                model = batch_models.get(_prio_name, "deepseek-v4-flash-free")
+                model = batch_models.get(_prio_name, "deepseek-flash")
                 for orig_idx, event in _indices_list:
                     event_id = event.get("event_id", f"ev_{orig_idx+1}")
                     try:

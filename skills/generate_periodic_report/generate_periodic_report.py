@@ -70,9 +70,9 @@ try:
     elif isinstance(_periodic_model_res, str):
         _PERIODIC_MODEL = _periodic_model_res
     else:
-        _PERIODIC_MODEL = "deepseek-v4-flash-free"
+        _PERIODIC_MODEL = "deepseek-flash"
 except Exception:
-    _PERIODIC_MODEL = "deepseek-v4-flash-free"
+    _PERIODIC_MODEL = "deepseek-flash"
 
 LLM_MODEL = _PERIODIC_MODEL
 MAX_TOKENS_CHAPTER = 8192

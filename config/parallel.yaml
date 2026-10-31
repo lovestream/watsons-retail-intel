@@ -62,14 +62,14 @@ extract_events:
     # 模型策略
     model_strategy:
       # 默认模型（批量 JSON 抽取）
-      default: deepseek-v4-flash-free
+      default: deepseek-flash
       # 失败重试模型
-      fallback: deepseek-v4-flash-free
+      fallback: deepseek-flash
       # 不使用 Thinking 模型做 JSON 抽取
       skip_thinking: true
     # 失败重试
     retry_on_failure: true
-    retry_model: deepseek-v4-flash-free
+    retry_model: deepseek-flash
     retry_timeout: 120
 
 # ── filter_relevant_articles ──
@@ -84,8 +84,8 @@ filter_relevant_articles:
     single_timeout: 90
     # 模型策略：只用 Lite/Chat，不用 Thinking（审核分类不需要深度推理）
     model_strategy:
-      default: deepseek-v4-flash-free
-      fallback: deepseek-v4-flash-free
+      default: deepseek-flash
+      fallback: deepseek-flash
       skip_thinking: true
 
 # ── generate_daily_report ──
@@ -119,19 +119,19 @@ analyze_business_impact:
       # P2: 使用 Lite 快速批量
       P2:
         use_llm: true
-        model: deepseek-v4-flash-free
+        model: deepseek-flash
         max_workers: 6
         timeout: 60
       # P1: 使用 Chat 稳定
       P1:
         use_llm: true
-        model: deepseek-v4-flash-free
+        model: deepseek-flash
         max_workers: 4
         timeout: 120
       # P0: 低并发，使用 Chat 稳妥处理
       P0:
         use_llm: true
-        model: deepseek-v4-flash-free
+        model: deepseek-flash
         max_workers: 2
         timeout: 150
     # 总超时

@@ -49,12 +49,12 @@ CST = timezone(timedelta(hours=8))
 SERVICES = {
     # ── 核心外部服务（Key-based） ──
     "opencode_llm": {
-        "name": "OpenCode LLM (主, 免费)",
+        "name": "RightCode LLM (唯一)",
         "critical": True,
-        "key_source": "file",          # key 从 config/opencode_keys.json 载入
-        "key_count": 4,                 # 3 自定义 Key + 1 内置 keyless
-        "test_model": "deepseek-v4-flash-free",
-        "test_url": "https://opencode.ai/zen/v1",
+        "key_source": "env",           # key 从环境变量 rightcode_bybt 读取
+        "key_count": 1,
+        "test_model": "deepseek-flash",
+        "test_url": "https://api.site/v1",
         "test_type": "api_key",
     },
     "tavily_search": {
@@ -244,59 +244,34 @@ _OPENCODE_UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 )
-_OPENCODE_MODEL = "deepseek-v4-flash-free"
+_TEST_MODEL = "deepseek-flash"
 _OPENCODE_URL = "https://opencode.ai/zen/v1"
 
 
 def _load_opencode_keys(project_root: str = ".") -> list:
-    """载入 OpenCode 轮换入口: [(name, key)]。3 自定义 Key + 1 内置 keyless。
-
-    Key 源: <project_root>/config/opencode_keys.json（dict {name: key}）。
-    keyless 入口始终附加（key=""，请求不带 Authorization）。
-    """
-    entries = []
-    candidates = [
-        os.path.join(project_root, "config", "opencode_keys.json"),
-        "config/opencode_keys.json",
-    ]
-    for cand in candidates:
-        if os.path.exists(cand):
-            try:
-                with open(cand, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                if isinstance(data, dict):
-                    for name, key in data.items():
-                        if isinstance(key, str) and key.strip():
-                            entries.append((str(name), key.strip()))
-                elif isinstance(data, list):
-                    for i, key in enumerate(data):
-                        if isinstance(key, str) and key.strip():
-                            entries.append(("key%d" % i, key.strip()))
-            except Exception as e:
-                entries.append(("__load_error__", str(e)[:80]))
-            break
-    # 内置 keyless 入口（无需 API Key）
-    if not any(k == "" for _, k in entries):
-        entries.append(("opencode-keyless", ""))
-    return entries
+    """读取 RightCode key（函数名为历史兼容保留）。"""
+    pairs = []
+    env_val = (os.environ.get("rightcode_bybt", "")
+               or os.environ.get("RIGHTCODE_API_KEY", "")).strip()
+    if env_val:
+        for i, k in enumerate([x.strip() for x in env_val.split(",") if x.strip()]):
+            pairs.append((f"rightcode_{i}", k))
+    return pairs
 
 
 def test_opencode_key(name: str, key: str, model: str, timeout: int = 25) -> dict:
-    """测试单个 OpenCode 入口（带浏览器 User-Agent 绕过 Cloudflare 403 code 1010）。"""
+    """测试 SiliconFlow 主模型连通性（函数名为历史兼容保留）。"""
     try:
         payload = json.dumps({
-            "model": model or _OPENCODE_MODEL,
+            "model": model or _TEST_MODEL,
             "messages": [{"role": "user", "content": "ok"}],
             "max_tokens": 3,
         }).encode()
-        headers = {
-            "User-Agent": _OPENCODE_UA,
-            "Content-Type": "application/json",
-        }
+        headers = {"Content-Type": "application/json"}
         if key:
             headers["Authorization"] = "Bearer %s" % key
         req = urllib.request.Request(
-            _OPENCODE_URL + "/chat/completions",
+            "https://api.site/v1/chat/completions",
             data=payload,
             headers=headers,
         )
@@ -306,44 +281,6 @@ def test_opencode_key(name: str, key: str, model: str, timeout: int = 25) -> dic
         return {"ok": True, "tokens": tok}
     except urllib.error.HTTPError as e:
         body = e.read().decode()[:300]
-        return {"ok": False, "status": e.code,
-                "error_type": _error_type_from_exception(e), "body": body}
-    except Exception as e:
-        return {"ok": False, "error": str(e)[:200],
-                "error_type": _error_type_from_exception(e)}
-
-
-def test_fallback_llm(timeout: int = 30) -> dict:
-    """测试 GPT 兜底 Provider（付费，应始终可用）。
-
-    用 llm_client 的 FALLBACK_* 常量，避免重复硬编码。
-    """
-    try:
-        from skills.utils.llm_client import (
-            FALLBACK_KEY_ENV, FALLBACK_BASE_URL, FALLBACK_MODEL,
-        )
-        key = os.environ.get(FALLBACK_KEY_ENV, "").strip()
-        if not key:
-            return {"ok": False, "error_type": "no_key",
-                    "error": f"env {FALLBACK_KEY_ENV} 未配置"}
-        base = FALLBACK_BASE_URL.rstrip("/")
-        endpoint = (f"{base}/chat/completions" if base.endswith("/v1")
-                    else f"{base}/v1/chat/completions")
-        payload = json.dumps({
-            "model": FALLBACK_MODEL,
-            "messages": [{"role": "user", "content": "ok"}],
-            "max_tokens": 3,
-        }).encode()
-        req = urllib.request.Request(
-            endpoint, data=payload,
-            headers={"Authorization": f"Bearer {key}",
-                     "Content-Type": "application/json"},
-        )
-        resp = urllib.request.urlopen(req, timeout=timeout)
-        json.loads(resp.read().decode())
-        return {"ok": True, "model": FALLBACK_MODEL}
-    except urllib.error.HTTPError as e:
-        body = e.read().decode()[:200]
         return {"ok": False, "status": e.code,
                 "error_type": _error_type_from_exception(e), "body": body}
     except Exception as e:
@@ -720,7 +657,7 @@ def run_health_check(project_root: str = ".", logger: logging.Logger = None) -> 
             else:
                 for key_name, key_val in keys:
                     if svc_id == "opencode_llm":
-                        r = test_opencode_key(key_name, key_val, svc_cfg.get("test_model", _OPENCODE_MODEL))
+                        r = test_opencode_key(key_name, key_val, svc_cfg.get("test_model", _TEST_MODEL))
                     elif svc_id == "tavily_search":
                         r = test_tavily_key(key_name, key_val)
                     elif svc_id == "xcrawl":

@@ -4,7 +4,7 @@
 
 ## 项目定位
 
-围绕**即时零售 × 个护美妆**采集公开经营情报，经清洗、评分、摘要后按频率生成报告，以 **HTML 邮件 + MP3 播客** 推送（收件人由 NAS 私有配置管理，不公开），助力品类经营决策。
+围绕**即时零售 × 个护美妆**采集公开经营情报，经清洗、评分、摘要后按频率生成报告，以 **HTML 邮件 + MP3 播客** 推送（收件人 `123399974@qq.com`），助力品类经营决策。
 
 ## 当前架构形态（2026-08 起）
 
@@ -44,9 +44,7 @@ watsons-retail-intel/
 
 ## 文档
 
-**当前方案（2026-10-25）**：系统一直运行在 **NAS Docker + QwenPaw/Python** 中，无迁移需求。Muse 独立实验已于 2026-10-25 按 M0 退役清理完毕：main 的 `muse/` 与 `docs/10` 已删除，Draft PR #1 未合并关闭，远端试验分支保留作历史备份；生产优化由 NAS 内 QwenPaw + **用户已接好的 RightCode「百亿补贴」DeepSeek Flash** 逐阶段实施，用户自行选择模型，不重新接入API或按时段切换。请先读 [11｜NAS架构决策和AIHOT对标](docs/11_20261025_nas_qwenpaw_aihot_architecture_decision.md)，再按 [12｜Muse退役（Muse执行）与NAS优化（QwenPaw从M1开始）](docs/12_20261025_qwenpaw_step_by_step_execution.md) 分工执行。GitHub文档更新**不代表NAS端配置或任务已改变**。
-
-**最新的实现与全流程文档见 [`docs/README.md`](docs/README.md)**，按子系统分篇，全程以真实代码与运行产物为准整理，适合排查问题与制定优化方案。
+**最新的实现与全流程文档见 [`docs/README.md`](docs/README.md)**，按子系统分 8 篇，全程以真实代码与运行产物为准整理，适合排查问题与制定优化方案。
 
 ## 许可
 

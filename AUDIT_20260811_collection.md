@@ -2,6 +2,7 @@
 
 > 范围: 采集(collect) → 补漏(broad_search/tavily_gap) → 富化(enrich) → 合并(merge) → 过滤(filter) → 提取(extract) → 时效(temporal) → 新颖性(novelty) → 评分(score) → 报告(report)
 > 数据基准: 2026-08-08 ~ 08-11 实际运行日志 + 事件池 + 漏斗报告
+> **修复状态: 2026-08-11 已完成 P0-1/P0-2/P1-3/P1-4 代码修复, commit d868a23 (未 push, SSH 阻塞)**
 
 ---
 
@@ -100,10 +101,10 @@
 ---
 
 ## 五、建议修复优先级执行顺序
-1. **P0-1 tavily 711 bug**（5 分钟修完，恢复 tavily_gap 通道）
-2. **P0-2 tophub 停用**（避免每天空转 + 修 cloakbrowser_enrich 防御 bug）
-3. **P1-3 xcrawl 超时降级**（timeout 20s/retry 2 + 连续失败自动停用）
-4. **P1-4 web_monitor 处理**（决定：走全文抓取 or 降线索源 or 停用）
-5. **P1-5 采集词收紧 + filter 泛词直接拒**
-6. **P2-6 filter_merged 增量**、**P2-7 低效源自动停用**
-7. **P2-8 补发机制**（确认 08-08/09 状态）
+1. ✅ **P0-1 tavily 711 bug**（已完成: YAML 加引号 + _load_all_keywords/_match_keywords 类型防御, 验证 349 词全 str）
+2. ✅ **P0-2 tophub 停用**（已完成: 验证码墙快速失败 + cloakbrowser_enrich 空 list 防御）
+3. ✅ **P1-3 xcrawl 超时降级**（已完成: timeout 15s + max_retries 1）
+4. ✅ **P1-4 web_monitor 处理**（已完成: 垂直源跳过标题级 CORE 过滤, 由 filter 全文判断）
+5. ⏳ **P1-5 采集词收紧 + filter 泛词直接拒**（待做: 采集词已较精准, 重点是观察 08-12 实测效果）
+6. ⏳ **P2-6 filter_merged 增量**、**P2-7 低效源自动停用**（待做: 需跨多天数据）
+7. ⏳ **P2-8 补发机制**（待确认 08-08/09 状态）

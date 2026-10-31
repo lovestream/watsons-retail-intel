@@ -32,8 +32,15 @@ from urllib.parse import urlparse
 CST = timezone(timedelta(hours=8))
 REQUEST_DELAY_MIN = 0.8   # 每次scrape之间的最小延迟(秒)
 REQUEST_DELAY_MAX = 1.8   # 每次scrape之间的最大延迟(秒)
-SCRAPE_TIMEOUT = 30        # 单次scrape超时(秒)
-MAX_RETRIES_PER_URL = 1    # 单个URL最大重试次数(不含首次)
+# 2026-10-31 实测：XCrawl /v1/scrape 成功抓取平均 27.6s，而原超时阈值 30s
+# 只留 2.4s 余量，导致 10-27~30 每天出现 19~59 次 ReadTimeout 重试。
+# 提高到 45s（覆盖 P95），并允许环境变量覆盖。
+SCRAPE_TIMEOUT = int(os.environ.get("XCRAWL_SCRAPE_TIMEOUT", "45"))
+# 单 URL 重试：超时类错误重试无意义（服务端慢，不是抖动），改为 0 次快速跳过，
+# 由 CloakBrowser L2 兜底；连接类错误仍走 1 次重试。
+MAX_RETRIES_PER_URL = int(os.environ.get("XCRAWL_MAX_RETRIES", "1"))
+# 域名级熔断：同域名连续失败 N 次后，本轮跳过该域名剩余 URL，避免整轮被拖死
+DOMAIN_FAIL_LIMIT = int(os.environ.get("XCRAWL_DOMAIN_FAIL_LIMIT", "3"))
 
 # 输入文件优先级（按顺序加载，后加载的 URL 被去重跳过）
 INPUT_FILES = [
@@ -397,9 +404,13 @@ def scrape_url(url: str, api_key: str, timeout: int = SCRAPE_TIMEOUT) -> Optiona
         
         logging.debug(f"Scrape {'API' if is_api_error else '内容'} 异常 {url}: {err_type}: {err_str[:120]}")
         
+        # 区分"超时"：服务端慢，重试无意义，直接交给兜底通道
+        is_timeout = ("Timeout" in err_type or "timed out" in err_str.lower()
+                      or "ReadTimeout" in err_type)
         return {
             "_error": True,
             "_error_type": "api_error" if is_api_error else "content_error",
+            "_timeout": is_timeout,
             "_error_msg": f"{err_type}: {err_str[:200]}",
         }
 
@@ -738,6 +749,8 @@ def xcrawl_enrich_articles(
     _key_usage_lock = threading.Lock()
     domain_counts: Counter = Counter()
     _domain_lock = threading.Lock()
+    domain_fail_counts: Dict[str, int] = {}   # 域名连续失败计数（熔断用）
+    timeout_count = [0]                        # 本轮超时次数（统计用）
     
     def _scrape_one(i: int, article: dict):
         """单篇文章抓取（线程安全），返回 (i, enriched_article, status)"""
@@ -758,6 +771,13 @@ def xcrawl_enrich_articles(
             # 标记所有剩余为跳过
             return i, None, "skipped_no_key"
         
+        # 域名熔断：同域名已连续失败多次时跳过，避免拖慢整轮
+        _domain = urlparse(url).netloc.lower()
+        with _domain_lock:
+            if domain_fail_counts.get(_domain, 0) >= DOMAIN_FAIL_LIMIT:
+                logger.info(f"  域名熔断跳过（连续失败 {domain_fail_counts[_domain]} 次）: {_domain}")
+                return i, None, "skipped_domain_circuit"
+
         key_short = _mask_key(api_key)
         with _key_usage_lock:
             key_usage[key_short] = key_usage.get(key_short, 0) + 1
@@ -768,6 +788,13 @@ def xcrawl_enrich_articles(
         if result is None or result.get("_error"):
             is_api = result.get("_error_type") == "api_error" if result else False
             err_msg = result.get("_error_msg", "unknown") if result else "None returned"
+            _is_timeout = bool(result.get("_timeout")) if result else False
+            with _domain_lock:
+                domain_fail_counts[_domain] = domain_fail_counts.get(_domain, 0) + 1
+                if _is_timeout:
+                    timeout_count[0] += 1
+            if _is_timeout:
+                logger.info(f"  超时跳过（交 L2 兜底，不重试）: {url[:70]}")
             if is_api:
                 logger.warning(f"  API错误: {url[:80]} - {err_msg}")
             else:
@@ -935,6 +962,7 @@ def xcrawl_enrich_articles(
     logger.info(f"  跳过(钥匙耗尽): {skipped_count}")
     logger.info(f"  来源统计: {dict(source_counts)}")
     logger.info(f"  域名统计: {dict(domain_counts)}")
+    logger.info(f"  超时跳过: {timeout_count[0]} 篇（已交 L2/其他通道兜底）")
     logger.info(f"  Key 使用: {key_usage}")
     logger.info(f"  输出: {output_file}")
     logger.info("=" * 60)

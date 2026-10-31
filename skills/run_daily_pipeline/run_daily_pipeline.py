@@ -554,23 +554,41 @@ def build_step_args(step: str, project_root: str, date: str,
 
 # ===================== 调用方式 =====================
 
+class StepImportError(RuntimeError):
+    """步骤模块导入/取函数阶段失败（尚未执行业务逻辑，可安全降级重试）。"""
+
+
+class StepExecutionError(RuntimeError):
+    """步骤函数已开始执行后抛异常（可能已产生副作用，禁止整轮重跑）。"""
+
+
 def call_step_by_import(step: str, args: dict) -> dict:
-    """通过 import 调用步骤的主函数。"""
+    """通过 import 调用步骤的主函数。
+
+    关键约定（2026-10-31）：必须区分「导入失败」与「执行失败」。
+    - 导入/取函数失败：业务尚未开始，返回 StepImportError，调用方可安全降级 subprocess；
+    - 函数执行中抛异常：可能已调用 LLM 或写入部分产物，返回 StepExecutionError，
+      调用方**不得**自动整轮重跑，以免重复消耗 LLM 调用。
+    """
     defn = STEP_DEFS[step]
     module_path = defn["module"]
     func_name = defn["function"]
 
     logger.info(f"  调用方式: import {module_path}.{func_name}()")
 
+    import importlib
     try:
-        import importlib
         mod = importlib.import_module(module_path)
         func = getattr(mod, func_name)
-        result = func(**args)
-        return result if result else {"ok": False, "errors": ["步骤返回空结果"]}
     except Exception as e:
-        logger.warning(f"  import 调用失败: {e}")
-        raise
+        raise StepImportError(f"{module_path}.{func_name}: {e}") from e
+
+    try:
+        result = func(**args)
+    except Exception as e:
+        raise StepExecutionError(f"{module_path}.{func_name}() 执行异常: {e}") from e
+
+    return result if result else {"ok": False, "errors": ["步骤返回空结果"]}
 
 
 def call_step_by_subprocess(step: str, args: dict) -> dict:
@@ -665,16 +683,29 @@ def call_step_by_subprocess(step: str, args: dict) -> dict:
 
 
 def call_step(step: str, args: dict) -> dict:
-    """调用步骤主函数，优先 import，失败时 subprocess。"""
+    """调用步骤主函数。
+
+    仅当 **模块导入阶段** 失败时降级 subprocess；
+    若业务函数已开始执行后失败，绝不自动整轮重跑（会重复消耗 LLM 调用、
+    甚至覆盖已完成产物）。此时返回失败结果交由上层判定。
+    """
     try:
         result = call_step_by_import(step, args)
         result["_call_method"] = "import"
         return result
-    except Exception as e:
-        logger.warning(f"  import 失败，尝试 subprocess: {e}")
+    except StepImportError as e:
+        logger.warning(f"  {step} 模块导入失败，降级 subprocess 执行: {e}")
         result = call_step_by_subprocess(step, args)
         result["_call_method"] = "subprocess"
         return result
+    except StepExecutionError as e:
+        logger.error(f"  {step} 执行阶段异常，不自动重跑（避免重复 LLM 调用）: {e}")
+        return {
+            "ok": False,
+            "errors": [str(e)],
+            "execution_failed_after_start": True,
+            "_call_method": "import",
+        }
 
 
 # ===================== 输出校验 =====================

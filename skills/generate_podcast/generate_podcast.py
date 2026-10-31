@@ -194,11 +194,31 @@ LLM_SYSTEM_PROMPT = """你是一位专业的零售行业播客主播，擅长将
 
 ## 核心规则
 1. **所有内容必须基于提供的事件数据**——不得编造事实、数据或事件
-2. **口语化表达**——像一位资深零售顾问在跟你聊天，有观点、有判断、有建议
+2. **说人话**——这是给人"听"的稿子，不是给眼睛"读"的文章
 3. **严格控制在3000-5000中文字符之间**——低于2500字不合格
 4. **去掉技术标注**——event_id、置信度标签一律不出现
 5. **开头格式**：「早安，这里是即时零售×个护美妆经营日报，{date}。」
-6. **结尾格式**：以「今天听完只做三件事」收尾，列出3条最具体的行动项
+6. **结尾格式**：以「今天听完只做三件事。」这句话开头，然后给出行动建议。
+   **条数由证据决定，不要为了凑数编造**：有 3 条扎实的就写 3 条，
+   只有 2 条就写 2 条；每条必须能追溯到今天讲过的某个事件。
+
+## 口播语言规范（最重要，直接决定听感）
+- **一句话只说一件事**。平均句长控制在 30 字以内，超过 40 字的句子必须拆开。
+- **多用短句**。允许 5-15 字的断句，允许"这句很重要"这样的独立短句。
+- **用口语连接词**：而不是书面连接词。
+  写"但是"不要写"然而"；写"因为"不要写"由于"；写"所以"不要写"因此"；
+  写"这个事"不要写"该事项"；写"大概"不要写"约莫"；写"现在"不要写"当前阶段"。
+- **把名词化拆回动词**：不写"进行品类结构的优化调整"，写"把品类结构调整一下"。
+- **禁用的书面词**：底层逻辑、赋能、抓手、闭环、链路、维度、层面、矩阵、
+  生态位、护城河、降本增效、提质增效、结构性、体系化、以及所有"××性""××化"。
+- **必须有对话感**：全篇至少 3 处直接对听众说话，用"你""我们""咱们"。
+  例如："你有没有发现""咱们算一笔账""这事你得盯一下"。
+- **数字要念得出来**：不写"同比+157.3%"，写"同比涨了 157.3%，翻了一倍半还多"。
+- **每段开头给听众一个路标**："先说最重要的这件事。""再看一个平台的变化。"
+
+## 句子自检（写完必做）
+逐句问自己：这句话我会在电话里这么说吗？
+如果不会（太多从句、太长、太书面），就拆成两句短话重写。
 
 ## 口播稿结构
 
@@ -227,14 +247,19 @@ LLM_SYSTEM_PROMPT = """你是一位专业的零售行业播客主播，擅长将
 - 需要警惕的风险 + 明天要追踪什么
 
 ### 结尾：今天听完只做三件事
-- 列出3条最具体、最可执行的行动项
+- 以「今天听完只做三件事。」开头
+- 每条行动项必须包含三要素：**做什么 + 基于今天哪件事 + 怎么判断做成了**
+- 条数按证据给：最多 3 条；证据只够 2 条就写 2 条，不要凑
+- 不允许"加强关注""持续跟进""密切关注"这类无法执行的空话
 
 ## 禁止事项
 - 禁止添加事件数据中没有的数据、数字、事件
 - 禁止使用"据报道""有消息称"等模糊来源
 - 禁止出现任何 Markdown 格式符号：不要用 **加粗**、不要用 # 标题、不要用 --- 分隔线、不要用 - 列表符号。这是纯文本口播稿，直接用文字表达重点
 - 禁止出现 event_id
-- 禁止空洞的套话（"值得关注""需要重视"必须跟具体内容）"""
+- 禁止空洞的套话（"值得关注""需要重视"必须跟具体内容）
+- 禁止长句堆叠：单句超过 40 字视为不合格
+- 禁止书面语体（见上方"口播语言规范"）"""
 
 
 LLM_USER_TEMPLATE = """以下是今天（{date}）的即时零售×个护美妆行业事件数据。请根据这些事件生成一份口播稿。
@@ -254,9 +279,9 @@ LLM_USER_TEMPLATE = """以下是今天（{date}）的即时零售×个护美妆�
 要求：
 1. 严格3000-5000中文字符（低于2500不合格，请充分展开分析）
 2. 对前2-3条核心事件做500-600字/条的5维度深度分析
-3. 自然口语化，业务顾问风格
+3. 说人话：平均句长 30 字以内，超过 40 字的句子必须拆开；至少 3 处用"你/我们/咱们"直接对话
 4. 所有分析必须基于上述事件数据，不得编造
-5. 以「今天听完只做三件事」收尾"""
+5. 以「今天听完只做三件事。」开头收尾；条数按证据给，最多 3 条，不凑数"""
 
 
 NO_SIGNAL_TEMPLATE = """早安，即时零售×个护美妆经营日报，{date}。
@@ -464,6 +489,7 @@ def generate_podcast(
     voice: str = "zh-CN-XiaoxiaoNeural",
     rate: str = "+0%",
     use_llm: bool = True,
+    audio_only: bool = False,
     **kwargs,
 ) -> dict:
     """从事件池直接生成播客（方案C：独立于日报）。
@@ -592,6 +618,44 @@ def generate_podcast(
         len(core_new) == 0 and not has_priority_signal)
     log(f"事件类型: {'无信号' if is_no_signal else f'正常(选材{len(selected)}条, core+new={len(core_new)}条)'}")
 
+    # ── 仅重合成音频（审稿修订后闭环）──
+    # 复用现有口播稿，不再调用 LLM，保证"审稿通过的稿子 == MP3 内容"
+    if audio_only:
+        existing_script = script_file or str(script_dir / f"{date}.md")
+        if not Path(existing_script).exists():
+            msg = f"audio_only 模式找不到口播稿: {existing_script}"
+            log(f"❌ {msg}")
+            return {"ok": False, "date": date, "script_file": existing_script,
+                    "audio_file": "", "script_length": 0, "errors": [msg]}
+        with open(existing_script, "r", encoding="utf-8") as f:
+            script = f.read()
+        if not audio_file:
+            audio_file = str(audio_dir / f"{date}.mp3")
+        Path(audio_file).parent.mkdir(parents=True, exist_ok=True)
+        cn_chars = count_chinese_chars(script)
+        log(f"audio_only: 复用口播稿 {existing_script} ({cn_chars} 字), 重新合成音频")
+        tts_ok = generate_audio(script, audio_file, voice=voice, rate=rate)
+        size = os.path.getsize(audio_file) if tts_ok and os.path.exists(audio_file) else 0
+        if size and size < 10 * 1024:
+            log(f"  ⚠️ 音频过小({size}B)，视为失败")
+            tts_ok = False
+        audio_sha = ""
+        if tts_ok:
+            import hashlib
+            audio_sha = hashlib.sha256(open(audio_file, "rb").read()).hexdigest()
+            log(f"✅ 音频已重新合成: {audio_file} ({size // 1024} KB) sha256={audio_sha[:12]}")
+        result = {
+            "ok": bool(tts_ok), "date": date, "events_file": events_file,
+            "script_file": existing_script, "audio_file": audio_file if tts_ok else "",
+            "script_length": cn_chars, "audio_exists": bool(tts_ok),
+            "audio_size_bytes": size, "audio_sha256": audio_sha,
+            "is_no_signal": False, "llm_used": False, "tts_success": bool(tts_ok),
+            "voice": voice, "audio_only": True, "errors": [] if tts_ok else ["TTS 失败"],
+        }
+        with open(log_dir / "generate_podcast.json", "w", encoding="utf-8") as f:
+            json.dump(result, f, ensure_ascii=False, indent=2)
+        return result
+
     # ── 生成口播稿 ──
     script = ""
     llm_used = False
@@ -661,10 +725,13 @@ def generate_podcast(
     log(f"开始生成音频: voice={voice}, rate={rate}")
     tts_success = generate_audio(script, audio_file, voice=voice, rate=rate)
 
+    audio_sha = ""
     if tts_success:
         audio_size = os.path.getsize(audio_file)
+        import hashlib
+        audio_sha = hashlib.sha256(open(audio_file, "rb").read()).hexdigest()
         log(f"✅ 音频生成成功: {audio_file}")
-        log(f"  音频大小: {audio_size / 1024:.0f} KB")
+        log(f"  音频大小: {audio_size / 1024:.0f} KB sha256={audio_sha[:12]}")
     else:
         log(f"⚠️ 音频生成失败，口播稿已保存")
 
@@ -678,6 +745,7 @@ def generate_podcast(
         "script_length": cn_chars,
         "audio_exists": tts_success,
         "audio_size_bytes": os.path.getsize(audio_file) if tts_success else 0,
+        "audio_sha256": audio_sha,
         "is_no_signal": is_no_signal,
         "llm_used": llm_used,
         "tts_success": tts_success,

@@ -262,7 +262,7 @@ def check_action_items(script: str) -> Tuple[bool, List[str]]:
     
     # 数行动建议条数（匹配 "1. " "2、" "3）" "一、" "第一，" 等格式）
     action_items = re.findall(
-        r'(?:^|\n)\s*(?:[-*]\s+)?(?:第)?(\d+|[一二三四五六七八九])[.、，）\)\s：:]',
+        r'(?:^|\n)\s*(?:[-*]\s+)?(?:第)?(\d+|[一二三四五六七八九])(?:件|条|点)?[.、，）\)\s：:]?',
         ending_section, re.MULTILINE
     )
     # 去重编号
@@ -274,11 +274,80 @@ def check_action_items(script: str) -> Tuple[bool, List[str]]:
             unique_actions.append(a)
     
     action_count = len(unique_actions)
-    if action_count < ACTION_MIN_COUNT:
-        issues.append(f"结尾行动建议不足（{action_count}条 < {ACTION_MIN_COUNT}条）")
+
+    # 2026-10-31：不再强制凑满三条。条数由证据决定，1~3 条均可，
+    # 但每条必须"可执行 + 有依据"（含具体动作词与判据）。
+    if action_count == 0:
+        issues.append("结尾没有可执行的行动建议（'今天听完只做三件事'后无条目）")
+        return False, issues
+    if action_count > 3:
+        issues.append(f"行动建议 {action_count} 条，超过 3 条，通勤收听会记不住")
+        return False, issues
+
+    # 检查每条是否可执行：必须出现具体动作或判据词
+    vague_only = re.compile(
+        r'^(?:加强|持续|密切|重点|进一步)?(?:关注|重视|跟进|留意|注意|跟踪)[。；;，,]?$')
+    actionable = re.compile(
+        r'试|推|上架|下架|调|改|测算|对比|谈判|约|跑|看|查|拉|定|设|建|做|换|补|压|清|'
+        r'锁|抢|铺|分成|%|％|天|周|月|单|店|SKU|口径|指标|目标')
+    weak = []
+    for line in ending_section.splitlines():
+        line = line.strip()
+        if not line or not re.match(r'^(?:[-*]\s*)?(?:第)?(?:\d+|[一二三四五六七八九])(?:件|条|点)?[.、，）\)\s：:]', line):
+            continue
+        body = re.sub(r'^(?:[-*]\s*)?(?:第)?(?:\d+|[一二三四五六七八九])(?:件|条|点)?[.、，）\)\s：:]\s*', '', line)
+        if vague_only.match(body.strip()) or not actionable.search(body):
+            weak.append(body[:40])
+    if weak:
+        issues.append(f"行动建议太空泛（缺具体动作/判据）：{weak[0]}")
         return False, issues
 
     return True, []
+
+
+# ═══════════════════════════════════════════════════════════════
+# 检查3b: 句子是否适合"听"（平均句长 <= 30 字）
+# ═══════════════════════════════════════════════════════════════
+
+# 按"真实停顿"切分：句号/问号/感叹/分号/换行，以及冒号后的列举用逗号再切一层
+SENTENCE_SPLIT = re.compile(r'[。！？!?；;\n]+')
+CLAUSE_SPLIT = re.compile(r'[，,、：:]')
+
+
+def check_sentence_rhythm(script: str) -> Tuple[bool, List[str], dict]:
+    """检查口播稿是否符合"听"的节奏：平均句长 <= 30 字，超长句占比 <= 15%。
+
+    2026-10-31 新增：此前只报"平均 43 字"但没有真正参与通过判定，
+    导致审稿 7/8 仍被当作可接受。现在把它作为硬检查项。
+    """
+    issues = []
+    body = re.sub(r'[\(（][^)）]*[)）]', '', script)  # 去掉括注
+    # 一层：整句；二层：逗号/顿号切出的口语停顿单元。
+    # 听感由"一口气能念多长"决定，因此两层都统计，整句权重更高。
+    sentences = [x.strip() for x in SENTENCE_SPLIT.split(body) if x.strip()]
+    clauses = [c.strip() for x in sentences for c in CLAUSE_SPLIT.split(x) if c.strip()]
+    lens = [len(x) for x in clauses if len(x) > 1]
+    if not lens:
+        return False, ["口播稿没有可识别的完整句子"], {}
+
+    avg = sum(lens) / len(lens)
+    long_ratio = sum(1 for n in lens if n > 40) / len(lens)
+    stats = {"avg_sentence_len": round(avg, 1), "long_sentence_ratio": round(long_ratio, 3),
+             "sentences": len(lens), "max_len": max(lens)}
+
+    if avg > 30:
+        issues.append(f"平均停顿单元 {avg:.1f} 字 > 30 字，听感偏书面")
+    if long_ratio > 0.15:
+        issues.append(f"长停顿单元(>40字)占比 {long_ratio:.0%} > 15%")
+
+    # 口语连接词 / 书面连接词对比
+    spoken = len(re.findall(r'但是|因为|所以|现在|这个事|咱们|你想|你算', script))
+    written = len(re.findall(r'然而|由于|因此|当前阶段|该事项|综上所述|此外|与此同时', script))
+    stats.update({"spoken_connectors": spoken, "written_connectors": written})
+    if written > spoken:
+        issues.append(f"书面连接词({written})多于口语连接词({spoken})")
+
+    return (not issues), issues, stats
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -672,12 +741,31 @@ def review_podcast(
     events = load_events(project_root, date)
     outline = load_podcast_outline(project_root, date)
 
+    # ── 审稿对象指纹：确保"审的稿子"就是"合成了 MP3 的稿子" ──
+    import hashlib
+    script_sha = hashlib.sha256(script.encode("utf-8")).hexdigest() if script else ""
+    audio_sha = ""
+    audio_path = Path(project_root) / "podcasts" / "audio" / f"{date}.mp3"
+    if audio_path.exists():
+        audio_sha = hashlib.sha256(audio_path.read_bytes()).hexdigest()
+    gen_meta = {}
+    gen_json = Path(project_root) / "data" / "logs" / date / "generate_podcast.json"
+    if gen_json.exists():
+        try:
+            gen_meta = json.loads(gen_json.read_text(encoding="utf-8"))
+        except Exception:
+            gen_meta = {}
+    audio_matches_script = bool(audio_sha) and gen_meta.get("audio_sha256") == audio_sha
+
     if not script:
         return {
             "ok": False,
             "sendable_podcast": False,
             "checks": {},
             "retries_used": 0,
+            "script_sha256": "",
+            "audio_sha256": "",
+            "audio_matches_script": False,
             "errors": ["口播稿文件不存在"],
         }
 
@@ -687,8 +775,14 @@ def review_podcast(
     action_ok, action_issues = check_action_items(script)
     novel_count, novel_issues = check_fact_novelty(script, events)
     commute_ok, commute_result = check_commute_fitness(script)
+    rhythm_ok, rhythm_issues, rhythm_stats = check_sentence_rhythm(script)
 
     checks = {
+        "sentence_rhythm": {
+            "passed": rhythm_ok,
+            "issues": rhythm_issues,
+            "stats": rhythm_stats,
+        },
         "orality": {
             "passed": oral_score >= ORALITY_MIN_SCORE,
             "score": oral_score,
@@ -804,6 +898,9 @@ def review_podcast(
         "checks": checks,
         "llm_review": llm_review_result,
         "retries_used": 0,
+        "script_sha256": script_sha,
+        "audio_sha256": audio_sha,
+        "audio_matches_script": audio_matches_script,
         "errors": [],
     }
 
@@ -838,6 +935,10 @@ def run_podcast_review(
         "warnings": [],
         "errors": result.get("errors", []),
         "llm_review_available": bool(result.get("llm_review")),
+        "script_sha256": result.get("script_sha256", ""),
+        "audio_sha256": result.get("audio_sha256", ""),
+        "audio_matches_script": result.get("audio_matches_script", False),
+        "sentence_rhythm": result.get("checks", {}).get("sentence_rhythm", {}).get("stats", {}),
     }
     # 收集所有 issues
     for check_name, check_data in result.get("checks", {}).items():
@@ -873,20 +974,14 @@ def main():
     if args.verbose:
         logger.setLevel(logging.DEBUG)
 
-    result = review_podcast(
+    # 与生产入口共用同一保存逻辑，保证 podcast_review.json 结构一致
+    result = run_podcast_review(
         project_root=args.project_root,
         date=args.date,
         max_retries=args.max_retries,
         force=args.force,
         use_llm=(args.use_llm == "true"),
     )
-
-    # 保存结果
-    log_dir = Path(args.project_root) / "data" / "logs" / args.date
-    log_dir.mkdir(parents=True, exist_ok=True)
-    result_file = log_dir / "podcast_review.json"
-    with open(result_file, "w", encoding="utf-8") as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
 
     print(json.dumps({
         "ok": result["ok"],

@@ -849,6 +849,7 @@ def extract_events(
     output_file: Optional[str] = None,
     use_llm: bool = True,
     max_articles: Optional[int] = None,
+    force: bool = False,
 ) -> dict:
     """事件抽取主函数。"""
     errors: List[str] = []
@@ -1037,10 +1038,13 @@ def extract_events(
         _fallback_model = _model_strategy.get("fallback", "deepseek-flash")
         _skip_thinking = _model_strategy.get("skip_thinking", True)
 
-        # 清除旧 checkpoint
-        clear_checkpoint(_checkpoint_path)
+        # ── 断点续跑（2026-10-31）──
+        # 原实现无条件 clear_checkpoint：任何中断都会让全部文章重跑，
+        # 重复消耗 LLM 调用。现在默认保留已完成的逐篇结果。
+        _resume_enabled = os.environ.get("EXTRACT_RESUME", "1") not in ("0", "false", "False")
+        if force or not _resume_enabled:
+            clear_checkpoint(_checkpoint_path)
 
-        # ── 加载 checkpoint 恢复 ──
         _completed_checkpoints = load_checkpoint(_checkpoint_path)
         if _completed_checkpoints:
             logger.info(f"从 checkpoint 恢复: {len(_completed_checkpoints)} 篇已完成")
@@ -1493,6 +1497,8 @@ def main():
     parser.add_argument("--max-articles", type=int, default=None, help="最大处理文章数")
     parser.add_argument("--verbose", action="store_true", help="启用详细日志")
     parser.add_argument("--test-llm", action="store_true", help="运行 LLM 连通性测试")
+    parser.add_argument("--force", action="store_true",
+                        help="清空 checkpoint 并重抽全部文章（默认断点续跑）")
 
     args = parser.parse_args()
 
@@ -1517,6 +1523,7 @@ def main():
         output_file=args.output_file,
         use_llm=use_llm,
         max_articles=args.max_articles,
+        force=args.force,
     )
 
     print(json.dumps(result, ensure_ascii=False, indent=2))

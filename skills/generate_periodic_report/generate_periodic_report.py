@@ -1233,7 +1233,7 @@ def _send_report_email(report_type, period_label, final_result, recipient,
             report_type=report_type,
             period_label=period_label,
             report_path=final_result.get("report_path", ""),
-            audio_path=final_result.get("audio_path", ""),
+            audio_path=prepared["audio_path"],
             recipient=recipient,
             project_root=project_root,
             dry_run=False,
@@ -1243,6 +1243,9 @@ def _send_report_email(report_type, period_label, final_result, recipient,
     except Exception as exc:
         logger.error("%s 新版邮件发送入口异常: %s", LOG_PREFIX, exc)
         return {"ok": False, "error": "reader_brief_delivery_exception"}
+    result["approved_audio_path"] = prepared["audio_path"]
+    result["approved_audio_sha256"] = prepared["audio_sha256"]
+    result["approved_script_sha256"] = prepared["script_sha256"]
     if result.get("ok"):
         logger.info("%s 经P09复核的新版经营简报已发送", LOG_PREFIX)
     else:

@@ -17,7 +17,7 @@ def _digest(path):
 
 def _voice_text(value):
     # Input is final structured plain text. Strip formatting, not numbers.
-    value = re.sub(r"https?://\\S+", "", str(value or ""))
+    value = re.sub(r"https?://\S+", "", str(value or ""))
     value = re.sub(r"[#*_`]+", "", value)
     return " ".join(value.split()).strip()
 

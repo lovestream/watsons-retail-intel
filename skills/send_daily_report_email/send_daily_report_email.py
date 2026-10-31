@@ -1301,10 +1301,31 @@ def send_periodic_report_email(
             m.get("sendable") is True and
             bool(expected) and hashlib.sha256(blob).hexdigest() == expected
         )
-        if audio_path:
+        if not dry_run:
+            a = m.get("audio") or {}
+            ap = Path(audio_path).resolve() if audio_path else None
+            script_fp = Path(a.get("script_path") or "").resolve()
+            brief_fp = manifest_fp.parent / "reader_brief.json"
+            p09_fp = manifest_fp.parent / "p09_review.json"
+            audit = json.loads(p09_fp.read_text(encoding="utf-8")) if p09_fp.is_file() else {}
+            valid = (valid and m.get("text_review_approved") is True
+                     and m.get("audio_delivery_ready") is True
+                     and (audit.get("gate") or {}).get("state") == "approved"
+                     and a.get("generation") == "from_p09_final_brief"
+                     and a.get("exists") is True
+                     and ap is not None and ap.is_file()
+                     and ap.parent == manifest_fp.parent.resolve()
+                     and script_fp.parent == manifest_fp.parent.resolve()
+                     and script_fp.is_file() and brief_fp.is_file()
+                     and a.get("sha256") == hashlib.sha256(ap.read_bytes()).hexdigest()
+                     and a.get("script_sha256") == hashlib.sha256(script_fp.read_bytes()).hexdigest()
+                     and a.get("source_brief_sha256") == hashlib.sha256(brief_fp.read_bytes()).hexdigest())
+        elif audio_path:
+            # Dry runs may preview text-only HTML, but external audio never
+            # becomes verified by mere file existence.
             ap = Path(audio_path)
             a = m.get("audio") or {}
-            valid = (valid and ap.is_file() and a.get("exists") is True and
+            valid = (valid and ap.is_file() and
                      hashlib.sha256(ap.read_bytes()).hexdigest() == a.get("sha256"))
         if not valid:
             return {"ok": False, "error": "reader_brief_approval_or_hash_mismatch"}

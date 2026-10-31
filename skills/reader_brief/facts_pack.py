@@ -150,7 +150,10 @@ def build_from_synthesis(synth: Dict, period_type: str = "weekly",
                       urls[i] if i < len(urls) else (urls[0] if urls else ""),
                       names[i] if i < len(names) else (names[0] if names else ""),
                       c.get("platforms"), c.get("competitors"), eids,
-                      (c.get("event_types") or [""])[0])
+                      (c.get("event_types") or [""])[0],
+                      date_role="observed")
+            # Cluster first_seen/last_seen are collection times, never
+            # evidence of article publication or event occurrence.
             if len(facts) >= max_facts:
                 break
         if len(facts) >= max_facts:
@@ -198,10 +201,16 @@ def build_from_events(events_dir: str, start: str, end: str,
             continue
         seen.add(key)
         ents = ev.get("entities") or {}
-        occurred = (ev.get("event_occurred_at") or ev.get("occurred_at")
-                    or ev.get("published_at") or day_name)
-        role = "occurred" if occurrences_ok(ev) else "published"
-        _add_fact(facts, text, occurred, ev.get("source_url") or "",
+        event_at = ev.get("event_occurred_at") or ev.get("occurred_at")
+        published_at = ev.get("published_at") or ev.get("article_published_at")
+        if occurrences_ok(ev):
+            when, role = event_at, "occurred"
+        elif _date_of(published_at or ""):
+            when, role = published_at, "published"
+        else:
+            # Directory date only establishes when the pipeline saw the item.
+            when, role = day_name, "observed"
+        _add_fact(facts, text, when, ev.get("source_url") or "",
                   ev.get("source_name") or "",
                   (ents.get("platforms") or [])[:3],
                   (ents.get("companies") or [])[:3],

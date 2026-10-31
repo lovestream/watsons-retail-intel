@@ -65,7 +65,8 @@ def prepare_approved_brief(kind, period, root, synthesis, cross=None,
     # Deliberately ignore old long-report audio_path. Only P09-final brief
     # audio generated inside run_brief may become a production attachment.
     if kind == "weekly":
-        pack = build_from_synthesis(synthesis, "weekly", max_facts=80)
+        pack = build_from_synthesis(synthesis, "weekly", max_facts=80,
+                                    events_dir=str(root / "data" / "events"))
         if not pack.get("facts"):
             return {"approved": False, "error": "no_source_linked_weekly_facts", "period_id": pid}
         # An LLM or secondary report cannot turn a headline into verified source.

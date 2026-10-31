@@ -243,6 +243,35 @@ except Exception:
     _is_non_mainland_subject_event = None
 
 
+# 仅因"跨天重复出现"被日报判为旧闻、但本身是本周持续发酵的事件。
+# 周报覆盖整周，跨天重复属正常现象，不应因此排除。
+# 2026-10-31 实测：W43 有 9 条权重≥2.8、watsons_relevance≥3 的优质事件
+# 仅因 republished_old_fact 被丢，占可用池 26%。
+_ONLY_REPUBLISHED = ("republished_old_fact",)
+
+
+def _is_republished_but_valid(e: dict) -> bool:
+    """本周内、仅因重复被判旧闻、但内容质量达标的事件。"""
+    if not isinstance(e, dict):
+        return False
+    if e.get("priority") != "ARCHIVE":
+        return False
+    dg = " ".join(str(r) for r in (e.get("downgrade_reasons") or []))
+    if not any(k in dg for k in _ONLY_REPUBLISHED):
+        return False
+    # 其他硬降级原因（旧背景/历史回顾/资本市场/港台海外）仍然排除
+    for bad in ("historical_background", "retrospective", "证券", "资本市场",
+                "港台", "海外", "watsons_relevance=0", "watsons_relevance=1"):
+        if bad in dg:
+            return False
+    scores = e.get("scores") or {}
+    if (e.get("weighted_score") or 0) < 2.8:
+        return False
+    if (scores.get("watsons_relevance") or 0) < 3:
+        return False
+    return True
+
+
 def _is_archive_event(e: dict) -> bool:
     """与 generate_periodic_report 相同的归档判断 + 财经噪音二次拦截。"""
     if not isinstance(e, dict):
@@ -250,6 +279,9 @@ def _is_archive_event(e: dict) -> bool:
     if e.get("reject") is True or e.get("rejected") is True:
         return True
     if e.get("priority") == "ARCHIVE":
+        # 周期视角下的豁免：本周内反复出现 ≠ 旧闻
+        if _is_republished_but_valid(e):
+            return False
         return True
     if _is_stock_market_event is not None and _is_stock_market_event(e):
         return True

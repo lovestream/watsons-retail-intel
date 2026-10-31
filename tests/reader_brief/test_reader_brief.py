@@ -139,3 +139,84 @@ def test_period_labels_differ():
     m = render_mobile.render(_brief(period_type="monthly"), _pack(), "monthly", "M")
     y = render_mobile.render(_brief(period_type="yearly"), _pack(), "yearly", "Y")
     assert "周报" in w and "月报" in m and "年报" in y
+
+
+# Delivery-level claim / source / time contracts (2026-10-31).
+def _codes(b, p=None):
+    return {e["code"] for e in schema.validate_brief(
+        b, p or _pack(), "2026-10-29")["errors"]}
+
+
+def test_missing_signal_claim_binding_blocks():
+    b = _brief()
+    del b["signals"][0]["claim_ids"]
+    assert "missing_claim_binding" in _codes(b)
+
+
+def test_valid_but_wrong_claim_id_blocks():
+    p = _pack()
+    another = dict(p["facts"][0], fact_id="F002", claim_id="CL002")
+    another["source"] = {"url": "https://example.com/b", "name": "媒体", "kind": "media"}
+    p["facts"].append(another)
+    b = _brief()
+    b["signals"][0]["claim_ids"] = ["CL002"]
+    assert "claim_fact_mismatch" in _codes(b, p)
+
+
+def test_missing_source_claim_binding_blocks():
+    b = _brief()
+    b["signals"][0]["source_refs"][0].pop("supports_claim_ids")
+    assert "missing_source_claim_binding" in _codes(b)
+
+
+def test_source_claim_url_cross_pair_blocks():
+    p = _pack()
+    p["facts"].append(dict(p["facts"][0], fact_id="F002", claim_id="CL002",
+                           source={"name": "媒体", "url": "https://example.com/b", "kind": "media"}))
+    b = _brief()
+    b["signals"][0]["source_refs"][0]["supports_claim_ids"] = ["CL002"]
+    assert "supports_unbound" in _codes(b, p)
+
+
+def test_missing_competitor_claim_binding_blocks():
+    b = _brief()
+    b["competitor_cards"] = [{"name": "某品牌", "move": "10月20日开展线下活动",
+                              "occurred_on": "2026-10-20", "why_matters": "参考",
+                              "fact_ids": ["F001"],
+                              "source_refs": [{"url": "https://example.com/a",
+                                               "supports_claim_ids": ["CL001"]}]}]
+    assert "missing_claim_binding" in _codes(b)
+
+
+def test_competitor_publication_date_not_occurrence_blocks():
+    p = _pack()
+    p["facts"][0]["date_role"] = "published"
+    p["facts"][0]["date"] = "2026-10-25"
+    # A publication date is not evidence of a completed event on that date.
+    b = _brief()
+    b["competitor_cards"] = [{"name": "某品牌", "move": "某品牌发布预告",
+                              "occurred_on": "2026-10-25", "why_matters": "观察",
+                              "fact_ids": ["F001"], "claim_ids": ["CL001"],
+                              "source_refs": [{"url": "https://example.com/a",
+                                               "supports_claim_ids": ["CL001"]}]}]
+    assert "occurred_date_unbound" in _codes(b, p)
+
+
+def test_period_identity_change_blocks():
+    b = _brief()
+    b["period_start"] = "2026-10-12"
+    assert "period_identity_mismatch" in _codes(b)
+
+
+def test_mixed_completed_and_reported_overclaim_blocks():
+    p = _pack()
+    p["facts"][0]["status"] = "completed"
+    p["facts"].append(dict(p["facts"][0], fact_id="F002", claim_id="CL002",
+                           status="reported"))
+    b = _brief()
+    s = b["signals"][0]
+    s["fact_ids"] = ["F001", "F002"]
+    s["claim_ids"] = ["CL001", "CL002"]
+    s["source_refs"][0]["supports_claim_ids"] = ["CL001", "CL002"]
+    s["fact"] = "项目已落地，覆盖范围需后续核实。"
+    assert "status_overclaim" in _codes(b, p)

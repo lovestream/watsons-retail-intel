@@ -180,12 +180,12 @@ def _second_round(brief, pack, send_at, prior_material, client, pr) -> Tuple[Dic
         "只核对前轮已指出的实质问题是否消除，不重复提出非实质措辞意见。"
         "若仍有主体、状态、日期、数字、来源或跨主体因果的实质错误，"
         "请以可定位的brief_quote/source_excerpt/claim_id/evidence_url指出；"
-        "其他问题标minor，审稿结论approve。\\n"
-        "已修订完整JSON:\\n" + json.dumps(brief, ensure_ascii=False) +
-        "\\n原始证据:\\n" + json.dumps(_evidence(brief, pack), ensure_ascii=False) +
-        "\\n需复核的前轮实质问题:\\n" +
+        "其他问题标minor，审稿结论approve。\n"
+        "已修订完整JSON:\n" + json.dumps(brief, ensure_ascii=False) +
+        "\n原始证据:\n" + json.dumps(_evidence(brief, pack), ensure_ascii=False) +
+        "\n需复核的前轮实质问题:\n" +
         json.dumps(prior_material, ensure_ascii=False) +
-        "\\n确定性门:\\n" + json.dumps(det, ensure_ascii=False)
+        "\n确定性门:\n" + json.dumps(det, ensure_ascii=False)
     )
     res = client.chat(messages=[{"role": "user", "content": user}],
                       system_prompt=pr.system, response_format="json",

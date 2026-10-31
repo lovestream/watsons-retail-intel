@@ -85,6 +85,16 @@ def validate_brief(brief: Dict, pack: Dict, send_at: str,
     errors: List[Dict] = []
     warnings: List[Dict] = []
 
+    # Report identity is a program-owned invariant, not a value that P08/P09
+    # may change during editing or targeted corrections.
+    period = pack.get("period") or {}
+    for key, expected in (("period_type", pack.get("period_type")),
+                          ("period_start", period.get("start")),
+                          ("period_end", period.get("end"))):
+        if expected and brief.get(key) != expected:
+            errors.append(_issue("period_identity_mismatch", "error", key,
+                                 f"期别与来源包不一致，应为 {expected}"))
+
     for key in REQUIRED:
         if key not in brief:
             errors.append(_issue("missing_field", "error", key, "缺少必填字段"))
@@ -130,12 +140,29 @@ def validate_brief(brief: Dict, pack: Dict, send_at: str,
                 errors.append(_issue("p05_topic_not_published", "error", where,
                                      f"引用了 P05 未发布选题的事实: {outside}"))
         cids = item.get("claim_ids") or []
+        # P08's mandatory claim_ids/source_refs cannot be a prompt-only rule:
+        # an omitted or empty list is a delivery-blocking error.
+        if section in ("signals", "competitor_cards"):
+            if "claim_ids" not in item or not isinstance(item.get("claim_ids"), list) or not cids:
+                errors.append(_issue("missing_claim_binding", "error", where,
+                                     "公开事实卡必须显式绑定非空 claim_ids"))
+            if not isinstance(item.get("source_refs"), list) or not item.get("source_refs"):
+                errors.append(_issue("missing_source_binding", "error", where,
+                                     "公开事实卡必须显式绑定来源链接和主张"))
         if cids:
             badc = [x for x in cids if x not in claims]
             if badc:
                 errors.append(_issue("unknown_claim_id", "error", where, f"不存在: {badc}"))
+            elif section in ("signals", "competitor_cards"):
+                # Every CLxxx is program-assigned to exactly one Fxxx.
+                # Merely referring to another valid claim in the pack is not proof.
+                required_cids = {facts[x]["claim_id"] for x in ids}
+                if set(cids) != required_cids:
+                    errors.append(_issue("claim_fact_mismatch", "error", where,
+                                         "claim_ids 与 fact_ids 必须精确一一对应"))
         # 来源链接必须真实存在且属于所引用事实
         own_urls = {facts[x]["source"]["url"] for x in ids}
+        bound = set()
         for j, ref in enumerate(item.get("source_refs") or []):
             url = ref.get("url") or ""
             if not url:
@@ -151,10 +178,27 @@ def validate_brief(brief: Dict, pack: Dict, send_at: str,
                                      f"{where}.source_refs[{j}]",
                                      "链接与所引用事实不匹配"))
             sup = ref.get("supports_claim_ids") or []
-            if sup and any(x not in (item.get("claim_ids") or []) for x in sup):
-                warnings.append(_issue("supports_unbound", "warning",
-                                       f"{where}.source_refs[{j}]",
-                                       "supports_claim_ids 不在本条 claim_ids 中"))
+            if section in ("signals", "competitor_cards"):
+                if not isinstance(ref.get("supports_claim_ids"), list) or not sup:
+                    errors.append(_issue("missing_source_claim_binding", "error",
+                                         f"{where}.source_refs[{j}]",
+                                         "来源必须显式绑定支持的 claim_ids"))
+            if any(x not in (item.get("claim_ids") or []) for x in sup):
+                errors.append(_issue("supports_unbound", "error",
+                                     f"{where}.source_refs[{j}]",
+                                     "来源所支持的 claim_ids 不在本条中"))
+            for cid in sup:
+                if cid in claims:
+                    cf = claims[cid]
+                    if cf["source"]["url"] != url or cf["fact_id"] not in ids:
+                        errors.append(_issue("source_claim_mismatch", "error",
+                                             f"{where}.source_refs[{j}]",
+                                             f"来源链接不能支持主张 {cid}"))
+                    else:
+                        bound.add(cid)
+        if section in ("signals", "competitor_cards") and cids and set(cids) != bound:
+            errors.append(_issue("uncovered_claim_ids", "error", where,
+                                 "至少一条主张未获得所属原始来源的明确绑定"))
 
         joined = _texts(item, text_fields)
         fact_texts = " ".join(facts[x]["text"] for x in ids)
@@ -168,9 +212,32 @@ def validate_brief(brief: Dict, pack: Dict, send_at: str,
             errors.append(_issue("number_not_in_fact", "error", where,
                                  f"数字 {n} 未出现在所引用事实中"))
         statuses = {facts[x]["status"] for x in ids}
-        if statuses <= {"proposed", "reported"} and re.search(OVERCLAIM, joined):
+        # A mixed completed+proposed bundle must not launder the proposed
+        # event into a completed one merely because another cited fact occurred.
+        if statuses & {"proposed", "reported"} and re.search(OVERCLAIM, joined):
+            # Treat this as a conservative block requiring source restructuring.
             errors.append(_issue("status_overclaim", "error", where,
-                                 "事实为拟推进/媒体披露，正文却写成已落地"))
+                                 "引用含拟推进/仅报道事项，不得整体写成已落地"))
+        if section == "competitor_cards":
+            occurred_text = str(item.get("occurred_on") or "").strip()
+            if occurred_text:
+                event_date = parse_date(occurred_text, today.year)
+                if not event_date:
+                    errors.append(_issue("invalid_occurred_on", "error", where,
+                                         "事件发生日无法解析；不得以发文日或抓取日替代"))
+                else:
+                    # A reported/published date is not an event occurrence date.
+                    # Only an original fact with occurrence semantics or an
+                    # explicit matching date within its factual text can support it.
+                    supported = any(
+                        (facts[x].get("date_role") == "occurred" and
+                         facts[x].get("date") == event_date.isoformat()) or
+                        parse_date(facts[x].get("text", ""), today.year) == event_date
+                        for x in ids
+                    )
+                    if not supported:
+                        errors.append(_issue("occurred_date_unbound", "error", where,
+                                             "事件发生日期未在主张事实中得到支持"))
         if check_dates:
             d = parse_date(joined, today.year)
             if d and d < today:

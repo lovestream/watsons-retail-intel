@@ -57,6 +57,8 @@ def main(argv=None) -> int:
     ap.add_argument("--topic-plan-in", default="")
     ap.add_argument("--previous-fingerprints", default="")
     ap.add_argument("--audio-file", default="")
+    ap.add_argument("--generate-audio", action="store_true",
+                    help="Generate MP3 synchronously from the final P09-approved brief")
     ap.add_argument("--outdir", required=True)
     ap.add_argument("--draft", action="store_true")
     a = ap.parse_args(argv)
@@ -134,16 +136,30 @@ def main(argv=None) -> int:
         state = "hold_for_review"
 
     audio_note, audio_meta = "", {"path": "", "exists": False}
-    if a.audio_file:
+    if a.generate_audio:
+        if a.audio_file:
+            print("ERROR: --generate-audio 与 --audio-file 不能混用", file=sys.stderr)
+            return 3
+        if state == "approved":
+            from skills.reader_brief.audio import generate
+            # The audio must be generated AFTER any P09 correction has been
+            # persisted to reader_brief.json.
+            audio_meta = generate(brief, outdir, Path(__file__).resolve().parents[2])
+            if not audio_meta.get("exists"):
+                logger.error("音频生成或验证失败: %s", audio_meta)
+                state = "hold_for_review"
+                draft_note = "P09文字审稿完成，但最终稿口播音频未通过交付门"
+            else:
+                audio_note = f"附本期口播音频（sha256 {audio_meta['sha256'][:12]}）"
+    elif a.audio_file:
+        # Preview compatibility only. External MP3 has no proof it narrates
+        # the P09-approved brief, and cannot satisfy the production mail gate.
         p = Path(a.audio_file)
-        if p.exists() and p.stat().st_size > 0:
-            sha = _sha256_file(str(p))
-            audio_meta = {"path": str(p), "exists": True, "sha256": sha,
-                          "bytes": p.stat().st_size}
-            audio_note = f"附本期口播音频（sha256 {sha[:12]}）"
-        else:
-            audio_meta = {"path": str(p), "exists": False}
-            logger.warning("音频文件不存在或为空，HTML 不写附音频声明")
+        audio_meta = {"path": str(p), "exists": p.is_file() and p.stat().st_size > 0,
+                      "generation": "external_unbound_preview"}
+        if audio_meta["exists"]:
+            audio_meta.update(sha256=_sha256_file(str(p)), bytes=p.stat().st_size)
+        logger.warning("外部音频不保证与P09最终稿一致，禁止认定为可发音频")
 
     html = render(brief, pack, brief.get("period_type"), brief.get("period_start"),
                   brief.get("period_end"), audio_note=audio_note,
@@ -166,12 +182,16 @@ def main(argv=None) -> int:
         "p05": plan.get("_meta"),
         "p05_rejected_topics": plan.get("rejected_topics") or [],
         "p08": {k: v for k, v in emeta.items() if k != "first_pass"},
-        "p09": {"state": state, "decision": gate.get("decision"),
+        "p09": {"state": gate.get("state") or gate.get("status"),
+                "decision": gate.get("decision"),
                 "rounds": rmeta.get("rounds"),
                 "degraded": bool(rmeta.get("degraded")),
                 "prompt_version": rmeta.get("prompt_version"),
                 "model": rmeta.get("model")},
         "audio": audio_meta,
+        "text_review_approved": (gate.get("state") or gate.get("status")) == "approved",
+        "audio_delivery_ready": bool(audio_meta.get("exists") and
+                                     audio_meta.get("generation") == "from_p09_final_brief"),
         "html_sha256": hashlib.sha256(html.encode()).hexdigest(),
         "generated_at": datetime.now().isoformat(timespec="seconds"),
     }

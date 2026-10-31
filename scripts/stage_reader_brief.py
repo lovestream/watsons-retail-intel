@@ -26,6 +26,8 @@ def main():
     p.add_argument("--month", default="")
     p.add_argument("--audio-file", default="")
     a = p.parse_args()
+    if a.audio_file:
+        p.error("--audio-file 旁路音频已禁用：本命令只能从P09最终稿同步生成MP3")
     root = str(Path(a.root).resolve())
     if a.period_type == "weekly":
         if not a.start or not a.end:
@@ -54,7 +56,7 @@ def main():
                           "coverage": coverage}, ensure_ascii=False))
         return 2
     result = prepare_approved_brief(a.period_type, period, root, synthesis,
-                                    cross=cross, audio_path=a.audio_file)
+                                    cross=cross)
     result["smtp_sent"] = False
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result.get("approved") else 2

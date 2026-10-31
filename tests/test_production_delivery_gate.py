@@ -109,7 +109,8 @@ class MailSenderGate(unittest.TestCase):
         with mock.patch.dict(os.environ, {"WATSONS_PERIODIC_MAIL_MODE": "reader_brief"}):
             with mock.patch.object(sender, "_send_email", side_effect=AssertionError("SMTP forbidden")):
                 r = sender.send_periodic_report_email(**self.args)
-        self.assertEqual(r["error"], "required_audio_missing_or_invalid")
+        # An unbound/missing MP3 fails the manifest provenance gate BEFORE SMTP.
+        self.assertEqual(r["error"], "reader_brief_approval_or_hash_mismatch")
 
     def test_dry_run_uses_approved_html_never_legacy_markdown(self):
         observed = {}
@@ -123,6 +124,56 @@ class MailSenderGate(unittest.TestCase):
         self.assertTrue(r["ok"])
         self.assertIn("ONLY_APPROVED_P09_HTML", observed["html_body"])
         self.assertNotIn("SHOULD_NOT_APPEAR_IN_SENT_HTML", observed["html_body"])
+
+
+
+
+class AudioFromApprovedFinalBrief(unittest.TestCase):
+    def test_audio_script_uses_only_final_p09_brief_not_pre_review(self):
+        from skills.reader_brief.audio import build_script
+        before = {"period_type": "weekly", "title": "旧标题",
+                  "one_line_takeaway": "错误的旧结论",
+                  "signals": [{"headline": "旧信号", "fact": "旧数字", "business_impact": "旧行动"}],
+                  "priority_actions": [], "watch_items": [], "competitor_cards": []}
+        after = dict(before)
+        after.update(title="修订后标题", one_line_takeaway="有证据的最终结论",
+                     signals=[{"headline": "最终信号", "fact": "真实事实",
+                               "business_impact": "有条件推断"}])
+        spoken = build_script(after)
+        self.assertIn("修订后标题", spoken)
+        self.assertIn("真实事实", spoken)
+        self.assertNotIn("错误的旧结论", spoken)
+        self.assertNotIn("旧数字", spoken)
+
+    def test_sidecar_mp3_cannot_pass_smtp_on_hash_alone(self):
+        # A byte-identical MP3 may narrate a previous draft; without a
+        # source_brief_sha256+script_sha256 it must not satisfy formal sending.
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            html = root / "brief.html"
+            html.write_text("<html>approved</html>", encoding="utf-8")
+            report = root / "report.md"
+            report.write_text("archive", encoding="utf-8")
+            audio = root / "old-sidecar.mp3"
+            audio.write_bytes(b"ID3" + b"x" * 2048)
+            manifest = root / "manifest.json"
+            manifest.write_text(json.dumps({
+                "period_type": "weekly", "delivery_state": "approved",
+                "sendable": True, "html_sha256": hashlib.sha256(html.read_bytes()).hexdigest(),
+                "audio": {"exists": True, "path": str(audio),
+                          "sha256": hashlib.sha256(audio.read_bytes()).hexdigest()},
+            }), encoding="utf-8")
+            args = dict(report_type="weekly", period_label="2026-W43",
+                        report_path=str(report), audio_path=str(audio),
+                        recipient="test@example.invalid", project_root=td,
+                        approved_brief_html_path=str(html),
+                        approved_brief_manifest_path=str(manifest))
+            with mock.patch.dict(os.environ, {"WATSONS_PERIODIC_MAIL_MODE": "reader_brief"}):
+                with mock.patch.object(sender, "_setup_logger", return_value=logging.getLogger("tt")):
+                    with mock.patch.object(sender, "_send_email",
+                                           side_effect=AssertionError("SMTP forbidden")):
+                        result = sender.send_periodic_report_email(**args)
+            self.assertEqual(result.get("error"), "reader_brief_approval_or_hash_mismatch")
 
 
 if __name__ == "__main__":

@@ -90,7 +90,7 @@ prompts:
     - topic_plan_json
     - verified_internal_capabilities_json
     max_tokens: 4096
-    temperature: 0.3
+    temperature: 0.1
   P09:
     title: 邮件事实一致性复核
     file: docs/prompts/09_reader_claim_checker.md
@@ -102,7 +102,7 @@ prompts:
     - reader_brief_json
     - selected_claim_evidence_json
     max_tokens: 3072
-    temperature: 0.1
+    temperature: 0.0
   P10:
     title: 周/月/年播客口播
     file: docs/prompts/10_periodic_podcast_writer.md

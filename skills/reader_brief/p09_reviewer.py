@@ -16,6 +16,7 @@ from skills.utils.llm_client import get_llm_client
 from skills.utils.prompt_registry import render
 from skills.reader_brief import schema
 from skills.reader_brief.facts_pack import fact_index
+from skills.reader_brief.issue_policy import partition_issues
 
 logger = logging.getLogger(__name__)
 
@@ -59,138 +60,161 @@ def _evidence(brief: Dict, pack: Dict) -> List[Dict]:
 
 def review(brief: Dict, pack: Dict, send_at: str,
            deterministic: Optional[Dict] = None) -> Tuple[Dict, Dict]:
-    """返回 (gate, meta)。gate: {status: pass|revise_applied|block, ...}"""
+    """Bounded P09: only material, source-anchored errors block delivery.
+
+    No more than two P09 calls per brief. Unverifiable major issues are HOLD,
+    not blindly accepted or retried until the model happens to approve.
+    """
     det = deterministic or schema.validate_brief(brief, pack, send_at)
     det_errors = det.get("errors") or []
-    pr = render("P09",
-                reader_brief_json=brief,
-                selected_claim_evidence_json=_evidence(brief, pack),
-                deterministic_validation_findings_json={
-                    "errors": det["errors"], "warnings": det["warnings"]})
+    if det_errors:
+        return {"state": "blocked", "status": "blocked",
+                "decision": "deterministic_errors", "issues": [],
+                "det_errors": det_errors}, {
+                    "prompt": "P09", "rounds": 0, "deterministic": det}
+    pr = render(
+        "P09",
+        reader_brief_json=brief,
+        selected_claim_evidence_json=_evidence(brief, pack),
+        deterministic_validation_findings_json={
+            "errors": det.get("errors") or [],
+            "warnings": det.get("warnings") or [],
+        })
     client = get_llm_client()
     client.timeout = max(int(getattr(client, "timeout", 180)), 300)
     res = client.chat(messages=[{"role": "user", "content": pr.user}],
                       system_prompt=pr.system, response_format="json",
                       temperature=pr.temperature, max_tokens=pr.max_tokens)
-    review_json = res.get("parsed") if res.get("ok") else None
+    rj = res.get("parsed") if res.get("ok") else None
     meta = {"prompt": "P09", "prompt_version": pr.version,
             "model": res.get("model"), "rounds": 1,
             "deterministic": det}
-    if not isinstance(review_json, dict):
-        # 模型不可用 → fail-closed：任何程序门错误 blocked；否则 hold_for_review。
-        # 绝不把"没审"当成"已审"。
-        meta["degraded"] = True
-        meta["error"] = (res.get("error") or "")[:200]
-        if det_errors:
-            return {"state": "blocked", "status": "blocked",
-                    "decision": "deterministic_errors",
-                    "review": None, "degraded": True, "issues": [],
-                    "det_errors": det_errors,
-                    "reason": (res.get("error") or "")[:160]}, meta
+    if not isinstance(rj, dict):
+        meta.update({"degraded": True,
+                     "error": (res.get("error") or "")[:200]})
         return {"state": "hold_for_review", "status": "hold_for_review",
-                "decision": "p09_unavailable", "review": None,
-                "degraded": True, "issues": [],
-                "reason": (res.get("error") or "")[:160]}, meta
+                "decision": "p09_unavailable", "review": None, "issues": [],
+                "degraded": True}, meta
 
-    decision = str(review_json.get("decision") or "").lower()
-    issues = review_json.get("issues") or []
+    decision = str(rj.get("decision") or "").lower()
+    issues = rj.get("issues")
     if decision not in ("approve", "revise", "block") or not isinstance(issues, list):
+        meta["degraded"] = True
         return {"state": "hold_for_review", "status": "hold_for_review",
-                "decision": "invalid_p09_response"}, meta
-    meta["review"] = review_json
-    meta["raw_reviews"] = [review_json]
+                "decision": "invalid_p09_response", "review": rj}, meta
 
-    critical = [i for i in issues if str(i.get("severity")).lower() == "critical"]
-    hard_errors = [e for e in det["errors"] if e["code"] in CRITICAL_CODES]
-    if decision == "block" or critical or hard_errors or det_errors:
-        return {"state": "blocked", "status": "blocked",
-                "decision": decision or "block",
-                "review": review_json, "issues": critical or issues,
-                "det_errors": hard_errors or det_errors}, meta
+    split = partition_issues(issues, brief, pack)
+    meta.update({"review": rj, "raw_reviews": [rj],
+                 "issue_policy": {"material": len(split["material"]),
+                                  "advisory": len(split["advisory"]),
+                                  "ungrounded_material": len(split["ungrounded_material"])}})
+    if split["ungrounded_material"]:
+        # A major claim without exact brief+source grounding may be a real
+        # factual error OR an overzealous reviewer. Without proof, no auto-send.
+        meta["unverifiable_findings"] = split["ungrounded_material"]
+        return {"state": "hold_for_review", "status": "hold_for_review",
+                "decision": "unverifiable_material_findings",
+                "review": rj, "issues": issues}, meta
 
-    if any(str(i.get("severity")).lower() == "major" for i in issues) and not review_json.get("suggested_replacements"):
-        return {"state": "blocked", "status": "blocked",
-                "decision": "major_issues_unfixed", "issues": issues}, meta
-
-    if decision == "revise" or review_json.get("suggested_replacements"):
-        fixed, applied = schema.apply_replacements(
-            brief, review_json.get("suggested_replacements") or [])
-        after = schema.validate_brief(fixed, pack, send_at)
-        meta["applied_replacements"] = applied
-        meta["post_revise"] = after
-        if not after["pass"]:
-            return {"state": "blocked", "status": "blocked",
-                    "decision": "revise_rejected",
-                    "review": review_json, "issues": issues,
-                    "det_errors": after["errors"]}, meta
-        unresolved = [i for i in issues
-                      if str(i.get("severity")).lower() in ("critical", "major")
-                      and str(i.get("location") or "") not in applied]
-        meta["unresolved_major"] = unresolved
-        if unresolved:
-            return {"state": "blocked", "status": "blocked",
-                    "decision": "revise_incomplete",
-                    "review": review_json, "issues": unresolved,
-                    "applied": applied}, meta
-        if applied and _still_major(issues):
-            gate2, meta2 = _second_round(fixed, pack, send_at, issues, client, pr)
-            meta["rounds"] = 2
-            meta["second_round"] = meta2
-            if meta2.get("review"):
-                meta.setdefault("raw_reviews", []).append(meta2["review"])
-            if gate2.get("status") != "approved":
-                return gate2, meta
+    if not split["material"]:
+        # Wording, nonmaterial precision and stylistic requests are advisory
+        # even when the model mistakenly chooses revise/block.
+        if decision == "block" and not issues:
+            return {"state": "hold_for_review", "status": "hold_for_review",
+                    "decision": "unexplained_block", "review": rj}, meta
         return {"state": "approved", "status": "approved",
-                "decision": "revise", "review": review_json,
-                "issues": issues, "applied": applied, "brief": fixed}, meta
+                "decision": "approve", "review": rj, "issues": issues,
+                "advisory_only": bool(issues)}, meta
 
+    # There is at least one material, traceable factual claim defect.
+    if decision == "approve":
+        return {"state": "hold_for_review", "status": "hold_for_review",
+                "decision": "review_conflicts_with_material_findings",
+                "review": rj, "issues": issues}, meta
+
+    replacements = rj.get("suggested_replacements") or []
+    if not isinstance(replacements, list) or not replacements:
+        return {"state": "blocked", "status": "blocked",
+                "decision": "material_errors_no_replacement",
+                "review": rj, "issues": issues}, meta
+
+    fixed, applied = schema.apply_replacements(brief, replacements)
+    meta["applied_replacements"] = applied
+    after = schema.validate_brief(fixed, pack, send_at)
+    meta["post_revise"] = after
+    if not after["pass"]:
+        return {"state": "blocked", "status": "blocked",
+                "decision": "revised_deterministic_errors",
+                "review": rj, "det_errors": after["errors"]}, meta
+    unresolved = [
+        obj["issue"] for obj in split["material"]
+        if str(obj["issue"].get("location") or "") not in applied
+    ]
+    if unresolved:
+        return {"state": "blocked", "status": "blocked",
+                "decision": "material_issue_without_applied_fix",
+                "review": rj, "issues": unresolved}, meta
+
+    # Exactly one revision pass, then a second P09 call. No third review.
+    gate2, detail2 = _second_round(fixed, pack, send_at, split["material"],
+                                    client, pr)
+    meta.update({"rounds": 2, "second_round": detail2})
+    if detail2.get("review"):
+        meta.setdefault("raw_reviews", []).append(detail2["review"])
+    if gate2["state"] != "approved":
+        return gate2, meta
     return {"state": "approved", "status": "approved",
-            "decision": "approve", "review": review_json,
-            "issues": issues}, meta
+            "decision": "revise", "review": rj,
+            "issues": issues, "applied": applied, "brief": fixed}, meta
 
 
-def _still_major(issues) -> bool:
-    return any(str(i.get("severity")).lower() in ("critical", "major")
-               for i in issues)
-
-
-def _second_round(brief, pack, send_at, issues, client, pr) -> Tuple[Dict, Dict]:
-    """Independently reassess the ACTUAL revised brief, not the original pr.user.
-
-    A second model response requesting further revisions is not an approval.
-    """
+def _second_round(brief, pack, send_at, prior_material, client, pr) -> Tuple[Dict, Dict]:
+    """Review the final edited JSON, not the old draft; stop after this call."""
     det = schema.validate_brief(brief, pack, send_at)
     if not det["pass"]:
         return {"state": "blocked", "status": "blocked",
                 "decision": "second_round_deterministic_errors",
                 "det_errors": det["errors"]}, {"deterministic": det}
     user = (
-        "仅审阅下面的【已修订简报】，不要审阅上一版。"
-        "下列证据是唯一可用的原始主张，若仍有major/critical问题必须block。"
-        "只有完全正确时 decision=approve；不要直接提出第三轮修订。\n"
-        "已修订简报JSON:\n" + json.dumps(brief, ensure_ascii=False) +
-        "\n来源事实与证据:\n" + json.dumps(_evidence(brief, pack), ensure_ascii=False) +
-        "\n上一轮需修复问题（只用来检查是否解决）:\n" +
-        json.dumps(issues, ensure_ascii=False) +
-        "\n确定性校验:\n" + json.dumps(det, ensure_ascii=False)
+        "这是第2次，也是最后一次事实审稿。不得引入第三轮修改。"
+        "只核对前轮已指出的实质问题是否消除，不重复提出非实质措辞意见。"
+        "若仍有主体、状态、日期、数字、来源或跨主体因果的实质错误，"
+        "请以可定位的brief_quote/source_excerpt/claim_id/evidence_url指出；"
+        "其他问题标minor，审稿结论approve。\n"
+        "已修订完整JSON:\n" + json.dumps(brief, ensure_ascii=False) +
+        "\n原始证据:\n" + json.dumps(_evidence(brief, pack), ensure_ascii=False) +
+        "\n需复核的前轮实质问题:\n" +
+        json.dumps(prior_material, ensure_ascii=False) +
+        "\n确定性门:\n" + json.dumps(det, ensure_ascii=False)
     )
     res = client.chat(messages=[{"role": "user", "content": user}],
                       system_prompt=pr.system, response_format="json",
                       temperature=0.0, max_tokens=pr.max_tokens)
     rj = res.get("parsed") if res.get("ok") else None
-    if not isinstance(rj, dict):
+    if not isinstance(rj, dict) or not isinstance(rj.get("issues"), list) or str(
+            rj.get("decision") or "").lower() not in ("approve", "block", "revise"):
         return {"state": "hold_for_review", "status": "hold_for_review",
-                "decision": "second_round_failed"}, {}
-    findings = rj.get("issues") or []
-    if (str(rj.get("decision")).lower() != "approve" or
-            not isinstance(findings, list) or any(
-                str(item.get("severity")).lower() in ("critical", "major")
-                for item in findings if isinstance(item, dict))):
+                "decision": "second_round_unavailable_or_invalid"}, {}
+    split = partition_issues(rj["issues"], brief, pack)
+    detail = {"review": rj, "issue_policy": {
+        "material": len(split["material"]),
+        "advisory": len(split["advisory"]),
+        "ungrounded_material": len(split["ungrounded_material"]),
+    }}
+    if split["ungrounded_material"]:
+        return {"state": "hold_for_review", "status": "hold_for_review",
+                "decision": "second_round_unverifiable",
+                "issues": rj["issues"], "review": rj}, detail
+    if split["material"]:
         return {"state": "blocked", "status": "blocked",
-                "decision": "second_round_unresolved", "review": rj,
-                "issues": findings}, {"review": rj}
+                "decision": "second_round_material_unresolved",
+                "issues": rj["issues"], "review": rj}, detail
+    if rj["decision"] == "block" and not rj["issues"]:
+        return {"state": "hold_for_review", "status": "hold_for_review",
+                "decision": "second_round_unexplained_block"}, detail
     return {"state": "approved", "status": "approved",
-            "decision": "approve", "review": rj}, {"review": rj}
+            "decision": "approve", "review": rj,
+            "advisory_only": bool(rj["issues"])}, detail
 
 STATE_ZH = {"approved": "已通过（本批次可发送）",
             "hold_for_review": "暂缓（P09 未完成，需人工复核后放行）",

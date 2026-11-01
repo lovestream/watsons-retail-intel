@@ -132,3 +132,11 @@ priority / title / source，外加 3 个人工填写列。
 
 PR #8 保持 Draft；PR #2/#4/#6 未合并；main、生产 Cron、历史账本、邮件设置均未修改；
 正式邮件 hold；未回填任何历史数据。
+
+## 8. 2026-11-01后续静态复审：来源及跨日重复纠偏（独立候选、未验收）
+
+- 本项目只读复核发现：merge阶段`seen_urls`只覆盖当次采集；event_novelty依赖event_title和fact文本且文本变化可能直接写为新delta；periodic_synthesis原用重复`event_count`加高置信度，并将first/last两日误作days_active。
+- 已冻结来源评价政策和跨日事件身份：[`docs/design/SOURCE-QUALITY-AND-CROSSDAY-DEDUPE-ACCEPTANCE-2026-11-01.md`](../../design/SOURCE-QUALITY-AND-CROSSDAY-DEDUPE-ACCEPTANCE-2026-11-01.md)。**评价以经核实的独有新增事实为准，不以source main通过篇数为准。**
+- PR #8后续隔离候选增加周期事实包的business_scope再检查；提高confidence以独立出版社域名数（严格说仍只是机器近似值）代替重复event_count；新增跨日重复及周/月拒放回归用例。
+- **不得把上述候选代码写成NAS验收全绿**：该追加变更未执行真487/629条及37+104组事件的完整回放，亦未实施持久化article ledger和canonical_event_id。菜鸟23次仍必须作为端到端跨日去重的红线反例，未修复历史事件本身。
+- 后续source/crawler调整只准用隔离配置验证：`rsshub_36kr_search_instant_retail`10/6、`cloakbrowser_cls_instant_retail`153/0等原始数据不代表独有有效报道；先计算去重后边际贡献。主线、Cron、原始账本、SMTP仍不动，正式邮件hold。

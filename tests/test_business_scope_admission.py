@@ -221,3 +221,30 @@ def test_no_original_article_action_not_accepted_merely_by_llm_claim():
     )
     assert classify_business_scope(invented, event_level=True)["decision"] == "ACCEPT"
     assert "收购" not in article["title"] + article["summary"]
+
+
+
+def test_user_curated_contextual_case_survives_only_when_linked_event_proves_it(tmp_path):
+    from skills.reader_brief import facts_pack
+    events_dir = tmp_path / "2026-10-28"
+    events_dir.mkdir()
+    (events_dir / "events_analyzed.json").write_text(json.dumps({
+        "events": [{
+            "event_id": "CURATED1",
+            "event_title": "山姆、奥乐齐、盒马掘金“县级”市场",
+            "source_name": "零售圈",
+            "published_at": "2026-10-28",
+        }]
+    }, ensure_ascii=False), encoding="utf-8")
+    synth = {
+        "period": {"start": "2026-10-26", "end": "2026-11-01"},
+        "all_clusters": [
+            {"event_ids": ["CURATED1"], "facts": ["山姆、奥乐齐、盒马掘金“县级”市场"],
+             "source_urls": ["https://example.com/retail"], "sources": ["零售圈"]},
+            {"event_ids": ["UNAPPROVED"], "facts": ["山姆、奥乐齐、盒马掘金“县级”市场"],
+             "source_urls": ["https://example.com/unapproved"], "sources": ["零售圈"]},
+        ],
+    }
+    pack = facts_pack.build_from_synthesis(synth, events_dir=str(tmp_path))
+    assert len(pack["facts"]) == 1, pack
+    assert pack["facts"][0]["event_ids"] == ["CURATED1"]

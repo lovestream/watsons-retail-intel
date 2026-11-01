@@ -822,8 +822,17 @@ def temporal_fact_validation(
             ) else ""
             content_dates = extract_content_dates(text_for_dates, now, article_anchor)
 
-            # 4. 事件时间字段
-            temporal = validate_event_times(event, sanity, content_dates, now)
+            # 4. Prove the supposed source quote belongs to this article.
+            # A model-written sentence alone is not external evidence; missing
+            # fulltext is not a reason to fabricate an occurred date.
+            original_text = article.get("content") or article.get("article_content") or ""
+            quote = event.get("evidence_text") or ""
+            time_candidate = dict(event)
+            time_candidate["evidence_verified"] = bool(
+                original_text and isinstance(quote, str) and quote
+                and quote in original_text
+            )
+            temporal = validate_event_times(time_candidate, sanity, content_dates, now)
 
             # 5. 账本比对（用于分类）
             cluster_key = generate_cluster_key(event)
@@ -848,6 +857,7 @@ def temporal_fact_validation(
             updated["event_time_confidence"] = temporal["event_time_confidence"]
             updated["temporal_evidence"] = temporal["temporal_evidence"]
             updated["temporal_issues"] = temporal["temporal_issues"]
+            updated["temporal_evidence_verified"] = time_candidate["evidence_verified"]
             updated["content_dates"] = temporal["content_dates"]
             updated["historical_date_ratio"] = temporal["historical_date_ratio"]
             updated["is_retrospective"] = freshness["fact_freshness_status"] in (

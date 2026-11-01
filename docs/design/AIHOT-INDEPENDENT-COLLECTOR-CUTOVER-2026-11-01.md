@@ -81,7 +81,7 @@ python3 skills/aihot_bridge/aihot_bridge.py \
   --as-of 2026-10-31 \
   --write-shadow --output-dir /tmp/watsons-aihot-shadow
 ```
-`tests/fixtures/aihot_articles.json`需要真实匿名化样本，当前尚未提交，以免把虚构新闻伪装成生产事实；实际离线契约测试在`tests/test_aihot_bridge.py`内部构造内存夹具。
+`tests/fixtures/aihot_articles.json`已提交，仅含明确标记为**合成测试**的`example.invalid`域名和虚拟文章，绝不是生产事实；实际契约测试也使用`tests/test_aihot_bridge.py`的合成内存数据。可进一步运行：`python3 scripts/preview_aihot_scope_shadow.py /tmp/watsons-aihot-shadow/raw_articles_all.json`，检查入口硬门的main/reference/reject分类。
 
 ### 连接AIHOT PG的只读影子导出
 

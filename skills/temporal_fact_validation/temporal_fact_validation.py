@@ -31,6 +31,9 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+from skills.temporal_fact_validation.date_contract import (
+    exact_day, normalize_precision, trustworthy_occurred_day,
+)
 
 _PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -300,125 +303,88 @@ def extract_content_dates(
     now: Optional[datetime] = None,
     article_date: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """从正文/事实提取所有明确日期与相对时间。
+    """Extract date mentions without guessing which event they belong to.
 
-    Returns:
-        {
-          "absolute_dates": [datetime 列表],
-          "relative_dates": [datetime 列表],
-          "campaign_refs": [str],
-          "total_mentions": int,
-          "historical_mentions": int,
-          "recent_mentions": int,
-          "historical_date_ratio": float,
-          "oldest_date": str,
-          "newest_date": str,
-        }
+    Relative dates are never anchored to pipeline run time. Only an explicitly
+    supplied, trustworthy original article publication date may resolve them.
     """
     if now is None:
         now = _now_cst()
-    if not text:
-        return {
-            "absolute_dates": [], "relative_dates": [], "campaign_refs": [],
-            "total_mentions": 0, "historical_mentions": 0, "recent_mentions": 0,
-            "historical_date_ratio": 0.0, "oldest_date": "", "newest_date": "",
-        }
-
+    text = text or ""
+    anchor = parse_flexible_date(article_date) if article_date else None
     abs_dates: List[datetime] = []
     rel_dates: List[datetime] = []
+    month_mentions: List[dict] = []
+    relative_expressions: List[dict] = []
     campaign_refs: List[str] = []
-    this_year_dates: List[datetime] = []
 
-    # 绝对日期 — 先匹配完整"年月日"，挖掉后避免"年月"模式重复匹配
     work_text = text
-    full_date_re = _ABS_DATE_PATTERNS[0]
-    for m in full_date_re.finditer(text):
-        try:
-            dt = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), tzinfo=CST)
-            abs_dates.append(dt)
-        except (ValueError, IndexError):
-            continue
-    work_text = full_date_re.sub(" ", text)
-    # 纯数字日期 YYYY-MM-DD 等
-    for m in _ABS_DATE_PATTERNS[1].finditer(text):
-        try:
-            dt = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), tzinfo=CST)
-            abs_dates.append(dt)
-        except (ValueError, IndexError):
-            continue
-    work_text = _ABS_DATE_PATTERNS[1].sub(" ", work_text)
-    # 年月模式（在年月日挖掉之后）
+    for pattern in _ABS_DATE_PATTERNS[:2]:
+        for m in pattern.finditer(work_text):
+            try:
+                abs_dates.append(datetime(int(m[1]), int(m[2]), int(m[3]), tzinfo=CST))
+            except (ValueError, IndexError):
+                continue
+        work_text = pattern.sub(" ", work_text)
+
+    # Month-only expressions are NOT exact dates.
     for m in _ABS_DATE_PATTERNS[2].finditer(work_text):
         try:
-            dt = datetime(int(m.group(1)), int(m.group(2)), 1, tzinfo=CST)
-            abs_dates.append(dt)
-        except (ValueError, IndexError):
+            datetime(int(m[1]), int(m[2]), 1, tzinfo=CST)
+            month_mentions.append({"value": f"{int(m[1]):04d}-{int(m[2]):02d}",
+                                   "precision": "month", "quote": m.group(0)})
+        except ValueError:
             continue
 
-    # 相对时间
-    for pat, offset_days in _REL_TIME_PATTERNS:
-        for m in pat.finditer(text):
-            if offset_days is not None:
-                rel_dates.append(now - timedelta(days=offset_days))
-            else:
-                num = int(m.group(1))
-                unit = m.group(0)
-                if "小时" in unit:
-                    rel_dates.append(now - timedelta(hours=num))
-                elif "分钟" in unit:
-                    rel_dates.append(now - timedelta(minutes=num))
-                elif "周" in unit:
-                    rel_dates.append(now - timedelta(weeks=num))
-                else:
-                    rel_dates.append(now - timedelta(days=num))
+    for pattern, offset_days in _REL_TIME_PATTERNS:
+        for m in pattern.finditer(text):
+            expr = m.group(0)
+            item = {"expression": expr, "start": m.start(), "end": m.end(),
+                    "anchor": date_str(anchor) if anchor else "",
+                    "resolved": "", "precision": "unknown"}
+            if anchor is not None:
+                if offset_days is not None:
+                    result = anchor - timedelta(days=offset_days)
+                    item.update({"resolved": date_str(result), "precision": "day"})
+                    rel_dates.append(result)
+                elif "天" in expr:
+                    result = anchor - timedelta(days=int(m[1]))
+                    item.update({"resolved": date_str(result), "precision": "day"})
+                    rel_dates.append(result)
+                elif "小时" in expr or "分钟" in expr:
+                    # Without reliable original clock time we cannot resolve day.
+                    if re.search(r"\d{2}:\d{2}", str(article_date)):
+                        delta = (timedelta(hours=int(m[1])) if "小时" in expr
+                                 else timedelta(minutes=int(m[1])))
+                        result = anchor - delta
+                        item.update({"resolved": result.isoformat(), "precision": "hour"})
+                        rel_dates.append(result)
+                elif "周" in expr:
+                    item["precision"] = "week"
+            relative_expressions.append(item)
 
-    # 营销节点
-    for pat, year_kind in _CAMPAIGN_PATTERNS:
-        for m in pat.finditer(text):
-            campaign_refs.append(m.group(0))
-            if year_kind == "this_year":
-                # 今年618/双11 → 映射到今年，作为近期/未来参考
-                campaign_name = re.sub(r"\s+", "", m.group(1))
-                if "618" in campaign_name:
-                    rel_dates.append(datetime(now.year, 6, 18, tzinfo=CST))
-                elif "双11" in campaign_name:
-                    rel_dates.append(datetime(now.year, 11, 11, tzinfo=CST))
-                elif "双12" in campaign_name:
-                    rel_dates.append(datetime(now.year, 12, 12, tzinfo=CST))
-                # 其他节日节点映射到今年（如年货节→1月，春节→2月附近），一律算今年内
-                else:
-                    rel_dates.append(datetime(now.year, 6, 1, tzinfo=CST))
-            # unspecified_year 仅记录引用，不映射（避免去年618旧文误判）
-
-    all_dates = abs_dates + rel_dates
-    if not all_dates:
-        return {
-            "absolute_dates": [d.isoformat() for d in abs_dates],
-            "relative_dates": [d.isoformat() for d in rel_dates],
-            "campaign_refs": campaign_refs,
-            "total_mentions": 0, "historical_mentions": 0, "recent_mentions": 0,
-            "historical_date_ratio": 0.0, "oldest_date": "", "newest_date": "",
-        }
-
-    # 旧年份 = 非当前年份（用户定义"正文主要事实属于旧年份"）
-    historical = [d for d in all_dates if d.year < now.year]
-    # 近期 = 近 7 天窗口内
-    window = timedelta(days=7)
-    recent = [d for d in all_dates if d >= now - window]
-    ratio = len(historical) / len(all_dates) if all_dates else 0.0
-
+    for pattern, _ in _CAMPAIGN_PATTERNS:
+        for m in pattern.finditer(text):
+            if m.group(0) not in campaign_refs:
+                campaign_refs.append(m.group(0))
+    # "今年双11" and similar marketing references are never occurred days.
+    dated = abs_dates + rel_dates
+    years = [d.year for d in dated] + [int(x["value"][:4]) for x in month_mentions]
+    historical_count = sum(y < now.year for y in years)
+    recent_count = sum(now - timedelta(days=7) <= d <= now for d in dated)
     return {
         "absolute_dates": [d.isoformat() for d in abs_dates],
         "relative_dates": [d.isoformat() for d in rel_dates],
+        "relative_expressions": relative_expressions,
+        "month_mentions": month_mentions,
         "campaign_refs": campaign_refs,
-        "total_mentions": len(all_dates),
-        "historical_mentions": len(historical),
-        "recent_mentions": len(recent),
-        "historical_date_ratio": round(ratio, 3),
-        "oldest_date": min(all_dates).strftime("%Y-%m-%d"),
-        "newest_date": max(all_dates).strftime("%Y-%m-%d"),
+        "total_mentions": len(years),
+        "historical_mentions": historical_count,
+        "recent_mentions": recent_count,
+        "historical_date_ratio": round(historical_count / len(years), 3) if years else 0.0,
+        "oldest_date": min(dated).strftime("%Y-%m-%d") if dated else "",
+        "newest_date": max(dated).strftime("%Y-%m-%d") if dated else "",
     }
-
 
 # ═══════════════════════════════════════════════════════════════
 # 事件时间字段提取（第一节）
@@ -430,78 +396,51 @@ def validate_event_times(
     content_dates: Dict[str, Any],
     now: Optional[datetime] = None,
 ) -> dict:
-    """填充事件层时间字段。
+    """Validate date roles without promoting arbitrary text dates to occurred.
 
-    event_occurred_at    — 事件实际发生时间
-    event_announced_at   — 事件宣布/公布时间
-    event_effective_at   — 事件生效/执行时间（政策规则类）
-    event_time_precision — day/week/month/quarter/year/unknown
-    event_time_confidence— high/medium/low
-    temporal_evidence    — 时间证据（原文片段或说明）
-    content_dates        — 正文日期提取结果
-    historical_date_ratio— 历史日期占比
-    is_retrospective     — 是否为回顾文
+    Raw model fields remain in the source event. Uncorroborated day claims are
+    dropped from derived temporal output and recorded as issues.
     """
-    if now is None:
-        now = _now_cst()
+    claimed = event.get("event_occurred_at") or ""
+    precision = normalize_precision(event.get("event_time_precision"))
+    confidence = str(event.get("event_time_confidence") or "unknown").lower()
+    issues: List[str] = []
+    if claimed:
+        if not exact_day(claimed):
+            issues.append("occurred_not_exact_day")
+        if precision != "day":
+            issues.append("occurred_precision_mismatch")
+    elif precision == "day":
+        issues.append("day_without_occurred_value")
 
-    # LLM 已在抽取时提供（如果有）
-    occurred = event.get("event_occurred_at") or ""
-    announced = event.get("event_announced_at") or ""
-    effective = event.get("event_effective_at") or ""
-    precision = event.get("event_time_precision") or ""
-    confidence = event.get("event_time_confidence") or ""
-
-    # 未提供的 → 从正文日期/文章发布时间推断
-    occurred_dt = parse_flexible_date(occurred, now)
-    announced_dt = parse_flexible_date(announced, now)
-    effective_dt = parse_flexible_date(effective, now)
-
-    if occurred_dt is None:
-        # 用正文中最新日期作为发生时间近似
-        dates = []
-        for iso in content_dates.get("absolute_dates", []) + content_dates.get("relative_dates", []):
-            d = parse_flexible_date(iso, now)
-            if d:
-                dates.append(d)
-        if dates:
-            occurred_dt = max(dates)
-            if not precision:
-                precision = "day"
-            if not confidence:
-                confidence = "medium"
-
-    if announced_dt is None and article_sanity.get("published_at_parsed"):
-        announced_dt = parse_flexible_date(article_sanity["published_at_parsed"], now)
-
-    if not precision:
-        precision = "unknown"
-    if not confidence:
-        confidence = "unknown"
-
-    temporal_evidence = []
-    ev = (event.get("evidence_text") or "")[:200]
-    if occurred:
-        temporal_evidence.append(f"occurred={occurred}")
-    if announced:
-        temporal_evidence.append(f"announced={announced}")
-    if effective:
-        temporal_evidence.append(f"effective={effective}")
-    if not temporal_evidence and ev:
-        temporal_evidence.append(ev[:80])
-
+    verified = trustworthy_occurred_day(event)
+    if claimed and not verified:
+        issues.append("occurred_without_grounded_day_evidence")
+    result_precision = "day" if verified else (
+        precision if precision in ("week", "month", "quarter", "year", "range")
+        else "unknown"
+    )
+    announced = exact_day(event.get("event_announced_at"))
+    effective = exact_day(event.get("event_effective_at"))
+    for field, value in (("announced", event.get("event_announced_at")),
+                         ("effective", event.get("event_effective_at"))):
+        if value and not exact_day(value):
+            issues.append(f"{field}_not_exact_day")
+    quotes = event.get("temporal_evidence") or []
+    if not isinstance(quotes, list):
+        quotes = [quotes] if quotes else []
     return {
-        "event_occurred_at": date_str(occurred_dt),
-        "event_announced_at": date_str(announced_dt),
-        "event_effective_at": date_str(effective_dt),
-        "event_time_precision": precision,
-        "event_time_confidence": confidence,
-        "temporal_evidence": temporal_evidence,
+        "event_occurred_at": verified or "",
+        "event_announced_at": announced or "",  # Never fill with published_at.
+        "event_effective_at": effective or "",
+        "event_time_precision": result_precision,
+        "event_time_confidence": confidence if verified else "unknown",
+        "temporal_evidence": quotes,
+        "temporal_issues": list(dict.fromkeys(issues)),
         "content_dates": content_dates,
         "historical_date_ratio": content_dates.get("historical_date_ratio", 0.0),
         "is_retrospective": False,
     }
-
 
 # ═══════════════════════════════════════════════════════════════
 # 事实新鲜度分类（第三/四/五节）
@@ -872,7 +811,12 @@ def temporal_fact_validation(
             content = article.get("content") or article.get("article_content") or ""
             title = article.get("title") or event.get("event_title") or ""
             text_for_dates = title + " " + content
-            content_dates = extract_content_dates(text_for_dates, now, event.get("published_at", ""))
+            # Anchor to reliable original article publication, never execution time.
+            article_anchor = (sanity.get("published_at_parsed") or "") if (
+                sanity.get("published_at_confidence") in ("high", "medium")
+                and sanity.get("article_time_status") == "valid"
+            ) else ""
+            content_dates = extract_content_dates(text_for_dates, now, article_anchor)
 
             # 4. 事件时间字段
             temporal = validate_event_times(event, sanity, content_dates, now)
@@ -899,6 +843,7 @@ def temporal_fact_validation(
             updated["event_time_precision"] = temporal["event_time_precision"]
             updated["event_time_confidence"] = temporal["event_time_confidence"]
             updated["temporal_evidence"] = temporal["temporal_evidence"]
+            updated["temporal_issues"] = temporal["temporal_issues"]
             updated["content_dates"] = temporal["content_dates"]
             updated["historical_date_ratio"] = temporal["historical_date_ratio"]
             updated["is_retrospective"] = freshness["fact_freshness_status"] in (

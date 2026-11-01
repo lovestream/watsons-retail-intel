@@ -24,6 +24,13 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+# Direct-file CLI and module invocation must both resolve sibling skills.
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
+from skills.filter_relevant_articles.business_scope_gate import classify_business_scope
+from skills.filter_relevant_articles.cross_day_gate import load_previous_articles, prior_duplicate
+
 # ===================== 依赖检查 =====================
 _MISSING = []
 try:
@@ -1353,6 +1360,13 @@ def decide_final_pool(
         (final_pool, final_reason)
         final_pool: "main" | "reference" | "reject"
     """
+    scope_decision = article.get("_business_scope") or classify_business_scope(article)
+    # The scope gate is mandatory: neither rule scores, source priority nor
+    # LLM recommendations may override a clearly unrelated primary topic.
+    if scope_decision["decision"] == "REJECT":
+        return "reject", "business_scope:" + scope_decision["reason_code"]
+    if article.get("_cross_day_duplicate"):
+        return "reject", "cross_day_duplicate_of:" + article["_cross_day_duplicate"]
     url = article.get("url", "") or ""
     title = article.get("title", "") or ""
     time_status = article.get("time_status", "")
@@ -1427,9 +1441,9 @@ def decide_final_pool(
             return "reject", f"内容农场(泛): {domain}"
 
     # ── 季节错位检测：大促关键词出现在错误月份 ──
-    seasonal_mismatch = check_seasonal_mismatch(title, article.get("summary", ""))
-    if seasonal_mismatch:
-        return "reject", seasonal_mismatch
+    # Campaign timing is handled by classify_campaign_temporality using the
+    # declared business date. Never reject a valid new campaign announcement
+    # merely because the pipeline happens to run in a different month.
 
     # 垃圾内容硬拒绝
     content_lower = " ".join([title, article.get("summary", "") or ""]).lower()
@@ -1458,6 +1472,13 @@ def decide_final_pool(
     # 此处作为兜底，不再给搜索源开后门。
     if time_status == "old":
         return "reject", f"time_status=old rule_score={rule_score}"
+
+    # REVIEW is a non-publishable candidate pool, but must still satisfy all
+    # source, region, recency, page and campaign safety checks first.
+    if scope_decision["decision"] == "REVIEW":
+        if is_noise_blocked:
+            return "reject", "business_scope_review_noise:" + noise_reason
+        return "reference", "business_scope_review:" + scope_decision["reason_code"]
 
     # ── 核心命中检测（屈臣氏/核心平台/竞对） ──
     core_hit, core_type = has_core_hit(article)
@@ -1790,6 +1811,9 @@ def filter_relevant_articles(
     all_matched_keywords = Counter()
 
     # 中间结果：存储每篇文章的规则评分和是否需要 LLM
+    # Read-only cross-day observations, independent of the event ledger and
+    # of any current-day retry. No production files are modified by this read.
+    previous_articles = load_previous_articles(project_root, date, lookback_days=21)
     _phase1_results = []  # list of (article, rule_score, rule_reasons, rule_decision, need_llm, page_type, region_tag, noise_flags)
     llm_reviewed_count = 0
     llm_failed_count = 0
@@ -1812,6 +1836,9 @@ def filter_relevant_articles(
         for kw in article.get("matched_keywords", []):
             all_matched_keywords[str(kw)] += 1
 
+        scope_decision = classify_business_scope(article)
+        article["_business_scope"] = scope_decision
+        article["_cross_day_duplicate"] = prior_duplicate(article, previous_articles)
         rule_score, rule_reasons = compute_rule_score(article)
         rule_decision = make_rule_decision(rule_score)
 
@@ -1826,7 +1853,10 @@ def filter_relevant_articles(
 
         # 判断是否需要 LLM 复核
         need_llm = False
-        if use_llm and llm_client:
+        if (use_llm and llm_client and scope_decision["decision"] == "REVIEW"
+                and not article["_cross_day_duplicate"]):
+            # Only semantically ambiguous core subjects warrant paid review;
+            # hard negatives never consume model tokens.
             if llm_mode == "borderline_only":
                 if rule_decision == "review":
                     need_llm = True
@@ -1944,8 +1974,14 @@ def filter_relevant_articles(
             page_type=page_type, region_tag=region_tag, noise_flags=noise_flags
         )
 
+        scope_decision = article["_business_scope"]
         output_article = dict(article)
+        output_article["business_scope"] = scope_decision
+        output_article["cross_day_duplicate_of"] = article.get("_cross_day_duplicate") or ""
         output_article["filter"] = {
+            "business_scope_version": scope_decision["version"],
+            "business_scope_decision": scope_decision["decision"],
+            "business_scope_reason": scope_decision["reason_code"],
             "rule_score": rule_score,
             "rule_decision": rule_decision,
             "rule_reasons": rule_reasons,
@@ -1968,7 +2004,7 @@ def filter_relevant_articles(
 
         # 清除临时字段（避免污染原始文章数据）
         for k in ("_campaign_name", "_campaign_temporality", "_campaign_year",
-                  "_retro_level", "_retro_reason"):
+                  "_retro_level", "_retro_reason", "_business_scope", "_cross_day_duplicate"):
             article.pop(k, None)
 
         if final_pool == "main":

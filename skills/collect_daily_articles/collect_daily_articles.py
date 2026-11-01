@@ -27,7 +27,7 @@ import os
 import re
 import sys
 import time as time_mod
-from collections import OrderedDict
+from collections import OrderedDict, Counter
 
 # 确保项目根目录在 sys.path 中，支持 from skills.xxx 导入
 _PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -36,6 +36,8 @@ if _PROJECT_ROOT not in sys.path:
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+
+from skills.filter_relevant_articles.business_scope_gate import classify_business_scope
 from urllib.parse import urljoin, urlparse, urlunparse
 
 # ===================== 依赖检查 =====================
@@ -2131,6 +2133,20 @@ def collect_daily_articles(
 
     # ---- 并行/串行源采集 ----
     all_articles: List[dict] = []
+    collection_scope_rejected = Counter()
+    def admit_collection_candidates(items):
+        # Cheap preflight *before* global item caps, so generic financial
+        # feeds cannot exhaust the capacity before high-value vertical sources.
+        result = []
+        for art in items:
+            scope = classify_business_scope(art)
+            if scope["decision"] == "REJECT":
+                collection_scope_rejected[scope["reason_code"]] += 1
+                continue
+            art["collection_business_scope"] = scope
+            result.append(art)
+        return result
+
     source_stats: Dict[str, dict] = {}
     by_collector: Dict[str, int] = {}
 
@@ -2216,7 +2232,10 @@ def collect_daily_articles(
                     idx = future_map[future]
                     try:
                         source_id, m, articles, stats = future.result(timeout=_source_timeout)
-                        all_articles.extend(articles)
+                        admitted_articles = admit_collection_candidates(articles)
+                        all_articles.extend(admitted_articles)
+                        stats["scope_prefilter_kept"] = len(admitted_articles)
+                        stats["scope_prefilter_rejected"] = len(articles) - len(admitted_articles)
                         source_stats[source_id] = stats
                         by_collector[m] = by_collector.get(m, 0) + len(articles)
                     except Exception as e:
@@ -2278,7 +2297,10 @@ def collect_daily_articles(
                     f"耗时 {elapsed}s"
                 )
 
-                all_articles.extend(articles)
+                admitted_articles = admit_collection_candidates(articles)
+                all_articles.extend(admitted_articles)
+                stats["scope_prefilter_kept"] = len(admitted_articles)
+                stats["scope_prefilter_rejected"] = len(articles) - len(admitted_articles)
                 source_stats[source_id] = stats
                 by_collector[method] = by_collector.get(method, 0) + len(articles)
 
@@ -2287,11 +2309,38 @@ def collect_daily_articles(
                     logging.warning(f"采集数量达到上限 {max_items_before_dedup}，停止采集")
                     break
 
-    total_collected = len(all_articles)
-    logging.info(f"总采集数: {total_collected}")
+    total_collected = sum(by_collector.values())  # All fetched items, pre-scope.
+    total_scope_candidates = len(all_articles)
+    logging.info("业务范围预筛拒绝: %s", dict(collection_scope_rejected))
+    logging.info("原始采集数: %d, 目标业务候选: %d",
+                 total_collected, total_scope_candidates)
 
     # ---- 去重 ----
     deduped_articles = deduplicate(all_articles)
+
+    # Rank relevant operating facts *before* the 600/300 processing limits.
+    # Source collection order / thread completion order is not business value.
+    _scope_rank = {
+        "watsons": 0, "direct_competitor": 1, "beauty_x_channel": 2,
+        "instant_retail": 3, "beauty_policy": 4, "beauty_personal_care": 5,
+        "explicit_editorial_exception": 6,
+    }
+    def _quality_rank(article):
+        scope = article.get("collection_business_scope") or {}
+        tier = article.get("source_tier", 3)
+        try:
+            tier = int(tier)
+        except (TypeError, ValueError):
+            tier = 3
+        return (
+            0 if scope.get("decision") == "ACCEPT" else 1,
+            _scope_rank.get(scope.get("scope"), 9),
+            0 if article.get("time_status") == "in_window" else 1,
+            tier,
+            -len(article.get("content") or ""),
+            str(article.get("url") or ""),
+        )
+    deduped_articles.sort(key=_quality_rank)
 
     # 截断到上限
     if len(deduped_articles) > max_items_after_dedup:
@@ -2338,6 +2387,9 @@ def collect_daily_articles(
             "window_end": window_end.isoformat(),
             "timezone": DEFAULT_TIMEZONE_STR,
             "total_collected": total_collected,
+            "scope_prefilter_rejected_by_reason": dict(collection_scope_rejected),
+            "scope_prefilter_total_rejected": sum(collection_scope_rejected.values()),
+            "total_scope_candidates": total_scope_candidates,
             "total_saved": total_saved,
             "old_discarded_by_allow_old": old_discarded,
             "time_summary": time_summary,

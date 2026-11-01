@@ -31,6 +31,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
+# Direct-file CLI and module invocation must both resolve sibling skills.
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
+from skills.filter_relevant_articles.business_scope_gate import classify_business_scope
+
 # 抽取是高频批量调用：thinking 先写 reasoning 会把单篇耗时推到 300s，
 # 生产上必须默认关闭；需要推理质量时用 EXTRACT_ENABLE_THINKING=1 打开。
 _ENABLE_THINKING = os.environ.get("EXTRACT_ENABLE_THINKING", "0") in ("1", "true", "True")
@@ -96,7 +102,9 @@ LLM_SYSTEM_PROMPT = (
     "1. 文章包含明确新增事实 → 抽取1个或多个事件\n"
     "2. 没有新增事实 → article_reject=true\n"
     "3. 每个事件必须有 fact 和 evidence_text\n"
-    "4. 事件服务于屈臣氏电商经营分析\n\n"
+    "4. 只抽取中国大陆即时零售商家机制、个护美妆品牌渠道、屈臣氏及直接竞对的真实经营动作。\n"
+    "5. 文章夹带的股价、券商研报、招聘、餐饮/冰淇淋、泛商超无关经营主张一律不得抽取。\n"
+    "6. 背景提到屈臣氏/美妆不能让无关主张入库；无相关动作则article_reject=true。\n\n"
     "confidence评定标准（重要）：\n"
     "- high: 事实明确、有具体数据或官方来源、时新性强（今天/昨天发生或明确标注日期）\n"
     "- medium: 事实较明确但缺少关键数据细节，或时效为近期但非当天\n"
@@ -750,7 +758,7 @@ def rule_fallback_extract(article: dict, date: str, event_index: int) -> tuple:
         "novelty": "unclear",
         "confidence": "low",
         "event_occurred_at": "",
-        "event_announced_at": article.get("published_at", "") or "",
+        "event_announced_at": "",
         "event_effective_at": "",
         "event_time_precision": "unknown",
         "event_time_confidence": "unknown",
@@ -817,7 +825,7 @@ def rule_extract_events(article: dict, date: str, event_index: int) -> tuple:
             "novelty": "unclear",
             "confidence": "low",
             "event_occurred_at": "",
-            "event_announced_at": article.get("published_at", "") or "",
+            "event_announced_at": "",
             "event_effective_at": "",
             "event_time_precision": "unknown",
             "event_time_confidence": "unknown",
@@ -1295,7 +1303,7 @@ def extract_events(
                 ev.setdefault("novelty", "unclear")
                 ev.setdefault("confidence", "low")
                 ev.setdefault("event_occurred_at", "")
-                ev.setdefault("event_announced_at", article.get("published_at", "") or "")
+                ev.setdefault("event_announced_at", "")
                 ev.setdefault("event_effective_at", "")
                 ev.setdefault("event_time_precision", "unknown")
                 ev.setdefault("event_time_confidence", "unknown")
@@ -1362,6 +1370,74 @@ def extract_events(
             article_id = article.get("article_id", f"art_{i+1:04d}")
             by_source[source_name] += 1
 
+    # ── P0 business-scope admission: article approval is not event approval ──
+    # A multi-event article may contain unrelated finance, food or HR claims.
+    article_by_id = {
+        str(a.get("article_id")): a for a in articles if a.get("article_id")
+    }
+    scope_rejected_events = []
+    scope_accepted_events = []
+    for ev in all_events:
+        parent = article_by_id.get(str(ev.get("source_article_id") or ""), {})
+        parent_scope = parent.get("business_scope") or (
+            classify_business_scope(parent) if parent else None
+        )
+        event_scope = classify_business_scope(ev, event_level=True)
+        if parent_scope and parent_scope["decision"] == "REJECT":
+            scope_rejected_events.append({
+                "event_id": ev.get("event_id"), "source_article_id": ev.get("source_article_id"),
+                "reason": "parent_" + parent_scope["reason_code"],
+            })
+            continue
+        # Precisely one user-curated contextual retail item; the editorial
+        # exception is tied to its article and cannot promote unrelated
+        # sub-events, other supermarket stories, or food headlines.
+        curated = bool(
+            parent_scope
+            and parent_scope.get("reason_code") == "user_curated_adjacent_format"
+            and any(w in (ev.get("event_title") or "") for w in ("山姆", "奥乐齐", "盒马"))
+        )
+        if event_scope["decision"] != "ACCEPT" and not curated:
+            scope_rejected_events.append({
+                "event_id": ev.get("event_id"), "source_article_id": ev.get("source_article_id"),
+                "reason": event_scope["reason_code"],
+            })
+            continue
+        # Do not let a model manufacture a new operational action from a
+        # merely related article. Headline/summary are valid reporting
+        # evidence when fulltext is missing, but the action must appear in
+        # original input, not only in LLM-generated event text.
+        original_context = " ".join(str(parent.get(k) or "") for k in (
+            "title", "summary", "content", "article_content"
+        ))
+        event_action = event_scope.get("action") or ""
+        evidence_level = "none"
+        if curated:
+            evidence_level = "editorially_curated_title"
+        elif parent and (parent.get("url") or ev.get("source_url")):
+            quote = ev.get("evidence_text") or ""
+            if quote and any(
+                quote in str(parent.get(k) or "")
+                for k in ("content", "article_content", "summary", "title")
+            ):
+                # Original evidence, not the generated summary, anchors action.
+                evidence_level = "source_quote"
+            elif event_action and event_action in original_context:
+                evidence_level = "source_action_only"
+        if evidence_level == "none":
+            scope_rejected_events.append({
+                "event_id": ev.get("event_id"), "source_article_id": ev.get("source_article_id"),
+                "reason": "action_not_grounded_in_source",
+            })
+            continue
+        ev["source_business_action_evidence"] = evidence_level
+        ev["business_scope"] = (parent_scope if curated else event_scope)
+        ev["business_scope_verified_by_rule"] = True
+        scope_accepted_events.append(ev)
+    all_events = scope_accepted_events
+    logger.info("业务事件准入: accept=%d, rejected_or_hold=%d",
+                len(all_events), len(scope_rejected_events))
+
     # ── 事件去重 ──
     pre_dedup_count = len(all_events)
     all_events, dedup_log = deduplicate_events(all_events, similarity_threshold=0.50)
@@ -1373,6 +1449,17 @@ def extract_events(
     else:
         logger.info(f"  事件去重: 无重复事件")
 
+    # Scope candidates never enter events_raw, even when extracted by LLM.
+    scope_rejected_file = os.path.join(events_dir, "events_scope_rejected.json")
+    with open(scope_rejected_file, "w", encoding="utf-8") as f:
+        json.dump({"date": date, "rejected_events": scope_rejected_events},
+                  f, ensure_ascii=False, indent=2)
+    # Zero successful LLM calls with nonempty candidates is NOT a healthy
+    # extraction run. Preserve diagnostics but fail closed, not "no signal".
+    degraded_extraction = bool(articles and llm_success_count == 0)
+    if degraded_extraction:
+        logger.error("有候选文章但P02模型成功次数为0；拒绝标记为正常抽取")
+        errors.append("extract_degraded: nonempty articles and zero successful LLM calls")
     # ── 保存输出 ──
     events_data = {
         "metadata": {
@@ -1382,9 +1469,11 @@ def extract_events(
             "created_at": datetime.now().isoformat(),
             "total_articles": len(articles),
             "total_events": len(all_events),
+            "scope_rejected_count": len(scope_rejected_events),
             "rejected_articles": len(rejected_articles),
             "failed_articles": len(failed_articles),
             "llm_success_count": llm_success_count,
+            "degraded_extraction": degraded_extraction,
             "llm_failed_count": llm_failed_count,
             "retry_success_count": retry_success_count,
             "retry_failed_count": retry_failed_count,
@@ -1455,7 +1544,7 @@ def extract_events(
     file_handler.close()
 
     return {
-        "ok": True,
+        "ok": not degraded_extraction,
         "date": date,
         "input_file": cleaned_file,
         "output_file": output_file,

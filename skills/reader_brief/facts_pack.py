@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 from skills.temporal_fact_validation.date_contract import trustworthy_occurred_day
+from skills.filter_relevant_articles.business_scope_gate import classify_business_scope
 
 logger = logging.getLogger(__name__)
 
@@ -134,8 +135,8 @@ def _add_fact(facts: List[Dict], text: str, day: str, url: str, name: str,
               platforms=None, competitors=None, event_ids=None,
               event_type: str = "", date_role: str = "published") -> None:
     clean = _clean(text)
-    if not clean:
-        return
+    if not clean or not url:
+        return  # No source URL means no publishable claim.
     parsed = _date_of(day)
     facts.append({
         "fact_id": f"F{len(facts) + 1:03d}",
@@ -143,6 +144,12 @@ def _add_fact(facts: List[Dict], text: str, day: str, url: str, name: str,
         "text": clean,
         "date": parsed.isoformat() if parsed else "",
         "date_role": date_role,
+        # Use the REPORT date when occurrence is unprovable; never claim the
+        # event happened on the day the article was published.
+        "attribution_text": (
+            f"据{name}{parsed.year}年{parsed.month}月{parsed.day}日报道"
+            if date_role == "published" and parsed and name else ""
+        ),
         "status": infer_status(clean),
         # 主体参与度：并列列举("与A、B、C等合作")只代表"被提及在名单中"，
         # 不代表每个主体都实际执行该动作。给编辑端一个显式字段，
@@ -190,6 +197,29 @@ def _occurred_index(events_dir: str) -> Dict[str, str]:
     return {eid: day for eid, day in idx.items() if day}
 
 
+def _curated_event_ids(events_dir: str) -> set:
+    """Preserve explicit human approval across synthesis without broad allowlists."""
+    ids = set()
+    if not events_dir:
+        return ids
+    for p in sorted(Path(events_dir).glob("*/events_analyzed.json")):
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        items = data if isinstance(data, list) else data.get("events", [])
+        for ev in items:
+            classification = ev.get("business_scope") or classify_business_scope({
+                "title": ev.get("event_title") or "",
+                "source_name": ev.get("source_name") or "",
+                "published_at": ev.get("published_at") or "",
+            })
+            if (classification.get("reason_code") == "user_curated_adjacent_format"
+                    and ev.get("event_id")):
+                ids.add(ev["event_id"])
+    return ids
+
+
 def build_from_synthesis(synth: Dict, period_type: str = "weekly",
                          max_facts: int = 80,
                          events_dir: str = "") -> Dict:
@@ -197,6 +227,7 @@ def build_from_synthesis(synth: Dict, period_type: str = "weekly",
     seen = set()
     # Compute once per batch; previously repeated an O(all event files) scan for every cluster.
     occurred_index = _occurred_index(events_dir) if events_dir else {}
+    curated_ids = _curated_event_ids(events_dir) if events_dir else set()
     for c in synth.get("all_clusters") or []:
         urls = c.get("source_urls") or []
         names = c.get("sources") or []
@@ -227,6 +258,25 @@ def build_from_synthesis(synth: Dict, period_type: str = "weekly",
                              ).get("beyond_period"):
             continue
         for i, ftxt in enumerate(texts):
+            source_name = names[i] if i < len(names) else (names[0] if names else "")
+            # Historical clusters can predate the current upstream scope gate.
+            # Revalidate every report fact so excluded food/finance stories do
+            # not reappear through weekly/monthly/yearly aggregation.
+            scope = classify_business_scope({
+                "title": ftxt, "source_name": source_name,
+                "published_at": str((synth.get("period") or {}).get("start") or ""),
+            })
+            if scope["decision"] != "ACCEPT":
+                # A single explicitly approved contextual case can survive
+                # weekly synthesis only when its source event IDs prove it.
+                # Never authorize a generic supermarket story from keywords.
+                is_curated = bool(
+                    eids and all(e in curated_ids for e in eids)
+                    and "零售圈" in source_name
+                    and all(w in ftxt for w in ("山姆", "奥乐齐", "盒马", "县级"))
+                )
+                if not is_curated:
+                    continue
             clean = _clean(ftxt)
             if not clean or clean in seen:
                 continue
@@ -282,6 +332,16 @@ def build_from_events(events_dir: str, start: str, end: str,
     seen = set()
     for score, day_name, ev in raw:
         text = ev.get("fact") or ev.get("event_title") or ""
+        # P0: historical analyzed events are not grandfathered into the new
+        # information library. Gate each claim, regardless of old scores.
+        scope = classify_business_scope({
+            "title": ev.get("event_title") or text,
+            "summary": text,
+            "source_name": ev.get("source_name") or "",
+            "published_at": ev.get("published_at") or "",
+        })
+        if scope["decision"] != "ACCEPT":
+            continue
         key = re.sub(r"\W+", "", _clean(text))[:40]
         if not key or key in seen:
             continue

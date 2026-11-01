@@ -43,7 +43,7 @@ other_sources:
   max_results: 20
   method: xcrawl
   name: XCrawl-热点-即时零售最新
-  query: 即时零售 最新
+  query: 即时零售 美妆 上线
   role: news_tracking
   source_type: xcrawl
   tier: tier1_core
@@ -55,7 +55,7 @@ other_sources:
   max_results: 20
   method: xcrawl
   name: XCrawl-热点-即时零售动态
-  query: 即时零售 动态
+  query: 即时零售 个护 合作
   role: news_tracking
   source_type: xcrawl
   tier: tier1_core
@@ -79,7 +79,7 @@ other_sources:
   max_results: 20
   method: xcrawl
   name: XCrawl-热点-美团即时零售
-  query: 美团 即时零售
+  query: 美团闪购 美妆 商家
   role: news_tracking
   source_type: xcrawl
   tier: tier1_core
@@ -91,7 +91,7 @@ other_sources:
   max_results: 20
   method: xcrawl
   name: XCrawl-热点-京东到家即时零售
-  query: 京东到家 即时零售
+  query: 京东秒送 个护 配送
   role: news_tracking
   source_type: xcrawl
   tier: tier1_core
@@ -163,7 +163,7 @@ other_sources:
   max_results: 20
   method: xcrawl
   name: XCrawl-屈臣氏-屈臣氏最新动态
-  query: 屈臣氏 最新
+  query: 屈臣氏 门店 运营
   role: core_search
   source_type: xcrawl
   tier: tier1_core
@@ -223,7 +223,7 @@ other_sources:
   max_results: 20
   method: xcrawl
   name: XCrawl-美妆-美妆个护外卖到家
-  query: 美妆 个护 外卖 到家
+  query: 美妆 个护 即时配送
   role: core_search
   source_type: xcrawl
   tier: tier1_core
@@ -247,7 +247,7 @@ other_sources:
   max_results: 20
   method: xcrawl
   name: XCrawl-竞品-丝芙兰最新动态
-  query: 丝芙兰 最新 动态 中国
+  query: 丝芙兰 中国 美妆 门店
   role: competitor_signal
   source_type: xcrawl
   tier: tier2_supplement
@@ -295,7 +295,7 @@ other_sources:
   max_results: 20
   method: xcrawl
   name: XCrawl-品牌-护肤品即时配送最新
-  query: 护肤品 即时配送 线上 最新
+  query: 护肤品 即时配送 品牌
   role: core_search
   source_type: xcrawl
   tier: tier2_supplement
@@ -1076,7 +1076,7 @@ rsshub_sources:
   max_results: 5
   method: tavily
   name: Tavily-即时零售最新动态
-  query: 即时零售 最新 动态
+  query: 即时零售 美妆 新规
   role: supplementary_search
   source_type: tavily
   tier: tier2_supplement
@@ -1088,7 +1088,7 @@ rsshub_sources:
   max_results: 5
   method: tavily
   name: Tavily-即时零售三国杀
-  query: 美团 京东 阿里 即时零售 大战
+  query: 美团闪购 京东秒送 商家规则
   role: supplementary_search
   source_type: tavily
   tier: tier2_supplement
@@ -1100,7 +1100,7 @@ rsshub_sources:
   max_results: 5
   method: tavily
   name: Tavily-美妆个护即时零售
-  query: 美妆 个护 外卖 到家 最新
+  query: 美妆 个护 即时配送
   role: supplementary_search
   source_type: tavily
   tier: tier2_supplement

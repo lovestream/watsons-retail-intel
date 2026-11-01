@@ -25,6 +25,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from skills.filter_relevant_articles.business_scope_gate import classify_business_scope
+from skills.filter_relevant_articles.cross_day_gate import load_previous_articles, prior_duplicate
 
 # ===================== 依赖检查 =====================
 _MISSING = []
@@ -1362,6 +1363,8 @@ def decide_final_pool(
         return "reject", "business_scope:" + scope_decision["reason_code"]
     if scope_decision["decision"] == "REVIEW":
         return "reference", "business_scope_review:" + scope_decision["reason_code"]
+    if article.get("_cross_day_duplicate"):
+        return "reject", "cross_day_duplicate_of:" + article["_cross_day_duplicate"]
     url = article.get("url", "") or ""
     title = article.get("title", "") or ""
     time_status = article.get("time_status", "")
@@ -1799,6 +1802,9 @@ def filter_relevant_articles(
     all_matched_keywords = Counter()
 
     # 中间结果：存储每篇文章的规则评分和是否需要 LLM
+    # Read-only cross-day observations, independent of the event ledger and
+    # of any current-day retry. No production files are modified by this read.
+    previous_articles = load_previous_articles(project_root, date, lookback_days=21)
     _phase1_results = []  # list of (article, rule_score, rule_reasons, rule_decision, need_llm, page_type, region_tag, noise_flags)
     llm_reviewed_count = 0
     llm_failed_count = 0
@@ -1823,6 +1829,7 @@ def filter_relevant_articles(
 
         scope_decision = classify_business_scope(article)
         article["_business_scope"] = scope_decision
+        article["_cross_day_duplicate"] = prior_duplicate(article, previous_articles)
         rule_score, rule_reasons = compute_rule_score(article)
         rule_decision = make_rule_decision(rule_score)
 
@@ -1837,7 +1844,8 @@ def filter_relevant_articles(
 
         # 判断是否需要 LLM 复核
         need_llm = False
-        if use_llm and llm_client and scope_decision["decision"] == "REVIEW":
+        if (use_llm and llm_client and scope_decision["decision"] == "REVIEW"
+                and not article["_cross_day_duplicate"]):
             # Only semantically ambiguous core subjects warrant paid review;
             # hard negatives never consume model tokens.
             if llm_mode == "borderline_only":
@@ -1960,6 +1968,7 @@ def filter_relevant_articles(
         scope_decision = article["_business_scope"]
         output_article = dict(article)
         output_article["business_scope"] = scope_decision
+        output_article["cross_day_duplicate_of"] = article.get("_cross_day_duplicate") or ""
         output_article["filter"] = {
             "business_scope_version": scope_decision["version"],
             "business_scope_decision": scope_decision["decision"],
@@ -1986,7 +1995,7 @@ def filter_relevant_articles(
 
         # 清除临时字段（避免污染原始文章数据）
         for k in ("_campaign_name", "_campaign_temporality", "_campaign_year",
-                  "_retro_level", "_retro_reason", "_business_scope"):
+                  "_retro_level", "_retro_reason", "_business_scope", "_cross_day_duplicate"):
             article.pop(k, None)
 
         if final_pool == "main":

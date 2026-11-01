@@ -2316,6 +2316,30 @@ def collect_daily_articles(
     # ---- 去重 ----
     deduped_articles = deduplicate(all_articles)
 
+    # Rank relevant operating facts *before* the 600/300 processing limits.
+    # Source collection order / thread completion order is not business value.
+    _scope_rank = {
+        "watsons": 0, "direct_competitor": 1, "beauty_x_channel": 2,
+        "instant_retail": 3, "beauty_policy": 4, "beauty_personal_care": 5,
+        "explicit_editorial_exception": 6,
+    }
+    def _quality_rank(article):
+        scope = article.get("collection_business_scope") or {}
+        tier = article.get("source_tier", 3)
+        try:
+            tier = int(tier)
+        except (TypeError, ValueError):
+            tier = 3
+        return (
+            0 if scope.get("decision") == "ACCEPT" else 1,
+            _scope_rank.get(scope.get("scope"), 9),
+            0 if article.get("time_status") == "in_window" else 1,
+            tier,
+            -len(article.get("content") or ""),
+            str(article.get("url") or ""),
+        )
+    deduped_articles.sort(key=_quality_rank)
+
     # 截断到上限
     if len(deduped_articles) > max_items_after_dedup:
         logging.warning(f"去重后 {len(deduped_articles)} 条，截断到 {max_items_after_dedup}")

@@ -143,6 +143,12 @@ def _add_fact(facts: List[Dict], text: str, day: str, url: str, name: str,
         "text": clean,
         "date": parsed.isoformat() if parsed else "",
         "date_role": date_role,
+        # Use the REPORT date when occurrence is unprovable; never claim the
+        # event happened on the day the article was published.
+        "attribution_text": (
+            f"据{name}{parsed.year}年{parsed.month}月{parsed.day}日报道"
+            if date_role == "published" and parsed and name else ""
+        ),
         "status": infer_status(clean),
         # 主体参与度：并列列举("与A、B、C等合作")只代表"被提及在名单中"，
         # 不代表每个主体都实际执行该动作。给编辑端一个显式字段，

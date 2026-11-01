@@ -51,18 +51,24 @@ def day_candidates(text: Any, reference_year: Optional[int] = None) -> Set[str]:
 
 
 def source_quotes(event: dict) -> list:
-    """Only original source excerpts, not generated 'occurred=...' metadata."""
-    out = []
-    for key in ("evidence_text", "temporal_evidence"):
-        value = event.get(key) or []
-        values = value if isinstance(value, list) else [value]
-        for item in values:
-            if isinstance(item, dict):
-                item = item.get("quote") or item.get("text") or ""
-            if isinstance(item, str) and item.strip() and not re.match(
-                r"^\s*(occurred|announced|effective)\s*=", item
-            ):
-                out.append(item)
+    """Use original evidence_text. LLM-produced temporal quotes require support.
+
+    Never treat 'occurred=YYYY-MM-DD' metadata or unbound model text as
+    evidence from an external source.
+    """
+    original = event.get("evidence_text") or ""
+    if not isinstance(original, str) or not original.strip():
+        return []
+    out = [original]
+    value = event.get("temporal_evidence") or []
+    values = value if isinstance(value, list) else [value]
+    for item in values:
+        if isinstance(item, dict):
+            item = item.get("quote") or item.get("text") or ""
+        if (isinstance(item, str) and item.strip()
+                and item in original
+                and not re.match(r"^\s*(occurred|announced|effective)\s*=", item)):
+            out.append(item)
     return out
 
 
@@ -81,7 +87,11 @@ def trustworthy_occurred_day(event: dict) -> Optional[str]:
     quoted = source_quotes(event)
     if not quoted:
         return None
-    reference_year = int(value[:4])
+    # An unqualified "10月20日" needs a publication-year anchor rather than
+    # circularly using the model's own claimed occurred year.
+    publication = str(event.get("published_at") or "")[:10]
+    pub_day = exact_day(publication)
+    reference_year = int(pub_day[:4]) if pub_day else None
     mentioned = set().union(*(day_candidates(q, reference_year) for q in quoted))
     if mentioned != {value}:
         return None

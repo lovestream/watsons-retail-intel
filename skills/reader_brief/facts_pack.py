@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 from skills.temporal_fact_validation.date_contract import trustworthy_occurred_day
+from skills.filter_relevant_articles.business_scope_gate import classify_business_scope
 
 logger = logging.getLogger(__name__)
 
@@ -134,8 +135,8 @@ def _add_fact(facts: List[Dict], text: str, day: str, url: str, name: str,
               platforms=None, competitors=None, event_ids=None,
               event_type: str = "", date_role: str = "published") -> None:
     clean = _clean(text)
-    if not clean:
-        return
+    if not clean or not url:
+        return  # No source URL means no publishable claim.
     parsed = _date_of(day)
     facts.append({
         "fact_id": f"F{len(facts) + 1:03d}",
@@ -233,6 +234,16 @@ def build_from_synthesis(synth: Dict, period_type: str = "weekly",
                              ).get("beyond_period"):
             continue
         for i, ftxt in enumerate(texts):
+            source_name = names[i] if i < len(names) else (names[0] if names else "")
+            # Historical clusters can predate the current upstream scope gate.
+            # Revalidate every report fact so excluded food/finance stories do
+            # not reappear through weekly/monthly/yearly aggregation.
+            scope = classify_business_scope({
+                "title": ftxt, "source_name": source_name,
+                "published_at": str((synth.get("period") or {}).get("start") or ""),
+            })
+            if scope["decision"] != "ACCEPT":
+                continue
             clean = _clean(ftxt)
             if not clean or clean in seen:
                 continue
@@ -288,6 +299,16 @@ def build_from_events(events_dir: str, start: str, end: str,
     seen = set()
     for score, day_name, ev in raw:
         text = ev.get("fact") or ev.get("event_title") or ""
+        # P0: historical analyzed events are not grandfathered into the new
+        # information library. Gate each claim, regardless of old scores.
+        scope = classify_business_scope({
+            "title": ev.get("event_title") or text,
+            "summary": text,
+            "source_name": ev.get("source_name") or "",
+            "published_at": ev.get("published_at") or "",
+        })
+        if scope["decision"] != "ACCEPT":
+            continue
         key = re.sub(r"\W+", "", _clean(text))[:40]
         if not key or key in seen:
             continue

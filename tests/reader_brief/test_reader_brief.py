@@ -67,7 +67,7 @@ def test_facts_pack_from_events_is_traceable():
         day.mkdir(parents=True)
         (day / "events_analyzed.json").write_text(json.dumps([{
             "event_id": "E1", "fact_id": "E1", "claim_id": "E1",
-            "event_title": "天猫双11开卖，4小时124个品牌成交破亿。",
+            "event_title": "屈臣氏在美团闪购上线个护到家专区。",
             "source_url": "https://example.com/a", "source_name": "36氪",
             "status": "reported", "date_role": "occurred"}], ensure_ascii=False),
             encoding="utf-8")

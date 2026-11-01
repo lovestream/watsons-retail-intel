@@ -992,6 +992,13 @@ def apply_hard_downgrade(
     source_cred = scores.get("source_credibility", 0)
     watsons_rel = scores.get("watsons_relevance", 0)
 
+    # Mandatory event-level business-scope gate: score cannot override scope.
+    from skills.filter_relevant_articles.business_scope import admissible
+    scope = admissible(event)
+    if scope["decision"] != "main":
+        reasons.append(f"业务范围硬门: {scope['reason']} → ARCHIVE")
+        return "ARCHIVE", reasons
+
     # 规则7: source_url 缺失 → ARCHIVE
     if not source_url.strip():
         reasons.append("硬降级: source_url缺失 → ARCHIVE")

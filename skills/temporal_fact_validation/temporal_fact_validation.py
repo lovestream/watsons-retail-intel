@@ -860,6 +860,7 @@ def temporal_fact_validation(
             updated["temporal_evidence"] = temporal["temporal_evidence"]
             updated["temporal_issues"] = temporal["temporal_issues"]
             updated["temporal_evidence_verified"] = time_candidate["evidence_verified"]
+            updated["evidence_verified"] = time_candidate["evidence_verified"]
             updated["content_dates"] = temporal["content_dates"]
             updated["historical_date_ratio"] = temporal["historical_date_ratio"]
             updated["is_retrospective"] = freshness["fact_freshness_status"] in (

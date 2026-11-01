@@ -1363,8 +1363,6 @@ def decide_final_pool(
         return "reject", "business_scope:" + scope_decision["reason_code"]
     if article.get("_cross_day_duplicate"):
         return "reject", "cross_day_duplicate_of:" + article["_cross_day_duplicate"]
-    if scope_decision["decision"] == "REVIEW":
-        return "reference", "business_scope_review:" + scope_decision["reason_code"]
     url = article.get("url", "") or ""
     title = article.get("title", "") or ""
     time_status = article.get("time_status", "")
@@ -1470,6 +1468,13 @@ def decide_final_pool(
     # 此处作为兜底，不再给搜索源开后门。
     if time_status == "old":
         return "reject", f"time_status=old rule_score={rule_score}"
+
+    # REVIEW is a non-publishable candidate pool, but must still satisfy all
+    # source, region, recency, page and campaign safety checks first.
+    if scope_decision["decision"] == "REVIEW":
+        if is_noise_blocked:
+            return "reject", "business_scope_review_noise:" + noise_reason
+        return "reference", "business_scope_review:" + scope_decision["reason_code"]
 
     # ── 核心命中检测（屈臣氏/核心平台/竞对） ──
     core_hit, core_type = has_core_hit(article)

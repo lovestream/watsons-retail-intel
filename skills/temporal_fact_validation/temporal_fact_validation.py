@@ -718,7 +718,11 @@ def temporal_fact_validation(
     输出 events_temporal.json + 日志 + 统计。
     """
     errors: List[str] = []
-    now = _now_cst()
+    # Replay/backfill classification must not depend on the day it is rerun.
+    # The report's declared Asia/Shanghai day is the stable as-of boundary.
+    now = datetime.strptime(date, "%Y-%m-%d").replace(
+        hour=23, minute=59, second=59, tzinfo=CST
+    )
 
     # ── 路径 ──
     if not events_file:

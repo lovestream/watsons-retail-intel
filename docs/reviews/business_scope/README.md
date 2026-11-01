@@ -102,13 +102,23 @@ OpenAI(12)、奥迪(17)、2022年双11(2)
 
 | 文件 | 内容 |
 |---|---|
-| `docs/reviews/business_scope/A_main_37_needs_review.csv` | 37 条 main 全量 |
-| `docs/reviews/business_scope/B_reference_sample_40.csv` | reference 抽样 40/104 |
+| `A_main_semantic_groups.csv` | **7 组**（37 条 main 语义归并后）|
+| `B_reference_semantic_groups.csv` | **16 组**（104 条 reference 归并后）|
 
-字段含：event_id / day / priority / decision / reason / title / source / published，
-外加 3 个人工填写列（判断/理由/备注）。
+### 为什么从 37 条变成 7 组
 
-**37 条 main 需逐条确认**——这是准入硬门的实际交付面，比之前的 25 条口径更严。
+用户反馈"怎么有这么多重复的"。核查发现：37 条里只有 15 个不同标题，
+其中「菜鸟接入淘宝闪购」单条在 10-01～10-30 出现 **23 次**。
+
+原因：准入层不做去重，导出时直接把 37 条并列。
+字符相似度去重（阈值 0.50）只能降到 10 条，因为
+「菜鸟供应链加入淘宝闪购」与「菜鸟为淘宝闪购提供配送服务」措辞差异过大。
+
+**改用"主体+动作族"语义归并**：菜鸟|接入/服务、美团闪购|直播/试点、
+山姆|开店/扩张……最终 **37 条 → 7 组**。这才是真实人工核查量。
+
+字段含：group / event_id / occurrences（出现次数）/ days（日期跨度）/
+priority / title / source，外加 3 个人工填写列。
 
 ## 6. 未完成（不能宣称已修好）
 

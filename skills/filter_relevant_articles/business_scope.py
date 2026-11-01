@@ -36,10 +36,12 @@ OPERATIONS = (
     "供应链", "履约", "配送", "渠道", "会员", "价格", "定价",
     "促销", "营销", "服务", "新品", "战略", "试点", "落地", "运营",
     "县级市场", "县域", "下沉市场", "闭店", "关店", "品类",
+    "掘金", "抢滩", "进击", "加码", "深耕", "抢占", "攻坚",
 )
 # Topic-specific blockers; matched against the article's subject, NOT the
 # full body, which may contain a generic sector comparison.
 NOISE_SUBJECT = (
+    "白酒", "酒类", "酒水", "啤酒", "葡萄酒", "酒行", "酒业",
     "招聘", "求职", "岗位", "猎头", "年薪", "薪资", "cho", "职场",
     "冰淇淋", "冰激凌", "雪糕", "野人先生", "茶饮", "奶茶", "寿司郎",
     "寿司", "火锅", "餐饮", "咖啡", "健身", "运动健身", "私教",
@@ -59,27 +61,36 @@ OPERATING_DATA = ("gmv", "单量", "客单价", "销售额", "动销", "转化�
                   "订单量", "门店销售", "履约成本", "配送时效")
 
 
+_QUOTES = str.maketrans("", "", "“”\"'‘’「」『』《》 \t\u3000")
+
+
+def _norm(text: str) -> str:
+    """去掉引号/空白，避免"“县级”市场"漏匹配"县级市场"。"""
+    return str(text or "").translate(_QUOTES).lower().replace("\u00a0", "")
+
+
 def _hit(text, words):
-    return any(x in text for x in words)
+    t = _norm(text)
+    return any(x in t for x in words)
 
 
 def decide(article: Dict) -> dict:
     title = str(article.get("title") or article.get("event_title") or "")
     summary = str(article.get("summary") or article.get("fact") or "")
-    subject = (title + " " + summary[:200]).lower()
+    subject = _norm(title + " " + summary[:200])
     if not title.strip():
         return {"decision": "reference", "reason": "subject_missing"}
     # No business report should be rescued by a late unrelated mention of
     # "Watsons", "beauty", or a platform in the full content.
-    if _hit(title.lower(), NOISE_SUBJECT) or (
-        _hit(subject, NOISE_SUBJECT) and not _hit(title.lower(), WATSONS)
+    if _hit(title, NOISE_SUBJECT) or (
+        _hit(subject, NOISE_SUBJECT) and not _hit(title, WATSONS)
     ):
         return {"decision": "reject", "reason": "unrelated_industry_subject"}
-    if _hit(title.lower(), STOCK_SUBJECT) or (
-        _hit(subject, STOCK_SUBJECT) and not _hit(title.lower(), OPERATIONS)
+    if _hit(title, STOCK_SUBJECT) or (
+        _hit(subject, STOCK_SUBJECT) and not _hit(title, OPERATIONS)
     ):
         return {"decision": "reject", "reason": "capital_market_subject"}
-    if _hit(title.lower(), GENERIC_REPORTS) and not _hit(title.lower(), OPERATIONS):
+    if _hit(title, GENERIC_REPORTS) and not _hit(title, OPERATIONS):
         return {"decision": "reject", "reason": "generic_research_subject"}
 
     watsons = _hit(subject, WATSONS)
@@ -96,12 +107,14 @@ def decide(article: Dict) -> dict:
         return {"decision": "main", "reason": "beauty_competitor_operating_move"}
     if beauty and channel and operating:
         return {"decision": "main", "reason": "beauty_instant_retail_move"}
-    # User-selected structural retailer/channel expansion is not a license for
-    # general groceries. Needs named retailers and an identifiable market move.
-    grocery = _hit(subject, ("山姆", "奥乐齐", "aldi", "盒马"))
-    county = _hit(subject, ("县级市场", "县域", "下沉市场"))
+    # User-selected structural retailer expansion (山姆/奥乐齐/盒马 下沉县域)
+    # must be decided BEFORE the generic channel fallback, otherwise it is
+    # misclassified as reference-only.
+    grocery = _hit(subject, ("山姆", "奥乐齐", "aldi", "盒马", "costco", "开市客"))
+    county = _hit(subject, ("县级市场", "县域", "下沉市场", "县级市"))
     if grocery and county and operating:
         return {"decision": "main", "reason": "named_retail_channel_expansion"}
+
     # Direct platform operational changes may influence Watsons even without
     # the category in the headline; put in reference pending category linkage.
     if channel and operating:

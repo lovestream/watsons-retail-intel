@@ -137,9 +137,10 @@ LLM_USER_PROMPT_TEMPLATE = """从下面文章中抽取事件，只输出JSON，�
       "event_occurred_at": "",
       "event_announced_at": "",
       "event_effective_at": "",
-      "event_time_precision": "day|week|month|quarter|year|unknown",
+      "event_time_precision": "day|week|month|quarter|year|range|unknown",
       "event_time_confidence": "high|medium|low",
       "temporal_evidence": "",
+      "temporal_role_evidence": [],
       "reject": false,
       "reject_reason": ""
     }}
@@ -150,7 +151,7 @@ LLM_USER_PROMPT_TEMPLATE = """从下面文章中抽取事件，只输出JSON，�
 
 时间字段填写要求（重要）：
 - event_occurred_at: 事件实际发生的日期，格式 YYYY-MM-DD；正文未明确写日期则留空
-- event_announced_at: 事件宣布/公布的日期（通常等于或早于文章发布日）
+- event_announced_at: 有明确原文日期证据的宣布/公布日；不得用文章发表日默认填充
 - event_effective_at: 政策/规则/措施生效执行的日期；如果是"未来某日执行"，必须填上该未来日期
 - event_time_precision: 能确定到哪一级（日/周/月/季度/年/未知）
 - event_time_confidence: 时间信息的可靠程度
@@ -158,7 +159,7 @@ LLM_USER_PROMPT_TEMPLATE = """从下面文章中抽取事件，只输出JSON，�
 - event_occurred_at 仅表示实际动作发生日期；绝不填入媒体发表日、首次抓取日、政策计划生效日、统计截止日
 - 若发生时间仅为“第三季度/10月/10月20日至25日”，event_occurred_at 留空，event_time_precision 按原文保留 quarter/month/range
 - 对发生日为day的事件，evidence_text须保留含日级时间和动作的**原文连续子串**；不得为满足字段而拼接不相邻句子
-- temporal_role_evidence: 可附列表，每项 {"role":"occurred|announced|effective|deadline|measurement","value":"YYYY-MM-DD","quote":"evidence_text中的逐字原文片段"}；无原文日期则不要编造
+- temporal_role_evidence: 可附列表，每项 {{"role":"occurred|announced|effective|deadline|measurement","value":"YYYY-MM-DD","quote":"evidence_text中的逐字原文片段"}}；无原文日期则不要编造
 - 同文出现多个时间（宣布/生效/截止/回顾）时须拆分角色，绝不取最新日期冒充occurred
 - 如果正文出现"回顾、复盘、去年、上一年、去年双11"等，说明事件属于历史；如果正文有明确"今天/今日/昨天/发布"说明事件是近期
 """
@@ -169,6 +170,7 @@ SIMPLIFIED_SYSTEM_PROMPT = (
     "事件类型枚举: " + ", ".join(EVENT_TYPES) + "。"
     "业务变量枚举: " + ", ".join(BUSINESS_VARIABLES) + "。"
     "最多抽取3个事件。"
+    "不允许用文章发表日/抓取日替代事件发生日或宣布日；多日期要分清角色；日期来源不明一律留空。"
     "confidence: high=事实明确+有数据/官方来源; medium=事实较明确但少数据; low=模糊/无法验证。不要默认打low。"
 )
 

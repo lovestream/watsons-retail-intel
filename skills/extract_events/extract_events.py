@@ -752,7 +752,7 @@ def rule_fallback_extract(article: dict, date: str, event_index: int) -> tuple:
         "novelty": "unclear",
         "confidence": "low",
         "event_occurred_at": "",
-        "event_announced_at": article.get("published_at", "") or "",
+        "event_announced_at": "",
         "event_effective_at": "",
         "event_time_precision": "unknown",
         "event_time_confidence": "unknown",
@@ -819,7 +819,7 @@ def rule_extract_events(article: dict, date: str, event_index: int) -> tuple:
             "novelty": "unclear",
             "confidence": "low",
             "event_occurred_at": "",
-            "event_announced_at": article.get("published_at", "") or "",
+            "event_announced_at": "",
             "event_effective_at": "",
             "event_time_precision": "unknown",
             "event_time_confidence": "unknown",
@@ -1297,7 +1297,7 @@ def extract_events(
                 ev.setdefault("novelty", "unclear")
                 ev.setdefault("confidence", "low")
                 ev.setdefault("event_occurred_at", "")
-                ev.setdefault("event_announced_at", article.get("published_at", "") or "")
+                ev.setdefault("event_announced_at", "")
                 ev.setdefault("event_effective_at", "")
                 ev.setdefault("event_time_precision", "unknown")
                 ev.setdefault("event_time_confidence", "unknown")

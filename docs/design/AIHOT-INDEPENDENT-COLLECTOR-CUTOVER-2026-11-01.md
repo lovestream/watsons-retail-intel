@@ -82,6 +82,22 @@ python3 skills/aihot_bridge/aihot_bridge.py \
   --write-shadow --output-dir /tmp/watsons-aihot-shadow
 ```
 `tests/fixtures/aihot_articles.json`已提交，仅含明确标记为**合成测试**的`example.invalid`域名和虚拟文章，绝不是生产事实；实际契约测试也使用`tests/test_aihot_bridge.py`的合成内存数据。可进一步运行：`python3 scripts/preview_aihot_scope_shadow.py /tmp/watsons-aihot-shadow/raw_articles_all.json`，检查入口硬门的main/reference/reject分类。
+    
+### 安全交给Watsons原生管线（**只写独立影子工作树**）
+
+```bash
+# 示例：独立副本已建立在/tmp/watsons-shadow，且有完整skills/目录。
+python3 scripts/import_aihot_shadow_to_watsons.py \
+  --bridge-dir /tmp/watsons-aihot-shadow \
+  --shadow-root /tmp/watsons-shadow \
+  --as-of 2026-10-31
+# 只在/tmp/watsons-shadow/data/raw/2026-10-31/写原生raw_articles_all.json
+# 和aihot_shadow_import_manifest.json；若已有文件则拒绝覆盖。
+# 如明确需要重建该日影子输入，额外使用--replace-shadow。
+```
+
+这样现有`filter_relevant_articles(project_root=独立Watsons影子工作树,date=2026-10-31)`可读取原生输入。**导入器不会自动运行P01/P02或调用LLM**。后续调用现有模块前须先在影子目录验证模型路由和费用开关；不得直接对生产项目执行。
+
 
 ### 连接AIHOT PG的只读影子导出
 
@@ -113,6 +129,6 @@ python3 skills/aihot_bridge/aihot_bridge.py \
 
 ## 5. 已交付与尚未完成
 
-已交付：只读schema适配器、影子归一化输出、离线测试、AIHOT独立信源示例、部署/迁移/验收说明。
+已交付：只读schema适配器、影子归一化输出、离线契约测试与跨层集成测试、零LLM准入预览、原生Watsons影子输入导入器、AIHOT独立信源示例、部署/迁移/验收说明。**这些测试已编写，但本轮未在NAS或CI实际执行。**
 
 未完成：AIHOT私有独立Fork/模板仓库、NAS Docker启动、真实源预览与逐条标注、数据库只读用户建立、两周影子源覆盖、跨媒体canonical_event去重与真正增量事务游标、完整周/月/年端到端重生成。均不得宣称完成或已部署。

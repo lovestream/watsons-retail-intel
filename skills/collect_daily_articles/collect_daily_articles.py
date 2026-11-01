@@ -2309,9 +2309,11 @@ def collect_daily_articles(
                     logging.warning(f"采集数量达到上限 {max_items_before_dedup}，停止采集")
                     break
 
-    total_collected = len(all_articles)
+    total_collected = sum(by_collector.values())  # All fetched items, pre-scope.
+    total_scope_candidates = len(all_articles)
     logging.info("业务范围预筛拒绝: %s", dict(collection_scope_rejected))
-    logging.info(f"总采集数: {total_collected}")
+    logging.info("原始采集数: %d, 目标业务候选: %d",
+                 total_collected, total_scope_candidates)
 
     # ---- 去重 ----
     deduped_articles = deduplicate(all_articles)
@@ -2387,6 +2389,7 @@ def collect_daily_articles(
             "total_collected": total_collected,
             "scope_prefilter_rejected_by_reason": dict(collection_scope_rejected),
             "scope_prefilter_total_rejected": sum(collection_scope_rejected.values()),
+            "total_scope_candidates": total_scope_candidates,
             "total_saved": total_saved,
             "old_discarded_by_allow_old": old_discarded,
             "time_summary": time_summary,

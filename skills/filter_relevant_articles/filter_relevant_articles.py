@@ -1360,6 +1360,15 @@ def decide_final_pool(
     freshness = article.get("freshness_status", "")
     source_type = article.get("source_type", "")
 
+    # Business scope is a mandatory precondition, not a keyword bonus.
+    # Keep uncertain direct-channel developments in reference only.
+    from skills.filter_relevant_articles.business_scope import decide as scope_decide
+    scope = scope_decide(article)
+    if scope["decision"] == "reject":
+        return "reject", "业务范围硬门: " + scope["reason"]
+    if scope["decision"] == "reference":
+        return "reference", "业务待核: " + scope["reason"]
+
     # ── Phase 0: 噪音硬拦截（V4 新增）──
     is_noise_blocked = False
     noise_reason = ""

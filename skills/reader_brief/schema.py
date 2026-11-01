@@ -243,6 +243,26 @@ def validate_brief(brief: Dict, pack: Dict, send_at: str,
             if _bad:
                 errors.append(_issue("status_overclaim", "error", where,
                                      f"未落地事项被写成已落地：{_bad[0]}"))
+        # 报道日期（独立角色）："据36氪2026年10月30日报道"。
+        # 2026-11-01 用户要求：事件发生日不明时，不要硬编日期，
+        # 改用"据X媒体Y日报道"的准确口径。reported_on 必须能对该事实的
+        # 来源文章发表日，且不得被当作 occurred 使用。
+        reported_text = str(item.get("reported_on") or "").strip()
+        if reported_text:
+            _rd = parse_date(reported_text, today.year)
+            if not _rd:
+                errors.append(_issue("invalid_reported_on", "error", where,
+                                     "报道日期无法解析"))
+            else:
+                _pub_ok = any(
+                    (facts[x].get("published_on") or "")[:10] == _rd.isoformat()
+                    or (facts[x].get("date") or "")[:10] == _rd.isoformat()
+                    for x in ids
+                )
+                if not _pub_ok:
+                    errors.append(_issue("reported_on_unbound", "error", where,
+                                         "报道日期与所引用事实的发表日不一致"))
+
         if section == "competitor_cards":
             occurred_text = str(item.get("occurred_on") or "").strip()
             # 2026-10-31：当引用事实本身没有"日级发生时间"（date_role!=occurred）时，
@@ -269,6 +289,15 @@ def validate_brief(brief: Dict, pack: Dict, send_at: str,
                                              "事件发生日期未在主张事实中得到支持"))
             elif _has_day:
                 pass  # 有日级发生日却留空，可接受（不强制补写）
+        # 报道口径兜底：既无发生日也无报道日时，必须有可读的来源名，
+        # 供渲染层输出"据<来源>报道"
+        if (section == "competitor_cards"
+                and not str(item.get("occurred_on") or "").strip()
+                and not str(item.get("reported_on") or "").strip()):
+            _names = [((facts[x].get("source") or {}).get("name") or "") for x in ids]
+            if not any(_names):
+                warnings.append(_issue("no_source_name_for_reporting", "warning", where,
+                                       "无发生日/报道日且无来源名，无法写'据X报道'"))
         if check_dates:
             d = parse_date(joined, today.year)
             if d and d < today:

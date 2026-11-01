@@ -673,6 +673,105 @@ def classify_priority(weighted_score: float, thresholds: dict) -> str:
         return "ARCHIVE"
 
 
+
+# ======== 资本市场内容硬过滤（2026-11-01 用户要求）========
+# 用户明确要求：股市/财报类新闻一条都不要，"什么垃圾鬼"。
+# 原规则要求"强信号 且 无经营词"才拦，导致只要文中带"即时零售"就放行，
+# 94 条财报/研报内容因此涌入。新规则改为**内容主体判定**：
+#   - 出现财报口径词（营收/净利润/扣非/同比）且无明确经营动作 → 剔除
+#   - 出现研报/评级/目标价/股价类 → 剔除
+#   - 出现个股/指数/游资等证券语言 → 剔除
+CAPITAL_MARKET_HARD = [
+    # 研报与评级
+    "研报", "评级", "目标价", "买入", "增持", "减持", "中性评级",
+    "盈利预测", "业绩预告", "业绩快报", "估值", "市盈率", "市净率",
+    "EPS", "PE", "PB", "市值", "股价", "涨停", "跌停", "涨幅", "跌幅",
+    "收盘", "开盘", "换手", "成交额", "北向资金", "主力资金",
+    "A股", "港股", "美股", "纳斯达克", "道琼斯", "券商", "投行",
+    "股东大会", "董事会决议", "股票", "股份回购", "定增", "可转债",
+    "IPO", "上市辅导", "招股", "并购重组", "要约收购",
+    # 财报口径
+    "营收", "营业收入", "净利润", "归母净利", "扣非", "毛利",
+    "同比下滑", "同比增长", "季报", "三季报", "中报", "年报",
+    "前三季度", "Q3", "Q2", "Q1", "Q4",
+]
+# 财务叙事词（投资者视角，不属于经营情报）
+FIN_NARRATIVE_TERMS = [
+    "业绩", "财报", "三季报", "中报", "年报", "季报",
+    "营收", "营业收入", "净利润", "归母", "扣非", "毛利率",
+    "同比增长", "同比下滑", "环比增长", "创历史新高", "创新高",
+    "押注", "市值", "估值", "融资", "完成首轮", "战略合作",
+    "前三季度", "销量创", "亏损",
+]
+
+# 真正的经营动作（不是财务口径）
+REAL_BIZ_ACTION = [
+    "开店", "闭店", "门店数", "入驻", "上线", "下架", "上新",
+    "签约", "合作", "试点", "开放加盟", "进驻", "铺货", "调改",
+    "直播", "补贴", "配送时效", "履约", "前置仓", "便利店", "专柜",
+]
+
+
+def is_capital_market_noise(event: dict) -> bool:
+    """判断事件是否属于资本市场/财报噪音（用户要求全清除）。
+
+    与旧版区别：不再要求"无经营词"。只要主体是财务口径或证券语言，
+    即便顺带提到即时零售/门店，也判定为噪音。
+    """
+    text = " ".join([
+        str(event.get("event_title") or ""),
+        str(event.get("fact") or ""),
+        str(event.get("evidence_text") or ""),
+        str(event.get("business_analysis", {}).get("watsons_impact") or "")
+        if isinstance(event.get("business_analysis"), dict) else "",
+    ])
+    if not text.strip():
+        return False
+
+    cm_hits = sum(1 for k in CAPITAL_MARKET_HARD if k in text)
+    biz_hits = sum(1 for k in REAL_BIZ_ACTION if k in text)
+
+    # 强证券语言：命中即剔除，不看经营词
+    hard_terms = ["研报", "评级", "目标价", "涨停", "跌停", "股价",
+                  "市值", "市盈率", "可转债", "定增", "招股", "券商"]
+    if any(k in text for k in hard_terms):
+        return True
+
+    # 财务叙事口径：出现"业绩/财报/营收/净利/销量创新高/押注/全年目标"
+    # 等投资者视角语言，即使讲的是经营，也不是我们要的经营情报。
+    FIN_NARRATIVE = FIN_NARRATIVE_TERMS
+    fin_hits = sum(1 for k in FIN_NARRATIVE if k in text)
+    # 只要出现 2 个以上财务叙事词，且没有明确的门店/履约/上架动作 → 剔除
+    STRONG_OPS = ["开店", "闭店", "入驻", "上线直播", "试点合作",
+                  "开放加盟", "进驻", "铺货", "调改", "配送时效"]
+    ops = sum(1 for k in STRONG_OPS if k in text)
+    if fin_hits >= 2 and ops == 0:
+        return True
+    # 单条强财务叙事词即可判定（这些词本身就是投资者口径，不用于经营情报）
+    STRONG_FIN = ["押注", "创历史新高", "创新高", "市值", "估值",
+                  "完成首轮", "融资", "研报", "亏损总额", "亏损"]
+    if any(k in text for k in STRONG_FIN) and ops == 0:
+        return True
+
+    # 财报口径占优：财务词 ≥3 且经营动作 <2
+    if cm_hits >= 3 and biz_hits < 2:
+        return True
+
+    # 大量证券词（≥5）即使有经营词也剔除
+    if cm_hits >= 5:
+        return True
+
+    import re as _re
+    years = [int(y) for y in _re.findall(r"(20\d{2})\s*年", text)]
+    if years and max(years) <= 2024 and "2026" not in text:
+        return True
+    IRRELEVANT = ["人形机器人", "OpenAI", "马斯克", "特斯拉", "半导体",
+                  "芯片", "南北分治", "汽车架构"]
+    if any(k in text for k in IRRELEVANT):
+        return True
+    return False
+
+
 def _is_stock_market_event(event: dict) -> bool:
     """判断事件是否为纯资本市场/证券行情内容。
 
@@ -812,6 +911,20 @@ def _is_non_mainland_subject_event(event: dict) -> bool:
     # 非大陆信号明显占主导 → 判定为港台海外事件
     if non_hits >= 2 and non_hits > mainland_hits:
         return True
+    # 旧闻：正文出现明显早于当前年份的年份（如 2022年双11），且无本年信息
+    import re as _re
+    years = [int(y) for y in _re.findall(r"(20\d{2})\s*年", text)]
+    if years:
+        maxy = max(years)
+        if maxy <= 2024 and "2026" not in text:
+            return True
+
+    # 与即时零售/个护美妆无关的领域
+    IRRELEVANT = ["人形机器人", "OpenAI", "马斯克", "特斯拉", "半导体",
+                  "芯片", "南辕北辙", "南北分治", "汽车架构", "雷军"]
+    if any(k in text for k in IRRELEVANT):
+        return True
+
     return False
 
 

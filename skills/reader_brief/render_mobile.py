@@ -85,6 +85,11 @@ def _competitor_card(c: Dict) -> str:
     meta = []
     if c.get("occurred_on"):
         meta.append(_e(c.get("occurred_on")))
+    elif c.get("reported_on") and c.get("source_name"):
+        # 事件发生日不明时，用准确的报道口径，不硬编发生日
+        meta.append(_e(f"据{c.get('source_name')}{c.get('reported_on')}报道"))
+    elif c.get("reported_on"):
+        meta.append(_e(f"据媒体报道 {c.get('reported_on')}"))
     links = _source_links(c.get("source_refs") or [])
     if links:
         meta.append(links)

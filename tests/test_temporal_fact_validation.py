@@ -61,7 +61,19 @@ def make_event(title="测试事件", fact="测试事实", evidence="", occurred_
         "source_title": "测试文章",
     }
     if occurred_at:
+        # Historic tests explicitly simulate source-backed occurrence; the new
+        # P0 contract does not infer dates from a model field alone.
+        dt = datetime.strptime(occurred_at, "%Y-%m-%d")
+        quote = evidence or (
+            f"{dt.year}年{dt.month}月{dt.day}日，{fact}"
+        )
+        ev["evidence_text"] = quote
         ev["event_occurred_at"] = occurred_at
+        ev["event_time_precision"] = "day"
+        ev["event_time_confidence"] = "high"
+        ev["temporal_role_evidence"] = [
+            {"role": "occurred", "value": occurred_at, "quote": quote}
+        ]
     if effective_at:
         ev["event_effective_at"] = effective_at
     return ev
@@ -135,11 +147,11 @@ def test_case4_split_background_and_update():
     # 模拟 extract 阶段已拆成两个事件: 一个旧背景、一个新数据
     bg_event = make_event(title="2025年即时零售市场规模回顾",
                           fact="2025年即时零售市场规模约1.5万亿", occurred_at="2025-12-31")
-    new_event = make_event(title="2026年上半年即时零售增速发布",
-                           fact="2026年上半年即时零售市场同比增长20%，今天官方公布最新数据",
+    new_event = make_event(title="2026年8月9日即时零售试点推出",
+                           fact="2026年8月9日某平台启动新的配送试点",
                            occurred_at="2026-08-09")
 
-    article = make_article(content="2025年市场规模1.5万亿。2026年8月9日，官方公布上半年增长20%。")
+    article = make_article(content="2025年市场规模1.5万亿。2026年8月9日，某平台启动新的配送试点。")
     content_dates = extract_content_dates(article["title"] + " " + article["content"], NOW)
 
     # 背景事件 → historical_background
@@ -220,9 +232,11 @@ def test_case8_this_year_618():
                        occurred_at="2026-06-18")
     temporal = validate_event_times(event, article_date_sanity_check(article, NOW), content_dates, NOW)
     freshness = classify_fact_freshness(event, article_date_sanity_check(article, NOW), temporal, None, NOW)
-    # 今年618（6月18日）已过但属于今年 → 不被误杀为 republished_old_fact，也不 reject
-    assert freshness["fact_freshness_status"] in ("historical_background", "ongoing_fact", "new_fact"), freshness
-    assert freshness["temporal_eligibility"] in ("reference", "tracking", "core")
+    # "今年618"是营销节点而不是单一发生日；不能冒充6月18日已发生。
+    # 保留候选到review，而非历史拒绝或伪造精确日期。
+    assert temporal["event_occurred_at"] == "", temporal
+    assert freshness["fact_freshness_status"] == "unknown_fact_time", freshness
+    assert freshness["temporal_eligibility"] == "review", freshness
 
     # 但如果是"今年618规则即将生效"（8月宣布、未来执行）→ upcoming_fact 不被历史618过滤
     event2 = make_event(title="今年618规则补充", fact="官方宣布618规则补充条款下月生效",

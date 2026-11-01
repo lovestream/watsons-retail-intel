@@ -94,22 +94,33 @@ def trustworthy_occurred_day(event: dict) -> Optional[str]:
     publication = str(event.get("published_at") or "")[:10]
     pub_day = exact_day(publication)
     reference_year = int(pub_day[:4]) if pub_day else None
+    # Prefer a genuine *event-scoped* quote when a paragraph contains dates
+    # for multiple different actions. The exact source quote must contain an
+    # action as well as its date; an isolated "10月20日" is not enough.
+    roles = event.get("temporal_role_evidence") or []
+    original = event.get("evidence_text") or ""
+    for item in roles:
+        if not isinstance(item, dict) or item.get("role") != "occurred":
+            continue
+        quote = item.get("quote") or ""
+        if (not isinstance(quote, str) or not quote.strip()
+                or quote not in original or len(quote.strip()) < 11):
+            continue
+        if exact_day(str(item.get("value") or "")) != value:
+            continue
+        if day_candidates(quote, reference_year) != {value}:
+            continue
+        if FUTURE_OR_OTHER_ROLE.search(quote):
+            continue
+        return value
+
+    # No valid scoped occurrence quote: paragraph-wide date is safe only if
+    # it contains exactly this day and no scheduled/announced/statistical role.
     mentioned = set().union(*(day_candidates(q, reference_year) for q in quoted))
     if mentioned != {value}:
         return None
-    # Unknown semantic role is allowed only when a scoped source quote is clearly
-    # about the event; never reuse a scheduled effective/announcement date as occurred.
     if any(FUTURE_OR_OTHER_ROLE.search(q) for q in quoted):
-        # A role-annotated source span can be explicitly designated occurrence.
-        roles = event.get("temporal_role_evidence") or []
-        if not any(
-            isinstance(r, dict)
-            and r.get("role") == "occurred"
-            and exact_day(str(r.get("value") or "")) == value
-            and (r.get("quote") or "") in quoted
-            for r in roles
-        ):
-            return None
+        return None
     return value
 
 

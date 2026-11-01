@@ -35,6 +35,7 @@ def article_signature(article):
         canonical_url(article.get("url")),
         text_fingerprint(article.get("title")),
         text_fingerprint(article.get("summary") or article.get("description")),
+        text_fingerprint(article.get("source_name")),
     )
 
 
@@ -64,14 +65,15 @@ def load_previous_articles(project_root, current_date, lookback_days=21):
 
 def prior_duplicate(article, history):
     """Suppress identical story, not same topic or substantially updated claim."""
-    url, title, lead = article_signature(article)
+    url, title, lead, source = article_signature(article)
     if not title:
         return ""
-    for day, (old_url, old_title, old_lead) in history:
-        if old_title == title and old_lead == lead:
-            return day
-        # Same URL can be edited: only skip if title AND summary match.
-        # Different URL/same title/new numbers are potential new developments.
+    for day, (old_url, old_title, old_lead, old_source) in history:
+        # Same article across days, or same-source mirror: duplicate.
+        # Another independent publication is potential corroborating evidence
+        # and must not be destroyed at the collection layer.
         if url and url == old_url and title == old_title and lead == old_lead:
+            return day
+        if source and source == old_source and title == old_title and lead == old_lead:
             return day
     return ""

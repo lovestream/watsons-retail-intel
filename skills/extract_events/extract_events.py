@@ -31,6 +31,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
+from skills.filter_relevant_articles.business_scope_gate import classify_business_scope
+
 # 抽取是高频批量调用：thinking 先写 reasoning 会把单篇耗时推到 300s，
 # 生产上必须默认关闭；需要推理质量时用 EXTRACT_ENABLE_THINKING=1 打开。
 _ENABLE_THINKING = os.environ.get("EXTRACT_ENABLE_THINKING", "0") in ("1", "true", "True")
@@ -1362,6 +1364,46 @@ def extract_events(
             article_id = article.get("article_id", f"art_{i+1:04d}")
             by_source[source_name] += 1
 
+    # ── P0 business-scope admission: article approval is not event approval ──
+    # A multi-event article may contain unrelated finance, food or HR claims.
+    article_by_id = {
+        str(a.get("article_id")): a for a in articles if a.get("article_id")
+    }
+    scope_rejected_events = []
+    scope_accepted_events = []
+    for ev in all_events:
+        parent = article_by_id.get(str(ev.get("source_article_id") or ""), {})
+        parent_scope = parent.get("business_scope") or (
+            classify_business_scope(parent) if parent else None
+        )
+        event_scope = classify_business_scope(ev, event_level=True)
+        if parent_scope and parent_scope["decision"] == "REJECT":
+            scope_rejected_events.append({
+                "event_id": ev.get("event_id"), "source_article_id": ev.get("source_article_id"),
+                "reason": "parent_" + parent_scope["reason_code"],
+            })
+            continue
+        # Precisely one user-curated contextual retail item; the editorial
+        # exception is tied to its article and cannot promote unrelated
+        # sub-events, other supermarket stories, or food headlines.
+        curated = bool(
+            parent_scope
+            and parent_scope.get("reason_code") == "user_curated_adjacent_format"
+            and any(w in (ev.get("event_title") or "") for w in ("山姆", "奥乐齐", "盒马"))
+        )
+        if event_scope["decision"] != "ACCEPT" and not curated:
+            scope_rejected_events.append({
+                "event_id": ev.get("event_id"), "source_article_id": ev.get("source_article_id"),
+                "reason": event_scope["reason_code"],
+            })
+            continue
+        ev["business_scope"] = (parent_scope if curated else event_scope)
+        ev["business_scope_verified_by_rule"] = True
+        scope_accepted_events.append(ev)
+    all_events = scope_accepted_events
+    logger.info("业务事件准入: accept=%d, rejected_or_hold=%d",
+                len(all_events), len(scope_rejected_events))
+
     # ── 事件去重 ──
     pre_dedup_count = len(all_events)
     all_events, dedup_log = deduplicate_events(all_events, similarity_threshold=0.50)
@@ -1373,6 +1415,11 @@ def extract_events(
     else:
         logger.info(f"  事件去重: 无重复事件")
 
+    # Scope candidates never enter events_raw, even when extracted by LLM.
+    scope_rejected_file = os.path.join(events_dir, "events_scope_rejected.json")
+    with open(scope_rejected_file, "w", encoding="utf-8") as f:
+        json.dump({"date": date, "rejected_events": scope_rejected_events},
+                  f, ensure_ascii=False, indent=2)
     # ── 保存输出 ──
     events_data = {
         "metadata": {
@@ -1382,6 +1429,7 @@ def extract_events(
             "created_at": datetime.now().isoformat(),
             "total_articles": len(articles),
             "total_events": len(all_events),
+            "scope_rejected_count": len(scope_rejected_events),
             "rejected_articles": len(rejected_articles),
             "failed_articles": len(failed_articles),
             "llm_success_count": llm_success_count,

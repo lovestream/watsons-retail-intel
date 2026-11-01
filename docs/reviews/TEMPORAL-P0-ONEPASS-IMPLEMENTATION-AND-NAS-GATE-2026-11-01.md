@@ -22,7 +22,7 @@
 
 ## 2. 新增/调整的离线测试
 
-- `tests/test_temporal_p0_contract.py`新增21个直接反例和正例：未锚定昨日、原稿锚定、处理日漂移、只有日期无法解析N小时前、多个日期、published≠announced、计划生效日误用、季度伪精确、月份默认1日、低置信与未知精度、原文引用不符、非法日期、模型自造证据、cluster串日、月报旁路、跨年等。
+- `tests/test_temporal_p0_contract.py`新增24个直接反例和正例：未锚定昨日、原稿锚定、处理日漂移、只有日期无法解析N小时前、多个日期、published≠announced、计划生效日误用、季度伪精确、月份默认1日、低置信与未知精度、原文引用不符、非法日期、模型自造证据、cluster串日、月报旁路、跨年等。
 - `tests/test_temporal_fact_validation.py`旧测试中显式发生日期的正例加入模拟原文证据、真实day精度与角色；“今年618”营销节点不能自动当6/18日发生，新事件positive改用明确动作案例。
 - `scripts/audit_temporal_p0_shadow.py`全程只读，通过data/events/*/events_analyzed.json及关联原文计算：原始主张字段覆盖、可信来源证据数、失配数、原文缺失率、按priority/precision分层。只输出stdout；不是独立人工真值审查。
 

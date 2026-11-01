@@ -193,3 +193,34 @@ def test_T20_cross_event_cluster_has_no_arbitrary_first_occurred_date():
 def test_T21_cross_year_yesterday_is_stable():
     x = extract_content_dates("昨天发布", RUN, "2027-01-01")
     assert x["relative_expressions"][0]["resolved"] == "2026-12-31"
+
+
+def test_T22_unverified_source_quote_never_accepted():
+    x = event(day="2026-10-20", precision="day", confidence="high",
+              evidence="2026年10月20日新店开业", evidence_verified=False)
+    assert trustworthy_occurred_day(x) is None
+
+
+def test_T23_multi_date_original_with_scoped_occurrence_can_pass():
+    quote = "2026年10月20日新店开业，同时公告11月11日促销计划"
+    x = event(day="2026-10-20", precision="day", confidence="high",
+              evidence=quote, temporal_role_evidence=[
+                  {"role": "occurred", "value": "2026-10-20",
+                   "quote": "2026年10月20日新店开业"}])
+    assert trustworthy_occurred_day(x) == "2026-10-20"
+
+
+def test_T24_prompt_builds_without_format_interpolation_or_early_truncation():
+    from skills.extract_events.extract_events import (
+        _build_extraction_prompt, _context_with_late_date_evidence
+    )
+    content = "市场背景。" * 700 + "2026年10月20日平台新店开业。" + "其他内容。" * 100
+    selected = _context_with_late_date_evidence(content)
+    assert "2026年10月20日平台新店开业" in selected
+    assert len(selected) <= 4200
+    system, user_prompt = _build_extraction_prompt({
+        "article_id": "test-p0", "title": "开业", "content": content
+    })
+    assert "temporal_role_evidence" in user_prompt
+    assert "2026年10月20日平台新店开业" in user_prompt
+    assert isinstance(system, str)

@@ -31,6 +31,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
+# Direct-file CLI and module invocation must both resolve sibling skills.
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
 from skills.filter_relevant_articles.business_scope_gate import classify_business_scope
 
 # 抽取是高频批量调用：thinking 先写 reasoning 会把单篇耗时推到 300s，

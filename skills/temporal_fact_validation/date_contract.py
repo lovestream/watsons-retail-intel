@@ -78,6 +78,8 @@ def trustworthy_occurred_day(event: dict) -> Optional[str]:
     This is a necessary syntactic/evidence gate, not a substitute for semantic
     P03 review where a quote contains several different temporal roles.
     """
+    if event.get("evidence_verified") is False:
+        return None  # The quote was not found in the actual source article.
     value = exact_day(event.get("event_occurred_at") or event.get("occurred_at"))
     precision = str(event.get("event_time_precision") or "").strip().lower()
     confidence = str(event.get("event_time_confidence") or "").strip().lower()

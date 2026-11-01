@@ -24,6 +24,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from skills.filter_relevant_articles.business_scope_gate import classify_business_scope
+
 # ===================== 依赖检查 =====================
 _MISSING = []
 try:
@@ -1353,6 +1355,13 @@ def decide_final_pool(
         (final_pool, final_reason)
         final_pool: "main" | "reference" | "reject"
     """
+    scope_decision = article.get("_business_scope") or classify_business_scope(article)
+    # The scope gate is mandatory: neither rule scores, source priority nor
+    # LLM recommendations may override a clearly unrelated primary topic.
+    if scope_decision["decision"] == "REJECT":
+        return "reject", "business_scope:" + scope_decision["reason_code"]
+    if scope_decision["decision"] == "REVIEW":
+        return "reference", "business_scope_review:" + scope_decision["reason_code"]
     url = article.get("url", "") or ""
     title = article.get("title", "") or ""
     time_status = article.get("time_status", "")
@@ -1812,6 +1821,8 @@ def filter_relevant_articles(
         for kw in article.get("matched_keywords", []):
             all_matched_keywords[str(kw)] += 1
 
+        scope_decision = classify_business_scope(article)
+        article["_business_scope"] = scope_decision
         rule_score, rule_reasons = compute_rule_score(article)
         rule_decision = make_rule_decision(rule_score)
 
@@ -1826,7 +1837,9 @@ def filter_relevant_articles(
 
         # 判断是否需要 LLM 复核
         need_llm = False
-        if use_llm and llm_client:
+        if use_llm and llm_client and scope_decision["decision"] == "REVIEW":
+            # Only semantically ambiguous core subjects warrant paid review;
+            # hard negatives never consume model tokens.
             if llm_mode == "borderline_only":
                 if rule_decision == "review":
                     need_llm = True
@@ -1945,7 +1958,11 @@ def filter_relevant_articles(
         )
 
         output_article = dict(article)
+        output_article["business_scope"] = article["_business_scope"]
         output_article["filter"] = {
+            "business_scope_version": scope_decision["version"],
+            "business_scope_decision": scope_decision["decision"],
+            "business_scope_reason": scope_decision["reason_code"],
             "rule_score": rule_score,
             "rule_decision": rule_decision,
             "rule_reasons": rule_reasons,
@@ -1968,7 +1985,7 @@ def filter_relevant_articles(
 
         # 清除临时字段（避免污染原始文章数据）
         for k in ("_campaign_name", "_campaign_temporality", "_campaign_year",
-                  "_retro_level", "_retro_reason"):
+                  "_retro_level", "_retro_reason", "_business_scope"):
             article.pop(k, None)
 
         if final_pool == "main":

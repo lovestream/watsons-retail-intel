@@ -1957,8 +1957,9 @@ def filter_relevant_articles(
             page_type=page_type, region_tag=region_tag, noise_flags=noise_flags
         )
 
+        scope_decision = article["_business_scope"]
         output_article = dict(article)
-        output_article["business_scope"] = article["_business_scope"]
+        output_article["business_scope"] = scope_decision
         output_article["filter"] = {
             "business_scope_version": scope_decision["version"],
             "business_scope_decision": scope_decision["decision"],

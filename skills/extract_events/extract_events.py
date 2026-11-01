@@ -1408,15 +1408,15 @@ def extract_events(
         evidence_level = "none"
         if curated:
             evidence_level = "editorially_curated_title"
-        elif (parent and (parent.get("url") or ev.get("source_url"))
-                and event_action and event_action in original_context):
+        elif parent and (parent.get("url") or ev.get("source_url")):
             quote = ev.get("evidence_text") or ""
             if quote and any(
                 quote in str(parent.get(k) or "")
                 for k in ("content", "article_content", "summary", "title")
             ):
+                # Original evidence, not the generated summary, anchors action.
                 evidence_level = "source_quote"
-            else:
+            elif event_action and event_action in original_context:
                 evidence_level = "source_action_only"
         if evidence_level == "none":
             scope_rejected_events.append({

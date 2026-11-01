@@ -519,6 +519,15 @@ def fact_hash(e: dict) -> str:
     return hashlib.md5(norm.encode("utf-8")).hexdigest()[:16]
 
 
+def _observation_date(e: dict) -> str:
+    """A source-seen business day, distinct from claimed occurrence/effectivity."""
+    for key in ("first_observed_at", "observed_at", "collected_at", "ingested_on"):
+        value = str(e.get(key) or "")
+        if re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", value[:10]):
+            return value[:10]
+    return ""
+
+
 def _publisher_domain(raw: str) -> str:
     """Use publisher domains, not collectors or repeated article occurrences."""
     from urllib.parse import urlsplit
@@ -589,6 +598,7 @@ def cluster_events(events: List[dict], cfg: Dict[str, Any]) -> List[dict]:
                 "first_seen_at": (e.get("effective_event_time") or "")[:10],
                 "last_seen_at": (e.get("effective_event_time") or "")[:10],
                 "days_active": 1,
+                "observed_days": [_observation_date(e)] if _observation_date(e) else [],
                 "event_count": 1,
                 "source_count": 1,
                 "platforms": sorted(set(ent.get("platforms") or [])),
@@ -626,8 +636,10 @@ def cluster_events(events: List[dict], cfg: Dict[str, Any]) -> List[dict]:
                     c["first_seen_at"] = ts
                 if ts > c["last_seen_at"]:
                     c["last_seen_at"] = ts
-            c["days_active"] = len(set([c["first_seen_at"], c["last_seen_at"]]) -
-                                   {""})
+            observed_day = _observation_date(e)
+            if observed_day and observed_day not in c.get("observed_days", []):
+                c.setdefault("observed_days", []).append(observed_day)
+            c["days_active"] = max(1, len(c.get("observed_days", [])))
             src = e.get("source_name") or ""
             if src:
                 c["sources"] = sorted(set(c.get("sources", []) + [src]))
@@ -673,7 +685,8 @@ def cluster_events(events: List[dict], cfg: Dict[str, Any]) -> List[dict]:
         # Existing days_active only compared first and last dates (max 2).
         # This field cannot support trend claims until an actual observed-day
         # ledger is available. No automatic promotion based on it.
-        c["days_active"] = 1
+        c["observed_days"] = sorted(set(c.get("observed_days", [])))
+        c["days_active"] = max(1, len(c["observed_days"]))
 
     # 排序：加权分高的 cluster 在前
     clusters.sort(key=lambda c: c.get("max_weighted_score") or 0, reverse=True)
@@ -734,8 +747,9 @@ def detect_trend_direction(cluster: dict, prev_clusters: List[dict],
 
     days = cluster.get("days_active") or 1
     srcs = cluster.get("source_count") or 1
-    events = cluster.get("event_count") or 1
-    prev_events = sum(pc.get("event_count") or 0 for pc in prev_similar)
+    # Trend uses distinct source articles, not repeated pipeline observations.
+    events = cluster.get("distinct_source_article_count") or 1
+    prev_events = sum(pc.get("distinct_source_article_count") or 0 for pc in prev_similar)
 
     # 首次出现（上周期无同类）
     if not prev_similar:

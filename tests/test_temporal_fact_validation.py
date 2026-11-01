@@ -61,7 +61,19 @@ def make_event(title="测试事件", fact="测试事实", evidence="", occurred_
         "source_title": "测试文章",
     }
     if occurred_at:
+        # Historic tests explicitly simulate source-backed occurrence; the new
+        # P0 contract does not infer dates from a model field alone.
+        dt = datetime.strptime(occurred_at, "%Y-%m-%d")
+        quote = evidence or (
+            f"{dt.year}年{dt.month}月{dt.day}日，{fact}"
+        )
+        ev["evidence_text"] = quote
         ev["event_occurred_at"] = occurred_at
+        ev["event_time_precision"] = "day"
+        ev["event_time_confidence"] = "high"
+        ev["temporal_role_evidence"] = [
+            {"role": "occurred", "value": occurred_at, "quote": quote}
+        ]
     if effective_at:
         ev["event_effective_at"] = effective_at
     return ev

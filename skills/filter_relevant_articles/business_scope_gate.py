@@ -153,6 +153,8 @@ def classify_business_scope(article: dict, *, event_level: bool = False) -> Dict
         return _result("ACCEPT", "beauty_channel_action", "beauty_x_channel", action, title)
     if instant and mechanic:
         return _result("ACCEPT", "instant_retail_mechanism", "instant_retail", action, title)
+    if beauty and _match(r"新规|政策|条例|监管|备案|召回|处罚|抽检|整改", focus):
+        return _result("ACCEPT", "beauty_category_regulation", "beauty_policy", action, title)
     if beauty and (adjacent_rival or _match(r"品牌|门店|上市新品|产品|零售|渠道|工厂|企业|公司", focus)):
         return _result("ACCEPT", "beauty_operating_action", "beauty_personal_care", action, title)
     # Instant retail action without merchant/fulfillment implications can be

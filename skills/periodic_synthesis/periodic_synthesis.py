@@ -523,7 +523,7 @@ def _observation_date(e: dict) -> str:
     """A source-seen business day, distinct from claimed occurrence/effectivity."""
     for key in ("first_observed_at", "observed_at", "collected_at", "ingested_on"):
         value = str(e.get(key) or "")
-        if re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", value[:10]):
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value[:10]):
             return value[:10]
     return ""
 

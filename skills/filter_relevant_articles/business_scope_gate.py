@@ -15,6 +15,9 @@ ADJACENT_RIVALS = ("名创优品", "miniso", "kk集团")
 INSTANT = ("即时零售", "美团闪购", "京东秒送", "京东到家", "淘宝闪购",
            "抖音小时达", "天猫小时达", "闪电仓", "前置仓",
            "即时配送", "门店履约", "小时达", "万物到家", "同城零售")
+INSTANT_PLATFORMS = ("美团闪购", "京东秒送", "京东到家", "淘宝闪购",
+                     "抖音小时达", "天猫小时达", "饿了么即时零售")
+INSTANT_CHANNEL = ("即时零售", "同城零售", "万物到家")
 BEAUTY = ("美妆", "个护", "化妆品", "护肤", "彩妆", "洗护", "防晒",
           "面膜", "精华液", "洁面", "洗发水", "护发", "沐浴露",
           "身体护理", "香水", "香氛", "口腔护理", "牙膏", "牙刷",
@@ -116,6 +119,7 @@ def classify_business_scope(article: dict, *, event_level: bool = False) -> Dict
     direct_rival = _hit(focus, DIRECT_RIVALS)
     adjacent_rival = _hit(focus, ADJACENT_RIVALS)
     instant = _hit(focus, INSTANT)
+    direct_instant = _hit(focus, INSTANT_PLATFORMS) or _hit(focus, INSTANT_CHANNEL)
     beauty = _hit(focus, BEAUTY)
     channel = _hit(focus, CHANNEL)
     mechanic = _hit(focus, MECHANICS)
@@ -151,7 +155,7 @@ def classify_business_scope(article: dict, *, event_level: bool = False) -> Dict
         return _result("ACCEPT", "competitor_operating_action", "direct_competitor", action, title)
     if beauty and (instant or channel):
         return _result("ACCEPT", "beauty_channel_action", "beauty_x_channel", action, title)
-    if instant and mechanic:
+    if instant and mechanic and direct_instant:
         return _result("ACCEPT", "instant_retail_mechanism", "instant_retail", action, title)
     if beauty and _match(r"新规|政策|条例|监管|备案|召回|处罚|抽检|整改", focus):
         return _result("ACCEPT", "beauty_category_regulation", "beauty_policy", action, title)

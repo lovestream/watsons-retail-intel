@@ -793,7 +793,9 @@ def temporal_fact_validation(
                     "url": event.get("source_url", ""),
                     "title": event.get("source_title", ""),
                     "published_at": event.get("published_at", ""),
-                    "content": event.get("fact", "") + " " + (event.get("evidence_text") or ""),
+                    # Source fulltext missing: do not treat model-written fact
+                    # and evidence as a verified copy of the original source.
+                    "content": "",
                 }
 
             # 1. 文章层 date sanity

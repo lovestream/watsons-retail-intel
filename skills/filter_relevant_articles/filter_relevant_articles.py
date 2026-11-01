@@ -1361,10 +1361,10 @@ def decide_final_pool(
     # LLM recommendations may override a clearly unrelated primary topic.
     if scope_decision["decision"] == "REJECT":
         return "reject", "business_scope:" + scope_decision["reason_code"]
-    if scope_decision["decision"] == "REVIEW":
-        return "reference", "business_scope_review:" + scope_decision["reason_code"]
     if article.get("_cross_day_duplicate"):
         return "reject", "cross_day_duplicate_of:" + article["_cross_day_duplicate"]
+    if scope_decision["decision"] == "REVIEW":
+        return "reference", "business_scope_review:" + scope_decision["reason_code"]
     url = article.get("url", "") or ""
     title = article.get("title", "") or ""
     time_status = article.get("time_status", "")
@@ -1439,9 +1439,9 @@ def decide_final_pool(
             return "reject", f"内容农场(泛): {domain}"
 
     # ── 季节错位检测：大促关键词出现在错误月份 ──
-    seasonal_mismatch = check_seasonal_mismatch(title, article.get("summary", ""))
-    if seasonal_mismatch:
-        return "reject", seasonal_mismatch
+    # Campaign timing is handled by classify_campaign_temporality using the
+    # declared business date. Never reject a valid new campaign announcement
+    # merely because the pipeline happens to run in a different month.
 
     # 垃圾内容硬拒绝
     content_lower = " ".join([title, article.get("summary", "") or ""]).lower()

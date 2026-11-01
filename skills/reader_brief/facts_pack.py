@@ -18,6 +18,8 @@ from datetime import date
 from pathlib import Path
 from typing import Dict, List, Optional
 
+from skills.temporal_fact_validation.date_contract import trustworthy_occurred_day
+
 logger = logging.getLogger(__name__)
 
 COMPLETED = ("已完成", "已签署", "已上线", "已开卖", "已开业", "已关停",
@@ -162,17 +164,11 @@ def _add_fact(facts: List[Dict], text: str, day: str, url: str, name: str,
 # 2026-10-31 实测：上游把研报估算写成 event_occurred_at=2026-10-30 但 precision=quarter，
 # 把 2025-08 旧闻写成 2025-08-01 但 precision=unknown。
 # 这类值一旦当 occurred 用，会同时造成"旧闻混入"和"竞对发生日无法绑定"两个问题。
-PRECISE_DAY_LEVELS = {"day", "date", "exact", "published"}
+PRECISE_DAY_LEVELS = {"day"}
 
 
 def _occurred_index(events_dir: str) -> Dict[str, str]:
-    """建立 event_id -> event_occurred_at 索引（仅收录可解析日期）。
-
-    2026-10-31：此前 build_from_synthesis 只有 cluster 的 first_seen/last_seen
-    （采集时间），导致全部事实被标 observed，竞对卡片 occurred_on 一律无法绑定，
-    10 轮稳定性测试中 8 轮被 occurred_date_unbound 硬门拦下。
-    真实事件库中约 60% 事件自带 event_occurred_at，应当用上。
-    """
+    """Index only source-grounded actual occurrence dates, never publication."""
     idx: Dict[str, str] = {}
     if not events_dir:
         return idx
@@ -181,20 +177,17 @@ def _occurred_index(events_dir: str) -> Dict[str, str]:
             data = json.loads(p.read_text(encoding="utf-8"))
         except Exception:
             continue
-        for ev in data.get("events") or []:
+        items = data if isinstance(data, list) else data.get("events", [])
+        for ev in items:
             eid = ev.get("event_id")
-            when = ev.get("event_occurred_at") or ev.get("occurred_at") or ""
-            precision = str(ev.get("event_time_precision") or "").lower()
-            conf = str(ev.get("event_time_confidence") or "").lower()
-            if not eid or not _date_of(when):
-                continue
-            # 精度不足（quarter/month/year/unknown）或低置信，不得当作发生日
-            if precision and precision not in PRECISE_DAY_LEVELS:
-                continue
-            if conf == "low":
-                continue
-            idx[eid] = when
-    return idx
+            occurred = trustworthy_occurred_day(ev)
+            if eid and occurred:
+                # Duplicated event IDs with incompatible days are not trusted.
+                if eid in idx and idx[eid] != occurred:
+                    idx[eid] = ""
+                elif eid not in idx:
+                    idx[eid] = occurred
+    return {eid: day for eid, day in idx.items() if day}
 
 
 def build_from_synthesis(synth: Dict, period_type: str = "weekly",
@@ -202,14 +195,22 @@ def build_from_synthesis(synth: Dict, period_type: str = "weekly",
                          events_dir: str = "") -> Dict:
     facts: List[Dict] = []
     seen = set()
+    # Compute once per batch; previously repeated an O(all event files) scan for every cluster.
+    occurred_index = _occurred_index(events_dir) if events_dir else {}
     for c in synth.get("all_clusters") or []:
         urls = c.get("source_urls") or []
         names = c.get("sources") or []
         texts = c.get("facts") or ([c["theme"]] if c.get("theme") else [])
         eids = c.get("event_ids") or []
         # 事件发生时间优先：cluster 的 first/last_seen 只是采集时间
-        _occ = _occurred_index(events_dir) if events_dir else {}
-        _occ_when = next((_occ[e] for e in eids if e in _occ), "")
+        # A cluster can aggregate several events. Never copy the first event
+        # timestamp to unrelated claims, or accept partial/discordant dates.
+        matched_days = [occurred_index[e] for e in eids if e in occurred_index]
+        unique_days = set(matched_days)
+        _occ_when = (
+            matched_days[0] if eids and len(matched_days) == len(eids)
+            and len(unique_days) == 1 else ""
+        )
         # 周期窗口：事实的"发生日/发文日"必须落在本期内，否则是旧闻混入。
         # 2026-10-31 实测：W43 事实包曾混入 2025-08、2022-11 旧闻与 10-18 区外内容，
         # 导致竞对卡片 occurred_on 无法绑定、并污染正文。
@@ -249,9 +250,8 @@ def build_from_synthesis(synth: Dict, period_type: str = "weekly",
 
 
 def occurrences_ok(ev: Dict) -> bool:
-    """仅当事件自带可解析的 occurred/occurred_at 时才把日期角色标成 occurred。"""
-    return bool(_date_of(ev.get("event_occurred_at") or ev.get("occurred_at")
-                         or ""))
+    """An occurrence requires day precision AND a grounded source excerpt."""
+    return bool(trustworthy_occurred_day(ev))
 
 
 def build_from_events(events_dir: str, start: str, end: str,
@@ -290,6 +290,9 @@ def build_from_events(events_dir: str, start: str, end: str,
         event_at = ev.get("event_occurred_at") or ev.get("occurred_at")
         published_at = ev.get("published_at") or ev.get("article_published_at")
         if occurrences_ok(ev):
+            # A historically resurfaced event must not be dated to this period.
+            if not (start <= event_at <= end):
+                continue
             when, role = event_at, "occurred"
         elif _date_of(published_at or ""):
             when, role = published_at, "published"

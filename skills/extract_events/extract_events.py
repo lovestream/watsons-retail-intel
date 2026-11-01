@@ -1454,6 +1454,12 @@ def extract_events(
     with open(scope_rejected_file, "w", encoding="utf-8") as f:
         json.dump({"date": date, "rejected_events": scope_rejected_events},
                   f, ensure_ascii=False, indent=2)
+    # Zero successful LLM calls with nonempty candidates is NOT a healthy
+    # extraction run. Preserve diagnostics but fail closed, not "no signal".
+    degraded_extraction = bool(articles and llm_success_count == 0)
+    if degraded_extraction:
+        logger.error("有候选文章但P02模型成功次数为0；拒绝标记为正常抽取")
+        errors.append("extract_degraded: nonempty articles and zero successful LLM calls")
     # ── 保存输出 ──
     events_data = {
         "metadata": {
@@ -1467,6 +1473,7 @@ def extract_events(
             "rejected_articles": len(rejected_articles),
             "failed_articles": len(failed_articles),
             "llm_success_count": llm_success_count,
+            "degraded_extraction": degraded_extraction,
             "llm_failed_count": llm_failed_count,
             "retry_success_count": retry_success_count,
             "retry_failed_count": retry_failed_count,
@@ -1537,7 +1544,7 @@ def extract_events(
     file_handler.close()
 
     return {
-        "ok": True,
+        "ok": not degraded_extraction,
         "date": date,
         "input_file": cleaned_file,
         "output_file": output_file,

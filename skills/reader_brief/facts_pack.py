@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 from skills.temporal_fact_validation.date_contract import trustworthy_occurred_day
+from skills.filter_relevant_articles.business_scope import admissible as business_scope_admissible
 
 logger = logging.getLogger(__name__)
 
@@ -227,6 +228,13 @@ def build_from_synthesis(synth: Dict, period_type: str = "weekly",
                              ).get("beyond_period"):
             continue
         for i, ftxt in enumerate(texts):
+            # Scoring and historical ARCHIVE exceptions cannot bypass business
+            # scope when the weekly synthesis is converted to final facts.
+            if business_scope_admissible({
+                "event_title": c.get("theme") or "",
+                "fact": ftxt,
+            })["decision"] != "main":
+                continue
             clean = _clean(ftxt)
             if not clean or clean in seen:
                 continue
@@ -273,7 +281,9 @@ def build_from_events(events_dir: str, start: str, end: str,
             continue
         items = data if isinstance(data, list) else data.get("events", [])
         for ev in items:
-            if ev.get("reject"):
+            if ev.get("reject") or ev.get("priority") == "ARCHIVE":
+                continue
+            if business_scope_admissible(ev)["decision"] != "main":
                 continue
             raw.append((float(ev.get("weighted_score") or 0), day.name, ev))
     raw.sort(key=lambda x: -x[0])

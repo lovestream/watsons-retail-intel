@@ -32,6 +32,8 @@ try:
 except Exception:
     yaml = None
 
+from skills.filter_relevant_articles.business_scope import admissible as business_scope_admissible
+
 logger = logging.getLogger(__name__)
 LOG_PREFIX = "[PeriodicSynthesis]"
 
@@ -278,6 +280,9 @@ def _is_archive_event(e: dict) -> bool:
         return True
     if e.get("reject") is True or e.get("rejected") is True:
         return True
+    # No ARCHIVE or historical exception may override business-scope rejection.
+    if business_scope_admissible(e)["decision"] != "main":
+        return True
     if e.get("priority") == "ARCHIVE":
         # 周期视角下的豁免：本周内反复出现 ≠ 旧闻
         if _is_republished_but_valid(e):
@@ -514,6 +519,18 @@ def fact_hash(e: dict) -> str:
     return hashlib.md5(norm.encode("utf-8")).hexdigest()[:16]
 
 
+def _publisher_domain(raw: str) -> str:
+    """Use publisher domains, not collectors or repeated article occurrences."""
+    from urllib.parse import urlsplit
+    host = urlsplit(str(raw or "")).hostname or ""
+    host = host.lower().removeprefix("www.")
+    for candidate in ("36kr.com", "huxiu.com", "jiemian.com", "pinguan.com",
+                      "sina.com.cn", "qq.com", "sohu.com"):
+        if host == candidate or host.endswith("." + candidate):
+            return candidate
+    return host
+
+
 def cluster_events(events: List[dict], cfg: Dict[str, Any]) -> List[dict]:
     """四级聚类：
 
@@ -643,6 +660,20 @@ def cluster_events(events: List[dict], cfg: Dict[str, Any]) -> List[dict]:
             pr = e.get("priority")
             if pr:
                 c.setdefault("_priority_flags", set()).add(pr)
+
+    # Event_count is a raw observation counter, NOT the number of independent
+    # articles or corroborating sources. Keep the separate units explicit.
+    for c in clusters:
+        urls = [x for x in c.get("source_urls", []) if x]
+        c["independent_source_count"] = len({
+            d for d in (_publisher_domain(x) for x in urls) if d
+        })
+        c["distinct_source_article_count"] = len(set(urls))
+        c["observation_count"] = c.get("event_count", 0)
+        # Existing days_active only compared first and last dates (max 2).
+        # This field cannot support trend claims until an actual observed-day
+        # ledger is available. No automatic promotion based on it.
+        c["days_active"] = 1
 
     # 排序：加权分高的 cluster 在前
     clusters.sort(key=lambda c: c.get("max_weighted_score") or 0, reverse=True)
@@ -992,8 +1023,14 @@ def build_periodic_synthesis(report_type: str, period_info: dict,
     prev_clusters = prev.get("clusters", [])
     for c in clusters:
         c["trend_direction"] = detect_trend_direction(c, prev_clusters, cfg)
-        c["confidence"] = "high" if c.get("event_count", 0) >= 3 else \
-                          ("medium" if c.get("event_count", 0) >= 2 else "low")
+        # Repeated observations never corroborate one another: the previous
+        # event_count criterion silently promoted one syndicated article to
+        # high confidence after three rediscoveries.
+        independent_sources = c.get("independent_source_count", 0)
+        c["confidence"] = (
+            "high" if independent_sources >= 3
+            else "medium" if independent_sources >= 2 else "low"
+        )
 
     # 5. 分层配额选样
     selected = select_by_quota(clusters, report_type, cfg)

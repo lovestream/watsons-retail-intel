@@ -1,0 +1,84 @@
+{
+  "$comment": "Watsons AIHOT independent collector starter pack. Import into an INITIALIZED-FRESH AIHOT clone as industry/sources.json before the initial seed. Existing DB sources must be managed through admin; this does not automatically delete old demo sources. The RSSHub host must share Docker network and be explicitly allowed in PRIVATE_FEED_HOSTS. Source URLs are ported from Watsons existing sources.yaml, not verified live here.",
+  "sources": [
+    {
+      "id": "wt_36kr_watsons",
+      "name": "36氪·屈臣氏关键词",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "http://rsshub:1200/36kr/search/articles/屈臣氏?limit=20&sorted=true",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "participation_mode": "isolated",
+      "interval_minutes": 180,
+      "tags": [
+        "屈臣氏",
+        "目标企业"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "wt_36kr_beauty",
+      "name": "36氪·美妆个护",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "http://rsshub:1200/36kr/search/articles/美妆?limit=20&sorted=true",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "participation_mode": "isolated",
+      "interval_minutes": 240,
+      "tags": [
+        "美妆个护"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "wt_36kr_instant",
+      "name": "36氪·即时零售",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "http://rsshub:1200/36kr/search/articles/即时零售?limit=20&sorted=true",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "participation_mode": "isolated",
+      "interval_minutes": 180,
+      "tags": [
+        "即时零售",
+        "待核"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "wt_huxiu_watsons",
+      "name": "虎嗅·屈臣氏关键词",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "http://rsshub:1200/huxiu/search/屈臣氏?limit=20&sorted=true",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "participation_mode": "isolated",
+      "interval_minutes": 360,
+      "tags": [
+        "屈臣氏",
+        "待核"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    }
+  ]
+}

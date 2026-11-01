@@ -214,7 +214,7 @@ def test_T24_prompt_builds_without_format_interpolation_or_early_truncation():
     from skills.extract_events.extract_events import (
         _build_extraction_prompt, _context_with_late_date_evidence
     )
-    content = "市场背景。" * 700 + "2026年10月20日平台新店开业。" + "其他内容。" * 100
+    content = "市场背景。" * 1000 + "2026年10月20日平台新店开业。" + "其他内容。" * 100
     selected = _context_with_late_date_evidence(content)
     assert "2026年10月20日平台新店开业" in selected
     assert len(selected) <= 4200

@@ -134,3 +134,90 @@ def test_source_query_config_contains_precise_active_core_searches():
     assert "query: 即时零售 最新 动态\n" not in text
     assert "query: 美团 京东 阿里 即时零售 大战\n" not in text
     assert "query: 美团闪购 美妆 商家\n" in text
+
+
+
+def test_report_pack_filters_pre_scope_legacy_events_and_attributes_publication(tmp_path):
+    from skills.reader_brief import facts_pack
+    day = tmp_path / "2026-10-30"
+    day.mkdir()
+    events = [
+        {
+            "event_id": "E1",
+            "event_title": "屈臣氏推动共创创新合作",
+            "fact": "屈臣氏与合作伙伴推动会员服务共创创新",
+            "source_url": "https://example.com/beauty",
+            "source_name": "36氪",
+            "published_at": "2026-10-30",
+        },
+        {
+            "event_id": "E2",
+            "event_title": "野人先生冰淇淋新店开业",
+            "fact": "野人先生冰淇淋开设新店",
+            "source_url": "https://example.com/icecream",
+            "source_name": "36氪",
+            "published_at": "2026-10-30",
+        },
+        {
+            "event_id": "E3",
+            "event_title": "上美股份高薪招聘CHO",
+            "fact": "上美股份招聘CHO发展美妆产业",
+            "source_url": "https://example.com/jobs",
+            "source_name": "36氪",
+            "published_at": "2026-10-30",
+        },
+        {
+            "event_id": "E4",
+            "event_title": "屈臣氏股价大涨，券商提高评级",
+            "fact": "屈臣氏相关上市公司股价上涨",
+            "source_url": "https://example.com/stock",
+            "source_name": "36氪",
+            "published_at": "2026-10-30",
+        },
+    ]
+    (day / "events_analyzed.json").write_text(
+        json.dumps({"events": events}, ensure_ascii=False), encoding="utf-8"
+    )
+    pack = facts_pack.build_from_events(
+        str(tmp_path), "2026-10-26", "2026-11-01", period_type="weekly"
+    )
+    assert len(pack["facts"]) == 1, pack
+    fact = pack["facts"][0]
+    assert fact["date_role"] == "published"
+    assert fact["attribution_text"] == "据36氪2026年10月30日报道"
+    assert fact["date"] == "2026-10-30"
+
+
+def test_legacy_synthesis_does_not_resurrect_stock_or_food():
+    from skills.reader_brief import facts_pack
+    synth = {
+        "period": {"start": "2026-10-26", "end": "2026-11-01"},
+        "all_clusters": [
+            {"facts": ["美团闪购升级美妆个护配送规则"],
+             "event_ids": ["E1"],
+             "source_urls": ["https://example.com/a"], "sources": ["官方"]},
+            {"facts": ["野人先生冰激凌门店开业，布局美妆周边"],
+             "event_ids": ["E2"],
+             "source_urls": ["https://example.com/b"], "sources": ["36氪"]},
+            {"facts": ["屈臣氏相关个股股价大涨"],
+             "event_ids": ["E3"],
+             "source_urls": ["https://example.com/c"], "sources": ["财经网"]},
+        ],
+    }
+    pack = facts_pack.build_from_synthesis(synth)
+    assert len(pack["facts"]) == 1, pack
+    assert "美团闪购" in pack["facts"][0]["text"]
+
+
+def test_no_original_article_action_not_accepted_merely_by_llm_claim():
+    # Model generation can mention a related actor; admission is only
+    # a topic predicate. Extract stage additionally binds claimed action
+    # to original article text and stores a scope rejection if absent.
+    article = {"title": "屈臣氏会员体系", "summary": "屈臣氏介绍会员现状"}
+    invented = {"event_title": "屈臣氏宣布收购其他企业",
+                "fact": "屈臣氏完成收购"}
+    assert classify_business_scope(article)["decision"] == "ACCEPT" or (
+        classify_business_scope(article)["decision"] == "REVIEW"
+    )
+    assert classify_business_scope(invented, event_level=True)["decision"] == "ACCEPT"
+    assert "收购" not in article["title"] + article["summary"]

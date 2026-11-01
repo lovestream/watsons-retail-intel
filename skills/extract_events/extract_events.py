@@ -155,6 +155,11 @@ LLM_USER_PROMPT_TEMPLATE = """从下面文章中抽取事件，只输出JSON，�
 - event_time_precision: 能确定到哪一级（日/周/月/季度/年/未知）
 - event_time_confidence: 时间信息的可靠程度
 - temporal_evidence: 正文中支持该时间的原文片段（一句话即可）
+- event_occurred_at 仅表示实际动作发生日期；绝不填入媒体发表日、首次抓取日、政策计划生效日、统计截止日
+- 若发生时间仅为“第三季度/10月/10月20日至25日”，event_occurred_at 留空，event_time_precision 按原文保留 quarter/month/range
+- 对发生日为day的事件，evidence_text须保留含日级时间和动作的**原文连续子串**；不得为满足字段而拼接不相邻句子
+- temporal_role_evidence: 可附列表，每项 {"role":"occurred|announced|effective|deadline|measurement","value":"YYYY-MM-DD","quote":"evidence_text中的逐字原文片段"}；无原文日期则不要编造
+- 同文出现多个时间（宣布/生效/截止/回顾）时须拆分角色，绝不取最新日期冒充occurred
 - 如果正文出现"回顾、复盘、去年、上一年、去年双11"等，说明事件属于历史；如果正文有明确"今天/今日/昨天/发布"说明事件是近期
 """
 
@@ -361,6 +366,41 @@ def _classify_failure(result: dict, content: str = "") -> str:
 # ===================== LLM 事件抽取 =====================
 
 
+_DATE_EVIDENCE_RE = re.compile(
+    r"\d{4}年\d{1,2}月|\d{1,2}月\d{1,2}[日号]|"
+    r"\d{4}[-/.]\d{1,2}[-/.]\d{1,2}|今天|今日|昨天|昨日|"
+    r"前天|上周|季度|截至|截止|宣布|生效|签约|开业|完成|"
+    r"计划|拟于|下月|双11"
+)
+
+
+def _context_with_late_date_evidence(content: str, max_chars: int = 4200) -> str:
+    """Keep leading article context AND useful later date-bearing passages.
+
+    Source snippets are original article substrings so the date contract can
+    verify quoted evidence; no LLM, network or unbounded token inflation.
+    """
+    content = content or ""
+    if len(content) <= max_chars:
+        return content
+    opening = content[:1900]
+    remaining = max_chars - len(opening) - 48
+    if remaining <= 0:
+        return opening
+    # Use original paragraphs/sentences without rewriting their contents.
+    spans = re.split(r"(?<=[。！？\n])", content[1900:])
+    selected = []
+    for span in spans:
+        if _DATE_EVIDENCE_RE.search(span):
+            part = span.strip()
+            if part and len(part) <= remaining:
+                selected.append(part)
+                remaining -= len(part) + 1
+        if remaining < 50:
+            break
+    return opening + "\n[原文后段的时间证据摘录]\n" + "\n".join(selected)
+
+
 def _build_extraction_prompt(article: dict) -> tuple:
     article_id = article.get("article_id", "")
     if not article_id:
@@ -374,7 +414,7 @@ def _build_extraction_prompt(article: dict) -> tuple:
         source_name=article.get("source_name", "") or "",
         published_at=article.get("published_at", "") or "",
         summary=article.get("summary", "") or "",
-        content=(article.get("content", "") or "")[:2000],
+        content=_context_with_late_date_evidence(article.get("content", "") or ""),
     )
     return LLM_SYSTEM_PROMPT, user_prompt
 
@@ -383,7 +423,7 @@ def _build_simplified_prompt(article: dict) -> tuple:
     """极简重试 prompt。"""
     title = article.get("title", "") or ""
     summary = article.get("summary", "") or ""
-    content = (article.get("content", "") or "")[:800]
+    content = _context_with_late_date_evidence(article.get("content", "") or "", max_chars=2600)
     user_prompt = SIMPLIFIED_USER_TEMPLATE.format(
         title=title, summary=summary, content=content,
     )

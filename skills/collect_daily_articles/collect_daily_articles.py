@@ -27,7 +27,7 @@ import os
 import re
 import sys
 import time as time_mod
-from collections import OrderedDict
+from collections import OrderedDict, Counter
 
 # 确保项目根目录在 sys.path 中，支持 from skills.xxx 导入
 _PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))

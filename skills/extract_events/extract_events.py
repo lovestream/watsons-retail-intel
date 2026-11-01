@@ -1397,6 +1397,34 @@ def extract_events(
                 "reason": event_scope["reason_code"],
             })
             continue
+        # Do not let a model manufacture a new operational action from a
+        # merely related article. Headline/summary are valid reporting
+        # evidence when fulltext is missing, but the action must appear in
+        # original input, not only in LLM-generated event text.
+        original_context = " ".join(str(parent.get(k) or "") for k in (
+            "title", "summary", "content", "article_content"
+        ))
+        event_action = event_scope.get("action") or ""
+        evidence_level = "none"
+        if curated:
+            evidence_level = "editorially_curated_title"
+        elif (parent and (parent.get("url") or ev.get("source_url"))
+                and event_action and event_action in original_context):
+            quote = ev.get("evidence_text") or ""
+            if quote and any(
+                quote in str(parent.get(k) or "")
+                for k in ("content", "article_content", "summary", "title")
+            ):
+                evidence_level = "source_quote"
+            else:
+                evidence_level = "source_action_only"
+        if evidence_level == "none":
+            scope_rejected_events.append({
+                "event_id": ev.get("event_id"), "source_article_id": ev.get("source_article_id"),
+                "reason": "action_not_grounded_in_source",
+            })
+            continue
+        ev["source_business_action_evidence"] = evidence_level
         ev["business_scope"] = (parent_scope if curated else event_scope)
         ev["business_scope_verified_by_rule"] = True
         scope_accepted_events.append(ev)

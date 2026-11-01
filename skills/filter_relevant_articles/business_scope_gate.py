@@ -22,7 +22,9 @@ BEAUTY = ("美妆", "个护", "化妆品", "护肤", "彩妆", "洗护", "防晒
 CHANNEL = ("天猫", "京东", "抖音电商", "京东自营", "天猫超市", "小红书电商")
 MECHANICS = ("闪电仓", "前置仓", "仓配", "履约", "入驻", "招商",
              "商家佣金", "平台佣金", "配送费", "配送时效", "到家",
-             "小时达", "即时配送", "门店配送", "运力", "商家规则")
+             "小时达", "即时配送", "门店配送", "运力", "商家规则",
+             "补贴", "合作", "供给", "渠道", "促销", "运营规则",
+             "商家扶持", "流量分配", "运营策略", "商家政策", "平台规则")
 BUSINESS_ACTIONS = (
     "开店", "新店", "开业", "新开", "闭店", "关店", "关停", "扩店", "门店扩张",
     "拓店", "开拓", "扩张", "布局", "入驻", "进驻", "上架", "上线", "推出",
@@ -128,7 +130,16 @@ def classify_business_scope(article: dict, *, event_level: bool = False) -> Dict
     if not (watsons or direct_rival or instant or beauty or (adjacent_rival and beauty)):
         return _result("REJECT", "out_of_scope", evidence=title)
     if not action:
+        # Preserve named platform-specific sources for fuller article fetch;
+        # generic "即时零售行业" with no action is not actionable.
+        named_platform = _hit(title_low, (
+            "美团闪购", "京东秒送", "京东到家", "淘宝闪购", "抖音小时达",
+            "天猫小时达",
+        ))
         # Narrow review queue only for named core businesses, never database.
+        if named_platform:
+            return _result("REVIEW", "named_platform_needs_action_evidence",
+                           "instant_retail", evidence=title)
         if watsons or direct_rival:
             return _result("REVIEW", "core_actor_no_specific_action",
                            "watsons" if watsons else "direct_rival", evidence=title)

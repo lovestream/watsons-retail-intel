@@ -24,6 +24,10 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+# Direct-file CLI and module invocation must both resolve sibling skills.
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
 from skills.filter_relevant_articles.business_scope_gate import classify_business_scope
 from skills.filter_relevant_articles.cross_day_gate import load_previous_articles, prior_duplicate
 

@@ -197,6 +197,29 @@ def _occurred_index(events_dir: str) -> Dict[str, str]:
     return {eid: day for eid, day in idx.items() if day}
 
 
+def _curated_event_ids(events_dir: str) -> set:
+    """Preserve explicit human approval across synthesis without broad allowlists."""
+    ids = set()
+    if not events_dir:
+        return ids
+    for p in sorted(Path(events_dir).glob("*/events_analyzed.json")):
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        items = data if isinstance(data, list) else data.get("events", [])
+        for ev in items:
+            classification = ev.get("business_scope") or classify_business_scope({
+                "title": ev.get("event_title") or "",
+                "source_name": ev.get("source_name") or "",
+                "published_at": ev.get("published_at") or "",
+            })
+            if (classification.get("reason_code") == "user_curated_adjacent_format"
+                    and ev.get("event_id")):
+                ids.add(ev["event_id"])
+    return ids
+
+
 def build_from_synthesis(synth: Dict, period_type: str = "weekly",
                          max_facts: int = 80,
                          events_dir: str = "") -> Dict:
@@ -204,6 +227,7 @@ def build_from_synthesis(synth: Dict, period_type: str = "weekly",
     seen = set()
     # Compute once per batch; previously repeated an O(all event files) scan for every cluster.
     occurred_index = _occurred_index(events_dir) if events_dir else {}
+    curated_ids = _curated_event_ids(events_dir) if events_dir else set()
     for c in synth.get("all_clusters") or []:
         urls = c.get("source_urls") or []
         names = c.get("sources") or []
@@ -243,7 +267,16 @@ def build_from_synthesis(synth: Dict, period_type: str = "weekly",
                 "published_at": str((synth.get("period") or {}).get("start") or ""),
             })
             if scope["decision"] != "ACCEPT":
-                continue
+                # A single explicitly approved contextual case can survive
+                # weekly synthesis only when its source event IDs prove it.
+                # Never authorize a generic supermarket story from keywords.
+                is_curated = bool(
+                    eids and all(e in curated_ids for e in eids)
+                    and "零售圈" in source_name
+                    and all(w in ftxt for w in ("山姆", "奥乐齐", "盒马", "县级"))
+                )
+                if not is_curated:
+                    continue
             clean = _clean(ftxt)
             if not clean or clean in seen:
                 continue

@@ -2143,7 +2143,18 @@ def collect_daily_articles(
         _method_groups[method].append((_idx, source))
 
     # 按 method 组顺序采集（保持 source 配置顺序），组内并行
-    _method_order = ["xcrawl", "tavily", "rsshub", "rss", "web", "baidu_news"]
+    #
+    # 2026-11-02 S3 修正：原顺序把泛搜索(xcrawl/tavily)放在垂直订阅(rsshub/rss)之前，
+    # 一旦泛搜索产量冲高，会在 800 条上限处把高质量垂直订阅挤掉。
+    # 现改为"垂直/官方订阅优先，泛搜索兜底"：
+    #   rss/rsshub（订阅源，日期与出处最可靠）
+    #   -> web（垂类站点监控）
+    #   -> tavily（缺口补搜，需 key 与预算）
+    #   -> xcrawl（正文增强为主，非采集主力）
+    # 可用 config/sources.yaml 的 collection_limits.method_order 覆盖。
+    _default_order = ["rss", "rsshub", "web", "tavily", "xcrawl", "baidu_news"]
+    _method_order = list(
+        (collection_limits.get("method_order") or _default_order))
     # 保留不在预期顺序中的 method
     for m in _method_groups:
         if m not in _method_order:

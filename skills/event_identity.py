@@ -241,10 +241,55 @@ def compare(old_prof: Dict, new_prof: Dict) -> Dict:
     return {"content_changed": False, "reason": "paraphrase_no_material_change"}
 
 
+def extraction_quality(event: Dict) -> str:
+    """抽取质量标记：llm > rule_fallback。
+
+    金标准核查发现：同一 URL 可能同时存在「规则兜底」抽取（LLM 失败降级）
+    与「LLM」抽取两条记录，若按事件身份合并会留下低质量的那条，
+    按 URL 合并又会漏掉同文多事件。正确做法是：同 URL 同身份时，
+    以 LLM 抽取结果为准，规则兜底版本丢弃。
+    """
+    fact = str(event.get("fact") or "")
+    if "[规则兜底]" in fact:
+        return "rule_fallback"
+    if event.get("llm_extracted") is False:
+        return "rule_fallback"
+    if str(event.get("extraction_method") or "").lower() == "rule_fallback":
+        return "rule_fallback"
+    return "llm"
+
+
+def is_lower_quality_dup(ledger: Dict[str, Dict], event: Dict) -> bool:
+    """该事件是否为「同 URL 同身份的降级重复」。"""
+    prof = event_profile(event)
+    ident = event_identity(event)
+
+    prev = ledger.get(ident)
+    if not prev:
+        return False
+    prev_prof = prev.get("profile") or {}
+    if prev_prof.get("url") != prof["url"]:
+        return False
+    prev_q = prev.get("quality") or "llm"
+    cur_q = extraction_quality(event)
+    # 已有 LLM 版本，当前是规则兜底 → 丢弃当前
+    if prev_q == "llm" and cur_q == "rule_fallback":
+        return True
+    return False
+
+
 def evaluate(ledger: Dict[str, Dict], event: Dict) -> Dict:
     """返回 {action, identity, reason}。action ∈ new/observation_only/material_delta。"""
     prof = event_profile(event)
     ident = event_identity(event)
+
+    # 同 URL 同身份时，规则兜底版本让位于 LLM 版本（金标准核查结论）
+    if is_lower_quality_dup(ledger, event):
+        return {"action": "observation_only", "identity": ident,
+                "reason": "lower_quality_duplicate", "profile": prof,
+                "url": prof["url"], "content_hash": prof["content_hash"],
+                "event_title": event.get("event_title"), "fact": event.get("fact")}
+
     prev = ledger.get(ident)
 
     if prev is None:
@@ -252,7 +297,8 @@ def evaluate(ledger: Dict[str, Dict], event: Dict) -> Dict:
                 "profile": prof, "url": prof["url"],
                 "content_hash": prof["content_hash"],
                 "event_title": event.get("event_title"),
-                "fact": event.get("fact")}
+                "fact": event.get("fact"),
+                "quality": extraction_quality(event)}
 
     # 兼容旧账本结构 {url, content_hash, event_title, fact}
     if not prev.get("profile"):
@@ -278,14 +324,16 @@ def evaluate(ledger: Dict[str, Dict], event: Dict) -> Dict:
                 "reason": cmp["reason"], "profile": prof, "url": prof["url"],
                 "content_hash": prof["content_hash"],
                 "event_title": event.get("event_title"),
-                "fact": event.get("fact")}
+                "fact": event.get("fact"),
+                "quality": extraction_quality(event)}
 
     if prof["url"] and prev.get("profile", {}).get("url") == prof["url"]:
         return {"action": "observation_only", "identity": ident,
                 "reason": "same_url_same_content", "profile": prof,
                 "url": prof["url"], "content_hash": prof["content_hash"],
                 "event_title": event.get("event_title"),
-                "fact": event.get("fact")}
+                "fact": event.get("fact"),
+                "quality": extraction_quality(event)}
     return {"action": "observation_only", "identity": ident,
             "reason": "dup_content_other_source", "profile": prof,
             "url": prof["url"], "content_hash": prof["content_hash"],

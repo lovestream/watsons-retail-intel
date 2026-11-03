@@ -161,5 +161,61 @@ class FactsTest(unittest.TestCase):
         self.assertEqual(f.get("city_count"), "102")
 
 
+
+
+class RuleFallbackTest(unittest.TestCase):
+    """金标准核查发现的抽取质量问题。"""
+
+    def _ledger_with_llm(self, url, ident_profile_event):
+        from skills.event_identity import event_profile
+        return {event_identity(ident_profile_event): {
+            "profile": event_profile(ident_profile_event),
+            "event_title": ident_profile_event.get("event_title"),
+            "fact": ident_profile_event.get("fact"),
+            "url": url, "quality": "llm"}}
+
+    def test_rule_fallback_after_llm_is_suppressed(self):
+        """同 URL，已有 LLM 版本，后来的规则兜底版本应被丢弃。"""
+        from skills.event_identity import evaluate, event_identity, event_profile
+        llm = {"event_title": "菜鸟供应链加入淘宝闪购提供小时达服务",
+               "fact": "菜鸟供应链将参与淘宝闪购业务，提供小时达服务",
+               "source_url": "https://cls.cn/detail/x"}
+        ledger = {event_identity(llm): {"profile": event_profile(llm),
+                                        "event_title": llm["event_title"],
+                                        "fact": llm["fact"],
+                                        "url": llm["source_url"],
+                                        "quality": "llm"}}
+        rf = {"event_title": "获悉，菜鸟已经在上海、杭州等城市为淘宝闪购提供服务",
+              "fact": "[规则兜底] cloakbrowser报道：菜鸟已经在上海、杭州等城市为淘宝闪购提供服务",
+              "source_url": "https://cls.cn/detail/x"}
+        r = evaluate(ledger, rf)
+        self.assertEqual(r["action"], "observation_only")
+        self.assertEqual(r["reason"], "lower_quality_duplicate")
+
+    def test_llm_after_rule_fallback_is_accepted(self):
+        """先规则兜底、后 LLM：LLM 版本应作为更新接收。"""
+        from skills.event_identity import evaluate, event_identity, event_profile
+        rf = {"event_title": "菜鸟已经在上海等城市为淘宝闪购提供服务",
+              "fact": "[规则兜底] 菜鸟已经在上海等城市为淘宝闪购提供服务",
+              "source_url": "https://cls.cn/detail/x"}
+        ledger = {event_identity(rf): {"profile": event_profile(rf),
+                                        "event_title": rf["event_title"],
+                                        "fact": rf["fact"],
+                                        "url": rf["source_url"],
+                                        "quality": "rule_fallback"}}
+        llm = {"event_title": "菜鸟供应链加入淘宝闪购提供小时达服务",
+               "fact": "菜鸟供应链加入淘宝闪购，提供小时达服务，覆盖多城市",
+               "source_url": "https://cls.cn/detail/x"}
+        r = evaluate(ledger, llm)
+        self.assertIn(r["action"], ("material_delta", "observation_only"))
+        # 至少不应被判为 lower_quality
+        self.assertNotEqual(r.get("reason"), "lower_quality_duplicate")
+
+    def test_extraction_quality_detects_marker(self):
+        from skills.event_identity import extraction_quality
+        self.assertEqual(extraction_quality({"fact": "[规则兜底] xxx"}), "rule_fallback")
+        self.assertEqual(extraction_quality({"fact": "正常抽取内容"}), "llm")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

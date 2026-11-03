@@ -1,0 +1,94 @@
+{
+ "stages": [
+  {
+   "stage": "过滤层(准入)",
+   "ok": true,
+   "detail": "12 篇 -> 准入 0"
+  },
+  {
+   "stage": "事件抽取层",
+   "ok": true,
+   "detail": "历史事件 487 条"
+  },
+  {
+   "stage": "新颖性/身份层",
+   "ok": true,
+   "detail": "new=7 delta=0 observation=16 reject=464"
+  },
+  {
+   "stage": "周事实包(W43)",
+   "ok": true,
+   "detail": "W43 独立事件 2 条"
+  },
+  {
+   "stage": "旧账本兼容",
+   "ok": true,
+   "detail": "旧格式 record 可读, action=new"
+  },
+  {
+   "stage": "回滚能力",
+   "ok": true,
+   "detail": "新逻辑独立模块 skills/event_identity.py，采集顺序可通过 config collection_limits.method_order 覆盖，不修改生产数据文件"
+  }
+ ],
+ "stats": {
+  "new": 7,
+  "observation_only": 16,
+  "material_delta": 0,
+  "rejected": 464
+ },
+ "final_event_count": 7,
+ "w43_event_count": 2,
+ "events": [
+  {
+   "day": "2026-10-20",
+   "id": "E20261020_0018",
+   "identity": "淘宝闪购|履约配送",
+   "title": "菜鸟供应链加入淘宝闪购提供小时达服务",
+   "action": "new"
+  },
+  {
+   "day": "2026-10-21",
+   "id": "E20261021_0034",
+   "identity": "美团闪购|直播营销",
+   "title": "美团闪购双11上线直播工具并与丝芙兰、屈臣氏试点合作",
+   "action": "new"
+  },
+  {
+   "day": "2026-10-27",
+   "id": "E20261027_0085",
+   "identity": "丝芙兰|开店闭店",
+   "title": "2026丝芙兰玩妆节落地上海张园圆满收官",
+   "action": "new"
+  },
+  {
+   "day": "2026-10-28",
+   "id": "E20261028_0010",
+   "identity": "山姆|开店闭店",
+   "title": "山姆会员商店江阴店开业，为全国第70家门店及第4家县级市门店",
+   "action": "new"
+  },
+  {
+   "day": "2026-10-28",
+   "id": "E20261028_0011",
+   "identity": "盒马|开店闭店",
+   "title": "盒马通过盒马鲜生和超盒算NB双业态下沉县域市场",
+   "action": "new"
+  },
+  {
+   "day": "2026-10-28",
+   "id": "E20261028_0012",
+   "identity": "奥乐齐|开店闭店",
+   "title": "奥乐齐沿沪宁线在江阴、张家港、如皋等县级市开店",
+   "action": "new"
+  },
+  {
+   "day": "2026-10-29",
+   "id": "E20261029_0016",
+   "identity": "屈臣氏|开店闭店",
+   "title": "屈臣氏在西安大悦城等21个城市落地飞天小女警主题快闪店与主题门店",
+   "action": "new"
+  }
+ ],
+ "all_pass": true
+}

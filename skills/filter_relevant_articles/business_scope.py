@@ -17,6 +17,7 @@ BEAUTY = (
     "洗发", "护发", "护发素", "沐浴", "洗面奶", "洁面", "香氛", "香水", "口腔护理",
     "牙膏", "牙刷", "身体护理", "洗护用品", "个人护理", "母婴护理", "防脱",
     "美容", "眼霜", "精华液", "护肤品", "面部护理", "卸妆", "洗衣液",
+    "博倩叶", "boscia", "玉泽", "薇诺娜", "润百颜", "夸迪",
 )
 BEAUTY_RETAILERS = (
     "丝芙兰", "sephora", "万宁", "mannings", "妍丽", "调色师", "话梅",
@@ -30,6 +31,16 @@ CHANNELS = (
     "盒马", "山姆", "奥乐齐", "aldi", "盒马鲜生", "零售渠道",
     "履约配送", "到家配送", "线上线下融合", "o2o",
 )
+# 即时零售平台侧"基础设施级"动作（用户裁定应进主池）：
+# 投入/补贴/入驻/开放能力，直接影响屈臣氏怎么做生意。
+PLATFORM_INVEST = (
+    "投入", "加码", "补贴", "扶持", "战略合作", "入驻", "开放能力",
+    "新增投入", "百亿", "亿投入", "资源倾斜", "流量扶持",
+    "履约", "供应链", "配送服务", "小时达", "仓配",
+)
+PLATFORMS_CORE = ("美团闪购", "淘宝闪购", "京东秒送", "京东到家",
+                  "抖音小时达", "饿了么", "即时零售")
+
 OPERATIONS = (
     "上线", "上新", "入驻", "合作", "签约", "开店", "门店", "开业",
     "布局", "拓展", "扩张", "升级", "改造", "调整", "调改", "共创",
@@ -37,10 +48,14 @@ OPERATIONS = (
     "促销", "营销", "服务", "新品", "战略", "试点", "落地", "运营",
     "县级市场", "县域", "下沉市场", "闭店", "关店", "品类",
     "掘金", "抢滩", "进击", "加码", "深耕", "抢占", "攻坚",
+    "盛典", "快闪", "联名", "首店", "旗舰店", "主题店", "专柜",
 )
 # Topic-specific blockers; matched against the article's subject, NOT the
 # full body, which may contain a generic sector comparison.
 NOISE_SUBJECT = (
+    # 2026-11-02 用户裁定：厨房、餐饮、生鲜、家宴一律不进
+    "厨房", "餐饮", "生鲜", "家宴", "菜谱", "食材", "预制菜", "熟食",
+    "会员卡", "积分规则", "会员等级",      # 会员卡规则类与经营情报无关
     "白酒", "酒类", "酒水", "啤酒", "葡萄酒", "酒行", "酒业",
     "招聘", "求职", "岗位", "猎头", "年薪", "薪资", "cho", "职场",
     "冰淇淋", "冰激凌", "雪糕", "野人先生", "茶饮", "奶茶", "寿司郎",
@@ -51,7 +66,8 @@ NOISE_SUBJECT = (
 STOCK_SUBJECT = (
     "股价", "涨停", "跌停", "股市", "股票", "a股", "港股", "美股",
     "行情", "股民", "市值", "市盈率", "市净率", "目标价",
-    "买入评级", "卖出评级", "券商研报", "机构研报", "业绩预告",
+    "研报", "买入评级", "卖出评级", "券商研报", "机构研报", "业绩预告",
+    "亏损总额", "估算", "净利润同比",
     "财报", "季报", "年报", "净利润", "扣非净利", "上市融资",
     "ipo", "股票回购", "股份回购", "定增", "可转债", "投资者",
     "融资融券", "增持评级", "减持评级",
@@ -93,15 +109,38 @@ def decide(article: Dict) -> dict:
     if _hit(title, GENERIC_REPORTS) and not _hit(title, OPERATIONS):
         return {"decision": "reject", "reason": "generic_research_subject"}
 
+    # 3C/手机/家电/智能硬件方向的品牌或政策，不属美妆个护经营情报（用户裁定）。
+    # 必须在"平台投入"判定之前，否则"智能眼镜补贴+即时零售"会被误纳入。
+    DEVICE_BRANDS = ("vivo", "oppo", "华为", "小米", "荣耀", "苹果",
+                     "iphone", "三星", "realme", "一加", "联想", "戴尔",
+                     "智能眼镜", "无人机", "游戏机", "智能手表")
+    if _hit(subject, DEVICE_BRANDS):
+        return {"decision": "reject", "reason": "device_brand_not_beauty"}
+
     watsons = _hit(subject, WATSONS)
     retailer = _hit(subject, BEAUTY_RETAILERS)
     beauty = _hit(subject, BEAUTY)
     channel = _hit(subject, CHANNELS)
     operating = _hit(subject, OPERATIONS) or _hit(subject, OPERATING_DATA)
 
+    # 平台侧基础设施级动作（投入/补贴/入驻/开放）→ 主池。
+    # 金标准核查：美团300亿投入即时零售(13次)、北京补贴100万、
+    # 苏宁600家门店入驻美团闪购，均被判应进 main。
+    _platform = _hit(subject, PLATFORMS_CORE)
+    _invest = _hit(subject, PLATFORM_INVEST)
+    if _platform and _invest:
+        return {"decision": "main", "reason": "platform_infrastructure_move"}
+
     # Watsons itself: meaningful mainland operating actions only.
     if watsons and operating:
         return {"decision": "main", "reason": "watsons_operating_move"}
+    # 实体零售商（含综合卖场）入驻即时零售平台 = 供给结构变化 → 主池。
+    # 金标准：苏宁易购600家门店入驻美团闪购 判应进；vivo品牌合作 判不进。
+    BIG_RETAILER = ("苏宁", "国美", "沃尔玛", "永辉", "大润发", "华润万家",
+                    "麦德龙", "costco", "开市客", "罗森", "全家", "7-eleven")
+    if _hit(subject, BIG_RETAILER) and _invest:
+        return {"decision": "main", "reason": "retailer_channel_entry"}
+
     # Direct beauty competitor actions; beauty-category channel moves.
     if retailer and operating:
         return {"decision": "main", "reason": "beauty_competitor_operating_move"}
@@ -114,6 +153,11 @@ def decide(article: Dict) -> dict:
     county = _hit(subject, ("县级市场", "县域", "下沉市场", "县级市"))
     if grocery and county and operating:
         return {"decision": "main", "reason": "named_retail_channel_expansion"}
+
+    # 美妆个护品牌自身的经营模式动作（DTC/直营/重启/进入中国）→ 主池。
+    BRAND_MODEL = ("dtc", "直营", "重启", "进入中国", "落地中国", "独家代理")
+    if _hit(subject, BEAUTY) and _hit(subject, BRAND_MODEL):
+        return {"decision": "main", "reason": "beauty_brand_model_move"}
 
     # Direct platform operational changes may influence Watsons even without
     # the category in the headline; put in reference pending category linkage.

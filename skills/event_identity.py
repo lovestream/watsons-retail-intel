@@ -34,11 +34,13 @@ SUBJECTS = [
     "菜鸟", "顺丰", "达达", "闪送",
     "上海家化", "珀莱雅", "贝泰妮", "华熙生物", "上美股份", "花西子",
     "完美日记", "薇诺娜", "六神", "佰草集",
+    "博倩叶", "boscia", "玉泽", "润百颜", "夸迪",
     "天猫", "京东", "拼多多", "抖音", "快手", "苏宁",
 ]
 
 # 动作族：动作动词 → 规范化动作名
 ACTIONS = {
+    "收购重启": ["收购", "并购", "重启", "易主", "接手", "接盘"],
     "接入合作": ["加入", "接入", "合作", "签约", "达成", "携手", "联手", "共建"],
     "履约配送": ["配送", "小时达", "履约", "供应链", "前置仓", "仓配", "送装",
                  "提供服务", "服务覆盖"],
@@ -80,6 +82,16 @@ LOCATIONS = [
 ]
 
 
+def _first_appearing(cands, text: str) -> str:
+    """返回在 text 中最早出现的候选词（按字符位置）。"""
+    best, pos = "", len(text) + 1
+    for c in cands:
+        i = text.find(c)
+        if 0 <= i < pos:
+            best, pos = c, i
+    return best
+
+
 def _hits(text: str, words) -> List[str]:
     return [w for w in words if w in text]
 
@@ -116,7 +128,7 @@ def detect_stage(text: str) -> str:
 # 例如"菜鸟为淘宝闪购提供配送服务并计划拓展重点城市"，
 # 主动作是履约配送，"计划拓展"只是附带计划，不能因此拆成"扩张下沉"。
 # "经营数据"放在较后，避免"直播工具上线带动增长"被误归为数据类。
-ACTION_PRIORITY = ["履约配送", "开店闭店", "直播营销", "上线发布",
+ACTION_PRIORITY = ["收购重启", "履约配送", "开店闭店", "直播营销", "上线发布",
                    "补贴政策", "价格调整", "组织人事", "接入合作",
                    "扩张下沉", "经营数据"]
 
@@ -167,7 +179,9 @@ def event_profile(event: Dict) -> Dict:
     fact = str(event.get("fact") or "")
     text = (title + " " + fact).strip()
     return {
-        "subject": next((s for s in SUBJECTS if s in text), ""),
+        # 主体取"文中最先出现"的那个：中文新闻通常主语在前，
+        # 若按词表顺序取会把"苏宁易购与美团合作"误判为美团主体。
+        "subject": _first_appearing(SUBJECTS, text),
         "action": _primary(ACTIONS, text),
         "object_set": tuple(sorted(n for n, ws in OBJECTS.items()
                                    if any(w in text for w in ws))),

@@ -1,0 +1,52 @@
+[
+ {
+  "source_id": "rsshub_jiemian_retail",
+  "name": "界面新闻·零售",
+  "url": "http://192.168.2.100:1200/jiemian/lists/847",
+  "items": 24,
+  "dated": 24,
+  "admitted": 0,
+  "unique_vs_existing": 0,
+  "samples": []
+ },
+ {
+  "source_id": "rsshub_jiemian_beauty",
+  "name": "界面新闻·美妆",
+  "url": "http://192.168.2.100:1200/jiemian/lists/838",
+  "items": 24,
+  "dated": 24,
+  "admitted": 0,
+  "unique_vs_existing": 0,
+  "samples": []
+ },
+ {
+  "source_id": "rsshub_tmtpost_consumer",
+  "name": "钛媒体·消费",
+  "url": "http://192.168.2.100:1200/tmtpost/column/3882530",
+  "items": 30,
+  "dated": 30,
+  "admitted": 0,
+  "unique_vs_existing": 0,
+  "samples": []
+ },
+ {
+  "source_id": "rsshub_199it_ec",
+  "name": "199IT·电商",
+  "url": "http://192.168.2.100:1200/199it/archives/category/electronic-commerce",
+  "items": 17,
+  "dated": 17,
+  "admitted": 0,
+  "unique_vs_existing": 0,
+  "samples": []
+ },
+ {
+  "source_id": "rsshub_36kr_newsflashes",
+  "name": "36氪快讯",
+  "url": "http://192.168.2.100:1200/36kr/newsflashes",
+  "items": 20,
+  "dated": 20,
+  "admitted": 0,
+  "unique_vs_existing": 0,
+  "samples": []
+ }
+]

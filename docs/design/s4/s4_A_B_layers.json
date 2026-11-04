@@ -1,0 +1,92 @@
+{
+ "A_article_layer": {
+  "days": [
+   "2026-10-26",
+   "2026-10-27",
+   "2026-10-28",
+   "2026-10-29",
+   "2026-10-30"
+  ],
+  "articles": 36,
+  "admitted": 3,
+  "dated": 20,
+  "fulltext": 36,
+  "unique_url": 14
+ },
+ "B_time_boundary": {
+  "fixture": [
+   {
+    "date": "2026-10-17",
+    "events": 0,
+    "present": false
+   },
+   {
+    "date": "2026-10-18",
+    "events": 0,
+    "present": false
+   },
+   {
+    "date": "2026-10-19",
+    "events": 40,
+    "present": true
+   },
+   {
+    "date": "2026-10-20",
+    "events": 28,
+    "present": true
+   },
+   {
+    "date": "2026-10-21",
+    "events": 39,
+    "present": true
+   },
+   {
+    "date": "2026-10-22",
+    "events": 55,
+    "present": true
+   },
+   {
+    "date": "2026-10-23",
+    "events": 40,
+    "present": true
+   },
+   {
+    "date": "2026-10-24",
+    "events": 46,
+    "present": true
+   },
+   {
+    "date": "2026-10-25",
+    "events": 39,
+    "present": true
+   },
+   {
+    "date": "2026-10-26",
+    "events": 37,
+    "present": true
+   },
+   {
+    "date": "2026-10-27",
+    "events": 87,
+    "present": true
+   },
+   {
+    "date": "2026-10-28",
+    "events": 59,
+    "present": true
+   },
+   {
+    "date": "2026-10-29",
+    "events": 57,
+    "present": true
+   },
+   {
+    "date": "2026-10-30",
+    "events": 59,
+    "present": true
+   }
+  ],
+  "present_days": 12,
+  "total_days": 14
+ }
+}

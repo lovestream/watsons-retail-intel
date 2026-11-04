@@ -1,0 +1,15 @@
+﻿date,events_analyzed,event_count,cleaned,raw_original,logs,sha12,old_chain_reconstructable,gap_reason
+2026-10-17,N,0,N,N,N,,no,无 events 产物
+2026-10-18,N,0,N,N,N,,no,无 events 产物
+2026-10-19,Y,40,N,N,N,780fcba11f8c,partial,缺 raw 原件（旧链路不可完整重建）; 缺 cleaned 正文
+2026-10-20,Y,28,N,N,N,35b9fc6ea7eb,partial,缺 raw 原件（旧链路不可完整重建）; 缺 cleaned 正文
+2026-10-21,Y,39,N,N,N,efd8820dd7a3,partial,缺 raw 原件（旧链路不可完整重建）; 缺 cleaned 正文
+2026-10-22,Y,55,N,N,N,69cceb2d6d66,partial,缺 raw 原件（旧链路不可完整重建）; 缺 cleaned 正文
+2026-10-23,Y,40,N,N,N,1a4417b9aeb6,partial,缺 raw 原件（旧链路不可完整重建）; 缺 cleaned 正文
+2026-10-24,Y,46,N,N,N,be9cb22795c8,partial,缺 raw 原件（旧链路不可完整重建）; 缺 cleaned 正文
+2026-10-25,Y,39,N,N,Y,2b35c5bd5a52,partial,缺 raw 原件（旧链路不可完整重建）; 缺 cleaned 正文
+2026-10-26,Y,37,Y,N,Y,83f53cd4c312,partial,缺 raw 原件（旧链路不可完整重建）
+2026-10-27,Y,87,Y,N,Y,dc436df79df1,partial,缺 raw 原件（旧链路不可完整重建）
+2026-10-28,Y,59,Y,N,Y,d2e1a72fe261,partial,缺 raw 原件（旧链路不可完整重建）
+2026-10-29,Y,57,Y,N,Y,7342b62bde97,partial,缺 raw 原件（旧链路不可完整重建）
+2026-10-30,Y,59,Y,N,Y,1637e41d6c1d,partial,缺 raw 原件（旧链路不可完整重建）

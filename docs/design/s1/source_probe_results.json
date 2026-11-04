@@ -1,0 +1,92 @@
+[
+ {
+  "source_id": "rsshub_jiemian_retail",
+  "name": "界面新闻·零售",
+  "tier": "B",
+  "url": "http://192.168.2.100:1200/jiemian/lists/847",
+  "http": 200,
+  "items": 21,
+  "dated": 21,
+  "with_url": 21,
+  "verdict": "usable",
+  "note": "21 条, 21 有条目日期",
+  "latency_ms": 4145
+ },
+ {
+  "source_id": "rsshub_jiemian_beauty",
+  "name": "界面新闻·美妆",
+  "tier": "B",
+  "url": "http://192.168.2.100:1200/jiemian/lists/838",
+  "http": 200,
+  "items": 24,
+  "dated": 24,
+  "with_url": 24,
+  "verdict": "usable",
+  "note": "24 条, 24 有条目日期",
+  "latency_ms": 3418
+ },
+ {
+  "source_id": "rsshub_jumeili",
+  "name": "聚美丽",
+  "tier": "B",
+  "url": "http://192.168.2.100:1200/jumeili/home",
+  "http": 200,
+  "items": 24,
+  "dated": 0,
+  "with_url": 24,
+  "verdict": "no_date",
+  "note": "有条目但缺 pubDate（不得用抓取日顶替）",
+  "latency_ms": 5396
+ },
+ {
+  "source_id": "rsshub_tmtpost_consumer",
+  "name": "钛媒体·消费",
+  "tier": "B",
+  "url": "http://192.168.2.100:1200/tmtpost/column/3882530",
+  "http": 200,
+  "items": 30,
+  "dated": 30,
+  "with_url": 30,
+  "verdict": "usable",
+  "note": "30 条, 30 有条目日期",
+  "latency_ms": 6958
+ },
+ {
+  "source_id": "rsshub_199it_ec",
+  "name": "199IT·电商",
+  "tier": "C",
+  "url": "http://192.168.2.100:1200/199it/archives/category/electronic-commerce",
+  "http": 200,
+  "items": 17,
+  "dated": 17,
+  "with_url": 17,
+  "verdict": "usable",
+  "note": "17 条, 17 有条目日期",
+  "latency_ms": 2449
+ },
+ {
+  "source_id": "rsshub_36kr_newsflashes",
+  "name": "36氪快讯",
+  "tier": "B",
+  "url": "http://192.168.2.100:1200/36kr/newsflashes",
+  "http": 200,
+  "items": 20,
+  "dated": 20,
+  "with_url": 20,
+  "verdict": "usable",
+  "note": "20 条, 20 有条目日期",
+  "latency_ms": 511
+ },
+ {
+  "source_id": "rsshub_ebrun_retail",
+  "name": "亿邦动力·零售",
+  "tier": "B",
+  "url": "http://192.168.2.100:1200/ebrun/retail",
+  "http": 503,
+  "items": 0,
+  "dated": 0,
+  "with_url": 0,
+  "verdict": "fail_http",
+  "note": "HTTP 503"
+ }
+]

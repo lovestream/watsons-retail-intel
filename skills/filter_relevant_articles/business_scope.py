@@ -121,7 +121,10 @@ def decide(article: Dict) -> dict:
     # 必须在"平台投入"判定之前，否则"智能眼镜补贴+即时零售"会被误纳入。
     DEVICE_BRANDS = ("vivo", "oppo", "华为", "小米", "荣耀", "苹果",
                      "iphone", "三星", "realme", "一加", "联想", "戴尔",
-                     "智能眼镜", "无人机", "游戏机", "智能手表")
+                     "智能眼镜", "无人机", "游戏机", "智能手表",
+                     # 非美妆个护品类，平台动作涉及这些也不算经营情报
+                     "家具", "卫浴", "家装", "建材", "淘工厂", "产业带工厂",
+                     "汽车用品", "宠物食品")
     if _hit(subject, DEVICE_BRANDS):
         return {"decision": "reject", "reason": "device_brand_not_beauty"}
 
